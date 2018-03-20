@@ -1,0 +1,6 @@
+---
+fail_on_violations: false
+ruby:
+  config_file: .rubocop.yml
+haml:
+  config_file: .haml-lint.yml
