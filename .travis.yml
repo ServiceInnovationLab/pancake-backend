@@ -5,12 +5,12 @@ cache:
 before_install:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
-script: RAILS_ENV=test bundle exec rake db:create db:migrate bundle exec rake assets:precompile
+script:
+  - RAILS_ENV=test bundle exec rake db:create db:migrate
+  - bundle exec rake assets:precompile
   - bundle exec rspec
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t simplecov --id $CC_TEST_REPORTER_ID"
-before_deploy:
-  - bundle exec script/heroku_maintenance.rb on
 deploy:
   provider: heroku
   api_key:
