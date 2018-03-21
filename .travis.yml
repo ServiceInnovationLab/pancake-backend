@@ -1,3 +1,4 @@
+---
 sudo: required
 language: ruby
 cache:
@@ -21,6 +22,6 @@ deploy:
     dev: pancakenz-staging
     master: pancakenz
   run:
-    - bundle exec rake assets:precompile
+    # - bundle exec rake assets:precompile
     - bundle exec rake db:migrate
     - restart
