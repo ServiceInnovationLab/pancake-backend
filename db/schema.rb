@@ -23,11 +23,22 @@ ActiveRecord::Schema.define(version: 20180321015659) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "signatures", force: :cascade do |t|
-    t.bigint "rebate_id"
+  create_table "signature_types", force: :cascade do |t|
+    t.text "name"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rebate_id"], name: "index_signatures_on_rebate_id"
   end
 
+  create_table "signatures", force: :cascade do |t|
+    t.bigint "signature_type_id"
+    t.bigint "rebate_form_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rebate_form_id"], name: "index_signatures_on_rebate_form_id"
+    t.index ["signature_type_id"], name: "index_signatures_on_signature_type_id"
+  end
+
+  add_foreign_key "signatures", "rebate_forms"
+  add_foreign_key "signatures", "signature_types"
 end
