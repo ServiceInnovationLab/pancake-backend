@@ -1,6 +1,7 @@
 class CreateRebates < ActiveRecord::Migration[5.1]
   def change
     create_table :rebate_forms do |t|
+      t.text :valuation_id
       t.text :token
       t.json :payload
       t.timestamps

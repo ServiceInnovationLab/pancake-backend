@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20180321015659) do
   enable_extension "plpgsql"
 
   create_table "rebate_forms", force: :cascade do |t|
+    t.text "valuation_id"
     t.text "token"
     t.json "payload"
     t.datetime "created_at", null: false
