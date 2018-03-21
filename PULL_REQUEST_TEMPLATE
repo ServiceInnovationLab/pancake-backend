@@ -4,6 +4,4 @@
 
 - [ ] has automated tests
 - [ ] at least one a reviewer ran the code
-- [ ] tested in small screen
-- [ ] i18n
-- [ ] tested in screen reader/contrast <-- remove this if no UX change
+- [ ] updated API docs
