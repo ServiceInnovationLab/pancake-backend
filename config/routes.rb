@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     scope path: '/v1' do
       resources :rebate_forms
       resources :signatures
-      resources :signature_types
+      resources :signature_types, only: [:index, :show]
       # your routes go here
     end
   end

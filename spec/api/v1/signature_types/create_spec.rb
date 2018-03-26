@@ -13,19 +13,16 @@ RSpec.describe 'signature_types#create', type: :request do
         data: {
           type: 'signature_types',
           attributes: {
-            # ... your attrs here
+            name: 'scribble'
           }
         }
       }
     end
 
-    pending 'creates the resource' do
+    it 'does not let api calls create new signature_types' do
       expect do
         make_request
-      end.to change { SignatureType.count }.by(1)
-      signature_type = SignatureType.last
-
-      assert_payload(:signature_type, signature_type, json_item)
+      end.to raise_error(ActionController::RoutingError)
     end
   end
 end

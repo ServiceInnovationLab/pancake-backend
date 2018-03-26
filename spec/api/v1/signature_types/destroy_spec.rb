@@ -10,13 +10,10 @@ RSpec.describe 'signature_types#destroy', type: :request do
   describe 'basic destroy' do
     let!(:signature_type) { create(:signature_type) }
 
-    it 'updates the resource' do
+    it 'will not delete the resource' do
       expect do
         make_request
-      end.to change { SignatureType.count }.by(-1)
-
-      expect(response.status).to eq(200)
-      expect(json).to eq('meta' => {})
+      end.to raise_error(ActionController::RoutingError)
     end
   end
 end
