@@ -3,6 +3,8 @@
 FactoryBot.define do
   factory :rebate_form do
     valuation_id '123'
+    token 'MyString'
+    payload ''
   end
 
   factory :signed_form, parent: :rebate_form do
