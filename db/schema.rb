@@ -16,21 +16,21 @@ ActiveRecord::Schema.define(version: 20180321015659) do
   enable_extension "plpgsql"
 
   create_table "rebate_forms", force: :cascade do |t|
-    t.text "valuation_id"
-    t.text "token"
+    t.string "valuation_id"
+    t.string "token"
     t.json "payload"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "signature_types", force: :cascade do |t|
-    t.text "name"
-    t.text "description"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "signatures", force: :cascade do |t|
+    t.string "path"
     t.bigint "signature_type_id"
     t.bigint "rebate_form_id"
     t.datetime "created_at", null: false
