@@ -15,4 +15,12 @@ RSpec.describe RebateForm, type: :model do
       it { expect(form.signatures.size).to eq 2 }
     end
   end
+
+  describe 'signatures' do
+    let(:form) { FactoryBot.create :rebate_form }
+    let!(:applicant) { FactoryBot.create :applicant_signature, rebate_form: form }
+    let!(:witness) { FactoryBot.create :witness_signature, rebate_form: form }
+    it { expect(form.applicant_signature).to eq(applicant) }
+    it { expect(form.witness_signature).to eq(witness) }
+  end
 end
