@@ -17,10 +17,15 @@ class SignatureResource < ApplicationResource
   # allow_stat total: [:count]
   #
   # === Allow sideloading/sideposting of relationships ===
-  # belongs_to :foo,
-  #   foreign_key: :foo_id,
-  #   resource: FooResource,
-  #   scope: -> { Foo.all }
+  belongs_to :signature_type,
+             foreign_key: :signature_type_id,
+             resource: SignatureTypeResource,
+             scope: -> { SignatureType.all }
+  belongs_to :rebate_form,
+             foreign_key: :rebate_form_id,
+             resource: RebateFormResource,
+             scope: -> { RebateForm.all }
+
   #
   # === Custom sorting logic ===
   # sort do |scope, att, dir|
