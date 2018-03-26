@@ -32,37 +32,40 @@ class SignatureTypesController < ApplicationController
   # This will handle nested relationships as well.
   # On validation errors, render correct error JSON.
   def create
-    signature_type, success = jsonapi_create.to_a
+    raise 'Not implemented'
+    #   signature_type, success = jsonapi_create.to_a
 
-    if success
-      render_jsonapi(signature_type, scope: false)
-    else
-      render_errors_for(signature_type)
-    end
+    #   if success
+    #     render_jsonapi(signature_type, scope: false)
+    #   else
+    #     render_errors_for(signature_type)
+    #   end
   end
 
   # jsonapi_update will use the configured Resource (and adapter) to persist.
   # This will handle nested relationships as well.
   # On validation errors, render correct error JSON.
   def update
-    signature_type, success = jsonapi_update.to_a
+    raise 'Not implemented'
+    #   signature_type, success = jsonapi_update.to_a
 
-    if success
-      render_jsonapi(signature_type, scope: false)
-    else
-      render_errors_for(signature_type)
-    end
+    #   if success
+    #     render_jsonapi(signature_type, scope: false)
+    #   else
+    #     render_errors_for(signature_type)
+    #   end
   end
 
   # Renders 200 OK with empty meta
   # http://jsonapi.org/format/#crud-deleting-responses-200
   def destroy
-    signature_type, success = jsonapi_destroy.to_a
+    raise 'Not implemented'
+    #   signature_type, success = jsonapi_destroy.to_a
 
-    if success
-      render json: { meta: {} }
-    else
-      render_errors_for(signature_type)
-    end
+    #   if success
+    #     render json: { meta: {} }
+    #   else
+    #     render_errors_for(signature_type)
+    #   end
   end
 end

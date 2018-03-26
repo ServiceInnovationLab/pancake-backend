@@ -23,13 +23,10 @@ RSpec.describe 'signature_types#update', type: :request do
     end
 
     # Replace 'xit' with 'it' after adding attributes
-    xit 'updates the resource' do
+    it 'wont update the signature type' do
       expect do
         make_request
-      end.to change { signature_type.reload.attributes }
-      assert_payload(:signature_type, signature_type, json_item)
-
-      # ... assert updates attributes ...
+      end.to raise_error(ActionController::RoutingError)
     end
   end
 end
