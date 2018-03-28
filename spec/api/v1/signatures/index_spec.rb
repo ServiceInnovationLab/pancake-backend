@@ -15,10 +15,9 @@ RSpec.describe 'signatures#index', type: :request do
     let!(:signature2) { create(:signature) }
 
     it 'serializes the list correctly' do
-      make_request
-      expect(json_ids(true)).to match_array([signature1.id, signature2.id])
-      assert_payload(:signature, signature1, json_items[0])
-      assert_payload(:signature, signature2, json_items[1])
+      expect do
+        make_request
+      end.to raise_error(ActionController::RoutingError)
     end
   end
 end
