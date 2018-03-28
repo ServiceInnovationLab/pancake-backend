@@ -1,6 +1,7 @@
----
-fail_on_violations: false
-ruby:
-  config_file: .rubocop.yml
-haml:
-  config_file: .haml-lint.yml
+eslint:
+  enabled: true
+  config_file: .eslintrc
+jshint:
+  enabled: false
+scss:
+  config_file: .scss-lint.yml
