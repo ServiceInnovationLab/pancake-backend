@@ -7,7 +7,7 @@ class SerializableSignatureType < JSONAPI::Serializable::Resource
 
   # Add attributes here to ensure they get rendered, .e.g.
   #
-  # attribute :name
+  attribute :name
   #
   # To customize, pass a block and reference the underlying @object
   # being serialized:
@@ -15,5 +15,4 @@ class SerializableSignatureType < JSONAPI::Serializable::Resource
   # attribute :name do
   #   @object.name.upcase
   # end
-  attribute :name
 end

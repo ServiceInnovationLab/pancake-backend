@@ -34,9 +34,8 @@
 # For additional documentation, see https://jsonapi-suite.github.io/strong_resources
 StrongResources.configure do
   strong_resource :rebate_form do
-    attribute :valuation_id, :string
     attribute :token, :string
-    attribute :payload, :json
+    attribute :valuation_id, :string
   end
   strong_resource :signature do
     attribute :path, :string

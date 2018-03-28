@@ -17,5 +17,4 @@ class SerializableRebateForm < JSONAPI::Serializable::Resource
   # end
   attribute :valuation_id
   attribute :token
-  attribute :payload
 end
