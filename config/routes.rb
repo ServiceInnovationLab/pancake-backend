@@ -7,9 +7,9 @@ Rails.application.routes.draw do
     resources :docs, only: [:index], path: '/swagger'
 
     scope path: '/v1' do
-      resources :rebate_forms, only: [:show, :create]
-      resources :signatures, only: [:show, :create]
+      resources :rebate_forms, only: [:create]
       resources :signature_types, only: [:index, :show]
+      resources :signatures, only: [:show, :create]
       # your routes go here
     end
   end
