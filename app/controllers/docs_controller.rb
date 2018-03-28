@@ -21,8 +21,11 @@ class DocsController < ActionController::API
     key :produces, ['application/json']
   end
   jsonapi_resource '/v1/rebate_forms',
-                   only: [:create],
-                   descriptions: { create: 'create a new application for a rates rebate' }
+                   only: [:create, :show],
+                   descriptions: {
+                     create: 'create a new application for a rates rebate',
+                     show: 'retrieve existing application. pass token as id'
+                   }
 
   jsonapi_resource '/v1/signature_types',
                    only: [:index],

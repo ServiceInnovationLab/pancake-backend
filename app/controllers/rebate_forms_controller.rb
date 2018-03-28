@@ -22,7 +22,7 @@ class RebateFormsController < ApplicationController
   # Call jsonapi_scope directly here so we can get behavior like
   # sparse fieldsets and statistics.
   def show
-    scope = jsonapi_scope(RebateForm.where(id: params[:id]))
+    scope = jsonapi_scope(RebateForm.where(token: params[:id]))
     instance = scope.resolve.first
     raise JsonapiCompliable::Errors::RecordNotFound unless instance
     render_jsonapi(instance, scope: false)
