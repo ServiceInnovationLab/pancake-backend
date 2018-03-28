@@ -41,3 +41,5 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'travis'
 end
+gem 'loofah', '>= 2.2.1'
+gem 'rails-html-sanitizer', '>= 1.0.4'
