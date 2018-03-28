@@ -1,26 +1,7 @@
 # README
 
+[![Build Status](https://travis-ci.org/Br3nda/diy.svg?branch=master)](https://travis-ci.org/Br3nda/diy)
+[![Maintainability](https://api.codeclimate.com/v1/badges/87a2101f7a74f5a28320/maintainability)](https://codeclimate.com/github/ServiceInnovationLab/pancake-backend/maintainability)
 [![AwesomeCode Status for ServiceInnovationLab/pancake-server](https://awesomecode.io/projects/61fa3b06-4025-4829-ad9d-568b2967bdd8/status)](https://awesomecode.io/projects/81)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Serverside Rates Rebate processor.
