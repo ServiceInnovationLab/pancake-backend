@@ -14,10 +14,10 @@ class RebateFormsController < ApplicationController
   before_action :apply_strong_params, only: [:create, :update]
 
   # Start with a base scope and pass to render_jsonapi
-  def index
-    rebate_forms = RebateForm.all
-    render_jsonapi(rebate_forms)
-  end
+  # def index
+  #   rebate_forms = RebateForm.all
+  #   render_jsonapi(rebate_forms)
+  # end
 
   # Call jsonapi_scope directly here so we can get behavior like
   # sparse fieldsets and statistics.
@@ -56,13 +56,13 @@ class RebateFormsController < ApplicationController
 
   # Renders 200 OK with empty meta
   # http://jsonapi.org/format/#crud-deleting-responses-200
-  def destroy
-    rebate_form, success = jsonapi_destroy.to_a
+  # def destroy
+  #   rebate_form, success = jsonapi_destroy.to_a
 
-    if success
-      render json: { meta: {} }
-    else
-      render_errors_for(rebate_form)
-    end
-  end
+  #   if success
+  #     render json: { meta: {} }
+  #   else
+  #     render_errors_for(rebate_form)
+  #   end
+  # end
 end
