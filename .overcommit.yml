@@ -28,6 +28,9 @@ PreCommit:
       - '**/db/schema.db'  # Ignore trailing whitespace in generated files
   HardTabs:
     enabled: true
+    exclude:
+      - 'public/api/docs/app.css.map'
+      - 'public/api/docs/app.js'
   CommitPlease:
     enabled: true
   AuthorEmail:
@@ -38,6 +41,8 @@ PreCommit:
     enabled: true
   CssLint:
     enabled: true
+    exclude:
+      - 'public/api/docs/app.css'
   HamlLint:
     enabled: true
   JsonSyntax:
