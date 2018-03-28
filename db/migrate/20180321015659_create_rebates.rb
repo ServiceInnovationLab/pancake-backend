@@ -15,8 +15,6 @@ class CreateRebates < ActiveRecord::Migration[5.1]
     create_table :rebate_forms do |t|
       t.string :valuation_id
       t.string :token
-      t.json :payload
-
       t.timestamps
     end
     add_foreign_key :signatures, :signature_types
