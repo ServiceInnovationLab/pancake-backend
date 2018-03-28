@@ -13,10 +13,7 @@ RSpec.describe 'rebate_forms#destroy', type: :request do
     it 'updates the resource' do
       expect do
         make_request
-      end.to change { RebateForm.count }.by(-1)
-
-      expect(response.status).to eq(200)
-      expect(json).to eq('meta' => {})
+      end.to raise_error(ActionController::RoutingError)
     end
   end
 end

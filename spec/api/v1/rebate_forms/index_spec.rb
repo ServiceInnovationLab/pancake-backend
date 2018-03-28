@@ -14,11 +14,10 @@ RSpec.describe 'rebate_forms#index', type: :request do
     let!(:rebate_form1) { create(:rebate_form) }
     let!(:rebate_form2) { create(:rebate_form) }
 
-    it 'serializes the list correctly' do
-      make_request
-      expect(json_ids(true)).to match_array([rebate_form1.id, rebate_form2.id])
-      assert_payload(:rebate_form, rebate_form1, json_items[0])
-      assert_payload(:rebate_form, rebate_form2, json_items[1])
+    it 'does not return list' do
+      expect do
+        make_request
+      end.to raise_error(ActionController::RoutingError)
     end
   end
 end

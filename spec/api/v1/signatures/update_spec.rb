@@ -23,7 +23,7 @@ RSpec.describe 'signatures#update', type: :request do
     end
 
     # Replace 'xit' with 'it' after adding attributes
-    it 'updates the resource' do
+    pending 'updates the resource' do
       expect do
         make_request
       end.to change { signature.reload.attributes }
