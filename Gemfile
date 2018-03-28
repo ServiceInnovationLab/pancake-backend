@@ -55,3 +55,5 @@ end
 group :test do
   gem 'database_cleaner', '~> 1.6'
 end
+gem 'loofah', '>= 2.2.1'
+gem 'rails-html-sanitizer', '>= 1.0.4'
