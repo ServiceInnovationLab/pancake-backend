@@ -13,7 +13,7 @@ class RebateForm < ApplicationRecord
   end
 
   def set_token
-    self.token = new_token
+    self.token = new_token unless token
   end
 
   private
