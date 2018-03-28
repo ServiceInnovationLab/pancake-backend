@@ -17,6 +17,14 @@ RSpec.describe 'rebate_forms#show', type: :request do
       make_request
       assert_payload(:rebate_form, rebate_form, json_item)
     end
+
+    it 'does not alter token on fetch' do
+      token = rebate_form.token
+      make_request
+      expect(rebate_form.token).to eq token
+      make_request
+      expect(rebate_form.token).to eq token
+    end
   end
 
   describe 'fetch by id' do
