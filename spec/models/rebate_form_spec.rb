@@ -23,4 +23,10 @@ RSpec.describe RebateForm, type: :model do
     it { expect(form.applicant_signature).to eq(applicant) }
     it { expect(form.witness_signature).to eq(witness) }
   end
+
+  describe 'tokens' do
+    let(:form) { FactoryBot.create :rebate_form }
+    it { expect(form.token.present?).to eq true }
+    it { expect(form.token.length).to eq 11 }
+  end
 end
