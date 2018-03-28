@@ -10,7 +10,7 @@ RSpec.describe 'signatures#destroy', type: :request do
   describe 'basic destroy' do
     let!(:signature) { create(:signature) }
 
-    it 'updates the resource' do
+    it 'deletes the signature' do
       expect do
         make_request
       end.to change { Signature.count }.by(-1)
