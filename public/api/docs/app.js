@@ -181,7 +181,7 @@ function setOwner(object, owner) {
 // > No other namespaced attribute can be expressed in the HTML syntax.
 
 function unwrap(val) {
-    if (val === null || val === undefined) throw new Error(`Expected value to be present`);
+    if (val === null || val === undefined) throw new Error('Expected value to be present');
     return val;
 }
 function expect(val, message) {
@@ -203,16 +203,16 @@ function debugAssert(test, msg) {
     //   Logger.warn("Don't leave debug assertions on in public builds");
     // }
     if (!test) {
-        throw new Error(msg || "assertion failure");
+        throw new Error(msg || 'assertion failure');
     }
 }
 
 var LogLevel;
 (function (LogLevel) {
-    LogLevel[LogLevel["Trace"] = 0] = "Trace";
-    LogLevel[LogLevel["Debug"] = 1] = "Debug";
-    LogLevel[LogLevel["Warn"] = 2] = "Warn";
-    LogLevel[LogLevel["Error"] = 3] = "Error";
+    LogLevel[LogLevel['Trace'] = 0] = 'Trace';
+    LogLevel[LogLevel['Debug'] = 1] = 'Debug';
+    LogLevel[LogLevel['Warn'] = 2] = 'Warn';
+    LogLevel[LogLevel['Error'] = 3] = 'Error';
 })(LogLevel || (LogLevel = {}));
 class NullConsole {
     log(_message) {}
@@ -532,19 +532,19 @@ const EMPTY_ARRAY = HAS_NATIVE_WEAKMAP ? Object.freeze([]) : [];
 var Register;
 (function (Register) {
     // $0 or $pc (program counter): pointer into `program` for the next insturction; -1 means exit
-    Register[Register["pc"] = 0] = "pc";
+    Register[Register['pc'] = 0] = 'pc';
     // $1 or $ra (return address): pointer into `program` for the return
-    Register[Register["ra"] = 1] = "ra";
+    Register[Register['ra'] = 1] = 'ra';
     // $2 or $fp (frame pointer): pointer into the `evalStack` for the base of the stack
-    Register[Register["fp"] = 2] = "fp";
+    Register[Register['fp'] = 2] = 'fp';
     // $3 or $sp (stack pointer): pointer into the `evalStack` for the top of the stack
-    Register[Register["sp"] = 3] = "sp";
+    Register[Register['sp'] = 3] = 'sp';
     // $4-$5 or $s0-$s1 (saved): callee saved general-purpose registers
-    Register[Register["s0"] = 4] = "s0";
-    Register[Register["s1"] = 5] = "s1";
+    Register[Register['s0'] = 4] = 's0';
+    Register[Register['s1'] = 5] = 's1';
     // $6-$7 or $t0-$t1 (temporaries): caller saved general-purpose registers
-    Register[Register["t0"] = 6] = "t0";
-    Register[Register["t1"] = 7] = "t1";
+    Register[Register['t0'] = 6] = 't0';
+    Register[Register['t1'] = 7] = 't1';
 })(Register || (Register = {}));
 
 class AppendOpcodes {
@@ -836,7 +836,7 @@ class ReferenceCache {
         return value;
     }
 }
-const NOT_MODIFIED = "adb3b78e-3d22-4e4b-877a-6317c2c5c145";
+const NOT_MODIFIED = 'adb3b78e-3d22-4e4b-877a-6317c2c5c145';
 function isModified(value) {
     return value !== NOT_MODIFIED;
 }
@@ -960,9 +960,9 @@ class ReferenceIterator {
 }
 var Phase;
 (function (Phase) {
-    Phase[Phase["Append"] = 0] = "Append";
-    Phase[Phase["Prune"] = 1] = "Prune";
-    Phase[Phase["Done"] = 2] = "Done";
+    Phase[Phase['Append'] = 0] = 'Append';
+    Phase[Phase['Prune'] = 1] = 'Prune';
+    Phase[Phase['Done'] = 2] = 'Done';
 })(Phase || (Phase = {}));
 class IteratorSynchronizer {
     constructor({ target, artifacts }) {
@@ -2398,7 +2398,7 @@ class ElementStack {
         return expect(this.operations, `${method} should only be called while constructing an element`);
     }
     block() {
-        return expect(this.blockStack.current, "Expected a current block tracker");
+        return expect(this.blockStack.current, 'Expected a current block tracker');
     }
     popElement() {
         let elementStack = this.elementStack,
@@ -2407,7 +2407,7 @@ class ElementStack {
         let topElement = elementStack.pop();
         nextSiblingStack.pop();
         // LOGGER.debug(`-> element stack ${this.elementStack.toArray().map(e => e.tagName).join(', ')}`);
-        this.element = expect(elementStack.current, "can't pop past the last element");
+        this.element = expect(elementStack.current, 'can\'t pop past the last element');
         this.nextSibling = nextSiblingStack.current;
         return topElement;
     }
@@ -2444,7 +2444,7 @@ class ElementStack {
     }
     popBlock() {
         this.block().finalize(this);
-        return expect(this.blockStack.pop(), "Expected popBlock to return a block");
+        return expect(this.blockStack.pop(), 'Expected popBlock to return a block');
     }
     openElement(tag, _operations) {
         // workaround argument.length transpile of arg initializer
@@ -2456,7 +2456,7 @@ class ElementStack {
     }
     flushElement() {
         let parent = this.element;
-        let element = expect(this.constructing, `flushElement should only be called when constructing an element`);
+        let element = expect(this.constructing, 'flushElement should only be called when constructing an element');
         this.dom.insertBefore(parent, element, this.nextSibling);
         this.constructing = null;
         this.operations = null;
@@ -3017,35 +3017,35 @@ APPEND_OPCODES.add(55 /* Iterate */, (vm, { op1: breaks }) => {
 var Opcodes;
 (function (Opcodes) {
     // Statements
-    Opcodes[Opcodes["Text"] = 0] = "Text";
-    Opcodes[Opcodes["Append"] = 1] = "Append";
-    Opcodes[Opcodes["Comment"] = 2] = "Comment";
-    Opcodes[Opcodes["Modifier"] = 3] = "Modifier";
-    Opcodes[Opcodes["Block"] = 4] = "Block";
-    Opcodes[Opcodes["Component"] = 5] = "Component";
-    Opcodes[Opcodes["OpenElement"] = 6] = "OpenElement";
-    Opcodes[Opcodes["FlushElement"] = 7] = "FlushElement";
-    Opcodes[Opcodes["CloseElement"] = 8] = "CloseElement";
-    Opcodes[Opcodes["StaticAttr"] = 9] = "StaticAttr";
-    Opcodes[Opcodes["DynamicAttr"] = 10] = "DynamicAttr";
-    Opcodes[Opcodes["Yield"] = 11] = "Yield";
-    Opcodes[Opcodes["Partial"] = 12] = "Partial";
-    Opcodes[Opcodes["DynamicArg"] = 13] = "DynamicArg";
-    Opcodes[Opcodes["StaticArg"] = 14] = "StaticArg";
-    Opcodes[Opcodes["TrustingAttr"] = 15] = "TrustingAttr";
-    Opcodes[Opcodes["Debugger"] = 16] = "Debugger";
-    Opcodes[Opcodes["ClientSideStatement"] = 17] = "ClientSideStatement";
+    Opcodes[Opcodes['Text'] = 0] = 'Text';
+    Opcodes[Opcodes['Append'] = 1] = 'Append';
+    Opcodes[Opcodes['Comment'] = 2] = 'Comment';
+    Opcodes[Opcodes['Modifier'] = 3] = 'Modifier';
+    Opcodes[Opcodes['Block'] = 4] = 'Block';
+    Opcodes[Opcodes['Component'] = 5] = 'Component';
+    Opcodes[Opcodes['OpenElement'] = 6] = 'OpenElement';
+    Opcodes[Opcodes['FlushElement'] = 7] = 'FlushElement';
+    Opcodes[Opcodes['CloseElement'] = 8] = 'CloseElement';
+    Opcodes[Opcodes['StaticAttr'] = 9] = 'StaticAttr';
+    Opcodes[Opcodes['DynamicAttr'] = 10] = 'DynamicAttr';
+    Opcodes[Opcodes['Yield'] = 11] = 'Yield';
+    Opcodes[Opcodes['Partial'] = 12] = 'Partial';
+    Opcodes[Opcodes['DynamicArg'] = 13] = 'DynamicArg';
+    Opcodes[Opcodes['StaticArg'] = 14] = 'StaticArg';
+    Opcodes[Opcodes['TrustingAttr'] = 15] = 'TrustingAttr';
+    Opcodes[Opcodes['Debugger'] = 16] = 'Debugger';
+    Opcodes[Opcodes['ClientSideStatement'] = 17] = 'ClientSideStatement';
     // Expressions
-    Opcodes[Opcodes["Unknown"] = 18] = "Unknown";
-    Opcodes[Opcodes["Get"] = 19] = "Get";
-    Opcodes[Opcodes["MaybeLocal"] = 20] = "MaybeLocal";
-    Opcodes[Opcodes["FixThisBeforeWeMerge"] = 21] = "FixThisBeforeWeMerge";
-    Opcodes[Opcodes["HasBlock"] = 22] = "HasBlock";
-    Opcodes[Opcodes["HasBlockParams"] = 23] = "HasBlockParams";
-    Opcodes[Opcodes["Undefined"] = 24] = "Undefined";
-    Opcodes[Opcodes["Helper"] = 25] = "Helper";
-    Opcodes[Opcodes["Concat"] = 26] = "Concat";
-    Opcodes[Opcodes["ClientSideExpression"] = 27] = "ClientSideExpression";
+    Opcodes[Opcodes['Unknown'] = 18] = 'Unknown';
+    Opcodes[Opcodes['Get'] = 19] = 'Get';
+    Opcodes[Opcodes['MaybeLocal'] = 20] = 'MaybeLocal';
+    Opcodes[Opcodes['FixThisBeforeWeMerge'] = 21] = 'FixThisBeforeWeMerge';
+    Opcodes[Opcodes['HasBlock'] = 22] = 'HasBlock';
+    Opcodes[Opcodes['HasBlockParams'] = 23] = 'HasBlockParams';
+    Opcodes[Opcodes['Undefined'] = 24] = 'Undefined';
+    Opcodes[Opcodes['Helper'] = 25] = 'Helper';
+    Opcodes[Opcodes['Concat'] = 26] = 'Concat';
+    Opcodes[Opcodes['ClientSideExpression'] = 27] = 'ClientSideExpression';
 })(Opcodes || (Opcodes = {}));
 
 function is(variant) {
@@ -3112,10 +3112,10 @@ var Statements;
 
 var Ops$1;
 (function (Ops) {
-    Ops[Ops["OpenComponentElement"] = 0] = "OpenComponentElement";
-    Ops[Ops["DidCreateElement"] = 1] = "DidCreateElement";
-    Ops[Ops["DidRenderLayout"] = 2] = "DidRenderLayout";
-    Ops[Ops["FunctionExpression"] = 3] = "FunctionExpression";
+    Ops[Ops['OpenComponentElement'] = 0] = 'OpenComponentElement';
+    Ops[Ops['DidCreateElement'] = 1] = 'DidCreateElement';
+    Ops[Ops['DidRenderLayout'] = 2] = 'DidRenderLayout';
+    Ops[Ops['FunctionExpression'] = 3] = 'FunctionExpression';
 })(Ops$1 || (Ops$1 = {}));
 
 class CompiledStaticTemplate {
@@ -3322,7 +3322,7 @@ class ComponentBuilder {
         let builder = this.builder;
 
         if (!definitionArgs || definitionArgs.length === 0) {
-            throw new Error("Dynamic syntax without an argument");
+            throw new Error('Dynamic syntax without an argument');
         }
         let meta = this.builder.meta.templateMeta;
         function helper(vm, a) {
@@ -4354,7 +4354,7 @@ function populateBuiltins(blocks = new Blocks(), inlines = new Inlines()) {
         // END:   Noop
         //        Exit
         if (!params || params.length !== 1) {
-            throw new Error(`SYNTAX ERROR: #if requires a single argument`);
+            throw new Error('SYNTAX ERROR: #if requires a single argument');
         }
         builder.startLabels();
         builder.pushFrame();
@@ -4393,7 +4393,7 @@ function populateBuiltins(blocks = new Blocks(), inlines = new Inlines()) {
         // END:   Noop
         //        Exit
         if (!params || params.length !== 1) {
-            throw new Error(`SYNTAX ERROR: #unless requires a single argument`);
+            throw new Error('SYNTAX ERROR: #unless requires a single argument');
         }
         builder.startLabels();
         builder.pushFrame();
@@ -4432,7 +4432,7 @@ function populateBuiltins(blocks = new Blocks(), inlines = new Inlines()) {
         // END:   Noop
         //        Exit
         if (!params || params.length !== 1) {
-            throw new Error(`SYNTAX ERROR: #with requires a single argument`);
+            throw new Error('SYNTAX ERROR: #with requires a single argument');
         }
         builder.startLabels();
         builder.pushFrame();
@@ -4526,7 +4526,7 @@ function populateBuiltins(blocks = new Blocks(), inlines = new Inlines()) {
     });
     blocks.add('-in-element', (params, hash, template, _inverse, builder) => {
         if (!params || params.length !== 1) {
-            throw new Error(`SYNTAX ERROR: #-in-element requires a single argument`);
+            throw new Error('SYNTAX ERROR: #-in-element requires a single argument');
         }
         builder.startLabels();
         builder.pushFrame();
@@ -5139,7 +5139,7 @@ const SVG_INTEGRATION_POINTS = { foreignObject: 1, desc: 1, title: 1 };
 // TODO: Adjust SVG elements
 // http://www.w3.org/TR/html/syntax.html#parsing-main-inforeign
 const BLACKLIST_TABLE = Object.create(null);
-["b", "big", "blockquote", "body", "br", "center", "code", "dd", "div", "dl", "dt", "em", "embed", "h1", "h2", "h3", "h4", "h5", "h6", "head", "hr", "i", "img", "li", "listing", "main", "meta", "nobr", "ol", "p", "pre", "ruby", "s", "small", "span", "strong", "strike", "sub", "sup", "table", "tt", "u", "ul", "var"].forEach(tag => BLACKLIST_TABLE[tag] = 1);
+['b', 'big', 'blockquote', 'body', 'br', 'center', 'code', 'dd', 'div', 'dl', 'dt', 'em', 'embed', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'hr', 'i', 'img', 'li', 'listing', 'main', 'meta', 'nobr', 'ol', 'p', 'pre', 'ruby', 's', 'small', 'span', 'strong', 'strike', 'sub', 'sup', 'table', 'tt', 'u', 'ul', 'var'].forEach(tag => BLACKLIST_TABLE[tag] = 1);
 let doc = typeof document === 'undefined' ? null : document;
 
 function moveNodesBefore(source, target, nextSibling) {
@@ -5639,10 +5639,10 @@ class Opcode {
 }
 var TableSlotState;
 (function (TableSlotState) {
-    TableSlotState[TableSlotState["Allocated"] = 0] = "Allocated";
-    TableSlotState[TableSlotState["Freed"] = 1] = "Freed";
-    TableSlotState[TableSlotState["Purged"] = 2] = "Purged";
-    TableSlotState[TableSlotState["Pointer"] = 3] = "Pointer";
+    TableSlotState[TableSlotState['Allocated'] = 0] = 'Allocated';
+    TableSlotState[TableSlotState['Freed'] = 1] = 'Freed';
+    TableSlotState[TableSlotState['Purged'] = 2] = 'Purged';
+    TableSlotState[TableSlotState['Pointer'] = 3] = 'Pointer';
 })(TableSlotState || (TableSlotState = {}));
 class Heap {
     constructor() {
@@ -5845,7 +5845,7 @@ class BlockOpcode extends UpdatingOpcode {
     constructor(start, state, bounds$$1, children) {
         super();
         this.start = start;
-        this.type = "block";
+        this.type = 'block';
         this.next = null;
         this.prev = null;
         let env = state.env,
@@ -5880,7 +5880,7 @@ class BlockOpcode extends UpdatingOpcode {
     }
     toJSON() {
         let details = dict();
-        details["guid"] = `${this._guid}`;
+        details['guid'] = `${this._guid}`;
         return {
             guid: this._guid,
             type: this.type,
@@ -5892,7 +5892,7 @@ class BlockOpcode extends UpdatingOpcode {
 class TryOpcode extends BlockOpcode {
     constructor(start, state, bounds$$1, children) {
         super(start, state, bounds$$1, children);
-        this.type = "try";
+        this.type = 'try';
         this.tag = this._tag = UpdatableTag.create(CONSTANT_TAG);
     }
     didInitializeChildren() {
@@ -5927,9 +5927,9 @@ class TryOpcode extends BlockOpcode {
     }
     toJSON() {
         let json = super.toJSON();
-        let details = json["details"];
+        let details = json['details'];
         if (!details) {
-            details = json["details"] = {};
+            details = json['details'] = {};
         }
         return super.toJSON();
     }
@@ -6001,7 +6001,7 @@ class ListRevalidationDelegate {
 class ListBlockOpcode extends BlockOpcode {
     constructor(start, state, bounds$$1, children, artifacts) {
         super(start, state, bounds$$1, children);
-        this.type = "list-block";
+        this.type = 'list-block';
         this.map = dict();
         this.lastIterated = INITIAL;
         this.artifacts = artifacts;
@@ -6023,7 +6023,7 @@ class ListBlockOpcode extends BlockOpcode {
             let dom = vm.dom;
 
             let marker = dom.createComment('');
-            dom.insertAfter(bounds$$1.parentElement(), marker, expect(bounds$$1.lastNode(), "can't insert after an empty bounds"));
+            dom.insertAfter(bounds$$1.parentElement(), marker, expect(bounds$$1.lastNode(), 'can\'t insert after an empty bounds'));
             let target = new ListRevalidationDelegate(this, marker);
             let synchronizer = new IteratorSynchronizer({ target, artifacts });
             synchronizer.sync();
@@ -6045,12 +6045,12 @@ class ListBlockOpcode extends BlockOpcode {
         let map$$1 = this.map;
         let inner = Object.keys(map$$1).map(key => {
             return `${JSON.stringify(key)}: ${map$$1[key]._guid}`;
-        }).join(", ");
-        let details = json["details"];
+        }).join(', ');
+        let details = json['details'];
         if (!details) {
-            details = json["details"] = {};
+            details = json['details'] = {};
         }
-        details["map"] = `{${inner}}`;
+        details['map'] = `{${inner}}`;
         return json;
     }
 }
@@ -6106,7 +6106,7 @@ class RenderResult {
         return this.updating;
     }
     handleException() {
-        throw "this should never happen";
+        throw 'this should never happen';
     }
     destroy() {
         this.bounds.destroy();
@@ -6269,7 +6269,7 @@ class VM {
         //        (tail)
         //        DidModify
         // END:   Noop
-        let END = new LabelOpcode("END");
+        let END = new LabelOpcode('END');
         let opcodes = this.updating();
         let marker = this.cacheGroups.pop();
         let head = marker ? opcodes.nextNode(marker) : opcodes.head();
@@ -6496,18 +6496,18 @@ class ScannableTemplate {
 
 var NodeType;
 (function (NodeType) {
-    NodeType[NodeType["Element"] = 0] = "Element";
-    NodeType[NodeType["Attribute"] = 1] = "Attribute";
-    NodeType[NodeType["Text"] = 2] = "Text";
-    NodeType[NodeType["CdataSection"] = 3] = "CdataSection";
-    NodeType[NodeType["EntityReference"] = 4] = "EntityReference";
-    NodeType[NodeType["Entity"] = 5] = "Entity";
-    NodeType[NodeType["ProcessingInstruction"] = 6] = "ProcessingInstruction";
-    NodeType[NodeType["Comment"] = 7] = "Comment";
-    NodeType[NodeType["Document"] = 8] = "Document";
-    NodeType[NodeType["DocumentType"] = 9] = "DocumentType";
-    NodeType[NodeType["DocumentFragment"] = 10] = "DocumentFragment";
-    NodeType[NodeType["Notation"] = 11] = "Notation";
+    NodeType[NodeType['Element'] = 0] = 'Element';
+    NodeType[NodeType['Attribute'] = 1] = 'Attribute';
+    NodeType[NodeType['Text'] = 2] = 'Text';
+    NodeType[NodeType['CdataSection'] = 3] = 'CdataSection';
+    NodeType[NodeType['EntityReference'] = 4] = 'EntityReference';
+    NodeType[NodeType['Entity'] = 5] = 'Entity';
+    NodeType[NodeType['ProcessingInstruction'] = 6] = 'ProcessingInstruction';
+    NodeType[NodeType['Comment'] = 7] = 'Comment';
+    NodeType[NodeType['Document'] = 8] = 'Document';
+    NodeType[NodeType['DocumentType'] = 9] = 'DocumentType';
+    NodeType[NodeType['DocumentFragment'] = 10] = 'DocumentFragment';
+    NodeType[NodeType['Notation'] = 11] = 'Notation';
 })(NodeType || (NodeType = {}));
 
 function EMPTY_CACHE() {}
@@ -6629,10 +6629,10 @@ class ConstRoot {
         return this.inner;
     }
     referenceFromParts(_parts) {
-        throw new Error("Not implemented");
+        throw new Error('Not implemented');
     }
     chainFor(_prop) {
-        throw new Error("Not implemented");
+        throw new Error('Not implemented');
     }
     get(prop) {
         return new ConstPath(this.inner, prop);
@@ -6646,7 +6646,7 @@ class ConstMeta /*implements IMeta*/ {
         return new ConstRoot(this.object);
     }
 }
-const CLASS_META = "df8be4c8-4e89-44e2-a8f9-550c8dacdca7";
+const CLASS_META = 'df8be4c8-4e89-44e2-a8f9-550c8dacdca7';
 const hasOwnProperty = Object.hasOwnProperty;
 class Meta {
     constructor(object, { RootReferenceFactory, DefaultPathReferenceFactory }) {
@@ -6856,7 +6856,7 @@ class EmptyIterator {
         return true;
     }
     next() {
-        throw new Error(`Cannot call next() on an empty iterator`);
+        throw new Error('Cannot call next() on an empty iterator');
     }
 }
 const EMPTY_ITERATOR = new EmptyIterator();
@@ -7097,7 +7097,7 @@ class Environment$1 extends Environment {
             if (owner.identify(`component:${name}`, referrer)) {
                 throw new Error(`The component '${name}' is missing a template. All components must have a template. Make sure there is a template.hbs in the component directory.`);
             } else {
-                throw new Error("Could not find template for " + name);
+                throw new Error('Could not find template for ' + name);
             }
         }
         if (!this.components[specifier]) {
@@ -7188,7 +7188,7 @@ function canCreateComponentDefinition(manager) {
     return manager.createComponentDefinition !== undefined;
 }
 
-var mainTemplate = { "id": "UN61+JFU", "block": "{\"symbols\":[\"root\"],\"statements\":[[4,\"each\",[[19,0,[\"roots\"]]],[[\"key\"],[\"id\"]],{\"statements\":[[4,\"-in-element\",[[19,1,[\"parent\"]]],[[\"nextSibling\"],[[19,1,[\"nextSibling\"]]]],{\"statements\":[[1,[25,\"component\",[[19,1,[\"component\"]]],null],false]],\"parameters\":[]},null]],\"parameters\":[1]},null]],\"hasEval\":false}", "meta": { "specifier": "template:/-application/templates/main" } };
+var mainTemplate = { 'id': 'UN61+JFU', 'block': '{"symbols":["root"],"statements":[[4,"each",[[19,0,["roots"]]],[["key"],["id"]],{"statements":[[4,"-in-element",[[19,1,["parent"]]],[["nextSibling"],[[19,1,["nextSibling"]]]],{"statements":[[1,[25,"component",[[19,1,["component"]]],null],false]],"parameters":[]},null]],"parameters":[1]},null]],"hasEval":false}', 'meta': { 'specifier': 'template:/-application/templates/main' } };
 
 function NOOP() {}
 class Application {
@@ -7498,7 +7498,7 @@ function tracked(...dependencies) {
         key = dependencies[1],
         descriptor = dependencies[2];
 
-    if (typeof target === "string") {
+    if (typeof target === 'string') {
         return function (target, key, descriptor) {
             return descriptorForTrackedComputedProperty(target, key, descriptor, dependencies);
         };
@@ -7633,7 +7633,7 @@ function combinatorForComputedProperties(meta, key, dependencies) {
     // Return a combinator across the CP's tags and its dependencies' tags.
     return combine(tags);
 }
-let META = Symbol("ember-object");
+let META = Symbol('ember-object');
 function metaFor$1(obj) {
     let meta = obj[META];
     if (meta && hasOwnProperty$1(obj, META)) {
@@ -7673,7 +7673,7 @@ function defaultErrorThrower(obj, key) {
     throw UntrackedPropertyError.for(obj, key);
 }
 function tagForProperty(obj, key, throwError = defaultErrorThrower) {
-    if (typeof obj === "object" && obj) {
+    if (typeof obj === 'object' && obj) {
         if (true && !hasTag(obj, key)) {
             installDevModeErrorInterceptor(obj, key, throwError);
         }
@@ -7909,7 +7909,7 @@ class Component {
   }
   set args(args) {
     this.__args__ = args;
-    metaFor$1(this).dirtyableTagFor("args").inner.dirty();
+    metaFor$1(this).dirtyableTagFor('args').inner.dirty();
   }
   static create(injections) {
     return new this(injections);
@@ -8030,10 +8030,10 @@ class NestedPropertyReference extends PropertyReference$1 {
 
         let parentValue = _parentReference.value();
         _parentObjectTag.inner.update(tagForProperty(parentValue, _propertyKey));
-        if (typeof parentValue === "string" && _propertyKey === "length") {
+        if (typeof parentValue === 'string' && _propertyKey === 'length') {
             return parentValue.length;
         }
-        if (typeof parentValue === "object" && parentValue) {
+        if (typeof parentValue === 'object' && parentValue) {
             return parentValue[_propertyKey];
         } else {
             return undefined;
@@ -8135,7 +8135,7 @@ var __decorate = undefined && undefined.__decorate || function (decorators, targ
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
         d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function') r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 let $ = window['$'];
@@ -8273,18 +8273,18 @@ class EndpointRoute extends Component {
         });
     }
 }
-__decorate([tracked], EndpointRoute.prototype, "fetchParams", void 0);
-__decorate([tracked], EndpointRoute.prototype, "selectedPayloadName", void 0);
-__decorate([tracked], EndpointRoute.prototype, "idParam", void 0);
-__decorate([tracked('selectedPayloadName')], EndpointRoute.prototype, "currentPayload", null);
-__decorate([tracked('args')], EndpointRoute.prototype, "isReadOperation", null);
-__decorate([tracked('args')], EndpointRoute.prototype, "isCreateAction", null);
-__decorate([tracked('args')], EndpointRoute.prototype, "isUpdateAction", null);
-__decorate([tracked('args')], EndpointRoute.prototype, "fetchMethod", null);
-__decorate([tracked('model')], EndpointRoute.prototype, "payloads", null);
-__decorate([tracked('args')], EndpointRoute.prototype, "model", null);
+__decorate([tracked], EndpointRoute.prototype, 'fetchParams', void 0);
+__decorate([tracked], EndpointRoute.prototype, 'selectedPayloadName', void 0);
+__decorate([tracked], EndpointRoute.prototype, 'idParam', void 0);
+__decorate([tracked('selectedPayloadName')], EndpointRoute.prototype, 'currentPayload', null);
+__decorate([tracked('args')], EndpointRoute.prototype, 'isReadOperation', null);
+__decorate([tracked('args')], EndpointRoute.prototype, 'isCreateAction', null);
+__decorate([tracked('args')], EndpointRoute.prototype, 'isUpdateAction', null);
+__decorate([tracked('args')], EndpointRoute.prototype, 'fetchMethod', null);
+__decorate([tracked('model')], EndpointRoute.prototype, 'payloads', null);
+__decorate([tracked('args')], EndpointRoute.prototype, 'model', null);
 
-var __ui_components_endpoint_route_template__ = { "id": "YTpDYBPG", "block": "{\"symbols\":[\"prop\",\"payload\",\"param\",\"@isReady\"],\"statements\":[[6,\"div\"],[9,\"class\",\"col-md-4\"],[7],[0,\"\\n  \"],[6,\"div\"],[9,\"class\",\"endpoint\"],[7],[0,\"\\n\"],[4,\"if\",[[19,4,[]]],null,{\"statements\":[[0,\"      \"],[6,\"h2\"],[7],[1,[20,[\"model\",\"label\"]],false],[8],[0,\"\\n\\n      \"],[6,\"p\"],[7],[1,[20,[\"model\",\"config\",\"description\"]],true],[8],[0,\"\\n\\n      \"],[6,\"button\"],[10,\"onclick\",[25,\"action\",[[19,0,[\"fetch\"]]],null],null],[9,\"class\",\"btn btn-primary\"],[9,\"type\",\"button\"],[7],[0,\"Try It Out\"],[8],[0,\"\\n\\n      \"],[6,\"div\"],[9,\"class\",\"parameters\"],[7],[0,\"\\n        \"],[6,\"h4\"],[7],[0,\"Parameters\"],[8],[0,\"\\n\\n\"],[4,\"each\",[[19,0,[\"model\",\"config\",\"parameters\"]]],[[\"key\"],[\"@index\"]],{\"statements\":[[0,\"          \"],[6,\"div\"],[9,\"class\",\"parameter\"],[7],[0,\"\\n            \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n              \"],[6,\"label\"],[7],[1,[19,3,[\"name\"]],false],[8],[0,\"\\n            \"],[8],[0,\"\\n\\n            \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n\"],[4,\"if\",[[25,\"eq\",[[19,3,[\"name\"]],\"id\"],null]],null,{\"statements\":[[0,\"                \"],[6,\"input\"],[10,\"oninput\",[25,\"action\",[[19,0,[\"updateIdParam\"]]],null],null],[10,\"value\",[18,\"idParam\"],null],[9,\"class\",\"col-md-6\"],[9,\"type\",\"text\"],[7],[8],[0,\"\\n\"]],\"parameters\":[]},{\"statements\":[[4,\"if\",[[25,\"eq\",[[19,3,[\"name\"]],\"payload\"],null]],null,{\"statements\":[[0,\"                  \"],[6,\"textarea\"],[10,\"oninput\",[25,\"action\",[[19,0,[\"updateParams\"]],[19,3,[\"name\"]]],null],null],[9,\"class\",\"col-md-6\"],[9,\"type\",\"text\"],[7],[8],[0,\"\\n                  \"],[6,\"small\"],[7],[0,\"Paste JSON here, or - better yet - use \"],[6,\"a\"],[9,\"target\",\"_blank\"],[9,\"href\",\"https://www.getpostman.com\"],[7],[0,\"Postman\"],[8],[8],[0,\"\\n\"]],\"parameters\":[]},{\"statements\":[[0,\"                  \"],[6,\"input\"],[10,\"oninput\",[25,\"action\",[[19,0,[\"updateParams\"]],[19,3,[\"name\"]]],null],null],[9,\"class\",\"col-md-6\"],[9,\"type\",\"text\"],[7],[8],[0,\"\\n\"]],\"parameters\":[]}]],\"parameters\":[]}],[0,\"            \"],[8],[0,\"\\n\\n            \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n              \"],[6,\"small\"],[7],[1,[19,3,[\"description\"]],true],[8],[0,\"\\n            \"],[8],[0,\"\\n          \"],[8],[0,\"\\n\"]],\"parameters\":[3]},null],[0,\"      \"],[8],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"  \"],[8],[0,\"\\n\"],[8],[0,\"\\n\\n\"],[6,\"div\"],[9,\"class\",\"col-md-5\"],[7],[0,\"\\n  \"],[6,\"div\"],[9,\"class\",\"right-sidebar language-json highlighter-rouge\"],[7],[0,\"\\n    \"],[6,\"ul\"],[9,\"class\",\"nav nav-tabs\"],[7],[0,\"\\n      \"],[6,\"li\"],[7],[6,\"a\"],[10,\"onclick\",[25,\"action\",[[19,0,[\"switchTab\"]],\"api-response\"],null],null],[9,\"href\",\"#\"],[7],[0,\"API Response\"],[8],[8],[0,\"\\n      \"],[6,\"li\"],[7],[6,\"a\"],[10,\"onclick\",[25,\"action\",[[19,0,[\"switchTab\"]],\"schemas\"],null],null],[9,\"href\",\"#\"],[7],[0,\"Schemas\"],[8],[8],[0,\"\\n    \"],[8],[0,\"\\n\\n\"],[4,\"if\",[[19,4,[]]],null,{\"statements\":[[0,\"      \"],[6,\"div\"],[9,\"class\",\"tab-content\"],[7],[0,\"\\n        \"],[6,\"div\"],[9,\"class\",\"tab-pane\"],[9,\"class\",\"active\"],[9,\"id\",\"api-response\"],[7],[0,\"\\n          \"],[6,\"pre\"],[9,\"class\",\"highlight\"],[7],[0,\"\\n            \"],[6,\"code\"],[9,\"class\",\"json hljs\"],[7],[0,\"\\n            Click \\\"Try it Out\\\" to view API response here\\n            \"],[8],[0,\"\\n          \"],[8],[0,\"\\n        \"],[8],[0,\"\\n\\n        \"],[6,\"div\"],[9,\"class\",\"tab-pane\"],[9,\"id\",\"schemas\"],[7],[0,\"\\n          \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n            \"],[6,\"div\"],[9,\"class\",\"form-group\"],[7],[0,\"\\n              \"],[6,\"select\"],[9,\"class\",\"payload-select form-control\"],[10,\"onchange\",[25,\"action\",[[19,0,[\"changeCurrentPayload\"]]],null],null],[7],[0,\"\\n\"],[4,\"each\",[[19,0,[\"payloads\"]]],[[\"key\"],[\"@index\"]],{\"statements\":[[0,\"                  \"],[6,\"option\"],[10,\"selected\",[25,\"eq\",[[19,0,[\"currentPayload\",\"name\"]],[19,2,[\"name\"]]],null],null],[10,\"value\",[19,2,[\"name\"]],null],[7],[1,[19,2,[\"name\"]],false],[8],[0,\"\\n\"]],\"parameters\":[2]},null],[0,\"              \"],[8],[0,\"\\n            \"],[8],[0,\"\\n          \"],[8],[0,\"\\n\\n\"],[4,\"if\",[[19,0,[\"currentPayload\"]]],null,{\"statements\":[[0,\"            \"],[6,\"h3\"],[7],[1,[20,[\"currentPayload\",\"name\"]],false],[8],[0,\"\\n            \"],[6,\"ul\"],[9,\"class\",\"attributes\"],[7],[0,\"\\n\"],[4,\"each\",[[25,\"props\",[[19,0,[\"currentPayload\",\"properties\"]]],null]],[[\"key\"],[\"@index\"]],{\"statements\":[[0,\"                \"],[6,\"li\"],[9,\"class\",\"attribute\"],[7],[0,\"\\n                  \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n                    \"],[6,\"label\"],[7],[0,\"\\n                      \"],[1,[19,1,[\"key\"]],false],[0,\"\\n                      \"],[5,\"type-check\",[],[[\"@type\"],[[19,1,[\"value\",\"type\"]]]],{\"statements\":[],\"parameters\":[]}],[0,\"\\n                    \"],[8],[0,\"\\n                  \"],[8],[0,\"\\n                  \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n                    \"],[6,\"small\"],[7],[1,[19,1,[\"value\",\"description\"]],false],[8],[0,\"\\n                  \"],[8],[0,\"\\n                \"],[8],[0,\"\\n\"]],\"parameters\":[1]},null],[0,\"            \"],[8],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"        \"],[8],[0,\"\\n      \"],[8],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"  \"],[8],[0,\"\\n\"],[8],[0,\"\\n\"]],\"hasEval\":false}", "meta": { "specifier": "template:/jsonapi-swagger-ui/components/endpoint-route" } };
+var __ui_components_endpoint_route_template__ = { 'id': 'YTpDYBPG', 'block': '{"symbols":["prop","payload","param","@isReady"],"statements":[[6,"div"],[9,"class","col-md-4"],[7],[0,"\\n  "],[6,"div"],[9,"class","endpoint"],[7],[0,"\\n"],[4,"if",[[19,4,[]]],null,{"statements":[[0,"      "],[6,"h2"],[7],[1,[20,["model","label"]],false],[8],[0,"\\n\\n      "],[6,"p"],[7],[1,[20,["model","config","description"]],true],[8],[0,"\\n\\n      "],[6,"button"],[10,"onclick",[25,"action",[[19,0,["fetch"]]],null],null],[9,"class","btn btn-primary"],[9,"type","button"],[7],[0,"Try It Out"],[8],[0,"\\n\\n      "],[6,"div"],[9,"class","parameters"],[7],[0,"\\n        "],[6,"h4"],[7],[0,"Parameters"],[8],[0,"\\n\\n"],[4,"each",[[19,0,["model","config","parameters"]]],[["key"],["@index"]],{"statements":[[0,"          "],[6,"div"],[9,"class","parameter"],[7],[0,"\\n            "],[6,"div"],[9,"class","row"],[7],[0,"\\n              "],[6,"label"],[7],[1,[19,3,["name"]],false],[8],[0,"\\n            "],[8],[0,"\\n\\n            "],[6,"div"],[9,"class","row"],[7],[0,"\\n"],[4,"if",[[25,"eq",[[19,3,["name"]],"id"],null]],null,{"statements":[[0,"                "],[6,"input"],[10,"oninput",[25,"action",[[19,0,["updateIdParam"]]],null],null],[10,"value",[18,"idParam"],null],[9,"class","col-md-6"],[9,"type","text"],[7],[8],[0,"\\n"]],"parameters":[]},{"statements":[[4,"if",[[25,"eq",[[19,3,["name"]],"payload"],null]],null,{"statements":[[0,"                  "],[6,"textarea"],[10,"oninput",[25,"action",[[19,0,["updateParams"]],[19,3,["name"]]],null],null],[9,"class","col-md-6"],[9,"type","text"],[7],[8],[0,"\\n                  "],[6,"small"],[7],[0,"Paste JSON here, or - better yet - use "],[6,"a"],[9,"target","_blank"],[9,"href","https://www.getpostman.com"],[7],[0,"Postman"],[8],[8],[0,"\\n"]],"parameters":[]},{"statements":[[0,"                  "],[6,"input"],[10,"oninput",[25,"action",[[19,0,["updateParams"]],[19,3,["name"]]],null],null],[9,"class","col-md-6"],[9,"type","text"],[7],[8],[0,"\\n"]],"parameters":[]}]],"parameters":[]}],[0,"            "],[8],[0,"\\n\\n            "],[6,"div"],[9,"class","row"],[7],[0,"\\n              "],[6,"small"],[7],[1,[19,3,["description"]],true],[8],[0,"\\n            "],[8],[0,"\\n          "],[8],[0,"\\n"]],"parameters":[3]},null],[0,"      "],[8],[0,"\\n"]],"parameters":[]},null],[0,"  "],[8],[0,"\\n"],[8],[0,"\\n\\n"],[6,"div"],[9,"class","col-md-5"],[7],[0,"\\n  "],[6,"div"],[9,"class","right-sidebar language-json highlighter-rouge"],[7],[0,"\\n    "],[6,"ul"],[9,"class","nav nav-tabs"],[7],[0,"\\n      "],[6,"li"],[7],[6,"a"],[10,"onclick",[25,"action",[[19,0,["switchTab"]],"api-response"],null],null],[9,"href","#"],[7],[0,"API Response"],[8],[8],[0,"\\n      "],[6,"li"],[7],[6,"a"],[10,"onclick",[25,"action",[[19,0,["switchTab"]],"schemas"],null],null],[9,"href","#"],[7],[0,"Schemas"],[8],[8],[0,"\\n    "],[8],[0,"\\n\\n"],[4,"if",[[19,4,[]]],null,{"statements":[[0,"      "],[6,"div"],[9,"class","tab-content"],[7],[0,"\\n        "],[6,"div"],[9,"class","tab-pane"],[9,"class","active"],[9,"id","api-response"],[7],[0,"\\n          "],[6,"pre"],[9,"class","highlight"],[7],[0,"\\n            "],[6,"code"],[9,"class","json hljs"],[7],[0,"\\n            Click \\"Try it Out\\" to view API response here\\n            "],[8],[0,"\\n          "],[8],[0,"\\n        "],[8],[0,"\\n\\n        "],[6,"div"],[9,"class","tab-pane"],[9,"id","schemas"],[7],[0,"\\n          "],[6,"div"],[9,"class","row"],[7],[0,"\\n            "],[6,"div"],[9,"class","form-group"],[7],[0,"\\n              "],[6,"select"],[9,"class","payload-select form-control"],[10,"onchange",[25,"action",[[19,0,["changeCurrentPayload"]]],null],null],[7],[0,"\\n"],[4,"each",[[19,0,["payloads"]]],[["key"],["@index"]],{"statements":[[0,"                  "],[6,"option"],[10,"selected",[25,"eq",[[19,0,["currentPayload","name"]],[19,2,["name"]]],null],null],[10,"value",[19,2,["name"]],null],[7],[1,[19,2,["name"]],false],[8],[0,"\\n"]],"parameters":[2]},null],[0,"              "],[8],[0,"\\n            "],[8],[0,"\\n          "],[8],[0,"\\n\\n"],[4,"if",[[19,0,["currentPayload"]]],null,{"statements":[[0,"            "],[6,"h3"],[7],[1,[20,["currentPayload","name"]],false],[8],[0,"\\n            "],[6,"ul"],[9,"class","attributes"],[7],[0,"\\n"],[4,"each",[[25,"props",[[19,0,["currentPayload","properties"]]],null]],[["key"],["@index"]],{"statements":[[0,"                "],[6,"li"],[9,"class","attribute"],[7],[0,"\\n                  "],[6,"div"],[9,"class","row"],[7],[0,"\\n                    "],[6,"label"],[7],[0,"\\n                      "],[1,[19,1,["key"]],false],[0,"\\n                      "],[5,"type-check",[],[["@type"],[[19,1,["value","type"]]]],{"statements":[],"parameters":[]}],[0,"\\n                    "],[8],[0,"\\n                  "],[8],[0,"\\n                  "],[6,"div"],[9,"class","row"],[7],[0,"\\n                    "],[6,"small"],[7],[1,[19,1,["value","description"]],false],[8],[0,"\\n                  "],[8],[0,"\\n                "],[8],[0,"\\n"]],"parameters":[1]},null],[0,"            "],[8],[0,"\\n"]],"parameters":[]},null],[0,"        "],[8],[0,"\\n      "],[8],[0,"\\n"]],"parameters":[]},null],[0,"  "],[8],[0,"\\n"],[8],[0,"\\n"]],"hasEval":false}', 'meta': { 'specifier': 'template:/jsonapi-swagger-ui/components/endpoint-route' } };
 
 function eq([left, right]) {
     return left === right;
@@ -8296,13 +8296,13 @@ function _if([test, truthy, falsy]) {
 
 class IndexRoute extends Component {}
 
-var __ui_components_index_route_template__ = { "id": "x84cIsRK", "block": "{\"symbols\":[\"@swagger\"],\"statements\":[[6,\"h1\"],[7],[0,\"Welcome to the \"],[1,[19,1,[\"info\",\"title\"]],false],[0,\" API!\"],[8],[0,\"\\n\\n\"],[6,\"div\"],[9,\"class\",\"col-md-9\"],[7],[0,\"\\n  \"],[6,\"div\"],[9,\"class\",\"introduction\"],[7],[0,\"\\n    \"],[6,\"p\"],[7],[0,\"\\n      This API adheres to the open-source \"],[6,\"a\"],[9,\"target\",\"_blank\"],[9,\"href\",\"http://jsonapi.org\"],[7],[0,\"JSONAPI Specification\"],[8],[0,\". If you're unfamiliar with JSONAPI, start there!\\n    \"],[8],[0,\"\\n\\n    \"],[6,\"p\"],[7],[0,\"\\n      Because the specification is verbose, we've omitted the cruft. Instead, Resource Schemas detail the relevant attributes, types, and descriptions.\\n      At the top of each endpoint's documentation, you'll see the schemas relevant to that endpoint (ie, possible sideloads and sideposts).\\n    \"],[8],[0,\"\\n\\n    \"],[6,\"p\"],[7],[0,\"\\n      If you need a token to access this API, use something like \"],[6,\"a\"],[9,\"target\",\"_blank\"],[9,\"href\",\"http://www.requestly.in\"],[7],[0,\"Requestly\"],[8],[0,\" to modify your headers each request. This way you can access endpoints directly through your browser.\\n    \"],[8],[0,\"\\n  \"],[8],[0,\"\\n\\n  \"],[6,\"div\"],[9,\"class\",\"description\"],[7],[0,\"\\n    \"],[6,\"h2\"],[7],[0,\"API Details\"],[8],[0,\"\\n    \"],[1,[19,1,[\"info\",\"description\"]],true],[0,\"\\n  \"],[8],[0,\"\\n\"],[8],[0,\"\\n\"]],\"hasEval\":false}", "meta": { "specifier": "template:/jsonapi-swagger-ui/components/index-route" } };
+var __ui_components_index_route_template__ = { 'id': 'x84cIsRK', 'block': '{"symbols":["@swagger"],"statements":[[6,"h1"],[7],[0,"Welcome to the "],[1,[19,1,["info","title"]],false],[0," API!"],[8],[0,"\\n\\n"],[6,"div"],[9,"class","col-md-9"],[7],[0,"\\n  "],[6,"div"],[9,"class","introduction"],[7],[0,"\\n    "],[6,"p"],[7],[0,"\\n      This API adheres to the open-source "],[6,"a"],[9,"target","_blank"],[9,"href","http://jsonapi.org"],[7],[0,"JSONAPI Specification"],[8],[0,". If you\'re unfamiliar with JSONAPI, start there!\\n    "],[8],[0,"\\n\\n    "],[6,"p"],[7],[0,"\\n      Because the specification is verbose, we\'ve omitted the cruft. Instead, Resource Schemas detail the relevant attributes, types, and descriptions.\\n      At the top of each endpoint\'s documentation, you\'ll see the schemas relevant to that endpoint (ie, possible sideloads and sideposts).\\n    "],[8],[0,"\\n\\n    "],[6,"p"],[7],[0,"\\n      If you need a token to access this API, use something like "],[6,"a"],[9,"target","_blank"],[9,"href","http://www.requestly.in"],[7],[0,"Requestly"],[8],[0," to modify your headers each request. This way you can access endpoints directly through your browser.\\n    "],[8],[0,"\\n  "],[8],[0,"\\n\\n  "],[6,"div"],[9,"class","description"],[7],[0,"\\n    "],[6,"h2"],[7],[0,"API Details"],[8],[0,"\\n    "],[1,[19,1,["info","description"]],true],[0,"\\n  "],[8],[0,"\\n"],[8],[0,"\\n"]],"hasEval":false}', 'meta': { 'specifier': 'template:/jsonapi-swagger-ui/components/index-route' } };
 
 var createObject = Object.create;
 function createMap() {
     var map = createObject(null);
-    map["__"] = undefined;
-    delete map["__"];
+    map['__'] = undefined;
+    delete map['__'];
     return map;
 }
 
@@ -8319,7 +8319,7 @@ Target.prototype.to = function to(target, callback) {
     this.matcher.add(this.path, target);
     if (callback) {
         if (callback.length === 0) {
-            throw new Error("You must have an argument in the function passed to `to`");
+            throw new Error('You must have an argument in the function passed to `to`');
         }
         this.matcher.addChild(this.path, target, callback, this.delegate);
     }
@@ -8379,7 +8379,7 @@ function eachRoute(baseRoute, matcher, callback, binding) {
 }
 var map$1 = function map(callback, addRouteCallback) {
     var matcher = new Matcher();
-    callback(generateMatch("", matcher, this.delegate));
+    callback(generateMatch('', matcher, this.delegate));
     eachRoute([], matcher, function (routes) {
         if (addRouteCallback) {
             addRouteCallback(this, routes);
@@ -8395,14 +8395,14 @@ var map$1 = function map(callback, addRouteCallback) {
 // Safe to call multiple times on the same path.
 // Normalizes percent-encoded values in `path` to upper-case and decodes percent-encoded
 function normalizePath(path) {
-    return path.split("/").map(normalizeSegment).join("/");
+    return path.split('/').map(normalizeSegment).join('/');
 }
 // We want to ensure the characters "%" and "/" remain in percent-encoded
 // form when normalizing paths, so replace them with their encoded form after
 // decoding the rest of the path
 var SEGMENT_RESERVED_CHARS = /%|\//g;
 function normalizeSegment(segment) {
-    if (segment.length < 3 || segment.indexOf("%") === -1) {
+    if (segment.length < 3 || segment.indexOf('%') === -1) {
         return segment;
     }
     return decodeURIComponent(segment).replace(SEGMENT_RESERVED_CHARS, encodeURIComponent);
@@ -8426,16 +8426,16 @@ var escapeRegex = /(\/|\.|\*|\+|\?|\||\(|\)|\[|\]|\{|\}|\\)/g;
 var isArray = Array.isArray;
 var hasOwnProperty$2 = Object.prototype.hasOwnProperty;
 function getParam(params, key) {
-    if (typeof params !== "object" || params === null) {
-        throw new Error("You must pass an object as the second argument to `generate`.");
+    if (typeof params !== 'object' || params === null) {
+        throw new Error('You must pass an object as the second argument to `generate`.');
     }
     if (!hasOwnProperty$2.call(params, key)) {
-        throw new Error("You must provide param `" + key + "` to `generate`.");
+        throw new Error('You must provide param `' + key + '` to `generate`.');
     }
     var value = params[key];
-    var str = typeof value === "string" ? value : "" + value;
+    var str = typeof value === 'string' ? value : '' + value;
     if (str.length === 0) {
-        throw new Error("You must provide a param `" + key + "`.");
+        throw new Error('You must provide a param `' + key + '`.');
     }
     return str;
 }
@@ -8460,16 +8460,16 @@ eachChar[4 /* Epsilon */] = function (_, currentState) {
 };
 var regex = [];
 regex[0 /* Static */] = function (segment) {
-    return segment.value.replace(escapeRegex, "\\$1");
+    return segment.value.replace(escapeRegex, '\\$1');
 };
 regex[1 /* Dynamic */] = function () {
-    return "([^/]+)";
+    return '([^/]+)';
 };
 regex[2 /* Star */] = function () {
-    return "(.+)";
+    return '(.+)';
 };
 regex[4 /* Epsilon */] = function () {
-    return "";
+    return '';
 };
 var generate = [];
 generate[0 /* Static */] = function (segment) {
@@ -8487,7 +8487,7 @@ generate[2 /* Star */] = function (segment, params) {
     return getParam(params, segment.value);
 };
 generate[4 /* Epsilon */] = function () {
-    return "";
+    return '';
 };
 var EmptyObject$1 = Object.freeze({});
 var EmptyArray = Object.freeze([]);
@@ -8500,14 +8500,14 @@ function parse(segments, route, types) {
     if (route.length > 0 && route.charCodeAt(0) === 47 /* SLASH */) {
             route = route.substr(1);
         }
-    var parts = route.split("/");
+    var parts = route.split('/');
     var names = undefined;
     var shouldDecodes = undefined;
     for (var i = 0; i < parts.length; i++) {
         var part = parts[i];
         var flags = 0;
         var type = 0;
-        if (part === "") {
+        if (part === '') {
             type = 4 /* Epsilon */;
         } else if (part.charCodeAt(0) === 58 /* COLON */) {
                 type = 1 /* Dynamic */;
@@ -8562,7 +8562,7 @@ var State = function State(states, id, char, negate, repeat) {
     this.char = char;
     this.negate = negate;
     this.nextStates = repeat ? id : null;
-    this.pattern = "";
+    this.pattern = '';
     this._regex = undefined;
     this.handlers = undefined;
     this.types = undefined;
@@ -8703,7 +8703,7 @@ function findHandler(state, originalPath, queryParams) {
     var handlers = state.handlers;
     var regex = state.regex();
     if (!regex || !handlers) {
-        throw new Error("state not initialized");
+        throw new Error('state not initialized');
     }
     var captures = originalPath.match(regex);
     var currentCapture = 1;
@@ -8740,12 +8740,12 @@ function findHandler(state, originalPath, queryParams) {
 }
 function decodeQueryParamPart(part) {
     // http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1
-    part = part.replace(/\+/gm, "%20");
+    part = part.replace(/\+/gm, '%20');
     var result;
     try {
         result = decodeURIComponent(part);
     } catch (error) {
-        result = "";
+        result = '';
     }
     return result;
 }
@@ -8759,7 +8759,7 @@ var RouteRecognizer = function RouteRecognizer() {
 };
 RouteRecognizer.prototype.add = function add(routes, options) {
     var currentState = this.rootState;
-    var pattern = "^";
+    var pattern = '^';
     var types = [0, 0, 0];
     var handlers = new Array(routes.length);
     var allSegments = [];
@@ -8779,7 +8779,7 @@ RouteRecognizer.prototype.add = function add(routes, options) {
             isEmpty = false;
             // Add a "/" for the new segment
             currentState = currentState.put(47 /* SLASH */, false, false);
-            pattern += "/";
+            pattern += '/';
             // Add a representation of the segment to the NFA and regex
             currentState = eachChar[segment.type](segment, currentState);
             pattern += regex[segment.type](segment);
@@ -8792,13 +8792,13 @@ RouteRecognizer.prototype.add = function add(routes, options) {
     }
     if (isEmpty) {
         currentState = currentState.put(47 /* SLASH */, false, false);
-        pattern += "/";
+        pattern += '/';
     }
     currentState.handlers = handlers;
-    currentState.pattern = pattern + "$";
+    currentState.pattern = pattern + '$';
     currentState.types = types;
     var name;
-    if (typeof options === "object" && options !== null && options.as) {
+    if (typeof options === 'object' && options !== null && options.as) {
         name = options.as;
     }
     if (name) {
@@ -8814,7 +8814,7 @@ RouteRecognizer.prototype.add = function add(routes, options) {
 RouteRecognizer.prototype.handlersFor = function handlersFor(name) {
     var route = this.names[name];
     if (!route) {
-        throw new Error("There is no route named " + name);
+        throw new Error('There is no route named ' + name);
     }
     var result = new Array(route.handlers.length);
     for (var i = 0; i < route.handlers.length; i++) {
@@ -8828,9 +8828,9 @@ RouteRecognizer.prototype.hasRoute = function hasRoute(name) {
 };
 RouteRecognizer.prototype.generate = function generate$1(name, params) {
     var route = this.names[name];
-    var output = "";
+    var output = '';
     if (!route) {
-        throw new Error("There is no route named " + name);
+        throw new Error('There is no route named ' + name);
     }
     var segments = route.segments;
     for (var i = 0; i < segments.length; i++) {
@@ -8838,11 +8838,11 @@ RouteRecognizer.prototype.generate = function generate$1(name, params) {
         if (segment.type === 4 /* Epsilon */) {
                 continue;
             }
-        output += "/";
+        output += '/';
         output += generate[segment.type](segment, params);
     }
-    if (output.charAt(0) !== "/") {
-        output = "/" + output;
+    if (output.charAt(0) !== '/') {
+        output = '/' + output;
     }
     if (params && params.queryParams) {
         output += this.generateQueryString(params.queryParams);
@@ -8862,40 +8862,40 @@ RouteRecognizer.prototype.generateQueryString = function generateQueryString(par
         var pair = encodeURIComponent(key);
         if (isArray(value)) {
             for (var j = 0; j < value.length; j++) {
-                var arrayPair = key + "[]" + "=" + encodeURIComponent(value[j]);
+                var arrayPair = key + '[]' + '=' + encodeURIComponent(value[j]);
                 pairs.push(arrayPair);
             }
         } else {
-            pair += "=" + encodeURIComponent(value);
+            pair += '=' + encodeURIComponent(value);
             pairs.push(pair);
         }
     }
     if (pairs.length === 0) {
-        return "";
+        return '';
     }
-    return "?" + pairs.join("&");
+    return '?' + pairs.join('&');
 };
 RouteRecognizer.prototype.parseQueryString = function parseQueryString(queryString) {
-    var pairs = queryString.split("&");
+    var pairs = queryString.split('&');
     var queryParams = {};
     for (var i = 0; i < pairs.length; i++) {
-        var pair = pairs[i].split("="),
+        var pair = pairs[i].split('='),
             key = decodeQueryParamPart(pair[0]),
             keyLength = key.length,
             isArray = false,
             value = void 0;
         if (pair.length === 1) {
-            value = "true";
+            value = 'true';
         } else {
             // Handle arrays
-            if (keyLength > 2 && key.slice(keyLength - 2) === "[]") {
+            if (keyLength > 2 && key.slice(keyLength - 2) === '[]') {
                 isArray = true;
                 key = key.slice(0, keyLength - 2);
                 if (!queryParams[key]) {
                     queryParams[key] = [];
                 }
             }
-            value = pair[1] ? decodeQueryParamPart(pair[1]) : "";
+            value = pair[1] ? decodeQueryParamPart(pair[1]) : '';
         }
         if (isArray) {
             queryParams[key].push(value);
@@ -8910,18 +8910,18 @@ RouteRecognizer.prototype.recognize = function recognize(path) {
     var states = [this.rootState];
     var queryParams = {};
     var isSlashDropped = false;
-    var hashStart = path.indexOf("#");
+    var hashStart = path.indexOf('#');
     if (hashStart !== -1) {
         path = path.substr(0, hashStart);
     }
-    var queryStart = path.indexOf("?");
+    var queryStart = path.indexOf('?');
     if (queryStart !== -1) {
         var queryString = path.substr(queryStart + 1, path.length);
         path = path.substr(0, queryStart);
         queryParams = this.parseQueryString(queryString);
     }
-    if (path.charAt(0) !== "/") {
-        path = "/" + path;
+    if (path.charAt(0) !== '/') {
+        path = '/' + path;
     }
     var originalPath = path;
     if (RouteRecognizer.ENCODE_AND_DECODE_PATH_SEGMENTS) {
@@ -8931,7 +8931,7 @@ RouteRecognizer.prototype.recognize = function recognize(path) {
         originalPath = decodeURI(originalPath);
     }
     var pathLen = path.length;
-    if (pathLen > 1 && path.charAt(pathLen - 1) === "/") {
+    if (pathLen > 1 && path.charAt(pathLen - 1) === '/') {
         path = path.substr(0, pathLen - 1);
         originalPath = originalPath.substr(0, originalPath.length - 1);
         isSlashDropped = true;
@@ -8953,14 +8953,14 @@ RouteRecognizer.prototype.recognize = function recognize(path) {
     if (state && state.handlers) {
         // if a trailing slash was dropped and a star segment is the last segment
         // specified, put the trailing slash back
-        if (isSlashDropped && state.pattern && state.pattern.slice(-5) === "(.+)$") {
-            originalPath = originalPath + "/";
+        if (isSlashDropped && state.pattern && state.pattern.slice(-5) === '(.+)$') {
+            originalPath = originalPath + '/';
         }
         results = findHandler(state, originalPath, queryParams);
     }
     return results;
 };
-RouteRecognizer.VERSION = "0.3.3";
+RouteRecognizer.VERSION = '0.3.3';
 // Set to false to opt-out of encoding and decoding path segments.
 // See https://github.com/tildeio/route-recognizer/pull/55
 RouteRecognizer.ENCODE_AND_DECODE_PATH_SEGMENTS = true;
@@ -9015,7 +9015,7 @@ var __decorate$1 = undefined && undefined.__decorate || function (decorators, ta
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
         d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function') r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 console.log('configwas', config$1);
@@ -9073,20 +9073,20 @@ class JsonapiSwaggerUi extends Component {
         return json;
     }
 }
-__decorate$1([tracked], JsonapiSwaggerUi.prototype, "currentRouteComponent", void 0);
-__decorate$1([tracked], JsonapiSwaggerUi.prototype, "params", void 0);
-__decorate$1([tracked], JsonapiSwaggerUi.prototype, "swagger", void 0);
-__decorate$1([tracked], JsonapiSwaggerUi.prototype, "id", void 0);
-__decorate$1([tracked], JsonapiSwaggerUi.prototype, "routeIsChanging", void 0);
-__decorate$1([tracked('swagger')], JsonapiSwaggerUi.prototype, "isReady", null);
+__decorate$1([tracked], JsonapiSwaggerUi.prototype, 'currentRouteComponent', void 0);
+__decorate$1([tracked], JsonapiSwaggerUi.prototype, 'params', void 0);
+__decorate$1([tracked], JsonapiSwaggerUi.prototype, 'swagger', void 0);
+__decorate$1([tracked], JsonapiSwaggerUi.prototype, 'id', void 0);
+__decorate$1([tracked], JsonapiSwaggerUi.prototype, 'routeIsChanging', void 0);
+__decorate$1([tracked('swagger')], JsonapiSwaggerUi.prototype, 'isReady', null);
 
-var __ui_components_jsonapi_swagger_ui_template__ = { "id": "LI8ddkWn", "block": "{\"symbols\":[\"endpoint\"],\"statements\":[[6,\"main\"],[9,\"class\",\"page-content\"],[9,\"aria-label\",\"Content\"],[7],[0,\"\\n  \"],[6,\"div\"],[9,\"class\",\"wrapper\"],[7],[0,\"\\n    \"],[5,\"nav-header\",[],[[\"@swagger\"],[[18,\"swagger\"]]],{\"statements\":[],\"parameters\":[]}],[0,\"\\n\\n    \"],[6,\"div\"],[9,\"class\",\"container-fluid\"],[7],[0,\"\\n      \"],[6,\"div\"],[9,\"class\",\"row\"],[7],[0,\"\\n\\n        \"],[6,\"div\"],[9,\"class\",\"col-md-3 alpha\"],[7],[0,\"\\n          \"],[6,\"div\"],[9,\"class\",\"sidebar-nav-fixed left-sidebar\"],[7],[0,\"\\n            \"],[6,\"div\"],[9,\"class\",\"well\"],[7],[0,\"\\n              \"],[6,\"ul\"],[9,\"class\",\"nav endpoints\"],[7],[0,\"\\n                \"],[6,\"li\"],[9,\"class\",\"nav-header\"],[7],[0,\"API Reference\"],[8],[0,\"\\n\"],[4,\"each\",[[19,0,[\"swagger\",\"endpoints\"]]],[[\"key\"],[\"@index\"]],{\"statements\":[[0,\"                  \"],[6,\"li\"],[7],[0,\"\\n                    \"],[6,\"a\"],[10,\"href\",[26,[\"#/endpoints/\",[19,1,[\"id\"]]]]],[7],[1,[19,1,[\"label\"]],false],[8],[0,\"\\n                  \"],[8],[0,\"\\n\"]],\"parameters\":[1]},null],[0,\"              \"],[8],[0,\"\\n            \"],[8],[0,\"\\n          \"],[8],[0,\"\\n        \"],[8],[0,\"\\n\\n\"],[4,\"unless\",[[19,0,[\"routeIsChanging\"]]],null,{\"statements\":[[0,\"          \"],[1,[25,\"component\",[[19,0,[\"currentRouteComponent\"]]],[[\"context\",\"isReady\",\"swagger\",\"params\"],[[19,0,[]],[19,0,[\"isReady\"]],[19,0,[\"swagger\"]],[19,0,[\"params\"]]]]],false],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"      \"],[8],[0,\"\\n    \"],[8],[0,\"\\n  \"],[8],[0,\"\\n\"],[8],[0,\"\\n\\n\"]],\"hasEval\":false}", "meta": { "specifier": "template:/jsonapi-swagger-ui/components/jsonapi-swagger-ui" } };
+var __ui_components_jsonapi_swagger_ui_template__ = { 'id': 'LI8ddkWn', 'block': '{"symbols":["endpoint"],"statements":[[6,"main"],[9,"class","page-content"],[9,"aria-label","Content"],[7],[0,"\\n  "],[6,"div"],[9,"class","wrapper"],[7],[0,"\\n    "],[5,"nav-header",[],[["@swagger"],[[18,"swagger"]]],{"statements":[],"parameters":[]}],[0,"\\n\\n    "],[6,"div"],[9,"class","container-fluid"],[7],[0,"\\n      "],[6,"div"],[9,"class","row"],[7],[0,"\\n\\n        "],[6,"div"],[9,"class","col-md-3 alpha"],[7],[0,"\\n          "],[6,"div"],[9,"class","sidebar-nav-fixed left-sidebar"],[7],[0,"\\n            "],[6,"div"],[9,"class","well"],[7],[0,"\\n              "],[6,"ul"],[9,"class","nav endpoints"],[7],[0,"\\n                "],[6,"li"],[9,"class","nav-header"],[7],[0,"API Reference"],[8],[0,"\\n"],[4,"each",[[19,0,["swagger","endpoints"]]],[["key"],["@index"]],{"statements":[[0,"                  "],[6,"li"],[7],[0,"\\n                    "],[6,"a"],[10,"href",[26,["#/endpoints/",[19,1,["id"]]]]],[7],[1,[19,1,["label"]],false],[8],[0,"\\n                  "],[8],[0,"\\n"]],"parameters":[1]},null],[0,"              "],[8],[0,"\\n            "],[8],[0,"\\n          "],[8],[0,"\\n        "],[8],[0,"\\n\\n"],[4,"unless",[[19,0,["routeIsChanging"]]],null,{"statements":[[0,"          "],[1,[25,"component",[[19,0,["currentRouteComponent"]]],[["context","isReady","swagger","params"],[[19,0,[]],[19,0,["isReady"]],[19,0,["swagger"]],[19,0,["params"]]]]],false],[0,"\\n"]],"parameters":[]},null],[0,"      "],[8],[0,"\\n    "],[8],[0,"\\n  "],[8],[0,"\\n"],[8],[0,"\\n\\n"]],"hasEval":false}', 'meta': { 'specifier': 'template:/jsonapi-swagger-ui/components/jsonapi-swagger-ui' } };
 
 var __decorate$2 = undefined && undefined.__decorate || function (decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
         d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function') r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 class NavHeader extends Component {
@@ -9098,9 +9098,9 @@ class NavHeader extends Component {
         return this.args.swagger.info.title;
     }
 }
-__decorate$2([tracked('args')], NavHeader.prototype, "title", null);
+__decorate$2([tracked('args')], NavHeader.prototype, 'title', null);
 
-var __ui_components_nav_header_template__ = { "id": "75vDVPqU", "block": "{\"symbols\":[\"@swagger\"],\"statements\":[[6,\"header\"],[9,\"class\",\"navbar navbar-inverse normal\"],[9,\"role\",\"banner\"],[7],[0,\"\\n  \"],[6,\"div\"],[9,\"class\",\"container-fluid\"],[7],[0,\"\\n    \"],[6,\"div\"],[9,\"class\",\"navbar-header\"],[7],[0,\"\\n      \"],[6,\"a\"],[9,\"href\",\"#/\"],[9,\"class\",\"navbar-brand\"],[7],[1,[19,1,[\"info\",\"title\"]],false],[8],[0,\"\\n    \"],[8],[0,\"\\n    \"],[6,\"nav\"],[9,\"class\",\"collapse navbar-collapse bs-navbar-collapse\"],[9,\"role\",\"navigation\"],[7],[0,\"\\n      \"],[6,\"ul\"],[9,\"class\",\"nav navbar-nav\"],[7],[0,\"\\n      \"],[8],[0,\"\\n      \"],[6,\"ul\"],[9,\"class\",\"nav navbar-nav navbar-right visible-md visible-lg\"],[7],[0,\"\\n        \"],[6,\"li\"],[7],[0,\"\\n          \"],[6,\"a\"],[10,\"href\",[18,\"githubURL\"],null],[9,\"class\",\"button\"],[7],[0,\"Fork on Github\"],[8],[0,\"\\n        \"],[8],[0,\"\\n      \"],[8],[0,\"\\n    \"],[8],[0,\"\\n  \"],[8],[0,\"\\n\"],[8],[0,\"\\n\"]],\"hasEval\":false}", "meta": { "specifier": "template:/jsonapi-swagger-ui/components/nav-header" } };
+var __ui_components_nav_header_template__ = { 'id': '75vDVPqU', 'block': '{"symbols":["@swagger"],"statements":[[6,"header"],[9,"class","navbar navbar-inverse normal"],[9,"role","banner"],[7],[0,"\\n  "],[6,"div"],[9,"class","container-fluid"],[7],[0,"\\n    "],[6,"div"],[9,"class","navbar-header"],[7],[0,"\\n      "],[6,"a"],[9,"href","#/"],[9,"class","navbar-brand"],[7],[1,[19,1,["info","title"]],false],[8],[0,"\\n    "],[8],[0,"\\n    "],[6,"nav"],[9,"class","collapse navbar-collapse bs-navbar-collapse"],[9,"role","navigation"],[7],[0,"\\n      "],[6,"ul"],[9,"class","nav navbar-nav"],[7],[0,"\\n      "],[8],[0,"\\n      "],[6,"ul"],[9,"class","nav navbar-nav navbar-right visible-md visible-lg"],[7],[0,"\\n        "],[6,"li"],[7],[0,"\\n          "],[6,"a"],[10,"href",[18,"githubURL"],null],[9,"class","button"],[7],[0,"Fork on Github"],[8],[0,"\\n        "],[8],[0,"\\n      "],[8],[0,"\\n    "],[8],[0,"\\n  "],[8],[0,"\\n"],[8],[0,"\\n"]],"hasEval":false}', 'meta': { 'specifier': 'template:/jsonapi-swagger-ui/components/nav-header' } };
 
 function props(params) {
     let obj = params[0];
@@ -9115,7 +9115,7 @@ var __decorate$3 = undefined && undefined.__decorate || function (decorators, ta
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
         d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function') r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 class TypeCheck extends Component {
@@ -9132,13 +9132,13 @@ class TypeCheck extends Component {
         return this.mapping[this.args.type];
     }
 }
-__decorate$3([tracked('args')], TypeCheck.prototype, "labelClass", null);
+__decorate$3([tracked('args')], TypeCheck.prototype, 'labelClass', null);
 
-var __ui_components_type_check_template__ = { "id": "wNy8BFEa", "block": "{\"symbols\":[\"@type\"],\"statements\":[[6,\"span\"],[10,\"class\",[26,[\"label \",[18,\"labelClass\"]]]],[7],[1,[19,1,[]],false],[8],[0,\"\\n\"]],\"hasEval\":false}", "meta": { "specifier": "template:/jsonapi-swagger-ui/components/type-check" } };
+var __ui_components_type_check_template__ = { 'id': 'wNy8BFEa', 'block': '{"symbols":["@type"],"statements":[[6,"span"],[10,"class",[26,["label ",[18,"labelClass"]]]],[7],[1,[19,1,[]],false],[8],[0,"\\n"]],"hasEval":false}', 'meta': { 'specifier': 'template:/jsonapi-swagger-ui/components/type-check' } };
 
 var moduleMap = { 'component:/jsonapi-swagger-ui/components/endpoint-route': EndpointRoute, 'template:/jsonapi-swagger-ui/components/endpoint-route': __ui_components_endpoint_route_template__, 'helper:/jsonapi-swagger-ui/components/eq': eq, 'helper:/jsonapi-swagger-ui/components/if': _if, 'component:/jsonapi-swagger-ui/components/index-route': IndexRoute, 'template:/jsonapi-swagger-ui/components/index-route': __ui_components_index_route_template__, 'component:/jsonapi-swagger-ui/components/jsonapi-swagger-ui': JsonapiSwaggerUi, 'template:/jsonapi-swagger-ui/components/jsonapi-swagger-ui': __ui_components_jsonapi_swagger_ui_template__, 'component:/jsonapi-swagger-ui/components/nav-header': NavHeader, 'template:/jsonapi-swagger-ui/components/nav-header': __ui_components_nav_header_template__, 'helper:/jsonapi-swagger-ui/components/props': props, 'component:/jsonapi-swagger-ui/components/type-check': TypeCheck, 'template:/jsonapi-swagger-ui/components/type-check': __ui_components_type_check_template__ };
 
-var resolverConfiguration = { "app": { "name": "jsonapi-swagger-ui", "rootName": "jsonapi-swagger-ui" }, "types": { "application": { "definitiveCollection": "main" }, "component": { "definitiveCollection": "components" }, "component-test": { "unresolvable": true }, "helper": { "definitiveCollection": "components" }, "helper-test": { "unresolvable": true }, "renderer": { "definitiveCollection": "main" }, "template": { "definitiveCollection": "components" } }, "collections": { "main": { "types": ["application", "renderer"] }, "components": { "group": "ui", "types": ["component", "component-test", "template", "helper", "helper-test"], "defaultType": "component", "privateCollections": ["utils"] }, "styles": { "group": "ui", "unresolvable": true }, "utils": { "unresolvable": true } } };
+var resolverConfiguration = { 'app': { 'name': 'jsonapi-swagger-ui', 'rootName': 'jsonapi-swagger-ui' }, 'types': { 'application': { 'definitiveCollection': 'main' }, 'component': { 'definitiveCollection': 'components' }, 'component-test': { 'unresolvable': true }, 'helper': { 'definitiveCollection': 'components' }, 'helper-test': { 'unresolvable': true }, 'renderer': { 'definitiveCollection': 'main' }, 'template': { 'definitiveCollection': 'components' } }, 'collections': { 'main': { 'types': ['application', 'renderer'] }, 'components': { 'group': 'ui', 'types': ['component', 'component-test', 'template', 'helper', 'helper-test'], 'defaultType': 'component', 'privateCollections': ['utils'] }, 'styles': { 'group': 'ui', 'unresolvable': true }, 'utils': { 'unresolvable': true } } };
 
 class App extends Application {
     constructor() {
