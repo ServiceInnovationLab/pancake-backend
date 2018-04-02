@@ -4,3 +4,8 @@ ruby:
   config_file: .rubocop.yml
 haml:
   config_file: .haml-lint.yml
+eslint:
+  config_file: .eslintrc
+  ignore_file: .esignore
+jshint:
+  enabled: false
