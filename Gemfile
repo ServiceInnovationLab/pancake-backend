@@ -9,23 +9,20 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'
+
 # Use sqlite3 as the database for Active Record
 gem 'pg'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# Logins
+gem 'devise'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'loofah', '>= 2.2.1'
+gem 'rails-html-sanitizer', '>= 1.0.4'
 
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'haml-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -45,6 +42,7 @@ gem 'jsonapi_spec_helpers', '~> 0.4', require: false
 gem 'jsonapi_suite', '~> 0.7'
 gem 'jsonapi_swagger_helpers', '~> 0.6', require: false
 gem 'kaminari', '~> 1.0'
+
 group :development, :test do
   gem 'factory_bot_rails', '~> 4.0'
   gem 'faker', '~> 1.7'
@@ -55,5 +53,3 @@ end
 group :test do
   gem 'database_cleaner', '~> 1.6'
 end
-gem 'loofah', '>= 2.2.1'
-gem 'rails-html-sanitizer', '>= 1.0.4'
