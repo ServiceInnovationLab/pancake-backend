@@ -2,5 +2,5 @@
 
 require 'rails_helper'
 
-RSpec.describe WelcomeController, type: :controller do
+RSpec.describe Admin::BaseController, type: :controller do
 end
