@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :users
   root to: 'welcome#index'
-  get 'welcome/index'
+
+  scope path: '/admin' do
+    get 'welcome/index'
+  end
+
   scope path: '/api' do
     resources :docs, only: [:index], path: '/swagger'
 
@@ -10,8 +15,6 @@ Rails.application.routes.draw do
       resources :rebate_forms, only: [:create, :show]
       resources :signature_types, only: [:index, :show]
       resources :signatures, only: [:show, :create]
-      # your routes go here
     end
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
