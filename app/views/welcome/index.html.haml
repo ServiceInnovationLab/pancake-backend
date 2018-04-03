@@ -5,5 +5,5 @@
   %li= link_to 'Admin', new_user_session_path
 
   - if current_user.present?
-    %li=link_to 'invite new user', new_user_invitation_path
+    %li= link_to 'invite new user', new_user_invitation_path
     %li= link_to 'rebate forms', admin_rebate_forms_path
