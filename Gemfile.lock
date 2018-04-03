@@ -152,6 +152,8 @@ GEM
     powerpack (0.1.1)
     public_suffix (3.0.2)
     puma (3.11.3)
+    purecss-rails (0.6.1)
+      railties (>= 3.2.6, < 6)
     rack (2.0.4)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
@@ -279,6 +281,7 @@ DEPENDENCIES
   loofah (>= 2.2.1)
   pg
   puma (~> 3.7)
+  purecss-rails
   rails (~> 5.1.5)
   rails-controller-testing
   rails-html-sanitizer (>= 1.0.4)

@@ -23,6 +23,7 @@ gem 'loofah', '>= 2.2.1'
 gem 'rails-html-sanitizer', '>= 1.0.4'
 
 gem 'haml-rails'
+gem 'purecss-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
