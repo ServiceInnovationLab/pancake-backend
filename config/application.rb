@@ -31,7 +31,7 @@ module PancakeServer
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = false
-    # config.assets.precompile += %w( active_admin.css active_admin.js active_admin/print.css )
+    config.assets.precompile += %w[application.js]
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
   end
