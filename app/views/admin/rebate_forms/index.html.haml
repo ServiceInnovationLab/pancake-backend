@@ -1,0 +1,19 @@
+%h1 Listing admin_rebate_forms
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @rebate_forms.each do |admin_rebate_form|
+      %tr
+        %td= link_to 'Show', admin_rebate_form
+        %td= link_to 'Edit', edit_admin_rebate_form_path(admin_rebate_form)
+        %td= link_to 'Destroy', admin_rebate_form, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Rebate form', new_admin_rebate_form_path
