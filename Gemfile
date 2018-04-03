@@ -17,6 +17,7 @@ gem 'puma', '~> 3.7'
 
 # Logins
 gem 'devise'
+gem 'devise_invitable'
 
 gem 'loofah', '>= 2.2.1'
 gem 'rails-html-sanitizer', '>= 1.0.4'
@@ -45,6 +46,7 @@ gem 'kaminari', '~> 1.0'
 group :development, :test do
   gem 'factory_bot_rails', '~> 4.0'
   gem 'faker', '~> 1.7'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5.2'
   gem 'swagger-diff', '~> 1.1'
 end

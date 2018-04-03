@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     devise_for :users
     get 'welcome/index'
   end
+  namespace :admin do
+    resources :rebate_forms
+  end
 
   scope path: '/api' do
     resources :docs, only: [:index], path: '/swagger'
