@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
-  root to: 'admin/welcome#index'
+  root to: 'welcome#index'
 
   scope path: '/admin' do
+    devise_for :users
     get 'welcome/index'
   end
 
