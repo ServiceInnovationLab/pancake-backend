@@ -4290,7 +4290,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand {
   float: left;
   height: 50px;
-  padding: 15px 15px;
+  padding: 15px;
   font-size: 18px;
   line-height: 20px; }
 
@@ -6669,8 +6669,6 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
-
-/*# sourceMappingURL=bootstrap.css.map */
 @media (min-width: 1200px) {
   .container {
     width: 970px; } }
@@ -6823,7 +6821,7 @@ a:focus, button:focus {
     text-align: left;
     background: rgba(0, 0, 0, 0.8);
     box-shadow: none;
-    padding: 5px 0 8px 0;
+    padding: 5px 0 8px;
     border-radius: 4px 0 4px 4px;
     border: 0px; }
     .navbar.hero .navbar-nav > li ul.dropdown-menu li a {
@@ -7208,6 +7206,4 @@ pre code.hljs.ruby [class*=symbol] {
     list-style-type: none;
     font-size: 120%; }
     #schemas .attributes .attribute {
-      margin: 1rem 0 1rem 0; }
-
-/*# sourceMappingURL=app.css.map */
+      margin: 1rem 0; }
