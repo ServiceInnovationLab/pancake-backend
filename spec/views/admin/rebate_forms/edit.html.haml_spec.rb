@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'admin/rebate_forms/edit', type: :view do
-  before(:each) do
+  before do
     @rebate_form = assign(:rebate_form, RebateForm.create!)
   end
 
