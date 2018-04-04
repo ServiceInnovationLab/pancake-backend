@@ -17,9 +17,9 @@
   font-size: 17px;
   color: #fff !important;
   text-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0;
-  border: 0px;
+  border: 0;
   border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 2px, inset rgba(255, 255, 255, 0.88) 0px 1px 3px -1px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 2px, inset rgba(255, 255, 255, 0.88) 0 1px 3px -1px;
   background-color: #4589E3;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5DA4FF), color-stop(100%, #417BFF));
   background: -webkit-linear-gradient(#5DA4FF, #417BFF);
@@ -35,7 +35,7 @@
     color: #fff;
     text-decoration: none; }
   .button:active {
-    box-shadow: inset 0px 3px 3px rgba(0, 0, 0, 0.29); }
+    box-shadow: inset 0 3px 3px rgba(0, 0, 0, 0.29); }
   .button.button-small {
     padding: 10px 33px;
     border: 1px solid #68A2EE;
@@ -4290,7 +4290,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand {
   float: left;
   height: 50px;
-  padding: 15px 15px;
+  padding: 15px;
   font-size: 18px;
   line-height: 20px; }
 
@@ -6669,8 +6669,6 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
-
-/*# sourceMappingURL=bootstrap.css.map */
 @media (min-width: 1200px) {
   .container {
     width: 970px; } }
@@ -6713,8 +6711,8 @@ a:focus, button:focus {
 .navbar.normal {
   min-height: 70px;
   background: #223741;
-  border-radius: 0px;
-  box-shadow: 0px 1px 3px 1px rgba(46, 46, 46, 0.3), inset rgba(255, 255, 255, 0.2) 0 1px 1px;
+  border-radius: 0;
+  box-shadow: 0 1px 3px 1px rgba(46, 46, 46, 0.3), inset rgba(255, 255, 255, 0.2) 0 1px 1px;
   border: none;
   z-index: 9999; }
   .navbar.normal .navbar-header .navbar-brand {
@@ -6779,9 +6777,9 @@ a:focus, button:focus {
         font-size: 15px; } }
 
 .navbar.hero {
-  margin: 0px;
-  border-radius: 0px;
-  border: 0px;
+  margin: 0;
+  border-radius: 0;
+  border: 0;
   z-index: 999;
   position: absolute;
   width: 100%;
@@ -6823,9 +6821,9 @@ a:focus, button:focus {
     text-align: left;
     background: rgba(0, 0, 0, 0.8);
     box-shadow: none;
-    padding: 5px 0 8px 0;
+    padding: 5px 0 8px;
     border-radius: 4px 0 4px 4px;
-    border: 0px; }
+    border: 0; }
     .navbar.hero .navbar-nav > li ul.dropdown-menu li a {
       color: #fff;
       padding: 10px 18px; }
@@ -6842,7 +6840,7 @@ a:focus, button:focus {
   @media (min-width: 768px) {
     .navbar.white {
       background: #fff;
-      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.75); } }
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.75); } }
   @media (min-width: 1200px) {
     .navbar.white .container {
       width: 1000px; } }
@@ -7208,6 +7206,4 @@ pre code.hljs.ruby [class*=symbol] {
     list-style-type: none;
     font-size: 120%; }
     #schemas .attributes .attribute {
-      margin: 1rem 0 1rem 0; }
-
-/*# sourceMappingURL=app.css.map */
+      margin: 1rem 0; }
