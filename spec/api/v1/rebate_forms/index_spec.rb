@@ -9,7 +9,6 @@ RSpec.describe 'rebate_forms#index', type: :request do
   end
   let(:params) { {} }
 
-
   describe 'basic fetch' do
     let!(:rebate_form1) { create(:rebate_form) }
     let!(:rebate_form2) { create(:rebate_form) }

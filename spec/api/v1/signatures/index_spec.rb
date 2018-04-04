@@ -9,7 +9,6 @@ RSpec.describe 'signatures#index', type: :request do
   end
   let(:params) { {} }
 
-
   describe 'basic fetch' do
     let!(:signature1) { create(:signature) }
     let!(:signature2) { create(:signature) }

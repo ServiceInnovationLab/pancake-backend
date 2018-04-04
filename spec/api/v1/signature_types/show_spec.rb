@@ -9,7 +9,6 @@ RSpec.describe 'signature_types#show', type: :request do
   end
   let(:params) { {} }
 
-
   describe 'basic fetch' do
     let!(:signature_type) { create(:signature_type) }
 
