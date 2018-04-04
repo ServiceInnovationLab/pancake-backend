@@ -3,12 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'signatures#index', type: :request do
-  let(:params) { {} }
-
   subject(:make_request) do
     jsonapi_get '/api/v1/signatures',
                 params: params
   end
+
+  let(:params) { {} }
 
   describe 'basic fetch' do
     let!(:signature1) { create(:signature) }
