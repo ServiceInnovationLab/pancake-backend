@@ -7,6 +7,7 @@ RSpec.describe 'rebate_forms#index', type: :request do
     jsonapi_get '/api/v1/rebate_forms',
                 params: params
   end
+
   let(:params) { {} }
 
   describe 'basic fetch' do
