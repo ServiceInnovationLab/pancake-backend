@@ -3,12 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'rebate_forms#index', type: :request do
-  let(:params) { {} }
-
   subject(:make_request) do
     jsonapi_get '/api/v1/rebate_forms',
                 params: params
   end
+  let(:params) { {} }
+
 
   describe 'basic fetch' do
     let!(:rebate_form1) { create(:rebate_form) }

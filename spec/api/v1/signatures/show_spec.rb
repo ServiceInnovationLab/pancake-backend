@@ -3,12 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'signatures#show', type: :request do
-  let(:params) { {} }
-
   subject(:make_request) do
     jsonapi_get "/api/v1/signatures/#{signature.id}",
                 params: params
   end
+  let(:params) { {} }
+
 
   describe 'basic fetch' do
     let!(:signature) { create(:signature) }
