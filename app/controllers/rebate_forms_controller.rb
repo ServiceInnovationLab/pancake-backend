@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RebateFormsController < ApplicationController
+class RebateFormsController < ApiController
   # Mark this as a JSONAPI controller, associating with the given resource
   jsonapi resource: RebateFormResource
 

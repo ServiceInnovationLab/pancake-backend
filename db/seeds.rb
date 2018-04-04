@@ -10,3 +10,6 @@
 
 SignatureType.create! name: 'applicant'
 SignatureType.create! name: 'witness'
+
+User.invite! email: 'brenda.wallace@dia.govt.nz'
+User.invite! email: 'dana.iti@dia.govt.nz'

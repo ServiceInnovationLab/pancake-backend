@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateRebates < ActiveRecord::Migration[5.1]
   def change
     create_table :signature_types do |t|
@@ -19,6 +21,5 @@ class CreateRebates < ActiveRecord::Migration[5.1]
     end
     add_foreign_key :signatures, :signature_types
     add_foreign_key :signatures, :rebate_forms
-
   end
 end
