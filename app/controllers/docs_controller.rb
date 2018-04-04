@@ -21,7 +21,7 @@ class DocsController < ActionController::API
     key :produces, ['application/json']
   end
   jsonapi_resource '/v1/rebate_forms',
-                   only: [:create, :show],
+                   only: %i[create show],
                    descriptions: {
                      create: 'create a new application for a rates rebate',
                      show: 'retrieve existing application. pass token as id'
@@ -32,6 +32,6 @@ class DocsController < ActionController::API
                    descriptions: { index: 'list of possible signature types' }
 
   jsonapi_resource '/v1/signatures',
-                   only: [:create, :update],
+                   only: %i[create update],
                    descriptions: { create: 'create new signture', update: 'overwrite existing signature' }
 end
