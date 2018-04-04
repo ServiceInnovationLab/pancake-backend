@@ -7,6 +7,7 @@ RSpec.describe 'signatures#index', type: :request do
     jsonapi_get '/api/v1/signatures',
                 params: params
   end
+
   let(:params) { {} }
 
   describe 'basic fetch' do
