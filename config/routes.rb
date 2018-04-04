@@ -15,9 +15,9 @@ Rails.application.routes.draw do
     resources :docs, only: [:index], path: '/swagger'
 
     scope path: '/v1' do
-      resources :rebate_forms, only: [:create, :show]
-      resources :signature_types, only: [:index, :show]
-      resources :signatures, only: [:show, :create]
+      resources :rebate_forms, only: %i[create show]
+      resources :signature_types, only: %i[index show]
+      resources :signatures, only: %i[show create]
     end
   end
 end
