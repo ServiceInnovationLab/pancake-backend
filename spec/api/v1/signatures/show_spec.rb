@@ -9,7 +9,6 @@ RSpec.describe 'signatures#show', type: :request do
   end
   let(:params) { {} }
 
-
   describe 'basic fetch' do
     let!(:signature) { create(:signature) }
 
