@@ -33,6 +33,8 @@ class RebateFormsController < ApiController
   # On validation errors, render correct error JSON.
   def create
     rebate_form, success = jsonapi_create.to_a
+    fields = params[:_jsonapi][:data][:attributes][:fields].to_json
+    rebate_form.update(fields: fields)
 
     if success
       render_jsonapi(rebate_form, scope: false)
@@ -46,6 +48,8 @@ class RebateFormsController < ApiController
   # On validation errors, render correct error JSON.
   def update
     rebate_form, success = jsonapi_update.to_a
+    fields = params[:_jsonapi][:data][:attributes][:fields].to_json
+    rebate_form.update(fields: fields)
 
     if success
       render_jsonapi(rebate_form, scope: false)
