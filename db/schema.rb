@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403020256) do
+ActiveRecord::Schema.define(version: 20180405042043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "rebate_forms", force: :cascade do |t|
     t.string "valuation_id"
@@ -21,6 +22,7 @@ ActiveRecord::Schema.define(version: 20180403020256) do
     t.json "payload"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "fields"
   end
 
   create_table "signature_types", force: :cascade do |t|
