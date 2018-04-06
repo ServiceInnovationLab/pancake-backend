@@ -167,7 +167,7 @@
   }
 
   // There is a small whitelist of namespaced attributes specially
-  // enumerated in
+  // Enumerated in
   // https://www.w3.org/TR/html/syntax.html#attributes-0
   //
   // > When a foreign element has one of the namespaced attributes given by
@@ -176,7 +176,7 @@
   // > the third cell from the same row.
   //
   // In all other cases, colons are interpreted as a regular character
-  // with no special meaning:
+  // With no special meaning:
   //
   // > No other namespaced attribute can be expressed in the HTML syntax.
 
@@ -195,11 +195,11 @@
     return lastOperand - 4;
   }
 
-  // import Logger from './logger';
-  // let alreadyWarned = false;
+  // Import Logger from './logger';
+  // Let alreadyWarned = false;
   function debugAssert(test, msg) {
-    // if (!alreadyWarned) {
-    //   alreadyWarned = true;
+    // If (!alreadyWarned) {
+    //   AlreadyWarned = true;
     //   Logger.warn("Don't leave debug assertions on in public builds");
     // }
     if (!test) {
@@ -287,7 +287,7 @@
   }
 
   let proto = Object.create(null, {
-    // without this, we will always still end up with (new
+    // Without this, we will always still end up with (new
     // EmptyObject()).constructor === Object
     constructor: {
       value: undefined,
@@ -298,10 +298,10 @@
   function EmptyObject() {}
   EmptyObject.prototype = proto;
   function dict() {
-    // let d = Object.create(null);
-    // d.x = 1;
-    // delete d.x;
-    // return d;
+    // Let d = Object.create(null);
+    // D.x = 1;
+    // Delete d.x;
+    // Return d;
     return new EmptyObject();
   }
   class DictSet {
@@ -503,14 +503,14 @@
   const EMPTY_SLICE = new ListSlice(null, null);
 
   const HAS_NATIVE_WEAKMAP = function () {
-    // detect if `WeakMap` is even present
+    // Detect if `WeakMap` is even present
     let hasWeakMap = typeof WeakMap === 'function';
     if (!hasWeakMap) {
       return false;
     }
     let instance = new WeakMap();
-    // use `Object`'s `.toString` directly to prevent us from detecting
-    // polyfills as native weakmaps
+    // Use `Object`'s `.toString` directly to prevent us from detecting
+    // Polyfills as native weakmaps
     return Object.prototype.toString.call(instance) === '[object WeakMap]';
   }();
 
@@ -942,8 +942,8 @@
     }
   }
   class ReferenceIterator {
-    // if anyone needs to construct this object with something other than
-    // an iterable, let @wycats know.
+    // If anyone needs to construct this object with something other than
+    // An iterable, let @wycats know.
     constructor(iterable) {
       this.iterator = null;
       let artifacts = new IterationArtifacts(iterable);
@@ -1305,12 +1305,12 @@
       if (position < 0 || position >= length) {
         return UNDEFINED_REFERENCE;
       }
-      // stack: pos1, pos2, pos3, named1, named2
-      // start: 4 (top - 4)
+      // Stack: pos1, pos2, pos3, named1, named2
+      // Start: 4 (top - 4)
       //
-      // at(0) === pos1 === top - start
-      // at(1) === pos2 === top - (start - 1)
-      // at(2) === pos3 === top - (start - 2)
+      // At(0) === pos1 === top - start
+      // At(1) === pos2 === top - (start - 1)
+      // At(2) === pos3 === top - (start - 2)
       let fromTop = start - position - 1;
       return this.stack.fromTop(fromTop);
     }
@@ -1403,12 +1403,12 @@
       if (idx === -1) {
         return UNDEFINED_REFERENCE;
       }
-      // stack: pos1, pos2, pos3, named1, named2
-      // start: 4 (top - 4)
-      // namedDict: { named1: 1, named2: 0 };
+      // Stack: pos1, pos2, pos3, named1, named2
+      // Start: 4 (top - 4)
+      // NamedDict: { named1: 1, named2: 0 };
       //
-      // get('named1') === named1 === top - (start - 1)
-      // get('named2') === named2 === top - start
+      // Get('named1') === named1 === top - (start - 1)
+      // Get('named2') === named2 === top - start
       let fromTop = length - idx;
       return this.stack.fromTop(fromTop);
     }
@@ -2447,7 +2447,7 @@
       return expect(this.blockStack.pop(), 'Expected popBlock to return a block');
     }
     openElement(tag, _operations) {
-      // workaround argument.length transpile of arg initializer
+      // Workaround argument.length transpile of arg initializer
       let operations = _operations === undefined ? this.defaultOperations : _operations;
       let element = this.dom.createElement(tag, this.element);
       this.constructing = element;
@@ -2823,7 +2823,7 @@
       let upsert = this.insert(vm.env.getAppendOperations(), stack, value);
       let bounds$$1 = new Fragment(upsert.bounds);
       stack.newBounds(bounds$$1);
-      if (cache /* i.e. !isConst(reference) */) {
+      if (cache /* I.e. !isConst(reference) */) {
         vm.updateWith(this.updateWith(vm, reference, cache, bounds$$1, upsert));
       }
     }
@@ -2919,14 +2919,14 @@
     }
   }
 
-  /* tslint:disable */
+  /* Tslint:disable */
   function debugCallback(context, get) {
     console.info('Use `context`, and `get(<path>)` to debug this template.');
-    // for example...
+    // For example...
     context === get('this');
     
   }
-  /* tslint:enable */
+  /* Tslint:enable */
   let callback = debugCallback;
   // For testing purposes
 
@@ -3420,11 +3420,11 @@
       this.heap.finishMalloc(this.start);
       return this.start;
     }
-    // args
+    // Args
     pushArgs(synthetic) {
       this.push(58 /* PushArgs */, synthetic === true ? 1 : 0);
     }
-    // helpers
+    // Helpers
     get labels() {
       return expect(this.labelsStack.current, 'bug: not in a label stack');
     }
@@ -3435,7 +3435,7 @@
       let label = expect(this.labelsStack.pop(), 'unbalanced push and pop labels');
       label.patch(this.program);
     }
-    // components
+    // Components
     pushComponentManager(definition) {
       this.push(56 /* PushComponentManager */, this.other(definition));
     }
@@ -3473,18 +3473,18 @@
     didRenderLayout(state) {
       this.push(68 /* DidRenderLayout */, state);
     }
-    // partial
+    // Partial
     getPartialTemplate() {
       this.push(69 /* GetPartialTemplate */);
     }
     resolveMaybeLocal(name) {
       this.push(70 /* ResolveMaybeLocal */, this.string(name));
     }
-    // debugger
+    // Debugger
     debugger(symbols, evalInfo) {
       this.push(71 /* Debugger */, this.constants.other(symbols), this.constants.array(evalInfo));
     }
-    // content
+    // Content
     dynamicContent(Opcode) {
       this.push(26 /* DynamicContent */, this.other(Opcode));
     }
@@ -3494,7 +3494,7 @@
     trustingAppend() {
       this.dynamicContent(new OptimizedTrustingAppendOpcode());
     }
-    // dom
+    // Dom
     text(text) {
       this.push(24 /* Text */, this.constants.string(text));
     }
@@ -3535,7 +3535,7 @@
     modifier(_definition) {
       this.push(35 /* Modifier */, this.other(_definition));
     }
-    // lists
+    // Lists
     putIterator() {
       this.push(54 /* PutIterator */);
     }
@@ -3550,7 +3550,7 @@
       this.reserve(55 /* Iterate */);
       this.labels.target(this.pos, 55 /* Iterate */, breaks);
     }
-    // expressions
+    // Expressions
     setVariable(symbol) {
       this.push(4 /* SetVariable */, symbol);
     }
@@ -3587,7 +3587,7 @@
     pop(count = 1) {
       return this.push(16 /* Pop */, count);
     }
-    // vm
+    // Vm
     pushRemoteElement() {
       this.push(36 /* PushRemoteElement */);
     }
@@ -3635,7 +3635,7 @@
         flag = 2;
         break;
       case 'object':
-        // assume null
+        // Assume null
         primitive = 2;
         flag = 2;
         break;
@@ -4143,7 +4143,7 @@
         return;
       }
       let table = block.symbolTable;
-      let locals = table.parameters; // always present in inline blocks
+      let locals = table.parameters; // Always present in inline blocks
       let calleeCount = locals ? locals.length : 0;
       let count = Math.min(callerCount, calleeCount);
       vm.pushFrame();
@@ -4308,8 +4308,8 @@
     compile(sexp, builder) {
       let value = sexp[1];
       // TODO: Fix this so that expression macros can return
-      // things like components, so that {{component foo}}
-      // is the same as {{(component foo)}}
+      // Things like components, so that {{component foo}}
+      // Is the same as {{(component foo)}}
       if (!Array.isArray(value)) return ['expr', value];
       let name;
       let params;
@@ -4855,16 +4855,16 @@
     return { normalized, type };
   }
 
-  // properties that MUST be set as attributes, due to:
-  // * browser bug
-  // * strange spec outlier
+  // Properties that MUST be set as attributes, due to:
+  // * Browser bug
+  // * Strange spec outlier
   const ATTR_OVERRIDES = {
-    // phantomjs < 2.0 lets you set it as a prop but won't reflect it
-    // back to the attribute. button.getAttribute('type') === null
+    // Phantomjs < 2.0 lets you set it as a prop but won't reflect it
+    // Back to the attribute. button.getAttribute('type') === null
     BUTTON: { type: true, form: true },
     INPUT: {
       // Some version of IE (like IE9) actually throw an exception
-      // if you set input.type = 'something-unknown'
+      // If you set input.type = 'something-unknown'
       type: true,
       form: true,
       // Chrome 46.0.2464.0: 'autocorrect' in document.createElement('input') === false
@@ -4875,8 +4875,8 @@
       // Safari 9.1.3: 'list' in document.createElement('input') === false
       list: true
     },
-    // element.form is actually a legitimate readOnly property, that is to be
-    // mutated, but must be mutated by setAttribute...
+    // Element.form is actually a legitimate readOnly property, that is to be
+    // Mutated, but must be mutated by setAttribute...
     SELECT: { form: true },
     OPTION: { form: true },
     TEXTAREA: { form: true },
@@ -4901,10 +4901,10 @@
   // Patch:    innerHTML Fix
   // Browsers: IE9
   // Reason:   IE9 don't allow us to set innerHTML on col, colgroup, frameset,
-  //           html, style, table, tbody, tfoot, thead, title, tr.
+  //           Html, style, table, tbody, tfoot, thead, title, tr.
   // Fix:      Wrap the innerHTML we are about to set in its parents, apply the
-  //           wrapped innerHTML on a div, then move the unwrapped nodes into the
-  //           target position.
+  //           Wrapped innerHTML on a div, then move the unwrapped nodes into the
+  //           Target position.
   function domChanges(document, DOMChangesClass) {
     if (!document) return DOMChangesClass;
     if (!shouldApplyFix(document)) {
@@ -4977,14 +4977,14 @@
   // Patch:    insertAdjacentHTML on SVG Fix
   // Browsers: Safari, IE, Edge, Firefox ~33-34
   // Reason:   insertAdjacentHTML does not exist on SVG elements in Safari. It is
-  //           present but throws an exception on IE and Edge. Old versions of
+  //           Present but throws an exception on IE and Edge. Old versions of
   //           Firefox create nodes in the incorrect namespace.
   // Fix:      Since IE and Edge silently fail to create SVG nodes using
-  //           innerHTML, and because Firefox may create nodes in the incorrect
-  //           namespace using innerHTML on SVG elements, an HTML-string wrapping
-  //           approach is used. A pre/post SVG tag is added to the string, then
-  //           that whole string is added to a div. The created nodes are plucked
-  //           out and applied to the target location on DOM.
+  //           InnerHTML, and because Firefox may create nodes in the incorrect
+  //           Namespace using innerHTML on SVG elements, an HTML-string wrapping
+  //           Approach is used. A pre/post SVG tag is added to the string, then
+  //           That whole string is added to a div. The created nodes are plucked
+  //           Out and applied to the target location on DOM.
   function domChanges$1(document, DOMChangesClass, svgNamespace) {
     if (!document) return DOMChangesClass;
     if (!shouldApplyFix$1(document, svgNamespace)) {
@@ -5023,7 +5023,7 @@
   }
   function fixSVG(parent, div, html, reference) {
     // IE, Edge: also do not correctly support using `innerHTML` on SVG
-    // namespaced elements. So here a wrapper is used.
+    // Namespaced elements. So here a wrapper is used.
     let wrappedHtml = '<svg>' + html + '</svg>';
     div.innerHTML = wrappedHtml;
 
@@ -5055,14 +5055,14 @@
   // Browsers: IE, Edge, Firefox w/o inspector open
   // Reason:   These browsers will merge adjacent text nodes. For exmaple given
   //           <div>Hello</div> with div.insertAdjacentHTML(' world') browsers
-  //           with proper behavior will populate div.childNodes with two items.
+  //           With proper behavior will populate div.childNodes with two items.
   //           These browsers will populate it with one merged node instead.
   // Fix:      Add these nodes to a wrapper element, then iterate the childNodes
-  //           of that wrapper and move the nodes to their target location. Note
-  //           that potential SVG bugs will have been handled before this fix.
+  //           Of that wrapper and move the nodes to their target location. Note
+  //           That potential SVG bugs will have been handled before this fix.
   //           Note that this fix must only apply to the previous text node, as
-  //           the base implementation of `insertHTMLBefore` already handles
-  //           following text nodes correctly.
+  //           The base implementation of `insertHTMLBefore` already handles
+  //           Following text nodes correctly.
   function domChanges$2(document, DOMChangesClass) {
     if (!document) return DOMChangesClass;
     if (!shouldApplyFix$2(document)) {
@@ -5158,8 +5158,8 @@
       this.document = document;
       this.setupUselessElement();
     }
-    // split into seperate method so that NodeDOMTreeConstruction
-    // can override it.
+    // Split into seperate method so that NodeDOMTreeConstruction
+    // Can override it.
     setupUselessElement() {
       this.uselessElement = this.document.createElement('div');
     }
@@ -5174,8 +5174,8 @@
       }
       if (isElementInSVGNamespace && !isHTMLIntegrationPoint) {
         // FIXME: This does not properly handle <font> with color, face, or
-        // size attributes, which is also disallowed by the spec. We should fix
-        // this.
+        // Size attributes, which is also disallowed by the spec. We should fix
+        // This.
         if (BLACKLIST_TABLE[tag]) {
           throw new Error(`Cannot create a ${tag} inside an SVG context`);
         }
@@ -5262,9 +5262,9 @@
   }
   function insertHTMLBefore(_useless, _parent, _nextSibling, html) {
     // TypeScript vendored an old version of the DOM spec where `insertAdjacentHTML`
-    // only exists on `HTMLElement` but not on `Element`. We actually work with the
-    // newer version of the DOM API here (and monkey-patch this method in `./compat`
-    // when we detect older browsers). This is a hack to work around this limitation.
+    // Only exists on `HTMLElement` but not on `Element`. We actually work with the
+    // Newer version of the DOM API here (and monkey-patch this method in `./compat`
+    // When we detect older browsers). This is a hack to work around this limitation.
     let parent = _parent;
     let useless = _useless;
     let nextSibling = _nextSibling;
@@ -5281,10 +5281,10 @@
       last = nextSibling.previousSibling;
     } else {
       // Non-element nodes do not support insertAdjacentHTML, so add an
-      // element and call it on that element. Then remove the element.
+      // Element and call it on that element. Then remove the element.
       //
       // This also protects Edge, IE and Firefox w/o the inspector open
-      // from merging adjacent text nodes. See ./compat/text-node-merging-fix.ts
+      // From merging adjacent text nodes. See ./compat/text-node-merging-fix.ts
       parent.insertBefore(useless, nextSibling);
       useless.insertAdjacentHTML('beforebegin', html);
       last = useless.previousSibling;
@@ -5373,7 +5373,7 @@
     }
     removeAttribute(env, element, namespace) {
       // TODO this sucks but to preserve properties first and to meet current
-      // semantics we must do this.
+      // Semantics we must do this.
       let attr = this.attr;
 
       if (namespace) {
@@ -5383,7 +5383,7 @@
       }
     }
     updateAttribute(env, element, value, namespace) {
-      // ensure the property is always updated
+      // Ensure the property is always updated
       element[this.attr] = value;
       if (isAttrRemovalValue(value)) {
         this.removeAttribute(env, element, namespace);
@@ -5398,7 +5398,7 @@
     if (value === true) {
       return '';
     }
-    // onclick function etc in SSR
+    // Onclick function etc in SSR
     if (typeof value === 'function') {
       return null;
     }
@@ -5464,11 +5464,11 @@
 
   class Scope {
     constructor(
-    // the 0th slot is `self`
+    // The 0th slot is `self`
       slots, callerScope,
-      // named arguments and blocks passed to a layout that uses eval
+      // Named arguments and blocks passed to a layout that uses eval
       evalScope,
-      // locals in scope when the partial was invoked
+      // Locals in scope when the partial was invoked
       partialMap) {
       this.slots = slots;
       this.callerScope = callerScope;
@@ -5650,7 +5650,7 @@
       this.offset = 0;
       this.handle = 0;
       /**
-         * layout:
+         * Layout:
          *
          * - pointer into heap
          * - size
@@ -5682,8 +5682,8 @@
       return this.offset;
     }
     // It is illegal to close over this address, as compaction
-    // may move it. However, it is legal to use this address
-    // multiple times between compactions.
+    // May move it. However, it is legal to use this address
+    // Multiple times between compactions.
     getaddr(handle) {
       return this.table[handle];
     }
@@ -5712,9 +5712,9 @@
         if (state === TableSlotState.Purged) {
           continue;
         } else if (state === TableSlotState.Freed) {
-          // transition to "already freed"
-          // a good improvement would be to reuse
-          // these slots
+          // Transition to "already freed"
+          // A good improvement would be to reuse
+          // These slots
           table[i + 2] = 2;
           compactedSize += size;
         } else if (state === TableSlotState.Allocated) {
@@ -6293,9 +6293,9 @@
       stack.push(memo);
       let state = this.capture(2);
       let tracker = this.elements().pushUpdatableBlock();
-      // let ip = this.ip;
-      // this.ip = end + 4;
-      // this.frames.push(ip);
+      // Let ip = this.ip;
+      // This.ip = end + 4;
+      // This.frames.push(ip);
       return new TryOpcode(this.heap.gethandle(this.pc), state, tracker, new LinkedList());
     }
     enterItem(key, opcode) {
@@ -6538,7 +6538,7 @@
         let ReferenceType = typeof parentValue === 'object' ? Meta.for(parentValue).referenceTypeFor(property) : PropertyReference;
         inner = this.inner = new ReferenceType(parentValue, property, this);
       }
-      // if (typeof parentValue === 'object') {
+      // If (typeof parentValue === 'object') {
       //   Meta.for(parentValue).addReference(property, this);
       // }
       return this.cache = inner.value();
@@ -6573,7 +6573,7 @@
     }
     update(object) {
       this.object = object;
-      // this.notify();
+      // This.notify();
     }
     get(prop) {
       let chains = this.chains;
@@ -6638,7 +6638,7 @@
       return new ConstPath(this.inner, prop);
     }
   }
-  class ConstMeta /*implements IMeta*/ {
+  class ConstMeta /*Implements IMeta*/ {
     constructor(object) {
       this.object = object;
     }
@@ -6725,9 +6725,9 @@
     }
   }
 
-  // import { metaFor } from './meta';
-  // import { intern } from '@glimmer/util';
-  // import { metaFor } from './meta';
+  // Import { metaFor } from './meta';
+  // Import { intern } from '@glimmer/util';
+  // Import { metaFor } from './meta';
 
   function isTypeSpecifier(specifier) {
     return specifier.indexOf(':') === -1;
@@ -6959,8 +6959,8 @@
       curriedArgs.shift();
       curriedArgs.push(...invokedArgs);
       // Invoke the function with the component as the context, the curried
-      // arguments passed to `{{action}}`, and the arguments the bound function
-      // was invoked with.
+      // Arguments passed to `{{action}}`, and the arguments the bound function
+      // Was invoked with.
       actionFunc.apply(componentRef && componentRef.value(), curriedArgs);
     });
   }
@@ -7055,7 +7055,7 @@
       this.managers = dict();
       setOwner(this, getOwner(options));
       // TODO - required for `protocolForURL` - seek alternative approach
-      // e.g. see `installPlatformSpecificProtocolForURL` in Ember
+      // E.g. see `installPlatformSpecificProtocolForURL` in Ember
       this.uselessAnchor = options.document.createElement('a');
     }
     static create(options = {}) {
@@ -7065,7 +7065,7 @@
     }
     protocolForURL(url) {
       // TODO - investigate alternative approaches
-      // e.g. see `installPlatformSpecificProtocolForURL` in Ember
+      // E.g. see `installPlatformSpecificProtocolForURL` in Ember
       this.uselessAnchor.href = url;
       return this.uselessAnchor.protocol;
     }
@@ -7213,7 +7213,7 @@
     initRegistry() {
       let registry = this._registry = new Registry();
       // Create ApplicationRegistry as a proxy to the underlying registry
-      // that will only be available during `initialize`.
+      // That will only be available during `initialize`.
       let appRegistry = new ApplicationRegistry(this._registry, this.resolver);
       registry.register(`environment:/${this.rootName}/main/main`, Environment$1);
       registry.registerOption('helper', 'instantiate', false);
@@ -7232,7 +7232,7 @@
     initContainer() {
       this._container = new Container(this._registry, this.resolver);
       // Inject `this` (the app) as the "owner" of every object instantiated
-      // by its container.
+      // By its container.
       this._container.defaultInjections = specifier => {
         let hash = {};
         setOwner(hash, this);
@@ -7423,7 +7423,7 @@
             }
           }
           // Because local and private resolution has failed, clear all but `name` and `type`
-          // to proceed with top-level resolution
+          // To proceed with top-level resolution
           s.rootName = s.collection = s.namespace = undefined;
         } else {
           assert$1('Referrer must either be "absolute" or include a `type` to determine the associated type', r.type);
@@ -7692,8 +7692,8 @@
     let target = obj;
     let descriptor;
     // Find the descriptor for the current property. We may need to walk the
-    // prototype chain to do so. If the property is undefined, we may never get a
-    // descriptor here.
+    // Prototype chain to do so. If the property is undefined, we may never get a
+    // Descriptor here.
     let hasOwnDescriptor = true;
     while (target) {
       descriptor = Object.getOwnPropertyDescriptor(target, key);
@@ -7704,7 +7704,7 @@
       target = Object.getPrototypeOf(target);
     }
     // If possible, define a property descriptor that passes through the current
-    // value on reads but throws an exception on writes.
+    // Value on reads but throws an exception on writes.
     if (descriptor) {
       if (descriptor.configurable || !hasOwnDescriptor) {
         Object.defineProperty(obj, key, {
@@ -8390,16 +8390,16 @@
   };
 
   // Normalizes percent-encoded values in `path` to upper-case and decodes percent-encoded
-  // values that are not reserved (i.e., unicode characters, emoji, etc). The reserved
-  // chars are "/" and "%".
+  // Values that are not reserved (i.e., unicode characters, emoji, etc). The reserved
+  // Chars are "/" and "%".
   // Safe to call multiple times on the same path.
   // Normalizes percent-encoded values in `path` to upper-case and decodes percent-encoded
   function normalizePath(path) {
     return path.split('/').map(normalizeSegment).join('/');
   }
   // We want to ensure the characters "%" and "/" remain in percent-encoded
-  // form when normalizing paths, so replace them with their encoded form after
-  // decoding the rest of the path
+  // Form when normalizing paths, so replace them with their encoded form after
+  // Decoding the rest of the path
   var SEGMENT_RESERVED_CHARS = /%|\//g;
   function normalizeSegment(segment) {
     if (segment.length < 3 || segment.indexOf('%') === -1) {
@@ -8409,13 +8409,13 @@
   }
   // We do not want to encode these characters when generating dynamic path segments
   // See https://tools.ietf.org/html/rfc3986#section-3.3
-  // sub-delims: "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
-  // others allowed by RFC 3986: ":", "@"
+  // Sub-delims: "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
+  // Others allowed by RFC 3986: ":", "@"
   //
   // First encode the entire path segment, then decode any of the encoded special chars.
   //
   // The chars "!", "'", "(", ")", "*" do not get changed by `encodeURIComponent`,
-  // so the possible encoded chars are:
+  // So the possible encoded chars are:
   // ['%24', '%26', '%2B', '%2C', '%3B', '%3D', '%3A', '%40'].
   var PATH_SEGMENT_ENCODINGS = /%(?:2(?:4|6|B|C)|3(?:B|D|A)|40)/g;
   function encodePathSegment(str) {
@@ -8492,11 +8492,11 @@
   var EmptyObject$1 = Object.freeze({});
   var EmptyArray = Object.freeze([]);
   // The `names` will be populated with the paramter name for each dynamic/star
-  // segment. `shouldDecodes` will be populated with a boolean for each dyanamic/star
-  // segment, indicating whether it should be decoded during recognition.
+  // Segment. `shouldDecodes` will be populated with a boolean for each dyanamic/star
+  // Segment, indicating whether it should be decoded during recognition.
   function parse(segments, route, types) {
-    // normalize route as not starting with a "/". Recognition will
-    // also normalize.
+    // Normalize route as not starting with a "/". Recognition will
+    // Also normalize.
     if (route.length > 0 && route.charCodeAt(0) === 47 /* SLASH */) {
       route = route.substr(1);
     }
@@ -8541,21 +8541,21 @@
     return spec.char === char && spec.negate === negate;
   }
   // A State has a character specification and (`charSpec`) and a list of possible
-  // subsequent states (`nextStates`).
+  // Subsequent states (`nextStates`).
   //
   // If a State is an accepting state, it will also have several additional
-  // properties:
+  // Properties:
   //
   // * `regex`: A regular expression that is used to extract parameters from paths
-  //   that reached this accepting state.
+  //   That reached this accepting state.
   // * `handlers`: Information on how to convert the list of captures into calls
-  //   to registered handlers with the specified parameters
+  //   To registered handlers with the specified parameters
   // * `types`: How many static, dynamic or star segments in this route. Used to
-  //   decide which route to use if multiple registered routes match a path.
+  //   Decide which route to use if multiple registered routes match a path.
   //
   // Currently, State is implemented naively by looping over `nextStates` and
-  // comparing a character specification against a character. A more efficient
-  // implementation would use a hash of keys pointing at one or more next states.
+  // Comparing a character specification against a character. A more efficient
+  // Implementation would use a hash of keys pointing at one or more next states.
   var State = function State(states, id, char, negate, repeat) {
     this.states = states;
     this.id = id;
@@ -8597,7 +8597,7 @@
   State.prototype.put = function put(char, negate, repeat) {
     var state;
     // If the character specification already exists in a child of the current
-    // state, just return that state.
+    // State, just return that state.
     if (state = this.get(char, negate)) {
       return state;
     }
@@ -8649,10 +8649,10 @@
   // This strategy generally prefers more static and less dynamic matching.
   // Specifically, it
   //
-  //  * prefers fewer stars to more, then
-  //  * prefers using stars for less of the match to more, then
-  //  * prefers fewer dynamic segments to more, then
-  //  * prefers more static segments to more
+  //  * Prefers fewer stars to more, then
+  //  * Prefers using stars for less of the match to more, then
+  //  * Prefers fewer dynamic segments to more, then
+  //  * Prefers more static segments to more
   function sortSolutions(states) {
     return states.sort(function (a, b) {
       var ref = a.types || [0, 0, 0];
@@ -8770,7 +8770,7 @@
       var ref = parse(allSegments, route.path, types);
       var names = ref.names;
       var shouldDecodes = ref.shouldDecodes;
-      // preserve j so it points to the start of newly added segments
+      // Preserve j so it points to the start of newly added segments
       for (; j < allSegments.length; j++) {
         var segment = allSegments[j];
         if (segment.type === 4 /* Epsilon */) {
@@ -8802,8 +8802,8 @@
       name = options.as;
     }
     if (name) {
-      // if (this.names[name]) {
-      //   throw new Error("You may not add a duplicate route named `" + name + "`.");
+      // If (this.names[name]) {
+      //   Throw new Error("You may not add a duplicate route named `" + name + "`.");
       // }
       this.names[name] = {
         segments: allSegments,
@@ -8951,8 +8951,8 @@
     states = sortSolutions(solutions);
     var state = solutions[0];
     if (state && state.handlers) {
-      // if a trailing slash was dropped and a star segment is the last segment
-      // specified, put the trailing slash back
+      // If a trailing slash was dropped and a star segment is the last segment
+      // Specified, put the trailing slash back
       if (isSlashDropped && state.pattern && state.pattern.slice(-5) === '(.+)$') {
         originalPath = originalPath + '/';
       }
@@ -8996,7 +8996,7 @@
   }
   function onChange(callback) {
     changeCallback = callback;
-    _hashchangeHandler(); // kick it off the first time
+    _hashchangeHandler(); // Kick it off the first time
     window.addEventListener('hashchange', _hashchangeHandler);
   }
 
