@@ -22,7 +22,7 @@ RSpec.describe 'signatures#create', type: :request do
     pending 'creates the resource' do
       expect do
         make_request
-      end.to change { Signature.count }.by(1)
+      end.to change(Signature, :count).by(1)
       signature = Signature.last
 
       assert_payload(:signature, signature, json_item)
