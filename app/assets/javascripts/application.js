@@ -10,5 +10,5 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // About supported directives.
 //
-//= require rails-ujs
-//= require_tree .
+// = require rails-ujs
+// = require_tree .
