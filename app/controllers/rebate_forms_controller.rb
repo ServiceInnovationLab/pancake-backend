@@ -3,6 +3,7 @@
 class RebateFormsController < ApiController
   # Mark this as a JSONAPI controller, associating with the given resource
   jsonapi resource: RebateFormResource
+  strong_resource :rebate_form
 
   def show
     scope = jsonapi_scope(RebateForm.where(token: params[:id]))
