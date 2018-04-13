@@ -24,7 +24,7 @@ class Admin::RebateFormsController < ApplicationController
     @rebate_form = RebateForm.new(admin_rebate_form_params)
 
     if @rebate_form.save
-      redirect_to @rebate_form, notice: 'Rebate form was successfully created.'
+      redirect_to admin_rebate_forms_url, notice: 'Rebate form was successfully created.'
     else
       render :new
     end
@@ -33,7 +33,7 @@ class Admin::RebateFormsController < ApplicationController
   # PATCH/PUT /admin/rebate_forms/1
   def update
     if @rebate_form.update(admin_rebate_form_params)
-      redirect_to @rebate_form, notice: 'Rebate form was successfully updated.'
+      redirect_to admin_rebate_forms_url, notice: 'Rebate form was successfully updated.'
     else
       render :edit
     end
@@ -54,6 +54,6 @@ class Admin::RebateFormsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def admin_rebate_form_params
-    params.fetch(:admin_rebate_form, {})
+    params.require(:rebate_form).permit(:valuation_id, :token)
   end
 end

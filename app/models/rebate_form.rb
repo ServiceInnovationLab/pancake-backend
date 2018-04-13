@@ -3,6 +3,8 @@
 class RebateForm < ApplicationRecord
   has_many :signatures, dependent: :destroy
   after_initialize :set_token
+  validates :valuation_id, presence: true
+  validates :token, presence: true
 
   def applicant_signature
     signatures.applicant.first
@@ -19,10 +21,10 @@ class RebateForm < ApplicationRecord
   private
 
   def new_token
-    "#{random_token 3}-#{random_token 3}-#{random_token 3}"
-  end
-
-  def random_token(length)
-    (0...length).map { rand(65..90).chr }.join
+    bits = []
+    5.times do
+      bits << (0...3).map { rand(65..90).chr }.join
+    end
+    bits.join('-')
   end
 end

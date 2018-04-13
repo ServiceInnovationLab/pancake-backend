@@ -31,6 +31,6 @@ RSpec.describe RebateForm, type: :model do
     let(:form) { FactoryBot.create :rebate_form }
 
     it { expect(form.token.present?).to eq true }
-    it { expect(form.token.length).to eq 11 }
+    it { expect(form.token.length).to eq 19 }
   end
 end
