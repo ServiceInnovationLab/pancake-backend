@@ -3,6 +3,8 @@
 class RebateForm < ApplicationRecord
   has_many :signatures, dependent: :destroy
   after_initialize :set_token
+  validates :valuation_id, presence: true
+  validates :token, presence: true
 
   def applicant_signature
     signatures.applicant.first
