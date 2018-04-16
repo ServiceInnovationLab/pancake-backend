@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe RebateFormsController, type: :controller do
   subject { JSON.parse response.body }
+
   describe '#create' do
     let(:body) do
       {
