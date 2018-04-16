@@ -1,0 +1,19 @@
+%h1 Listing admin_rebate_forms
+
+= link_to 'New Rebate form', new_admin_rebate_form_path, class: 'pure-button pure-button-primary'
+
+%table
+  %thead
+    %tr
+      %th token
+      %th valuation_id
+
+  %tbody
+    - @rebate_forms.each do |rebate_form|
+      %tr
+        %td= rebate_form.token
+        %td= rebate_form.valuation_id
+        %td= rebate_form.created_at
+        %td= link_to 'Show', admin_rebate_form_path(rebate_form)
+        %td= link_to 'Edit', edit_admin_rebate_form_path(rebate_form)
+        %td= link_to 'Destroy', admin_rebate_form_path(rebate_form), method: :delete, data: { confirm: 'Are you sure?' }, class: "pure-button"

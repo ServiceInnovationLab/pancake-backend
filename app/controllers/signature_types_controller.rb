@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SignatureTypesController < ApplicationController
+class SignatureTypesController < ApiController
   # Mark this as a JSONAPI controller, associating with the given resource
   jsonapi resource: SignatureTypeResource
 

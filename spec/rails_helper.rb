@@ -33,7 +33,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include JsonapiSpecHelpers
 
-  config.before :each do
+  config.before do
     JsonapiErrorable.disable!
   end
 
@@ -43,7 +43,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.around(:each) do |example|
+  config.around do |example|
     begin
       DatabaseCleaner.cleaning do
         example.run
