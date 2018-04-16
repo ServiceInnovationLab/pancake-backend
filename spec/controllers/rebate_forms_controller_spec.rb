@@ -62,13 +62,13 @@ RSpec.describe RebateFormsController, type: :controller do
       end
       let(:expected_errors) do
         { 'errors' => [
-          { 
+          {
             'code' => 'unprocessable_entity',
             'status' => '422',
             'title' => 'Validation Error',
             'detail' => "Valuation can't be blank",
             'source' => { 'pointer' => '/data/attributes/valuation_id' },
-            'meta' => { 'attribute' => 'valuation_id', 'message' => "can't be blank", 'code' => 'blank' } 
+            'meta' => { 'attribute' => 'valuation_id', 'message' => "can't be blank", 'code' => 'blank' }
           }
         ] }
       end
