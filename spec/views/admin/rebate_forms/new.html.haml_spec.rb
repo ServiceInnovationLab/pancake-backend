@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'admin/rebate_forms/new', type: :view do
   let(:rebate_form) { FactoryBot.create(:rebate_form) }
+
   before do
     assign(:rebate_form, rebate_form)
   end
