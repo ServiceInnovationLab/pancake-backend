@@ -16,7 +16,7 @@ deploy:
   api_key:
     secure: TZqifWTjUVoLnR81YSrpBsM0vIxFhrPpr/jJZbZ1cK6uIJU3VSw9U0FRSkxfuK+0/mb9PIfLFMVwJkTtyWZNbaEw3MJOU7nfOghnxHmjfDAzdD+yZxVK74pXz/m4rffYC0KEXtKNlL51D0tXo6zEDCPFOb4T+v1JWB0M8vKR/Abqoi3uSsOM2yug4t8ePtXoT9meamT5ZKafoswQjiGk8b3PkMH2K5H8mc25GR6sPJ2wpJrVQ8IhsRdhuk5NppTRah4Sok4CKq8BggYhj3qoVHaWUQAC1GP+3iMK3WdFZ/8Rl9vzNF25/UOoQI9wtuMTUQJxx2o8T9Mi8c+tjlFlwEIBQXvn18QQ5UAZTFIB04vockHpYWaUkNpxmPatFj/F67zss410pLdZdpsYNRsbpNRjwyspCDI1lgqGosE98YIjZSNY1hMlechAvorm1NcTBMipylpKgseeMFOZB9NOEMwEr3dKVmZM/WREw0iP237n27TuTpp/QTezxotQgS4xiDbeejDhrunLj/YC8vkSWHnWxeFqKcmnW9279J4d11p8I+4rbsk3HJhkzVNwrXKrVor5K0xXYE4RYbMq57YllTGpzBOEWDmDvXu889aTKBklG/VnSsb5lnfIoPCqEmtwFA8VghxToe+Jt8J76fLfUOoccG4r02nzNLDApYWrXD0=
   on:
-    repo: ServiceInnovationLab/pancake-server
+    repo: ServiceInnovationLab/pancake-backend
   app:
     dev: pancakenz-staging
     master: pancakenz

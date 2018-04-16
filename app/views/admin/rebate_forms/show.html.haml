@@ -1,0 +1,14 @@
+%p#notice= notice
+
+
+%h3 Valuation_id
+%p= @rebate_form.valuation_id
+%h3 Token
+%p= @rebate_form.token
+%h3 Fields
+%p= @rebate_form.fields.to_json
+
+%p
+  = link_to 'Edit', edit_admin_rebate_form_path(@rebate_form)
+  \|
+  = link_to 'Back', admin_rebate_forms_path

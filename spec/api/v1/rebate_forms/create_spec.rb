@@ -22,7 +22,7 @@ RSpec.describe 'rebate_forms#create', type: :request do
     pending 'creates the resource' do
       expect do
         make_request
-      end.to change { RebateForm.count }.by(1)
+      end.to change(RebateForm, :count).by(1)
       rebate_form = RebateForm.last
 
       assert_payload(:rebate_form, rebate_form, json_item)
