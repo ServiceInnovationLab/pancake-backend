@@ -22,7 +22,7 @@ class RebateForm < ApplicationRecord
 
   def new_token
     bits = []
-    5.times do
+    3.times do
       bits << (0...3).map { rand(65..90).chr }.join
     end
     bits.join('-')
