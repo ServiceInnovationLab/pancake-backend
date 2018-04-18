@@ -23,6 +23,21 @@ module PancakeServer
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins ENV['CORS_ORIGINS']
+        resource ENV['CORS_RESOURCE'], :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
+
+    if Rails.env.development?
+      ENV['CORS_ORIGINS'] = '*'
+      ENV['CORS_RESOURCE'] = '*'
+    else
+      ENV['CORS_ORIGINS'] = 'serviceinnovationlab.github.io'
+      ENV['CORS_RESOURCE'] = 'api/*'
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
