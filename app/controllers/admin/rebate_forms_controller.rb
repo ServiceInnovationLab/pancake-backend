@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::RebateFormsController < ApplicationController
+class Admin::RebateFormsController < Admin::BaseController
   before_action :set_admin_rebate_form, only: %i[show edit update destroy]
 
   # GET /admin/rebate_forms
