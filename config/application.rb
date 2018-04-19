@@ -26,7 +26,7 @@ module PancakeServer
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins ENV['CORS_ORIGINS']
-        resource ENV['CORS_RESOURCE'], :headers => :any, :methods => [:get, :post, :options]
+        resource ENV['CORS_RESOURCE'], headers: :any, methods: %i[get post options]
       end
     end
 
@@ -34,7 +34,7 @@ module PancakeServer
       ENV['CORS_ORIGINS'] = '*'
       ENV['CORS_RESOURCE'] = '*'
     else
-      ENV['CORS_ORIGINS'] = 'serviceinnovationlab.github.io'
+      ENV['CORS_ORIGINS'] = 'https://serviceinnovationlab.github.io'
       ENV['CORS_RESOURCE'] = 'api/*'
     end
 
