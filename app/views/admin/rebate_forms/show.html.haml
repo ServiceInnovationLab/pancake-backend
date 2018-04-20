@@ -1,13 +1,35 @@
 %p#notice= notice
 
 
-%h3 Valuation_id
-%p= @rebate_form.valuation_id
-%h3 Token
-%p= @rebate_form.token
-%h3 Fields
-%p= @rebate_form.fields.to_json
 
+.pure-g
+  .pure-u-1-3
+    %h3 Valuation_id
+    %p= @rebate_form.valuation_id
+    %h3 Token
+    %p= @rebate_form.token
+  .pure-u-1-3
+    %h3 Fields
+    %dl
+      - @rebate_form.fields.each do |name, value|
+        %dt
+          %h4= name
+        %dl= value
+
+  .pure-u-1-3
+    %h3 Signatures
+    %table.pure-table.pure-table-horizontal
+      - @signatures.each do |type_name, signature|
+        %tr
+          %th
+            = type_name
+          %td
+            - if signature.present?
+              %p
+                %img{src: "/admin/signatures?type=#{signature.signature_type.name}&token=#{@rebate_form.token}&valuation_id=#{@rebate_form.valuation_id}"}
+              %p=signature.created_at
+            - else
+              Signature missing
 %p
   = link_to 'Edit', edit_admin_rebate_form_path(@rebate_form)
   \|

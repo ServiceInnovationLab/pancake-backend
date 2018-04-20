@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   namespace :admin do
     resources :rebate_forms
+    get 'signatures' => 'signatures#show'
   end
 
   scope path: '/api' do

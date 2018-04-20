@@ -1,15 +1,20 @@
 # frozen_string_literal: true
 
-class Admin::RebateFormsController < ApplicationController
+class Admin::RebateFormsController < Admin::BaseController
   before_action :set_admin_rebate_form, only: %i[show edit update destroy]
 
   # GET /admin/rebate_forms
   def index
-    @rebate_forms = RebateForm.all
+    @rebate_forms = RebateForm.all.order(created_at: :desc)
   end
 
   # GET /admin/rebate_forms/1
-  def show; end
+  def show
+    @signatures = {}
+    SignatureType.order(:name).all.each do |st|
+      @signatures[st.name] = @rebate_form.signatures.where(signature_type: st).order(created_at: :desc).first
+    end
+  end
 
   # GET /admin/rebate_forms/new
   def new

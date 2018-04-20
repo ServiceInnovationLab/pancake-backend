@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :signature_type do
-    name 'scribble'
+    name { Faker::DrWho.specie }
   end
 end
