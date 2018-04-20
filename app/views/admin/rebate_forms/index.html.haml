@@ -7,6 +7,9 @@
     %tr
       %th token
       %th valuation_id
+      %th When
+      %th signed
+      %th witnessed
 
   %tbody
     - @rebate_forms.each do |rebate_form|
@@ -14,6 +17,8 @@
         %td= rebate_form.token
         %td= rebate_form.valuation_id
         %td= rebate_form.created_at
+        %td= rebate_form.applicant_signature.present?
+        %td= rebate_form.witness_signature.present?
         %td= link_to 'Show', admin_rebate_form_path(rebate_form)
         %td= link_to 'Edit', edit_admin_rebate_form_path(rebate_form)
         %td= link_to 'Destroy', admin_rebate_form_path(rebate_form), method: :delete, data: { confirm: 'Are you sure?' }, class: "pure-button"

@@ -38,30 +38,23 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
   let(:valid_session) { {} }
 
   describe 'GET #index' do
-    it 'assigns all admin_rebate_forms as @rebate_forms' do
+    it 'assigns all rebate_forms as @rebate_forms' do
       rebate_form = RebateForm.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(assigns(:admin_rebate_forms)).to eq([rebate_form])
+      expect(assigns(:rebate_forms)).to eq([rebate_form])
     end
   end
 
   describe 'GET #show' do
-    it 'assigns the requested admin_rebate_form as @rebate_form' do
+    it 'assigns the requested rebate_form as @rebate_form' do
       rebate_form = RebateForm.create! valid_attributes
       get :show, params: { id: rebate_form.to_param }, session: valid_session
       expect(assigns(:rebate_form)).to eq(rebate_form)
     end
   end
 
-  describe 'GET #new' do
-    it 'assigns a new admin_rebate_form as @rebate_form' do
-      get :new, params: {}, session: valid_session
-      expect(assigns(:rebate_form)).to be_a_new(RebateForm)
-    end
-  end
-
   describe 'GET #edit' do
-    it 'assigns the requested admin_rebate_form as @rebate_form' do
+    it 'assigns the requested rebate_form as @rebate_form' do
       rebate_form = RebateForm.create! valid_attributes
       get :edit, params: { id: rebate_form.to_param }, session: valid_session
       expect(assigns(:rebate_form)).to eq(rebate_form)
@@ -72,30 +65,30 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     context 'with valid params' do
       it 'creates a new Admin::RebateForm' do
         expect do
-          post :create, params: { admin_rebate_form: valid_attributes }, session: valid_session
+          post :create, params: { rebate_form: valid_attributes }, session: valid_session
         end.to change(RebateForm, :count).by(1)
       end
 
-      it 'assigns a newly created admin_rebate_form as @rebate_form' do
-        post :create, params: { admin_rebate_form: valid_attributes }, session: valid_session
+      it 'assigns a newly created rebate_form as @rebate_form' do
+        post :create, params: { rebate_form: valid_attributes }, session: valid_session
         expect(assigns(:rebate_form)).to be_a(Admin::RebateForm)
         expect(assigns(:rebate_form)).to be_persisted
       end
 
-      it 'redirects to the created admin_rebate_form' do
-        post :create, params: { admin_rebate_form: valid_attributes }, session: valid_session
+      it 'redirects to the created rebate_form' do
+        post :create, params: { rebate_form: valid_attributes }, session: valid_session
         expect(response).to redirect_to(RebateForm.last)
       end
     end
 
     context 'with invalid params' do
-      it 'assigns a newly created but unsaved admin_rebate_form as @rebate_form' do
-        post :create, params: { admin_rebate_form: invalid_attributes }, session: valid_session
+      it 'assigns a newly created but unsaved rebate_form as @rebate_form' do
+        post :create, params: { rebate_form: invalid_attributes }, session: valid_session
         expect(assigns(:rebate_form)).to be_a_new(Admin::RebateForm)
       end
 
       it "re-renders the 'new' template" do
-        post :create, params: { admin_rebate_form: invalid_attributes }, session: valid_session
+        post :create, params: { rebate_form: invalid_attributes }, session: valid_session
         expect(response).to render_template('new')
       end
     end
@@ -107,53 +100,53 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         skip('Add a hash of attributes valid for your model')
       end
 
-      it 'updates the requested admin_rebate_form' do
+      it 'updates the requested rebate_form' do
         rebate_form = RebateForm.create! valid_attributes
-        put :update, params: { id: rebate_form.to_param, admin_rebate_form: new_attributes }, session: valid_session
+        put :update, params: { id: rebate_form.to_param, rebate_form: new_attributes }, session: valid_session
         rebate_form.reload
         skip('Add assertions for updated state')
       end
 
-      it 'assigns the requested admin_rebate_form as @rebate_form' do
+      it 'assigns the requested rebate_form as @rebate_form' do
         rebate_form = RebateForm.create! valid_attributes
-        put :update, params: { id: rebate_form.to_param, admin_rebate_form: valid_attributes }, session: valid_session
+        put :update, params: { id: rebate_form.to_param, rebate_form: valid_attributes }, session: valid_session
         expect(assigns(:rebate_form)).to eq(rebate_form)
       end
 
-      it 'redirects to the admin_rebate_form' do
+      it 'redirects to the rebate_form' do
         rebate_form = RebateForm.create! valid_attributes
-        put :update, params: { id: rebate_form.to_param, admin_rebate_form: valid_attributes }, session: valid_session
+        put :update, params: { id: rebate_form.to_param, rebate_form: valid_attributes }, session: valid_session
         expect(response).to redirect_to(rebate_form)
       end
     end
 
     context 'with invalid params' do
-      it 'assigns the admin_rebate_form as @rebate_form' do
+      it 'assigns the rebate_form as @rebate_form' do
         rebate_form = RebateForm.create! valid_attributes
-        put :update, params: { id: rebate_form.to_param, admin_rebate_form: invalid_attributes }, session: valid_session
+        put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes }, session: valid_session
         expect(assigns(:rebate_form)).to eq(rebate_form)
       end
 
       it "re-renders the 'edit' template" do
         rebate_form = RebateForm.create! valid_attributes
-        put :update, params: { id: rebate_form.to_param, admin_rebate_form: invalid_attributes }, session: valid_session
+        put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes }, session: valid_session
         expect(response).to render_template('edit')
       end
     end
   end
 
   describe 'DELETE #destroy' do
-    it 'destroys the requested admin_rebate_form' do
+    it 'destroys the requested rebate_form' do
       rebate_form = RebateForm.create! valid_attributes
       expect do
         delete :destroy, params: { id: rebate_form.to_param }, session: valid_session
       end.to change(Admin::RebateForm, :count).by(-1)
     end
 
-    it 'redirects to the admin_rebate_forms list' do
+    it 'redirects to the rebate_forms list' do
       rebate_form = RebateForm.create! valid_attributes
       delete :destroy, params: { id: rebate_form.to_param }, session: valid_session
-      expect(response).to redirect_to(admin_rebate_forms_url)
+      expect(response).to redirect_to(rebate_forms_url)
     end
   end
 end
