@@ -38,7 +38,7 @@ StrongResources.configure do
     attribute :valuation_id, :string
   end
   strong_resource :signature do
-    attribute :path, :string
+    attribute :image, :string
   end
   strong_resource :signature_type do
     attribute :name, :string

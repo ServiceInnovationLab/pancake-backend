@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405042043) do
+ActiveRecord::Schema.define(version: 20180417002038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(version: 20180405042043) do
   end
 
   create_table "signatures", force: :cascade do |t|
-    t.string "path"
     t.bigint "signature_type_id"
     t.bigint "rebate_form_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.binary "image"
     t.index ["rebate_form_id"], name: "index_signatures_on_rebate_form_id"
     t.index ["signature_type_id"], name: "index_signatures_on_signature_type_id"
   end

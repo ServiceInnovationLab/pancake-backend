@@ -16,4 +16,8 @@ RSpec.describe Signature, type: :model do
     it { expect(Signature.applicant).to eq [applicant] }
     it { expect(Signature.witness).to eq [witness] }
   end
+
+  describe 'image' do
+    it { expect(witness.image.present?).to eq true }
+  end
 end
