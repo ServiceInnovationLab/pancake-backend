@@ -9,7 +9,12 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   # GET /admin/rebate_forms/1
-  def show; end
+  def show
+    @signatures = {}
+    SignatureType.order(:name).all.each do |st|
+      @signatures[st.name] = @rebate_form.signatures.where(signature_type: st).order(created_at: :desc).first
+    end
+  end
 
   # GET /admin/rebate_forms/new
   def new
