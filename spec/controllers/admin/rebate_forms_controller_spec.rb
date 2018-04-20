@@ -38,7 +38,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
   let(:valid_session) { {} }
 
   describe 'GET #index' do
-    it 'assigns all admin_rebate_forms as @admin_rebate_forms' do
+    it 'assigns all admin_rebate_forms as @rebate_forms' do
       rebate_form = RebateForm.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(assigns(:admin_rebate_forms)).to eq([rebate_form])
@@ -46,7 +46,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
   end
 
   describe 'GET #show' do
-    it 'assigns the requested admin_rebate_form as @admin_rebate_form' do
+    it 'assigns the requested admin_rebate_form as @rebate_form' do
       rebate_form = RebateForm.create! valid_attributes
       get :show, params: { id: rebate_form.to_param }, session: valid_session
       expect(assigns(:rebate_form)).to eq(rebate_form)
@@ -54,14 +54,14 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
   end
 
   describe 'GET #new' do
-    it 'assigns a new admin_rebate_form as @admin_rebate_form' do
+    it 'assigns a new admin_rebate_form as @rebate_form' do
       get :new, params: {}, session: valid_session
       expect(assigns(:rebate_form)).to be_a_new(RebateForm)
     end
   end
 
   describe 'GET #edit' do
-    it 'assigns the requested admin_rebate_form as @admin_rebate_form' do
+    it 'assigns the requested admin_rebate_form as @rebate_form' do
       rebate_form = RebateForm.create! valid_attributes
       get :edit, params: { id: rebate_form.to_param }, session: valid_session
       expect(assigns(:rebate_form)).to eq(rebate_form)
@@ -76,7 +76,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         end.to change(RebateForm, :count).by(1)
       end
 
-      it 'assigns a newly created admin_rebate_form as @admin_rebate_form' do
+      it 'assigns a newly created admin_rebate_form as @rebate_form' do
         post :create, params: { admin_rebate_form: valid_attributes }, session: valid_session
         expect(assigns(:rebate_form)).to be_a(Admin::RebateForm)
         expect(assigns(:rebate_form)).to be_persisted
@@ -89,7 +89,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     end
 
     context 'with invalid params' do
-      it 'assigns a newly created but unsaved admin_rebate_form as @admin_rebate_form' do
+      it 'assigns a newly created but unsaved admin_rebate_form as @rebate_form' do
         post :create, params: { admin_rebate_form: invalid_attributes }, session: valid_session
         expect(assigns(:rebate_form)).to be_a_new(Admin::RebateForm)
       end
@@ -114,7 +114,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         skip('Add assertions for updated state')
       end
 
-      it 'assigns the requested admin_rebate_form as @admin_rebate_form' do
+      it 'assigns the requested admin_rebate_form as @rebate_form' do
         rebate_form = RebateForm.create! valid_attributes
         put :update, params: { id: rebate_form.to_param, admin_rebate_form: valid_attributes }, session: valid_session
         expect(assigns(:rebate_form)).to eq(rebate_form)
@@ -128,7 +128,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     end
 
     context 'with invalid params' do
-      it 'assigns the admin_rebate_form as @admin_rebate_form' do
+      it 'assigns the admin_rebate_form as @rebate_form' do
         rebate_form = RebateForm.create! valid_attributes
         put :update, params: { id: rebate_form.to_param, admin_rebate_form: invalid_attributes }, session: valid_session
         expect(assigns(:rebate_form)).to eq(rebate_form)
