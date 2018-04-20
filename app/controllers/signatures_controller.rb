@@ -32,12 +32,15 @@ class SignaturesController < ApiController
   # This will handle nested relationships as well.
   # On validation errors, render correct error JSON.
   def create
-    signature, success = jsonapi_create.to_a
-
-    if success
-      render_jsonapi(signature, scope: false)
-    else
+    signature = Signature.create!(
+      image: signature_params[:image],
+      rebate_form: rebate_form,
+      signature_type: signature_type
+    )
+    if signature.errors.any?
       render_errors_for(signature)
+    else
+      render_jsonapi(signature, scope: false)
     end
   end
 
@@ -64,5 +67,21 @@ class SignaturesController < ApiController
     else
       render_errors_for(signature)
     end
+  end
+
+  private
+
+  def signature_type
+    SignatureType.find_by(name: signature_params[:type])
+  end
+
+  def rebate_form
+    RebateForm.find_by(
+      valuation_id: signature_params[:valuation_id], token: signature_params[:token]
+    )
+  end
+
+  def signature_params
+    params.require(:data).require(:attributes).permit(:valuation_id, :token, :image, :type)
   end
 end
