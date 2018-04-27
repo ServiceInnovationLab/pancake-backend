@@ -34,7 +34,7 @@ module PancakeServer
       ENV['CORS_ORIGINS'] = '*'
       ENV['CORS_RESOURCE'] = '*'
     else
-      ENV['CORS_ORIGINS'] = 'https://serviceinnovationlab.github.io/*'
+      ENV['CORS_ORIGINS'] = 'https://serviceinnovationlab.github.io/pancake-frontend'
       ENV['CORS_RESOURCE'] = '*'
     end
 
