@@ -35,7 +35,7 @@ module PancakeServer
       ENV['CORS_RESOURCE'] = '*'
     else
       ENV['CORS_ORIGINS'] = 'https://serviceinnovationlab.github.io/*'
-      ENV['CORS_RESOURCE'] = '/api/*'
+      ENV['CORS_RESOURCE'] = '*'
     end
 
     # Settings in config/environments/* take precedence over those specified here.
