@@ -29,4 +29,8 @@ class DocsController < ActionController::API
   jsonapi_resource '/v1/signatures',
                    only: %i[create],
                    descriptions: { create: 'create new signature' }
+
+  jsonapi_resource '/v1/properties'
+  jsonapi_resource '/v1/rates_bills'
+  jsonapi_resource '/v1/rates_payers'
 end
