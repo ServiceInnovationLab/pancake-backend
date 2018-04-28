@@ -13,7 +13,7 @@ RSpec.describe 'signatures#show', type: :request do
   describe 'basic fetch' do
     let!(:signature) { create(:signature) }
 
-    pending 'serializes the resource correctly' do
+    it 'serializes the resource correctly' do
       expect do
         make_request
       end.to raise_error(ActionController::RoutingError)
