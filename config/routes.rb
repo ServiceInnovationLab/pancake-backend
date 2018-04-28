@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   namespace :admin do
     resources :rebate_forms
-    get 'signatures' => 'signatures#show'
+    get 'signature' => 'signatures#show'
   end
 
   scope path: '/api' do
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     scope path: '/v1' do
       resources :rebate_forms, only: %i[create show update]
       resources :signature_types, only: %i[index show]
-      resources :signatures, only: %i[show create]
+      resources :signatures, only: %i[create]
     end
   end
 end
