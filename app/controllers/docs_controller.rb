@@ -26,12 +26,7 @@ class DocsController < ActionController::API
                      create: 'create a new application for a rates rebate',
                      show: 'retrieve existing application. pass token as id'
                    }
-
-  jsonapi_resource '/v1/signature_types',
-                   only: [:index],
-                   descriptions: { index: 'list of possible signature types' }
-
   jsonapi_resource '/v1/signatures',
-                   only: %i[create update],
-                   descriptions: { create: 'create new signture', update: 'overwrite existing signature' }
+                   only: %i[create],
+                   descriptions: { create: 'create new signature' }
 end

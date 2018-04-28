@@ -31,4 +31,6 @@
 # For more information, see https://jsonapi-suite.github.io/jsonapi_spec_helpers/
 JsonapiSpecHelpers::Payload.register(:signature) do
   key(:image, String)
+  key(:name, String)
+  key(:role, String)
 end

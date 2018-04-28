@@ -39,6 +39,8 @@ StrongResources.configure do
   end
   strong_resource :signature do
     attribute :image, :string
+    attribute :name, :string
+    attribute :role, :string
   end
   strong_resource :signature_type do
     attribute :name, :string
