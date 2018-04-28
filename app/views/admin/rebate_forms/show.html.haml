@@ -25,9 +25,10 @@
             = type_name
           %td
             - if signature.present?
-              %p
-                %img{src: "/admin/signatures?type=#{signature.signature_type.name}&token=#{@rebate_form.token}&valuation_id=#{@rebate_form.valuation_id}"}
-              %p=signature.created_at
+              %p= image_tag(signature_image_path(signature), alt: 'signature')
+              %p= signature.name.presence || "no name"
+              %p= signature.role.presence || "no role specified"
+              %p= signature.created_at
             - else
               Signature missing
 %p
