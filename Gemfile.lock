@@ -298,6 +298,5 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   swagger-diff (~> 1.1)
 
-
 BUNDLED WITH
    1.16.1
