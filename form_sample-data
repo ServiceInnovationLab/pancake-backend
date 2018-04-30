@@ -1,0 +1,11 @@
+{
+  "data": {
+    "type": "rebate-forms",
+    "attributes": {
+      "valuation_id": "abc",
+      "fields": {
+        "name": "bob"
+      }
+    }
+  }
+}
