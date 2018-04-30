@@ -8,6 +8,7 @@ class SerializableRatesPayer < JSONAPI::Serializable::Resource
   # Add attributes here to ensure they get rendered, .e.g.
   #
   # attribute :name
+  attributes :surname, :first_names
   #
   # To customize, pass a block and reference the underlying @object
   # being serialized:
