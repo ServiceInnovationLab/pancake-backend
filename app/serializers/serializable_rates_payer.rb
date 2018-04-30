@@ -2,16 +2,13 @@
 
 # Serializers define the rendered JSON for a model instance.
 # We use jsonapi-rb, which is similar to active_model_serializers.
-class SerializableSignature < JSONAPI::Serializable::Resource
-  type :signatures
+class SerializableRatesPayer < JSONAPI::Serializable::Resource
+  type :rates_payers
 
   # Add attributes here to ensure they get rendered, .e.g.
   #
-  attribute :name
-  attribute :role
-  attribute :image
-
-  belongs_to :signature_type
+  # attribute :name
+  attributes :surname, :first_names
   #
   # To customize, pass a block and reference the underlying @object
   # being serialized:
