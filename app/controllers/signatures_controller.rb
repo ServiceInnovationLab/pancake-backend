@@ -3,28 +3,32 @@
 class SignaturesController < ApiController
   jsonapi resource: SignatureResource
   strong_resource :signature
-  before_action :apply_strong_params, only: %i[create]
+  before_action :apply_strong_params
 
   def create
-    signature = Signature.new(
+    Signature.transaction do
+      delete_existing_signatures!
+      signature.save
+    end
+    return render_errors_for(signature) if signature.errors.any?
+    render_jsonapi(signature, scope: false)
+  end
+
+  private
+
+  def delete_existing_signatures!
+    rebate_form.signatures.where(signature_type: signature_type).delete_all
+  end
+
+  def signature
+    Signature.new(
       image: signature_params[:image],
       name: signature_params[:name],
       role: signature_params[:role],
       rebate_form: rebate_form,
       signature_type: signature_type
     )
-    Signature.transaction do
-      rebate_form.signatures.where(signature_type: signature_type).delete_all
-      signature.save
-    end
-    if signature.errors.any?
-      render_errors_for(signature)
-    else
-      render_jsonapi(signature, scope: false)
-    end
   end
-
-  private
 
   def signature_type
     SignatureType.find_by(name: signature_params[:type])
