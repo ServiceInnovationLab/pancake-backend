@@ -5,6 +5,8 @@ FactoryBot.define do
     signature_type
     rebate_form
     image { Base64.encode64(File.open('sig.png', 'rb').read) }
+    name 'Person Name'
+    role 'cool job title goes here'
   end
   factory :applicant_signature, parent: :signature do
     signature_type { FactoryBot.create :signature_type, name: 'applicant' }
