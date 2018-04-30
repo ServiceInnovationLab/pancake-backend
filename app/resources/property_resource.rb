@@ -11,7 +11,7 @@ class PropertyResource < ApplicationResource
   # Customize your resource here. Some common examples:
   #
   # === Allow ?filter[name] query parameter ===
-  # allow_filter :name
+  allow_filter :location
   #
   # === Enable total count, when requested ===
   # allow_stat total: [:count]

@@ -20,7 +20,7 @@ class SignaturesController < ApiController
     if signature.errors.any?
       render_errors_for(signature)
     else
-      render_jsonapi(signature, scope: false)
+      render_jsonapi(signature, scope: false, include: :signature_type)
     end
   end
 
