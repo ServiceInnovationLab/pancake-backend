@@ -38,10 +38,10 @@ StrongResources.configure do
   strong_resource :rates_bill do
   end
   strong_resource :property do
-    attrbute :valuation_id
-    attrbute :location
-    attrbute :suburb
-    attrbute :town_city
+    attribute :valuation_id, :string
+    attribute :location, :string
+    attribute :suburb, :string
+    attribute :town_city, :string
   end
   strong_resource :rebate_form do
     attribute :token, :string
