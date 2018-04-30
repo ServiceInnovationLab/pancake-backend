@@ -15,7 +15,5 @@ class SerializableRebateForm < JSONAPI::Serializable::Resource
   # attribute :name do
   #   @object.name.upcase
   # end
-  attribute :valuation_id
-  attribute :token
-  attribute :fields
+  attributes :valuation_id, :token, :fields
 end

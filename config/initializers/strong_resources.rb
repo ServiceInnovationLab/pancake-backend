@@ -33,6 +33,16 @@
 #
 # For additional documentation, see https://jsonapi-suite.github.io/strong_resources
 StrongResources.configure do
+  strong_resource :rates_payer do
+  end
+  strong_resource :rates_bill do
+  end
+  strong_resource :property do
+    attribute :valuation_id, :string
+    attribute :location, :string
+    attribute :suburb, :string
+    attribute :town_city, :string
+  end
   strong_resource :rebate_form do
     attribute :token, :string
     attribute :valuation_id, :string

@@ -2924,7 +2924,7 @@
     console.info('Use `context`, and `get(<path>)` to debug this template.');
     // For example...
     context === get('this');
-    
+
   }
   /* Tslint:enable */
   let callback = debugCallback;
