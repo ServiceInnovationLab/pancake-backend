@@ -5,7 +5,14 @@ class SignaturesController < ApiController
   strong_resource :signature
   before_action :apply_strong_params, only: %i[create]
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    signature = Signature.new(
+      image: signature_params[:image],
+      name: signature_params[:name],
+      role: signature_params[:role],
+      rebate_form: rebate_form,
+      signature_type: signature_type
+    )
     Signature.transaction do
       rebate_form.signatures.where(signature_type: signature_type).delete_all
       Signature.create(
@@ -24,8 +31,8 @@ class SignaturesController < ApiController
   end
 
   private
-  def signature
-  end
+
+  def signature; end
 
   def signature_type
     SignatureType.find_by(name: signature_params[:type])
