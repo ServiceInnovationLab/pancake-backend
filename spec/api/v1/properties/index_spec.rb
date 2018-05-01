@@ -9,7 +9,6 @@ RSpec.describe 'properties#index', type: :request do
   end
   let(:params) { { q: 'main' } }
 
-
   describe 'basic fetch' do
     let!(:matching_property) { create(:property, location: '1 main street') }
     let!(:unrelated_property) { create(:property, location: '22 tawa road') }
