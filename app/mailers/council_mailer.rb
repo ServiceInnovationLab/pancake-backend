@@ -1,2 +1,0 @@
-class CouncilMailer < ApplicationMailer
-end

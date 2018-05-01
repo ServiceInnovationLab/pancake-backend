@@ -5,6 +5,7 @@ class RebateForm < ApplicationRecord
   after_initialize :set_token
   validates :valuation_id, presence: true
   validates :token, presence: true
+  after_create :send_emails
 
   def applicant_signature
     signatures.applicant.first
@@ -26,5 +27,14 @@ class RebateForm < ApplicationRecord
       bits << (0...3).map { rand(65..90).chr }.join
     end
     bits.join('-')
+  end
+
+  def send_emails
+    mailer.applicant_mail.deliver_later
+    mailer.council_mail.deliver_later
+  end
+
+  def mailer
+    RebateFormsMailer.with(rebate_form: self)
   end
 end

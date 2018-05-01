@@ -43,6 +43,7 @@ gem 'kaminari', '~> 1.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'dotenv-rails'
   gem 'factory_bot_rails', '~> 4.0'
   gem 'faker', '~> 1.7'
   gem 'letter_opener'
