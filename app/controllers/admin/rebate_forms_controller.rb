@@ -5,7 +5,9 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # GET /admin/rebate_forms
   def index
-    @rebate_forms = RebateForm.all.order(created_at: :desc)
+    @rebate_forms = RebateForm.all
+                              .includes(:signatures, :property)
+                              .order(created_at: :desc).page params[:page]
   end
 
   # GET /admin/rebate_forms/1

@@ -2,10 +2,17 @@
 
 class RebateForm < ApplicationRecord
   has_many :signatures, dependent: :destroy
+  belongs_to :property, required: false
+
   after_initialize :set_token
   validates :valuation_id, presence: true
   validates :token, presence: true
+  before_save :set_property_id
   after_create :send_emails
+
+  def fully_signed?
+    applicant_signature.present? && witness_signature.present?
+  end
 
   def applicant_signature
     signatures.applicant.first
@@ -24,6 +31,10 @@ class RebateForm < ApplicationRecord
   end
 
   private
+
+  def set_property_id
+    self.property = Property.find_by(valuation_id: valuation_id)
+  end
 
   def new_token
     bits = []

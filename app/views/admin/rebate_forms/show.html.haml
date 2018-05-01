@@ -18,20 +18,9 @@
 
   .pure-u-1-3
     %h3 Signatures
-    %table.pure-table.pure-table-horizontal
-      - @signatures.each do |type_name, signature|
-        %tr
-          %th
-            = type_name
-          %td
-            - if signature.present?
-              %p= image_tag(signature_image_path(signature), alt: 'signature')
-              %p= signature.name.presence || "no name"
-              %p= signature.role.presence || "no role specified"
-              %p= signature.created_at
-            - else
-              Signature missing
+    - if @rebate_form.fully_signed?
+      = render 'signatures'
+    - else
+      = render 'sign_button', rebate_form: @rebate_form
 %p
-  = link_to 'Edit', edit_admin_rebate_form_path(@rebate_form)
-  \|
   = link_to 'Back', admin_rebate_forms_path

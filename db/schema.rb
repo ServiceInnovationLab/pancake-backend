@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180427015503) do
+ActiveRecord::Schema.define(version: 20180501213514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20180427015503) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "fields"
+    t.integer "property_id"
   end
 
   create_table "signature_types", force: :cascade do |t|
@@ -108,6 +109,7 @@ ActiveRecord::Schema.define(version: 20180427015503) do
 
   add_foreign_key "rates_bills", "properties"
   add_foreign_key "rates_payers", "properties"
+  add_foreign_key "rebate_forms", "properties"
   add_foreign_key "signatures", "rebate_forms"
   add_foreign_key "signatures", "signature_types"
 end

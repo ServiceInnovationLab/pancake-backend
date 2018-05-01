@@ -1,24 +1,41 @@
-%h1 Listing admin_rebate_forms
+%h1 Listing Rebate forms
 
-= link_to 'New Rebate form', new_admin_rebate_form_path, class: 'pure-button pure-button-primary'
 
-%table
+%p= paginate  @rebate_forms
+
+%table.pure-table.pure-table-bordered
   %thead
     %tr
       %th token
       %th valuation_id
+      %th Address
       %th When
-      %th signed
-      %th witnessed
+      %th Signed
+      %th Witnessed
 
   %tbody
     - @rebate_forms.each do |rebate_form|
-      %tr
+      %tr{class: rebate_form.fully_signed? ? 'pure-table-odd' : ''}
         %td= rebate_form.token
         %td= rebate_form.valuation_id
+        %td
+          - if rebate_form.property.present?
+            %p
+              =rebate_form.property.location
+              %br/
+              =rebate_form.property.suburb
+              %br/
+              =rebate_form.property.town_city
         %td= rebate_form.created_at
-        %td= rebate_form.applicant_signature.present?
-        %td= rebate_form.witness_signature.present?
+        %td
+          - if rebate_form.applicant_signature.present?
+            = rebate_form.applicant_signature.created_at
+          - else
+            = render 'sign_button', rebate_form: rebate_form
+        %td= render 'witness', signature: rebate_form.witness_signature
         %td= link_to 'Show', admin_rebate_form_path(rebate_form)
-        %td= link_to 'Edit', edit_admin_rebate_form_path(rebate_form)
-        %td= link_to 'Destroy', admin_rebate_form_path(rebate_form), method: :delete, data: { confirm: 'Are you sure?' }, class: "pure-button"
+        %td
+          = link_to admin_rebate_form_path(rebate_form), method: :delete, data: { confirm: 'Are you sure?' }, class: "  pure-button" do
+            = fa_icon "trash"
+
+%p= paginate  @rebate_forms
