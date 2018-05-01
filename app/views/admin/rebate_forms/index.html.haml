@@ -1,7 +1,6 @@
 %h1 Listing Rebate forms
 
-
-%p= paginate  @rebate_forms
+%p= paginate @rebate_forms
 
 %table.pure-table.pure-table-bordered
   %thead
@@ -15,17 +14,17 @@
 
   %tbody
     - @rebate_forms.each do |rebate_form|
-      %tr{class: rebate_form.fully_signed? ? 'pure-table-odd' : ''}
+      %tr{ class: rebate_form.fully_signed? ? 'pure-table-odd' : '' }
         %td= rebate_form.token
         %td= rebate_form.valuation_id
         %td
           - if rebate_form.property.present?
             %p
-              =rebate_form.property.location
+              = rebate_form.property.location
               %br/
-              =rebate_form.property.suburb
+              = rebate_form.property.suburb
               %br/
-              =rebate_form.property.town_city
+              = rebate_form.property.town_city
         %td= rebate_form.created_at
         %td
           - if rebate_form.applicant_signature.present?
@@ -35,7 +34,8 @@
         %td= render 'witness', signature: rebate_form.witness_signature
         %td= link_to 'Show', admin_rebate_form_path(rebate_form)
         %td
-          = link_to admin_rebate_form_path(rebate_form), method: :delete, data: { confirm: 'Are you sure?' }, class: "  pure-button" do
-            = fa_icon "trash"
+          = link_to admin_rebate_form_path(rebate_form), method: :delete,
+            data: { confirm: 'Are you sure?' }, class: 'pure-button' do
+            = fa_icon 'trash'
 
-%p= paginate  @rebate_forms
+%p= paginate @rebate_forms
