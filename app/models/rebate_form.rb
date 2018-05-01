@@ -19,6 +19,10 @@ class RebateForm < ApplicationRecord
     self.token = new_token unless token
   end
 
+  def signing_url
+    ENV['SIGNING_URL'].sub('{token}', token)
+  end
+
   private
 
   def new_token
