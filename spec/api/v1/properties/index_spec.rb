@@ -3,12 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'properties#index', type: :request do
-  let(:params) { { q: 'main' } }
-
   subject(:make_request) do
     jsonapi_get '/api/v1/properties',
                 params: params
   end
+  let(:params) { { q: 'main' } }
+
 
   describe 'basic fetch' do
     let!(:matching_property) { create(:property, location: '1 main street') }
