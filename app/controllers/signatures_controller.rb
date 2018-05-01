@@ -8,7 +8,13 @@ class SignaturesController < ApiController
   def create
     Signature.transaction do
       rebate_form.signatures.where(signature_type: signature_type).delete_all
-      signature.save
+      Signature.create(
+        image: signature_params[:image],
+        name: signature_params[:name],
+        role: signature_params[:role],
+        rebate_form: rebate_form,
+        signature_type: signature_type
+      )
     end
     if signature.errors.any?
       render_errors_for(signature)
@@ -18,15 +24,7 @@ class SignaturesController < ApiController
   end
 
   private
-
   def signature
-    Signature.new(
-      image: signature_params[:image],
-      name: signature_params[:name],
-      role: signature_params[:role],
-      rebate_form: rebate_form,
-      signature_type: signature_type
-    )
   end
 
   def signature_type
