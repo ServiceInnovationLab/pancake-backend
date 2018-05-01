@@ -7,8 +7,10 @@ class PropertiesController < ApiController
     scope = jsonapi_scope(Property.where(valuation_id: params[:id]))
     instance = scope.resolve.first
     raise JsonapiCompliable::Errors::RecordNotFound unless instance
-    render_jsonapi(instance, scope: false,
-                             include: [:rates_bills, :rates_payers])
+    render_jsonapi(
+      instance, scope: false,
+                include: [:rates_bills, :rates_payers]
+    )
   end
 
   def index
