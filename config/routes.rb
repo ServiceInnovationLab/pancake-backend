@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       resources :rates_bills, only: %(show)
       resources :properties, only: %(index show)
       resources :rebate_forms, only: %i[create show update]
-      resources :properties, only: [:show, :index]
+      resources :properties, only: %i[show index]
 
       resources :signature_types, only: %i[index show]
       resources :signatures, only: %i[create]
