@@ -8,7 +8,6 @@ RSpec.describe 'properties#show', type: :request do
   end
   let!(:property) { create(:property) }
 
-
   describe 'basic fetch' do
     it 'serializes the resource correctly' do
       make_request
