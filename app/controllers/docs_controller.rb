@@ -21,28 +21,6 @@ class DocsController < ActionController::API
     key :produces, ['application/json']
   end
 
-  # swagger_path '/v1/rebate_forms/{token}/{valuation_id}' do
-  #   operation :get do
-  #     key :summary, 'Retrieve existing rebate form'
-  #     parameter do
-  #       key :name, :token
-  #       key :in, :path
-  #       key :description, 'Unique token belonging to this form data'
-  #       key :required, true
-  #       key :type, :integer
-  #       key :format, :string
-  #     end
-  #     parameter do
-  #       key :name, :valuation_id
-  #       key :in, :path
-  #       key :description, 'valuation_id for the rateable property this application is for'
-  #       key :required, true
-  #       key :type, :integer
-  #       key :format, :string
-  #     end
-  #   end
-  # end
-
   jsonapi_resource '/v1/rebate_forms',
                    only: %i[create update show],
                    tags: [:rebates],
