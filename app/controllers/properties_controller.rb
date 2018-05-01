@@ -9,12 +9,12 @@ class PropertiesController < ApiController
     raise JsonapiCompliable::Errors::RecordNotFound unless instance
     render_jsonapi(
       instance, scope: false,
-                include: [:rates_bills, :rates_payers]
+                include: %i[rates_bills rates_payers]
     )
   end
 
   def index
     filter = "%#{params[:q].parameterize}%"
-    render_jsonapi(Property.where('location ILIKE ?', filter), include: [:rates_payers, :rates_bills])
+    render_jsonapi(Property.where('location ILIKE ?', filter), include: %i[rates_payers rates_bills])
   end
 end
