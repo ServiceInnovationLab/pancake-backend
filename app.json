@@ -3,11 +3,6 @@
   "scripts": {
     "postdeploy": "bundle exec rake db:migrate db:seed"
   },
-  "env": {
-    "COUNCIL_EMAIL": {
-      "required": true
-    }
-  },
   "formation": {
   },
   "addons": [ "sendgrid"],
