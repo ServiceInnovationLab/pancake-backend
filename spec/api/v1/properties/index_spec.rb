@@ -7,6 +7,7 @@ RSpec.describe 'properties#index', type: :request do
     jsonapi_get '/api/v1/properties',
                 params: params
   end
+
   let(:params) { { q: 'main' } }
 
   describe 'basic fetch' do

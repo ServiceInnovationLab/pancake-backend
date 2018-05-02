@@ -6,6 +6,7 @@ RSpec.describe 'properties#show', type: :request do
   subject(:make_request) do
     jsonapi_get "/api/v1/properties/#{property.valuation_id}"
   end
+
   let!(:property) { create(:property) }
 
   describe 'basic fetch' do
