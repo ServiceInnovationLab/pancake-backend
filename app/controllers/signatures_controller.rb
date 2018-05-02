@@ -32,15 +32,14 @@ class SignaturesController < ApiController
 
   private
 
-  def signature; end
-
   def signature_type
-    SignatureType.find_by(name: signature_params[:type])
+    SignatureType.find_by!(name: signature_params[:type])
   end
 
   def rebate_form
-    RebateForm.find_by(
-      valuation_id: signature_params[:valuation_id], token: signature_params[:token]
+    RebateForm.find_by!(
+      # valuation_id: signature_params[:valuation_id]
+      token: signature_params[:token]
     )
   end
 

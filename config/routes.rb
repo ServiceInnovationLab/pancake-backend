@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     get 'welcome/index'
   end
   namespace :admin do
-    resources :rebate_forms
+    resources :rebate_forms, only: %i[show index destroy]
     get 'signature' => 'signatures#show'
   end
 
