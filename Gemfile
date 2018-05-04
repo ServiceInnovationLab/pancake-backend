@@ -27,12 +27,7 @@ gem 'purecss-rails'
 
 gem 'rack-cors', require: 'rack/cors'
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-  gem 'letter_opener'
-  gem 'rubocop'
-end
+gem 'font-awesome-rails'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -48,10 +43,15 @@ gem 'jsonapi_swagger_helpers', '~> 0.6', require: false
 gem 'kaminari', '~> 1.0'
 
 group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+  gem 'dotenv-rails'
   gem 'factory_bot_rails', '~> 4.0'
   gem 'faker', '~> 1.7'
+  gem 'letter_opener'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5.2'
+  gem 'rubocop'
   gem 'swagger-diff', '~> 1.1'
 end
 

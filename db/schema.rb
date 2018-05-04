@@ -10,10 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405042043) do
+ActiveRecord::Schema.define(version: 20180501213514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "properties", force: :cascade do |t|
+    t.text "valuation_id"
+    t.text "location"
+    t.text "suburb"
+    t.text "town_city"
+    t.text "meta"
+    t.index ["valuation_id"], name: "index_properties_on_valuation_id", unique: true
+  end
+
+  create_table "rates_bills", force: :cascade do |t|
+    t.integer "property_id"
+    t.text "rating_year"
+    t.text "total_rates"
+    t.text "total_water_rates"
+    t.text "order"
+    t.text "current_owner_start_date"
+    t.text "meta"
+    t.index ["property_id", "rating_year"], name: "index_rates_bills_on_property_id_and_rating_year", unique: true
+  end
+
+  create_table "rates_payers", force: :cascade do |t|
+    t.integer "property_id"
+    t.text "council_owner_id"
+    t.text "surname"
+    t.text "first_names"
+    t.text "meta"
+  end
 
   create_table "rebate_forms", force: :cascade do |t|
     t.string "valuation_id"
@@ -21,20 +49,24 @@ ActiveRecord::Schema.define(version: 20180405042043) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "fields"
+    t.integer "property_id"
   end
 
   create_table "signature_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_signature_types_on_name", unique: true
   end
 
   create_table "signatures", force: :cascade do |t|
-    t.string "path"
     t.bigint "signature_type_id"
     t.bigint "rebate_form_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.binary "image"
+    t.text "name"
+    t.text "role"
     t.index ["rebate_form_id"], name: "index_signatures_on_rebate_form_id"
     t.index ["signature_type_id"], name: "index_signatures_on_signature_type_id"
   end
@@ -75,6 +107,9 @@ ActiveRecord::Schema.define(version: 20180405042043) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "rates_bills", "properties"
+  add_foreign_key "rates_payers", "properties"
+  add_foreign_key "rebate_forms", "properties"
   add_foreign_key "signatures", "rebate_forms"
   add_foreign_key "signatures", "signature_types"
 end

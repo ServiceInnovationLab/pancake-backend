@@ -1,0 +1,13 @@
+%table.pure-table.pure-table-horizontal
+  - @signatures.each do |type_name, signature|
+    %tr
+      %th
+        = type_name
+      %td
+        - if signature.present?
+          %p= image_tag(signature_image_path(signature), alt: 'signature')
+          %p= signature.name.presence || "no name"
+          %p= signature.role.presence || "no role specified"
+          %p= signature.created_at
+        - else
+          Signature missing

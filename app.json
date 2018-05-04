@@ -1,0 +1,12 @@
+{
+  "name": "pancake-backend",
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate db:seed"
+  },
+  "formation": {
+  },
+  "addons": [ "sendgrid"],
+  "buildpacks": [
+
+  ]
+}
