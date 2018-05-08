@@ -57,20 +57,20 @@ class RatesImporter
       )
     end
 
-    rate_payer = RatesPayer.find_by(
-      council_owner_id: council_owner_id,
-      first_names: first_names,
-      surname: surname,
-      property: property
-    )
-    if rate_payer.blank? # rubocop:disable Style/GuardClause
-      RatesPayer.create!(
-        council_owner_id: council_owner_id,
-        first_names: first_names,
-        surname: surname,
-        property: property
-      )
-    end
+    # rate_payer = RatesPayer.find_by(
+    #   council_owner_id: council_owner_id,
+    #   first_names: first_names,
+    #   surname: surname,
+    #   property: property
+    # )
+    # if rate_payer.blank? # rubocop:disable Style/GuardClause
+    #   RatesPayer.create!(
+    #     council_owner_id: council_owner_id,
+    #     first_names: first_names,
+    #     surname: surname,
+    #     property: property
+    #   )
+    # end
   end
 end
 
