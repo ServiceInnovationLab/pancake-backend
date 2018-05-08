@@ -5,8 +5,10 @@ require 'csv'
 SignatureType.find_or_create_by! name: 'applicant'
 SignatureType.find_or_create_by! name: 'witness'
 
-User.invite! email: 'brenda.wallace@dia.govt.nz'
-User.invite! email: 'dana.iti@dia.govt.nz'
+['brenda.wallace', 'dana.iti'].each do |name|
+  email = "#{name}@dia.govt.nz"
+  User.invite! email: email unless User.find_by(email: email)
+end
 
 def load_rates!
   rates_file = Rails.root.join('db', 'seeds', 'rates.csv')
