@@ -61,7 +61,7 @@ class RatesImporter
     #   surname: surname,
     #   property: property
     # )
-    # if rate_payer.blank? # rubocop:disable Style/GuardClause
+    # if rate_payer.blank?
     #   RatesPayer.create!(
     #     council_owner_id: council_owner_id,
     #     first_names: first_names,
