@@ -9,10 +9,6 @@ User.invite! email: 'brenda.wallace@dia.govt.nz'
 User.invite! email: 'dana.iti@dia.govt.nz'
 
 def load_rates!
-  RatesPayer.delete_all
-  RatesBill.delete_all
-  Property.delete_all
-
   rates_file = Rails.root.join('db', 'seeds', 'rates.csv')
 
   Property.transaction do
