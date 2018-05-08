@@ -54,21 +54,6 @@ class RatesImporter
         current_owner_start_date: current_owner_start_date
       )
     end
-
-    # rate_payer = RatesPayer.find_by(
-    #   council_owner_id: council_owner_id,
-    #   first_names: first_names,
-    #   surname: surname,
-    #   property: property
-    # )
-    # if rate_payer.blank?
-    #   RatesPayer.create!(
-    #     council_owner_id: council_owner_id,
-    #     first_names: first_names,
-    #     surname: surname,
-    #     property: property
-    #   )
-    # end
   end
 end
 
