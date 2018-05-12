@@ -32,7 +32,9 @@ RSpec.describe PropertiesController, type: :controller do
   end
 
   describe '#show' do
-    let!(:property_1) { FactoryBot.create :property, location: '123 Lambton Quay', suburb: 'Te Aro', town_city: 'Poneke' }
+    let!(:property_1) do
+      FactoryBot.create :property, location: '123 Lambton Quay', suburb: 'Te Aro', town_city: 'Poneke'
+    end
     subject { JSON.parse(response.body)['data'] }
 
     before { get :show, format: :json, params: { id: property_1.valuation_id } }
