@@ -7,7 +7,7 @@ class Admin::RebateFormsController < Admin::BaseController
   def index
     @location = params[:location]
     if @location.present?
-      @rebate_forms = RebateForm.joins(:property).where("properties.location ILIKE ?", "%#{params[:location]}%").page params[:page]
+      @rebate_forms = RebateForm.joins(:property).where('properties.location ILIKE ?', "%#{params[:location]}%").page params[:page]
     else
       @rebate_forms = RebateForm.all
                                 .includes(:signatures, :property)
