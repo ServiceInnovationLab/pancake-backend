@@ -5,9 +5,14 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # GET /admin/rebate_forms
   def index
-    @rebate_forms = RebateForm.all
-                              .includes(:signatures, :property)
-                              .order(created_at: :desc).page params[:page]
+    @location = params[:location]
+    if @location.present?
+      @rebate_forms = RebateForm.joins(:property).where("properties.location ILIKE ?", "%#{params[:location]}%").page params[:page]
+    else
+      @rebate_forms = RebateForm.all
+                                .includes(:signatures, :property)
+                                .order(created_at: :desc).page params[:page]
+    end
   end
 
   # GET /admin/rebate_forms/1
@@ -15,25 +20,6 @@ class Admin::RebateFormsController < Admin::BaseController
     @signatures = {}
     SignatureType.order(:name).all.each do |st|
       @signatures[st.name] = @rebate_form.signatures.where(signature_type: st).order(created_at: :desc).first
-    end
-  end
-
-  # GET /admin/rebate_forms/new
-  def new
-    @rebate_form = RebateForm.new
-  end
-
-  # GET /admin/rebate_forms/1/edit
-  def edit; end
-
-  # POST /admin/rebate_forms
-  def create
-    @rebate_form = RebateForm.new(admin_rebate_form_params)
-
-    if @rebate_form.save
-      redirect_to admin_rebate_forms_url, notice: 'Rebate form was successfully created.'
-    else
-      render :new
     end
   end
 
