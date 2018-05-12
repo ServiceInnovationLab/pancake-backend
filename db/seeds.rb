@@ -5,14 +5,12 @@ require 'csv'
 SignatureType.find_or_create_by! name: 'applicant'
 SignatureType.find_or_create_by! name: 'witness'
 
-User.invite! email: 'brenda.wallace@dia.govt.nz'
-User.invite! email: 'dana.iti@dia.govt.nz'
+['brenda.wallace', 'dana.iti'].each do |name|
+  email = "#{name}@dia.govt.nz"
+  User.invite! email: email unless User.find_by(email: email)
+end
 
 def load_rates!
-  RatesPayer.delete_all
-  RatesBill.delete_all
-  Property.delete_all
-
   rates_file = Rails.root.join('db', 'seeds', 'rates.csv')
 
   Property.transaction do
@@ -54,21 +52,6 @@ class RatesImporter
         total_rates: total_rates,
         total_water_rates: total_water_rates,
         current_owner_start_date: current_owner_start_date
-      )
-    end
-
-    rate_payer = RatesPayer.find_by(
-      council_owner_id: council_owner_id,
-      first_names: first_names,
-      surname: surname,
-      property: property
-    )
-    if rate_payer.blank? # rubocop:disable Style/GuardClause
-      RatesPayer.create!(
-        council_owner_id: council_owner_id,
-        first_names: first_names,
-        surname: surname,
-        property: property
       )
     end
   end
