@@ -8,9 +8,27 @@ RSpec.describe PropertiesController, type: :controller do
     let!(:property_2) { FactoryBot.create :property, location: '11 MOANA ROAD' }
 
     subject { JSON.parse(response.body)['data'] }
-    before { get :index, format: :json, params: { q: 'moana' } }
-    it { expect(subject.size).to eq 1 }
-    it { expect(subject.first['id']).to eq property_2.valuation_id }
+
+    shared_examples 'finds property' do
+      before { get :index, format: :json, params: { q: query } }
+      it { expect(subject.size).to eq 1 }
+      it { expect(subject.first['id']).to eq property_2.valuation_id }
+    end
+
+    describe 'name search' do
+      let(:query) { 'moana' }
+      include_examples 'finds property'
+    end
+
+    describe 'name search' do
+      let(:query) { 'moana road' }
+      include_examples 'finds property'
+    end
+
+    describe 'name search' do
+      let(:query) { '1 moana road' }
+      include_examples 'finds property'
+    end
   end
 
   describe '#show' do
