@@ -3,5 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Property, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:property) { FactoryBot.create :property, location: '123 Lambton Quay' }
+  it { expect(property.location).to eq '123 Lambton Quay' }
 end
