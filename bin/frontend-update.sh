@@ -12,7 +12,7 @@ cd $APP_NAME
 node --version
 
 npm install
-npm run build
+CI=false npm run build
 
 rm -r public/app
 mv build ../public/app
