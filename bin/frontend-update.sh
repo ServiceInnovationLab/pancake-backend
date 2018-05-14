@@ -4,7 +4,7 @@ set -euv
 
 
 APP_NAME="pancake-frontend"
-BRANCH="feature/deployment"
+BRANCH="master"
 
 git clone https://github.com/ServiceInnovationLab/$APP_NAME.git --branch $BRANCH
 cd $APP_NAME
@@ -14,7 +14,6 @@ node --version
 npm install
 CI=false npm run build
 
-#rm -r public/app
 mv build ../public/app
 
 cd ..
