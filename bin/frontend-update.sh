@@ -18,4 +18,4 @@ CI=false npm run build
 mv build ../public/app
 
 cd ..
-rm -r $APP_NAME
+rm -rf $APP_NAME
