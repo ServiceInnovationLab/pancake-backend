@@ -14,7 +14,7 @@ node --version
 npm install
 CI=false npm run build
 
-rm -r public/app
+#rm -r public/app
 mv build ../public/app
 
 cd ..
