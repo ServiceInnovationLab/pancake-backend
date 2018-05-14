@@ -1,5 +1,10 @@
 %h1 Listing Rebate forms
 
+= form_tag(admin_rebate_forms_path, method: :get) do
+  = text_field_tag :location, @location
+  = submit_tag 'Search'
+
+
 %p= paginate @rebate_forms
 
 %table.pure-table.pure-table-bordered

@@ -10,7 +10,7 @@ class RebateFormsMailer < ApplicationMailer
 
   def applicant_mail
     @rebate_form = params[:rebate_form]
-    applicant_email = @rebate_form.fields['what_is_your_email_address']
-    mail(to: applicant_email, subject: 'New ratesrebate application')
+    applicant_email = @rebate_form.fields['email']
+    mail(to: applicant_email, subject: 'New Rates Rebate application')
   end
 end
