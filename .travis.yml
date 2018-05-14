@@ -12,6 +12,7 @@ script:
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t simplecov --id $CC_TEST_REPORTER_ID"
 before_deploy:
+    - which nvm
     - ./bin/frontend-update.sh
 deploy:
   provider: heroku
