@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: 'welcome#index'
+  root to: redirect('/app')
 
   scope path: '/admin' do
     devise_for :users
