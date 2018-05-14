@@ -6,14 +6,14 @@ cache:
 before_install:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
+  - nvm install $(cat .nvmrc)
+  - nvm use $(cat .nvmrc)
 script:
   - RAILS_ENV=test bundle exec rake db:create db:migrate
   - bundle exec rspec
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t simplecov --id $CC_TEST_REPORTER_ID"
 before_deploy:
-  - $HOME/.nvm/nvm.sh
-  - which nvm
   - ./bin/frontend-update.sh
 deploy:
   provider: heroku
