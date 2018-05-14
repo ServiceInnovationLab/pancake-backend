@@ -2,6 +2,8 @@
 
 set -euv
 
+node --version
+
 APP_NAME="pancake-frontend"
 BRANCH="feature/deployment"
 
