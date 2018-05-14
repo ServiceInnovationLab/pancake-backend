@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: redirect('/app')
+  root to: redirect('/app/')
 
   scope path: '/admin' do
+    get '/' => 'welcome#index'
     devise_for :users
-    get 'welcome/index'
   end
+
   namespace :admin do
     resources :rebate_forms, only: %i[show index destroy]
     get 'signature' => 'signatures#show'
