@@ -21,6 +21,7 @@ deploy:
   on:
     repo: ServiceInnovationLab/pancake-backend
   app:
+    feature/fe-deploy: pancakenz-staging
     dev: pancakenz-staging
     master: pancakenz
   run:
