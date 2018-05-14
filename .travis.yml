@@ -6,8 +6,8 @@ cache:
 before_install:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
-  - nvm install $(cat .nvmrc)
-  - nvm use $(cat .nvmrc)
+  - nvm install 9.11.1
+  - nvm use 9.11.1
 script:
   - RAILS_ENV=test bundle exec rake db:create db:migrate
   - bundle exec rspec
