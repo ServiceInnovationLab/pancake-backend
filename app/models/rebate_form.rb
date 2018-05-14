@@ -2,7 +2,7 @@
 
 class RebateForm < ApplicationRecord
   has_many :signatures, dependent: :destroy
-  belongs_to :property, required: true
+  belongs_to :property, required: false
 
   after_initialize :set_token
   validates :valuation_id, presence: true
