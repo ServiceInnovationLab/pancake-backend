@@ -11,6 +11,7 @@
   %thead
     %tr
       %th valuation_id
+      %th Applicant
       %th Address
       %th When
       %th Signed
@@ -20,6 +21,7 @@
     - @rebate_forms.each do |rebate_form|
       %tr{ class: rebate_form.fully_signed? ? 'pure-table-odd' : '' }
         %td= rebate_form.valuation_id
+        %td= rebate_form.fields['full_name']
         %td
           - if rebate_form.property.present?
             %p
