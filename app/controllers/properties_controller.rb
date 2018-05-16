@@ -14,7 +14,6 @@ class PropertiesController < ApiController
   end
 
   def index
-    filter = "%#{params[:q].parameterize}%"
-    render_jsonapi(Property.where('location ILIKE ?', filter))
+    render_jsonapi(Property.where('location ILIKE ?', "%#{params[:q]}%"))
   end
 end

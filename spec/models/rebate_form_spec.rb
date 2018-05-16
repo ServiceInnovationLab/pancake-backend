@@ -28,9 +28,16 @@ RSpec.describe RebateForm, type: :model do
   end
 
   describe 'tokens' do
-    let(:form) { FactoryBot.create :rebate_form }
+    describe 'sets a token' do
+      let(:form) { FactoryBot.create :rebate_form }
 
-    it { expect(form.token.present?).to eq true }
-    it { expect(form.token.length).to eq 11 }
+      it { expect(form.token.present?).to eq true }
+      it { expect(form.token.length).to be >= 40 }
+    end
+    it 'generates long tokens' do
+      100.times do
+        expect(RebateForm.new.token.length).to be >= 40
+      end
+    end
   end
 end

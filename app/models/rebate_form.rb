@@ -37,11 +37,7 @@ class RebateForm < ApplicationRecord
   end
 
   def new_token
-    bits = []
-    3.times do
-      bits << (0...3).map { rand(65..90).chr }.join
-    end
-    bits.join('-')
+    SecureRandom.hex(rand(40..60))
   end
 
   def send_emails
