@@ -4,6 +4,6 @@ class RatesBill < ApplicationRecord
   belongs_to :property, required: true
 
   def total_bill
-    total_rates.to_f + total_water_rates.to_f
+    '%.2f' % (total_rates.to_f + total_water_rates.to_f)
   end
 end
