@@ -24,3 +24,6 @@
 
 public/assets/**
 /db/seeds/rates.csv
+/.env
+/public/app/**
+/pancake-frontend/
