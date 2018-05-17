@@ -5,9 +5,10 @@ class RebateForm < ApplicationRecord
   belongs_to :property, required: false
 
   after_initialize :set_token
+  before_validation :set_property_id
+
   validates :valuation_id, presence: true
   validates :token, presence: true
-  before_save :set_property_id
   validate :required_fields_present
 
   after_create :send_emails
@@ -52,8 +53,8 @@ class RebateForm < ApplicationRecord
   end
 
   def required_fields_present
-    errors.add(:fields, "must include income") unless fields["income"].present?
-    errors.add(:fields, "must include dependants") unless fields["dependants"].present?
-    errors.add(:fields, "must include full_name") unless fields["full_name"].present?
+    ["income", "dependants", "full_name"].each do |field|
+      errors.add(:fields, "must include #{field}") unless fields[field].present?
+    end
   end
 end
