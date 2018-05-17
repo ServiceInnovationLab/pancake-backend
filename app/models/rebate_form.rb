@@ -13,6 +13,27 @@ class RebateForm < ApplicationRecord
 
   after_create :send_emails
 
+  def calc_rebate_amount!
+    year = ENV['YEAR']
+    rates_bill = property.rates_bills.find_by(rating_year: year)
+    return unless rates_bill.present?
+    rebate = OpenFiscaService.rebate_amount(
+      income: income,
+      rates: rates_bill.total_bill,
+      dependants: dependants,
+      year: year
+    )
+    update!(rebate: rebate)
+  end
+
+  def dependants
+    fields['dependants']
+  end
+
+  def income
+    fields['income']
+  end
+
   def fully_signed?
     applicant_signature.present? && witness_signature.present?
   end
