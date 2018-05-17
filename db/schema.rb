@@ -27,8 +27,6 @@ ActiveRecord::Schema.define(version: 20180517034856) do
   create_table "rates_bills", force: :cascade do |t|
     t.integer "property_id"
     t.text "rating_year"
-    t.text "old_total_rates"
-    t.text "old_total_water_rates"
     t.text "order"
     t.text "current_owner_start_date"
     t.text "meta"

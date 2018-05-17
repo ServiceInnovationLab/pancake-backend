@@ -10,6 +10,8 @@ class AddRebateToApplication < ActiveRecord::Migration[5.1]
       "UPDATE rates_bills SET
       total_rates=cast(old_total_rates as double precision), total_water_rates=cast(old_total_water_rates as double precision)")
 
+    remove_column :rates_bills, :old_total_rates
+    remove_column :rates_bills, :old_total_water_rates
   end
 end
 
