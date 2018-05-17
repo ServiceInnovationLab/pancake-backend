@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'httparty'
 require 'json'
 
@@ -6,34 +7,34 @@ class OpenFiscaService
   def self.rebate_amount(income:, rates:, dependants:, year:)
     property_name = 'tahi'
     query = {
-      'persons'=> {
-        'Ruby'=> {
-          'salary'=> {
+      'persons' => {
+        'Ruby' => {
+          'salary' => {
             year => income
           },
-          'dependants'=> {
-            year=> dependants
+          'dependants' => {
+            year => dependants
           }
         }
       },
-      'properties'=> {
+      'properties' => {
         property_name => {
-          "owners" => ['Ruby'],
-          'rates'=> {
+          'owners' => ['Ruby'],
+          'rates' => {
             year => rates
           },
-          'rates_rebate'=> {
+          'rates_rebate' => {
             year => nil
           }
         }
       }
     }
-    response = self.calculate(query)
-    response["properties"][property_name]["rates_rebate"][year]
+    response = calculate(query)
+    response['properties'][property_name]['rates_rebate'][year]
   end
 
   def self.calculate(query)
-    headers = {"Content-Type"=> "application/json"}
+    headers = { 'Content-Type' => 'application/json' }
     JSON.parse(HTTParty.post(ENV['OPENFISCA_ORIGIN'], body: query.to_json, headers: headers).body)
   end
 end
