@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :rebate_form do
     valuation_id '123'
-    property { FactoryBot.create :property }
+    property { FactoryBot.create :property, valuation_id: valuation_id }
     # token <-- auto generated. Don't set in factory
     fields("full_name": 'Fred', "income": 0, dependants: 0)
   end
