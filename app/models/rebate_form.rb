@@ -16,7 +16,7 @@ class RebateForm < ApplicationRecord
   def calc_rebate_amount!
     year = ENV['YEAR']
     rates_bill = property.rates_bills.find_by(rating_year: year)
-    return unless rates_bill.present?
+    return if rates_bill.blank?
     rebate = OpenFiscaService.rebate_amount(
       income: income,
       rates: rates_bill.total_bill,
@@ -74,8 +74,8 @@ class RebateForm < ApplicationRecord
   end
 
   def required_fields_present
-    ["income", "dependants", "full_name"].each do |field|
-      errors.add(:fields, "must include #{field}") unless fields[field].present?
+    %w[income dependants full_name].each do |field|
+      errors.add(:fields, "must include #{field}") if fields[field].blank?
     end
   end
 end
