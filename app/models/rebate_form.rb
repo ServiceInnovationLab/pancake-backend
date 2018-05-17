@@ -8,6 +8,8 @@ class RebateForm < ApplicationRecord
   validates :valuation_id, presence: true
   validates :token, presence: true
   before_save :set_property_id
+  validate :required_fields_present
+
   after_create :send_emails
 
   def fully_signed?
@@ -47,5 +49,11 @@ class RebateForm < ApplicationRecord
 
   def mailer
     RebateFormsMailer.with(rebate_form: self)
+  end
+
+  def required_fields_present
+    errors.add(:fields, "must include income") unless fields["income"].present?
+    errors.add(:fields, "must include dependants") unless fields["dependants"].present?
+    errors.add(:fields, "must include full_name") unless fields["full_name"].present?
   end
 end
