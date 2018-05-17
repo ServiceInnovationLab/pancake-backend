@@ -294,6 +294,7 @@ DEPENDENCIES
   faker (~> 1.7)
   font-awesome-rails
   haml-rails
+  httparty
   jsonapi-rails (~> 0.3.0)
   jsonapi_spec_helpers (~> 0.4)
   jsonapi_suite (~> 0.7)
