@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501213514) do
+ActiveRecord::Schema.define(version: 20180517034856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,11 +27,11 @@ ActiveRecord::Schema.define(version: 20180501213514) do
   create_table "rates_bills", force: :cascade do |t|
     t.integer "property_id"
     t.text "rating_year"
-    t.text "total_rates"
-    t.text "total_water_rates"
     t.text "order"
     t.text "current_owner_start_date"
     t.text "meta"
+    t.decimal "total_rates", precision: 8, scale: 2
+    t.decimal "total_water_rates", precision: 8, scale: 2
     t.index ["property_id", "rating_year"], name: "index_rates_bills_on_property_id_and_rating_year", unique: true
   end
 
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20180501213514) do
     t.datetime "updated_at", null: false
     t.json "fields"
     t.integer "property_id"
+    t.decimal "rebate", precision: 8, scale: 2
   end
 
   create_table "signature_types", force: :cascade do |t|

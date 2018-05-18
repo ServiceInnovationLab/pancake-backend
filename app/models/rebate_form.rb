@@ -2,13 +2,37 @@
 
 class RebateForm < ApplicationRecord
   has_many :signatures, dependent: :destroy
-  belongs_to :property, required: false
+  belongs_to :property, required: true
 
   after_initialize :set_token
+  before_validation :set_property_id
+
   validates :valuation_id, presence: true
   validates :token, presence: true
-  before_save :set_property_id
+  validate :required_fields_present
+
   after_create :send_emails
+
+  def calc_rebate_amount!
+    year = ENV['YEAR']
+    rates_bill = property.rates_bills.find_by(rating_year: year)
+    return if rates_bill.blank?
+    rebate = OpenFiscaService.rebate_amount(
+      income: income,
+      rates: rates_bill.total_bill,
+      dependants: dependants,
+      year: year
+    )
+    update!(rebate: rebate)
+  end
+
+  def dependants
+    fields['dependants']
+  end
+
+  def income
+    fields['income']
+  end
 
   def fully_signed?
     applicant_signature.present? && witness_signature.present?
@@ -41,11 +65,17 @@ class RebateForm < ApplicationRecord
   end
 
   def send_emails
-    mailer.applicant_mail.deliver_later
+    mailer.applicant_mail.deliver_later if fields['email'].present?
     mailer.council_mail.deliver_later
   end
 
   def mailer
     RebateFormsMailer.with(rebate_form: self)
+  end
+
+  def required_fields_present
+    %w[income dependants full_name].each do |field|
+      errors.add(:fields, "must include #{field}") if fields[field].blank?
+    end
   end
 end

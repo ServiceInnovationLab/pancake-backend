@@ -11,8 +11,8 @@ RSpec.describe 'rebate_forms#index', type: :request do
   let(:params) { {} }
 
   describe 'basic fetch' do
-    let!(:rebate_form1) { create(:rebate_form) }
-    let!(:rebate_form2) { create(:rebate_form) }
+    let!(:rebate_form1) { FactoryBot.create(:rebate_form) }
+    let!(:rebate_form2) { FactoryBot.create(:rebate_form) }
 
     it 'does not return list' do
       expect do

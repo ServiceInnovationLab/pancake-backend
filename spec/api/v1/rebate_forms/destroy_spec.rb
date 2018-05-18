@@ -8,7 +8,7 @@ RSpec.describe 'rebate_forms#destroy', type: :request do
   end
 
   describe 'basic destroy' do
-    let!(:rebate_form) { create(:rebate_form) }
+    let!(:rebate_form) { FactoryBot.create(:rebate_form) }
 
     it 'updates the resource' do
       expect do
