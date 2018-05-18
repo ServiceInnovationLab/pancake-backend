@@ -8,7 +8,7 @@ RSpec.describe 'rebate_forms#update', type: :request do
   end
 
   describe 'basic update' do
-    let!(:rebate_form) { create(:rebate_form) }
+    let!(:rebate_form) { FactoryBot.create(:rebate_form) }
 
     let(:payload) do
       {

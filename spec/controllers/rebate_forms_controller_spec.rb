@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe RebateFormsController, type: :controller do
   subject { JSON.parse response.body }
+  let(:fields) { { 'dependants' => '0', 'full_name' => 'bob', 'income' => '10' } }
+  let(:property) { FactoryBot.create :property }
 
   describe '#create' do
     let(:body) do
@@ -11,13 +13,12 @@ RSpec.describe RebateFormsController, type: :controller do
         data: {
           type: 'rebate-forms',
           attributes: {
-            valuation_id: 'abc',
+            valuation_id: property.valuation_id,
             fields: fields
           }
         }
       }
     end
-    let(:fields) { { 'name' => 'bob', 'relationship' => 'married' } }
 
     before { post :create, format: :json, params: { api: body } }
     it { expect(subject['data']['attributes']['fields']).to eq fields }
@@ -26,7 +27,6 @@ RSpec.describe RebateFormsController, type: :controller do
 
   describe '#update' do
     let(:rebate_form) { FactoryBot.create :rebate_form }
-    let(:fields) { { 'name' => 'bob', 'relationship' => 'married' } }
 
     describe 'good' do
       let(:body) do
@@ -35,7 +35,7 @@ RSpec.describe RebateFormsController, type: :controller do
             type: 'rebate-forms',
             id: rebate_form.token,
             attributes: {
-              valuation_id: 'abc',
+              valuation_id: property.valuation_id,
               fields: fields
             }
           }
@@ -62,6 +62,12 @@ RSpec.describe RebateFormsController, type: :controller do
       end
       let(:expected_errors) do
         { 'errors' => [
+          { 'code' => 'unprocessable_entity',
+            'status' => '422',
+            'title' => 'Validation Error',
+            'detail' => 'Property must exist',
+            'source' => { 'pointer' => '/data/relationships/property' },
+            'meta' => { 'attribute' => 'property', 'message' => 'must exist', 'code' => 'blank' } },
           {
             'code' => 'unprocessable_entity',
             'status' => '422',
