@@ -1,0 +1,47 @@
+
+
+
+%h2
+  Application for Rating year
+  = rebate_form.rating_year
+
+%p
+  Income of
+  %strong
+    $
+    =format('%.2f', rebate_form.fields['income'])
+  and
+  %strong
+    =rebate_form.fields['dependants']
+    dependants
+  and rates of $
+  %strong=rebate_form.rates_this_year.total_bill
+
+%h3
+  Rebate
+  $
+  =rebate_form.rebate
+
+%table.pure-table.pure-table-horizontal
+  %tbody
+    %tr
+      %th Applicant full name
+      %td=rebate_form.full_name
+    %tr
+      %th Income
+      %td
+        $
+        =format('%.2f', rebate_form.income)
+    %tr
+      %th Dependants
+      %td=rebate_form.dependants
+
+    %tr
+      %th Lived here 1 July 2017?
+      %td= rebate_form.fields['lived_here_before_july_2017']
+
+    %tr
+      %th Has home business?
+      %td= rebate_form.fields['has_home_business']
+
+/ => {"address"=>"6/51 CLIFF ROAD", "valuation_id"=>"06601*004*01*", "rates_bill"=>"3455.00", "dependants"=>"0", "income_range"=>"below", "lived_here_before_july_2017"=>"yes", "full_name"=>"asdfdsa", "has_home_business"=>"no", "email"=>"brenda@wallace.net.nz", "phone_number"=>"213", "income"=>27631.760000000002}
