@@ -1,6 +1,7 @@
-Council email copy goes in here
+A new rebate application has been sent to you.
 
 %p= @rebate_form.valuation_id
 %p= @rebate_form.fields['address']
+%p= @rebate_form.fields['full_name']
 
 %p= link_to 'Sign this', @rebate_form.signing_url

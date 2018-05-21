@@ -2,9 +2,10 @@
 
 FactoryBot.define do
   factory :rebate_form do
-    valuation_id '123'
+    valuation_id { Faker::Vehicle.vin }
+    property { FactoryBot.create :property, valuation_id: valuation_id }
     # token <-- auto generated. Don't set in factory
-    fields("name": 'Fred', "relationship": 'complicated')
+    fields("full_name": 'Fred', "income": 0, dependants: 0)
   end
 
   factory :signed_form, parent: :rebate_form do

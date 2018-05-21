@@ -13,6 +13,8 @@ class RebateFormsController < ApiController
 
   def create
     rebate_form = RebateForm.create(rebate_form_params)
+    rebate_form.calc_rebate_amount!
+
     if rebate_form.errors.any?
       render_errors_for(rebate_form)
     else

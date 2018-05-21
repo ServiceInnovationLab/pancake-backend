@@ -33,4 +33,5 @@ JsonapiSpecHelpers::Payload.register(:rebate_form) do
   key(:valuation_id, String)
   key(:token, String)
   key(:fields, Hash, description: 'free form fiends')
+  key(:rebate, String, allow_nil: true)
 end
