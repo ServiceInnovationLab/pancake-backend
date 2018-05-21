@@ -13,6 +13,8 @@ class RebateForm < ApplicationRecord
 
   after_create :send_emails
 
+  has_many_attached :images
+
   def calc_rebate_amount!
     year = ENV['YEAR']
     rates_bill = property.rates_bills.find_by(rating_year: year)
