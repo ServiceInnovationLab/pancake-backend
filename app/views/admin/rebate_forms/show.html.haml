@@ -19,11 +19,15 @@
       = f.file_field :images, multiple: true, direct_upload: false
       = f.submit 'Attach', class: 'pure-button pure-button-primary'
 
-
     %h3 Files
     %ul
       - @rebate_form.images.each do |file|
-        %li= image_tag file.variant(resize: '100x100')
+        %li
+          = image_tag file.variant(resize: '100x100')
+          = link_to admin_attachment_path(id: file.id), method: :delete,
+            class: 'pure-button', data: { confirm: 'Are you sure?' } do
+            = fa_icon 'trash'
+
 
   .pure-u-1-2
     %h3 Signatures
