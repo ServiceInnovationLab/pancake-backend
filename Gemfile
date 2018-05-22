@@ -31,6 +31,10 @@ gem 'font-awesome-rails'
 
 gem 'raygun4ruby' # exception catcher/logger
 
+gem 'aws-sdk-s3' # We store images on s3
+# gem 'mini_magick' # makes image previews (and can do other stuff)
+gem 'image_processing'
+
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -55,7 +59,7 @@ group :development, :test do
   gem 'letter_opener'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5.2'
-  gem 'rubocop'
+  gem 'rubocop', '0.55.0'
   gem 'swagger-diff', '~> 1.1'
 end
 
@@ -64,6 +68,7 @@ group :development do
 end
 
 group :test do
+  gem 'capybara'
   gem 'database_cleaner', '~> 1.6'
   gem 'simplecov', require: false
 end

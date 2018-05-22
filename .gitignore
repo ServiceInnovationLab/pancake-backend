@@ -27,3 +27,5 @@ public/assets/**
 /.env
 /public/app/**
 /pancake-frontend/
+/storage/**
+/coverage/**

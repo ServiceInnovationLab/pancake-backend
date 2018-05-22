@@ -1,21 +1,3 @@
-%table.pure-table.pure-table-bordered
-  %tr
-    %th Applicant Name
-    %td= fields['full_name']
-  %tr
-    %th Email
-    %td= fields['email']
-
-  %tr
-    %th Income
-    %td
-      $
-      = fields['income']
-
-  %tr
-    %th Dependants
-    %td= fields['dependants']
-
 %h3 Fields
 %table.pure-table.pure-table-bordered
   - fields.each do |name, value|
