@@ -28,3 +28,4 @@ public/assets/**
 /public/app/**
 /pancake-frontend/
 /storage/**
+/coverage/**
