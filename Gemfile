@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.1.5'
+gem 'rails', '~> 5.2.0'
 
 # Database
 gem 'pg'
@@ -59,6 +59,11 @@ group :development, :test do
   gem 'swagger-diff', '~> 1.1'
 end
 
+group :development do
+  gem 'travis'
+end
+
 group :test do
   gem 'database_cleaner', '~> 1.6'
+  gem 'simplecov', require: false
 end
