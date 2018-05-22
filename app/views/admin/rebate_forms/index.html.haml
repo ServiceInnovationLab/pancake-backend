@@ -30,10 +30,10 @@
               = rebate_form.property.suburb
               %br/
               = rebate_form.property.town_city
-        %td= rebate_form.created_at
+        %td= rebate_form.created_at.localtime
         %td
           - if rebate_form.applicant_signature.present?
-            = rebate_form.applicant_signature.created_at
+            = rebate_form.applicant_signature.created_at.localtime
           - else
             = render 'sign_button', rebate_form: rebate_form
         %td= render 'witness', signature: rebate_form.witness_signature
