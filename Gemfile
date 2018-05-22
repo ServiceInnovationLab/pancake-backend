@@ -57,7 +57,7 @@ group :development, :test do
   gem 'letter_opener'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5.2'
-  gem 'rubocop'
+  gem 'rubocop', '0.55.0'
   gem 'swagger-diff', '~> 1.1'
 end
 

@@ -263,7 +263,7 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rubocop (0.56.0)
+    rubocop (0.55.0)
       parallel (~> 1.10)
       parser (>= 2.5)
       powerpack (~> 0.1)
@@ -360,7 +360,7 @@ DEPENDENCIES
   rails-html-sanitizer (>= 1.0.4)
   raygun4ruby
   rspec-rails (~> 3.5.2)
-  rubocop
+  rubocop (= 0.55.0)
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
