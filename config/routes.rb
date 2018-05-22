@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :rebate_forms, only: %i[show index update destroy]
+    resources :notes
     resources :attachments, only: %i[destroy]
     get 'signature' => 'signatures#show'
   end

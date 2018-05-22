@@ -2,7 +2,9 @@
 
 class RebateForm < ApplicationRecord
   has_many :signatures, dependent: :destroy
+  has_many :notes, dependent: :destroy
   belongs_to :property, required: true
+  has_many_attached :attachments, dependent: :destroy
 
   after_initialize :set_token
   before_validation :set_property_id
@@ -12,8 +14,6 @@ class RebateForm < ApplicationRecord
   validate :required_fields_present
 
   after_create :send_emails
-
-  has_many_attached :attachments
 
   def calc_rebate_amount!
     year = ENV['YEAR']

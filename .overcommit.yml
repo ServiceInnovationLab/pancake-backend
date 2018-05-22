@@ -66,15 +66,15 @@ PostCheckout:
 PostMerge:
   BundleInstall:
     enabled: true
-  RailsSchemaUpToDate:
-    enabled: true
+  # RailsSchemaUpToDate:
+  #   enabled: true
 
 PrePush:
   ALL:
     on_warn: fail  # Treat all warnings as failures
     quiet: false
-  Brakeman:
-    enabled: true
+  # Brakeman:
+    # enabled: true
   RSpec:
     enabled: true
     command: ['bundle', 'exec', 'rspec']

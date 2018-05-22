@@ -1,29 +1,103 @@
 - content_for :title, "RatesRebate #{@rebate_form.property.location}"
+
 %p#notice= notice
 
-.pure-g
-  .pure-u-1-4
-    %h3 Valuation id
-    %p= @rebate_form.valuation_id
 
-    = render 'property', rebate_form: @rebate_form
-    = render 'rates_bills', rates_bills: @rebate_form.property.rates_bills
-    = render 'applicant', rebate_form: @rebate_form
 
-  .pure-u-1-4
-    %h2 Rebate
-    %p $#{@rebate_form.rebate}
+#list.pure-u-1
+  - @rebate_form.notes.each do |note|
+    .email-item.email-item-selected.pure-g
+      .pure-u
+        %img.email-avatar{:alt => "Tilo Mitra's avatar", :height => "64", :src => "/img/common/tilo-avatar.png", :width => "64"}/
+      .pure-u-3-4
+        %h5.email-name= note.user.email
+        %h4.email-subject Notes
+        %p.email-desc= note.body
 
-    = render 'attachments', rebate_form: @rebate_form
+  / .email-item.email-item-unread.pure-g
+  /   .pure-u
+  /     %img.email-avatar{:alt => "Eric Ferraiuolo's avatar", :height => "64", :src => "/img/common/ericf-avatar.png", :width => "64"}/
+  /   .pure-u-3-4
+  /     %h5.email-name Eric Ferraiuolo
+  /     %h4.email-subject Re: Pull Requests
+  /     %p.email-desc
+  /       Hey, I had some feedback for pull request #51. We should center the menu so it looks better on mobile.
+  / .email-item.email-item-unread.pure-g
+  /   .pure-u
+  /     %img.email-avatar{:alt => "YUI's avatar", :height => "64", :src => "/img/common/yui-avatar.png", :width => "64"}/
+  /   .pure-u-3-4
+  /     %h5.email-name YUI Library
+  /     %h4.email-subject You have 5 bugs assigned to you
+  /     %p.email-desc
+  /       Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla.
+  / .email-item.pure-g
+  /   .pure-u
+  /     %img.email-avatar{:alt => "Reid Burke's avatar", :height => "64", :src => "/img/common/reid-avatar.png", :width => "64"}/
+  /   .pure-u-3-4
+  /     %h5.email-name Reid Burke
+  /     %h4.email-subject Re: Design Language
+  /     %p.email-desc
+  /       Excepteur sint occaecat cupidatat non proident, sunt in culpa.
+  / .email-item.pure-g
+  /   .pure-u
+  /     %img.email-avatar{:alt => "Andrew Wooldridge's avatar", :height => "64", :src => "/img/common/andrew-avatar.png", :width => "64"}/
+  /   .pure-u-3-4
+  /     %h5.email-name Andrew Wooldridge
+  /     %h4.email-subject YUI Blog Updates?
+  /     %p.email-desc
+  /       Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
+  / .email-item.pure-g
+  /   .pure-u
+  /     %img.email-avatar{:alt => "Yahoo! Finance's Avatar", :height => "64", :src => "/img/common/yfinance-avatar.png", :width => "64"}/
+  /   .pure-u-3-4
+  /     %h5.email-name Yahoo! Finance
+  /     %h4.email-subject How to protect your finances from winter storms
+  /     %p.email-desc
+  /       Mauris tempor mi vitae sem aliquet pharetra. Fusce in dui purus, nec malesuada mauris.
+  / .email-item.pure-g
+  /   .pure-u
+  /     %img.email-avatar{:alt => "Yahoo! News' avatar", :height => "64", :src => "/img/common/ynews-avatar.png", :width => "64"}/
+  /   .pure-u-3-4
+  /     %h5.email-name Yahoo! News
+  /     %h4.email-subject Summary for April 3rd, 2012
+  /     %p.email-desc
+  /       We found 10 news articles that you may like.
+#main.pure-u-1
+  .email-content
+    .email-content-header.pure-g
+      .pure-u-1-2
+        %h1.email-content-title= @rebate_form.property.location
+        %p.email-content-subtitle
+          From
+          %a Tilo Mitra
+          at
+          %span 3:56pm, April 3, 2012
+      .email-content-controls.pure-u-1-2
+        %button.secondary-button.pure-button= link_to 'Back', admin_rebate_forms_path
+        / %button.secondary-button.pure-button Forward
+        / %button.secondary-button.pure-button Move to
+    .email-content-body
+      %h3 Valuation id
+      %p= @rebate_form.valuation_id
 
-  .pure-u-1-2
-    %h3 Signatures
-    - if @rebate_form.fully_signed?
-      = render 'signatures'
-    - else
-      = render 'sign_button', rebate_form: @rebate_form
+      = render 'property', rebate_form: @rebate_form
+      = render 'rates_bills', rates_bills: @rebate_form.property.rates_bills
+      = render 'applicant', rebate_form: @rebate_form
+      = render 'notes'
 
-    = render 'fields', fields: @rebate_form.fields
 
-%p
-  = link_to 'Back', admin_rebate_forms_path
+      %h2 Rebate
+      %p $#{@rebate_form.rebate}
+
+      = render 'attachments', rebate_form: @rebate_form
+
+
+      %h3 Signatures
+      - if @rebate_form.fully_signed?
+        = render 'signatures'
+      - else
+        = render 'sign_button', rebate_form: @rebate_form
+
+      = render 'fields', fields: @rebate_form.fields
+
+  %p

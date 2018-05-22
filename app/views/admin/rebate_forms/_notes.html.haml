@@ -1,0 +1,5 @@
+
+= form_for Note.new, url: { controller: 'admin/notes', action: 'create' }, html: { class: 'pure-form pure-form-stacked' } do |f|
+  = f.text_field :body
+  = f.hidden_field :rebate_form_id, value: @rebate_form.id
+  = f.submit
