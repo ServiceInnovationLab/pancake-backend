@@ -6,6 +6,6 @@ module Admin::AttachmentsHelper
       image_tag file.variant(resize: '200x200'), class: 'pure-image'
     end
   rescue ActiveStorage::InvariableError
-    link_to "File #{file.created_at.localtime}", url_for(file)
+    link_to "File #{file.filename}", url_for(file)
   end
 end
