@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   scope path: '/admin' do
     devise_for :users
+    get '/' => 'welcome#index'
   end
 
   namespace :admin do
