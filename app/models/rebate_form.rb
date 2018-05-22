@@ -67,8 +67,8 @@ class RebateForm < ApplicationRecord
   end
 
   def send_emails
-    mailer.applicant_mail.deliver_later if fields['email'].present?
-    mailer.council_mail.deliver_later
+    mailer.applicant_mail.deliver_now if fields['email'].present?
+    mailer.council_mail.deliver_now if ENV['COUNCIL_EMAIL'].present?
   end
 
   def mailer
