@@ -1,19 +1,20 @@
 # frozen_string_literal: true
 
 class Admin::RebateFormsController < Admin::BaseController
-  before_action :set_admin_rebate_form, only: %i[show edit update destroy]
+  before_action :set_admin_rebate_form, only: %i[show update destroy]
 
   # GET /admin/rebate_forms
   def index
     @location = params[:location]
+    @rebate_forms = RebateForm.all
+                              .includes(:signatures, :property)
+                              .order(created_at: :desc)
     if @location.present?
-      @rebate_forms = RebateForm.joins(:property)
-        .where('properties.location ILIKE ?', "%#{params[:location]}%").page params[:page]
-    else
-      @rebate_forms = RebateForm.all
-                                .includes(:signatures, :property)
-                                .order(created_at: :desc).page params[:page]
+      @rebate_forms = @rebate_forms.joins(:property)
+                                   .where('properties.location ILIKE ?', "%#{params[:location]}%")
     end
+
+    @rebate_forms = @rebate_forms.page(params[:page])
   end
 
   # GET /admin/rebate_forms/1
