@@ -31,6 +31,7 @@ gem 'font-awesome-rails'
 
 gem 'raygun4ruby' # exception catcher/logger
 
+gem 'aws-sdk-s3' # We store images on s3
 gem 'mini_magick' # makes image previews (and can do other stuff)
 
 group :development do
