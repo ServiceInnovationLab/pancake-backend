@@ -7,3 +7,15 @@
  *= require font-awesome
  *= require_tree .
 */
+
+body {
+  color: #333;
+}
+a {
+  color: #000000;
+}
+
+#main {
+  margin: 0;
+  padding: 1em;
+}
