@@ -53,4 +53,6 @@ Rails.application.configure do
 
   ENV['CORS_ORIGINS'] = '*'
   ENV['CORS_RESOURCE'] = '*'
+
+  config.active_storage.service = :amazon
 end

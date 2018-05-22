@@ -41,7 +41,5 @@ module PancakeServer
     config.assets.precompile += %w[application.js]
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
-
-    config.active_storage.service = :local
   end
 end
