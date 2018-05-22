@@ -13,7 +13,7 @@ class RebateForm < ApplicationRecord
 
   after_create :send_emails
 
-  has_many_attached :images
+  has_many_attached :attachments
 
   def calc_rebate_amount!
     year = ENV['YEAR']

@@ -53,6 +53,6 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # Only allow a trusted parameter "white list" through.
   def admin_rebate_form_params
-    params.require(:rebate_form).permit(:valuation_id, :token, images: [])
+    params.require(:rebate_form).permit(:valuation_id, :token, attachments: [])
   end
 end
