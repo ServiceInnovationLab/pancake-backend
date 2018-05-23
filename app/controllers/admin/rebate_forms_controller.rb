@@ -1,18 +1,20 @@
 # frozen_string_literal: true
 
 class Admin::RebateFormsController < Admin::BaseController
-  before_action :set_admin_rebate_form, only: %i[show edit update destroy]
+  before_action :set_admin_rebate_form, only: %i[show update destroy]
 
   # GET /admin/rebate_forms
   def index
     @location = params[:location]
+    @rebate_forms = RebateForm.all
+                              .includes(:signatures, :property)
+                              .order(created_at: :desc)
     if @location.present?
-      @rebate_forms = RebateForm.joins(:property).where('properties.location ILIKE ?', "%#{params[:location]}%").page params[:page]
-    else
-      @rebate_forms = RebateForm.all
-                                .includes(:signatures, :property)
-                                .order(created_at: :desc).page params[:page]
+      @rebate_forms = @rebate_forms.joins(:property)
+                                   .where('properties.location ILIKE ?', "%#{params[:location]}%")
     end
+
+    @rebate_forms = @rebate_forms.page(params[:page])
   end
 
   # GET /admin/rebate_forms/1
@@ -26,7 +28,7 @@ class Admin::RebateFormsController < Admin::BaseController
   # PATCH/PUT /admin/rebate_forms/1
   def update
     if @rebate_form.update(admin_rebate_form_params)
-      redirect_to admin_rebate_forms_url, notice: 'Rebate form was successfully updated.'
+      redirect_to admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
     else
       render :edit
     end
@@ -34,8 +36,12 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # DELETE /admin/rebate_forms/1
   def destroy
-    @rebate_form.destroy
-    redirect_to admin_rebate_forms_url, notice: 'Rebate form was successfully destroyed.'
+    if @rebate_form.fully_signed?
+      redirect_to admin_rebate_forms_url, notice: 'Cannot delete signed forms.'
+    else
+      @rebate_form.destroy
+      redirect_to admin_rebate_forms_url, notice: 'Rebate form was successfully destroyed.'
+    end
   end
 
   private
@@ -47,6 +53,6 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # Only allow a trusted parameter "white list" through.
   def admin_rebate_form_params
-    params.require(:rebate_form).permit(:valuation_id, :token)
+    params.require(:rebate_form).permit(:valuation_id, :token, attachments: [])
   end
 end

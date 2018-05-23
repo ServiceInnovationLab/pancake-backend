@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Pancake
+    %title= yield(:title)
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application'
@@ -11,4 +11,4 @@
     - flash.each do |name, msg|
       = content_tag :div, msg, class: name
     = render 'layouts/menu'
-    = yield
+    #main= yield

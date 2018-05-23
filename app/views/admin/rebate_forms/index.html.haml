@@ -1,3 +1,5 @@
+- content_for :title, "RatesRebate"
+
 %h1 Listing Rebate forms
 
 = form_tag(admin_rebate_forms_path, method: :get) do
@@ -30,17 +32,19 @@
               = rebate_form.property.suburb
               %br/
               = rebate_form.property.town_city
-        %td= rebate_form.created_at
+        %td= rebate_form.created_at.localtime
         %td
           - if rebate_form.applicant_signature.present?
-            = rebate_form.applicant_signature.created_at
+            = rebate_form.applicant_signature.created_at.localtime
           - else
             = render 'sign_button', rebate_form: rebate_form
         %td= render 'witness', signature: rebate_form.witness_signature
-        %td= link_to 'Show', admin_rebate_form_path(rebate_form)
         %td
-          = link_to admin_rebate_form_path(rebate_form), method: :delete,
-            data: { confirm: 'Are you sure?' }, class: 'pure-button' do
-            = fa_icon 'trash'
+          = link_to 'Show', admin_rebate_form_path(rebate_form), class: 'pure-button'
+        %td
+          - unless rebate_form.fully_signed?
+            = link_to admin_rebate_form_path(rebate_form), method: :delete,
+              data: { confirm: 'Are you sure?' }, class: 'pure-button' do
+              = fa_icon 'trash'
 
 %p= paginate @rebate_forms

@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.1.5'
+gem 'rails', '~> 5.2.0'
 
 # Database
 gem 'pg'
@@ -30,6 +30,10 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'font-awesome-rails'
 
 gem 'raygun4ruby' # exception catcher/logger
+
+gem 'aws-sdk-s3' # We store images on s3
+# gem 'mini_magick' # makes image previews (and can do other stuff)
+gem 'image_processing'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -55,10 +59,16 @@ group :development, :test do
   gem 'letter_opener'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5.2'
-  gem 'rubocop'
+  gem 'rubocop', '0.55.0'
   gem 'swagger-diff', '~> 1.1'
 end
 
+group :development do
+  gem 'travis'
+end
+
 group :test do
+  gem 'capybara'
   gem 'database_cleaner', '~> 1.6'
+  gem 'simplecov', require: false
 end
