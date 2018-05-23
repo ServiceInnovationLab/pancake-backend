@@ -17,6 +17,7 @@ class RebateForm < ApplicationRecord
 
   def calc_rebate_amount!
     year = ENV['YEAR']
+    raise 'No year set' if year.blank?
     rates_bill = property.rates_bills.find_by(rating_year: year)
     return if rates_bill.blank?
     rebate = OpenFiscaService.rebate_amount(
