@@ -12,3 +12,25 @@ Serverside Rates Rebate processor.
 
 Production server = https://ratesrebates.services.govt.nz
 
+Installation
+============
+
+To set up a development environment
+-----------------------------------
+
+1. make your own fork, and clone
+  `git clone [repo]`
+
+1. `cd pancake-backend`
+
+1. Add project upstream
+  `git remote add upstream git@github.com:WhareHauora/pancake-backend.git`
+
+1. Set up environment variables
+  `cp env-example .env`
+
+1. `bundle install`
+
+1. `bundle exec rake db:create db:migrate`
+
+1. `bundle exec rails s`
