@@ -2,7 +2,9 @@
 
 class RebateForm < ApplicationRecord
   has_many :signatures, dependent: :destroy
+  has_many :notes, dependent: :destroy
   belongs_to :property, required: true
+  has_many_attached :attachments, dependent: :destroy
 
   after_initialize :set_token
   before_validation :set_property_id
@@ -13,11 +15,8 @@ class RebateForm < ApplicationRecord
 
   after_create :send_emails
 
-  has_many_attached :attachments
-
   def calc_rebate_amount!
     year = ENV['YEAR']
-    raise 'No year set' if year.blank?
     rates_bill = property.rates_bills.find_by(rating_year: year)
     return if rates_bill.blank?
     rebate = OpenFiscaService.rebate_amount(
