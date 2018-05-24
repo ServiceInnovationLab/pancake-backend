@@ -62,12 +62,14 @@ RSpec.describe RebateFormsController, type: :controller do
       end
       let(:expected_errors) do
         { 'errors' => [
-          { 'code' => 'unprocessable_entity',
+          { 
+            'code' => 'unprocessable_entity',
             'status' => '422',
             'title' => 'Validation Error',
             'detail' => 'Property must exist',
             'source' => { 'pointer' => '/data/relationships/property' },
-            'meta' => { 'attribute' => 'property', 'message' => 'must exist', 'code' => 'blank' } },
+            'meta' => { 'attribute' => 'property', 'message' => 'must exist', 'code' => 'blank' } 
+          },
           {
             'code' => 'unprocessable_entity',
             'status' => '422',
