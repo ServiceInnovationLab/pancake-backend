@@ -15,8 +15,9 @@ class RebateForm < ApplicationRecord
 
   after_create :send_emails
 
+  delegate :location, :suburb, :town_city, to: :property
+
   def calc_rebate_amount!
-    year = ENV['YEAR']
     rates_bill = property.rates_bills.find_by(rating_year: year)
     return if rates_bill.blank?
     rebate = OpenFiscaService.rebate_amount(
@@ -26,6 +27,15 @@ class RebateForm < ApplicationRecord
       year: year
     )
     update!(rebate: rebate)
+  end
+
+  def year
+    raise('Year not set in env') if ENV['YEAR'].blank?
+    ENV['YEAR']
+  end
+
+  def full_name
+    fields['full_name']
   end
 
   def dependants
