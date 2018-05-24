@@ -1,0 +1,18 @@
+
+%h3 Attach Evidence
+= form_for @rebate_form, url: { action: 'update' }, html: { class: 'pure-form pure-form-stacked' } do |f|
+  = f.file_field :attachments, multiple: true, direct_upload: false
+  = f.submit 'Attach', class: 'pure-button pure-button-primary'
+
+%h3 Files
+- if @rebate_form.attachments.size.positive?
+  %table.pure-table.pure-table-bordered
+    - @rebate_form.attachments.each do |file|
+      %tr
+        %td
+          = link_to admin_attachment_path(id: file.id), method: :delete,
+            class: 'pure-button', data: { confirm: 'Are you sure?' } do
+            = fa_icon 'trash'
+          %td= image_or_link(file)
+- else
+  %p No files

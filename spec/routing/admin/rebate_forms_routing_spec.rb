@@ -25,11 +25,11 @@ RSpec.describe Admin::RebateFormsController, type: :routing do
     end
 
     it 'routes to #update via PUT' do
-      expect(put: '/admin/rebate_forms/1').not_to route_to('admin/rebate_forms#update', id: '1')
+      expect(put: '/admin/rebate_forms/1').to route_to('admin/rebate_forms#update', id: '1')
     end
 
     it 'routes to #update via PATCH' do
-      expect(patch: '/admin/rebate_forms/1').not_to route_to('admin/rebate_forms#update', id: '1')
+      expect(patch: '/admin/rebate_forms/1').to route_to('admin/rebate_forms#update', id: '1')
     end
 
     it 'routes to #destroy' do

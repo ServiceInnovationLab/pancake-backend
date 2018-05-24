@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe RebateFormsController, type: :controller do
   subject { JSON.parse response.body }
-  let(:fields) { { 'dependants' => '0', 'full_name' => 'bob', 'income' => '10' } }
-  let(:property) { FactoryBot.create :property }
+  let(:fields) { { 'dependants' => '0', 'full_name' => 'bob', 'income' => '10000' } }
+  let(:property) { FactoryBot.create :property_with_rates }
 
   describe '#create' do
     let(:body) do
@@ -23,6 +23,9 @@ RSpec.describe RebateFormsController, type: :controller do
     before { post :create, format: :json, params: { api: body } }
     it { expect(subject['data']['attributes']['fields']).to eq fields }
     it { expect(RebateForm.first.fields).to eq fields }
+    it 'calculates their rebate' do
+      expect(RebateForm.first.rebate).to eq 620.0
+    end
   end
 
   describe '#update' do

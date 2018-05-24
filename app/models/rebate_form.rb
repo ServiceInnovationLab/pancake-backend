@@ -13,8 +13,11 @@ class RebateForm < ApplicationRecord
 
   after_create :send_emails
 
+  has_many_attached :attachments
+
   def calc_rebate_amount!
     year = ENV['YEAR']
+    raise 'No year set' if year.blank?
     rates_bill = property.rates_bills.find_by(rating_year: year)
     return if rates_bill.blank?
     rebate = OpenFiscaService.rebate_amount(
@@ -65,8 +68,8 @@ class RebateForm < ApplicationRecord
   end
 
   def send_emails
-    mailer.applicant_mail.deliver_later if fields['email'].present?
-    mailer.council_mail.deliver_later
+    mailer.applicant_mail.deliver_now if fields['email'].present?
+    mailer.council_mail.deliver_now if ENV['COUNCIL_EMAIL'].present?
   end
 
   def mailer
