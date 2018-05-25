@@ -48,7 +48,7 @@ RSpec.describe PropertiesController, type: :controller do
             'valuation_id' => property_1.valuation_id,
             'location' => '123 Lambton Quay',
             'suburb' => 'Te Aro',
-            'town_city' => 'Poneke' 
+            'town_city' => 'Poneke'
           },
         'relationships' => { 'rates_payers' => { 'data' => [] }, 'rates_bills' => { 'data' => [] } }
       )
