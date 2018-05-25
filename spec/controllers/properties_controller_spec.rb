@@ -17,16 +17,19 @@ RSpec.describe PropertiesController, type: :controller do
 
     describe 'name search' do
       let(:query) { 'moana' }
+
       include_examples 'finds property'
     end
 
     describe 'name search' do
       let(:query) { 'moana road' }
+
       include_examples 'finds property'
     end
 
     describe 'name search' do
       let(:query) { '1 moana road' }
+
       include_examples 'finds property'
     end
   end
