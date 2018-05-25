@@ -17,16 +17,19 @@ RSpec.describe PropertiesController, type: :controller do
 
     describe 'name search' do
       let(:query) { 'moana' }
+
       include_examples 'finds property'
     end
 
     describe 'name search' do
       let(:query) { 'moana road' }
+
       include_examples 'finds property'
     end
 
     describe 'name search' do
       let(:query) { '1 moana road' }
+
       include_examples 'finds property'
     end
   end
@@ -35,6 +38,7 @@ RSpec.describe PropertiesController, type: :controller do
     let!(:property_1) do
       FactoryBot.create :property, location: '123 Lambton Quay', suburb: 'Te Aro', town_city: 'Poneke'
     end
+
     subject { JSON.parse(response.body)['data'] }
 
     before { get :show, format: :json, params: { id: property_1.valuation_id } }
