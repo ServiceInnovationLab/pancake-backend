@@ -4,10 +4,10 @@ require 'rails_helper'
 
 RSpec.describe PropertiesController, type: :controller do
   describe '#index' do
+    subject { JSON.parse(response.body)['data'] }
     let!(:property_1) { FactoryBot.create :property, location: '11 MAIN ROAD' }
     let!(:property_2) { FactoryBot.create :property, location: '11 MOANA ROAD' }
 
-    subject { JSON.parse(response.body)['data'] }
 
     shared_examples 'finds property' do
       before { get :index, format: :json, params: { q: query } }
@@ -32,10 +32,10 @@ RSpec.describe PropertiesController, type: :controller do
   end
 
   describe '#show' do
+    subject { JSON.parse(response.body)['data'] }
     let!(:property_1) do
       FactoryBot.create :property, location: '123 Lambton Quay', suburb: 'Te Aro', town_city: 'Poneke'
     end
-    subject { JSON.parse(response.body)['data'] }
 
     before { get :show, format: :json, params: { id: property_1.valuation_id } }
 
