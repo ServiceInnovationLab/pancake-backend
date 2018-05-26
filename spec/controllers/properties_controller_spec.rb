@@ -8,7 +8,6 @@ RSpec.describe PropertiesController, type: :controller do
     let!(:property_1) { FactoryBot.create :property, location: '11 MAIN ROAD' }
     let!(:property_2) { FactoryBot.create :property, location: '11 MOANA ROAD' }
 
-
     shared_examples 'finds property' do
       before { get :index, format: :json, params: { q: query } }
       it { expect(subject.size).to eq 1 }
