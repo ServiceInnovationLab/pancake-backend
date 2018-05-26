@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe RebateFormsController, type: :controller do
   subject { JSON.parse response.body }
+
   let(:fields) { { 'dependants' => '0', 'full_name' => 'bob', 'income' => '10000' } }
   let(:property) { FactoryBot.create :property_with_rates }
 
