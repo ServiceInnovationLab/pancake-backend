@@ -1,4 +1,4 @@
-addEventListener('direct-upload:initialize', event => {
+addEventListener('direct-upload:initialize', (event) => {
 
   const {target, detail} = event;
   const {id, file} = detail;
@@ -11,7 +11,7 @@ addEventListener('direct-upload:initialize', event => {
 
 });
 
-addEventListener('direct-upload:start', event => {
+addEventListener('direct-upload:start', (event) => {
 
   const {id} = event.detail;
   const element = document.getElementById(`direct-upload-${id}`);
@@ -19,7 +19,7 @@ addEventListener('direct-upload:start', event => {
 
 });
 
-addEventListener('direct-upload:progress', event => {
+addEventListener('direct-upload:progress', (event) => {
 
   const {id, progress} = event.detail;
   const progressElement = document.getElementById(`direct-upload-progress-${id}`);
@@ -27,7 +27,7 @@ addEventListener('direct-upload:progress', event => {
 
 });
 
-addEventListener('direct-upload:error', event => {
+addEventListener('direct-upload:error', (event) => {
 
   event.preventDefault();
   const {id, error} = event.detail;
@@ -37,7 +37,7 @@ addEventListener('direct-upload:error', event => {
 
 });
 
-addEventListener('direct-upload:end', event => {
+addEventListener('direct-upload:end', (event) => {
 
   const {id} = event.detail;
   const element = document.getElementById(`direct-upload-${id}`);
