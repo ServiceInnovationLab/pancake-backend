@@ -59,26 +59,26 @@ class RebateForm < ApplicationRecord
 
   private
 
-  def set_property_id
-    self.property = Property.find_by(valuation_id: valuation_id)
-  end
-
-  def new_token
-    SecureRandom.hex(rand(40..60))
-  end
-
-  def send_emails
-    mailer.applicant_mail.deliver_now if fields['email'].present?
-    mailer.council_mail.deliver_now if ENV['COUNCIL_EMAIL'].present?
-  end
-
-  def mailer
-    RebateFormsMailer.with(rebate_form: self)
-  end
-
-  def required_fields_present
-    %w[income dependants full_name].each do |field|
-      errors.add(:fields, "must include #{field}") if fields[field].blank?
+    def set_property_id
+      self.property = Property.find_by(valuation_id: valuation_id)
     end
-  end
+
+    def new_token
+      SecureRandom.hex(rand(40..60))
+    end
+
+    def send_emails
+      mailer.applicant_mail.deliver_now if fields['email'].present?
+      mailer.council_mail.deliver_now if ENV['COUNCIL_EMAIL'].present?
+    end
+
+    def mailer
+      RebateFormsMailer.with(rebate_form: self)
+    end
+
+    def required_fields_present
+      %w[income dependants full_name].each do |field|
+        errors.add(:fields, "must include #{field}") if fields[field].blank?
+      end
+    end
 end

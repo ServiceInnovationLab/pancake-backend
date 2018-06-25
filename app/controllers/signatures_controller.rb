@@ -32,18 +32,18 @@ class SignaturesController < ApiController
 
   private
 
-  def signature_type
-    SignatureType.find_by!(name: signature_params[:type])
-  end
+    def signature_type
+      SignatureType.find_by!(name: signature_params[:type])
+    end
 
-  def rebate_form
-    RebateForm.find_by!(
-      # valuation_id: signature_params[:valuation_id]
-      token: signature_params[:token]
-    )
-  end
+    def rebate_form
+      RebateForm.find_by!(
+        # valuation_id: signature_params[:valuation_id]
+        token: signature_params[:token]
+      )
+    end
 
-  def signature_params
-    params.require(:data).require(:attributes).permit(:valuation_id, :token, :image, :type, :name, :role)
-  end
+    def signature_params
+      params.require(:data).require(:attributes).permit(:valuation_id, :token, :image, :type, :name, :role)
+    end
 end
