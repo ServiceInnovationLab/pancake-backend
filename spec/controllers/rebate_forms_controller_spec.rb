@@ -22,6 +22,7 @@ RSpec.describe RebateFormsController, type: :controller do
     end
 
     before { post :create, format: :json, params: { api: body } }
+
     it { expect(subject['data']['attributes']['fields']).to eq fields }
     it { expect(RebateForm.first.fields).to eq fields }
     it 'calculates their rebate' do
@@ -47,6 +48,7 @@ RSpec.describe RebateFormsController, type: :controller do
       end
 
       before { patch :update, format: :json, params: { id: rebate_form.token, api: body } }
+
       it { expect(subject['data']['attributes']['fields']).to eq fields }
       it { expect(RebateForm.find(rebate_form.id).fields).to eq fields }
     end
@@ -86,6 +88,7 @@ RSpec.describe RebateFormsController, type: :controller do
       end
 
       before { patch :update, format: :json, params: { id: rebate_form.token, api: body } }
+
       it { expect(subject).to eq expected_errors }
     end
   end
@@ -94,6 +97,7 @@ RSpec.describe RebateFormsController, type: :controller do
     let(:rebate_form) { FactoryBot.create :rebate_form }
 
     before { get :show, format: :json, params: { id: rebate_form.token } }
+
     it { expect(subject['data']['attributes']['fields']).to eq rebate_form.fields }
     it { expect(subject['data']['attributes']['token']).to eq rebate_form.token }
   end
