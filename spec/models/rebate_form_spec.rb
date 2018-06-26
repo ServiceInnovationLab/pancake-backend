@@ -13,6 +13,7 @@ RSpec.describe RebateForm, type: :model do
       it { expect(form.signatures.size).to eq 0 }
     end
   end
+
   describe 'Signed form' do
     let(:form) { FactoryBot.create :signed_form, property: property, valuation_id: valuation_id }
 
@@ -37,6 +38,7 @@ RSpec.describe RebateForm, type: :model do
       it { expect(form.token.present?).to eq true }
       it { expect(form.token.length).to be >= 40 }
     end
+
     it 'generates long tokens' do
       100.times do
         expect(RebateForm.new.token.length).to be >= 40
