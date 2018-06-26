@@ -26,6 +26,7 @@ RSpec.describe SignaturesController, type: :controller do
     end
 
     before { post :create, format: :json, params: body }
+
     it { expect(subject['name']).to eq 'brenda' }
     it { expect(subject['role']).to eq 'pancake eater' }
   end

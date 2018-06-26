@@ -11,6 +11,7 @@ RSpec.describe PropertiesController, type: :controller do
 
     shared_examples 'finds property' do
       before { get :index, format: :json, params: { q: query } }
+
       it { expect(subject.size).to eq 1 }
       it { expect(subject.first['id']).to eq property_2.valuation_id }
     end
