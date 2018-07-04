@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe RebateForm, type: :model do
   let(:valuation_id) { 'abc' }
   let(:property) { FactoryBot.create :property, valuation_id: valuation_id }
+
   describe 'Unsigned form' do
     let(:form) { FactoryBot.create :rebate_form, property: property, valuation_id: valuation_id }
 
@@ -12,6 +13,7 @@ RSpec.describe RebateForm, type: :model do
       it { expect(form.signatures.size).to eq 0 }
     end
   end
+
   describe 'Signed form' do
     let(:form) { FactoryBot.create :signed_form, property: property, valuation_id: valuation_id }
 
@@ -36,6 +38,7 @@ RSpec.describe RebateForm, type: :model do
       it { expect(form.token.present?).to eq true }
       it { expect(form.token.length).to be >= 40 }
     end
+
     it 'generates long tokens' do
       100.times do
         expect(RebateForm.new.token.length).to be >= 40
@@ -47,7 +50,9 @@ RSpec.describe RebateForm, type: :model do
     let!(:rates_bill) { FactoryBot.create :rates_bill, total_rates: 3450, total_water_rates: 5, property: property, rating_year: ENV['YEAR'] }
     let(:form) { FactoryBot.create :rebate_form, property: property, valuation_id: valuation_id, fields: fields }
     let(:fields) { { "income": 39_900.00, "dependants": 1, "full_name": 'Edith' } }
+
     before { form.calc_rebate_amount! }
+
     it { expect(form.rebate).to eq 370.67 }
   end
 end

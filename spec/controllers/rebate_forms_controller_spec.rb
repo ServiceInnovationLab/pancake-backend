@@ -4,8 +4,9 @@ require 'rails_helper'
 
 RSpec.describe RebateFormsController, type: :controller do
   subject { JSON.parse response.body }
-  let(:fields) { { 'dependants' => '0', 'full_name' => 'bob', 'income' => '10' } }
-  let(:property) { FactoryBot.create :property }
+
+  let(:fields) { { 'dependants' => '0', 'full_name' => 'bob', 'income' => '10000' } }
+  let(:property) { FactoryBot.create :property_with_rates }
 
   describe '#create' do
     let(:body) do
@@ -21,8 +22,12 @@ RSpec.describe RebateFormsController, type: :controller do
     end
 
     before { post :create, format: :json, params: { api: body } }
+
     it { expect(subject['data']['attributes']['fields']).to eq fields }
     it { expect(RebateForm.first.fields).to eq fields }
+    it 'calculates their rebate' do
+      expect(RebateForm.first.rebate).to eq 620.0
+    end
   end
 
   describe '#update' do
@@ -43,6 +48,7 @@ RSpec.describe RebateFormsController, type: :controller do
       end
 
       before { patch :update, format: :json, params: { id: rebate_form.token, api: body } }
+
       it { expect(subject['data']['attributes']['fields']).to eq fields }
       it { expect(RebateForm.find(rebate_form.id).fields).to eq fields }
     end
@@ -62,12 +68,14 @@ RSpec.describe RebateFormsController, type: :controller do
       end
       let(:expected_errors) do
         { 'errors' => [
-          { 'code' => 'unprocessable_entity',
+          {
+            'code' => 'unprocessable_entity',
             'status' => '422',
             'title' => 'Validation Error',
             'detail' => 'Property must exist',
             'source' => { 'pointer' => '/data/relationships/property' },
-            'meta' => { 'attribute' => 'property', 'message' => 'must exist', 'code' => 'blank' } },
+            'meta' => { 'attribute' => 'property', 'message' => 'must exist', 'code' => 'blank' }
+          },
           {
             'code' => 'unprocessable_entity',
             'status' => '422',
@@ -80,6 +88,7 @@ RSpec.describe RebateFormsController, type: :controller do
       end
 
       before { patch :update, format: :json, params: { id: rebate_form.token, api: body } }
+
       it { expect(subject).to eq expected_errors }
     end
   end
@@ -88,6 +97,7 @@ RSpec.describe RebateFormsController, type: :controller do
     let(:rebate_form) { FactoryBot.create :rebate_form }
 
     before { get :show, format: :json, params: { id: rebate_form.token } }
+
     it { expect(subject['data']['attributes']['fields']).to eq rebate_form.fields }
     it { expect(subject['data']['attributes']['token']).to eq rebate_form.token }
   end
