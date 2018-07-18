@@ -6,6 +6,7 @@ FactoryBot.define do
     location '999 Lambton quay'
     suburb 'coolville'
     town_city 'Tauranga'
+    council
   end
   factory :property_with_rates, parent: :property do
     after(:create) do |property|
