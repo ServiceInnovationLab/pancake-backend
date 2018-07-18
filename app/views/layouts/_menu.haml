@@ -1,14 +1,18 @@
 .pure-menu.pure-menu-horizontal
-  = link_to 'PANCAKE', root_path, class: 'pure-menu-heading pure menu-link'
   %ul.pure-menu-list
-    %li.pure-menu-item
-      = link_to 'docs', '/api/docs', class: 'pure-menu-link'
-    %li.pure-menu-item
-      = link_to 'admin', new_user_session_path, class: 'pure-menu-link'
     - if current_user.present?
       %li.pure-menu-item
         = link_to 'invite new user', new_user_invitation_path, class: 'pure-menu-link'
       %li.pure-menu-item
         = link_to 'rebate forms', admin_rebate_forms_path, class: 'pure-menu-link'
       %li.pure-menu-item
-        = link_to "Sign Out", destroy_user_session_path, method: :delete
+        = link_to 'councils', admin_councils_path, class: 'pure-menu-link'
+      %li.pure-menu-item
+        = link_to destroy_user_session_path, method: :delete do
+          = fa_icon 'sign-out'
+          Sign Out
+    - else
+      %li.pure-menu-item
+        = link_to 'api docs', '/api/docs', class: 'pure-menu-link'
+      %li.pure-menu-item
+        = link_to 'admin', new_user_session_path, class: 'pure-menu-link'

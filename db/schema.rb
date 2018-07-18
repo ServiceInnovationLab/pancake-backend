@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_21_025206) do
+ActiveRecord::Schema.define(version: 2018_07_17_211017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,31 @@ ActiveRecord::Schema.define(version: 2018_05_21_025206) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "councils", force: :cascade do |t|
+    t.string "name"
+    t.string "short_name"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.bigint "rebate_form_id"
+    t.bigint "user_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rebate_form_id"], name: "index_notes_on_rebate_form_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.text "valuation_id"
     t.text "location"
     t.text "suburb"
     t.text "town_city"
     t.text "meta"
+    t.integer "council_id"
     t.index ["valuation_id"], name: "index_properties_on_valuation_id", unique: true
   end
 
@@ -72,6 +91,7 @@ ActiveRecord::Schema.define(version: 2018_05_21_025206) do
     t.json "fields"
     t.integer "property_id"
     t.decimal "rebate", precision: 8, scale: 2
+    t.integer "council_id"
   end
 
   create_table "signature_types", force: :cascade do |t|
@@ -129,6 +149,7 @@ ActiveRecord::Schema.define(version: 2018_05_21_025206) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "notes", "rebate_forms"
   add_foreign_key "rates_bills", "properties"
   add_foreign_key "rates_payers", "properties"
   add_foreign_key "rebate_forms", "properties"
