@@ -5,7 +5,7 @@ class Admin::CouncilsController < Admin::BaseController
 
   # GET /councils
   def index
-    @councils = Council.all
+    @councils = Council.all.order(:name)
   end
 
   # GET /councils/1
