@@ -1,18 +1,19 @@
+.pure-form
+  = form_for [:admin, @council] do |f|
+    - if @council.errors.any?
+      #error_explanation
+        %h2
+          #{pluralize(@council.errors.count, 'error')}
+          prohibited this council from being saved:
+        %ul
+          - @council.errors.full_messages.each do |message|
+            %li= message
 
-- if @council.errors.any?
-  #error_explanation
-    %h2
-      #{pluralize(@council.errors.count, 'error')}
-      prohibited this council from being saved:
-    %ul
-      - @council.errors.full_messages.each do |message|
-        %li= message
-
-.field
-  = f.label :name
-  = f.text_field :name
-.field
-  = f.label :active
-  = f.check_box :active
-.actions
-  = f.submit 'Save', class: 'pure-button'
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :active
+      = f.check_box :active
+    .actions
+      = f.submit 'Save', class: 'pure-button'

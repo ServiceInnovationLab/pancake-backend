@@ -3,8 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'admin/councils/edit', type: :view do
+  let(:council) { FactoryBot.create(:council) }
   before(:each) do
-    @council = assign(:council, FactoryBot.create(:council))
+    @council = assign(:council, council)
   end
 
   it 'renders the edit council form' do
