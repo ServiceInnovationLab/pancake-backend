@@ -7,7 +7,9 @@ class SerializableCouncil < JSONAPI::Serializable::Resource
 
   # Add attributes here to ensure they get rendered, .e.g.
   #
-  # attribute :name
+  attribute :name
+  attribute :short_name
+  attribute :active
   #
   # To customize, pass a block and reference the underlying @object
   # being serialized:
