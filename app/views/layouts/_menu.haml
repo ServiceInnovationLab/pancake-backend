@@ -8,9 +8,7 @@
       %li.pure-menu-item
         = link_to 'users', admin_users_path, class: 'pure-menu-link'
       %li.pure-menu-item
-        = link_to 'invite new user', new_user_invitation_path, class: 'pure-menu-link'
-      %li.pure-menu-item
-        = link_to destroy_user_session_path, method: :delete do
+        = link_to destroy_user_session_path, method: :delete, class: 'pure-button' do
           = fa_icon 'sign-out'
           Sign Out
     - else
