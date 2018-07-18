@@ -9,17 +9,25 @@
   %thead
     %tr
       %th Email
-      %th
+      %th Role
+      %th Council
       %th Active
 
   %tbody
     - @users.each do |user|
       %tr
         %td= user.email
+        %td
+          - if user.role.present?
+            = user.role.name
+        %td
+          - if user.council.present?
+            = user.council.name
         %td= link_to 'Show', admin_user_path(user)
         %td
-          - if user.deactivated_at
-
+          - if user.deactivated_at.present?
+            Deactivated
+            = user.deactivated_at
           - else
             = link_to admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'pure-button' do
               = fa_icon 'ban'
