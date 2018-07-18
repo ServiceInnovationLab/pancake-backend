@@ -3,6 +3,7 @@
 class RebateForm < ApplicationRecord
   has_many :signatures, dependent: :destroy
   belongs_to :property, required: true
+  delegate :council, to: :property
 
   after_initialize :set_token
   before_validation :set_property_id
@@ -12,7 +13,6 @@ class RebateForm < ApplicationRecord
   validate :required_fields_present
 
   after_create :send_emails
-
   has_many_attached :attachments
 
   def calc_rebate_amount!
@@ -21,10 +21,8 @@ class RebateForm < ApplicationRecord
     rates_bill = property.rates_bills.find_by(rating_year: year)
     return if rates_bill.blank?
     rebate = OpenFiscaService.rebate_amount(
-      income: income,
-      rates: rates_bill.total_bill,
-      dependants: dependants,
-      year: year
+      income: income, rates: rates_bill.total_bill,
+      dependants: dependants, year: year
     )
     update!(rebate: rebate)
   end

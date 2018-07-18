@@ -5,4 +5,5 @@ class RatesPayer < ApplicationRecord
   # rate payer may have maybe properties.
   # We only care about the one they lived in.
   belongs_to :property, required: true
+  delegate :council, to: :property
 end
