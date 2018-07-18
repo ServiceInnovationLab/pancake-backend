@@ -31,5 +31,6 @@
 # For more information, see https://jsonapi-suite.github.io/jsonapi_spec_helpers/
 JsonapiSpecHelpers::Payload.register(:council) do
   key(:name, String)
-  key(:short_name, String)
+  key(:short_name, String, allow_nil: true)
+  key(:active, TrueClass)
 end
