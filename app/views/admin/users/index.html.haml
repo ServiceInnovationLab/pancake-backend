@@ -1,0 +1,26 @@
+%h1 Listing user
+
+%p
+  = link_to new_user_invitation_path, class: 'pure-button' do
+    = fa_icon 'plus'
+    Invite new users
+
+%table.pure-table.pure-table-horizontal
+  %thead
+    %tr
+      %th Email
+      %th
+      %th Active
+
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.email
+        %td= link_to 'Show', admin_user_path(user)
+        %td
+          - if user.deactivated_at
+
+          - else
+            = link_to admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'pure-button' do
+              = fa_icon 'ban'
+              deactivate

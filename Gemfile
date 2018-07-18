@@ -15,6 +15,8 @@ gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
+gem 'paranoia', '~> 2.2'
+
 # Logins
 gem 'devise'
 gem 'devise_invitable'
