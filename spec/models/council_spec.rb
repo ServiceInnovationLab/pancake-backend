@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe Council, type: :model do
   let(:council) { FactoryBot.create :council, name: 'Tauranga' }
   let(:properties) { FactoryBot.create_list :property, 10, council: council }
+
   before do
     FactoryBot.create :rates_bill, property: properties.first
     FactoryBot.create :rates_payer, property: properties.first
