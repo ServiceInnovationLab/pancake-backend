@@ -21,6 +21,9 @@ gem 'paranoia', '~> 2.2'
 gem 'devise'
 gem 'devise_invitable'
 
+# Permissions
+gem 'pundit'
+
 gem 'loofah', '>= 2.2.1'
 gem 'rails-html-sanitizer', '>= 1.0.4'
 

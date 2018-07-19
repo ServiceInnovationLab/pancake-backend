@@ -4,7 +4,7 @@ class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: %i[show edit update destroy]
 
   def index
-    @users = User.with_deleted.order(:email)
+    @users = policy_scope(User).with_deleted.order(:email)
   end
 
   def show; end
@@ -29,6 +29,7 @@ class Admin::UsersController < Admin::BaseController
 
   def set_user
     @user = User.with_deleted.find(params[:id])
+    authorize @user
   end
 
   def user_params
