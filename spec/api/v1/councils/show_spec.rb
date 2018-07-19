@@ -9,7 +9,6 @@ RSpec.describe 'councils#show', type: :request do
   end
   let(:params) { {} }
 
-
   describe 'basic fetch' do
     let!(:council) { create(:council) }
 
