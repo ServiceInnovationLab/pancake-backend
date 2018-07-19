@@ -5,7 +5,7 @@ class Admin::CouncilsController < Admin::BaseController
 
   # GET /councils
   def index
-    @councils = Council.all.order(:name)
+    @councils = policy_scope(Council).all.order(:name)
   end
 
   # GET /councils/1
@@ -14,6 +14,7 @@ class Admin::CouncilsController < Admin::BaseController
   # GET /councils/new
   def new
     @council = Council.new
+    authorize @council
   end
 
   # GET /councils/1/edit
@@ -22,6 +23,7 @@ class Admin::CouncilsController < Admin::BaseController
   # POST /councils
   def create
     @council = Council.new(council_params)
+    authorize @council
 
     if @council.save
       redirect_to admin_councils_path, notice: 'Council was successfully created.'
@@ -50,6 +52,7 @@ class Admin::CouncilsController < Admin::BaseController
   # Use callbacks to share common setup or constraints between actions.
   def set_council
     @council = Council.find(params[:id])
+    authorize @council
   end
 
   # Only allow a trusted parameter "white list" through.
