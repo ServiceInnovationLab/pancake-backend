@@ -2,10 +2,14 @@
   .pure-menu.pure-menu-horizontal
     %ul.pure-menu-list
       - if current_user.present?
-        %li.pure-menu-item
-          = link_to 'rebate forms', admin_rebate_forms_path, class: 'pure-menu-link'
-        %li.pure-menu-item
-          = link_to 'councils', admin_councils_path, class: 'pure-menu-link'
+        - if policy(RebateForm).index?
+          %li.pure-menu-item
+            = link_to admin_rebate_forms_path, class: 'pure-menu-link' do
+              rebate forms
+        - if policy(Council).new?
+          %li.pure-menu-item
+            = link_to admin_councils_path, class: 'pure-menu-link' do
+              councils
         %li.pure-menu-item
           = link_to 'users', admin_users_path, class: 'pure-menu-link'
         %li.pure-menu-item

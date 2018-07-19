@@ -6,7 +6,8 @@ class Admin::RebateFormsController < Admin::BaseController
   # GET /admin/rebate_forms
   def index
     @location = params[:location]
-    @rebate_forms = RebateForm.all
+    @council = current_user.council.present? ? current_user.council : nil
+    @rebate_forms = policy_scope(RebateForm).all
                               .includes(:signatures, :property)
                               .order(created_at: :desc)
     if @location.present?

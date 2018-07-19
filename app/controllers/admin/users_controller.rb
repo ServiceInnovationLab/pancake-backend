@@ -15,8 +15,11 @@ class Admin::UsersController < Admin::BaseController
       @user.restore
       redirect_to edit_admin_user_url(@user), notice: 'User was re-actived.'
     else
-      @user.update(user_params)
-      redirect_to admin_users_url, notice: 'User was updated.'
+      if @user.update(user_params)
+        redirect_to admin_users_url, notice: 'User was updated.'
+      else
+        render :edit
+      end
     end
   end
 
@@ -33,6 +36,9 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:council_id, role_ids: [])
+    u = params.require(:user).permit(:council_id, role_ids: [])
+    u[:council_id] = nil if u[:council_id].blank?
+    u[:role_ids] = [] if u[:role_ids].blank?
+    u
   end
 end

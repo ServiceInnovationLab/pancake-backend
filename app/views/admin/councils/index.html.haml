@@ -24,12 +24,12 @@
         %td= council.name
         %td= council.active
         %td= link_to 'Show', admin_council_path(council)
-        - if policy(Council).edit?
+        - if policy(council).edit?
           %td= link_to 'Edit', edit_admin_council_path(council)
         %td
           - if council.rebate_forms.size.positive?
             #{council.rebate_forms.size} Rebate forms collected
-          - elsif policy(Council).destroy?
+          - elsif policy(council).destroy?
             = link_to admin_council_path(council), method: :delete, data: { confirm: 'Are you sure?' }, class: 'pure-button' do
               = fa_icon 'trash'
               Delete

@@ -1,10 +1,14 @@
-class UserPolicy < ApplicationPolicy
+class CouncilPolicy < ApplicationPolicy
+  def create?
+    is_dia?
+  end
+
   def update?
     is_dia?
   end
 
   def destroy?
-    is_dia? && record.id != user.id
+    is_dia? && ! record.rebate_forms.size.positive?
   end
 
   class Scope < Scope
@@ -12,7 +16,7 @@ class UserPolicy < ApplicationPolicy
       if user.present?
         scope.all
       else
-        scope.where(council_id: user.council_id)
+        scope.none
       end
     end
   end
