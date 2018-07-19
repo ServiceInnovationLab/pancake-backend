@@ -8,7 +8,9 @@
     = csrf_meta_tags
 
   %body
-    - flash.each do |name, msg|
-      = content_tag :div, msg, class: name
     = render 'layouts/menu'
-    #main= yield
+    #main
+      - flash.each do |name, msg|
+        = content_tag :div, msg, class: name
+      %h1 Rates Rebates
+      = yield
