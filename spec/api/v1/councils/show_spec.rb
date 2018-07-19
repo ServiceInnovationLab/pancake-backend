@@ -3,12 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'councils#show', type: :request do
-  let(:params) { {} }
-
   subject(:make_request) do
     jsonapi_get "/api/v1/councils/#{council.id}",
                 params: params
   end
+
+  let(:params) { {} }
 
   describe 'basic fetch' do
     let!(:council) { create(:council) }

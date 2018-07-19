@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'admin/councils/edit', type: :view do
   let(:council) { FactoryBot.create(:council) }
+
   before do
     @council = assign(:council, council)
   end
