@@ -1,3 +1,8 @@
+%h2
+  Users
+  - unless current_user.council.nil?
+    for #{current_user.council.name}
+
 .pure-g
   .pure-u-2-5
     %p Password change link goes here soon
