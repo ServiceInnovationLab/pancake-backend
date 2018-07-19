@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'admin/councils/new', type: :view do
-  before(:each) do
+  before do
     assign(:council, Council.new(
                        name: 'MyString',
                        active: false
