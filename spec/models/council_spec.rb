@@ -10,6 +10,7 @@ RSpec.describe Council, type: :model do
     FactoryBot.create :rates_bill, property: properties.first
     FactoryBot.create :rates_payer, property: properties.first
   end
+
   describe 'names' do
     it { expect(council.name).to eq 'Tauranga' }
   end
