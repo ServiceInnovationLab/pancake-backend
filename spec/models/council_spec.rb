@@ -12,12 +12,15 @@ RSpec.describe Council, type: :model do
   describe 'names' do
     it { expect(council.name).to eq 'Tauranga' }
   end
+
   describe 'has properties' do
     it { expect(council.properties).to eq properties }
   end
+
   describe 'has rates_bills' do
     it { expect(council.rates_bills).to eq properties.first.rates_bills }
   end
+
   describe 'has rates_payers' do
     it { expect(council.rates_payers).to eq properties.first.rates_payers }
   end
