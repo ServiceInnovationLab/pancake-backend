@@ -1,12 +1,12 @@
 - content_for(:title) do
   Councils
 
-%h1 Councils and Territorial Authorities
+%h2 Councils and Territorial Authorities
 
 %p
-  = link_to new_admin_council_path, class: 'pure-button pure-button-primary' do
-    New Council
+  = link_to new_admin_council_path, class: 'pure-button' do
     = fa_icon 'plus'
+    New Council
 
 %table.pure-table.pure-table-bordered
   %thead
@@ -28,6 +28,8 @@
           - if council.rebate_forms.size.positive?
             #{council.rebate_forms.size} Rebate forms collected
           - else
-            = link_to 'Destroy', admin_council_path(council), method: :delete, data: { confirm: 'Are you sure?' }
+            = link_to admin_council_path(council), method: :delete, data: { confirm: 'Are you sure?' }, class: 'pure-button' do
+              = fa_icon 'trash'
+              Delete
 
 %br
