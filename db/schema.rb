@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2018_07_18_045559) do
 
   # These are extensions that must be enabled in order to support this database
@@ -96,9 +95,18 @@ ActiveRecord::Schema.define(version: 2018_07_18_045559) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
+    t.string "friendly_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_roles_on_name", unique: true
+  end
+
+  create_table "roles_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+    t.index ["role_id"], name: "index_roles_users_on_role_id"
+    t.index ["user_id"], name: "index_roles_users_on_user_id"
   end
 
   create_table "signature_types", force: :cascade do |t|
@@ -149,7 +157,6 @@ ActiveRecord::Schema.define(version: 2018_07_18_045559) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.datetime "deactivated_at"
-    t.integer "role_id"
     t.integer "council_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true

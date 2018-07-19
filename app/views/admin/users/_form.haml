@@ -1,0 +1,34 @@
+%p= @user.email
+
+= form_for [:admin, @user], class: 'pure-form pure-form-stacked' do |f|
+
+  = render 'admin/form_errors', form_model: @user
+
+  - if @user.deactivated_at.present?
+    %p this user has been deactived
+    =hidden_field_tag :activate, 1
+    .pure-controls
+      = f.submit 'Re-activate', class: 'pure-button'
+
+  - else
+    %fieldset
+      .pure-control-group
+        %h3= f.label :role
+        - Role.all.order(:name).each do |r|
+          %label
+            = check_box_tag 'user[role_ids][]', r.id, f.object.roles.include?(r)
+            = r.friendly_name
+
+    %fieldset
+      .pure-control-group
+        %h3= f.label :council
+        %label
+          = radio_button_tag 'user[council_id]', '', @user.council_id == nil
+          \-- None --
+        - Council.all.order(:name).each do |council|
+          %label
+            = radio_button_tag 'user[council_id]', council.id, f.object.council_id == council.id
+            = council.name
+
+    .pure-controls
+      = f.submit 'Save', class: 'pure-button'

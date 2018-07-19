@@ -1,4 +1,4 @@
-%h1 Listing user
+%h2 Listing users
 
 %p
   = link_to new_user_invitation_path, class: 'pure-button' do
@@ -18,12 +18,14 @@
       %tr
         %td= user.email
         %td
-          - if user.role.present?
-            = user.role.name
+          - user.roles.each do |r|
+            %li= r.friendly_name
         %td
           - if user.council.present?
             = user.council.name
-        %td= link_to 'Show', admin_user_path(user)
+        %td
+          = link_to edit_admin_user_path(user) do
+            edit
         %td
           - if user.deactivated_at.present?
             Deactivated
