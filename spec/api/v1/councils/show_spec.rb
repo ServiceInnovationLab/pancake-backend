@@ -7,6 +7,7 @@ RSpec.describe 'councils#show', type: :request do
     jsonapi_get "/api/v1/councils/#{council.id}",
                 params: params
   end
+
   let(:params) { {} }
 
   describe 'basic fetch' do
