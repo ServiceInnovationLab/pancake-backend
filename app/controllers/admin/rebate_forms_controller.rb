@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::RebateFormsController < Admin::BaseController
-  before_action :set_admin_rebate_form, only: %i[show update destroy]
+  before_action :set_rebate_form, only: %i[show update destroy]
 
   # GET /admin/rebate_forms
   def index
@@ -28,8 +28,8 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
-    if @rebate_form.update(admin_rebate_form_params)
-      redirect_to admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
+    if @rebate_form.update(rebate_form_params)
+      redirect_to admin_rebate_forms_url, notice: 'Rebate form was successfully updated.'
     else
       render :edit
     end
@@ -48,12 +48,13 @@ class Admin::RebateFormsController < Admin::BaseController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_admin_rebate_form
+  def set_rebate_form
     @rebate_form = RebateForm.find(params[:id])
+    authorize @rebate_form
   end
 
   # Only allow a trusted parameter "white list" through.
-  def admin_rebate_form_params
+  def rebate_form_params
     params.require(:rebate_form).permit(:valuation_id, :token, attachments: [])
   end
 end
