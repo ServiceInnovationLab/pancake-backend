@@ -7,7 +7,6 @@ class Admin::UsersController < Admin::BaseController
     @users = policy_scope(User).with_deleted.order(:email)
   end
 
-  def show; end
   def edit; end
 
   def update
