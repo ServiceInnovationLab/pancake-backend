@@ -13,7 +13,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     end
 
     let(:invalid_attributes) do
-      {valuation_id: 1}
+      { valuation_id: 1 }
     end
 
     describe 'GET #index' do
