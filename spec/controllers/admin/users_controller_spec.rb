@@ -3,10 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe Admin::UsersController, type: :controller do
-  let(:admin_user) { FactoryBot.create :admin_user }
+  let!(:user) { FactoryBot.create :user }
+
+  context 'signed in with no roles' do
+  end
+  context 'signed in as council' do
+  end
 
   context 'signed in as admin' do
-    let!(:user) { FactoryBot.create :user }
+    let(:admin_user) { FactoryBot.create :admin_user }
     before { sign_in admin_user }
     describe 'GET #index' do
       it 'assigns all users as @users' do
@@ -16,9 +21,9 @@ RSpec.describe Admin::UsersController, type: :controller do
       end
     end
 
-    describe 'GET #show' do
+    describe 'GET #edit' do
       it 'assigns the requested user as @user' do
-        get :show, params: { id: user.to_param }
+        get :edit, params: { id: user.to_param }
         expect(assigns(:user)).to eq(user)
       end
     end

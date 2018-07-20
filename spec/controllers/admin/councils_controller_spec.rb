@@ -3,9 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Admin::CouncilsController, type: :controller do
-  let(:admin_user) { FactoryBot.create :admin_user }
+  let!(:council) { FactoryBot.create :council }
 
   context 'signed in as admin' do
+    let(:admin_user) { FactoryBot.create :admin_user }
     before { sign_in admin_user }
 
     let(:valid_attributes) do
@@ -13,11 +14,11 @@ RSpec.describe Admin::CouncilsController, type: :controller do
     end
 
     let(:invalid_attributes) do
-      skip('Add a hash of attributes invalid for your model')
+      { name: '', active: true }
     end
+
     describe 'GET #index' do
       it 'assigns all councils as @councils' do
-        council = Council.create! valid_attributes
         get :index, params: {}
         expect(assigns(:councils)).to eq([council])
       end
@@ -25,7 +26,6 @@ RSpec.describe Admin::CouncilsController, type: :controller do
 
     describe 'GET #show' do
       it 'assigns the requested council as @council' do
-        council = Council.create! valid_attributes
         get :show, params: { id: council.to_param }
         expect(assigns(:council)).to eq(council)
       end
@@ -40,7 +40,6 @@ RSpec.describe Admin::CouncilsController, type: :controller do
 
     describe 'GET #edit' do
       it 'assigns the requested council as @council' do
-        council = Council.create! valid_attributes
         get :edit, params: { id: council.to_param }
         expect(assigns(:council)).to eq(council)
       end
@@ -82,24 +81,22 @@ RSpec.describe Admin::CouncilsController, type: :controller do
     describe 'PUT #update' do
       context 'with valid params' do
         let(:new_attributes) do
-          skip('Add a hash of attributes valid for your model')
+          { name: 'Hamilton', active: true }
         end
 
         it 'updates the requested council' do
-          council = Council.create! valid_attributes
           put :update, params: { id: council.to_param, council: new_attributes }
           council.reload
-          skip('Add assertions for updated state')
+          expect(council.name).to eq('Hamilton')
+          expect(council.active).to eq true
         end
 
         it 'assigns the requested council as @council' do
-          council = Council.create! valid_attributes
           put :update, params: { id: council.to_param, council: valid_attributes }
           expect(assigns(:council)).to eq(council)
         end
 
         it 'redirects to the council' do
-          council = Council.create! valid_attributes
           put :update, params: { id: council.to_param, council: valid_attributes }
           expect(response).to redirect_to(admin_councils_path)
         end
@@ -107,13 +104,11 @@ RSpec.describe Admin::CouncilsController, type: :controller do
 
       context 'with invalid params' do
         it 'assigns the council as @council' do
-          council = Council.create! valid_attributes
           put :update, params: { id: council.to_param, council: invalid_attributes }
           expect(assigns(:council)).to eq(council)
         end
 
         it "re-renders the 'edit' template" do
-          council = Council.create! valid_attributes
           put :update, params: { id: council.to_param, council: invalid_attributes }
           expect(response).to render_template('edit')
         end
@@ -122,14 +117,12 @@ RSpec.describe Admin::CouncilsController, type: :controller do
 
     describe 'DELETE #destroy' do
       it 'destroys the requested council' do
-        council = Council.create! valid_attributes
         expect do
           delete :destroy, params: { id: council.to_param }
         end.to change(Council, :count).by(-1)
       end
 
       it 'redirects to the councils list' do
-        council = Council.create! valid_attributes
         delete :destroy, params: { id: council.to_param }
         expect(response).to redirect_to(admin_councils_url)
       end
