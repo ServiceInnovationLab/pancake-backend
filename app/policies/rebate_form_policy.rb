@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
 class RebateFormPolicy < ApplicationPolicy
   def index?
     user.present? && user.council_id.present?
   end
+
   def show?
     user.present? && user.council_id == record.council_id
   end
+
   def update?
     !record.fully_signed? && is_dia?
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationPolicy
   attr_reader :user, :record
 
@@ -11,7 +13,7 @@ class ApplicationPolicy
   end
 
   def show?
-    scope.where(:id => record.id).exists?
+    scope.where(id: record.id).exists?
   end
 
   def create?
@@ -56,6 +58,7 @@ class ApplicationPolicy
   def is_dia?
     user.roles.include?(dia_role)
   end
+
   def dia_role
     Role.find_by(name: 'dia')
   end

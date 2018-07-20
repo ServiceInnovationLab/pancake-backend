@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CouncilPolicy < ApplicationPolicy
   def create?
     is_dia?
@@ -8,7 +10,7 @@ class CouncilPolicy < ApplicationPolicy
   end
 
   def destroy?
-    is_dia? && ! record.rebate_forms.size.positive?
+    is_dia? && !record.rebate_forms.size.positive?
   end
 
   class Scope < Scope
