@@ -13,7 +13,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     end
 
     let(:invalid_attributes) do
-      skip('Add a hash of attributes invalid for your model')
+      {valuation_id: 1}
     end
 
     describe 'GET #index' do
@@ -33,13 +33,13 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     describe 'PUT #update' do
       context 'with valid params' do
         let(:new_attributes) do
-          skip('Add a hash of attributes valid for your model')
+          FactoryBot.build(:rebate_form).attributes.symbolize_keys
         end
 
         it 'updates the requested rebate_form' do
           put :update, params: { id: rebate_form.to_param, rebate_form: new_attributes }
           rebate_form.reload
-          skip('Add assertions for updated state')
+          expect(rebate_form.valuation_id).to eq(new_attributes[:valuation_id])
         end
 
         describe 'assigns the requested rebate_form as @rebate_form' do
