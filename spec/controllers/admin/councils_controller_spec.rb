@@ -5,6 +5,14 @@ require 'rails_helper'
 RSpec.describe Admin::CouncilsController, type: :controller do
   let!(:council) { FactoryBot.create :council }
 
+  context 'Not signed in' do
+    it 'GET #index' do
+      get :index, params: {}
+      expect(assigns(:councils)).to eq(nil)
+      expect(response.status).to eq(302)
+    end
+  end
+
   context 'signed in as admin' do
     let(:admin_user) { FactoryBot.create :admin_user }
     before { sign_in admin_user }
