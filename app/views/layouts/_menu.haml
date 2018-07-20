@@ -2,16 +2,14 @@
   .pure-menu.pure-menu-horizontal
     %ul.pure-menu-list
       - if current_user.present?
-        - if policy(RebateForm).index?
-          %li.pure-menu-item
-            = link_to admin_rebate_forms_path, class: 'pure-menu-link' do
-              = fa_icon 'wpforms'
-              rebate forms
-        - if policy(Council).new?
-          %li.pure-menu-item
-            = link_to admin_councils_path, class: 'pure-menu-link' do
-              = fa_icon 'building'
-              councils
+        %li.pure-menu-item
+          = link_to admin_rebate_forms_path, class: 'pure-menu-link' do
+            = fa_icon 'wpforms'
+            rebate forms
+        %li.pure-menu-item
+          = link_to admin_councils_path, class: 'pure-menu-link' do
+            = fa_icon 'building'
+            councils
         %li.pure-menu-item
           = link_to admin_users_path, class: 'pure-menu-link' do
             = fa_icon 'user'
