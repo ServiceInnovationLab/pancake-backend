@@ -44,16 +44,6 @@ ActiveRecord::Schema.define(version: 2018_07_18_045559) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "notes", force: :cascade do |t|
-    t.bigint "rebate_form_id"
-    t.bigint "user_id"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["rebate_form_id"], name: "index_notes_on_rebate_form_id"
-    t.index ["user_id"], name: "index_notes_on_user_id"
-  end
-
   create_table "properties", force: :cascade do |t|
     t.text "valuation_id"
     t.text "location"
@@ -166,7 +156,6 @@ ActiveRecord::Schema.define(version: 2018_07_18_045559) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "notes", "rebate_forms"
   add_foreign_key "rates_bills", "properties"
   add_foreign_key "rates_payers", "properties"
   add_foreign_key "rebate_forms", "properties"

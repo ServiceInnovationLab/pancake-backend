@@ -10,6 +10,6 @@ FactoryBot.define do
     end
   end
   factory :admin_user, parent: :user do
-    # roles { [FactoryBot.create(:janitor)] }
+    roles { [FactoryBot.create(:dia_role)] }
   end
 end
