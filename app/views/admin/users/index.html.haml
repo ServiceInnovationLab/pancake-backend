@@ -1,6 +1,6 @@
 %h2
   Users
-  - unless current_user.council.nil?
+  - if current_user.council.present?
     for #{current_user.council.name}
 
 .pure-g
