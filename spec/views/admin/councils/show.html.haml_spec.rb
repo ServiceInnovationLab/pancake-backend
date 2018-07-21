@@ -8,7 +8,7 @@ RSpec.describe 'admin/councils/show', type: :view do
       :council, Council.create!(
                   name: 'Name',
                   active: false
-                                ))
+                ))
   end
 
   it 'renders attributes in <p>' do
