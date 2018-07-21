@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'admin/councils/new', type: :view do
   before do
-    assign(:council, Council.new(
+    assign(
+:council, Council.new(
                        name: 'MyString',
                        active: false
                      ))
