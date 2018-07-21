@@ -14,7 +14,8 @@ RSpec.describe 'admin/councils/index', type: :view do
                name: 'Rua',
                active: false
              )
-           ])
+           ]
+)
   end
 
   it 'renders a list of councils' do

@@ -8,7 +8,8 @@ RSpec.describe 'admin/councils/new', type: :view do
       :council, Council.new(
                   name: 'MyString',
                   active: false
-                ))
+                )
+)
   end
 
   it 'renders new council form' do
