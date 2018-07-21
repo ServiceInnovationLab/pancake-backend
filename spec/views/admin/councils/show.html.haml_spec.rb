@@ -5,9 +5,9 @@ require 'rails_helper'
 RSpec.describe 'admin/councils/show', type: :view do
   before do
     @council = assign(
-:council, Council.create!(
-                                  name: 'Name',
-                                  active: false
+      :council, Council.create!(
+                  name: 'Name',
+                  active: false
                                 ))
   end
 
