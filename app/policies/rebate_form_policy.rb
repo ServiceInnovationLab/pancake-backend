@@ -10,11 +10,11 @@ class RebateFormPolicy < ApplicationPolicy
   end
 
   def update?
-    !record.fully_signed? && is_dia?
+    !record.fully_signed? && dia?
   end
 
   def destroy?
-    !record.fully_signed? && (is_dia? || user.council_id == record.council_id)
+    !record.fully_signed? && (dia? || user.council_id == record.council_id)
   end
 
   class Scope < Scope

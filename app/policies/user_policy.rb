@@ -2,11 +2,11 @@
 
 class UserPolicy < ApplicationPolicy
   def update?
-    is_dia?
+    dia?
   end
 
   def destroy?
-    is_dia? && record.id != user.id
+    dia? && record.id != user.id
   end
 
   class Scope < Scope

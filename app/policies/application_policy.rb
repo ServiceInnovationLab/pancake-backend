@@ -55,7 +55,7 @@ class ApplicationPolicy
 
   private
 
-  def is_dia?
+  def dia?
     user.roles.include?(dia_role)
   end
 
