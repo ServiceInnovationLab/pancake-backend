@@ -2,6 +2,8 @@
 
 class Council < ApplicationRecord
   validates :name, uniqueness: true, presence: true
+  validates :short_name, uniqueness: true, presence: true
+  validates :active, presence: true
   has_many :properties, dependent: :destroy
   has_many :rates_payers, through: :properties
   has_many :rates_bills, through: :properties

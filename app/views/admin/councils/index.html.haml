@@ -13,8 +13,8 @@
   %thead
     %tr
       %th Name
+      %th Shortname
       %th Active
-      %th
       %th
       %th
 
@@ -22,10 +22,11 @@
     - @councils.each do |council|
       %tr
         %td= council.name
+        %td= council.short_name
         %td= council.active
-        %td= link_to 'Show', admin_council_path(council)
+        / %td= link_to 'Show', admin_council_path(council), class: 'pure-button'
         - if policy(council).edit?
-          %td= link_to 'Edit', edit_admin_council_path(council)
+          %td= link_to 'Edit', edit_admin_council_path(council), class: 'pure-button'
         %td
           - if council.rebate_forms.size.positive?
             #{council.rebate_forms.size} Rebate forms collected
