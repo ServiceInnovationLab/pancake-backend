@@ -36,8 +36,12 @@ gem 'font-awesome-rails'
 
 gem 'raygun4ruby' # exception catcher/logger
 
+# Makes the pdfs
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 gem 'aws-sdk-s3' # We store images on s3
-# gem 'mini_magick' # makes image previews (and can do other stuff)
+
 gem 'image_processing'
 
 group :development do
