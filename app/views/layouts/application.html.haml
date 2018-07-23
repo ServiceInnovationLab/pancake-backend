@@ -8,7 +8,14 @@
     = csrf_meta_tags
 
   %body
-    - flash.each do |name, msg|
-      = content_tag :div, msg, class: name
-    = render 'layouts/menu'
-    #main= yield
+  #layout.pure-g
+    .pure-u-1-2
+      .header
+        %strong Rates Rebates
+        Te Whakamāmā i ngā Reiti
+    .pure-u-1-2
+      = render 'layouts/menu'
+    #main.pure-u-1
+      - flash.each do |name, msg|
+        = content_tag :div, msg, class: name
+      = yield

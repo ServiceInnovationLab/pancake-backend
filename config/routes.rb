@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :rebate_forms, only: %i[show index update destroy]
     resources :attachments, only: %i[destroy]
     resources :councils
+    resources :users
     get 'signature' => 'signatures#show'
   end
 

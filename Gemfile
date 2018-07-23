@@ -15,9 +15,14 @@ gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
+gem 'paranoia', '~> 2.2'
+
 # Logins
 gem 'devise'
 gem 'devise_invitable'
+
+# Permissions
+gem 'pundit'
 
 gem 'loofah', '>= 2.2.1'
 gem 'rails-html-sanitizer', '>= 1.0.4'

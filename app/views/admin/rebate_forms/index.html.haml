@@ -1,11 +1,17 @@
-- content_for :title, "RatesRebate"
+- content_for :title, "rebate forms"
 
-%h1 Listing Rebate forms
+%h2
+  Rebate forms
+  - unless @council.nil?
+    for #{@council.name}
 
-= form_tag(admin_rebate_forms_path, method: :get) do
-  = text_field_tag :location, @location
-  = submit_tag 'Search'
 
+.pure-g
+  .search-form.pure-u-1
+    = form_tag(admin_rebate_forms_path, method: :get, class: 'pure-form') do
+      = text_field_tag :location, @location, placeholder: "Address"
+      %button.pure-button
+        = fa_icon 'search'
 
 %p= paginate @rebate_forms
 
@@ -42,7 +48,7 @@
         %td
           = link_to 'Show', admin_rebate_form_path(rebate_form), class: 'pure-button'
         %td
-          - unless rebate_form.fully_signed?
+          - if policy(rebate_form).destroy?
             = link_to admin_rebate_form_path(rebate_form), method: :delete,
               data: { confirm: 'Are you sure?' }, class: 'pure-button' do
               = fa_icon 'trash'
