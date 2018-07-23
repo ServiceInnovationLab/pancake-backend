@@ -20,6 +20,8 @@ RSpec.describe RebateForm, type: :model do
     describe 'has both signatures' do
       it { expect(form.signatures.size).to eq 2 }
     end
+
+    it { expect(form.fully_signed?).to eq true }
   end
 
   describe 'signatures' do

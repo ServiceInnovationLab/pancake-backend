@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_17_211017) do
+ActiveRecord::Schema.define(version: 2018_07_18_045559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,16 +42,6 @@ ActiveRecord::Schema.define(version: 2018_07_17_211017) do
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "notes", force: :cascade do |t|
-    t.bigint "rebate_form_id"
-    t.bigint "user_id"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["rebate_form_id"], name: "index_notes_on_rebate_form_id"
-    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "properties", force: :cascade do |t|
@@ -92,6 +82,21 @@ ActiveRecord::Schema.define(version: 2018_07_17_211017) do
     t.integer "property_id"
     t.decimal "rebate", precision: 8, scale: 2
     t.integer "council_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "friendly_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_roles_on_name", unique: true
+  end
+
+  create_table "roles_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+    t.index ["role_id"], name: "index_roles_users_on_role_id"
+    t.index ["user_id"], name: "index_roles_users_on_user_id"
   end
 
   create_table "signature_types", force: :cascade do |t|
@@ -141,6 +146,8 @@ ActiveRecord::Schema.define(version: 2018_07_17_211017) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.datetime "deactivated_at"
+    t.integer "council_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
@@ -149,7 +156,6 @@ ActiveRecord::Schema.define(version: 2018_07_17_211017) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "notes", "rebate_forms"
   add_foreign_key "rates_bills", "properties"
   add_foreign_key "rates_payers", "properties"
   add_foreign_key "rebate_forms", "properties"

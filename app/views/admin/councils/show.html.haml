@@ -5,10 +5,12 @@
 %p
   %b Active:
   = @council.active
-%p
-  = link_to edit_admin_council_path(@council), class: 'pure-button' do
-    = fa_icon 'edit'
-    edit
+
+- if policy(@council).edit?
+  %p
+    = link_to edit_admin_council_path(@council), class: 'pure-button' do
+      = fa_icon 'edit'
+      edit
 
 %p #{@council.rebate_forms.size} Rebate forms collected
 %p #{@council.properties.size} Rateable properties in database

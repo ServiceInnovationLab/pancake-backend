@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Council < ApplicationRecord
-  validates :name, uniqueness: true
+  validates :name, uniqueness: true, presence: true
   has_many :properties, dependent: :destroy
   has_many :rates_payers, through: :properties
   has_many :rates_bills, through: :properties

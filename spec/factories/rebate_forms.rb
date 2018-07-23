@@ -10,7 +10,8 @@ FactoryBot.define do
 
   factory :signed_form, parent: :rebate_form do
     after(:create) do |rebate_form|
-      create_list(:signature, 2, rebate_form: rebate_form)
+      create(:applicant_signature, rebate_form: rebate_form)
+      create(:witness_signature, rebate_form: rebate_form)
     end
   end
 end
