@@ -4,10 +4,12 @@ require 'rails_helper'
 
 RSpec.describe 'admin/councils/show', type: :view do
   before do
-    @council = assign(:council, Council.create!(
-                                  name: 'Name',
-                                  active: false
-    ))
+    assign(
+      :council, Council.create!(
+                  name: 'Name',
+                  active: false
+      )
+    )
   end
 
   it 'renders attributes in <p>' do
