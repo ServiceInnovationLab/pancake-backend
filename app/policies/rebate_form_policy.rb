@@ -2,19 +2,19 @@
 
 class RebateFormPolicy < ApplicationPolicy
   def index?
-    user.present? && user.council_id.present?
+    dia? || same_council?
   end
 
   def show?
-    user.present? && user.council_id == record.council_id
+    dia? || same_council?
   end
 
   def update?
-    !record.fully_signed? && dia?
+    (dia? || same_council?) && !record.fully_signed?
   end
 
   def destroy?
-    !record.fully_signed? && (dia? || user.council_id == record.council_id)
+    (dia? || same_council?) && !record.fully_signed?
   end
 
   class Scope < Scope

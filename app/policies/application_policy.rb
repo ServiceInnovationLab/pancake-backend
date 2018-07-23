@@ -55,8 +55,13 @@ class ApplicationPolicy
 
   private
 
+  # User is in the same council as the record
+  def same_council?
+    user.present? && user.council.present? && record.council.present? && user.council_id == record.council.id
+  end
+
   def dia?
-    user.roles.include?(dia_role)
+    user.present? && user.roles.include?(dia_role)
   end
 
   def dia_role
