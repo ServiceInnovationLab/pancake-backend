@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %title PDF
+    = wicked_pdf_stylesheet_link_tag "pdf"
+    = wicked_pdf_stylesheet_link_tag "purecss"
+  %body
+    %header.main-header
+      .container
+        <!-- = image_tag wicked_pdf_asset_base64('dia.png') -->
+        %p.heading
+          2017/2018 Rates Rebate
+          Application form
+        %span
+          %strong Rates Rebates
+          Te Whakamāmā i ngā Reiti
+    =yield

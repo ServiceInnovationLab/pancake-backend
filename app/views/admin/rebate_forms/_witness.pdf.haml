@@ -1,0 +1,8 @@
+%p
+  / %p= image_tag(signature_image_path(signature), alt: 'signature')
+  = signature.name.presence || "no name"
+  %br/
+  = signature.role.presence || "no role specified"
+  %br/
+  = signature.created_at.localtime
+  %br/
