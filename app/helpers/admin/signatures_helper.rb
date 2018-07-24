@@ -11,7 +11,7 @@ module Admin::SignaturesHelper
 
   def signature_for_pdf(signature)
     file = Tempfile.new(["signature-#{signature.id}", '.png'], encoding: 'ascii-8bit')
-    file.write(Base64.decode64 signature.image)
+    file.write(Base64.decode64(signature.image))
     wicked_pdf_image_tag file.path, width: 100, height: 100, alt: 'signature', border: 1
   end
 end

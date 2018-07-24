@@ -28,7 +28,7 @@ class Admin::RebateFormsController < Admin::BaseController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf' #, show_as_html: true
+        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf'
       end
     end
   end

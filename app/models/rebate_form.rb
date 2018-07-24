@@ -16,12 +16,8 @@ class RebateForm < ApplicationRecord
   validate :same_council
   validate :only_completed_forms_in_batch
 
-  # after_create :send_emails
+  after_create :send_emails
   has_many_attached :attachments
-
-  scope :signed, -> { joins(:signatures).joins(signatures: :signature_type).where("signature_types.name": 'applicant') }
-  scope :witnessed, -> { joins(:signatures).joins(signatures: :signature_type).where("signature_types.name": 'witness') }
-  scope :signed_and_witnessed, -> { signed.witnessed }
 
   def calc_rebate_amount!
     year = ENV['YEAR']
@@ -64,7 +60,6 @@ class RebateForm < ApplicationRecord
   def set_property_id
     self.property = Property.find_by(valuation_id: valuation_id)
   end
-
 
   def new_token
     SecureRandom.hex(rand(40..60))
