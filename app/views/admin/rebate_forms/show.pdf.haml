@@ -30,7 +30,6 @@
         %p=rebate_form_amount(@rebate_form)
 
       .pure-u-1-4
-        = render 'rates', bill: @rebate_form.property.rates_bills
         %h3 Rates
         %table
           - @rebate_form.property.rates_bills.each do |bill|
