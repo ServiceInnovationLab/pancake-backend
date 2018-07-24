@@ -3,6 +3,8 @@
 class RebateForm < ApplicationRecord
   has_many :signatures, dependent: :destroy
   belongs_to :property, required: true
+  belongs_to :batch, required: false
+
   delegate :council, to: :property
 
   after_initialize :set_token
@@ -11,9 +13,14 @@ class RebateForm < ApplicationRecord
   validates :valuation_id, presence: true
   validates :token, presence: true
   validate :required_fields_present
+  validate :same_council
 
-  after_create :send_emails
+  # after_create :send_emails
   has_many_attached :attachments
+
+  scope :signed, -> { joins(:signatures).joins(signatures: :signature_type).where("signature_types.name": 'applicant') }
+  scope :witnessed, -> { joins(:signatures).joins(signatures: :signature_type).where("signature_types.name": 'witness') }
+  scope :signed_and_witnessed, -> { signed.witnessed }
 
   def calc_rebate_amount!
     year = ENV['YEAR']
@@ -78,5 +85,9 @@ class RebateForm < ApplicationRecord
     %w[income dependants full_name].each do |field|
       errors.add(:fields, "must include #{field}") if fields[field].blank?
     end
+  end
+
+  def same_council
+    errors.add(:batch_id, 'council must match') if batch.present? && property.council_id != batch.council_id
   end
 end

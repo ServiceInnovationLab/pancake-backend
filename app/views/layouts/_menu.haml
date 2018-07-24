@@ -4,8 +4,12 @@
       - if current_user.present?
         %li.pure-menu-item
           = link_to admin_rebate_forms_path, class: 'pure-menu-link' do
-            = fa_icon 'wpforms'
+            = fa_icon 'edit'
             rebate forms
+        %li.pure-menu-item
+          = link_to admin_batches_path, class: 'pure-menu-link' do
+            = fa_icon 'download'
+            batches
         %li.pure-menu-item
           = link_to admin_councils_path, class: 'pure-menu-link' do
             = fa_icon 'building'
@@ -14,6 +18,7 @@
           = link_to admin_users_path, class: 'pure-menu-link' do
             = fa_icon 'user'
             users
+        %li.pure-menu-item=current_user.email
         %li.pure-menu-item
           = link_to destroy_user_session_path, method: :delete, class: 'pure-button' do
             = fa_icon 'sign-out'

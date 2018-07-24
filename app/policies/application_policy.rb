@@ -61,10 +61,6 @@ class ApplicationPolicy
   end
 
   def dia?
-    user.present? && user.roles.include?(dia_role)
-  end
-
-  def dia_role
-    Role.find_by(name: 'dia')
+    user.present? && user.dia?
   end
 end

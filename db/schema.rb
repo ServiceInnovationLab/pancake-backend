@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_18_045559) do
+ActiveRecord::Schema.define(version: 2018_07_23_043847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,33 @@ ActiveRecord::Schema.define(version: 2018_07_18_045559) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "batches", force: :cascade do |t|
+    t.float "amount"
+    t.integer "claim_count"
+    t.text "download_link"
+    t.bigint "council_id"
+    t.datetime "batch_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["council_id"], name: "index_batches_on_council_id"
+  end
+
   create_table "councils", force: :cascade do |t|
     t.string "name"
     t.string "short_name"
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.bigint "rebate_form_id"
+    t.bigint "user_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rebate_form_id"], name: "index_notes_on_rebate_form_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "properties", force: :cascade do |t|
@@ -51,6 +72,7 @@ ActiveRecord::Schema.define(version: 2018_07_18_045559) do
     t.text "town_city"
     t.text "meta"
     t.integer "council_id"
+    t.index ["council_id"], name: "index_properties_on_council_id"
     t.index ["valuation_id"], name: "index_properties_on_valuation_id", unique: true
   end
 
@@ -82,6 +104,7 @@ ActiveRecord::Schema.define(version: 2018_07_18_045559) do
     t.integer "property_id"
     t.decimal "rebate", precision: 8, scale: 2
     t.integer "council_id"
+    t.integer "batch_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -156,8 +179,10 @@ ActiveRecord::Schema.define(version: 2018_07_18_045559) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "notes", "rebate_forms"
   add_foreign_key "rates_bills", "properties"
   add_foreign_key "rates_payers", "properties"
+  add_foreign_key "rebate_forms", "batches"
   add_foreign_key "rebate_forms", "properties"
   add_foreign_key "signatures", "rebate_forms"
   add_foreign_key "signatures", "signature_types"

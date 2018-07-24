@@ -1,0 +1,31 @@
+- content_for :title, "BATCHES"
+
+%h2
+  Batches
+  - unless @council.nil?
+    for #{@council.name}
+
+= form_for [:admin, Batch.new], class: 'pure-form pure-form-aligned' do |f|
+  = f.submit "Make next Batch", class: 'pure-button'
+
+%table.pure-table.pure-table-bordered
+  %thead
+    %tr
+      %th Batch no
+      %th council
+      %th Amount
+      %th Date
+      %th Claim count
+      %th Download
+
+  %tbody
+    - @batches.each do |batch|
+      %tr
+        %td= batch.id
+        %td= batch.council.name
+        %td= batch.amount
+        %td= batch.batch_date
+        %td= batch.claim_count
+        %td
+          = link_to(admin_batch_path(batch, format: :pdf), class: 'pure-button') do
+            = fa_icon 'download'
