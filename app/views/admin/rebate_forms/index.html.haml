@@ -27,7 +27,7 @@
 
   %tbody
     - @rebate_forms.each do |rebate_form|
-      %tr{ class: rebate_form.fully_signed? ? 'pure-table-odd' : '' }
+      %tr{ class: rebate_form.completed ? 'pure-table-odd' : '' }
         %td= rebate_form.valuation_id
         %td= rebate_form.fields['full_name']
         %td

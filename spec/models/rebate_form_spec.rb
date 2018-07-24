@@ -21,7 +21,7 @@ RSpec.describe RebateForm, type: :model do
       it { expect(form.signatures.size).to eq 2 }
     end
 
-    it { expect(form.fully_signed?).to eq true }
+    it { expect(form.completed).to eq true }
   end
 
   describe 'signatures' do

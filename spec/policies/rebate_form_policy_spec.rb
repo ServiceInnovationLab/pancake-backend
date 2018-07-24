@@ -26,7 +26,7 @@ describe RebateFormPolicy do
 
     describe 'with a fully signed form' do
       let(:rebate_form) { FactoryBot.create(:signed_form) }
-      it { expect(rebate_form.fully_signed?).to eq(true) }
+      it { expect(rebate_form.completed).to eq(true) }
       it { is_expected.to permit(:show) }
       it { is_expected.not_to permit(:update)  }
       it { is_expected.not_to permit(:edit)    }

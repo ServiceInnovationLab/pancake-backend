@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2018_07_23_043847) do
     t.decimal "rebate", precision: 8, scale: 2
     t.integer "council_id"
     t.integer "batch_id"
+    t.boolean "completed"
   end
 
   create_table "roles", force: :cascade do |t|

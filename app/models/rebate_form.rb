@@ -9,6 +9,7 @@ class RebateForm < ApplicationRecord
 
   after_initialize :set_token
   before_validation :set_property_id
+  before_validation :set_completed
 
   validates :valuation_id, presence: true
   validates :token, presence: true
@@ -42,10 +43,6 @@ class RebateForm < ApplicationRecord
     fields['income']
   end
 
-  def fully_signed?
-    applicant_signature.present? && witness_signature.present?
-  end
-
   def applicant_signature
     signatures.applicant.first
   end
@@ -66,6 +63,10 @@ class RebateForm < ApplicationRecord
 
   def set_property_id
     self.property = Property.find_by(valuation_id: valuation_id)
+  end
+
+  def set_completed
+    self.completed = (applicant_signature.present? && witness_signature.present?)
   end
 
   def new_token

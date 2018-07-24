@@ -79,7 +79,7 @@
 /   .pure-u-1
 /     .pure-g
 /       .pure-u-1-2
-/         - if @rebate_form.fully_signed?
+/         - if @rebate_form.completed
 /           = render 'signatures'
 /         - else
 /           = render 'sign_button', rebate_form: @rebate_form
