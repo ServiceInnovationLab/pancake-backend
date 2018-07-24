@@ -1,11 +1,16 @@
-
-
+= wicked_pdf_image_tag 'dia.png'
+%h1 Rates Rebates
+%h2 Gov Lab Alpha
 %h3
   COVER PAGE for Pancake batch
   = @batch.id
   %p
+    = @batch.created_at
+  %p
+    Total claimed rebates =
     $
     = @batch.amount
+
 
 - @batch.rebate_forms.each do |rebate_form|
   .pdf-page-break= render 'admin/rebate_forms/artefact', rebate_form: rebate_form
