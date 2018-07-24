@@ -6,6 +6,7 @@ FactoryBot.define do
     property { FactoryBot.create :property, valuation_id: valuation_id }
     # token <-- auto generated. Don't set in factory
     fields("full_name": 'Fred', "income": 0, dependants: 0)
+    completed false
   end
 
   factory :signed_form, parent: :rebate_form do
