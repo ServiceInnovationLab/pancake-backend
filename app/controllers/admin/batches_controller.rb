@@ -10,9 +10,18 @@ class Admin::BatchesController < Admin::BaseController
   end
 
   def show
-    pdf_file_as_String = WickedPdf.new.pdf_from_string(
-      render_to_string('admin/rebate_forms/index.pdf.haml', layout: 'pdf')
-    )
+    @batch = Batch.find(params[:id])
+    authorize @batch
+    # pdf_file_as_String = WickedPdf.new.pdf_from_string(
+    #   render_to_string('admin/rebate_forms/index.pdf.haml', layout: 'pdf')
+    # )
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf' #, show_as_html: true
+      end
+    end
   end
 
   def create
@@ -41,5 +50,11 @@ class Admin::BatchesController < Admin::BaseController
       end
     end
     redirect_to admin_batches_path
+  end
+
+  private
+
+  def pdf_filename
+    "batch-#{@batch.council.short_name}-#{@batch.id}"
   end
 end
