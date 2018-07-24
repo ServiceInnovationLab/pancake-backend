@@ -1,0 +1,6 @@
+
+= @batch.id
+
+- @batch.rebate_forms.each do |rebate_form|
+  = rebate_form.id
+  = render 'admin/rebate_forms/artefact', rebate_form: rebate_form
