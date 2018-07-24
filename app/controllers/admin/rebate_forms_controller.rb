@@ -24,6 +24,13 @@ class Admin::RebateFormsController < Admin::BaseController
     SignatureType.order(:name).all.each do |st|
       @signatures[st.name] = @rebate_form.signatures.where(signature_type: st).order(created_at: :desc).first
     end
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf' #, show_as_html: true
+      end
+    end
   end
 
   # PATCH/PUT /admin/rebate_forms/1
@@ -56,5 +63,9 @@ class Admin::RebateFormsController < Admin::BaseController
   # Only allow a trusted parameter "white list" through.
   def rebate_form_params
     params.require(:rebate_form).permit(:valuation_id, :token, attachments: [])
+  end
+
+  def pdf_filename
+    "rebate-#{@rebate_form.council.short_name}-#{@rebate_form.id}"
   end
 end

@@ -18,7 +18,7 @@
 %table.pure-table.pure-table-bordered
   %thead
     %tr
-      %th valuation_id
+      %th Valuation Id
       %th Applicant
       %th Address
       %th When
@@ -41,12 +41,14 @@
         %td= rebate_form.created_at.localtime
         %td
           - if rebate_form.applicant_signature.present?
-            = rebate_form.applicant_signature.created_at.localtime
+            = link_to admin_rebate_form_path(rebate_form, format: 'pdf'), class: 'pure-button' do
+              = fa_icon 'download'
           - else
-            = render 'sign_button', rebate_form: rebate_form
+            = render 'sign_button', rebate_form: rebate_form, class: 'pure-button pure-button-primary'
         %td= render 'witness', signature: rebate_form.witness_signature
         %td
-          = link_to 'Show', admin_rebate_form_path(rebate_form), class: 'pure-button'
+          = link_to admin_rebate_form_path(rebate_form), class: 'pure-button' do
+            show
         %td
           - if policy(rebate_form).destroy?
             = link_to admin_rebate_form_path(rebate_form), method: :delete,
