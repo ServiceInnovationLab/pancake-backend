@@ -6,10 +6,12 @@ module RebateFormsHelper
     return pluralize(dependants_count, 'dependant') if dependants_count.positive?
     'no'
   end
+
   def rebate_form_pdf_home_business(rebate_form)
     rebate_form.fields['has_home_business'] == 'yes' ? 'yes' : 'no'
   end
+
   def rebate_form_amount(rebate_form)
-    "$#{sprintf('%.2f', rebate_form.rebate)}"
+    "$#{format('%.2f', rebate_form.rebate)}"
   end
 end
