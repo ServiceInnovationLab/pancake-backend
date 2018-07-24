@@ -9,12 +9,12 @@ class RebateForm < ApplicationRecord
 
   after_initialize :set_token
   before_validation :set_property_id
-  before_validation :set_completed
 
   validates :valuation_id, presence: true
   validates :token, presence: true
   validate :required_fields_present
   validate :same_council
+  validate :only_completed_forms_in_batch
 
   # after_create :send_emails
   has_many_attached :attachments
@@ -65,9 +65,6 @@ class RebateForm < ApplicationRecord
     self.property = Property.find_by(valuation_id: valuation_id)
   end
 
-  def set_completed
-    self.completed = (applicant_signature.present? && witness_signature.present?)
-  end
 
   def new_token
     SecureRandom.hex(rand(40..60))
@@ -90,5 +87,9 @@ class RebateForm < ApplicationRecord
 
   def same_council
     errors.add(:batch_id, 'council must match') if batch.present? && property.council_id != batch.council_id
+  end
+
+  def only_completed_forms_in_batch
+    errors.add(:batch_id, 'uncompleted forms cannot be in a batch') if batch_id.present? && !completed
   end
 end
