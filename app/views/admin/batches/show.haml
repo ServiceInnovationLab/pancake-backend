@@ -1,6 +1,11 @@
 
-= @batch.id
+
+%h3
+  COVER PAGE for Pancake batch
+  = @batch.id
+  %p
+    $
+    = @batch.amount
 
 - @batch.rebate_forms.each do |rebate_form|
-  = rebate_form.id
-  = render 'admin/rebate_forms/artefact', rebate_form: rebate_form
+  .pdf-page-break= render 'admin/rebate_forms/artefact', rebate_form: rebate_form
