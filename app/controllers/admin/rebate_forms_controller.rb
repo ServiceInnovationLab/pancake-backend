@@ -44,7 +44,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # DELETE /admin/rebate_forms/1
   def destroy
-    if @rebate_form.fully_signed?
+    if @rebate_form.completed
       redirect_to admin_rebate_forms_url, notice: 'Cannot delete signed forms.'
     else
       @rebate_form.destroy

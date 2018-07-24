@@ -14,5 +14,11 @@ class CreateBatches < ActiveRecord::Migration[5.2]
     add_foreign_key :rebate_forms, :batches
 
     add_index :properties, :council_id
+
+    add_column :rebate_forms, :completed, :boolean
+    RebateForm.all.each do |rf|
+      completed = rf.applicant_signature.present? && rf.witness_signature.present?
+      rf.update(completed: completed)
+    end
   end
 end

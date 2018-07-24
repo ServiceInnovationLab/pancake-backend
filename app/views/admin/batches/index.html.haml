@@ -5,8 +5,12 @@
   - unless @council.nil?
     for #{@council.name}
 
-= form_for [:admin, Batch.new], class: 'pure-form pure-form-aligned' do |f|
-  = f.submit "Make next Batch", class: 'pure-button'
+
+- if @unbatched_count.positive?
+  %p #{@unbatched_count} fully signed forms not in a batch yet.
+  = form_for [:admin, Batch.new], class: 'pure-form pure-form-aligned' do |f|
+    = f.submit "Make next Batch", class: 'pure-button'
+
 
 %table.pure-table.pure-table-bordered
   %thead
