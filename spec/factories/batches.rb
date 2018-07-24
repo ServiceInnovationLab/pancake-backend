@@ -2,7 +2,6 @@
 
 FactoryBot.define do
   factory :batch do
-    batch_no 1
     amount 1.5
     claim_count 1
     download_link 'MyText'
