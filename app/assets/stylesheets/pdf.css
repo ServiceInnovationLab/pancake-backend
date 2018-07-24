@@ -1,3 +1,7 @@
+.pdf-page-break {
+  page-break-before: always;
+}
+
 body {
   font-family: 'Fira Sans', sans-serif;
 }
