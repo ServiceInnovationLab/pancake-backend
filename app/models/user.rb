@@ -10,4 +10,14 @@ class User < ApplicationRecord
   has_and_belongs_to_many :roles
 
   belongs_to :council, required: false
+
+  def dia?
+    roles.include?(dia_role)
+  end
+
+  private
+
+  def dia_role
+    Role.find_by(name: 'dia')
+  end
 end

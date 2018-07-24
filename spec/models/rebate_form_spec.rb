@@ -57,4 +57,35 @@ RSpec.describe RebateForm, type: :model do
 
     it { expect(form.rebate).to eq 370.67 }
   end
+
+  describe 'signed scopes' do
+    let!(:signed_form) do
+      FactoryBot.create :rebate_form, property: property, valuation_id: valuation_id,
+      signatures: [FactoryBot.create(:applicant_signature)]
+    end
+    let!(:witnessed_form) do
+      FactoryBot.create :rebate_form, property: property, valuation_id: valuation_id,
+      signatures: [FactoryBot.create(:witness_signature)]
+    end
+    let!(:fully_signed_form) do
+      FactoryBot.create :rebate_form, property: property, valuation_id: valuation_id,
+      signatures: [FactoryBot.create(:applicant_signature), FactoryBot.create(:witness_signature)]
+    end
+    describe "signed" do
+      it { expect(RebateForm.signed).to include(signed_form)}
+      it { expect(RebateForm.signed).to include(fully_signed_form)}
+      it { expect(RebateForm.signed).not_to include(witnessed_form)}
+    end
+    describe "witnessed" do
+      it { expect(RebateForm.witnessed).to include(witnessed_form)}
+      it { expect(RebateForm.witnessed).to include(fully_signed_form)}
+      it { expect(RebateForm.witnessed).not_to include(signed_form)}
+    end
+    describe "fully signed" do
+      it { expect(RebateForm.signed_and_witnessed).to include(fully_signed_form)}
+      it { expect(RebateForm.signed_and_witnessed).not_to include(signed_form)}
+      it { expect(RebateForm.signed_and_witnessed).not_to include(witnessed_form)}
+
+    end
+  end
 end

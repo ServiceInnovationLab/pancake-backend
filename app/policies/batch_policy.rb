@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
-class RebateFormPolicy < ApplicationPolicy
+class BatchPolicy < ApplicationPolicy
   def index?
     dia? || same_council?
   end
 
   def show?
+    dia? || same_council?
+  end
+
+  def create?
     dia? || same_council?
   end
 
@@ -19,12 +23,10 @@ class RebateFormPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.dia?
+      if user.present?
         scope.all
-      elsif user.present?
-        scope.joins(:property).where(council_id: user.council_id)
       else
-        scope.none
+        scope.where(council_id: user.council_id)
       end
     end
   end
