@@ -11,11 +11,13 @@ RSpec.describe 'admin/councils/index', type: :view do
         FactoryBot.create(
           :council,
           name: 'Tahi',
-          active: false),
+          active: false
+),
         FactoryBot.create(
           :council,
           name: 'Rua',
-          active: false)
+          active: false
+)
       ]
     )
   end
