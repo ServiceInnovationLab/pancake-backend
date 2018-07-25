@@ -8,10 +8,12 @@ RSpec.describe 'admin/councils/index', type: :view do
   before do
     assign(
       :councils, [
-        FactoryBot.create(:council,
+        FactoryBot.create(
+:council,
                           name: 'Tahi',
                           active: false),
-        FactoryBot.create(:council,
+        FactoryBot.create(
+:council,
                           name: 'Rua',
                           active: false)
       ]
