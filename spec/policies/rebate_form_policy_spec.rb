@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe RebateFormPolicy do
-  subject { RebateFormPolicy.new(user, rebate_form) }
+  subject { described_class.new(user, rebate_form) }
 
   shared_examples 'can do nothing' do
     let(:rebate_form) { FactoryBot.create(:rebate_form) }
