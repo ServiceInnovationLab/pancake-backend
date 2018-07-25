@@ -1,7 +1,12 @@
 - content_for :title, "RatesRebate #{@rebate_form.property.location}"
-%p= link_to 'Back', admin_rebate_forms_path, class: 'pure-button'
-%p#notice= notice
+%p
+  = link_to 'Back', admin_rebate_forms_path, class: 'pure-button'
 
+  - if @rebate_form.applicant_signature.present?
+    = link_to admin_rebate_form_path(@rebate_form, format: 'pdf'), class: 'pure-button' do
+      = fa_icon 'download'
+
+%p#notice= notice
 
 %h2
   Application for
