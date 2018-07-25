@@ -44,7 +44,7 @@ a:focus {
 .header {
   text-align: left;
   /*top: auto;*/
-  margin: 0em auto;
+  margin: 0 auto;
   padding: 1em;
 }
 
