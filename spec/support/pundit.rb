@@ -8,8 +8,8 @@ module PunditViewPolicy
       controller.singleton_class.class_eval do
         def policy(_instance)
           Class.new do
-            def method_missing(*_args); 
-              true; 
+            def method_missing(*_args);
+              true;
             end
           end.new
         end
