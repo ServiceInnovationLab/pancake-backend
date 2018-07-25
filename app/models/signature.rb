@@ -10,6 +10,7 @@ class Signature < ApplicationRecord
 
   after_save :update_form_completed
   after_destroy :update_form_completed
+  delegate :council, to: :property
 
   def update_form_completed
     rebate_form.completed = (rebate_form.applicant_signature.present? && rebate_form.witness_signature.present?)
