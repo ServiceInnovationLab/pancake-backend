@@ -19,6 +19,7 @@ RSpec.describe RebateForm, type: :model do
     describe 'factorybot makes both signatures' do
       it { expect(form.signatures.size).to eq 2 }
     end
+
     it { expect(form.completed).to eq true }
   end
 

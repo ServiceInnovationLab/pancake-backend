@@ -11,6 +11,7 @@ RSpec.describe 'RebateForm', type: :feature do
       expect(page).to have_text('Forgot your password?')
     end
   end
+
   context 'signed in as dia' do
     let(:user) { FactoryBot.create :admin_user }
     before { login_as(user, scope: :user) }
@@ -23,6 +24,7 @@ RSpec.describe 'RebateForm', type: :feature do
       expect(page).to have_text(rebate_form.fields['full_name'])
     end
   end
+
   context 'signed in as council' do
   end
 end

@@ -23,6 +23,7 @@ RSpec.describe Signature, type: :model do
       it { expect(witness.image.present?).to eq true }
     end
   end
+
   it 'updated form gets marked completed' do
     expect(rebate_form.completed).to eq false
 

@@ -7,6 +7,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
   context 'signed in with no roles' do
   end
+
   context 'signed in as council' do
   end
 
