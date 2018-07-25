@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::RebateFormsController, type: :controller do
   let(:rebate_form) { FactoryBot.create :rebate_form }
+
   context 'signed in as admin' do
     let(:admin_user) { FactoryBot.create :admin_user }
     before { sign_in admin_user }

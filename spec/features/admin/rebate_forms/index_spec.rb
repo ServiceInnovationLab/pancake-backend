@@ -14,6 +14,7 @@ RSpec.describe 'RebateForm', type: :feature do
 
   context 'signed in as dia' do
     let(:user) { FactoryBot.create :admin_user }
+
     before { login_as(user, scope: :user) }
     it ' Can see rebate forms' do
       visit '/admin/rebate_forms'

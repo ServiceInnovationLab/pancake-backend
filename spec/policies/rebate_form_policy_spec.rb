@@ -18,6 +18,7 @@ describe RebateFormPolicy do
   shared_examples 'can modify only unsigned forms' do
     describe 'unsigned form' do
       let(:rebate_form) { FactoryBot.create(:rebate_form) }
+
       it { is_expected.to permit(:show)    }
       it { is_expected.to permit(:update)  }
       it { is_expected.to permit(:edit)    }
@@ -26,6 +27,7 @@ describe RebateFormPolicy do
 
     describe 'with a fully signed form' do
       let(:rebate_form) { FactoryBot.create(:signed_form) }
+
       it { expect(rebate_form.completed).to eq(true) }
       it { is_expected.to permit(:show) }
       it { is_expected.not_to permit(:update)  }
@@ -36,26 +38,31 @@ describe RebateFormPolicy do
 
   context 'for a visitor' do
     let(:user) { nil }
+
     include_examples 'can do nothing'
   end
 
   context 'for a user with no council' do
     let(:user) { FactoryBot.create(:user, council: nil) }
+
     include_examples 'can do nothing'
   end
 
   context 'for a user with same council' do
     let(:user) { FactoryBot.create(:user, council_id: rebate_form.council.id) }
+
     include_examples 'can modify only unsigned forms'
   end
 
   context 'for a user with different council' do
     let(:user) { FactoryBot.create(:user, council: nil) }
+
     include_examples 'can do nothing'
   end
 
   context 'for a user from DIA' do
     let(:user) { FactoryBot.create(:admin_user, council: nil) }
+
     include_examples 'can modify only unsigned forms'
   end
 end

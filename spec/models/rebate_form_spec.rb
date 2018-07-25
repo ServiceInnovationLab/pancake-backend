@@ -16,6 +16,7 @@ RSpec.describe RebateForm, type: :model do
 
   describe 'Signed form' do
     let(:form) { FactoryBot.create :signed_form, property: property, valuation_id: valuation_id }
+
     describe 'factorybot makes both signatures' do
       it { expect(form.signatures.size).to eq 2 }
     end
