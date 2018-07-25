@@ -15,6 +15,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     let(:admin_user) { FactoryBot.create :admin_user }
 
     before { sign_in admin_user }
+
     describe 'GET #index' do
       it 'assigns all users as @users' do
         get :index

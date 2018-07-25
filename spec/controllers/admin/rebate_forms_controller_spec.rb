@@ -20,6 +20,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     describe 'GET #index' do
       describe 'assigns all rebate_forms as @rebate_forms' do
         before { get :index, params: {} }
+
         it { expect(assigns(:rebate_forms)).to eq([rebate_form]) }
       end
     end
@@ -27,6 +28,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     describe 'GET #show' do
       describe 'assigns the requested rebate_form as @rebate_form' do
         before { get :show, params: { id: rebate_form.to_param } }
+
         it { expect(assigns(:rebate_form)).to eq(rebate_form) }
       end
     end
@@ -45,11 +47,13 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
         describe 'assigns the requested rebate_form as @rebate_form' do
           before { put :update, params: { id: rebate_form.to_param, rebate_form: valid_attributes } }
+
           it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         end
 
         describe 'redirects to the rebate_form' do
           before { put :update, params: { id: rebate_form.to_param, rebate_form: valid_attributes } }
+
           it { expect(response).to redirect_to(admin_rebate_forms_url) }
         end
       end
@@ -57,6 +61,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       context 'with invalid params' do
         describe 'assigns the rebate_form as @rebate_form' do
           before { put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes } }
+
           it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         end
 

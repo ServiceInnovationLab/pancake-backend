@@ -16,6 +16,7 @@ RSpec.describe 'RebateForm', type: :feature do
     let(:user) { FactoryBot.create :admin_user }
 
     before { login_as(user, scope: :user) }
+
     it ' Can see rebate forms' do
       visit '/admin/rebate_forms'
       expect(page).to have_text(rebate_form.fields['full_name'])
