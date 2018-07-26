@@ -15,8 +15,10 @@ class CouncilPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.present?
+      if user.dia?
         scope.all
+      elsif user.present? && user.council.present?
+        scope.where(id: user.council_id)
       else
         scope.none
       end
