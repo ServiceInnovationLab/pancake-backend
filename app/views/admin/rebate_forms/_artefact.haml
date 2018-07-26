@@ -67,11 +67,11 @@
           solemnly and sincerely declare that I believe the information I have given on this form is true and correct, and I make this solemn declaration conscientiously believing the same to be true and by virtue of the Oaths and Declarations Act 1957.
 
       .pure-u-1-4
-        = signature_for_pdf(@rebate_form.applicant_signature)
+        = signature_for_pdf(rebate_form.applicant_signature)
 
     .pure-g
       .pure-u-1-2
         %h3 At [TIMESTAMP] before me
         = render 'admin/rebate_forms/witness', signature: rebate_form.signatures.witness.last
       .pure-u-1-4
-        = signature_for_pdf(@rebate_form.witness_signature)
+        = signature_for_pdf(rebate_form.witness_signature)
