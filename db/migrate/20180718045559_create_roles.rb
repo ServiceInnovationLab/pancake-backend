@@ -15,11 +15,11 @@ class CreateRoles < ActiveRecord::Migration[5.2]
       t.belongs_to :role, index: true, null: false
     end
 
-    dia_role = Role.create name: 'dia', friendly_name: 'Te Tari Taiwhenua'
-    rates_team = Role.create name: 'rates', friendly_name: 'Council rates staff'
-    frontline = Role.create name: 'frontline', friendly_name: 'Council frontline staff'
+    dia_role = Role.find_or_create_by name: 'dia', friendly_name: 'Te Tari Taiwhenua'
+    rates_team = Role.find_or_create_by name: 'rates', friendly_name: 'Council rates staff'
+    frontline = Role.find_or_create_by name: 'frontline', friendly_name: 'Council frontline staff'
 
-    tauranga = Council.find_by(name: 'Tauranga City Council')
+    tauranga = Council.find_or_create_by(name: 'Tauranga City Council')
 
     # Put all of Tauranga in Tauranga
     User.where("email like '%@tauranga.govt.nz'").each do |user|
