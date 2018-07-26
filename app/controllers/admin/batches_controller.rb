@@ -4,11 +4,10 @@ class Admin::BatchesController < Admin::BaseController
   def index
     @council = current_user.council
     @batches = policy_scope(Batch).all.order(created_at: :desc)
-    if @council.present?
-      @unbatched_count = RebateForm.joins(:property)
-                                   .where(completed: true, batch_id: nil,
-                                          properties: { council_id: @council.id }).size
-    end
+    return unless @council.present?
+    @unbatched_count = RebateForm.joins(:property)
+                                 .where(completed: true, batch_id: nil,
+                                        properties: { council_id: @council.id }).size
   end
 
   def show
