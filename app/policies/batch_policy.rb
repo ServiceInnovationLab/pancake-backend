@@ -23,10 +23,12 @@ class BatchPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.present?
+      if user.dia?
         scope.all
-      else
+      elsif user.council_id.present?
         scope.where(council_id: user.council_id)
+      else
+        scope.none
       end
     end
   end
