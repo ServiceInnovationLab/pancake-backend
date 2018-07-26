@@ -6,7 +6,7 @@ module CouncilsHelper
   end
 
   def council_forms_sum(council)
-    "$#{sprintf('%.2f', council.rebate_forms.sum(:rebate))}"
+    "$#{format('%.2f', council.rebate_forms.sum(:rebate))}"
   end
 
   def council_completed_forms_count(council)
@@ -18,7 +18,7 @@ module CouncilsHelper
     total = council_forms_count(council).to_f
     return '-' unless completed && total.positive?
     percent =  completed / total
-    percent = percent * 100
+    percent *= 100
     "#{percent.to_i}%"
   end
 
