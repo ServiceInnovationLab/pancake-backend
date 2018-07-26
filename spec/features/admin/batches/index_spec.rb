@@ -19,8 +19,8 @@ RSpec.describe 'Batch', type: :feature do
 
     it ' Can see all batches' do
       visit '/admin/batches'
-      expect(page).to have_text(batch.id)
-      expect(page).to have_text(batch_other_council.id)
+      expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
+      expect(page).to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
     end
   end
 
@@ -30,8 +30,8 @@ RSpec.describe 'Batch', type: :feature do
 
     it 'ca see batches from my council' do
       visit '/admin/batches'
-      expect(page).to have_text(batch.id)
-      expect(page).not_to have_text(batch_other_council.id)
+      expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
+      expect(page).not_to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
     end
   end
 end
