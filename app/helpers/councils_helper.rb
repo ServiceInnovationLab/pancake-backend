@@ -14,7 +14,10 @@ module CouncilsHelper
   end
 
   def council_percentage_completed(council)
-    percent = council_completed_forms_count(council).to_f / council_forms_count(council).to_f
+    completed = council_completed_forms_count(council).to_f
+    total = council_forms_count(council).to_f
+    return '-' unless completed && total.positive?
+    percent =  completed / total
     percent = percent * 100
     "#{percent.to_i}%"
   end
