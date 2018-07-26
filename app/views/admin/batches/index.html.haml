@@ -9,7 +9,10 @@
 
 - if current_user.council_id.present?
   - if @unbatched_count.present? && @unbatched_count.positive?
-    %p #{@unbatched_count} fully signed forms not in a batch yet.
+    %p
+      = @council.name
+      have
+      #{@unbatched_count} fully signed forms not in a batch yet.
     = form_for [:admin, Batch.new], class: 'pure-form pure-form-aligned' do |f|
       = f.submit "Make next Batch", class: 'pure-button'
 - else
@@ -31,8 +34,8 @@
         %tr
           %td= batch.id
           %td= batch.council.name
-          %td= batch.amount
-          %td= batch.batch_date
+          %td $#{batch.amount}
+          %td= batch.batch_date.localtime
           %td= batch.claim_count
           %td
             = link_to(admin_batch_path(batch, format: :pdf), class: 'pure-button') do

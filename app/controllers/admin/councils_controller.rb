@@ -6,6 +6,7 @@ class Admin::CouncilsController < Admin::BaseController
   # GET /councils
   def index
     @councils = policy_scope(Council).all.order(:name)
+    @year = 2018
   end
 
   # GET /councils/1
