@@ -8,6 +8,7 @@ FactoryBot.define do
     fields("full_name": 'Fred', "income": 0, dependants: 0)
     completed false
     rebate 555.12
+    batch nil
   end
 
   factory :signed_form, parent: :rebate_form do
