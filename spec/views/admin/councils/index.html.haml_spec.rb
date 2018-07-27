@@ -4,15 +4,20 @@ require 'rails_helper'
 
 RSpec.describe 'admin/councils/index', type: :view do
   let(:admin_user) { FactoryBot.create :admin_user }
+
   before do
     assign(
       :councils, [
-        FactoryBot.create(:council,
-                          name: 'Tahi',
-                          active: false),
-        FactoryBot.create(:council,
-                          name: 'Rua',
-                          active: false)
+        FactoryBot.create(
+          :council,
+          name: 'Tahi',
+          active: false
+        ),
+        FactoryBot.create(
+          :council,
+          name: 'Rua',
+          active: false
+        )
       ]
     )
   end
