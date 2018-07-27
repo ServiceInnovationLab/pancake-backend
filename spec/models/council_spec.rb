@@ -26,4 +26,14 @@ RSpec.describe Council, type: :model do
   describe 'has rates_payers' do
     it { expect(council.rates_payers).to eq properties.first.rates_payers }
   end
+
+  describe 'has batches' do
+    let!(:batch) { FactoryBot.create :batch, council: council }
+    it { expect(council.batches).to include batch }
+  end
+
+  describe 'has users' do
+    let!(:user) { FactoryBot.create :user, council: council }
+    it { expect(council.users).to include user }
+  end
 end

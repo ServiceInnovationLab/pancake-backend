@@ -4,6 +4,7 @@ class Admin::BatchesController < Admin::BaseController
   def index
     @council = current_user.council
     @batches = policy_scope(Batch).all.order(created_at: :desc)
+    return if @council.blank?
     @unbatched_count = RebateForm.joins(:property)
                                  .where(completed: true, batch_id: nil,
                                         properties: { council_id: @council.id }).size
@@ -12,10 +13,6 @@ class Admin::BatchesController < Admin::BaseController
   def show
     @batch = Batch.find(params[:id])
     authorize @batch
-    # pdf_file_as_String = WickedPdf.new.pdf_from_string(
-    #   render_to_string('admin/rebate_forms/index.pdf.haml', layout: 'pdf')
-    # )
-
     respond_to do |format|
       format.html
       format.pdf do
