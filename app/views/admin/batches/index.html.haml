@@ -13,8 +13,9 @@
       = @council.name
       have
       #{@unbatched_count} fully signed forms not in a batch yet.
-    = form_for [:admin, Batch.new], class: 'pure-form pure-form-aligned' do |f|
-      = f.submit "Make next Batch", class: 'pure-button'
+    %p
+      = form_for [:admin, Batch.new], class: 'pure-form pure-form-aligned' do |f|
+        = f.submit "Make next Batch", class: 'pure-button'
 - else
   %p Only users from a council can create batches.
 
