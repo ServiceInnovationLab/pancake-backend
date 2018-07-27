@@ -32,7 +32,7 @@ RSpec.describe 'Batch', type: :feature do
       expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
       expect(page).to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
 
-      expect(page).not_to have_button("Make next Batch")
+      expect(page).not_to have_button('Make next Batch')
     end
   end
 
@@ -46,8 +46,8 @@ RSpec.describe 'Batch', type: :feature do
       expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
       expect(page).not_to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
 
-      expect(page).to have_text "Tauranga have 10 fully signed forms not in a batch yet."
-      expect(page).to have_button("Make next Batch")
+      expect(page).to have_text 'Tauranga have 10 fully signed forms not in a batch yet.'
+      expect(page).to have_button('Make next Batch')
     end
   end
 end
