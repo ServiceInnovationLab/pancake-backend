@@ -21,6 +21,8 @@ RSpec.describe 'Batch', type: :feature do
       visit '/admin/batches'
       expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
       expect(page).to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
+
+      expect(page).not_to have_link(href: new_admin_batch_path)
     end
   end
 
@@ -32,6 +34,8 @@ RSpec.describe 'Batch', type: :feature do
       visit '/admin/batches'
       expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
       expect(page).not_to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
+
+      expect(page).to have_link(href: new_admin_batch_path)
     end
   end
 end
