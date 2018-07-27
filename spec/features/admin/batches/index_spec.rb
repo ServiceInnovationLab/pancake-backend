@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Batch', type: :feature do
-  let(:council) { FactoryBot.create :council, name: 'Tauranga'}
+  let(:council) { FactoryBot.create :council, name: 'Tauranga' }
   let!(:batch) { FactoryBot.create :batch, council: council }
   let!(:batch_other_council) { FactoryBot.create :batch }
 
