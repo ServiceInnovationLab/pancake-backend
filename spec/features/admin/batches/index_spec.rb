@@ -24,6 +24,7 @@ RSpec.describe 'Batch', type: :feature do
 
   context 'signed in as dia' do
     let(:user) { FactoryBot.create :admin_user }
+
     before { login_as(user, scope: :user) }
 
     it ' Can see all batches' do
@@ -37,6 +38,7 @@ RSpec.describe 'Batch', type: :feature do
 
   context 'signed in as council' do
     let(:user) { FactoryBot.create :user, council: council }
+
     before { login_as(user, scope: :user) }
 
     it 'ca see batches from my council' do

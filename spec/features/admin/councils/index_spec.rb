@@ -15,6 +15,7 @@ RSpec.describe 'Council', type: :feature do
 
   context 'signed in as dia' do
     let(:user) { FactoryBot.create :admin_user }
+
     before { login_as(user, scope: :user) }
 
     it ' Can see all councils' do
@@ -26,6 +27,7 @@ RSpec.describe 'Council', type: :feature do
 
   context 'signed in as council' do
     let(:user) { FactoryBot.create :user, council: council }
+
     before { login_as(user, scope: :user) }
 
     it 'can see only my council' do
