@@ -13,15 +13,14 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe Admin::SignaturesHelper, type: :helper do
-  def signature_image_path(signature)
-    "#{admin_signature_path}?" + {
-      type: signature.signature_type.name,
-      token: @rebate_form.token,
-      valuation_id: @rebate_form.valuation_id
-    }.to_param
+  let(:signature) { FactoryBot.create :signature }
+  describe "signature_image_path(signature)" do
+    let(:valuation_id) { signature.rebate_form.valuation_id }
+    let(:token) { signature.rebate_form.token }
+    it { expect(signature_image_path(signature)).to eq "/admin/signature?token=#{token}&type=#{signature.signature_type.name}&valuation_id=#{valuation_id}"}
   end
 
-  def signature_for_pdf(signature)
-    image_tag "data:image/png;base64,#{signature.image}"
+  describe "signature_for_pdf(signature)" do
+    it { expect(signature_for_pdf(signature)).to start_with '<img src="data:image/png;base64,'}
   end
 end
