@@ -10,7 +10,7 @@
 #
 # https://github.com/mileszs/wicked_pdf/blob/master/README.md
 
-wkhtmltopdf_path = "#{Rails.root}/bin/wkhtmltopdf-amd64"
+wkhtmltopdf_path = "#{Rails.root}/bin/wkhtmltopdf"
 
 WickedPdf.config = { exe_path: wkhtmltopdf_path, wkhtmltopdf: wkhtmltopdf_path }
 
