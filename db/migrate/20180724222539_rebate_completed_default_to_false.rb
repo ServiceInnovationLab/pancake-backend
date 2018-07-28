@@ -1,6 +1,6 @@
 class RebateCompletedDefaultToFalse < ActiveRecord::Migration[5.2]
   def up
-    change_column :rebate_forms, :completed, :boolean, default: true
+    change_column :rebate_forms, :completed, :boolean, default: false
   end
 
   def down
