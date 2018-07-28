@@ -12,6 +12,8 @@ RSpec.describe RebateForm, type: :model do
     describe 'has no signatures' do
       it { expect(form.signatures.size).to eq 0 }
     end
+
+    it { expect(form.completed).to eq false }
   end
 
   describe 'Signed form' do
