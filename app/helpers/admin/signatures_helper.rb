@@ -10,8 +10,6 @@ module Admin::SignaturesHelper
   end
 
   def signature_for_pdf(signature)
-    file = Tempfile.new(["signature-#{signature.id}", '.png'], encoding: 'ascii-8bit')
-    file.write(Base64.decode64(signature.image))
-    image_tag file.path, width: 175, height: 175, alt: 'signature'
+    image_tag "data:image/gif;base64,#{signature.image}"
   end
 end
