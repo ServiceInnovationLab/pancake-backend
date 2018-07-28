@@ -10,6 +10,6 @@ module Admin::SignaturesHelper
   end
 
   def signature_for_pdf(signature)
-    image_tag "data:image/gif;base64,#{signature.image}"
+    image_tag "data:image/png;base64,#{signature.image}"
   end
 end
