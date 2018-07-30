@@ -14,7 +14,7 @@ class RebateFormsController < ApiController
   def create
     rebate_form = RebateForm.create(rebate_form_params)
     rebate_form.calc_rebate_amount!
-    raise "No rebate calculated. This should never happen" if rebate_form.rebate.blank?
+    raise 'No rebate calculated. This should never happen' if rebate_form.rebate.blank?
 
     if rebate_form.errors.any?
       render_errors_for(rebate_form)
