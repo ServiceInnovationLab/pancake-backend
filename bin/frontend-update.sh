@@ -3,7 +3,7 @@
 set -eu
 
 APP_NAME="pancake-frontend"
-BRANCH="feature/config-staging"
+BRANCH="master"
 
 git clone https://github.com/ServiceInnovationLab/$APP_NAME.git --branch $BRANCH
 cd $APP_NAME
