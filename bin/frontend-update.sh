@@ -17,7 +17,7 @@ npm install
 if [ "$TRAVIS_BRANCH" == "master" ]
 then
   CONFIG_FILE="prod"
-elif ["$TRAVIS_BRANCH" == 'dev' ]
+elif [ "$TRAVIS_BRANCH" == 'dev' ]
 then
   CONFIG_FILE="staging"
 else
