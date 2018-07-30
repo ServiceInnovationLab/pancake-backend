@@ -20,6 +20,8 @@ then
 elif [ $TRAVIS_BRANCH == 'dev' ]
 then
   CONFIG_FILE="staging"
+else
+  CONFIG_FILE="dev"
 fi
 
 echo "Setting config to use $CONFIG_FILE"
