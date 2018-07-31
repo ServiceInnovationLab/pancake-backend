@@ -22,7 +22,7 @@ class RebateFormPolicy < ApplicationPolicy
       if user.dia?
         scope.all
       elsif user.present?
-        scope.joins(:property).where(council_id: user.council_id)
+        scope.joins(:property).where("properties.council_id": user.council_id)
       else
         scope.none
       end

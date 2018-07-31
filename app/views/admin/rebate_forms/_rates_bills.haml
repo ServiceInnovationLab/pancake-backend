@@ -1,18 +1,20 @@
-%h3 Rates
-%table.pure-table.pure-table-bordered
-  - rates_bills.each do |bill|
+- if rates_bill.present?
+  %h3 Rates for #{rates_bill.rating_year}
+  %table.pure-table.pure-table-bordered
     %tr
       %th Rates
       %td
         $
-        = bill.total_rates
+        = rates_bill.total_rates
     %tr
       %th Water
       %td
         $
-        = bill.total_water_rates
+        = rates_bill.total_water_rates
     %tr
       %th TOTAL
       %td
         $
-        = bill.total_bill
+        = rates_bill.total_bill
+- else
+  %p ERROR: no rates bill data for #{@year}

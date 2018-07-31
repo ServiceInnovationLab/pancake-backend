@@ -7,6 +7,7 @@ FactoryBot.define do
     suburb 'coolville'
     town_city 'Tauranga'
     council
+    rating_year '2018'
   end
   factory :property_with_rates, parent: :property do
     after(:create) do |property|

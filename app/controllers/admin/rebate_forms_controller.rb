@@ -14,12 +14,15 @@ class Admin::RebateFormsController < Admin::BaseController
       @rebate_forms = @rebate_forms.joins(:property)
                                    .where('properties.location ILIKE ?', "%#{params[:location]}%")
     end
-
     @rebate_forms = @rebate_forms.page(params[:page])
   end
 
   # GET /admin/rebate_forms/1
   def show
+    @year = ENV['YEAR']
+
+    @rates_bill = @rebate_form.property.rates_bills.find_by(rating_year: @year)
+
     @signatures = {}
     SignatureType.order(:name).all.each do |st|
       @signatures[st.name] = @rebate_form.signatures.where(signature_type: st).order(created_at: :desc).first
