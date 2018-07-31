@@ -7,6 +7,7 @@ RSpec.describe 'properties#index', type: :request do
     jsonapi_get '/api/v1/properties',
                 params: params
   end
+
   let(:year) { '2018' }
   before { ENV['YEAR'] = year }
 
