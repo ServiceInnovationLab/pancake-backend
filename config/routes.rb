@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :rebate_forms, only: %i[show index update destroy]
     resources :attachments, only: %i[destroy]
+    resources :councils
+    resources :users
+    resources :batches
     get 'signature' => 'signatures#show'
   end
 
@@ -18,12 +21,12 @@ Rails.application.routes.draw do
     resources :docs, only: [:index], path: '/swagger'
 
     scope path: '/v1' do
+      resources :councils
       resources :rates_payers, only: %(show)
       resources :rates_bills, only: %(show)
       resources :properties, only: %(index show)
       resources :rebate_forms, only: %i[create show update]
       resources :properties, only: %i[show index]
-
       resources :signature_types, only: %i[index show]
       resources :signatures, only: %i[create]
     end

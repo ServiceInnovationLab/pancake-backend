@@ -8,7 +8,7 @@ class SerializableRatesBill < JSONAPI::Serializable::Resource
   # Add attributes here to ensure they get rendered, .e.g.
   #
   # attribute :name
-  attributes :rating_year, :total_bill
+  attributes :rating_year, :total_bill, :rating_year
 
   #
   # To customize, pass a block and reference the underlying @object

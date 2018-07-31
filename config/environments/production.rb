@@ -52,7 +52,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "pancake-server_#{Rails.env}"
+  # config.active_job.queue_name_prefix = "pancake-backend_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -92,4 +92,7 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
   config.active_storage.service = :amazon
+
+  # For pdfs on heroku
+  config.assets.precompile += ['pdf.css']
 end

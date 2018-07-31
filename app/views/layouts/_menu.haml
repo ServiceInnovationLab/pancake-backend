@@ -1,14 +1,30 @@
-.pure-menu.pure-menu-horizontal
-  = link_to 'PANCAKE', root_path, class: 'pure-menu-heading pure menu-link'
-  %ul.pure-menu-list
-    %li.pure-menu-item
-      = link_to 'docs', '/api/docs', class: 'pure-menu-link'
-    %li.pure-menu-item
-      = link_to 'admin', new_user_session_path, class: 'pure-menu-link'
-    - if current_user.present?
-      %li.pure-menu-item
-        = link_to 'invite new user', new_user_invitation_path, class: 'pure-menu-link'
-      %li.pure-menu-item
-        = link_to 'rebate forms', admin_rebate_forms_path, class: 'pure-menu-link'
-      %li.pure-menu-item
-        = link_to "Sign Out", destroy_user_session_path, method: :delete
+#menus
+  .pure-menu.pure-menu-horizontal
+    %ul.pure-menu-list
+      - if current_user.present?
+        %li.pure-menu-item
+          = link_to admin_rebate_forms_path, class: 'pure-menu-link' do
+            = fa_icon 'edit'
+            rebate forms
+        %li.pure-menu-item
+          = link_to admin_batches_path, class: 'pure-menu-link' do
+            = fa_icon 'download'
+            batches
+        %li.pure-menu-item
+          = link_to admin_councils_path, class: 'pure-menu-link' do
+            = fa_icon 'building'
+            councils
+        %li.pure-menu-item
+          = link_to admin_users_path, class: 'pure-menu-link' do
+            = fa_icon 'user'
+            users
+        %li.pure-menu-item=current_user.email
+        %li.pure-menu-item
+          = link_to destroy_user_session_path, method: :delete, class: 'pure-button' do
+            = fa_icon 'sign-out'
+            Sign Out
+      - else
+        %li.pure-menu-item
+          = link_to 'api docs', '/api/docs', class: 'pure-menu-link'
+        %li.pure-menu-item
+          = link_to 'admin', new_user_session_path, class: 'pure-menu-link'

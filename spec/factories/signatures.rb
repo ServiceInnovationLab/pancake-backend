@@ -9,9 +9,9 @@ FactoryBot.define do
     role 'cool job title goes here'
   end
   factory :applicant_signature, parent: :signature do
-    signature_type { FactoryBot.create :signature_type, name: 'applicant' }
+    signature_type { SignatureType.find_or_create_by(name: 'applicant') }
   end
   factory :witness_signature, parent: :signature do
-    signature_type { FactoryBot.create :signature_type, name: 'witness' }
+    signature_type { SignatureType.find_or_create_by(name: 'witness') }
   end
 end

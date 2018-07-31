@@ -1,18 +1,24 @@
-- content_for :title, "RatesRebate"
+- content_for :title, "rebate forms"
 
-%h1 Listing Rebate forms
+%h2
+  Rebate forms
+  - unless @council.nil?
+    for #{@council.name}
 
-= form_tag(admin_rebate_forms_path, method: :get) do
-  = text_field_tag :location, @location
-  = submit_tag 'Search'
 
+.pure-g
+  .search-form.pure-u-1
+    = form_tag(admin_rebate_forms_path, method: :get, class: 'pure-form') do
+      = text_field_tag :location, @location, placeholder: "Address"
+      %button.pure-button
+        = fa_icon 'search'
 
 %p= paginate @rebate_forms
 
 %table.pure-table.pure-table-bordered
   %thead
     %tr
-      %th valuation_id
+      %th Valuation Id
       %th Applicant
       %th Address
       %th When
@@ -21,7 +27,7 @@
 
   %tbody
     - @rebate_forms.each do |rebate_form|
-      %tr{ class: rebate_form.fully_signed? ? 'pure-table-odd' : '' }
+      %tr{ class: rebate_form.completed ? 'pure-table-odd' : '' }
         %td= rebate_form.valuation_id
         %td= rebate_form.fields['full_name']
         %td
@@ -35,14 +41,16 @@
         %td= rebate_form.created_at.localtime
         %td
           - if rebate_form.applicant_signature.present?
-            = rebate_form.applicant_signature.created_at.localtime
+            = link_to admin_rebate_form_path(rebate_form, format: 'pdf'), class: 'pure-button' do
+              = fa_icon 'download'
           - else
-            = render 'sign_button', rebate_form: rebate_form
+            = render 'sign_button', rebate_form: rebate_form, class: 'pure-button pure-button-primary'
         %td= render 'witness', signature: rebate_form.witness_signature
         %td
-          = link_to 'Show', admin_rebate_form_path(rebate_form), class: 'pure-button'
+          = link_to admin_rebate_form_path(rebate_form), class: 'pure-button' do
+            show
         %td
-          - unless rebate_form.fully_signed?
+          - if policy(rebate_form).destroy?
             = link_to admin_rebate_form_path(rebate_form), method: :delete,
               data: { confirm: 'Are you sure?' }, class: 'pure-button' do
               = fa_icon 'trash'

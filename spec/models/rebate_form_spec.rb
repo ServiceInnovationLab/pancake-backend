@@ -12,14 +12,18 @@ RSpec.describe RebateForm, type: :model do
     describe 'has no signatures' do
       it { expect(form.signatures.size).to eq 0 }
     end
+
+    it { expect(form.completed).to eq false }
   end
 
   describe 'Signed form' do
     let(:form) { FactoryBot.create :signed_form, property: property, valuation_id: valuation_id }
 
-    describe 'has both signatures' do
+    describe 'factorybot makes both signatures' do
       it { expect(form.signatures.size).to eq 2 }
     end
+
+    it { expect(form.completed).to eq true }
   end
 
   describe 'signatures' do
@@ -47,12 +51,45 @@ RSpec.describe RebateForm, type: :model do
   end
 
   describe 'calculates rebate' do
-    let!(:rates_bill) { FactoryBot.create :rates_bill, total_rates: 3450, total_water_rates: 5, property: property, rating_year: ENV['YEAR'] }
+    let(:year) { '2018' }
+    let!(:rates_bill) { FactoryBot.create :rates_bill, total_rates: 3450, total_water_rates: 5, property: property, rating_year: year }
     let(:form) { FactoryBot.create :rebate_form, property: property, valuation_id: valuation_id, fields: fields }
     let(:fields) { { "income": 39_900.00, "dependants": 1, "full_name": 'Edith' } }
 
-    before { form.calc_rebate_amount! }
-
+    before do
+      ENV['YEAR'] = year
+      form.calc_rebate_amount!
+    end
     it { expect(form.rebate).to eq 370.67 }
+  end
+
+  describe 'signed scopes' do
+    let!(:signed_form) do
+      FactoryBot.create :rebate_form, property: property, valuation_id: valuation_id,
+                                      signatures: [FactoryBot.create(:applicant_signature)]
+    end
+    let!(:witnessed_form) do
+      FactoryBot.create :rebate_form, property: property, valuation_id: valuation_id,
+                                      signatures: [FactoryBot.create(:witness_signature)]
+    end
+    let!(:fully_signed_form) do
+      FactoryBot.create :rebate_form, property: property, valuation_id: valuation_id,
+                                      signatures: [FactoryBot.create(:applicant_signature), FactoryBot.create(:witness_signature)]
+    end
+    # describe "signed" do
+    #   it { expect(RebateForm.signed).to include(signed_form)}
+    #   it { expect(RebateForm.signed).to include(fully_signed_form)}
+    #   it { expect(RebateForm.signed).not_to include(witnessed_form)}
+    # end
+    # describe "witnessed" do
+    #   it { expect(RebateForm.witnessed).to include(witnessed_form)}
+    #   it { expect(RebateForm.witnessed).to include(fully_signed_form)}
+    #   it { expect(RebateForm.witnessed).not_to include(signed_form)}
+    # end
+    # describe "fully signed" do
+    #   it { expect(RebateForm.signed_and_witnessed).to include(fully_signed_form)}
+    #   it { expect(RebateForm.signed_and_witnessed).not_to include(signed_form)}
+    #   it { expect(RebateForm.signed_and_witnessed).not_to include(witnessed_form)}
+    # end
   end
 end
