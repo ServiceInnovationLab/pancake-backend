@@ -18,6 +18,8 @@
 %table.pure-table.pure-table-bordered
   %thead
     %tr
+      %th YEAR (ending)
+      %th Council
       %th Valuation Id
       %th Applicant
       %th Address
@@ -28,6 +30,8 @@
   %tbody
     - @rebate_forms.each do |rebate_form|
       %tr{ class: rebate_form.completed ? 'pure-table-odd' : '' }
+        %td= rebate_form.property.rating_year
+        %td= link_to rebate_form.council.name, admin_council_path(rebate_form.council)
         %td= rebate_form.valuation_id
         %td= rebate_form.fields['full_name']
         %td
