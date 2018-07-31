@@ -2,7 +2,7 @@ class RatesImporterService
   def import(row, council)
     puts row
     valuation, _rating_year, location, suburb, town_city,
-      total_rates, total_water_rates, _order, council_owner_id,
+      total_rates, total_water_rates, _order, _council_owner_id,
       surname, first_names, confidential, current_owner_start_date = row
 
     if total_rates.blank?
