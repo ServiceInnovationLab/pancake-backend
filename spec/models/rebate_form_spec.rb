@@ -60,6 +60,7 @@ RSpec.describe RebateForm, type: :model do
       ENV['YEAR'] = year
       form.calc_rebate_amount!
     end
+
     it { expect(form.rebate).to eq 370.67 }
   end
 

@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe PropertiesController, type: :controller do
   before { ENV['YEAR'] = '2019' }
+
   describe '#index' do
     subject { JSON.parse(response.body)['data'] }
 
