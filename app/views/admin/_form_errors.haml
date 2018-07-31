@@ -1,0 +1,10 @@
+- if form_model.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(form_model.errors.count, 'error')
+      prohibited this data from being saved:
+    %ul
+      - form_model.errors.full_messages.each do |message|
+        %li
+          = fa_icon 'warning'
+          = message

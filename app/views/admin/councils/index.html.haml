@@ -1,0 +1,58 @@
+- content_for(:title) do
+  Councils
+
+%h2 Councils and Territorial Authorities
+
+- if policy(Council).new?
+  %p
+    = link_to new_admin_council_path, class: 'pure-button' do
+      = fa_icon 'plus'
+      New Council
+
+%table.pure-table.pure-table-bordered
+  %thead
+    %tr
+      %th Name
+      %th Shortname
+      %th Active
+      %th Applications
+      %th Completed applications
+      %th Unclaimed by council
+      %th Claimed (Batches)
+
+  %tbody
+    - @councils.each do |council|
+      %tr
+        %td= council.name
+        %td= council.short_name
+        %td= council.active
+        %td
+          = council_forms_count(council)
+          applications
+        %td
+          = council_completed_forms_count(council)
+          applications
+          %br/
+          = council_completed_forms_sum(council)
+          %br/
+          = council_percentage_completed(council)
+          completion rate
+        %td
+          = council_completed_batched_forms_count(council)
+          applications
+          %br/
+          = council_completed_batched_forms_sum(council)
+        %td
+          = council.batches.size
+          batches
+          %br/
+          $#{council.batches.sum(:amount)}
+
+        - if policy(council).edit?
+          %td= link_to 'Edit', edit_admin_council_path(council), class: 'pure-button'
+
+        - if policy(council).destroy?
+          %td
+            = link_to admin_council_path(council), method: :delete, data: { confirm: 'Are you sure?' }, class: 'pure-button' do
+              = fa_icon 'trash'
+              Delete

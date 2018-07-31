@@ -7,7 +7,7 @@ class SerializableProperty < JSONAPI::Serializable::Resource
 
   id { @object.valuation_id }
   # Add attributes here to ensure they get rendered, .e.g.
-  attributes :valuation_id, :location, :suburb, :town_city
+  attributes :valuation_id, :location, :suburb, :town_city, :rating_year
 
   has_many :rates_payers
   has_many :rates_bills

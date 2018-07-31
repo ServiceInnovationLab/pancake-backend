@@ -1,0 +1,17 @@
+
+= form_for [:admin, @council], class: 'pure-form pure-form-aligned' do |f|
+  = render 'admin/form_errors', form_model: @council
+  .pure-control-group
+    = f.label :name
+    = f.text_field :name
+    %span.pure-form-message This is a required field.
+  .pure-control-group
+    = f.label :short_name
+    = f.text_field :short_name
+    %span.pure-form-message This is a required field.
+  .pure-control-group
+    = f.label :active do
+      = f.check_box :active
+      Active
+  .pure-controls
+    = f.submit 'Save', class: 'pure-button'

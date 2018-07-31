@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_21_025206) do
+ActiveRecord::Schema.define(version: 2018_07_30_204820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,13 +36,35 @@ ActiveRecord::Schema.define(version: 2018_05_21_025206) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "batches", force: :cascade do |t|
+    t.float "amount"
+    t.integer "claim_count"
+    t.text "download_link"
+    t.bigint "council_id"
+    t.datetime "batch_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["council_id"], name: "index_batches_on_council_id"
+  end
+
+  create_table "councils", force: :cascade do |t|
+    t.string "name"
+    t.string "short_name"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "properties", force: :cascade do |t|
     t.text "valuation_id"
     t.text "location"
     t.text "suburb"
     t.text "town_city"
     t.text "meta"
-    t.index ["valuation_id"], name: "index_properties_on_valuation_id", unique: true
+    t.integer "council_id"
+    t.text "rating_year"
+    t.index ["council_id"], name: "index_properties_on_council_id"
+    t.index ["valuation_id", "rating_year"], name: "index_properties_on_valuation_id_and_rating_year", unique: true
   end
 
   create_table "rates_bills", force: :cascade do |t|
@@ -72,6 +94,23 @@ ActiveRecord::Schema.define(version: 2018_05_21_025206) do
     t.json "fields"
     t.integer "property_id"
     t.decimal "rebate", precision: 8, scale: 2
+    t.integer "batch_id"
+    t.boolean "completed", default: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "friendly_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_roles_on_name", unique: true
+  end
+
+  create_table "roles_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+    t.index ["role_id"], name: "index_roles_users_on_role_id"
+    t.index ["user_id"], name: "index_roles_users_on_user_id"
   end
 
   create_table "signature_types", force: :cascade do |t|
@@ -121,6 +160,8 @@ ActiveRecord::Schema.define(version: 2018_05_21_025206) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.datetime "deactivated_at"
+    t.integer "council_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
@@ -131,6 +172,7 @@ ActiveRecord::Schema.define(version: 2018_05_21_025206) do
 
   add_foreign_key "rates_bills", "properties"
   add_foreign_key "rates_payers", "properties"
+  add_foreign_key "rebate_forms", "batches"
   add_foreign_key "rebate_forms", "properties"
   add_foreign_key "signatures", "rebate_forms"
   add_foreign_key "signatures", "signature_types"

@@ -15,9 +15,14 @@ gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
+gem 'paranoia', '~> 2.2'
+
 # Logins
 gem 'devise'
 gem 'devise_invitable'
+
+# Permissions
+gem 'pundit'
 
 gem 'loofah', '>= 2.2.1'
 gem 'rails-html-sanitizer', '>= 1.0.4'
@@ -31,8 +36,13 @@ gem 'font-awesome-rails'
 
 gem 'raygun4ruby' # exception catcher/logger
 
+# Makes the pdfs
+gem 'wicked_pdf'
+# gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-heroku'
+
 gem 'aws-sdk-s3' # We store images on s3
-# gem 'mini_magick' # makes image previews (and can do other stuff)
+
 gem 'image_processing'
 
 group :development do

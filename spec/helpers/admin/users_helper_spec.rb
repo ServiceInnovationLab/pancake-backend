@@ -3,15 +3,15 @@
 require 'rails_helper'
 
 # Specs in this file have access to a helper object that includes
-# the RebateFormsHelper. For example:
+# the Admin::UsersHelper. For example:
 #
-# describe RebateFormsHelper do
+# describe Admin::UsersHelper do
 #   describe "string concat" do
 #     it "concats two strings with spaces" do
 #       expect(helper.concat_strings("this","that")).to eq("this that")
 #     end
 #   end
 # end
-RSpec.describe RebateFormsHelper, type: :helper do
+RSpec.describe Admin::UsersHelper, type: :helper do
   pending "add some examples to (or delete) #{__FILE__}"
 end

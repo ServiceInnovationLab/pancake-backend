@@ -8,11 +8,15 @@ RSpec.describe 'properties#index', type: :request do
                 params: params
   end
 
+  let(:year) { '2018' }
+  before { ENV['YEAR'] = year }
+
+
   let(:params) { { q: 'main' } }
 
   describe 'basic fetch' do
-    let!(:matching_property) { create(:property, location: '1 main street') }
-    let!(:unrelated_property) { create(:property, location: '22 tawa road') }
+    let!(:matching_property) { create(:property, location: '1 main street', rating_year: year) }
+    let!(:unrelated_property) { create(:property, location: '22 tawa road', rating_year: year) }
 
     it 'serializes the list correctly' do
       make_request
