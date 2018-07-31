@@ -10,7 +10,7 @@ class RebateFormPolicy < ApplicationPolicy
   end
 
   def update?
-    (dia? || same_council?) && !record.completed
+    (dia? || same_council?)
   end
 
   def destroy?

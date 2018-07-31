@@ -39,7 +39,7 @@ class Admin::RebateFormsController < Admin::BaseController
   # PATCH/PUT /admin/rebate_forms/1
   def update
     if @rebate_form.update(rebate_form_params)
-      redirect_to admin_rebate_forms_url, notice: 'Rebate form was successfully updated.'
+      redirect_to admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
     else
       render :edit
     end
