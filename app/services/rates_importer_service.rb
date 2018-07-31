@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RatesImporterService
   def import(row, council)
     puts row
@@ -6,7 +8,7 @@ class RatesImporterService
       surname, first_names, confidential, current_owner_start_date = row
 
     if total_rates.blank?
-      puts "SKIPPING blank rates record"
+      puts 'SKIPPING blank rates record'
       return
     end
 

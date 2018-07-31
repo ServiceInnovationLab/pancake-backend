@@ -3,7 +3,7 @@
 namespace :rates do
   desc 'Import rates'
   task import: :environment do
-     council = Council.first
+    council = Council.first
     rates_file = Rails.root.join('db', 'seeds', 'rates_2019.csv')
     importer = RatesImporterService.new
     Property.transaction do
@@ -18,6 +18,3 @@ namespace :rates do
     puts 'Finished loading rates'
   end
 end
-
-
-

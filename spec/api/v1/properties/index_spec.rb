@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'properties#index', type: :request do
   let(:year) { '2018' }
-  before { ENV['YEAR'] = year}
+  before { ENV['YEAR'] = year }
   subject(:make_request) do
     jsonapi_get '/api/v1/properties',
                 params: params
