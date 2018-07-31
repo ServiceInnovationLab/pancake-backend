@@ -21,7 +21,7 @@
         %h2 Rebate
         %p.rebate-amount $#{@rebate_form.rebate}
       .pure-u-1-4= render 'property', rebate_form: @rebate_form
-      .pure-u-1-4= render 'rates_bills', rates_bills: @rebate_form.property.rates_bills
+      .pure-u-1-4= render 'rates_bills', rates_bill: @rates_bill
       .pure-u-1-4= render 'applicant', rebate_form: @rebate_form
 
   .pure-u-1

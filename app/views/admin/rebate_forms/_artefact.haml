@@ -40,9 +40,9 @@
         %p=rebate_form_amount(rebate_form)
 
       .pure-u-1-4
-        %h3 Rates
+        %h3 Rates for #{ENV['YEAR']}
         %table
-          - rebate_form.property.rates_bills.each do |bill|
+          - rebate_form.property.rates_bills.where(rating_year: ENV['YEAR']).each do |bill|
             %tr
               %th Rates
               %td $ #{bill.total_rates}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_24_222539) do
+ActiveRecord::Schema.define(version: 2018_07_30_204820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,8 +62,9 @@ ActiveRecord::Schema.define(version: 2018_07_24_222539) do
     t.text "town_city"
     t.text "meta"
     t.integer "council_id"
+    t.text "rating_year"
     t.index ["council_id"], name: "index_properties_on_council_id"
-    t.index ["valuation_id"], name: "index_properties_on_valuation_id", unique: true
+    t.index ["valuation_id", "rating_year"], name: "index_properties_on_valuation_id_and_rating_year", unique: true
   end
 
   create_table "rates_bills", force: :cascade do |t|
@@ -93,9 +94,8 @@ ActiveRecord::Schema.define(version: 2018_07_24_222539) do
     t.json "fields"
     t.integer "property_id"
     t.decimal "rebate", precision: 8, scale: 2
-    t.integer "council_id"
     t.integer "batch_id"
-    t.boolean "completed", default: true
+    t.boolean "completed", default: false
   end
 
   create_table "roles", force: :cascade do |t|
