@@ -24,8 +24,11 @@ class RebateForm < ApplicationRecord
   def calc_rebate_amount!
     year = ENV['YEAR']
     raise 'No year set' if year.blank?
+    raise 'Application year must match property record year' unless year == property.rating_year
+
     rates_bill = property.rates_bills.find_by(rating_year: year)
-    return if rates_bill.blank?
+    raise 'No rates bill found' if rates_bill.blank?
+
     rebate = OpenFiscaService.rebate_amount(
       income: income, rates: rates_bill.total_bill,
       dependants: dependants, year: year
@@ -60,7 +63,7 @@ class RebateForm < ApplicationRecord
   private
 
   def set_property_id
-    self.property = Property.find_by(valuation_id: valuation_id)
+    self.property = Property.find_by(valuation_id: valuation_id, rating_year: ENV['YEAR'])
   end
 
   def new_token
