@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class RatesImporterService
+  def clear!(rating_year)
+    puts rating_year
+    RatesBill.joins(:property).where("properties.rating_year": rating_year).delete_all
+    RatesPayer.joins(:property).where("properties.rating_year": rating_year).delete_all
+    Property.where(rating_year: rating_year).delete_all
+  end
+
   def import(row, council)
     puts row
     valuation, _rating_year, location, suburb, town_city,

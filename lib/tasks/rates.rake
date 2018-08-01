@@ -3,10 +3,13 @@
 namespace :rates do
   desc 'Import rates'
   task import: :environment do
+    rating_year = '2019'
+
     council = Council.first
     rates_file = Rails.root.join('db', 'seeds', 'rates_2019.csv')
     importer = RatesImporterService.new
     Property.transaction do
+      importer.clear!(rating_year)
       row_num = 0
       puts "Loading rates from #{rates_file}..."
       CSV.foreach(rates_file) do |row|
