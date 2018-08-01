@@ -9,10 +9,7 @@ namespace :rates do
     rates_file = Rails.root.join('db', 'seeds', 'rates_2019.csv')
     importer = RatesImporterService.new
     Property.transaction do
-      RatesBill.joins(:property).where("properties.rating_year": rating_year).delete_all
-      RatesPayer.joins(:property).where("properties.rating_year": rating_year).delete_all
-      Property.where(rating_year: rating_year).delete_all
-
+      importer.clear!(rating_year)
       row_num = 0
       puts "Loading rates from #{rates_file}..."
       CSV.foreach(rates_file) do |row|
