@@ -56,7 +56,6 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
       context 'rebate_form is completed' do
         let(:rebate_form) { FactoryBot.create :signed_form }
-        before {  }
 
         it 'does not allow changes to completed rebate_form' do
           rebate_form
