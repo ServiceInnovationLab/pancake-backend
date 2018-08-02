@@ -5,12 +5,6 @@ require 'rails_helper'
 RSpec.describe Admin::RebateFormsController, type: :controller do
   let(:property) { FactoryBot.create :property }
   let(:rebate_form) { FactoryBot.create :rebate_form, valuation_id: property.valuation_id }
-  let(:valid_attributes) do
-    FactoryBot.build(:rebate_form).attributes.symbolize_keys
-  end
-  let(:invalid_attributes) do
-    { valuation_id: 1 }
-  end
 
   shared_examples 'can wrangle rebate_forms' do
     describe 'GET #index' do
@@ -51,6 +45,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
 
       context 'with invalid params' do
+        let(:invalid_attributes) { { valuation_id: 1 } }
         before { put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes } }
         include_examples 'controller works'
       end
