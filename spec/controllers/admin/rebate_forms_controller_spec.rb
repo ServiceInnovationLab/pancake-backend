@@ -35,28 +35,24 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
     describe 'PUT #update' do
       let(:attachment_params) do
-        { 'attachments' => [
+        { attachments: [
           tempfile: Rails.root.join('sig.png'),
           original_filename: 'sig.png',
           content_type: 'image/jpeg'
         ] }
       end
-      context 'with valid params' do
-        before { put :update, params: { id: rebate_form.to_param, rebate_form: attachment_params } }
-
-        # it 'updates the requested rebate_form' do
-        #   rebate_form.reload
-        #   expect(rebate_form.valuation_id).to eq(attachment_params[:valuation_id])
-        # end
-
+      shared_examples 'controller works' do
         it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         it { expect(response).to redirect_to(admin_rebate_forms_url) }
+      end
+      context 'with valid params' do
+        before { put :update, params: { id: rebate_form.to_param, rebate_form: attachment_params } }
+        include_examples 'controller works'
       end
 
       context 'with invalid params' do
         before { put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes } }
-        it { expect(assigns(:rebate_form)).to eq(rebate_form) }
-        it { expect(response).to redirect_to(admin_rebate_forms_url) }
+        include_examples 'controller works'
       end
 
       context 'rebate_form is completed' do
