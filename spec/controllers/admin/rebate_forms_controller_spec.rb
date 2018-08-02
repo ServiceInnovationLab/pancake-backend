@@ -9,6 +9,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
   shared_examples 'can wrangle rebate_forms' do
     describe 'GET #index' do
       before { get :index, params: {} }
+
       describe 'assigns all rebate_forms as @rebate_forms' do
         it { expect(assigns(:rebate_forms)).to eq([rebate_form]) }
       end
@@ -17,12 +18,14 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     describe 'GET #show' do
       context 'html' do
         before { get :show, params: { id: rebate_form.to_param } }
+
         describe 'assigns the requested rebate_form as @rebate_form' do
           it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         end
       end
       context 'pdf' do
         before { get :show, params: { id: rebate_form.to_param }, format: :pdf }
+
         it { expect(assigns(:rebate_form)).to eq(rebate_form) }
       end
     end
@@ -42,6 +45,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
       context 'with valid params' do
         before { put :update, params: { id: rebate_form.to_param, rebate_form: attachment_params } }
+
         include_examples 'controller works'
       end
 
@@ -49,6 +53,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         let(:invalid_attributes) { { valuation_id: 1 } }
 
         before { put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes } }
+
         include_examples 'controller works'
       end
 
@@ -75,6 +80,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
       describe 'redirects to the rebate_forms list' do
         before { delete :destroy, params: { id: rebate_form.to_param } }
+
         it { expect(response).to redirect_to(admin_rebate_forms_url) }
       end
     end
@@ -84,6 +90,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     let(:council_user) { FactoryBot.create :user, council: rebate_form.council }
 
     before { sign_in council_user }
+
     include_examples 'can wrangle rebate_forms'
   end
 
@@ -91,6 +98,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     let(:admin_user) { FactoryBot.create :admin_user }
 
     before { sign_in admin_user }
+
     include_examples 'can wrangle rebate_forms'
   end
 end
