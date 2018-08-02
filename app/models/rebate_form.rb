@@ -63,7 +63,7 @@ class RebateForm < ApplicationRecord
   private
 
   def set_property_id
-    return unless property_id.blank?
+    return if property_id.present?
     self.property = Property.find_by(valuation_id: valuation_id, rating_year: ENV['YEAR'])
   end
 
