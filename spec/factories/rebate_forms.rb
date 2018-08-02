@@ -3,7 +3,9 @@
 FactoryBot.define do
   factory :rebate_form do
     valuation_id { Faker::Vehicle.vin }
-    property { FactoryBot.create :property, valuation_id: valuation_id }
+    property do
+      FactoryBot.create(:property, valuation_id: valuation_id) unless Property.find_by(valuation_id: valuation_id)
+    end
     # token <-- auto generated. Don't set in factory
     fields("full_name": 'Fred', "income": 0, dependants: 0)
     completed false

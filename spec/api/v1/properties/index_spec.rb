@@ -11,7 +11,6 @@ RSpec.describe 'properties#index', type: :request do
   let(:year) { '2018' }
   before { ENV['YEAR'] = year }
 
-
   let(:params) { { q: 'main' } }
 
   describe 'basic fetch' do
