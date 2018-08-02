@@ -54,7 +54,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         describe 'redirects to the rebate_form' do
           before { put :update, params: { id: rebate_form.to_param, rebate_form: valid_attributes } }
 
-          it { expect(response).to redirect_to(admin_rebate_forms_url) }
+          it { expect(response).to redirect_to(admin_rebate_form_url(rebate_form)) }
         end
       end
 
