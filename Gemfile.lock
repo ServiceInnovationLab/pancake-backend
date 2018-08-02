@@ -219,7 +219,7 @@ GEM
       ast (~> 2.4.0)
     pg (1.0.0)
     powerpack (0.1.1)
-    puma (3.11.4)
+    puma (3.12.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     purecss-rails (0.6.1)
