@@ -57,15 +57,13 @@ class Admin::RebateFormsController < Admin::BaseController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_rebate_form
     @rebate_form = RebateForm.find(params[:id])
     authorize @rebate_form
   end
 
-  # Only allow a trusted parameter "white list" through.
   def rebate_form_params
-    params.require(:rebate_form).permit(:valuation_id, :token, attachments: [])
+    params.require(:rebate_form).permit(attachments: [])
   end
 
   def pdf_filename
