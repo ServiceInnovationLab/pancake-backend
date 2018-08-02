@@ -35,8 +35,7 @@ RSpec.describe RebateFormsController, type: :controller do
   pending '#update'
 
   describe '#show' do
-    let(:property) { FactoryBot.create :property }
-    let(:rebate_form) { FactoryBot.create :rebate_form, valuation_id: property.valuation_id }
+    let(:rebate_form) { FactoryBot.create :rebate_form }
 
     before { get :show, format: :json, params: { id: rebate_form.token } }
 
