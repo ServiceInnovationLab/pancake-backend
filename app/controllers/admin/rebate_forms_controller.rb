@@ -2,6 +2,7 @@
 
 class Admin::RebateFormsController < Admin::BaseController
   before_action :set_rebate_form, only: %i[show update destroy]
+  respond_to :html, :pdf, :csv
 
   # GET /admin/rebate_forms
   def index
@@ -10,11 +11,14 @@ class Admin::RebateFormsController < Admin::BaseController
     @rebate_forms = policy_scope(RebateForm).all
                                             .includes(:signatures, :property)
                                             .order(created_at: :desc)
+
+    # if user is searching location, do a couple more filters
     if @location.present?
       @rebate_forms = @rebate_forms.joins(:property)
                                    .where('properties.location ILIKE ?', "%#{params[:location]}%")
     end
     @rebate_forms = @rebate_forms.page(params[:page])
+    respond_with @rebate_forms
   end
 
   # GET /admin/rebate_forms/1
@@ -28,8 +32,7 @@ class Admin::RebateFormsController < Admin::BaseController
       @signatures[st.name] = @rebate_form.signatures.where(signature_type: st).order(created_at: :desc).first
     end
 
-    respond_to do |format|
-      format.html
+    respond_with(@rebate_form) do |format|
       format.pdf do
         render pdf: pdf_filename, page_size: 'A4', layout: 'pdf'
       end
@@ -38,11 +41,8 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
-    if @rebate_form.update(rebate_form_params)
-      redirect_to admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
-    else
-      render :edit
-    end
+    @rebate_form.update(rebate_form_params)
+    respond_with @rebate_form, location: admin_rebate_forms_url, notice: 'Rebate form was successfully updated.'
   end
 
   # DELETE /admin/rebate_forms/1
@@ -57,15 +57,13 @@ class Admin::RebateFormsController < Admin::BaseController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_rebate_form
     @rebate_form = RebateForm.find(params[:id])
     authorize @rebate_form
   end
 
-  # Only allow a trusted parameter "white list" through.
   def rebate_form_params
-    params.require(:rebate_form).permit(:valuation_id, :token, attachments: [])
+    params.require(:rebate_form).permit(attachments: [])
   end
 
   def pdf_filename
