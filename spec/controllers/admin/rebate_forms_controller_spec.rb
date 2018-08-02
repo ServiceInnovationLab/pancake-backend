@@ -35,6 +35,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           content_type: 'image/jpeg'
         ] }
       end
+
       shared_examples 'controller works' do
         it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         it { expect(response).to redirect_to(admin_rebate_forms_url) }
@@ -46,6 +47,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
       context 'with invalid params' do
         let(:invalid_attributes) { { valuation_id: 1 } }
+
         before { put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes } }
         include_examples 'controller works'
       end
@@ -80,12 +82,14 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
   context 'signed in as council users' do
     let(:council_user) { FactoryBot.create :user, council: rebate_form.council }
+
     before { sign_in council_user }
     include_examples 'can wrangle rebate_forms'
   end
 
   context 'signed in as admin' do
     let(:admin_user) { FactoryBot.create :admin_user }
+
     before { sign_in admin_user }
     include_examples 'can wrangle rebate_forms'
   end
