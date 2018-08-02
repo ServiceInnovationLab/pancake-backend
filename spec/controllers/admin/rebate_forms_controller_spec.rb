@@ -3,72 +3,69 @@
 require 'rails_helper'
 
 RSpec.describe Admin::RebateFormsController, type: :controller do
-  let(:rebate_form) { FactoryBot.create :rebate_form }
+  let(:property) { FactoryBot.create :property }
+  let(:rebate_form) { FactoryBot.create :rebate_form, valuation_id: property.valuation_id }
+  let(:valid_attributes) do
+    FactoryBot.build(:rebate_form).attributes.symbolize_keys
+  end
+  let(:invalid_attributes) do
+    { valuation_id: 1 }
+  end
 
-  context 'signed in as admin' do
-    let(:admin_user) { FactoryBot.create :admin_user }
-    before { sign_in admin_user }
-
-    let(:valid_attributes) do
-      FactoryBot.build(:rebate_form).attributes.symbolize_keys
-    end
-
-    let(:invalid_attributes) do
-      { valuation_id: 1 }
-    end
-
+  shared_examples "can wrangle rebate_forms" do
     describe 'GET #index' do
+      before { get :index, params: {} }
       describe 'assigns all rebate_forms as @rebate_forms' do
-        before { get :index, params: {} }
-
         it { expect(assigns(:rebate_forms)).to eq([rebate_form]) }
       end
     end
 
     describe 'GET #show' do
-      describe 'assigns the requested rebate_form as @rebate_form' do
+      context 'html' do
         before { get :show, params: { id: rebate_form.to_param } }
-
+        describe 'assigns the requested rebate_form as @rebate_form' do
+          it { expect(assigns(:rebate_form)).to eq(rebate_form) }
+        end
+      end
+      context 'pdf' do
+        before { get :show, params: { id: rebate_form.to_param }, format: :pdf }
         it { expect(assigns(:rebate_form)).to eq(rebate_form) }
       end
     end
 
     describe 'PUT #update' do
+      let(:new_attributes) { FactoryBot.build(:rebate_form).attributes.symbolize_keys }
+
       context 'with valid params' do
-        let(:new_attributes) do
-          FactoryBot.build(:rebate_form).attributes.symbolize_keys
-        end
+        before { put :update, params: { id: rebate_form.to_param, rebate_form: new_attributes } }
 
         it 'updates the requested rebate_form' do
-          put :update, params: { id: rebate_form.to_param, rebate_form: new_attributes }
           rebate_form.reload
           expect(rebate_form.valuation_id).to eq(new_attributes[:valuation_id])
         end
 
-        describe 'assigns the requested rebate_form as @rebate_form' do
-          before { put :update, params: { id: rebate_form.to_param, rebate_form: valid_attributes } }
-
-          it { expect(assigns(:rebate_form)).to eq(rebate_form) }
-        end
-
-        describe 'redirects to the rebate_form' do
-          before { put :update, params: { id: rebate_form.to_param, rebate_form: valid_attributes } }
-
-          it { expect(response).to redirect_to(admin_rebate_forms_url) }
-        end
+        it { expect(assigns(:rebate_form)).to eq(rebate_form) }
+        it { expect(response).to redirect_to(admin_rebate_forms_url) }
       end
 
       context 'with invalid params' do
-        describe 'assigns the rebate_form as @rebate_form' do
-          before { put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes } }
+        before { put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes } }
+        it { expect(assigns(:rebate_form)).to eq(rebate_form) }
+        it { expect(response).to redirect_to(admin_rebate_forms_url) }
+      end
 
-          it { expect(assigns(:rebate_form)).to eq(rebate_form) }
+      context 'rebate_form is completed' do
+        let(:rebate_form) { FactoryBot.create :signed_form }
+        before {  }
+
+        it 'does not allow changes to completed rebate_form' do
+          rebate_form
+          expect do
+            put :update, params: { id: rebate_form.to_param, rebate_form: new_attributes }
+            rebate_form.reload
+          end.not_to change(rebate_form, :valuation_id)
         end
 
-        it "re-renders the 'edit' template" do
-          put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes }
-          expect(response).to render_template('edit')
-        end
       end
     end
 
@@ -80,10 +77,23 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         end.to change(RebateForm, :count).by(-1)
       end
 
-      it 'redirects to the rebate_forms list' do
-        delete :destroy, params: { id: rebate_form.to_param }
-        expect(response).to redirect_to(admin_rebate_forms_url)
+      describe 'redirects to the rebate_forms list' do
+        before { delete :destroy, params: { id: rebate_form.to_param } }
+        it { expect(response).to redirect_to(admin_rebate_forms_url) }
       end
     end
   end
+
+  context 'signed in as council users' do
+    let(:council_user) { FactoryBot.create :user, council: rebate_form.council }
+    before { sign_in council_user }
+    include_examples "can wrangle rebate_forms"
+  end
+
+  context 'signed in as admin' do
+    let(:admin_user) { FactoryBot.create :admin_user }
+    before { sign_in admin_user }
+    include_examples "can wrangle rebate_forms"
+  end
+
 end
