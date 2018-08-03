@@ -79,6 +79,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'database_cleaner', '~> 1.6'
   gem 'simplecov', require: false
 end
