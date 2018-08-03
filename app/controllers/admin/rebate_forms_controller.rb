@@ -8,19 +8,15 @@ class Admin::RebateFormsController < Admin::BaseController
   def index
     @location = params[:location]
     @rating_year = params[:rating_year]
-    @years = ['2019', '2018']
+    @years = %w[2019 2018]
     @council = current_user.council.presence
     @rebate_forms = policy_scope(RebateForm).joins(:property)
                                             .includes(:signatures, :property)
                                             .order(created_at: :desc)
 
     # if user is searching location, do a couple more filters
-    if @location.present?
-      @rebate_forms = @rebate_forms.where('properties.location ILIKE ?', "%#{params[:location]}%")
-    end
-    if @rating_year.present?
-      @rebate_forms = @rebate_forms.where("properties.rating_year": @rating_year)
-    end
+    @rebate_forms = @rebate_forms.where('properties.location ILIKE ?', "%#{params[:location]}%") if @location.present?
+    @rebate_forms = @rebate_forms.where("properties.rating_year": @rating_year) if @rating_year.present?
     respond_with @rebate_forms
   end
 

@@ -8,7 +8,7 @@ RSpec.describe 'admin/rebate_forms/index', type: :view do
     FactoryBot.create_list(:rebate_form, 2)
     assign(:council, council)
     assign(:rebate_forms, RebateForm.all.page(0))
-    assign(:years, ['2018', '2019'])
+    assign(:years, %w[2018 2019])
     render
   end
   it { expect(rendered).to include council.name }
