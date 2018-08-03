@@ -5,15 +5,14 @@
   - unless @council.nil?
     for #{@council.name}
 
+%p
+  = link_to admin_rebate_forms_path(format: :csv, rating_year: @rating_year, location: @location), class: 'pure-button' do
+    = fa_icon 'table'
+    Download CSV
 
-.pure-g
-  .search-form.pure-u-1
-    = form_tag(admin_rebate_forms_path, method: :get, class: 'pure-form') do
-      = text_field_tag :location, @location, placeholder: "Address"
-      %button.pure-button
-        = fa_icon 'search'
+= render 'search'
 
-%p= paginate @rebate_forms
+%p= paginate @rebate_forms.page(params[:page])
 
 %table.pure-table.pure-table-bordered
   %thead
@@ -28,7 +27,7 @@
       %th Witnessed
 
   %tbody
-    - @rebate_forms.each do |rebate_form|
+    - @rebate_forms.page(params[:page]).each do |rebate_form|
       %tr{ class: rebate_form.completed ? 'pure-table-odd' : '' }
         %td= rebate_form.property.rating_year
         %td
@@ -61,4 +60,4 @@
               data: { confirm: 'Are you sure?' }, class: 'pure-button' do
               = fa_icon 'trash'
 
-%p= paginate @rebate_forms
+%p= paginate @rebate_forms.page(params[:page])
