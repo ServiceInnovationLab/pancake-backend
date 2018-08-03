@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Council', type: :feature do
   subject { page }
+
   let!(:council) { FactoryBot.create :council }
 
 
