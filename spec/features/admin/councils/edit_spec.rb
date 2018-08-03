@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Council', type: :feature do
+  subject { page }
   let!(:council) { FactoryBot.create :council }
 
-  subject { page }
 
   context 'anonymous' do
     before { visit "/admin/councils/#{council.id}" }
