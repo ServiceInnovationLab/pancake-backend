@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'admin/rebate_forms/index', type: :view do
   let(:council) { FactoryBot.create(:council) }
+
   before do
     FactoryBot.create_list(:rebate_form, 2)
     assign(:council, council)

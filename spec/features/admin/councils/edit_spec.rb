@@ -26,6 +26,7 @@ RSpec.describe 'Council', type: :feature do
     end
 
     let(:user) { FactoryBot.create :user, council: council }
+
     it { is_expected.to have_http_status :ok }
     it { is_expected.to have_text(council.name) }
     it { is_expected.to have_text('3 Rebate forms collected') }
@@ -38,6 +39,7 @@ RSpec.describe 'Council', type: :feature do
       visit "/admin/councils/#{council.id}"
     end
     let(:user) { FactoryBot.create :admin_user }
+
     it { is_expected.to have_http_status :ok }
     it { is_expected.to have_text(council.name) }
   end
