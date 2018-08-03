@@ -9,6 +9,7 @@ RSpec.describe 'Council', type: :feature do
 
   context 'anonymous' do
     before { visit "/admin/councils/#{council.id}" }
+
     it { is_expected.to have_text('Forgot your password?') }
     it { is_expected.to have_http_status :ok }
     it { is_expected.not_to have_text(council.name) }
@@ -38,6 +39,7 @@ RSpec.describe 'Council', type: :feature do
       login_as(user, scope: :user)
       visit "/admin/councils/#{council.id}"
     end
+
     let(:user) { FactoryBot.create :admin_user }
 
     it { is_expected.to have_http_status :ok }

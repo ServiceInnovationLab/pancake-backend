@@ -12,6 +12,7 @@ RSpec.describe 'admin/rebate_forms/index', type: :view do
     assign(:years, %w[2018 2019])
     render
   end
+
   it { expect(rendered).to include council.name }
   it { expect(rendered).to include '2018' }
   it { expect(rendered).to include '2019' }
