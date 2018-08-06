@@ -1,5 +1,14 @@
 - content_for :title, "RatesRebate #{@rebate_form.property.location}"
-%p
+
+.show_header
+  %h2
+    = @rebate_form.property.rating_year
+    Application for
+    = @rebate_form.fields['full_name']
+    of
+    = @rebate_form.property.location
+
+  = link_to 'Edit', edit_admin_rebate_form_path, class: 'pure-button'
   = link_to 'Back', admin_rebate_forms_path, class: 'pure-button'
 
   - if @rebate_form.applicant_signature.present?
@@ -7,13 +16,6 @@
       = fa_icon 'download'
 
 %p#notice= notice
-
-%h2
-  = @rebate_form.property.rating_year
-  Application for
-  = @rebate_form.fields['full_name']
-  of
-  = @rebate_form.property.location
 
 .pure-g
   .pure-u-1

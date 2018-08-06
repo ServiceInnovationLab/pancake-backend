@@ -54,6 +54,11 @@ class Admin::RebateFormsController < Admin::BaseController
     end
   end
 
+  def edit
+    @rebate_form = RebateForm.find(params[:id])
+    authorize @rebate_form
+  end
+
   private
 
   def set_rebate_form

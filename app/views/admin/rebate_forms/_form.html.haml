@@ -1,4 +1,8 @@
 = form_for [:admin, @rebate_form] do |f|
+  - @rebate_form.fields.each_with_index do |field, i|
+    = f.label field.first
+    = f.text_field :token
+
   = f.label :valuation_id
   = f.text_field :valuation_id
   = f.label :token
