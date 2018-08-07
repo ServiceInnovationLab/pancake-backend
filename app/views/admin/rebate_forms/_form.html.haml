@@ -6,9 +6,6 @@
         = f.label item.first
         = f.text_field(item.first, :value => item.last)
 
-  = f.hidden_field(:updated_by, :value => current_user.email)
-  = f.hidden_field(:updated_at, :value => DateTime.now)
-
 
   - if @rebate_form.errors.any?
     #error_explanation
