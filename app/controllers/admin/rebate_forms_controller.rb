@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::RebateFormsController < Admin::BaseController
-  before_action :set_rebate_form, only: %i[show update destroy]
+  before_action :set_rebate_form, only: %i[show update destroy edit]
   respond_to :html, :pdf, :csv
 
   # GET /admin/rebate_forms
@@ -40,6 +40,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
+    # @rebate_form = RebateForm.find(params[:id])
     @rebate_form.update(fields: rebate_form_params)
     @rebate_form.save
     respond_with @rebate_form, location: admin_rebate_forms_url, notice: 'Rebate form was successfully updated.'
@@ -53,11 +54,6 @@ class Admin::RebateFormsController < Admin::BaseController
       @rebate_form.destroy
       redirect_to admin_rebate_forms_url, notice: 'Rebate form was successfully destroyed.'
     end
-  end
-
-  def edit
-    @rebate_form = RebateForm.find(params[:id])
-    authorize @rebate_form
   end
 
   private
