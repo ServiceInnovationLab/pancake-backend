@@ -9,12 +9,13 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :rebate_forms, only: %i[show index update destroy edit]
+    resources :rebate_forms, only: %i[show index update destroy edit post]
     resources :attachments, only: %i[destroy]
     resources :councils
     resources :users
     resources :batches
     get 'signature' => 'signatures#show'
+    post "rebate_forms/:id/edit" => "rebate_forms#edit"
   end
 
   scope path: '/api' do

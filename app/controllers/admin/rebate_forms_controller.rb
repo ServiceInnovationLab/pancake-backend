@@ -40,7 +40,9 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
-    @rebate_form.update(rebate_form_params)
+    @rebate_form = RebateForm.find(params[:id])
+    @rebate_form.fields = rebate_form_params
+    @rebate_form.save
     respond_with @rebate_form, location: admin_rebate_forms_url, notice: 'Rebate form was successfully updated.'
   end
 
@@ -67,7 +69,7 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def rebate_form_params
-    params.require(:rebate_form).permit(attachments: [])
+    params.fetch(:rebate_form, {}).permit({attachments: []}, :valuation_id, :address, :income, :dependants, :full_name, :phone_number, :rates_bill, :lived_here_before_july_2018, :income_range, :email, :has_home_business, :email_phone_can_be_used)
   end
 
   def pdf_filename

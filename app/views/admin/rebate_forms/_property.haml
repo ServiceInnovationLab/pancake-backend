@@ -1,9 +1,9 @@
 %h3 Valuation id
-%p= @rebate_form.valuation_id
+%p= @rebate_form.fields['valuation_id']
 
 - if @rebate_form.property.present?
   %h3 Address
   %addr
-    = @rebate_form.property.location
+    = @rebate_form.fields['address']
     %br/
     = @rebate_form.property.town_city
