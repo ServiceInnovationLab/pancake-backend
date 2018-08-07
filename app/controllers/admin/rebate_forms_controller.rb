@@ -42,7 +42,6 @@ class Admin::RebateFormsController < Admin::BaseController
   def update
     @rebate_form.update(fields: rebate_form_fields_params)
     @rebate_form.update(rebate_form_params)
-    @rebate_form.save
     respond_with @rebate_form, location: admin_rebate_forms_url, notice: 'Rebate form was successfully updated.'
   end
 
