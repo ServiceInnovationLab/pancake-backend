@@ -69,7 +69,7 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def rebate_form_params
-    params.fetch(:rebate_form, {}).permit({attachments: []}, :valuation_id, :address, :income, :dependants, :full_name, :phone_number, :rates_bill, :lived_here_before_july_2018, :income_range, :email, :has_home_business, :email_phone_can_be_used)
+    params.fetch(:rebate_form, {}).permit(:last_edited, {attachments: []}, :valuation_id, :address, :income, :dependants, :full_name, :phone_number, :rates_bill, :lived_here_before_july_2018, :income_range, :email, :has_home_business, :email_phone_can_be_used)
   end
 
   def pdf_filename
