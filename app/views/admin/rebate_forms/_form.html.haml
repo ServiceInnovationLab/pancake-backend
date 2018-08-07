@@ -1,10 +1,13 @@
 = form_for [:admin, @rebate_form] do |f|
+  - show_fields = ['income','dependants', 'full_name', 'lived_here_before_july_2018', 'has_home_business', 'email', 'phone_number', 'email_phone_can_be_used']
   - @rebate_form.fields.each do |item|
-    - if item.first != 'last_edited'
-      = f.label item.first
-      = f.text_field(item.first, :value => item.last)
+    - show_fields.each do |hf|
+      - if hf == item.first
+        = f.label item.first
+        = f.text_field(item.first, :value => item.last)
 
-  = f.hidden_field(:last_edited, :value => current_user.email)
+  = f.hidden_field(:updated_by, :value => current_user.email)
+  = f.hidden_field(:updated_at, :value => DateTime.now)
 
 
   - if @rebate_form.errors.any?

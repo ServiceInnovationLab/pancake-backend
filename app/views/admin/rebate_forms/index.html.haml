@@ -33,12 +33,12 @@
         %td
           - if rebate_form.council.present?
             = link_to rebate_form.council.name, admin_council_path(rebate_form.council)
-        %td= rebate_form.fields['valuation_id']
+        %td= rebate_form.valuation_id
         %td= rebate_form.fields['full_name']
         %td
           - if rebate_form.property.present?
             %p
-              = rebate_form.fields['address']
+              = rebate_form.property.location
               %br/
               = rebate_form.property.suburb
               %br/

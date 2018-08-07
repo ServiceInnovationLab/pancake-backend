@@ -32,33 +32,7 @@ RSpec.describe RebateFormsController, type: :controller do
     end
   end
 
-  describe '#update' do
-    let(:body) do
-      {
-        data: {
-          type: 'rebate-forms',
-          attributes: {
-            fields: {
-              "valuation_id": "123",
-              "address": "1 road street",
-              "income": 333.00,
-              "full_name": "Joe blogs",
-              "dependants": 5,
-              "phone_number": "234242342"
-            }
-          }
-        }
-      }
-    end
-
-    before { put :update, format: :json, params: { api: body } }
-
-    it "updates an entry with valid params" do
-      post :update, id: body, body: {valuation_id: "11111"}
-      body.reload
-      expect(body.valuation_id).to eq("11111")
-    end
-  end
+  pending '#update'
 
   describe '#show' do
     let(:rebate_form) { FactoryBot.create :rebate_form }
