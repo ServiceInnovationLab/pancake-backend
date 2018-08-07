@@ -40,8 +40,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
-    @rebate_form = RebateForm.find(params[:id])
-    @rebate_form.fields = rebate_form_params
+    @rebate_form.update(fields: rebate_form_params)
     @rebate_form.save
     respond_with @rebate_form, location: admin_rebate_forms_url, notice: 'Rebate form was successfully updated.'
   end
