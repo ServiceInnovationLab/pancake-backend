@@ -35,6 +35,9 @@ class RebateForm < ApplicationRecord
       dependants: dependants, year: year
     )
     update!(rebate: rebate)
+  rescue StandardError => e
+    errors.add(:address, e)
+    errors.add(:address, "Application invalid")
   end
 
   def dependants
