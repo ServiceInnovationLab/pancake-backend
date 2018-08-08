@@ -50,6 +50,7 @@ class Admin::RebateFormsController < Admin::BaseController
     elsif params.fetch(:rebate_form, false)
       # update the fields (preserves the other elements of the hash)
       @rebate_form.fields.update(rebate_form_fields_params) && @rebate_form.save
+      @rebate_form.calc_rebate_amount!
     end
     respond_with @rebate_form, location: admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
   end
