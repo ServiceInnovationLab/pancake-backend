@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     resources :users
     resources :batches
     get 'signature' => 'signatures#show'
-    post "rebate_forms/:id/edit" => "rebate_forms#edit"
   end
 
   scope path: '/api' do
