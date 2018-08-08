@@ -43,9 +43,15 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
-    @rebate_form.update(fields: rebate_form_fields_params, updated_by: current_user.email)
-    @rebate_form.update(rebate_form_params)
-    respond_with @rebate_form, location: admin_rebate_forms_url, notice: 'Rebate form was successfully updated.'
+    # updating attachments
+    if params.fetch(:rebate_form, {}).fetch(:attachments, false)
+      @rebate_form.update(rebate_form_params)
+    # updating rebate form itself
+    elsif params.fetch(:rebate_form, false)
+      # update the fields (preserves the other elements of the hash)
+      @rebate_form.fields.update(rebate_form_fields_params) && @rebate_form.save
+    end
+    respond_with @rebate_form, location: admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
   end
 
   # DELETE /admin/rebate_forms/1
@@ -65,12 +71,12 @@ class Admin::RebateFormsController < Admin::BaseController
     authorize @rebate_form
   end
 
-  def rebate_form_params
-    params.require(:rebate_form).permit(attachments: [])
+  def rebate_form_fields_params
+    params.require(:rebate_form).permit(fields: [:full_name, :income, :dependants])['fields']
   end
 
-  def rebate_form_fields_params
-    params.fetch(:rebate_form).permit(:income, :dependants, :full_name, :dependants, :lived_here_before_july_2018, :full_name, :has_home_business, :email, :phone_number, :email_phone_can_be_used)
+  def rebate_form_params
+    params.require(:rebate_form).permit(attachments: [])
   end
 
   def pdf_filename
