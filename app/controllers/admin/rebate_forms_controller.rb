@@ -72,7 +72,8 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def rebate_form_fields_params
-    params.require(:rebate_form).permit(fields: [:full_name, :income, :dependants])['fields']
+    params.require(:rebate_form).permit(
+      fields: [:full_name, :income, :dependants, :lived_here_before_july_2017, :lived_here_before_july_2018])['fields']
   end
 
   def rebate_form_params

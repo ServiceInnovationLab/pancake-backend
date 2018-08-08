@@ -14,14 +14,14 @@
     $
     = number_field(:rebate_form, 'fields[income]', value: @rebate_form.fields['income'])
 
-  / .pure-control-group
-  /   %h4= label_tag :lived_here_before_july_2018
-  /   %p
-  /     = radio_button_tag(:rebate_form, 'fields[lived_here_before_july_2018]', value: 'yes')
-  /     yes
-  /   %p
-  /     = radio_button_tag(:rebate_form, 'fields[lived_here_before_july_2018]', value: 'no')
-  /     no
+  .pure-control-group
+    - ['lived_here_before_july_2017', 'lived_here_before_july_2018'].each do |field|
+      - if (@rebate_form.fields[field].present?)
+        %h4= f.label field
+        - ['yes', 'no'].each do |value|
+          %p
+            = radio_button_tag "rebate_form[fields][#{field}]", value, @rebate_form.fields[field] == value
+            = f.label field, value
 
   .actions
     = f.submit 'Save', class: 'pure-button'
