@@ -38,6 +38,9 @@ class Admin::RebateFormsController < Admin::BaseController
     end
   end
 
+  def edit
+  end
+
   # PATCH/PUT /admin/rebate_forms/1
   def update
     @rebate_form.update(fields: rebate_form_fields_params, updated_by: current_user.email)
