@@ -48,6 +48,19 @@ a:focus {
   padding: 1em;
 }
 
+.show_header {
+  border-bottom: 1px solid #999;
+  padding: 10px 0;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  padding: 7px 10px;
+  margin: 5px 0 15px 0 !important;
+}
 
 .content {
   padding: 2em 1em 0;
