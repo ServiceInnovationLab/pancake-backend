@@ -7,7 +7,6 @@ RSpec.describe 'Council', type: :feature do
 
   let!(:council) { FactoryBot.create :council }
 
-
   context 'anonymous' do
     before { visit "/admin/councils/#{council.id}" }
 
