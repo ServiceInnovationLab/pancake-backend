@@ -43,13 +43,16 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
+
     # updating attachments
     if params.fetch(:rebate_form, {}).fetch(:attachments, false)
       @rebate_form.update(rebate_form_params)
     # updating rebate form itself
     elsif params.fetch(:rebate_form, false)
       # update the fields (preserves the other elements of the hash)
-      @rebate_form.fields.update(rebate_form_fields_params) && @rebate_form.save
+      @rebate_form.fields.update(rebate_form_fields_params)
+      @rebate_form.updated_by = current_user
+      @rebate_form.save
       @rebate_form.calc_rebate_amount!
     end
     respond_with @rebate_form, location: admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
