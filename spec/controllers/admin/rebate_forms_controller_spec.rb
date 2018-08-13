@@ -104,17 +104,16 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
   describe 'PUT update/:id' do
     let(:user) { FactoryBot.create :user, council: rebate_form.property.council }
+    let(:valid_attributes) { { fields: { full_name: 'Dananana', dependants: 1, income: 11_111 } } }
 
-    before {
+    before do
       sign_in user
-
-      put :update, params: { id: rebate_form.to_param, rebate_form: { fields: { full_name: 'Dananana', address: 'qweqew', income: 11111 } } }
-
-    }
+      put :update, params: { id: rebate_form.to_param, rebate_form: valid_attributes }
+    end
 
     it 'should update updated_by column with current user' do
       rebate_form.reload
-      expect(rebate_form.updated_by).to eq(user)
+      expect(rebate_form.updated_by).to eq(user.id)
     end
   end
 
