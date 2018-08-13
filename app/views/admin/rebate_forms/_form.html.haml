@@ -19,9 +19,8 @@
       - if (@rebate_form.fields[field].present?)
         %h4= f.label field
         - ['yes', 'no'].each do |value|
-          %p
-            = radio_button_tag "rebate_form[fields][#{field}]", value, @rebate_form.fields[field] == value
-            = f.label field, value
+          = radio_button_tag "rebate_form[fields][#{field}]", value, @rebate_form.fields[field] == value
+          %label{for: "rebate_form_fields_#{field}_#{value}", style: 'display: inline-block'}=value
 
   .actions
     = f.submit 'Save', class: 'pure-button'
