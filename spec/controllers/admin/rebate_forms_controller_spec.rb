@@ -38,11 +38,11 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           content_type: 'image/jpeg'
         ] }
       end
-
       shared_examples 'controller works' do
         it { expect(assigns(:rebate_form)).to eq(rebate_form) }
-        it { expect(response).to redirect_to(admin_rebate_forms_url) }
+        it { expect(response).to redirect_to(admin_rebate_form_url(rebate_form)) }
       end
+
       context 'with valid params' do
         before { put :update, params: { id: rebate_form.to_param, rebate_form: attachment_params } }
 
@@ -50,7 +50,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
 
       context 'with invalid params' do
-        let(:invalid_attributes) { { valuation_id: 1 } }
+        let(:invalid_attributes) { { fields: {} } }
 
         before { put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes } }
 
