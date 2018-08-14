@@ -17,7 +17,7 @@ RSpec.describe Admin::RebateFormsController, type: :routing do
     end
 
     it 'routes to #edit' do
-      expect(get: '/admin/rebate_forms/1/edit').not_to route_to('admin/rebate_forms#edit', id: '1')
+      expect(get: '/admin/rebate_forms/1/edit').to route_to('admin/rebate_forms#edit', id: '1')
     end
 
     it 'routes to #create' do
