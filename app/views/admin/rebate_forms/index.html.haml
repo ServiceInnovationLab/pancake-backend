@@ -54,7 +54,9 @@
         %td
           = link_to admin_rebate_form_path(rebate_form), class: 'pure-button' do
             show
-          = link_to 'Edit', edit_admin_rebate_form_path(rebate_form)
+        %td
+          - if policy(rebate_form).edit?
+            = link_to 'Edit', edit_admin_rebate_form_path(rebate_form), class: 'pure-button'
         %td
           - if policy(rebate_form).destroy?
             = link_to admin_rebate_form_path(rebate_form), method: :delete,
