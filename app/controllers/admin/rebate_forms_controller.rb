@@ -7,16 +7,23 @@ class Admin::RebateFormsController < Admin::BaseController
   # GET /admin/rebate_forms
   def index
     @location = params[:location]
-    @rating_year = params[:rating_year]
-    @years = %w[2019 2018]
+
+    @rating_year = params[:rating_year] || ENV['YEAR']
+    @years = Property.select(:rating_year).distinct.order(:rating_year).reverse_order.pluck(:rating_year)
+
+    @completed = params[:completed].present? ? params[:completed] == 'true' : nil
+
     @council = current_user.council.presence
+
     @rebate_forms = policy_scope(RebateForm).joins(:property)
-                                            .includes(:signatures, :property)
+                                            .includes(:signatures, :property, property: :council)
                                             .order(created_at: :desc)
 
-    # if user is searching location, do a couple more filters
+    # filter by the search form fields
     @rebate_forms = @rebate_forms.where('properties.location ILIKE ?', "%#{params[:location]}%") if @location.present?
     @rebate_forms = @rebate_forms.where("properties.rating_year": @rating_year) if @rating_year.present?
+    @rebate_forms = @rebate_forms.where(completed: @completed) unless @completed.nil?
+
     respond_with @rebate_forms
   end
 
@@ -86,5 +93,8 @@ class Admin::RebateFormsController < Admin::BaseController
 
   def pdf_filename
     "rebate-#{@rebate_form.council.short_name}-#{@rebate_form.id}"
+  end
+
+  def filter_records
   end
 end
