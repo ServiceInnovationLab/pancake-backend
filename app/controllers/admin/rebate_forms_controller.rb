@@ -22,6 +22,8 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # GET /admin/rebate_forms/1
   def show
+    @updated_by = User.find(current_user.id)
+
     @year = ENV['YEAR']
 
     @rates_bill = @rebate_form.property.rates_bills.find_by(rating_year: @year)
