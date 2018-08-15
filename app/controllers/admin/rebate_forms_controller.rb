@@ -31,9 +31,7 @@ class Admin::RebateFormsController < Admin::BaseController
       @signatures[st.name] = @rebate_form.signatures.where(signature_type: st).order(created_at: :desc).first
     end
 
-    unless @rebate_form.updated_by.nil?
-      @updated_by = User.find(@rebate_form.updated_by)
-    end
+    @updated_by = User.find(@rebate_form.updated_by) unless @rebate_form.updated_by.nil?
 
     respond_with(@rebate_form) do |format|
       format.pdf do
