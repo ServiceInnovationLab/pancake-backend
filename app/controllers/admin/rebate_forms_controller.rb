@@ -22,7 +22,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # GET /admin/rebate_forms/1
   def show
-    @updated_by = User.find(current_user.id)
+    @updated_by = User.find(@rebate_form.updated_by)
 
     @year = ENV['YEAR']
 
@@ -40,8 +40,7 @@ class Admin::RebateFormsController < Admin::BaseController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
@@ -53,8 +52,7 @@ class Admin::RebateFormsController < Admin::BaseController
       # update the fields (preserves the other elements of the hash)
       @rebate_form.fields.update(rebate_form_fields_params)
       @rebate_form.updated_by = current_user.id
-      @rebate_form.save
-      @rebate_form.calc_rebate_amount!
+      @rebate_form.save && @rebate_form.calc_rebate_amount!
     end
     respond_with @rebate_form, location: admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
   end
@@ -65,7 +63,7 @@ class Admin::RebateFormsController < Admin::BaseController
       redirect_to admin_rebate_forms_url, notice: 'Cannot delete signed forms.'
     else
       @rebate_form.destroy
-      redirect_to admin_rebate_forms_url, notice: 'Rebate form was successfully destroyed.'
+      redirect_to admin_rebate_forms_url, notice: 'Rebate form was deleted.'
     end
   end
 
@@ -78,7 +76,8 @@ class Admin::RebateFormsController < Admin::BaseController
 
   def rebate_form_fields_params
     params.require(:rebate_form).permit(
-      fields: [:full_name, :income, :dependants, :lived_here_before_july_2017, :lived_here_before_july_2018])['fields']
+      fields: %i[full_name income dependants lived_here_before_july_2017 lived_here_before_july_2018]
+    )['fields']
   end
 
   def rebate_form_params
