@@ -152,8 +152,8 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
       describe 'should update full_name, dependants and income' do
         it { expect(subject['full_name']).to eq('Mary Jane Kelly') }
-        it { expect(subject['dependants']).to eq(9) }
-        it { expect(subject['income']).to eq(11_999) }
+        it { expect(subject['dependants']).to eq('9') }
+        it { expect(subject['income']).to eq('11999') }
       end
 
       describe 'preserves the existing fields' do
