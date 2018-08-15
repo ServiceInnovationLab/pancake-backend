@@ -104,7 +104,9 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
   describe 'PUT update/:id' do
     let(:user) { FactoryBot.create :user, council: rebate_form.property.council }
-    let(:valid_attributes) { { fields: { full_name: 'Dananana', dependants: 1, income: 11_111 } } }
+    let(:valid_attributes) do
+      { fields: {valuation_id: "06601*004*02*", rates_bill: "1.10", dependants: "3", income_range: "below", lived_here_before_july_2018: "yes", full_name: "Sylvestor", email: "test@gmail.com", phone_number: "5556789", has_home_business: "no", email_phone_can_be_used: true, income: 23405.2, lived_with_partner: false}}
+    end
 
     before do
       sign_in user
@@ -114,6 +116,20 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     it 'should update updated_by column with current user' do
       rebate_form.reload
       expect(rebate_form.updated_by).to eq(user.id)
+    end
+
+    it 'should update full_name, dependants and income' do
+      rebate_form.reload
+      expect(rebate_form.fields['full_name']).to eq('Sylvestor')
+      expect(rebate_form.fields['dependants']).to eq('3')
+      expect(rebate_form.fields['income']).to eq('23405.2')
+    end
+
+    it 'should keep the same fields after an update' do
+      rebate_form.reload
+      rebate_form.fields.keys.each_with_index do |x, i|
+        expect(rebate_form.fields.include?(x)).to eq(true)
+      end
     end
   end
 
