@@ -103,34 +103,50 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
   end
 
   describe 'PUT update/:id' do
-    let(:user) { FactoryBot.create :user, council: rebate_form.property.council }
-    let(:valid_attributes) do
-      { fields: { valuation_id: "06601*004*02*", rates_bill: "1.10", dependants: "3", income_range: "below", lived_here_before_july_2018: "yes", full_name: "Sylvestor", email: "test@gmail.com", phone_number: "5556789", has_home_business: "no", email_phone_can_be_used: true, income: 23405.2, lived_with_partner: false } }
-    end
+    context 'user is same council' do
+      let(:user) { FactoryBot.create :user, council: rebate_form.property.council }
+      let(:rebate_form) do
+        FactoryBot.create(:rebate_form, fields: {
+          valuation_id: '06601*004*02*',
+          rates_bill: 1.10,
+          dependants: 3,
+          income_range: 'below',
+          lived_here_before_july_2018: 'yes',
+          full_name: 'Sylvestor',
+          email: 'test@gmail.com',
+          phone_number: '5556789',
+          has_home_business: 'no',
+          email_phone_can_be_used: true,
+          income: 23_405.2,
+          lived_with_partner: false
+        })
+      end
 
-    before do
-      sign_in user
-      put :update, params: { id: rebate_form.to_param, rebate_form: valid_attributes }
-    end
+      before do
+        sign_in user
+        put :update, params: { id: rebate_form.to_param, rebate_form:{fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 } } }
+        rebate_form.reload
+      end
 
-    it 'should update updated_by column with current user' do
-      rebate_form.reload
-      expect(rebate_form.updated_by).to eq(user.id)
-    end
+      it 'should update updated_by column with current user' do
+        expect(rebate_form.updated_by).to eq(user.id)
+      end
 
-    it 'should update full_name, dependants and income' do
-      rebate_form.reload
-      expect(rebate_form.fields['full_name']).to eq('Sylvestor')
-      expect(rebate_form.fields['dependants']).to eq('3')
-      expect(rebate_form.fields['income']).to eq('23405.2')
-    end
+      subject { rebate_form.fields }
 
-    it 'should keep the same fields after an update' do
-      rebate_form.reload
-      rebate_form.fields.keys.each do |x|
-        expect(rebate_form.fields.include?(x)).to eq(true)
+      describe 'should update full_name, dependants and income' do
+        it { expect(subject['full_name']).to eq('Mary Jane Kelly') }
+        it { expect(subject['dependants']).to eq(9) }
+        it { expect(subject['income']).to eq(11_999) }
+      end
+
+      describe "preserves the existing fields" do
+        it { expect(rebate_form.fields['email']).to eq "test@gmail.com" }
+        it { expect(rebate_form.fields['phone_number']).to eq "5556789" }
+        it { expect(rebate_form.fields['has_home_business']).to eq "no" }
+        it { expect(rebate_form.fields['email_phone_can_be_used']).to eq true }
+        it { expect(rebate_form.fields['lived_with_partner']).to eq false }
       end
     end
   end
-
 end
