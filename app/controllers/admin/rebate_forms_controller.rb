@@ -94,7 +94,4 @@ class Admin::RebateFormsController < Admin::BaseController
   def pdf_filename
     "rebate-#{@rebate_form.council.short_name}-#{@rebate_form.id}"
   end
-
-  def filter_records
-  end
 end
