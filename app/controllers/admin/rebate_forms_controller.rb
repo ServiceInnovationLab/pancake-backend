@@ -22,7 +22,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # GET /admin/rebate_forms/1
   def show
-    @updated_by = User.find(current_user.id)
+    @updated_by = User.find(@rebate_form.updated_by)
 
     @year = ENV['YEAR']
 
