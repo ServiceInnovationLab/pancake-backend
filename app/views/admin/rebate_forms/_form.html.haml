@@ -12,7 +12,7 @@
   .pure-control-group
     %h4= label_tag :income
     $
-    = number_field(:rebate_form, 'fields[income]', value: @rebate_form.fields['income'])
+    = number_field(:rebate_form, 'fields[income]', value: @rebate_form.fields['income'], step: 0.01)
 
   .pure-control-group
     - ['lived_here_before_july_2017', 'lived_here_before_july_2018'].each do |field|
