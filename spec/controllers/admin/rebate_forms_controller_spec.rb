@@ -127,7 +127,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
     it 'should keep the same fields after an update' do
       rebate_form.reload
-      rebate_form.fields.keys.each_with_index do |x, i|
+      rebate_form.fields.keys.each do |x|
         expect(rebate_form.fields.include?(x)).to eq(true)
       end
     end
