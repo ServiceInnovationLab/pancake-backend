@@ -24,6 +24,7 @@ class RebateForm < ApplicationRecord
   def calc_rebate_amount!
     year = ENV['YEAR']
     raise 'No year set' if year.blank?
+    raise 'No associated property record' if property.blank?
     raise 'Application year must match property record year' unless year == property.rating_year
 
     rates_bill = property.rates_bills.find_by(rating_year: year)
@@ -34,6 +35,9 @@ class RebateForm < ApplicationRecord
       dependants: dependants, year: year
     )
     update!(rebate: rebate)
+  rescue StandardError => e
+    errors.add(:address, e)
+    errors.add(:address, 'Application invalid')
   end
 
   def dependants
@@ -63,6 +67,7 @@ class RebateForm < ApplicationRecord
   private
 
   def set_property_id
+    return if property_id.present?
     self.property = Property.find_by(valuation_id: valuation_id, rating_year: ENV['YEAR'])
   end
 

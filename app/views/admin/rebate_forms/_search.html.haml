@@ -1,0 +1,13 @@
+.pure-g
+  .pure-u-1
+    = form_tag(admin_rebate_forms_path, method: :get, class: 'pure-form') do
+      %label Rating year (ending)
+      = radio_button_tag 'rating_year', '', @rating_year.blank?
+      All
+      - @years.each do |year|
+        = radio_button_tag 'rating_year', year, year == @rating_year
+        = year
+
+      = text_field_tag :location, @location, placeholder: "Address"
+      %button.pure-button
+        = fa_icon 'search'

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :rebate_forms, only: %i[show index update destroy]
+    resources :rebate_forms
     resources :attachments, only: %i[destroy]
     resources :councils
     resources :users
