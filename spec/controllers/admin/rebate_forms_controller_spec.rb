@@ -28,9 +28,69 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
         it { expect(assigns(:rebate_form)).to eq(rebate_form) }
       end
+
+      describe 'PUT #update' do
+        let(:property) { FactoryBot.create :property_with_rates }
+        let(:rebate_form) do
+          FactoryBot.create(:rebate_form,
+                            rebate: 10,
+                            property: property,
+                            fields: {
+                              valuation_id: '06601*004*02*',
+                              rates_bill: 1.10,
+                              dependants: 3,
+                              income_range: 'below',
+                              lived_here_before_july_2018: 'yes',
+                              full_name: 'Sylvestor',
+                              email: 'test@gmail.com',
+                              phone_number: '5556789',
+                              has_home_business: 'no',
+                              email_phone_can_be_used: true,
+                              income: 23_405.2,
+                              lived_with_partner: false
+                            })
+        end
+
+        before do
+          sign_in user
+          put :update, params: { id: rebate_form.to_param, rebate_form: {
+            fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 }
+          } }
+          rebate_form.reload
+        end
+
+        it { expect(assigns(:rebate_form)).to eq(rebate_form) }
+        it 'Does not have errors to report' do
+          expect(assigns(:rebate_form).errors.empty?).to eq true
+        end
+
+        it 'recalculates rebate amount' do
+          expect(rebate_form.rebate).to eq 620
+        end
+
+        it 'should update updated_by column with current user' do
+          expect(rebate_form.updated_by).to eq(user.id)
+        end
+
+        subject { rebate_form.fields }
+
+        describe 'should update full_name, dependants and income' do
+          it { expect(subject['full_name']).to eq('Mary Jane Kelly') }
+          it { expect(subject['dependants']).to eq('9') }
+          it { expect(subject['income']).to eq('11999') }
+        end
+
+        describe 'preserves the existing fields' do
+          it { expect(subject['email']).to eq 'test@gmail.com' }
+          it { expect(subject['phone_number']).to eq '5556789' }
+          it { expect(subject['has_home_business']).to eq 'no' }
+          it { expect(subject['email_phone_can_be_used']).to eq true }
+          it { expect(subject['lived_with_partner']).to eq false }
+        end
+      end
     end
 
-    describe 'PUT #update' do
+    describe 'Editing rebate_forms' do
       let(:attachment_params) do
         { attachments: [
           tempfile: Rails.root.join('sig.png'),
@@ -102,77 +162,13 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     include_examples 'can wrangle rebate_forms'
   end
 
-  describe 'PUT update/:id' do
-    let(:property) { FactoryBot.create :property_with_rates }
-    let(:rebate_form) do
-      FactoryBot.create(:rebate_form,
-                        rebate: 10,
-                        property: property,
-                        fields: {
-                          valuation_id: '06601*004*02*',
-                          rates_bill: 1.10,
-                          dependants: 3,
-                          income_range: 'below',
-                          lived_here_before_july_2018: 'yes',
-                          full_name: 'Sylvestor',
-                          email: 'test@gmail.com',
-                          phone_number: '5556789',
-                          has_home_business: 'no',
-                          email_phone_can_be_used: true,
-                          income: 23_405.2,
-                          lived_with_partner: false
-                        })
-    end
+  # pending 'user is different council' do
+  #   let(:user) { FactoryBot.create :user, council: FactoryBot.create(:council) }
+  #   before do
+  #     sign_in user
+  #     put :update, params: { id: rebate_form.to_param, rebate_form: { fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 } } }
+  #   end
+  # end
 
-    context 'user is same council' do
-      let(:user) { FactoryBot.create :user, council: rebate_form.property.council }
-
-      before do
-        sign_in user
-        put :update, params: { id: rebate_form.to_param, rebate_form: {
-          fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 }
-        } }
-        rebate_form.reload
-      end
-
-      it { expect(assigns(:rebate_form)).to eq(rebate_form) }
-      it 'Does not have errors to report' do
-        expect(assigns(:rebate_form).errors.empty?).to eq true
-      end
-
-      it 'recalculates rebate amount' do
-        expect(rebate_form.rebate).to eq 620
-      end
-
-      it 'should update updated_by column with current user' do
-        expect(rebate_form.updated_by).to eq(user.id)
-      end
-
-      subject { rebate_form.fields }
-
-      describe 'should update full_name, dependants and income' do
-        it { expect(subject['full_name']).to eq('Mary Jane Kelly') }
-        it { expect(subject['dependants']).to eq('9') }
-        it { expect(subject['income']).to eq('11999') }
-      end
-
-      describe 'preserves the existing fields' do
-        it { expect(subject['email']).to eq 'test@gmail.com' }
-        it { expect(subject['phone_number']).to eq '5556789' }
-        it { expect(subject['has_home_business']).to eq 'no' }
-        it { expect(subject['email_phone_can_be_used']).to eq true }
-        it { expect(subject['lived_with_partner']).to eq false }
-      end
-    end
-
-    pending 'user is different council' do
-      let(:user) { FactoryBot.create :user, council: FactoryBot.create(:council) }
-      before do
-        sign_in user
-        put :update, params: { id: rebate_form.to_param, rebate_form: { fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 } } }
-      end
-    end
-
-    pending { expect(response).to have_http_status(:forbidden) }
-  end
+  # pending { expect(response).to have_http_status(:forbidden) }
 end
