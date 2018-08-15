@@ -105,7 +105,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
   describe 'PUT update/:id' do
     let(:user) { FactoryBot.create :user, council: rebate_form.property.council }
     let(:valid_attributes) do
-      { fields: {valuation_id: "06601*004*02*", rates_bill: "1.10", dependants: "3", income_range: "below", lived_here_before_july_2018: "yes", full_name: "Sylvestor", email: "test@gmail.com", phone_number: "5556789", has_home_business: "no", email_phone_can_be_used: true, income: 23405.2, lived_with_partner: false}}
+      { fields: { valuation_id: "06601*004*02*", rates_bill: "1.10", dependants: "3", income_range: "below", lived_here_before_july_2018: "yes", full_name: "Sylvestor", email: "test@gmail.com", phone_number: "5556789", has_home_business: "no", email_phone_can_be_used: true, income: 23405.2, lived_with_partner: false } }
     end
 
     before do
