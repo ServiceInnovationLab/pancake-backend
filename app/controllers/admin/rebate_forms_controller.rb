@@ -45,7 +45,6 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
-
     # updating attachments
     if params.fetch(:rebate_form, {}).fetch(:attachments, false)
       @rebate_form.update(rebate_form_params)
