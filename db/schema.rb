@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_30_204820) do
+ActiveRecord::Schema.define(version: 2018_08_07_223143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2018_07_30_204820) do
     t.decimal "rebate", precision: 8, scale: 2
     t.integer "batch_id"
     t.boolean "completed", default: false
+    t.integer "updated_by"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -174,6 +175,7 @@ ActiveRecord::Schema.define(version: 2018_07_30_204820) do
   add_foreign_key "rates_payers", "properties"
   add_foreign_key "rebate_forms", "batches"
   add_foreign_key "rebate_forms", "properties"
+  add_foreign_key "rebate_forms", "users", column: "updated_by"
   add_foreign_key "signatures", "rebate_forms"
   add_foreign_key "signatures", "signature_types"
 end

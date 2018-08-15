@@ -1,14 +1,26 @@
-= form_for [:admin, @rebate_form] do |f|
-  = f.label :valuation_id
-  = f.text_field :valuation_id
-  = f.label :token
-  = f.text_field :token
-  - if @rebate_form.errors.any?
-    #error_explanation
-      %h2 #{pluralize(@rebate_form.errors.count, "error")} prohibited this admin_rebate_form from being saved:
-      %ul
-        - @rebate_form.errors.full_messages.each do |message|
-          %li= message
+= form_for [:admin, @rebate_form], class: 'pure-form pure-form-aligned' do |f|
+  = render 'admin/form_errors', form_model: @rebate_form
+
+  .pure-control-group
+    %h4= label_tag :full_name
+    = text_field(:rebate_form, 'fields[full_name]'.to_sym, value: @rebate_form.fields['full_name'])
+
+  .pure-control-group
+    %h4= label_tag :dependants
+    = number_field(:rebate_form, 'fields[dependants]', value: @rebate_form.fields['dependants'])
+
+  .pure-control-group
+    %h4= label_tag :income
+    $
+    = number_field(:rebate_form, 'fields[income]', value: @rebate_form.fields['income'])
+
+  .pure-control-group
+    - ['lived_here_before_july_2017', 'lived_here_before_july_2018'].each do |field|
+      - if (@rebate_form.fields[field].present?)
+        %h4= f.label field
+        - ['yes', 'no'].each do |value|
+          = radio_button_tag "rebate_form[fields][#{field}]", value, @rebate_form.fields[field] == value
+          %label{for: "rebate_form_fields_#{field}_#{value}", style: 'display: inline-block'}=value
 
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'pure-button'
