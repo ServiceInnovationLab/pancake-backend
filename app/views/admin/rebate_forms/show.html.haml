@@ -34,4 +34,6 @@
       .pure-u-1-4= render 'attachments', rebate_form: @rebate_form
       .pure-u-1-4= render 'fields', fields: @rebate_form.fields
 
-%em="Updated by #{@updated_by.email} on #{@rebate_form.updated_at}"
+- if @updated_by.present?
+  %p
+    %em="Updated by #{@updated_by.email} on #{@rebate_form.updated_at}"

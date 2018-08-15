@@ -22,8 +22,6 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # GET /admin/rebate_forms/1
   def show
-    @updated_by = User.find(@rebate_form.updated_by)
-
     @year = ENV['YEAR']
 
     @rates_bill = @rebate_form.property.rates_bills.find_by(rating_year: @year)
@@ -31,6 +29,10 @@ class Admin::RebateFormsController < Admin::BaseController
     @signatures = {}
     SignatureType.order(:name).all.each do |st|
       @signatures[st.name] = @rebate_form.signatures.where(signature_type: st).order(created_at: :desc).first
+    end
+
+    unless @rebate_form.updated_by.nil?
+      @updated_by = User.find(@rebate_form.updated_by)
     end
 
     respond_with(@rebate_form) do |format|
