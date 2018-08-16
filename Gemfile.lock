@@ -74,6 +74,7 @@ GEM
     capybara-screenshot (1.0.21)
       capybara (>= 1.0, < 4)
       launchy
+    chartkick (3.0.1)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     database_cleaner (1.7.0)
@@ -119,6 +120,8 @@ GEM
       net-http-pipeline
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    groupdate (4.0.1)
+      activesupport (>= 4.2)
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
@@ -375,6 +378,7 @@ DEPENDENCIES
   byebug
   capybara
   capybara-screenshot
+  chartkick
   database_cleaner (~> 1.6)
   devise
   devise_invitable
@@ -382,6 +386,7 @@ DEPENDENCIES
   factory_bot_rails (~> 4.0)
   faker (~> 1.7)
   font-awesome-rails
+  groupdate
   haml-rails
   httparty
   image_processing

@@ -36,6 +36,9 @@ gem 'font-awesome-rails'
 
 gem 'raygun4ruby' # exception catcher/logger
 
+gem 'groupdate'
+gem 'chartkick'
+
 # Makes the pdfs
 gem 'wicked_pdf'
 # gem 'wkhtmltopdf-binary'
