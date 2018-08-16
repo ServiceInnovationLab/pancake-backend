@@ -52,7 +52,6 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         end
 
         before do
-          sign_in user
           put :update, params: { id: rebate_form.to_param, rebate_form: {
             fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 }
           } }
