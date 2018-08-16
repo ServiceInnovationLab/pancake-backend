@@ -30,7 +30,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
 
       describe 'PUT #update' do
-        let(:property) { FactoryBot.create :property_with_rates }
+        let(:property) { FactoryBot.create :property_with_rates, rating_year: '2019' }
         let(:rebate_form) do
           FactoryBot.create(:rebate_form,
                             rebate: 10,
@@ -59,12 +59,14 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         end
 
         it { expect(assigns(:rebate_form)).to eq(rebate_form) }
-        it 'Does not have errors to report' do
-          expect(assigns(:rebate_form).errors.empty?).to eq true
+        describe 'Does not have errors to report' do
+          it { expect(assigns(:rebate_form).errors.empty?).to eq true }
+          # it { expect(assigns(:rebate_form).errors).to eq [] }
+          it { expect(assigns(:rebate_form)).to be_valid }
         end
 
         it 'recalculates rebate amount' do
-          expect(rebate_form.rebate).to eq 620
+          expect(rebate_form.rebate).to eq 630
         end
 
         it 'should update updated_by column with current user' do
@@ -146,28 +148,14 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
   end
 
   context 'signed in as council users' do
-    let(:council_user) { FactoryBot.create :user, council: rebate_form.council }
-
-    before { sign_in council_user }
-
+    let(:user) { FactoryBot.create :user, council: rebate_form.council }
+    before { sign_in user }
     include_examples 'can wrangle rebate_forms'
   end
 
   context 'signed in as admin' do
-    let(:admin_user) { FactoryBot.create :admin_user }
-
-    before { sign_in admin_user }
-
+    let(:user) { FactoryBot.create :admin_user }
+    before { sign_in user }
     include_examples 'can wrangle rebate_forms'
   end
-
-  # pending 'user is different council' do
-  #   let(:user) { FactoryBot.create :user, council: FactoryBot.create(:council) }
-  #   before do
-  #     sign_in user
-  #     put :update, params: { id: rebate_form.to_param, rebate_form: { fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 } } }
-  #   end
-  # end
-
-  # pending { expect(response).to have_http_status(:forbidden) }
 end
