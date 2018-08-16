@@ -3,6 +3,9 @@
     %ul.pure-menu-list
       - if current_user.present?
         %li.pure-menu-item
+          = link_to '/admin', class: 'pure-menu-link' do
+            analytics
+        %li.pure-menu-item
           = link_to admin_rebate_forms_path, class: 'pure-menu-link' do
             = fa_icon 'edit'
             rebate forms
