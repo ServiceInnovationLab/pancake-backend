@@ -2,6 +2,9 @@
 %p= @rebate_form.valuation_id
 
 - if @rebate_form.property.present?
+  %p
+    = link_to admin_property_path(@rebate_form.property), class: 'pure-button' do
+      Property details
   %h3 Address
   %addr
     = @rebate_form.property.location

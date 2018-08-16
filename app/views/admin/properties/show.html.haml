@@ -1,0 +1,32 @@
+.pure-g
+  .pure-u-1
+    %h2 Property
+  .pure-u-1-2
+    %p
+      %strong Rating year
+      = @property.rating_year
+
+    %p
+      = @property.valuation_id
+    %addr
+      = @property.location
+      %br/
+      = @property.suburb
+      %br/
+      = @property.town_city
+      %br/
+  .pure-u-1-4
+    %h3 Rates bills
+    - @property.rates_bills.each do |rates_bill|
+      = render('admin/rates_bills/table', rates_bill: rates_bill)
+
+  .pure-u-1-4
+    %h3 Rates Payers
+    TODO
+
+%p
+  = link_to @property.council.name, admin_council_path(@property.council)
+
+= link_to 'Edit', edit_admin_property_path(@property)
+\|
+= link_to 'Back', admin_properties_path

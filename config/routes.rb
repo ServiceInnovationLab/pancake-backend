@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :attachments, only: %i[destroy]
     resources :councils
     resources :users
+    resources :properties
     resources :batches
     get 'signature' => 'signatures#show'
   end

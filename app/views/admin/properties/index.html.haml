@@ -1,0 +1,25 @@
+= link_to 'New Property', new_admin_property_path
+
+%h1 Listing Properties
+
+%p= paginate @properties
+
+%table.pure-table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @properties.each do |property|
+      %tr
+        %td=property.valuation_id
+        %td=property.location
+        %td=property.council.name
+        %td=property.rating_year
+        %td= link_to 'Show', admin_property_path(property), class: 'pure-button'
+        %td= link_to 'Edit', edit_admin_property_path(property), class: 'pure-button'
+        %td= link_to 'Destroy', property, method: :delete, data: { confirm: 'Are you sure?' }, class: 'pure-button'
+
+%br

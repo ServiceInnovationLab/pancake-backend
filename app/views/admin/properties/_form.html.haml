@@ -1,0 +1,28 @@
+
+= form_for([:admin, @property], html: {class: 'pure-form pure-form-aligned'}) do |f|
+  = render 'admin/form_errors', form_model: @property
+
+  %fieldset
+    .pure-control-group
+      %label= f.label :rating_year
+      = f.text_field :rating_year
+
+    .pure-control-group
+      %label= f.label :valuation_id
+      = f.text_field :valuation_id
+  %fieldset
+    .pure-control-group
+      %label= f.label :location
+      = f.text_field :location
+    .pure-control-group
+      %label= f.label :suburb
+      = f.text_field :suburb
+    .pure-control-group
+      %label= f.label :town_city
+      = f.text_field :town_city
+  %fieldset
+    .pure-control-group
+      %label= f.label :meta
+      = f.text_field :meta
+  .pure-controls
+    = f.submit 'Save', class: 'pure-button pure-button-primary'
