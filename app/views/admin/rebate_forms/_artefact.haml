@@ -45,13 +45,13 @@
           - rebate_form.property.rates_bills.where(rating_year: ENV['YEAR']).each do |bill|
             %tr
               %th Rates
-              %td $ #{bill.total_rates}
+              %td= number_to_currency bill.total_rates
             %tr
               %th Water
-              %td $ #{bill.total_water_rates}
+              %td= number_to_currency bill.total_water_rates
             %tr
               %th TOTAL
-              %td $ #{bill.total_bill}
+              %td= number_to_currency bill.total_bill
         %hr/
         %table
 

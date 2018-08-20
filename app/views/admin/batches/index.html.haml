@@ -37,7 +37,7 @@
           %td= batch.council.name
           %td $#{batch.amount}
           %td= batch.batch_date.localtime
-          %td= batch.claim_count
+          %td= number_to_currency batch.claim_count
           %td
             = link_to(admin_batch_path(batch, format: :pdf), class: 'pure-button') do
               = fa_icon 'download'
