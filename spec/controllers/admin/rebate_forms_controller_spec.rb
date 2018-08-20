@@ -23,9 +23,9 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         let!(:application_this_year) { FactoryBot.create :rebate_form, property: this_year }
         let!(:application_last_year) { FactoryBot.create :rebate_form, property: last_year }
 
-        before { get :index, params: {rating_year: '1981'} }
+        before { get :index, params: { rating_year: '1981' } }
 
-        it { expect(assigns(:rebate_forms)).to eq [ application_this_year]}
+        it { expect(assigns(:rebate_forms)).to eq [application_this_year] }
       end
 
       describe 'filter by completion' do
@@ -33,20 +33,20 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         let!(:uncompleted) { FactoryBot.create :rebate_form, property: property }
 
         describe 'completed' do
-          before { get :index, params: {completed: true} }
-          it { expect(assigns(:rebate_forms)).to eq [ completed]}
+          before { get :index, params: { completed: true } }
+          it { expect(assigns(:rebate_forms)).to eq [completed] }
         end
         describe 'not completed' do
-          before { get :index, params: {completed: false} }
-          it { expect(assigns(:rebate_forms)).to eq [ uncompleted]}
+          before { get :index, params: { completed: false } }
+          it { expect(assigns(:rebate_forms)).to eq [uncompleted] }
         end
       end
 
       describe 'filter by location' do
-        let(:property) { FactoryBot.create :property, council: council , location: '123 Taniwha avenue'}
+        let(:property) { FactoryBot.create :property, council: council, location: '123 Taniwha avenue' }
         let!(:rebate_form) { FactoryBot.create :rebate_form, valuation_id: property.valuation_id }
-        before { get :index, params: {location: 'Tani'} }
-        it { expect(assigns(:rebate_forms)).to eq [ rebate_form]}
+        before { get :index, params: { location: 'Tani' } }
+        it { expect(assigns(:rebate_forms)).to eq [rebate_form] }
       end
     end
 
@@ -118,7 +118,6 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
     end
   end
-
 
   context 'signed in as council users' do
     let(:user) { FactoryBot.create :user, council: council }
