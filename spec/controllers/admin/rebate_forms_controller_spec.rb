@@ -3,15 +3,50 @@
 require 'rails_helper'
 
 RSpec.describe Admin::RebateFormsController, type: :controller do
-  let(:property) { FactoryBot.create :property }
+  let(:property) { FactoryBot.create :property, council: council }
   let(:rebate_form) { FactoryBot.create :rebate_form, valuation_id: property.valuation_id }
+  let(:council) { FactoryBot.create :council }
 
   shared_examples 'can wrangle rebate_forms' do
     describe 'GET #index' do
-      before { get :index, params: {} }
+      describe 'no filter' do
+        before { get :index, params: {} }
+        describe 'assigns all rebate_forms as @rebate_forms' do
+          it { expect(assigns(:rebate_forms)).to eq([rebate_form]) }
+        end
+      end
 
-      describe 'assigns all rebate_forms as @rebate_forms' do
-        it { expect(assigns(:rebate_forms)).to eq([rebate_form]) }
+      describe 'filter by year' do
+        let(:last_year) { FactoryBot.create :property, rating_year: '1980', council: council }
+        let(:this_year) { FactoryBot.create :property, rating_year: '1981', council: council }
+
+        let!(:application_this_year) { FactoryBot.create :rebate_form, property: this_year }
+        let!(:application_last_year) { FactoryBot.create :rebate_form, property: last_year }
+
+        before { get :index, params: { rating_year: '1981' } }
+
+        it { expect(assigns(:rebate_forms)).to eq [application_this_year] }
+      end
+
+      describe 'filter by completion' do
+        let!(:completed) { FactoryBot.create :signed_form, property: property }
+        let!(:uncompleted) { FactoryBot.create :rebate_form, property: property }
+
+        describe 'completed' do
+          before { get :index, params: { completed: true } }
+          it { expect(assigns(:rebate_forms)).to eq [completed] }
+        end
+        describe 'not completed' do
+          before { get :index, params: { completed: false } }
+          it { expect(assigns(:rebate_forms)).to eq [uncompleted] }
+        end
+      end
+
+      describe 'filter by location' do
+        let(:property) { FactoryBot.create :property, council: council, location: '123 Taniwha avenue' }
+        let!(:rebate_form) { FactoryBot.create :rebate_form, valuation_id: property.valuation_id }
+        before { get :index, params: { location: 'Tani' } }
+        it { expect(assigns(:rebate_forms)).to eq [rebate_form] }
       end
     end
 
@@ -58,13 +93,11 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
 
       context 'rebate_form is completed' do
-        let(:rebate_form) { FactoryBot.create :signed_form }
+        let!(:rebate_form) { FactoryBot.create :signed_form }
 
         it 'does not allow changes to completed rebate_form' do
-          rebate_form
           expect do
             put :update, params: { id: rebate_form.to_param, rebate_form: attachment_params }
-            rebate_form.reload
           end.not_to change(rebate_form, :valuation_id)
         end
       end
@@ -87,18 +120,14 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
   end
 
   context 'signed in as council users' do
-    let(:council_user) { FactoryBot.create :user, council: rebate_form.council }
-
-    before { sign_in council_user }
-
+    let(:user) { FactoryBot.create :user, council: council }
+    before { sign_in user }
     include_examples 'can wrangle rebate_forms'
   end
 
   context 'signed in as admin' do
-    let(:admin_user) { FactoryBot.create :admin_user }
-
-    before { sign_in admin_user }
-
+    let(:user) { FactoryBot.create :admin_user }
+    before { sign_in user }
     include_examples 'can wrangle rebate_forms'
   end
 

@@ -16,4 +16,8 @@ class Signature < ApplicationRecord
     rebate_form.completed = (rebate_form.applicant_signature.present? && rebate_form.witness_signature.present?)
     rebate_form.save
   end
+
+  def time_after_application
+    created_at - rebate_form.created_at
+  end
 end
