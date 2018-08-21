@@ -4,7 +4,7 @@
 
 body {
   font-family: 'Fira Sans', sans-serif;
-  font-size: 8pt;
+  font-size: 3.5em;
   color: #4f4b46;
   margin: 0;
 }
@@ -271,4 +271,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
   .column:last-child {
     padding-left: 10px;
+}
+
+.pdf-image {
+  position: absolute;
+  left: 0;
 }
