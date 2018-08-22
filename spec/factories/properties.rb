@@ -3,11 +3,11 @@
 FactoryBot.define do
   factory :property do
     valuation_id { Faker::Vehicle.vin }
-    location '999 Lambton quay'
-    suburb 'coolville'
-    town_city 'Tauranga'
+    location { '999 Lambton quay' }
+    suburb { 'coolville' }
+    town_city { 'Tauranga' }
     council
-    rating_year ENV['YEAR']
+    rating_year { ENV['YEAR'] }
   end
   factory :property_with_rates, parent: :property do
     after(:create) do |property|
