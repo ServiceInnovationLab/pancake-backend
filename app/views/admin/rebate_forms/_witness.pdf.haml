@@ -4,5 +4,5 @@
   %br/
   = signature.role.presence || "no role specified"
   %br/
-  = signature.created_at.localtime
+  = signature.created_at.strftime("%d-%m-%Y - %I:%M%P")
   %br/
