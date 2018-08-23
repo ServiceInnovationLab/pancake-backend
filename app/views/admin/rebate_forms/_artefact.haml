@@ -73,7 +73,7 @@
 
     .pure-g
       .pure-u-1-2
-        %h3= "At #{rebate_form.signatures.first.created_at.strftime("%d-%m-%Y - %I:%M%P")} before me"
+        %h3= "At #{rebate_form.signatures.first.created_at.strftime("%d-%m-%Y - %I:%M%P").to_time.localtime} before me"
         = render 'admin/rebate_forms/witness', signature: rebate_form.signatures.witness.last
       .pure-u-1-4
         = signature_for_pdf(rebate_form.witness_signature)
