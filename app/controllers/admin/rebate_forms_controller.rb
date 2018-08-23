@@ -92,6 +92,6 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def pdf_filename
-    "#{@rebate_form.council.short_name}-#{@rebate_form.fields['full_name'].parameterize}-#{@rebate_form.id}"
+    "#{@rebate_form.council.short_name}-(#{@rebate_form.valuation_id})-#{@rebate_form.id}"
   end
 end
