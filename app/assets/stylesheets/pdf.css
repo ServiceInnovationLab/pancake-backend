@@ -1,5 +1,5 @@
 .pdf {
-  font-size: 24px;
+  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -8,24 +8,24 @@
 }
 
 .container {
-  margin: 200px 180px 0;
+  margin: 66px 60px 0;
 }
 
 .main-header {
   background: rgb(218,253,197);
-  padding-bottom: 100px;
+  padding-bottom: 33px;
 }
 .heading {
-  font-size: 55px;
+  font-size: 37px;
   font-weight: bold;
   display: inline-block;
-  margin-top: 200px;
+  margin-top: 66px;
   margin-bottom: 0;
   color: rgb(31,132,49);
 }
 
 .sub-heading {
-  font-size: 35px;
+  font-size: 23px;
   font-weight: bold;
   margin-top: 30px;
   color: rgb(83,184,103);
@@ -33,15 +33,15 @@
 
 .pdf-image {
   position: absolute;
-  top: 200px;
-  right:130px;
-  width: 789px;
-  height: 213px;
+  top: 66px;
+  right: 43px;
+  width: 263px;
+  height: 71px;
 }
 
 .column {
   display: inline-block;
-  width: 300px;
+  width: 100px;
   margin-right: 60px;
 }
 .row {
@@ -50,11 +50,11 @@
 
 .phone_email {
   margin-top: 40px;
-  margin-bottom: 200px;
+  margin-bottom: 66px;
 }
 
 .question {
-  margin-bottom: 100px;
+  margin-bottom: 33px;
 }
 
 .question h3 {
@@ -64,18 +64,18 @@
 
 .table-border {
   border: 10px solid #ccc;
-  border-radius: 100px;
-  padding: 60px 100px;
+  border-radius: 33px;
+  padding: 20px 33px;
   width: 100%;
 }
 
 .pdf th,
 .pdf td {
-  padding: 10px 120px 20px 0;
+  padding: 10px 40px 20px 0;
 }
 
 .pdf td {
-  margin-bottom: 100px;
+  margin-bottom: 33px;
 }
 
 table h3 {
