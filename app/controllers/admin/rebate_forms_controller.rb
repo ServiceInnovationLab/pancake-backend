@@ -42,7 +42,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
     respond_with(@rebate_form) do |format|
       format.pdf do
-        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf'
+        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf', margin: { top: 0, bottom: 0, left: 0, right: 0 }
       end
     end
   end
@@ -92,6 +92,6 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def pdf_filename
-    "rebate-#{@rebate_form.council.short_name}-#{@rebate_form.id}"
+    "#{@rebate_form.council.short_name}-(#{@rebate_form.valuation_id})-#{@rebate_form.id}"
   end
 end

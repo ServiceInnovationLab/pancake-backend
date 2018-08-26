@@ -1,77 +1,89 @@
+
 %header.main-header
   .container
     %p.heading
       2017/2018 Rates Rebate
+      %br
       Application form
-      = image_tag wicked_pdf_asset_base64('dia.png'), class: 'pure-image'
-    %span
+    = image_tag wicked_pdf_asset_base64('dia.png'), class: 'pdf-image'
+    %p.sub-heading
       %strong Rates Rebates
-      Te Whakamāmā i ngā Reiti
 
-.pure-g
-  .pure-u-1
-    .pure-g
-      .pure-u-1-2
-        %h3 Application for
-        = rebate_form.fields['full_name']
-      .pure-u-1-3
-        %h3 Address
-        = rebate_form.property.location
-        %br/
-        = rebate_form.property.suburb
-        %br/
-        = rebate_form.property.town_city
-        %br/
-  .pure-u-1
-    .pure-g
-      .pure-u-2-3
-        %h3 Were you living at address at 1 July?
-        %p #{rebate_form.fields['lived_here_before_july_2017']}
+.container
+  .pure-g
+    .pure-u-1
+      .pure-g
+        .pure-u-1-2
+          %h3 Application for
+          = rebate_form.fields['full_name']
+          .row.phone_email
+            .column
+              %h3 Phone
+              =rebate_form.fields['phone_number']
+            .column
+              %h3 Email
+              =rebate_form.fields['email']
+        .pure-u-1-3
+          %h3 Address
+          = rebate_form.property.location
+          %br/
+          = rebate_form.property.suburb
+          %br/
+          = rebate_form.property.town_city
+          %br/
+    .pure-u-1
+      .pure-g
+        .pure-u-2-3
+          .question
+            %h3 Were you living at address at 1 July?
+            %p #{rebate_form.fields['lived_with_partner'] == true ? 'Yes' : 'No'}
+          .question
+            %h3 Did you live with a partner or a joint homeowner on 1 July?
+            %p=rebate_form.fields["lived_here_before_july_" + (ENV['YEAR'].to_i-1).to_s]
+          .question
+            %h3 How many dependants do you have?
+            %p=rebate_form_pdf_dependants(rebate_form)
+          .question
+            %h3 Do you run a business from home?
+            %p=rebate_form_pdf_home_business(rebate_form).capitalize
+          .question
+            %h3 Rebate amount
+            %p=rebate_form_amount(rebate_form)
 
-        %h3 Did you live with a partner or a joint homeowner on 1 July?
-
-        %h3 Do you have dependants?
-        %p=rebate_form_pdf_dependants(rebate_form)
-
-        %h3 Do you run a business from home?
-        %p=rebate_form_pdf_home_business(rebate_form)
-
-        %h3 Rebate amount
-        %p=rebate_form_amount(rebate_form)
-
-      .pure-u-1-4
-        %h3 Rates for #{ENV['YEAR']}
-        %table
-          - rebate_form.property.rates_bills.where(rating_year: ENV['YEAR']).each do |bill|
-            %tr
-              %th Rates
-              %td= number_to_currency bill.total_rates
-            %tr
-              %th Water
-              %td= number_to_currency bill.total_water_rates
-            %tr
-              %th TOTAL
-              %td= number_to_currency bill.total_bill
-        %hr/
-        %table
+        .pure-u-1-4
+          .table-border
+            %h3 Rates for #{rebate_form.property.rating_year}
+            %table
+              - rebate_form.property.rates_bills.where(rating_year: rebate_form.property.rating_year).each do |bill|
+                %tr
+                  %th Rates
+                  %th Water
+                %tr
+                  %td= number_to_currency bill.total_rates
+                  %td= number_to_currency bill.total_water_rates
+                %tr
+                  %th TOTAL
+                  %td= number_to_currency bill.total_bill
+            %hr/
+            %table
 
 
-  .pure-u-1
-    .pure-g
-      .pure-u-1-2
-        %h3 Declaration
-        %p
-          I #{rebate_form.fields['full_name']} of
-          #{rebate_form.property.location}
-          #{rebate_form.property.town_city}
-          solemnly and sincerely declare that I believe the information I have given on this form is true and correct, and I make this solemn declaration conscientiously believing the same to be true and by virtue of the Oaths and Declarations Act 1957.
+    .pure-u-1
+      .pure-g
+        .pure-u-1-2
+          %h3 Declaration
+          %p
+            I, #{rebate_form.fields['full_name']} of
+            #{rebate_form.property.location}
+            #{rebate_form.property.town_city}
+            solemnly and sincerely declare that I believe the information I have given on this form is true and correct, and I make this solemn declaration conscientiously believing the same to be true and by virtue of the Oaths and Declarations Act 1957.
 
-      .pure-u-1-4
-        = signature_for_pdf(rebate_form.applicant_signature)
+        .pure-u-1-4
+          = signature_for_pdf(rebate_form.applicant_signature)
 
-    .pure-g
-      .pure-u-1-2
-        %h3 At [TIMESTAMP] before me
-        = render 'admin/rebate_forms/witness', signature: rebate_form.signatures.witness.last
-      .pure-u-1-4
-        = signature_for_pdf(rebate_form.witness_signature)
+      .pure-g
+        .pure-u-1-2
+          %h3= "At #{rebate_form.signatures.first.created_at.strftime("%d-%m-%Y - %I:%M%P").to_time.localtime} before me"
+          = render 'admin/rebate_forms/witness', signature: rebate_form.signatures.witness.last
+        .pure-u-1-4
+          = signature_for_pdf(rebate_form.witness_signature)

@@ -3,8 +3,6 @@
 class RatesBill < ApplicationRecord
   belongs_to :property, required: true
   delegate :council, to: :property
-
-  validates :rating_year, presence: true
   validates :total_rates, presence: true
   validates :total_water_rates, presence: true
 

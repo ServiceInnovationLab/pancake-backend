@@ -22,7 +22,6 @@ class Admin::BatchesController < Admin::BaseController
   end
 
   def create
-    authorize Batch
     @council = current_user.council
 
     @rebate_forms = policy_scope(RebateForm)
