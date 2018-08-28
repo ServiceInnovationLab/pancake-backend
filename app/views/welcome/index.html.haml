@@ -14,18 +14,18 @@
         %tr
           %th Completed
           %td= RebateForm.where(completed: true).size
-          %td= RebateForm.where(completed: true).sum(:rebate)
-          %td= RebateForm.where(completed: true).average(:rebate)
+          %td= number_to_currency RebateForm.where(completed: true).sum(:rebate)
+          %td= number_to_currency RebateForm.where(completed: true).average(:rebate)
         %tr
           %th Not Completed
           %td= RebateForm.where(completed: false).size
-          %td= RebateForm.where(completed: false).sum(:rebate)
-          %td= RebateForm.where(completed: false).average(:rebate)
+          %td= number_to_currency RebateForm.where(completed: false).sum(:rebate)
+          %td= number_to_currency RebateForm.where(completed: false).average(:rebate)
         %tr
           %th Total
           %td= RebateForm.all.size
-          %td= RebateForm.all.sum(:rebate)
-          %td= RebateForm.all.average(:rebate)
+          %td= number_to_currency RebateForm.all.sum(:rebate)
+          %td= number_to_currency RebateForm.all.average(:rebate)
     .pure-u-1-3
       = line_chart [{name: "Witnessed", data: Signature.witness.group_by_day("signatures.created_at").count},
         {name: 'Applied', data: RebateForm.group_by_day(:created_at).count}]

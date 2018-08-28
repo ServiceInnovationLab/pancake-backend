@@ -1,66 +1,22 @@
 - content_for :title, "rebate forms"
 
-%h2
-  Rebate forms
-  - unless @council.nil?
-    for #{@council.name}
+.pure-g
+  .pure-u-1
+    %h2
+      Rebate forms
+      - unless @council.nil?
+        for #{@council.name}
 
-%p
-  = link_to admin_rebate_forms_path(format: :csv, rating_year: @rating_year, location: @location), class: 'pure-button' do
-    = fa_icon 'table'
-    Download CSV
+  .pure-u-1-2
+    = render 'search'
+  .pure-u-1-2
+    %p
+      = link_to admin_rebate_forms_path(format: :csv, rating_year: @rating_year, location: @location), class: 'pure-button' do
+        = fa_icon 'table'
+        Download CSV
 
-= render 'search'
-
-%p= paginate @rebate_forms.page(params[:page])
-
-%table.pure-table.pure-table-bordered
-  %thead
-    %tr
-      %th YEAR (ending)
-      %th Council
-      %th Valuation Id
-      %th Applicant
-      %th Address
-      %th When
-      %th Signed
-      %th Witnessed
-
-  %tbody
-    - @rebate_forms.page(params[:page]).each do |rebate_form|
-      %tr{ class: rebate_form.completed ? 'pure-table-odd' : '' }
-        %td= rebate_form.property.rating_year
-        %td
-          - if rebate_form.council.present?
-            = link_to rebate_form.council.name, admin_council_path(rebate_form.council)
-        %td= rebate_form.valuation_id
-        %td= rebate_form.fields['full_name']
-        %td
-          - if rebate_form.property.present?
-            %p
-              = rebate_form.property.location
-              %br/
-              = rebate_form.property.suburb
-              %br/
-              = rebate_form.property.town_city
-        %td= rebate_form.created_at.localtime
-        %td
-          - if rebate_form.applicant_signature.present?
-            = link_to admin_rebate_form_path(rebate_form, format: 'pdf'), class: 'pure-button' do
-              = fa_icon 'download'
-          - else
-            = render 'sign_button', rebate_form: rebate_form, class: 'pure-button pure-button-primary'
-        %td= render 'witness', signature: rebate_form.witness_signature
-        %td
-          = link_to admin_rebate_form_path(rebate_form), class: 'pure-button' do
-            show
-        %td
-          - if policy(rebate_form).edit?
-            = link_to 'Edit', edit_admin_rebate_form_path(rebate_form), class: 'pure-button'
-        %td
-          - if policy(rebate_form).destroy?
-            = link_to admin_rebate_form_path(rebate_form), method: :delete,
-              data: { confirm: 'Are you sure?' }, class: 'pure-button' do
-              = fa_icon 'trash'
-
-%p= paginate @rebate_forms.page(params[:page])
+  .pure-u-1
+    - if @rebate_forms.size.positive?
+      = render 'results'
+    - else
+      %p No rebate forms found
