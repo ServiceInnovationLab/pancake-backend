@@ -11,7 +11,7 @@ class Admin::RebateFormsController < Admin::BaseController
     @rating_year = params[:rating_year] || Rails.configuration.rating_year
     @years = Property.select(:rating_year).distinct.order(:rating_year).reverse_order.pluck(:rating_year)
 
-    @completed = params[:completed].present? ? params[:completed] == 'true' : nil
+    @completed = (params[:completed] == 'true')
 
     @council = current_user.council.presence
 
@@ -22,7 +22,8 @@ class Admin::RebateFormsController < Admin::BaseController
     # filter by the search form fields
     @rebate_forms = @rebate_forms.where('properties.location ILIKE ?', "%#{params[:location]}%") if @location.present?
     @rebate_forms = @rebate_forms.where("properties.rating_year": @rating_year) if @rating_year.present?
-    @rebate_forms = @rebate_forms.where(completed: @completed) unless @completed.nil?
+    @rebate_forms = @rebate_forms.where(completed: @completed)
+    @rebate_forms = @rebate_forms.order(created_at: :desc)
 
     respond_with @rebate_forms
   end

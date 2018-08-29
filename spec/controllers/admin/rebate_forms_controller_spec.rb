@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::RebateFormsController, type: :controller do
   let(:property) { FactoryBot.create :property, council: council }
-  let(:rebate_form) { FactoryBot.create :rebate_form, valuation_id: property.valuation_id }
+  let(:rebate_form) { FactoryBot.create :rebate_form, valuation_id: property.valuation_id, completed: false, created_at: 5.days.ago }
   let(:council) { FactoryBot.create :council }
 
   shared_examples 'can wrangle rebate_forms' do
@@ -33,12 +33,12 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         let!(:uncompleted) { FactoryBot.create :rebate_form, property: property }
 
         describe 'completed' do
-          before { get :index, params: { completed: true } }
+          before { get :index, params: { completed: 'true' } }
           it { expect(assigns(:rebate_forms)).to eq [completed] }
         end
         describe 'not completed' do
-          before { get :index, params: { completed: false } }
-          it { expect(assigns(:rebate_forms)).to eq [uncompleted] }
+          before { get :index, params: { completed: 'false' } }
+          it { expect(assigns(:rebate_forms)).to eq [uncompleted, rebate_form] }
         end
       end
 
