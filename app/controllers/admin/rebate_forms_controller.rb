@@ -8,7 +8,7 @@ class Admin::RebateFormsController < Admin::BaseController
   def index
     @location = params[:location]
 
-    @rating_year = params[:rating_year] || ENV['YEAR']
+    @rating_year = params[:rating_year] || Rails.configuration.rating_year
     @years = Property.select(:rating_year).distinct.order(:rating_year).reverse_order.pluck(:rating_year)
 
     @completed = params[:completed].present? ? params[:completed] == 'true' : nil

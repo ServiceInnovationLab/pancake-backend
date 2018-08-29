@@ -4,7 +4,7 @@ class PropertiesController < ApiController
   jsonapi resource: PropertyResource
   strong_resource :property
   def show
-    scope = jsonapi_scope(Property.where(valuation_id: params[:id], rating_year: ENV['YEAR']))
+    scope = jsonapi_scope(Property.where(valuation_id: params[:id], rating_year: Rails.configuration.rating_year))
     instance = scope.resolve.first
     raise JsonapiCompliable::Errors::RecordNotFound unless instance
     render_jsonapi(
@@ -14,6 +14,6 @@ class PropertiesController < ApiController
   end
 
   def index
-    render_jsonapi(Property.where('location ILIKE ?', "%#{params[:q]}%").where(rating_year: ENV['YEAR']))
+    render_jsonapi(Property.where('location ILIKE ?', "%#{params[:q]}%").where(rating_year: Rails.configuration.rating_year))
   end
 end

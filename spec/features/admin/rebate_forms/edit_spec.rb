@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'RebateForm', type: :feature do
-  let(:property) { FactoryBot.create :property_with_rates, rating_year: ENV['YEAR'] }
+  let(:property) { FactoryBot.create :property_with_rates, rating_year: '2018' }
   let!(:rebate_form) { FactoryBot.create :rebate_form, property: property }
 
   context 'anonymous' do
