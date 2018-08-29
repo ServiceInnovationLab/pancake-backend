@@ -4,7 +4,9 @@ require 'rails_helper'
 
 RSpec.describe Admin::RebateFormsController, type: :controller do
   let(:property) { FactoryBot.create :property, council: council }
-  let(:rebate_form) { FactoryBot.create :rebate_form, valuation_id: property.valuation_id, completed: false, created_at: 5.days.ago }
+  let(:rebate_form) do
+    FactoryBot.create :rebate_form, valuation_id: property.valuation_id, completed: false, created_at: 5.days.ago
+  end
   let(:council) { FactoryBot.create :council }
 
   shared_examples 'can wrangle rebate_forms' do
