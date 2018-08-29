@@ -14,6 +14,8 @@ class PropertiesController < ApiController
   end
 
   def index
-    render_jsonapi(Property.where('location ILIKE ?', "%#{params[:q]}%").where(rating_year: Rails.configuration.rating_year))
+    render_jsonapi(
+      Property.where('location ILIKE ?', "%#{params[:q]}%").where(rating_year: Rails.configuration.rating_year)
+    )
   end
 end
