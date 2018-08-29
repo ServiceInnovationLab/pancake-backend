@@ -22,7 +22,7 @@ class RebateForm < ApplicationRecord
   has_many_attached :attachments
 
   def calc_rebate_amount!
-    year = ENV['YEAR']
+    year = property.rating_year
     raise 'No year set' if year.blank?
     raise 'No associated property record' if property.blank?
     raise 'Application year must match property record year' unless year == property.rating_year
