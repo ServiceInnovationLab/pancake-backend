@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe PropertiesController, type: :controller do
-
   describe '#index' do
     subject { JSON.parse(response.body)['data'] }
 
@@ -44,7 +43,8 @@ RSpec.describe PropertiesController, type: :controller do
     subject { JSON.parse(response.body)['data'] }
 
     let!(:property_1) do
-      FactoryBot.create :property, location: '123 Lambton Quay', suburb: 'Te Aro', town_city: 'Poneke', rating_year: ENV['YEAR']
+      FactoryBot.create :property, location: '123 Lambton Quay',
+                                   suburb: 'Te Aro', town_city: 'Poneke', rating_year: ENV['YEAR']
     end
 
     before { get :show, format: :json, params: { id: property_1.valuation_id } }
