@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
 
+.pdf {
+  position: relative;
+}
+
 .pdf-page-break {
   page-break-before: always;
 }
@@ -81,6 +85,10 @@ h3 {
   margin-bottom: 0;
 }
 
+.declaration {
+  margin-top: 60px;
+}
+
 .declaration p {
   margin-bottom: 65px;
 }
@@ -121,15 +129,14 @@ table h3 {
 .applicant,
 .witness {
   position: absolute;
+  right: 140px;
 }
 
 .applicant {
-  right: 165px;
   top: 1010px;
 }
 
 .witness {
-  right: 140px;
   top: 1180px;
 }
 
@@ -166,4 +173,19 @@ hr {
   position: absolute;
   top: 175px;
   color: rgb(83,184,103) !important;
+}
+
+.batches-heading {
+  position: relative;
+  top: 200px;
+}
+
+.batches-heading p {
+  margin-bottom: 10px;
+}
+
+.batches-logo {
+  position: absolute;
+  top: 70px;
+  left: 45px;
 }
