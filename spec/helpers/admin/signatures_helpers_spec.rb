@@ -12,7 +12,7 @@ RSpec.describe Admin::SignaturesHelper, type: :helper do
     it { expect(signature_image_path(signature)).to eq "/admin/signature?token=#{token}&type=#{signature.signature_type.name}&valuation_id=#{valuation_id}" }
   end
 
-  describe 'signature_for_pdf(signature)' do
-    it { expect(signature_for_pdf(signature)).to start_with '<img src="data:image/png;base64,' }
+  describe 'signature_for_pdf(signature, type)' do
+    it { expect(signature_for_pdf(signature,'applicant')).to start_with '<img src="data:image/png;base64,' }
   end
 end
