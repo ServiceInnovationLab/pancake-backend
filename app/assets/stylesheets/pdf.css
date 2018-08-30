@@ -126,7 +126,7 @@ table h3 {
 .applicant,
 .witness {
   position: absolute;
-  right: 100px;
+  right: 80px;
 }
 
 .applicant {
@@ -134,22 +134,23 @@ table h3 {
 }
 
 .witness {
-  top: 800px;
+  top: 890px;
 }
 
 .applicant-heading,
 .witness-heading {
   position: absolute;
+  font-style: italic;
 }
 
 .applicant-heading {
   top: 610px;
-  right: 215px;
+  right: 195px;
 }
 
 .witness-heading {
-  top: 770px;
-  right: 235px;
+  top: 860px;
+  right: 215px;
 }
 
 .table-col {
