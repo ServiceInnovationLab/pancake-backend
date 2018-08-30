@@ -98,7 +98,6 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         describe 'Does not have errors to report' do
           it { expect(assigns(:rebate_form).errors.empty?).to eq true }
-          # it { expect(assigns(:rebate_form).errors).to eq [] }
           it { expect(assigns(:rebate_form)).to be_valid }
         end
 
