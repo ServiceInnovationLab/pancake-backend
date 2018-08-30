@@ -41,5 +41,7 @@ module PancakeServer
     config.assets.precompile += %w[application.js]
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
+
+    config.rating_year = ENV['YEAR']
   end
 end

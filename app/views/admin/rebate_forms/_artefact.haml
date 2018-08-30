@@ -39,7 +39,7 @@
             %p #{rebate_form.fields['lived_with_partner'] == true ? 'Yes' : 'No'}
           .question
             %h3 Did you live with a partner or a joint homeowner on 1 July?
-            %p=rebate_form.fields["lived_here_before_july_" + (ENV['YEAR'].to_i-1).to_s]
+            %p=rebate_form.fields["lived_here_before_july_" + (Rails.configuration.rating_year.to_i-1).to_s]
           .question
             %h3 How many dependants do you have?
             %p=rebate_form_pdf_dependants(rebate_form)

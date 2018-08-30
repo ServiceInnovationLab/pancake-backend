@@ -22,13 +22,13 @@ class RebateForm < ApplicationRecord
   has_many_attached :attachments
 
   def calc_rebate_amount!
-    year = ENV['YEAR']
+    year = property.rating_year
     raise 'No year set' if year.blank?
     raise 'No associated property record' if property.blank?
     raise 'Application year must match property record year' unless year == property.rating_year
 
     rates_bill = property.rates_bills.find_by(rating_year: year)
-    raise 'No rates bill found' if rates_bill.blank?
+    raise "No rates bill found for rating_year #{year}" if rates_bill.blank?
 
     rebate = OpenFiscaService.rebate_amount(
       income: income, rates: rates_bill.total_bill,
@@ -38,6 +38,10 @@ class RebateForm < ApplicationRecord
   rescue StandardError => e
     errors.add(:address, e)
     errors.add(:address, 'Application invalid')
+  end
+
+  def full_name
+    fields['full_name']
   end
 
   def dependants
@@ -68,7 +72,7 @@ class RebateForm < ApplicationRecord
 
   def set_property_id
     return if property_id.present?
-    self.property = Property.find_by(valuation_id: valuation_id, rating_year: ENV['YEAR'])
+    self.property = Property.find_by(valuation_id: valuation_id, rating_year: Rails.configuration.rating_year)
   end
 
   def new_token
