@@ -1,16 +1,16 @@
-= wicked_pdf_image_tag 'dia.png'
-%h1 Rates Rebates
-%h2 Gov Lab Alpha
-%h3
-  COVER PAGE for Pancake batch
-  = @batch.id
-  %p
-    = @batch.created_at
-  %p
-    Total claimed rebates =
-    $
-    = @batch.amount
+%header
+  .container
+    .batches-heading
+      %h1 Rates Rebates
+      %h2 Gov Lab Alpha
+      %h3
+        COVER PAGE for Batch
+        = @batch.id
+        %p
+          = @batch.created_at.strftime("%d-%m-%Y - %I:%M%P").to_time.localtime
+        %p="Total claimed rebates = $#{@batch.amount}"
+  = image_tag wicked_pdf_asset_base64('dia.png'), class: 'pdf-image batches-logo'
 
 
-- @batch.rebate_forms.each do |rebate_form|
-  .pdf-page-break= render 'admin/rebate_forms/artefact', rebate_form: rebate_form
+  - @batch.rebate_forms.each do |rebate_form|
+    .pdf-page-break= render 'admin/rebate_forms/artefact', rebate_form: rebate_form

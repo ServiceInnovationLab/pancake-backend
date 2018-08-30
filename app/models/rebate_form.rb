@@ -6,6 +6,7 @@ class RebateForm < ApplicationRecord
   belongs_to :batch, required: false
 
   delegate :council, to: :property
+  delegate :rating_year, to: :property
 
   after_initialize :set_token
   before_validation :set_property_id

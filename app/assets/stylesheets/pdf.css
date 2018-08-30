@@ -1,34 +1,43 @@
-.pdf {
-  font-size: 16px;
-  line-height: 1.5;
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+
+.pdf-page-break {
+  page-break-before: always;
 }
 
-.pdf h3 {
-  margin-bottom: 20px;
+body {
+  font-size: 18px;
+  margin: 0;
+}
+
+* {
+  font-family: 'Fira Sans', sans-serif;
+  color: rgb(51,51,51);
 }
 
 .container {
   margin: 66px 60px 0;
 }
 
+.container-secondary {
+  margin: 60px 60px 0;
+  position: relative;
+}
+
 .main-header {
   background: rgb(218,253,197);
-  padding-bottom: 33px;
+  position: relative;
+  height: 260px;
 }
+
 .heading {
   font-size: 37px;
   font-weight: bold;
+  line-height: 1.3em;
   display: inline-block;
-  margin-top: 66px;
   margin-bottom: 0;
+  position: absolute;
+  top: 65px;
   color: rgb(31,132,49);
-}
-
-.sub-heading {
-  font-size: 23px;
-  font-weight: bold;
-  margin-top: 30px;
-  color: rgb(83,184,103);
 }
 
 .pdf-image {
@@ -44,28 +53,55 @@
   width: 100px;
   margin-right: 60px;
 }
+
 .row {
   margin-left: 0;
 }
 
 .phone_email {
-  margin-top: 40px;
-  margin-bottom: 66px;
+  margin: 40px 0 70px;
 }
 
-.question {
-  margin-bottom: 33px;
+.field,
+.declaration {
+  margin-bottom: 10px;
+  color: rgb(51,51,51);
 }
 
-.question h3 {
-  margin-bottom: -30px !important;
-  padding-bottom: 0 !important;
+h3,
+p {
+  line-height: 1.4em;
+  margin: 0;
+}
+
+h3 + p {
+  margin-bottom: 10px;
+}
+
+h3 {
+  margin-bottom: 0;
+}
+
+.declaration {
+  margin-top: 60px;
+}
+
+.declaration p {
+  margin-bottom: 65px;
+}
+
+.declaration h3 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 0;
 }
 
 .table-border {
-  border: 10px solid #ccc;
+  border: 3px solid #ccc;
   border-radius: 33px;
-  padding: 20px 33px;
+  padding: 20px 30px;
   width: 100%;
 }
 
@@ -80,4 +116,74 @@
 
 table h3 {
   margin-top: 40px;
+}
+
+.applicant,
+.witness {
+  width: 200px;
+}
+
+.applicant,
+.witness {
+  position: absolute;
+  right: 80px;
+}
+
+.applicant {
+  top: 630px;
+}
+
+.witness {
+  top: 890px;
+}
+
+.applicant-heading,
+.witness-heading {
+  position: absolute;
+  font-style: italic;
+}
+
+.applicant-heading {
+  top: 610px;
+  right: 195px;
+}
+
+.witness-heading {
+  top: 860px;
+  right: 215px;
+}
+
+.table-col {
+  display: inline-block;
+  width: 100px;
+}
+
+.table-col p {
+  font-size: 19px;
+}
+
+hr {
+  margin: 20px 0;
+}
+
+.sub-heading strong {
+  font-size: 24px;
+  position: absolute;
+  top: 175px;
+  color: rgb(83,184,103) !important;
+}
+
+.batches-heading {
+  position: relative;
+  top: 200px;
+}
+
+.batches-heading p {
+  margin-bottom: 10px;
+}
+
+.batches-logo {
+  position: absolute;
+  top: 70px;
+  left: 45px;
 }
