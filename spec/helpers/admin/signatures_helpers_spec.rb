@@ -13,6 +13,6 @@ RSpec.describe Admin::SignaturesHelper, type: :helper do
   end
 
   describe 'signature_for_pdf(signature, type)' do
-    it { expect(signature_for_pdf(signature,'applicant')).to start_with '<img src="data:image/png;base64,' }
+    it { expect(signature_for_pdf(signature,'applicant')).to start_with '<img class="applicant" src="data:image/png;base64,' }
   end
 end
