@@ -14,4 +14,8 @@ module RebateFormsHelper
   def rebate_form_amount(rebate_form)
     "$#{format('%.2f', rebate_form.rebate)}"
   end
+
+  def rebate_form_total(rebate_form)
+    "$#{format('%.2f', rebate_form.fields['income'])}"
+  end
 end
