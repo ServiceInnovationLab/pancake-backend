@@ -18,4 +18,17 @@ module RebateFormsHelper
   def rebate_form_total(rebate_form)
     "$#{format('%.2f', rebate_form.fields['income'])}"
   end
+
+  def rebate_form_lived_year?(rebate_form)
+    field_name = "lived_here_before_july_" + (rebate_form.rating_year.to_i-1).to_s
+    if rebate_form[field_name].present?
+      rebate_form.fields[field_name].capitalize
+    else
+      'No answer'
+    end
+  end
+
+  def rebate_form_year_header(rebate_form)
+    "#{rebate_form.rating_year.to_i-1}/#{rebate_form.rating_year.to_i} Rates Rebate"
+  end
 end

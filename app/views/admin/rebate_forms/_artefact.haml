@@ -1,7 +1,7 @@
 %header.main-header
   .container
     %p.heading
-      ="#{Rails.configuration.rating_year.to_i-1}/#{Rails.configuration.rating_year.to_i} Rates Rebate"
+      =rebate_form_year_header(rebate_form)
       %br
       Application form
     = image_tag wicked_pdf_asset_base64('dia.png'), class: 'pdf-image'
@@ -43,7 +43,7 @@
             %p #{rebate_form.fields['lived_with_partner'] == true ? 'Yes' : 'No'}
           .field
             %h3 Did you live with a partner or a joint homeowner on 1 July?
-            %p=rebate_form.fields["lived_here_before_july_" + (Rails.configuration.rating_year.to_i-1).to_s].capitalize
+            %p=rebate_form_lived_year?(rebate_form)
           .field
             %h3 How many dependants do you have?
             %p=rebate_form_pdf_dependants(rebate_form)
