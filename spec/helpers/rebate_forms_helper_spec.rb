@@ -26,6 +26,6 @@ RSpec.describe RebateFormsHelper, type: :helper do
   end
 
   describe 'rebate_form_year_header(rebate_form)' do
-    it { expect(rebate_form_year_header(rebate_form)).to eq '2018/2019 Rates Rebate' }
+    it { expect(rebate_form_year_header(rebate_form)).to eq "#{rebate_form.rating_year.to_i-1}/#{rebate_form.rating_year} Rates Rebate" }
   end
 end
