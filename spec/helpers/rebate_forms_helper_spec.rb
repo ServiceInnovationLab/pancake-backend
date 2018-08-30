@@ -6,7 +6,7 @@ RSpec.describe RebateFormsHelper, type: :helper do
   let(:rebate_form) { FactoryBot.create :rebate_form }
 
   describe 'rebate_form_pdf_dependants(rebate_form)' do
-    it { expect(rebate_fgitorm_pdf_dependants(rebate_form)).to eq 'no' }
+    it { expect(rebate_form_pdf_dependants(rebate_form)).to eq 'no' }
   end
 
   describe 'rebate_form_pdf_home_business(rebate_form)' do
