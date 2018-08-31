@@ -54,8 +54,8 @@ class RebateForm < ApplicationRecord
   end
 
   def lived_here
-    fields.each do |key, value|
-      return fields[key] if key.start_with?('lived_here_before_july_')
+    fields.each do |key, _value|
+      return value if key.start_with?('lived_here_before_july_')
     end
     nil
   end
