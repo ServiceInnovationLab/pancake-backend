@@ -10,7 +10,7 @@ FactoryBot.define do
       end
     end
     # token <-- auto generated. Don't set in factory
-    fields { { "full_name": 'Fred', "income": 0, dependants: 0, "lived_here_before_july_2018": 'yes' } }
+    fields { { "full_name": 'Fred', "income": 0, dependants: 0, "lived_here_before_july_#{rating_year.to_i - 1}": 'yes' } }
     completed { false }
     rebate { 555.12 }
     batch { nil }

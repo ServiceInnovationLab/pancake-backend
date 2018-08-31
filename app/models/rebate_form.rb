@@ -53,6 +53,13 @@ class RebateForm < ApplicationRecord
     fields['income']
   end
 
+  def lived_here
+    fields.each do |key, value|
+      return fields[key] if key.start_with?('lived_here_before_july_')
+    end
+    nil
+  end
+
   def applicant_signature
     signatures.applicant.first
   end
