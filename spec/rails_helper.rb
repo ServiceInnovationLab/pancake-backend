@@ -45,13 +45,13 @@ RSpec.configure do |config|
   end
 
   config.around do |example|
-    begin
+    
       DatabaseCleaner.cleaning do
         example.run
       end
     ensure
       DatabaseCleaner.clean
-    end
+    
   end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
