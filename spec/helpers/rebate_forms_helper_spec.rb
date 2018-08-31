@@ -22,7 +22,7 @@ RSpec.describe RebateFormsHelper, type: :helper do
   end
 
   describe 'rebate_form_lived_year?(rebate_form)' do
-    it { expect(rebate_form_lived_year?(rebate_form)).to eq 'No answer' }
+    it { expect(rebate_form_lived_year?(rebate_form)).to eq 'Yes' }
   end
 
   describe 'rebate_form_year_header(rebate_form)' do

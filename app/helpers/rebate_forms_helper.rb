@@ -21,8 +21,8 @@ module RebateFormsHelper
 
   def rebate_form_lived_year?(rebate_form)
     field_name = 'lived_here_before_july_' + (rebate_form.rating_year.to_i - 1).to_s
-    if rebate_form[field_name].present?
-      rebate_form.fields[field_name].capitalize
+    if rebate_form.fields[field_name].present?
+      rebate_form.fields[field_name].to_s.capitalize
     else
       'No answer'
     end
