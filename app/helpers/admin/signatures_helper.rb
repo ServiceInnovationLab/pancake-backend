@@ -9,7 +9,7 @@ module Admin::SignaturesHelper
     }.to_param
   end
 
-  def signature_for_pdf(signature)
-    image_tag "data:image/png;base64,#{signature.image}"
+  def signature_for_pdf(signature, type)
+    image_tag "data:image/png;base64,#{signature.image}", class: type
   end
 end

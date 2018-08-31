@@ -7,22 +7,30 @@ class Admin::RebateFormsController < Admin::BaseController
   # GET /admin/rebate_forms
   def index
     @location = params[:location]
-    @rating_year = params[:rating_year]
-    @years = %w[2019 2018]
+
+    @rating_year = params[:rating_year] || Rails.configuration.rating_year
+    @years = Property.select(:rating_year).distinct.order(:rating_year).reverse_order.pluck(:rating_year)
+
+    @completed = (params[:completed] == 'true')
+
     @council = current_user.council.presence
+
     @rebate_forms = policy_scope(RebateForm).joins(:property)
-                                            .includes(:signatures, :property)
+                                            .includes(:signatures, :property, property: :council)
                                             .order(created_at: :desc)
 
-    # if user is searching location, do a couple more filters
+    # filter by the search form fields
     @rebate_forms = @rebate_forms.where('properties.location ILIKE ?', "%#{params[:location]}%") if @location.present?
     @rebate_forms = @rebate_forms.where("properties.rating_year": @rating_year) if @rating_year.present?
+    @rebate_forms = @rebate_forms.where(completed: @completed)
+    @rebate_forms = @rebate_forms.order(created_at: :desc)
+
     respond_with @rebate_forms
   end
 
   # GET /admin/rebate_forms/1
   def show
-    @year = ENV['YEAR']
+    @year = @rebate_form.property.rating_year
 
     @rates_bill = @rebate_form.property.rates_bills.find_by(rating_year: @year)
 
@@ -35,7 +43,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
     respond_with(@rebate_form) do |format|
       format.pdf do
-        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf'
+        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf', margin: { top: 0, bottom: 0, left: 0, right: 0 }, dpi: '300'
       end
     end
   end
@@ -85,6 +93,6 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def pdf_filename
-    "rebate-#{@rebate_form.council.short_name}-#{@rebate_form.id}"
+    "#{@rebate_form.council.short_name}-(#{@rebate_form.valuation_id})-#{@rebate_form.id}"
   end
 end

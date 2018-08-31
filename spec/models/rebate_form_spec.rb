@@ -56,11 +56,7 @@ RSpec.describe RebateForm, type: :model do
     let(:form) { FactoryBot.create :rebate_form, property: property, valuation_id: valuation_id, fields: fields }
     let(:fields) { { "income": 39_900.00, "dependants": 1, "full_name": 'Edith' } }
 
-    before do
-      ENV['YEAR'] = year
-      form.calc_rebate_amount!
-    end
-
+    before { form.calc_rebate_amount! }
     it { expect(form.rebate).to eq 370.67 }
   end
 
