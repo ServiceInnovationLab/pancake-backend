@@ -14,6 +14,7 @@ class RebateForm < ApplicationRecord
   validates :valuation_id, presence: true
   validates :token, presence: true
   validates :rebate, presence: true
+  validates :property, presence: true
 
   validate :required_fields_present
   validate :same_council
@@ -51,6 +52,13 @@ class RebateForm < ApplicationRecord
 
   def income
     fields['income']
+  end
+
+  def lived_here
+    fields.each do |key, value|
+      return value if key.start_with?('lived_here_before_july_')
+    end
+    nil
   end
 
   def applicant_signature
