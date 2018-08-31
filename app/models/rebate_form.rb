@@ -14,6 +14,7 @@ class RebateForm < ApplicationRecord
   validates :valuation_id, presence: true
   validates :token, presence: true
   validates :rebate, presence: true
+  validates :property, presence: true
 
   validate :required_fields_present
   validate :same_council
