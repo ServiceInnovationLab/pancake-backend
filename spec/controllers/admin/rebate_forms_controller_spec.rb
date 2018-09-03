@@ -40,6 +40,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
           it { expect(assigns(:rebate_forms)).to eq [completed] }
         end
+
         describe 'not completed' do
           before { get :index, params: { completed: 'false' } }
 
@@ -65,6 +66,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         end
       end
+
       context 'pdf' do
         before { get :show, params: { id: rebate_form.to_param }, format: :pdf }
 
