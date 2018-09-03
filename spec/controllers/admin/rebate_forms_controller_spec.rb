@@ -47,6 +47,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       describe 'filter by location' do
         let(:property) { FactoryBot.create :property, council: council, location: '123 Taniwha avenue' }
         let!(:rebate_form) { FactoryBot.create :rebate_form, valuation_id: property.valuation_id }
+
         before { get :index, params: { location: 'Tani' } }
         it { expect(assigns(:rebate_forms)).to eq [rebate_form] }
       end
@@ -135,6 +136,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           content_type: 'image/jpeg'
         ] }
       end
+
       shared_examples 'controller works' do
         it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         it { expect(response).to redirect_to(admin_rebate_form_url(rebate_form)) }
@@ -190,6 +192,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
   context 'signed in as admin' do
     let(:user) { FactoryBot.create :admin_user }
+
     before { sign_in user }
     include_examples 'can wrangle rebate_forms'
   end

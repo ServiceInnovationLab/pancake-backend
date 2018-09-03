@@ -51,12 +51,14 @@ RSpec.describe 'RebateForm', type: :feature do
 
   context 'signed in as dia' do
     let(:user) { FactoryBot.create :admin_user }
+
     before { login_as(user, scope: :user) }
     include_examples 'can edit'
   end
 
   context 'signed in as council' do
     let(:user) { FactoryBot.create :user, council_id: rebate_form.property.council_id }
+
     before { login_as(user, scope: :user) }
     include_examples 'can edit'
   end
