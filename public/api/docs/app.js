@@ -209,10 +209,10 @@
 
   var LogLevel;
   (function (LogLevel) {
-    LogLevel[LogLevel['Trace'] = 0] = 'Trace';
-    LogLevel[LogLevel['Debug'] = 1] = 'Debug';
-    LogLevel[LogLevel['Warn'] = 2] = 'Warn';
-    LogLevel[LogLevel['Error'] = 3] = 'Error';
+    LogLevel[LogLevel.Trace = 0] = 'Trace';
+    LogLevel[LogLevel.Debug = 1] = 'Debug';
+    LogLevel[LogLevel.Warn = 2] = 'Warn';
+    LogLevel[LogLevel.Error = 3] = 'Error';
   })(LogLevel || (LogLevel = {}));
   class NullConsole {
     log(_message) {}
@@ -532,19 +532,19 @@
   var Register;
   (function (Register) {
     // $0 or $pc (program counter): pointer into `program` for the next insturction; -1 means exit
-    Register[Register['pc'] = 0] = 'pc';
+    Register[Register.pc = 0] = 'pc';
     // $1 or $ra (return address): pointer into `program` for the return
-    Register[Register['ra'] = 1] = 'ra';
+    Register[Register.ra = 1] = 'ra';
     // $2 or $fp (frame pointer): pointer into the `evalStack` for the base of the stack
-    Register[Register['fp'] = 2] = 'fp';
+    Register[Register.fp = 2] = 'fp';
     // $3 or $sp (stack pointer): pointer into the `evalStack` for the top of the stack
-    Register[Register['sp'] = 3] = 'sp';
+    Register[Register.sp = 3] = 'sp';
     // $4-$5 or $s0-$s1 (saved): callee saved general-purpose registers
-    Register[Register['s0'] = 4] = 's0';
-    Register[Register['s1'] = 5] = 's1';
+    Register[Register.s0 = 4] = 's0';
+    Register[Register.s1 = 5] = 's1';
     // $6-$7 or $t0-$t1 (temporaries): caller saved general-purpose registers
-    Register[Register['t0'] = 6] = 't0';
-    Register[Register['t1'] = 7] = 't1';
+    Register[Register.t0 = 6] = 't0';
+    Register[Register.t1 = 7] = 't1';
   })(Register || (Register = {}));
 
   class AppendOpcodes {
@@ -960,9 +960,9 @@
   }
   var Phase;
   (function (Phase) {
-    Phase[Phase['Append'] = 0] = 'Append';
-    Phase[Phase['Prune'] = 1] = 'Prune';
-    Phase[Phase['Done'] = 2] = 'Done';
+    Phase[Phase.Append = 0] = 'Append';
+    Phase[Phase.Prune = 1] = 'Prune';
+    Phase[Phase.Done = 2] = 'Done';
   })(Phase || (Phase = {}));
   class IteratorSynchronizer {
     constructor({ target, artifacts }) {
@@ -3017,35 +3017,35 @@
   var Opcodes;
   (function (Opcodes) {
     // Statements
-    Opcodes[Opcodes['Text'] = 0] = 'Text';
-    Opcodes[Opcodes['Append'] = 1] = 'Append';
-    Opcodes[Opcodes['Comment'] = 2] = 'Comment';
-    Opcodes[Opcodes['Modifier'] = 3] = 'Modifier';
-    Opcodes[Opcodes['Block'] = 4] = 'Block';
-    Opcodes[Opcodes['Component'] = 5] = 'Component';
-    Opcodes[Opcodes['OpenElement'] = 6] = 'OpenElement';
-    Opcodes[Opcodes['FlushElement'] = 7] = 'FlushElement';
-    Opcodes[Opcodes['CloseElement'] = 8] = 'CloseElement';
-    Opcodes[Opcodes['StaticAttr'] = 9] = 'StaticAttr';
-    Opcodes[Opcodes['DynamicAttr'] = 10] = 'DynamicAttr';
-    Opcodes[Opcodes['Yield'] = 11] = 'Yield';
-    Opcodes[Opcodes['Partial'] = 12] = 'Partial';
-    Opcodes[Opcodes['DynamicArg'] = 13] = 'DynamicArg';
-    Opcodes[Opcodes['StaticArg'] = 14] = 'StaticArg';
-    Opcodes[Opcodes['TrustingAttr'] = 15] = 'TrustingAttr';
-    Opcodes[Opcodes['Debugger'] = 16] = 'Debugger';
-    Opcodes[Opcodes['ClientSideStatement'] = 17] = 'ClientSideStatement';
+    Opcodes[Opcodes.Text = 0] = 'Text';
+    Opcodes[Opcodes.Append = 1] = 'Append';
+    Opcodes[Opcodes.Comment = 2] = 'Comment';
+    Opcodes[Opcodes.Modifier = 3] = 'Modifier';
+    Opcodes[Opcodes.Block = 4] = 'Block';
+    Opcodes[Opcodes.Component = 5] = 'Component';
+    Opcodes[Opcodes.OpenElement = 6] = 'OpenElement';
+    Opcodes[Opcodes.FlushElement = 7] = 'FlushElement';
+    Opcodes[Opcodes.CloseElement = 8] = 'CloseElement';
+    Opcodes[Opcodes.StaticAttr = 9] = 'StaticAttr';
+    Opcodes[Opcodes.DynamicAttr = 10] = 'DynamicAttr';
+    Opcodes[Opcodes.Yield = 11] = 'Yield';
+    Opcodes[Opcodes.Partial = 12] = 'Partial';
+    Opcodes[Opcodes.DynamicArg = 13] = 'DynamicArg';
+    Opcodes[Opcodes.StaticArg = 14] = 'StaticArg';
+    Opcodes[Opcodes.TrustingAttr = 15] = 'TrustingAttr';
+    Opcodes[Opcodes.Debugger = 16] = 'Debugger';
+    Opcodes[Opcodes.ClientSideStatement = 17] = 'ClientSideStatement';
     // Expressions
-    Opcodes[Opcodes['Unknown'] = 18] = 'Unknown';
-    Opcodes[Opcodes['Get'] = 19] = 'Get';
-    Opcodes[Opcodes['MaybeLocal'] = 20] = 'MaybeLocal';
-    Opcodes[Opcodes['FixThisBeforeWeMerge'] = 21] = 'FixThisBeforeWeMerge';
-    Opcodes[Opcodes['HasBlock'] = 22] = 'HasBlock';
-    Opcodes[Opcodes['HasBlockParams'] = 23] = 'HasBlockParams';
-    Opcodes[Opcodes['Undefined'] = 24] = 'Undefined';
-    Opcodes[Opcodes['Helper'] = 25] = 'Helper';
-    Opcodes[Opcodes['Concat'] = 26] = 'Concat';
-    Opcodes[Opcodes['ClientSideExpression'] = 27] = 'ClientSideExpression';
+    Opcodes[Opcodes.Unknown = 18] = 'Unknown';
+    Opcodes[Opcodes.Get = 19] = 'Get';
+    Opcodes[Opcodes.MaybeLocal = 20] = 'MaybeLocal';
+    Opcodes[Opcodes.FixThisBeforeWeMerge = 21] = 'FixThisBeforeWeMerge';
+    Opcodes[Opcodes.HasBlock = 22] = 'HasBlock';
+    Opcodes[Opcodes.HasBlockParams = 23] = 'HasBlockParams';
+    Opcodes[Opcodes.Undefined = 24] = 'Undefined';
+    Opcodes[Opcodes.Helper = 25] = 'Helper';
+    Opcodes[Opcodes.Concat = 26] = 'Concat';
+    Opcodes[Opcodes.ClientSideExpression = 27] = 'ClientSideExpression';
   })(Opcodes || (Opcodes = {}));
 
   function is(variant) {
@@ -3112,10 +3112,10 @@
 
   var Ops$1;
   (function (Ops) {
-    Ops[Ops['OpenComponentElement'] = 0] = 'OpenComponentElement';
-    Ops[Ops['DidCreateElement'] = 1] = 'DidCreateElement';
-    Ops[Ops['DidRenderLayout'] = 2] = 'DidRenderLayout';
-    Ops[Ops['FunctionExpression'] = 3] = 'FunctionExpression';
+    Ops[Ops.OpenComponentElement = 0] = 'OpenComponentElement';
+    Ops[Ops.DidCreateElement = 1] = 'DidCreateElement';
+    Ops[Ops.DidRenderLayout = 2] = 'DidRenderLayout';
+    Ops[Ops.FunctionExpression = 3] = 'FunctionExpression';
   })(Ops$1 || (Ops$1 = {}));
 
   class CompiledStaticTemplate {
@@ -5037,7 +5037,7 @@
   function shouldApplyFix$1(document, svgNamespace) {
     let svg = document.createElementNS(svgNamespace, 'svg');
     try {
-      svg['insertAdjacentHTML']('beforeend', '<circle></circle>');
+      svg.insertAdjacentHTML('beforeend', '<circle></circle>');
     } catch (e) {
       // IE, Edge: Will throw, insertAdjacentHTML is unsupported on SVG
       // Safari: Will throw, insertAdjacentHTML is not present on SVG
@@ -5639,10 +5639,10 @@
   }
   var TableSlotState;
   (function (TableSlotState) {
-    TableSlotState[TableSlotState['Allocated'] = 0] = 'Allocated';
-    TableSlotState[TableSlotState['Freed'] = 1] = 'Freed';
-    TableSlotState[TableSlotState['Purged'] = 2] = 'Purged';
-    TableSlotState[TableSlotState['Pointer'] = 3] = 'Pointer';
+    TableSlotState[TableSlotState.Allocated = 0] = 'Allocated';
+    TableSlotState[TableSlotState.Freed = 1] = 'Freed';
+    TableSlotState[TableSlotState.Purged = 2] = 'Purged';
+    TableSlotState[TableSlotState.Pointer = 3] = 'Pointer';
   })(TableSlotState || (TableSlotState = {}));
   class Heap {
     constructor() {
@@ -5880,7 +5880,7 @@
     }
     toJSON() {
       let details = dict();
-      details['guid'] = `${this._guid}`;
+      details.guid = `${this._guid}`;
       return {
         guid: this._guid,
         type: this.type,
@@ -5927,9 +5927,9 @@
     }
     toJSON() {
       let json = super.toJSON();
-      let details = json['details'];
+      let details = json.details;
       if (!details) {
-        details = json['details'] = {};
+        details = json.details = {};
       }
       return super.toJSON();
     }
@@ -5941,7 +5941,7 @@
       this.didInsert = false;
       this.didDelete = false;
       this.map = opcode.map;
-      this.updating = opcode['children'];
+      this.updating = opcode.children;
     }
     insert(key, item, memo, before) {
       let map$$1 = this.map,
@@ -5952,7 +5952,7 @@
       let reference = null;
       if (before) {
         reference = map$$1[before];
-        nextSibling = reference['bounds'].firstNode();
+        nextSibling = reference.bounds.firstNode();
       } else {
         nextSibling = this.marker;
       }
@@ -6046,11 +6046,11 @@
       let inner = Object.keys(map$$1).map(key => {
         return `${JSON.stringify(key)}: ${map$$1[key]._guid}`;
       }).join(', ');
-      let details = json['details'];
+      let details = json.details;
       if (!details) {
-        details = json['details'] = {};
+        details = json.details = {};
       }
-      details['map'] = `{${inner}}`;
+      details.map = `{${inner}}`;
       return json;
     }
   }
@@ -6496,18 +6496,18 @@
 
   var NodeType;
   (function (NodeType) {
-    NodeType[NodeType['Element'] = 0] = 'Element';
-    NodeType[NodeType['Attribute'] = 1] = 'Attribute';
-    NodeType[NodeType['Text'] = 2] = 'Text';
-    NodeType[NodeType['CdataSection'] = 3] = 'CdataSection';
-    NodeType[NodeType['EntityReference'] = 4] = 'EntityReference';
-    NodeType[NodeType['Entity'] = 5] = 'Entity';
-    NodeType[NodeType['ProcessingInstruction'] = 6] = 'ProcessingInstruction';
-    NodeType[NodeType['Comment'] = 7] = 'Comment';
-    NodeType[NodeType['Document'] = 8] = 'Document';
-    NodeType[NodeType['DocumentType'] = 9] = 'DocumentType';
-    NodeType[NodeType['DocumentFragment'] = 10] = 'DocumentFragment';
-    NodeType[NodeType['Notation'] = 11] = 'Notation';
+    NodeType[NodeType.Element = 0] = 'Element';
+    NodeType[NodeType.Attribute = 1] = 'Attribute';
+    NodeType[NodeType.Text = 2] = 'Text';
+    NodeType[NodeType.CdataSection = 3] = 'CdataSection';
+    NodeType[NodeType.EntityReference = 4] = 'EntityReference';
+    NodeType[NodeType.Entity = 5] = 'Entity';
+    NodeType[NodeType.ProcessingInstruction = 6] = 'ProcessingInstruction';
+    NodeType[NodeType.Comment = 7] = 'Comment';
+    NodeType[NodeType.Document = 8] = 'Document';
+    NodeType[NodeType.DocumentType = 9] = 'DocumentType';
+    NodeType[NodeType.DocumentFragment = 10] = 'DocumentFragment';
+    NodeType[NodeType.Notation = 11] = 'Notation';
   })(NodeType || (NodeType = {}));
 
   function EMPTY_CACHE() {}
@@ -6976,11 +6976,11 @@
       return message;
     }
     if ('parent' in reference && 'property' in reference) {
-      parent = reference['parent'].value();
-      property = reference['property'];
+      parent = reference.parent.value();
+      property = reference.property;
     } else if ('_parentValue' in reference && '_propertyKey' in reference) {
-      parent = reference['_parentValue'];
-      property = reference['_propertyKey'];
+      parent = reference._parentValue;
+      property = reference._propertyKey;
     }
     if (property !== undefined) {
       message += `('${property}' on ${debugName(parent)}) `;
@@ -6994,8 +6994,8 @@
     } else if (objType === 'number' || objType === 'boolean') {
       return obj.toString();
     } else {
-      if (obj['debugName']) {
-        return obj['debugName'];
+      if (obj.debugName) {
+        return obj.debugName;
       }
       try {
         return JSON.stringify(obj);
@@ -8138,7 +8138,7 @@
     if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function') r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  let $ = window['$'];
+  let $ = window.$;
   class EndpointRoute extends Component {
     constructor(attributes) {
       super(attributes);
@@ -8207,7 +8207,7 @@
       }
     }
     fetch() {
-      let url = window['CONFIG']['basePath'];
+      let url = window.CONFIG.basePath;
       url += this.model.path.split('/{')[0];
       url += this.pathParams();
       if (this.isReadOperation) {
@@ -8221,14 +8221,14 @@
       }
     }
     onApiResponse(responseJSON) {
-      let html = window['$'](`<pre class="highlight"><code class="json hljs">${responseJSON}</code></pre>`);
-      window['$']('#api-response').html(html);
-      window['$']('pre.highlight code').each(function (i, block) {
-        window['hljs'].highlightBlock(block);
+      let html = window.$(`<pre class="highlight"><code class="json hljs">${responseJSON}</code></pre>`);
+      window.$('#api-response').html(html);
+      window.$('pre.highlight code').each(function (i, block) {
+        window.hljs.highlightBlock(block);
       });
     }
     doRead(url) {
-      let paramString = window['$'].param(this.presentFetchParams());
+      let paramString = window.$.param(this.presentFetchParams());
       url = `${url}?${paramString}`;
       return fetch(url).then(response => {
         return response.json().then(json => {
@@ -8243,12 +8243,12 @@
           'Content-Type': 'application/json'
         }
       };
-      if (this.fetchParams['payload']) {
-        let json = JSON.parse(this.fetchParams['payload']);
+      if (this.fetchParams.payload) {
+        let json = JSON.parse(this.fetchParams.payload);
         json = JSON.stringify(json);
-        opts['body'] = json;
+        opts.body = json;
       }
-      opts['method'] = this.fetchMethod;
+      opts.method = this.fetchMethod;
       return fetch(url, opts).then(response => {
         return response.json().then(json => {
           return JSON.stringify(json, null, 2);
@@ -8301,8 +8301,8 @@
   var createObject = Object.create;
   function createMap() {
     var map = createObject(null);
-    map['__'] = undefined;
-    delete map['__'];
+    map.__ = undefined;
+    delete map.__;
     return map;
   }
 
@@ -9026,7 +9026,7 @@
       this.swagger = {};
       this.id = 'employee';
       this.routeIsChanging = false;
-      let url = `${window['CONFIG'].basePath}/swagger.json`;
+      let url = `${window.CONFIG.basePath}/swagger.json`;
       fetch(url).then(response => {
         response.json().then(json => {
           this.swagger = this._buildSwagger(json);
@@ -9043,7 +9043,7 @@
       });
     }
     get isReady() {
-      return !!this.swagger['info'];
+      return !!this.swagger.info;
     }
     _buildSwagger(json) {
       json.models = [];
@@ -9069,7 +9069,7 @@
           properties: config.properties
         });
       });
-      window['swagger'] = json;
+      window.swagger = json;
       return json;
     }
   }
@@ -9092,7 +9092,7 @@
   class NavHeader extends Component {
     constructor(attributes) {
       super(attributes);
-      this.githubURL = window['CONFIG'].githubURL;
+      this.githubURL = window.CONFIG.githubURL;
     }
     get title() {
       return this.args.swagger.info.title;
