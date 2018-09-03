@@ -73,6 +73,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
       describe 'PUT #update' do
         subject { rebate_form.fields }
+
         let(:property) { FactoryBot.create :property_with_rates, rating_year: '2019' }
         let(:rebate_form) do
           FactoryBot.create(:rebate_form,
