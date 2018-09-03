@@ -40,10 +40,10 @@
         .pure-u-2-3
           .field
             %h3 Were you living at address at 1 July?
-            %p #{rebate_form.fields['lived_with_partner'] == 'yes' ? 'Yes' : 'No'}
+            %p=rebate_form_lived_year?(rebate_form)
           .field
             %h3 Did you live with a partner or a joint homeowner on 1 July?
-            %p=rebate_form_lived_year?(rebate_form)
+            %p #{rebate_form.fields['lived_with_partner'] == 'yes' ? 'Yes' : 'No'}
           .field
             %h3 How many dependants do you have?
             %p=rebate_form_pdf_dependants(rebate_form)

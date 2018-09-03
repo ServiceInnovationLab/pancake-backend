@@ -13,6 +13,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     describe 'GET #index' do
       describe 'no filter' do
         before { get :index, params: {} }
+
         describe 'assigns all rebate_forms as @rebate_forms' do
           it { expect(assigns(:rebate_forms)).to eq([rebate_form]) }
         end
@@ -36,11 +37,13 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
         describe 'completed' do
           before { get :index, params: { completed: 'true' } }
+
           it { expect(assigns(:rebate_forms)).to eq [completed] }
         end
 
         describe 'not completed' do
           before { get :index, params: { completed: 'false' } }
+
           it { expect(assigns(:rebate_forms)).to eq [uncompleted, rebate_form] }
         end
       end
@@ -48,7 +51,9 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       describe 'filter by location' do
         let(:property) { FactoryBot.create :property, council: council, location: '123 Taniwha avenue' }
         let!(:rebate_form) { FactoryBot.create :rebate_form, valuation_id: property.valuation_id }
+
         before { get :index, params: { location: 'Tani' } }
+
         it { expect(assigns(:rebate_forms)).to eq [rebate_form] }
       end
     end
@@ -69,6 +74,8 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
 
       describe 'PUT #update' do
+        subject { rebate_form.fields }
+
         let(:property) { FactoryBot.create :property_with_rates, rating_year: '2019' }
         let(:rebate_form) do
           FactoryBot.create(:rebate_form,
@@ -107,11 +114,9 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           expect(rebate_form.rebate).to eq 630
         end
 
-        it 'should update updated_by column with current user' do
+        it 'updates updated_by column with current user' do
           expect(rebate_form.updated_by).to eq(user.id)
         end
-
-        subject { rebate_form.fields }
 
         describe 'should update full_name, dependants and income' do
           it { expect(subject['full_name']).to eq('Mary Jane Kelly') }
@@ -137,6 +142,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           content_type: 'image/jpeg'
         ] }
       end
+
       shared_examples 'controller works' do
         it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         it { expect(response).to redirect_to(admin_rebate_form_url(rebate_form)) }
@@ -187,12 +193,15 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     let(:user) { FactoryBot.create :user, council: rebate_form.council }
 
     before { sign_in user }
+
     include_examples 'can wrangle rebate_forms'
   end
 
   context 'signed in as admin' do
     let(:user) { FactoryBot.create :admin_user }
+
     before { sign_in user }
+
     include_examples 'can wrangle rebate_forms'
   end
 end
