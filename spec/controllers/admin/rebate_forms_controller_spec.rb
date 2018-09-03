@@ -68,6 +68,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
 
       describe 'PUT #update' do
+        subject { rebate_form.fields }
         let(:property) { FactoryBot.create :property_with_rates, rating_year: '2019' }
         let(:rebate_form) do
           FactoryBot.create(:rebate_form,
@@ -110,7 +111,6 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           expect(rebate_form.updated_by).to eq(user.id)
         end
 
-        subject { rebate_form.fields }
 
         describe 'should update full_name, dependants and income' do
           it { expect(subject['full_name']).to eq('Mary Jane Kelly') }
