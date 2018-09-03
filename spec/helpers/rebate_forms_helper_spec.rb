@@ -28,10 +28,12 @@ RSpec.describe RebateFormsHelper, type: :helper do
       let(:fields) { { "full_name": 'Fred', "income": 0, dependants: 0, "lived_here_before_july_2019": 'yes' } }
       it { expect(rebate_form_lived_year?(rebate_form)).to eq 'Yes' }
     end
+
     describe 'no' do
       let(:fields) { { "full_name": 'Fred', "income": 0, dependants: 0, "lived_here_before_july_2019": 'no' } }
       it { expect(rebate_form_lived_year?(rebate_form)).to eq 'No' }
     end
+
     describe 'not answered' do
       let(:fields) { { "full_name": 'Fred', "income": 0, dependants: 0 } }
       it { expect(rebate_form_lived_year?(rebate_form)).to eq 'No answer' }
