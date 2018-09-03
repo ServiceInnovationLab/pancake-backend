@@ -116,7 +116,6 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           expect(rebate_form.updated_by).to eq(user.id)
         end
 
-
         describe 'should update full_name, dependants and income' do
           it { expect(subject['full_name']).to eq('Mary Jane Kelly') }
           it { expect(subject['dependants']).to eq('9') }
