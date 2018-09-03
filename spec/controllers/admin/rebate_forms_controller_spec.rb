@@ -105,7 +105,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           expect(rebate_form.rebate).to eq 630
         end
 
-        it 'should update updated_by column with current user' do
+        it 'updates updated_by column with current user' do
           expect(rebate_form.updated_by).to eq(user.id)
         end
 
