@@ -40,6 +40,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
           it { expect(assigns(:rebate_forms)).to eq [completed] }
         end
+
         describe 'not completed' do
           before { get :index, params: { completed: 'false' } }
 
@@ -65,6 +66,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         end
       end
+
       context 'pdf' do
         before { get :show, params: { id: rebate_form.to_param }, format: :pdf }
 
@@ -115,7 +117,6 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         it 'updates updated_by column with current user' do
           expect(rebate_form.updated_by).to eq(user.id)
         end
-
 
         describe 'should update full_name, dependants and income' do
           it { expect(subject['full_name']).to eq('Mary Jane Kelly') }
