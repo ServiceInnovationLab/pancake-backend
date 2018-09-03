@@ -57,6 +57,7 @@ RSpec.describe RebateForm, type: :model do
     let(:fields) { { "income": 39_900.00, "dependants": 1, "full_name": 'Edith' } }
 
     before { form.calc_rebate_amount! }
+
     it { expect(form.rebate).to eq 370.67 }
   end
 
