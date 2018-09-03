@@ -13,6 +13,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     describe 'GET #index' do
       describe 'no filter' do
         before { get :index, params: {} }
+
         describe 'assigns all rebate_forms as @rebate_forms' do
           it { expect(assigns(:rebate_forms)).to eq([rebate_form]) }
         end
@@ -36,10 +37,12 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
         describe 'completed' do
           before { get :index, params: { completed: 'true' } }
+
           it { expect(assigns(:rebate_forms)).to eq [completed] }
         end
         describe 'not completed' do
           before { get :index, params: { completed: 'false' } }
+
           it { expect(assigns(:rebate_forms)).to eq [uncompleted, rebate_form] }
         end
       end
@@ -49,6 +52,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         let!(:rebate_form) { FactoryBot.create :rebate_form, valuation_id: property.valuation_id }
 
         before { get :index, params: { location: 'Tani' } }
+
         it { expect(assigns(:rebate_forms)).to eq [rebate_form] }
       end
     end
@@ -187,6 +191,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     let(:user) { FactoryBot.create :user, council: rebate_form.council }
 
     before { sign_in user }
+
     include_examples 'can wrangle rebate_forms'
   end
 
@@ -194,6 +199,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     let(:user) { FactoryBot.create :admin_user }
 
     before { sign_in user }
+
     include_examples 'can wrangle rebate_forms'
   end
 end
