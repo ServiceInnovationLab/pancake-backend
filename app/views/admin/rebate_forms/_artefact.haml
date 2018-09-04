@@ -31,8 +31,9 @@
             %p
               = rebate_form.property.location
               %br/
-              = rebate_form.property.suburb
-              %br/
+              - if !rebate_form.property.suburb.to_s.include?('RT.VAL.AREAUNIT')
+                = rebate_form.property.suburb
+                %br/
               = rebate_form.property.town_city
               %br/
     .pure-u-1
