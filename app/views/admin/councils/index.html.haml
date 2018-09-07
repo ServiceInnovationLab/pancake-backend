@@ -19,6 +19,8 @@
       %th Completed applications
       %th Unclaimed by council
       %th Claimed (Batches)
+      %th
+      %th Rateable Properties
 
   %tbody
     - @councils.each do |council|
@@ -52,6 +54,13 @@
           batches
           %br/
           $#{council.batches.sum(:amount)}
+
+        %td
+          - council.properties.group(:rating_year).size.each do |year, count|
+            = year
+            \:
+            = number_with_delimiter count
+            %br/
 
         - if policy(council).edit?
           %td= link_to 'Edit', edit_admin_council_path(council), class: 'pure-button'
