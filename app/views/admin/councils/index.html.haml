@@ -27,7 +27,7 @@
           = link_to(admin_council_path(council)) do
             = council.name
         %td
-          = link_to("/app?council=#{council.short_name}", class: 'pure-button pure-button-primary') do
+          = link_to("#{ENV['APP_URL']}?council=#{council.short_name}", target: "_new", class: 'pure-button pure-button-primary') do
             Launch #{council.short_name} app
         %td= council.short_name
         %td= council.active
