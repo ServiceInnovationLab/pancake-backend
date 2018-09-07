@@ -30,9 +30,18 @@ a:focus {
   text-decoration: underline;
 }
 
+#layout {
+}
+
+#header {
+  margin: 0;
+  padding: 0;
+  background-color: #6dca7f;
+}
 
 #menus {
-  float: right;
+  float: top-right;
+  background-color: #f3faec;
 }
 
 #main {
