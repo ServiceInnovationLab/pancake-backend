@@ -23,7 +23,12 @@
   %tbody
     - @councils.each do |council|
       %tr
-        %td= council.name
+        %td
+          = link_to(admin_council_path(council)) do
+            = council.name
+        %td
+          = link_to("/app?council=#{council.short_name}", class: 'pure-button pure-button-primary') do
+            Launch #{council.short_name} app
         %td= council.short_name
         %td= council.active
         %td
@@ -56,3 +61,4 @@
             = link_to admin_council_path(council), method: :delete, data: { confirm: 'Are you sure?' }, class: 'pure-button' do
               = fa_icon 'trash'
               Delete
+
