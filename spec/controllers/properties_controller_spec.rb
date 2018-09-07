@@ -5,16 +5,17 @@ require 'rails_helper'
 RSpec.describe PropertiesController, type: :controller do
   describe '#index' do
     subject { JSON.parse(response.body)['data'] }
+    let(:council) { FactoryBot.create :council }
 
     # Property to not find, address doesn't match
-    let!(:property_1) { FactoryBot.create :property, location: '11 MAIN ROAD', rating_year: ENV['YEAR'] }
+    let!(:property_1) { FactoryBot.create :property, location: '11 MAIN ROAD', council: council, rating_year: ENV['YEAR'] }
     # Property we hope to find
-    let!(:property_2) { FactoryBot.create :property, location: '11 MOANA ROAD', rating_year: ENV['YEAR'] }
+    let!(:property_2) { FactoryBot.create :property, location: '11 MOANA ROAD', council: council, rating_year: ENV['YEAR'] }
     # Property we should not find, it's for a different year
-    let!(:property_3) { FactoryBot.create :property, location: '11 MOANA ROAD', rating_year: '1840' }
+    let!(:property_3) { FactoryBot.create :property, location: '11 MOANA ROAD', council: council, rating_year: '1840' }
 
     shared_examples 'finds property' do
-      before { get :index, format: :json, params: { q: query } }
+      before { get :index, format: :json, params: { q: query, council_id: council.id } }
 
       it { expect(subject.size).to eq 1 }
       it { expect(subject.first['id']).to eq property_2.valuation_id }
@@ -59,7 +60,8 @@ RSpec.describe PropertiesController, type: :controller do
             'location' => '123 Lambton Quay',
             'suburb' => 'Te Aro',
             'town_city' => 'Poneke',
-            'rating_year' => ENV['YEAR']
+            'rating_year' => ENV['YEAR'],
+            'council_id' => property_1.council.id
           },
         'relationships' => { 'rates_payers' => { 'data' => [] }, 'rates_bills' => { 'data' => [] } }
       )
