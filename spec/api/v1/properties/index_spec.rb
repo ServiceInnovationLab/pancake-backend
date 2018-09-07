@@ -9,11 +9,12 @@ RSpec.describe 'properties#index', type: :request do
   end
 
   let(:year) { '2018' }
-  let(:params) { { q: 'main' } }
+  let(:params) { { q: 'main', council_id: council.id } }
+  let(:council) { FactoryBot.create :council }
 
   describe 'basic fetch' do
-    let!(:matching_property) { create(:property, location: '1 main street', rating_year: year) }
-    let!(:unrelated_property) { create(:property, location: '22 tawa road', rating_year: year) }
+    let!(:matching_property) { create(:property, location: '1 main street', council_id: council.id, rating_year: year) }
+    let!(:unrelated_property) { create(:property, location: '22 tawa road', council_id: council.id, rating_year: year) }
 
     it 'serializes the list correctly' do
       make_request

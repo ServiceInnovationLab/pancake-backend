@@ -35,4 +35,5 @@ JsonapiSpecHelpers::Payload.register(:property) do
   key(:suburb, String)
   key(:town_city, String)
   key(:rating_year, String)
+  key(:council_id, Integer)
 end
