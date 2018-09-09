@@ -8,9 +8,13 @@ RSpec.describe PropertiesController, type: :controller do
     let(:council) { FactoryBot.create :council }
 
     # Property to not find, address doesn't match
-    let!(:property_1) { FactoryBot.create :property, location: '11 MAIN ROAD', council: council, rating_year: ENV['YEAR'] }
+    let!(:property_1) do
+      FactoryBot.create :property, location: '11 MAIN ROAD', council: council, rating_year: ENV['YEAR']
+    end
     # Property we hope to find
-    let!(:property_2) { FactoryBot.create :property, location: '11 MOANA ROAD', council: council, rating_year: ENV['YEAR'] }
+    let!(:property_2) do
+      FactoryBot.create :property, location: '11 MOANA ROAD', council: council, rating_year: ENV['YEAR']
+    end
     # Property we should not find, it's for a different year
     let!(:property_3) { FactoryBot.create :property, location: '11 MOANA ROAD', council: council, rating_year: '1840' }
 
