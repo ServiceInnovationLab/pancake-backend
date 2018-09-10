@@ -8,7 +8,7 @@ RSpec.describe 'properties#index', type: :request do
                 params: params
   end
 
-  let(:year) { '2018' }
+  let(:year) { ENV['YEAR'] }
   let(:params) { { q: 'main', council_id: council.id } }
   let(:council) { FactoryBot.create :council }
 
