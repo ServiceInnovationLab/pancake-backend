@@ -1,19 +1,49 @@
 %p#notice= notice
 
-%h2
+%h1
   = @council.name
-%p
-  %b Active:
-  = @council.active
+  (#{@council.short_name})
 
-- if policy(@council).edit?
-  %p
+%p
+  = link_to 'Back', admin_councils_path, class: 'pure-button'
+  - if policy(@council).edit?
     = link_to edit_admin_council_path(@council), class: 'pure-button' do
       = fa_icon 'edit'
       edit
+  &nbsp;
+  - if @council.active
+    = link_to("#{ENV['APP_URL']}?council=#{@council.short_name}", target: "_new", class: 'pure-button') do
+      Launch #{@council.short_name} app
+  - else
+    Not active
 
-%p #{@council.rebate_forms.size} Rebate forms collected
-%p #{@council.properties.size} Rateable properties in database
-%p #{@council.rates_bills.size} Rates bills known in database
+%hr/
+.pure-g
+  - ["2019", "2018"].each do |rating_year|
+    .pure-u-1-2
+      %h2 #{rating_year} Applications
+      %p
+        = render 'admin/analytics/applications',
+        	rebate_forms: RebateForm.joins(:property).where(properties: {rating_year: rating_year, council_id: @council_id})
+    .pure-u-1-2
+      = pie_chart RebateForm.joins(:property).where(properties: {rating_year: rating_year, council_id: @council.id}).group(:completed).count, title: "#{rating_year} Completion rate", donut: true
 
-%p= link_to 'Back', admin_councils_path
+
+%hr/
+
+.pure-g
+  .pure-u-1-3
+    = line_chart [{name: "Witnessed", data: Signature.by_council(@council).witness.group_by_day("signatures.created_at").count},
+      {name: 'Applied', data: RebateForm.group_by_day(:created_at).count}]
+
+  .pure-u-1-3
+    = column_chart RebateForm.joins(:property).by_council(@council).group_by_hour_of_day(:created_at, format: "%H %P", time_zone: 'Pacific/Auckland').count, title: 'Applications by Hour of day'
+
+  .pure-u-1-3
+    = column_chart Signature.by_council(@council).witness.group_by_hour_of_day("signatures.created_at", format: "%H %P", time_zone: 'Pacific/Auckland').count, title: 'Witnessing by Hour of day'
+    -# .pure-u-1-3
+    -#   = column_chart RebateForm.group_by_day_of_week(:created_at, format: "%A", time_zone: 'Pacific/Auckland').count, title: 'Day of week'
+    -# .pure-u-1-3
+    -#   = area_chart RebateForm.group_by_day(:created_at).sum(:rebate), title: "Rebate $ per day"
+
+

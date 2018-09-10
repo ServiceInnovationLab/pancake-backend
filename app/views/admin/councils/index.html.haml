@@ -9,17 +9,17 @@
       = fa_icon 'plus'
       New Council
 
+%hr/
+
 %table.pure-table.pure-table-bordered
   %thead
     %tr
       %th Name
-      %th Shortname
       %th Active
       %th Applications
       %th Completed applications
       %th Unclaimed by council
       %th Claimed (Batches)
-      %th
       %th Rateable Properties
 
   %tbody
@@ -27,12 +27,14 @@
       %tr
         %td
           = link_to(admin_council_path(council)) do
-            = council.name
+            #{council.name} (#{council.short_name})
         %td
-          = link_to("#{ENV['APP_URL']}?council=#{council.short_name}", target: "_new", class: 'pure-button pure-button-primary') do
-            Launch #{council.short_name} app
-        %td= council.short_name
-        %td= council.active
+          - if council.active
+            = link_to("#{ENV['APP_URL']}?council=#{council.short_name}", target: "_new", class: 'pure-button') do
+              Launch #{council.short_name} app
+          - else
+            Not active
+          
         %td
           = council_forms_count(council)
           applications
@@ -62,6 +64,8 @@
             = number_with_delimiter count
             %br/
 
+        - if policy(council).show?
+          %td= link_to 'Analytics', admin_council_path(council), class: 'pure-button'
         - if policy(council).edit?
           %td= link_to 'Edit', edit_admin_council_path(council), class: 'pure-button'
 

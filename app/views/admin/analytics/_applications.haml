@@ -1,0 +1,21 @@
+%table.pure-table
+  %tr
+    %th
+    %th TOTALS
+    %th Sum
+    %th Average rebate
+  %tr
+    %th Completed
+    %td= rebate_forms.where(completed: true).size
+    %td= number_to_currency rebate_forms.where(completed: true).sum(:rebate)
+    %td= number_to_currency rebate_forms.where(completed: true).average(:rebate)
+  %tr
+    %th Not Completed
+    %td= rebate_forms.where(completed: false).size
+    %td= number_to_currency rebate_forms.where(completed: false).sum(:rebate)
+    %td= number_to_currency rebate_forms.where(completed: false).average(:rebate)
+  %tr
+    %th Total
+    %td= rebate_forms.all.size
+    %td= number_to_currency rebate_forms.all.sum(:rebate)
+    %td= number_to_currency rebate_forms.all.average(:rebate)

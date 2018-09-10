@@ -23,6 +23,10 @@ class RebateForm < ApplicationRecord
   after_create :send_emails
   has_many_attached :attachments
 
+
+  scope :by_council, -> (council) { where(properties: {council_id: council.id}) }
+  
+
   def calc_rebate_amount!
     year = property.rating_year
     raise 'No year set' if year.blank?
