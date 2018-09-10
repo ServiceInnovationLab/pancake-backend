@@ -21,11 +21,11 @@ namespace :rates do
   task auckland: :environment do
     council = Council.find_or_create_by(name: 'Auckland')
     rates_file = Rails.root.join('db', 'seeds', 'rates_auckland_2019.csv')
-    
+
     Property.transaction do
       importer.clear!(rating_year, council)
       row_num = 0
-    #   puts "Loading rates from #{rates_file}..."
+      #   puts "Loading rates from #{rates_file}..."
       CSV.foreach(rates_file) do |row|
         row[0] = "#{row[0]}-#{row_num}"
         importer.import(row, rating_year, council) if row_num.positive?
