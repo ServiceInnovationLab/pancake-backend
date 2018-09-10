@@ -24,7 +24,7 @@
       %h2 Applications, year ending in #{rating_year}
       %p
         = render 'admin/analytics/applications',
-        	rebate_forms: RebateForm.joins(:property).where(properties: {rating_year: rating_year, council_id: @council_id})
+        	rebate_forms: RebateForm.joins(:property).where(properties: {rating_year: rating_year, council_id: @council.id})
     .pure-u-1-2
       = pie_chart RebateForm.joins(:property).where(properties: {rating_year: rating_year, council_id: @council.id}).group(:completed).count, title: "#{rating_year} Completion rate", donut: true
 
