@@ -92,7 +92,7 @@ class RebateForm < ApplicationRecord
 
   def send_emails
     mailer.applicant_mail.deliver_now if fields['email'].present?
-    mailer.council_mail.deliver_now if @rebate_form.council.email.present?
+    mailer.council_mail.deliver_now if council.email.present?
   end
 
   def mailer
