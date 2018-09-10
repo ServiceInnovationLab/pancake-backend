@@ -62,7 +62,11 @@
             = year
             \:
             = number_with_delimiter count
+            properties
             %br/
+
+          = link_to admin_council_properties_path(council_id: council.id) do
+            rateable properties data
 
         - if policy(council).show?
           %td= link_to 'Analytics', admin_council_path(council), class: 'pure-button'

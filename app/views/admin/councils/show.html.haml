@@ -19,7 +19,7 @@
 
 %hr/
 .pure-g
-  - ["2019", "2018"].each do |rating_year|
+  - @council.properties.group(:rating_year).size.each do |rating_year, count|
     .pure-u-1-2
       %h2 Applications, year ending in #{rating_year}
       %p
