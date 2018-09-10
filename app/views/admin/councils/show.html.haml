@@ -21,7 +21,7 @@
 .pure-g
   - ["2019", "2018"].each do |rating_year|
     .pure-u-1-2
-      %h2 #{rating_year} Applications
+      %h2 Applications, year ending in #{rating_year}
       %p
         = render 'admin/analytics/applications',
         	rebate_forms: RebateForm.joins(:property).where(properties: {rating_year: rating_year, council_id: @council_id})
