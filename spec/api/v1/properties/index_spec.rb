@@ -14,6 +14,7 @@ RSpec.describe 'properties#index', type: :request do
 
   describe 'basic fetch' do
     let!(:matching_property) { create(:property, location: '1 main street', council: council, rating_year: year) }
+    let!(:matching_property_wrong_year) { create(:property, location: '1 main street', council: council, rating_year: '1840') }
     let!(:unrelated_property) { create(:property, location: '22 tawa road', council: council, rating_year: year) }
 
     before { make_request }
