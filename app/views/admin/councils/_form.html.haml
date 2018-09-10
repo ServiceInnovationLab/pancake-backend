@@ -9,6 +9,12 @@
     = f.label :short_name
     = f.text_field :short_name
     %span.pure-form-message This is a required field.
+
+  .pure-control-group
+    = f.label :email
+    = f.text_field :email
+    %span.pure-form-message where to send
+
   .pure-control-group
     = f.label :active do
       = f.check_box :active

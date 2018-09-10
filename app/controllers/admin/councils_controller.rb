@@ -58,6 +58,6 @@ class Admin::CouncilsController < Admin::BaseController
 
   # Only allow a trusted parameter "white list" through.
   def council_params
-    params.require(:council).permit(:name, :short_name, :active)
+    params.require(:council).permit(:name, :short_name, :active, :email)
   end
 end
