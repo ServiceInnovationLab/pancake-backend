@@ -16,11 +16,11 @@ RSpec.describe 'properties#index', type: :request do
     let!(:matching_property) { create(:property, location: '1 main street', council: council, rating_year: year) }
     let!(:unrelated_property) { create(:property, location: '22 tawa road', council: council, rating_year: year) }
 
+    before { make_request }
     it 'serializes the list correctly' do
-      make_request
       assert_payload(:property, matching_property, json_items[0])
-      expect(json_items.first['id']).to eq matching_property.valuation_id
-      expect(json_items.size).to eq 1
     end
+    it { expect(json_items.first['id']).to eq matching_property.valuation_id }
+    it { expect(json_items.size).to eq 1 }
   end
 end
