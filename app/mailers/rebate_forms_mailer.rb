@@ -3,7 +3,7 @@
 class RebateFormsMailer < ApplicationMailer
   def council_mail
     @rebate_form = params[:rebate_form]
-    council_mail = ENV['COUNCIL_EMAIL']
+    council_mail = @rebate_form.council.email
     subject = @rebate_form.fields['what_is_your_address']
     mail(to: council_mail, subject: subject)
   end
