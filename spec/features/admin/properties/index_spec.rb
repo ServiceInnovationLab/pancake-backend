@@ -27,6 +27,7 @@ RSpec.describe 'Property', type: :feature do
     let(:user) { FactoryBot.create :admin_user }
 
     before { login_as(user, scope: :user) }
+
     include_examples 'can see properties for a council'
   end
 

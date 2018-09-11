@@ -8,6 +8,7 @@ RSpec.describe Admin::PropertiesController, type: :controller do
 
   context 'Not signed in' do
     before { get :index, params: { council_id: council.id } }
+
     it 'GET #index' do
       expect(assigns(:council)).to eq(nil)
       expect(response.status).to eq(302)
@@ -21,6 +22,7 @@ RSpec.describe Admin::PropertiesController, type: :controller do
 
     describe 'GET #index' do
       before { get :index, params: { council_id: council.id } }
+
       it { expect(assigns(:council)).to eq(council) }
     end
   end
@@ -32,6 +34,7 @@ RSpec.describe Admin::PropertiesController, type: :controller do
 
     describe 'GET #index' do
       before { get :index, params: { council_id: council.id } }
+
       it { expect(assigns(:council)).to eq(council) }
     end
   end
