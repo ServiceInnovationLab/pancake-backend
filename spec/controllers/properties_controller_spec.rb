@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe PropertiesController, type: :controller do
   describe '#index' do
     subject { JSON.parse(response.body)['data'] }
+
     let(:council) { FactoryBot.create :council }
 
     # Property to not find, address doesn't match
