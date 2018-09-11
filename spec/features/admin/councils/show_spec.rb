@@ -14,6 +14,7 @@ RSpec.describe 'Council', type: :feature do
       FactoryBot.create(:rebate_form, completed: false, property: FactoryBot.create(:property_with_rates, council: council))
     end
   end
+
   context 'anonymous' do
     before { visit "/admin/councils/#{council.id}" }
 
