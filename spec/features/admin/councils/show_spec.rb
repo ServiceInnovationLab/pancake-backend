@@ -25,7 +25,6 @@ RSpec.describe 'Council', type: :feature do
 
   context 'signed in as council' do
     before do
-
       login_as(user)
       visit "/admin/councils/#{council.id}"
     end
