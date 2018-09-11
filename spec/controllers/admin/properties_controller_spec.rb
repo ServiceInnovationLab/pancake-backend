@@ -16,6 +16,7 @@ RSpec.describe Admin::PropertiesController, type: :controller do
 
   context 'signed in as admin' do
     let(:admin_user) { FactoryBot.create :admin_user }
+
     before { sign_in admin_user }
 
     describe 'GET #index' do
@@ -26,6 +27,7 @@ RSpec.describe Admin::PropertiesController, type: :controller do
 
   context 'signed in as council' do
     let(:council_user) { FactoryBot.create :user, council: council }
+
     before { sign_in council_user }
 
     describe 'GET #index' do
