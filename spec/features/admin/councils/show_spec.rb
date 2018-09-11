@@ -15,12 +15,16 @@ RSpec.describe 'Council', type: :feature do
     it { is_expected.not_to have_text(council.name) }
   end
 
+  before do
+    # Set up some data
+    3.times do
+      FactoryBot.create(:rebate_form, completed: true, property: FactoryBot.create(:property_with_rates, council: council))
+      FactoryBot.create(:rebate_form, completed: false, property: FactoryBot.create(:property_with_rates, council: council))
+    end
+  end
+
   context 'signed in as council' do
     before do
-      # Set up some data
-      FactoryBot.create(:rebate_form, property: FactoryBot.create(:property, council: council))
-      FactoryBot.create(:rebate_form, property: FactoryBot.create(:property, council: council))
-      FactoryBot.create(:signed_form, property: FactoryBot.create(:property, council: council))
 
       login_as(user)
       visit "/admin/councils/#{council.id}"
@@ -30,8 +34,10 @@ RSpec.describe 'Council', type: :feature do
 
     it { is_expected.to have_http_status :ok }
     it { is_expected.to have_text(council.name) }
-    it { is_expected.to have_text('3 Rebate forms collected') }
-    it { is_expected.to have_text('3 Rateable properties in database') }
+    it { expect(council.rebate_forms.size).to eq 6 }
+    it { expect(council.properties.size).to eq 6 }
+    it { is_expected.to have_text('$555.12') } # average
+    it { is_expected.to have_text('$3,330.72') } # sum
   end
 
   context 'signed in as dia' do

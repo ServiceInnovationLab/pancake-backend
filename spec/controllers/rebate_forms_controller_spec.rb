@@ -6,7 +6,7 @@ RSpec.describe RebateFormsController, type: :controller do
   subject { JSON.parse response.body }
 
   let(:fields) { { 'dependants' => '0', 'full_name' => 'bob', 'income' => '10000' } }
-  let(:property) { FactoryBot.create :property_with_rates }
+  let(:property) { FactoryBot.create :property_with_rates, rating_year: ENV['YEAR'] }
 
   describe '#create' do
     let(:body) do
@@ -26,7 +26,7 @@ RSpec.describe RebateFormsController, type: :controller do
     it { expect(subject['data']['attributes']['fields']).to eq fields }
     it { expect(RebateForm.first.fields).to eq fields }
     it 'calculates their rebate' do
-      expect(RebateForm.first.rebate).to eq 620.0
+      expect(RebateForm.first.rebate).to eq 630.0
     end
   end
 

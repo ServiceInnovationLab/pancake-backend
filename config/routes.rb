@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :rebate_forms
     resources :attachments, only: %i[destroy]
-    resources :councils
+    resources :councils do
+      resources :properties
+    end
     resources :users
     resources :batches
     get 'signature' => 'signatures#show'

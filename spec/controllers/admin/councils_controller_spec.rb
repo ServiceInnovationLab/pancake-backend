@@ -18,7 +18,7 @@ RSpec.describe Admin::CouncilsController, type: :controller do
     before { sign_in admin_user }
 
     let(:valid_attributes) do
-      { name: 'Tauranga', short_name: 'TCC', active: true }
+      { name: 'Tauranga', short_name: 'TCC', email: 'bob@example.com', active: true }
     end
 
     let(:invalid_attributes) do

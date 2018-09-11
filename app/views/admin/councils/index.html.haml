@@ -9,23 +9,32 @@
       = fa_icon 'plus'
       New Council
 
+%hr/
+
 %table.pure-table.pure-table-bordered
   %thead
     %tr
       %th Name
-      %th Shortname
       %th Active
       %th Applications
       %th Completed applications
       %th Unclaimed by council
       %th Claimed (Batches)
+      %th Rateable Properties
 
   %tbody
     - @councils.each do |council|
       %tr
-        %td= council.name
-        %td= council.short_name
-        %td= council.active
+        %td
+          = link_to(admin_council_path(council)) do
+            #{council.name} (#{council.short_name})
+        %td
+          - if council.active
+            = link_to("#{ENV['APP_URL']}?council=#{council.short_name}", target: "_new", class: 'pure-button') do
+              Launch #{council.short_name} app
+          - else
+            Not active
+          
         %td
           = council_forms_count(council)
           applications
@@ -48,6 +57,19 @@
           %br/
           $#{council.batches.sum(:amount)}
 
+        %td
+          - council.properties.group(:rating_year).size.each do |year, count|
+            = year
+            \:
+            = number_with_delimiter count
+            properties
+            %br/
+
+          = link_to admin_council_properties_path(council_id: council.id) do
+            rateable properties data
+
+        - if policy(council).show?
+          %td= link_to 'Analytics', admin_council_path(council), class: 'pure-button'
         - if policy(council).edit?
           %td= link_to 'Edit', edit_admin_council_path(council), class: 'pure-button'
 
@@ -56,3 +78,4 @@
             = link_to admin_council_path(council), method: :delete, data: { confirm: 'Are you sure?' }, class: 'pure-button' do
               = fa_icon 'trash'
               Delete
+

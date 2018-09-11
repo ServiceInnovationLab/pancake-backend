@@ -16,10 +16,14 @@
 
 
 body {
+  background-color: #fff;
   color: #333;
+  margin: 33px;
+
 }
 
 a {
+  background-color: #6dca7f;
   color: #000000;
   color: rgb(61, 146, 201);
   text-decoration: none;
@@ -27,12 +31,23 @@ a {
 
 a:hover,
 a:focus {
+  color: #fff;
+  background-color: #000;
   text-decoration: underline;
 }
 
+#layout {
+}
+
+#header {
+  margin: 0;
+  padding: 0;
+  background-color: #6dca7f;
+}
 
 #menus {
-  float: right;
+  float: top-right;
+  background-color: #f3faec;
 }
 
 #main {
@@ -69,3 +84,6 @@ input {
 .search-form {
   float: right;
 }
+
+
+

@@ -3,11 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe Council, type: :model do
+  let(:year) { '2018' }
   let(:council) { FactoryBot.create :council, name: 'Tauranga' }
-  let(:properties) { FactoryBot.create_list :property, 10, council: council }
+  let(:properties) { FactoryBot.create_list :property, 10, council: council, rating_year: year }
 
   before do
-    FactoryBot.create :rates_bill, property: properties.first
+    FactoryBot.create :rates_bill, property: properties.first, rating_year: year
     FactoryBot.create :rates_payer, property: properties.first
   end
 
