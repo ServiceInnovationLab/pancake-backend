@@ -7,6 +7,13 @@ RSpec.describe 'Council', type: :feature do
 
   let!(:council) { FactoryBot.create :council }
 
+  before do
+    # Set up some data
+    3.times do
+      FactoryBot.create(:rebate_form, completed: true, property: FactoryBot.create(:property_with_rates, council: council))
+      FactoryBot.create(:rebate_form, completed: false, property: FactoryBot.create(:property_with_rates, council: council))
+    end
+  end
   context 'anonymous' do
     before { visit "/admin/councils/#{council.id}" }
 
@@ -15,13 +22,6 @@ RSpec.describe 'Council', type: :feature do
     it { is_expected.not_to have_text(council.name) }
   end
 
-  before do
-    # Set up some data
-    3.times do
-      FactoryBot.create(:rebate_form, completed: true, property: FactoryBot.create(:property_with_rates, council: council))
-      FactoryBot.create(:rebate_form, completed: false, property: FactoryBot.create(:property_with_rates, council: council))
-    end
-  end
 
   context 'signed in as council' do
     before do
