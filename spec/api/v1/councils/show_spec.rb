@@ -4,14 +4,14 @@ require 'rails_helper'
 
 RSpec.describe 'councils#show', type: :request do
   subject(:make_request) do
-    jsonapi_get "/api/v1/councils/#{council.id}",
+    jsonapi_get "/api/v1/councils/#{council.short_name}",
                 params: params
   end
 
   let(:params) { {} }
 
   describe 'basic fetch' do
-    let!(:council) { create(:council) }
+    let!(:council) { FactoryBot.create(:council) }
 
     it 'serializes the resource correctly' do
       make_request

@@ -23,18 +23,15 @@ class RebateForm < ApplicationRecord
   after_create :send_emails
   has_many_attached :attachments
 
-  def calc_rebate_amount!
-    year = property.rating_year
-    raise 'No year set' if year.blank?
-    raise 'No associated property record' if property.blank?
-    raise 'Application year must match property record year' unless year == property.rating_year
+  scope :by_council, ->(council) { where(properties: { council_id: council.id }) }
 
-    rates_bill = property.rates_bills.find_by(rating_year: year)
+  def calc_rebate_amount!
+    rates_bill = property.rates_bills.find_by(rating_year: rating_year)
     raise "No rates bill found for rating_year #{year}" if rates_bill.blank?
 
     rebate = OpenFiscaService.rebate_amount(
       income: income, rates: rates_bill.total_bill,
-      dependants: dependants, year: year
+      dependants: dependants, year: rating_year
     )
     update!(rebate: rebate)
   rescue StandardError => e
@@ -44,6 +41,10 @@ class RebateForm < ApplicationRecord
 
   def full_name
     fields['full_name']
+  end
+
+  def email
+    fields['email']
   end
 
   def dependants
@@ -90,7 +91,7 @@ class RebateForm < ApplicationRecord
 
   def send_emails
     mailer.applicant_mail.deliver_now if fields['email'].present?
-    mailer.council_mail.deliver_now if ENV['COUNCIL_EMAIL'].present?
+    mailer.council_mail.deliver_now if council.email.present?
   end
 
   def mailer

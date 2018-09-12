@@ -3,14 +3,16 @@
 class RebateFormsMailer < ApplicationMailer
   def council_mail
     @rebate_form = params[:rebate_form]
-    council_mail = ENV['COUNCIL_EMAIL']
-    subject = @rebate_form.fields['what_is_your_address']
+    council_mail = @rebate_form.council.email
+    subject = "Rates rebate application for #{@rebate_form.property.location}"
     mail(to: council_mail, subject: subject)
   end
 
   def applicant_mail
     @rebate_form = params[:rebate_form]
-    applicant_email = @rebate_form.fields['email']
-    mail(to: applicant_email, subject: 'New Rates Rebate application')
+    @council = @rebate_form.council
+    applicant_email = @rebate_form.email
+    subject = 'Your Rates Rebate application'
+    mail(to: applicant_email, subject: subject)
   end
 end

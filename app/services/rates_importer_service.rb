@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 class RatesImporterService
-  def clear!(rating_year)
-    puts rating_year
-    RatesBill.joins(:property).where("properties.rating_year": rating_year).delete_all
-    RatesPayer.joins(:property).where("properties.rating_year": rating_year).delete_all
-    Property.where(rating_year: rating_year).delete_all
+  def clear!(rating_year, council)
+    RatesBill.joins(:property).by_rating_year(rating_year).by_council(council).delete_all
+    RatesPayer.joins(:property).by_rating_year(rating_year).by_council(council).delete_all
+    Property.where(rating_year: rating_year, council: council).delete_all
   end
 
-  def import(row, council)
+  def import(row, rating_year, council)
     puts row
     valuation, _rating_year, location, suburb, town_city,
       total_rates, total_water_rates, _order, _council_owner_id,
@@ -18,8 +17,6 @@ class RatesImporterService
       puts 'SKIPPING blank rates record'
       return
     end
-
-    rating_year = '2019'
 
     property = Property.find_by(valuation_id: valuation, rating_year: rating_year)
     if property.blank?

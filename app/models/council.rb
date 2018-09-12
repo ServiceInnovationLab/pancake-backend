@@ -3,6 +3,8 @@
 class Council < ApplicationRecord
   validates :name, uniqueness: true, presence: true
   validates :short_name, uniqueness: true, presence: true
+  validates :email, presence: true
+
   # validates :active, presence: true
   has_many :properties, dependent: :destroy
   has_many :rates_payers, through: :properties
@@ -11,4 +13,6 @@ class Council < ApplicationRecord
 
   has_many :batches, dependent: :destroy
   has_many :users, dependent: :destroy
+
+  scope :active, -> { where('active') }
 end

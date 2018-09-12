@@ -18,6 +18,9 @@ Installation
 To set up a development environment
 -----------------------------------
 
+This is an app built using Json API suite https://jsonapi-suite.github.io/jsonapi_suite/concepts
+
+
 1. make your own fork, and clone
   `git clone [repo]`
 
@@ -29,8 +32,17 @@ To set up a development environment
 1. Set up environment variables
   `cp env-example .env`
 
+You will need ruby, the bundler gem to install dependencies. We recommend managing your ruby with a tool like rbenv or rvm
+
+Install the dependencies
+
 1. `bundle install`
 
+You will need a database. Any database supported by ruby on rails / jsonapi suite should work, but we only support Postgresql. Configure your database url in your `.env`, then:
+
 1. `bundle exec rake db:create db:migrate`
+
+
+To run the server:
 
 1. `bundle exec rails s`

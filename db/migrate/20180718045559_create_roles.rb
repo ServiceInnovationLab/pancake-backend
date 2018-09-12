@@ -18,19 +18,5 @@ class CreateRoles < ActiveRecord::Migration[5.2]
     dia_role = Role.find_or_create_by name: 'dia', friendly_name: 'Te Tari Taiwhenua'
     rates_team = Role.find_or_create_by name: 'rates', friendly_name: 'Council rates staff'
     frontline = Role.find_or_create_by name: 'frontline', friendly_name: 'Council frontline staff'
-
-    tauranga = Council.find_or_create_by(name: 'Tauranga City Council')
-
-    # Put all of Tauranga in Tauranga
-    User.where("email like '%@tauranga.govt.nz'").each do |user|
-      #user is in Tauranga
-      user.update(council: tauranga)
-      user.roles << rates_team
-    end
-
-    # Give DIA people the DIA role
-    User.where("email like '%@dia.govt.nz'").each do |user|
-      user.roles << dia_role
-    end
   end
 end

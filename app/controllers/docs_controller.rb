@@ -34,7 +34,7 @@ class DocsController < ActionController::API
                    descriptions: { create: 'create new signature' }
 
   jsonapi_resource '/v1/properties', only: [:show]
-  jsonapi_resource '/v1/councils', only: [:index]
+  jsonapi_resource '/v1/councils', only: [:index, :show]
 
   swagger_path '/v1/properties' do
     operation :get do
