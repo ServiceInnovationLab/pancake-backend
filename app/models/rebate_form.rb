@@ -43,6 +43,10 @@ class RebateForm < ApplicationRecord
     fields['full_name']
   end
 
+  def email
+    fields['email']
+  end
+
   def dependants
     fields['dependants']
   end
