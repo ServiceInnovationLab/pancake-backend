@@ -14,7 +14,7 @@ RSpec.describe 'Property', type: :feature do
   end
 
   shared_examples 'can see properties for a council' do
-    scenario do
+    it do
       visit '/admin/councils'
       expect(page).to have_text(council.name)
       click_link 'rateable properties data'
