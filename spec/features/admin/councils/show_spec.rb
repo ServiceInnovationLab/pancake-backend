@@ -23,7 +23,6 @@ RSpec.describe 'Council', type: :feature do
     it { is_expected.not_to have_text(council.name) }
   end
 
-
   context 'signed in as council' do
     before do
       login_as(user)
