@@ -32,18 +32,16 @@ module RebateFormsHelper
   end
 
   def rebate_form_has_partner(rebate_form)
-    answer = rebate_form.fields['lived_with_partner']
-    case answer
-    when true
+    boolean_field_to_english rebate_form.fields['lived_with_partner']
+  end
+
+  def boolean_field_to_english(answer)
+    if answer === true || answer.to_s.casecmp('yes').zero?
       'Yes'
-    when false
-      'No'
-    when ''
+    elsif answer === false || answer.to_s.casecmp('no').zero? || answer == ''
       'No'
     else
-      answer.capitalize
+      answer.to_s.capitalize
     end
-  rescue StandardError
-    answer
   end
 end
