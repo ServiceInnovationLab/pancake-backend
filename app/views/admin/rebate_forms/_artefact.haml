@@ -29,6 +29,8 @@
           .field
             %h3 Address
             %p
+              = rebate_form.property.valuation_id
+              %br/
               = rebate_form.property.location
               %br/
               - unless rebate_form.property.suburb.to_s.include?('RT.VAL.AREAUNIT')
