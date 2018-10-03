@@ -5,6 +5,16 @@ require 'rails_helper'
 RSpec.describe RebateFormsHelper, type: :helper do
   let(:rebate_form) { FactoryBot.create :rebate_form }
 
+  describe 'boolean_field_to_english(answer)' do
+    it { expect(boolean_field_to_english(true)).to eq 'Yes' }
+    it { expect(boolean_field_to_english('yes')).to eq 'Yes' }
+    it { expect(boolean_field_to_english('Yes')).to eq 'Yes' }
+
+    it { expect(boolean_field_to_english(false)).to eq 'No' }
+    it { expect(boolean_field_to_english('No')).to eq 'No' }
+    it { expect(boolean_field_to_english('')).to eq 'No' }
+  end
+
   describe 'rebate_form_pdf_dependants(rebate_form)' do
     it { expect(rebate_form_pdf_dependants(rebate_form)).to eq 'none' }
   end
