@@ -43,7 +43,7 @@ module RebateFormsHelper
     else
       answer.capitalize
     end
-  rescue
+  rescue StandardError
     answer
   end
 end
