@@ -30,4 +30,20 @@ module RebateFormsHelper
   def rebate_form_year_header(rebate_form)
     "#{rebate_form.rating_year.to_i - 1}/#{rebate_form.rating_year.to_i} Rates Rebate"
   end
+
+  def rebate_form_has_partner(rebate_form)
+    answer = rebate_form.fields['lived_with_partner']
+    case answer
+    when true
+      'Yes'
+    when false
+      'No'
+    when ''
+      'No'
+    else
+      answer.capitalize
+    end
+  rescue
+    answer
+  end
 end

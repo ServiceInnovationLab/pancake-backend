@@ -12,7 +12,9 @@
   %tr
     %th Income
     %td $ #{rebate_form.income}
-
   %tr
     %th Dependants
     %td= rebate_form.dependants
+  %tr
+    %th Partner?
+    %td=rebate_form_has_partner(rebate_form)
