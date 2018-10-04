@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe RebateFormsHelper, type: :helper do
   let(:rebate_form) { FactoryBot.create :rebate_form }
+
   describe 'rebate_form_boolean_field_to_english' do
     it { expect(rebate_form_boolean_field_to_english(true)).to eq 'Yes' }
     it { expect(rebate_form_boolean_field_to_english('yes')).to eq 'Yes' }
