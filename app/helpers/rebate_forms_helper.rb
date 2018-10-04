@@ -32,7 +32,7 @@ module RebateFormsHelper
   end
 
   def rebate_form_has_partner(rebate_form)
-    boolean_field_to_english rebate_form.fields['lived_with_partner']
+    rebate_form_boolean_field_to_english rebate_form.fields['lived_with_partner']
   end
 
   def rebate_form_boolean_field_to_english(answer)
