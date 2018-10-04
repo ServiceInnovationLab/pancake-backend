@@ -35,11 +35,13 @@ module RebateFormsHelper
     boolean_field_to_english rebate_form.fields['lived_with_partner']
   end
 
-  def boolean_field_to_english(answer)
+  def rebate_form_boolean_field_to_english(answer)
     if answer === true || answer.to_s.casecmp('yes').zero?
       'Yes'
-    elsif answer === false || answer.to_s.casecmp('no').zero? || answer == ''
+    elsif answer === false || answer.to_s.casecmp('no').zero?
       'No'
+    elsif answer == '' || answer.nil?
+      'No answer'
     else
       answer.to_s.capitalize
     end
