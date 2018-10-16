@@ -120,7 +120,7 @@ GEM
       net-http-pipeline
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    groupdate (4.0.1)
+    groupdate (4.0.2)
       activesupport (>= 4.2)
     haml (5.0.4)
       temple (>= 0.8.0)
@@ -139,7 +139,7 @@ GEM
       ruby_parser (~> 3.5)
     httparty (0.16.2)
       multi_xml (>= 0.5.2)
-    i18n (1.1.0)
+    i18n (1.1.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.7.1)
       mini_magick (~> 4.0)
