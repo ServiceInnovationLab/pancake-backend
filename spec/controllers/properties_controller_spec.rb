@@ -71,5 +71,10 @@ RSpec.describe PropertiesController, type: :controller do
         'relationships' => { 'rates_payers' => { 'data' => [] }, 'rates_bills' => { 'data' => [] } }
       )
     end
+    
+    it "raise not found error if id does not match" do
+      expect { get :show, format: :json, params: {id: 0}}.to raise_error(JsonapiCompliable::Errors::RecordNotFound)
+    end
+
   end
 end
