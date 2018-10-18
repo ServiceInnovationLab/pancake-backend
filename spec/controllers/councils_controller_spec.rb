@@ -23,8 +23,10 @@ RSpec.describe CouncilsController, type: :controller do
          "attributes"=>{"name"=>council.name, "short_name"=>council.short_name, "active"=>council.active}
       )
     end
+
+    it "raise not found error if id does not match" do
+      expect { get :show, format: :json, params: {id: 0}}.to raise_error(JsonapiCompliable::Errors::RecordNotFound)
+    end
   end
-
-
 
 end
