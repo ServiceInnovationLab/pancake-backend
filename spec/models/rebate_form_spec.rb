@@ -90,4 +90,15 @@ RSpec.describe RebateForm, type: :model do
     #   it { expect(RebateForm.signed_and_witnessed).not_to include(witnessed_form)}
     # end
   end
+
+  it "triggers send_emails after create" do
+    rebate_form = FactoryBot.create(:rebate_form)
+    expect(rebate_form.send :send_emails).should_not be_nil
+  end
+
+  it "triggers set_token after after_initialize" do
+    rebate_form = FactoryBot.build(:rebate_form)
+    expect(rebate_form.send :set_token).should_not be_nil
+  end
+
 end

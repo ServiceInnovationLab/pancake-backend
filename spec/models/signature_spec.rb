@@ -38,4 +38,17 @@ RSpec.describe Signature, type: :model do
     witness.destroy
     expect(rebate_form.completed).to eq false
   end
+
+  it "triggers update_form complicated after save" do
+    signature = FactoryBot.build(:signature)
+    expect(signature).to receive(:update_form_completed)
+    signature.save
+  end
+
+  it "triggers update_form complicated after destroy" do
+    signature = FactoryBot.create(:signature)
+    expect(signature).to receive(:update_form_completed)
+    signature.destroy
+  end
+
 end
