@@ -39,4 +39,35 @@ RSpec.describe Council, type: :model do
 
     it { expect(council.users).to include user }
   end
+
+  describe 'has valid name, short_name, email' do
+
+    it 'is not valid without name' do
+      council = FactoryBot.build(:council)
+      council.name = nil
+      expect(council).to_not be_valid
+    end
+
+    it 'is not valid without email' do
+      council = FactoryBot.build(:council)
+      council.email = nil
+      expect(council).to_not be_valid
+    end
+
+    it 'is not valid without short_name' do
+      council = FactoryBot.build(:council)
+      council.short_name = nil
+      expect(council).to_not be_valid
+    end
+
+  end
+
+  describe 'when name and short_name are already taken' do
+    it 'should not be valid' do
+      council_a = FactoryBot.create(:council)
+      council_b = Council.create(council_a.as_json.except('id'))
+      expect(council_b).to_not be_valid
+    end
+  end
+
 end

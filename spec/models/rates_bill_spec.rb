@@ -13,4 +13,5 @@ RSpec.describe RatesBill, type: :model do
     it { expect(bill.total_bill).to eq '110.40' }
     it { expect(bill.council).to eq council }
   end
+
 end
