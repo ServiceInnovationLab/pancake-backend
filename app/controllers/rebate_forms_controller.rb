@@ -8,6 +8,7 @@ class RebateFormsController < ApiController
     scope = jsonapi_scope(RebateForm.where(token: params[:id]))
     instance = scope.resolve.first
     raise JsonapiCompliable::Errors::RecordNotFound unless instance
+
     render_jsonapi(instance, scope: false)
   end
 

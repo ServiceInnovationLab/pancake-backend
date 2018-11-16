@@ -82,6 +82,7 @@ class RebateForm < ApplicationRecord
 
   def set_property_id
     return if property_id.present?
+
     self.property = Property.find_by(valuation_id: valuation_id, rating_year: Rails.configuration.rating_year)
   end
 
