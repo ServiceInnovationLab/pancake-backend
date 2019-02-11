@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 
 .pdf-page-break {
   page-break-before: always;
@@ -10,8 +10,8 @@ body {
 }
 
 * {
-  font-family: 'Fira Sans', sans-serif;
-  color: rgb(51,51,51);
+  font-family: "Fira Sans", sans-serif;
+  color: rgb(51, 51, 51);
 }
 
 .container {
@@ -24,7 +24,7 @@ body {
 }
 
 .main-header {
-  background: rgb(218,253,197);
+  background: rgb(218, 253, 197);
   position: relative;
   height: 260px;
 }
@@ -37,7 +37,7 @@ body {
   margin-bottom: 0;
   position: absolute;
   top: 65px;
-  color: rgb(31,132,49);
+  color: rgb(31, 132, 49);
 }
 
 .pdf-image {
@@ -65,7 +65,7 @@ body {
 .field,
 .declaration {
   margin-bottom: 10px;
-  color: rgb(51,51,51);
+  color: rgb(51, 51, 51);
 }
 
 h3,
@@ -170,7 +170,7 @@ hr {
   font-size: 24px;
   position: absolute;
   top: 175px;
-  color: rgb(83,184,103) !important;
+  color: rgb(83, 184, 103) !important;
 }
 
 .batches-heading {

@@ -14,12 +14,10 @@
   box-sizing: border-box;
 }
 
-
 body {
   background-color: #fff;
   color: #333;
   margin: 33px;
-
 }
 
 a {
@@ -84,6 +82,3 @@ input {
 .search-form {
   float: right;
 }
-
-
-
