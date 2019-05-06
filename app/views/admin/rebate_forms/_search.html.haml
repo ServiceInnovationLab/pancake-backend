@@ -1,23 +1,16 @@
 = form_tag(admin_rebate_forms_path, method: :get, class: 'pure-form pure-form-aligned') do
   %fieldset
     .pure-control-group
-      %label Address
-      = text_field_tag :location, @location, placeholder: "Address"
-
-    .pure-control-group
-      %label Rating year
-      = radio_button_tag 'rating_year', '', @rating_year.blank?
-      All years
-      - @years.each do |year|
-        = radio_button_tag 'rating_year', year, year == @rating_year, class: 'rating_year'
-        = year
-
-    .pure-control-group
       %label Signed
       = radio_button_tag 'completed', true, @completed == true
       Signed
       = radio_button_tag 'completed', false, @completed == false
       Not-Signed
+
+    .pure-control-group
+      %label Name
+      = text_field_tag :name, @name, placeholder: "Eg. John Doe"
+
 
     .pure-controls
       %button.pure-button.pure-button-primary{type: "submit"}
