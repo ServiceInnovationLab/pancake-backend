@@ -1,4 +1,4 @@
-%p= paginate @rebate_forms.page(params[:page])
+%p= paginate Kaminari.paginate_array(@rebate_forms).page(params[:page])
 
 %table.pure-table.pure-table-bordered
   %thead
@@ -13,7 +13,7 @@
       %th Witnessed
 
   %tbody
-    - @rebate_forms.page(params[:page]).each do |rebate_form|
+    - Kaminari.paginate_array(@rebate_forms).page(params[:page]).each do |rebate_form|
       %tr{ class: rebate_form.completed ? 'pure-table-odd' : '' }
         %td= rebate_form.property.rating_year
         %td
@@ -56,4 +56,4 @@
               data: { confirm: 'Are you sure?' }, class: 'pure-button' do
               = fa_icon 'trash'
 
-%p= paginate @rebate_forms.page(params[:page])
+%p= paginate Kaminari.paginate_array(@rebate_forms).page(params[:page])

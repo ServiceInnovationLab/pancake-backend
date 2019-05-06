@@ -2,18 +2,13 @@
 
 .pure-g
   .pure-u-1
+    %h1
+      Rates Rebate 2018/2019
     %h2
-      Rebate forms
-      - unless @council.nil?
-        for #{@council.name}
+      Customer search
 
   .pure-u-1-2
     = render 'search'
-  .pure-u-1-2
-    %p
-      = link_to admin_rebate_forms_path(format: :csv, rating_year: @rating_year, location: @location), class: 'pure-button' do
-        = fa_icon 'table'
-        Download CSV
 
   .pure-u-1
     - if @rebate_forms.size.positive?
