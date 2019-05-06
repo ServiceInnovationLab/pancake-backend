@@ -3,23 +3,12 @@
 %table.pure-table.pure-table-bordered
   %thead
     %tr
-      %th YEAR (ending)
-      %th Council
-      %th Valuation Id
-      %th Applicant
+      %th Name
       %th Address
-      %th When
-      %th Signed
-      %th Witnessed
 
   %tbody
     - @rebate_forms.page(params[:page]).each do |rebate_form|
       %tr{ class: rebate_form.completed ? 'pure-table-odd' : '' }
-        %td= rebate_form.property.rating_year
-        %td
-          - if rebate_form.council.present?
-            = link_to rebate_form.council.name, admin_council_path(rebate_form.council)
-        %td= rebate_form.valuation_id
         %td= rebate_form.fields['full_name']
         %td
           - if rebate_form.property.present?
@@ -29,31 +18,8 @@
               = rebate_form.property.suburb
               %br/
               = rebate_form.property.town_city
-
-        %td
-          %li= rebate_form.created_at.localtime
-          %li
-            = time_ago_in_words rebate_form.created_at
-            ago
-        %td
-          - if rebate_form.applicant_signature.present?
-            = link_to admin_rebate_form_path(rebate_form, format: 'pdf'), class: 'pure-button' do
-              = fa_icon 'download'
-              pdf
-          - else
-            = render 'sign_button', rebate_form: rebate_form, class: 'pure-button pure-button-primary'
-        %td
-          = render 'witness', signature: rebate_form.witness_signature
         %td
           = link_to admin_rebate_form_path(rebate_form), class: 'pure-button' do
             show
-        %td
-          - if policy(rebate_form).edit?
-            = link_to 'Edit', edit_admin_rebate_form_path(rebate_form), class: 'pure-button'
-        %td
-          - if policy(rebate_form).destroy?
-            = link_to admin_rebate_form_path(rebate_form), method: :delete,
-              data: { confirm: 'Are you sure?' }, class: 'pure-button' do
-              = fa_icon 'trash'
 
 %p= paginate @rebate_forms.page(params[:page])
