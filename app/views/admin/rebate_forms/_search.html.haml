@@ -1,11 +1,11 @@
 = form_tag(admin_rebate_forms_path, method: :get, class: 'pure-form pure-form-aligned') do
   %fieldset
     .pure-control-group
-      %label Signed
-      = radio_button_tag 'completed', true, @completed == true
-      Signed
+      %label
       = radio_button_tag 'completed', false, @completed == false
       Not-Signed
+      = radio_button_tag 'completed', true, @completed == true
+      Signed
 
     .pure-control-group
       %label Name

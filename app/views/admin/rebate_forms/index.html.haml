@@ -11,7 +11,5 @@
     = render 'search'
 
   .pure-u-1
-    - if @rebate_forms.size.positive?
+    - unless @name.nil?
       = render 'results'
-    - else
-      %p No rebate forms found
