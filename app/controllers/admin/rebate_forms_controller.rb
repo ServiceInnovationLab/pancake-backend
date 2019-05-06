@@ -17,9 +17,9 @@ class Admin::RebateFormsController < Admin::BaseController
                                             .order(created_at: :desc)
 
     # filter by the search form fields
-    @rebate_forms = @rebate_forms.select { |rebate_form| rebate_form.fields['full_name'] == params[:name].to_s } if @name.present?
-    @rebate_forms = @rebate_forms.select { |rebate_form| rebate_form.completed == @completed }
-    @rebate_forms = @rebate_forms.sort { |form1, form2| form2.created_at <=> form1.created_at }
+    @rebate_forms = @rebate_forms.where("fields ->> 'full_name' like ?", "%#{params[:name]}%") if @name.present?
+    @rebate_forms = @rebate_forms.where(completed: @completed)
+    @rebate_forms = @rebate_forms.order(created_at: :desc)
 
     respond_with @rebate_forms
   end
