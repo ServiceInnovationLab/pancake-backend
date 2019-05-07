@@ -1,17 +1,15 @@
-= form_tag(admin_rebate_forms_path, method: :get, class: 'pure-form pure-form-aligned') do
+= form_tag(admin_rebate_forms_path, method: :get, class: 'pure-form') do
   %fieldset
-    .pure-control-group
-      %label
+    .rebate-radio-wrapper
       = radio_button_tag 'completed', false, @completed == false
-      Not-Signed
+      Not Signed
       = radio_button_tag 'completed', true, @completed == true
       Signed
 
-    .pure-control-group
+    .rebate-search-field
       %label Name
-      = text_field_tag :name, @name, placeholder: "Eg. John Doe"
+      = text_field_tag :name, @name, placeholder: "Eg. John Doe", class: "rebate-search-input"
 
 
-    .pure-controls
-      %button.pure-button.pure-button-primary{type: "submit"}
-        Search
+    %button.pure-button.pure-button-primary.rebate-search-button{type: "submit"}
+      SEARCH
