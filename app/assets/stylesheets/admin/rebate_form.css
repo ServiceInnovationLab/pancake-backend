@@ -1,3 +1,65 @@
+/*Colours*/
+:root {
+  --light-gray: #EEEEEE;
+  --orange-red: #d34422;
+  --dark-gray: #878786;
+  --off-white: #f7f7f7;
+  --white: white;
+  --black: black;
+}
+
+.rebate-wrapper {
+  margin: auto;
+  max-width: 960px;
+  padding: 4em;
+}
+
+.rebate-header {
+  font-size: 3em;
+  margin: 0;
+}
+
+.rebate-subhead {
+  font-size: 1.75em;
+  margin: .4em 0;
+}
+
+.rebate-search-box {
+  background-color: var(--light-gray);
+  padding: 1.75em;
+  width: 770px;
+}
+
+.rebate-search-field {
+  margin-bottom: 1em;
+}
+
+.rebate-search-input {
+  line-height: 2em;
+  margin-bottom: .5em;
+  width: 100%;
+}
+
+.rebate-search-button {
+  background-color: var(--orange-red);
+  border-radius: .2em;
+}
+
+.rebate-results-table {
+  background-color: var(--light-gray);
+  margin-top: 1.5em;
+  padding: 1.75em;
+  width: 770px;
+}
+
+.rebate-results-header {
+  background-color: var(--light-gray) !important;
+}
+
+.rebate-results-table-cell {
+  background-color: var(--off-white) !important;
+}
+
 .rebate-amount {
   font-size: 4em;
 }

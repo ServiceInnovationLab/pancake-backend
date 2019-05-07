@@ -1,16 +1,17 @@
 %p= paginate @rebate_forms.page(params[:page])
 
-%table.pure-table.pure-table-bordered
-  %thead
+%table.pure-table.pure-table-bordered.rebate-results-table
+  %thead.rebate-results-table-header
     %tr
       %th Name
       %th Address
+      %th
 
-  %tbody
+  %tbody.rebate-results-table-body
     - @rebate_forms.page(params[:page]).each do |rebate_form|
       %tr{ class: rebate_form.completed ? 'pure-table-odd' : '' }
-        %td= rebate_form.fields['full_name']
-        %td
+        %td.rebate-results-table-cell= rebate_form.fields['full_name']
+        %td.rebate-results-table-cell
           - if rebate_form.property.present?
             %p
               = rebate_form.property.location
@@ -18,8 +19,8 @@
               = rebate_form.property.suburb
               %br/
               = rebate_form.property.town_city
-        %td
-          = link_to admin_rebate_form_path(rebate_form), class: 'pure-button' do
-            show
+        %td.rebate-results-table-cell
+          = link_to admin_rebate_form_path(rebate_form), class: '' do
+            right arrow
 
 %p= paginate @rebate_forms.page(params[:page])
