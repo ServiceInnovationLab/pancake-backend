@@ -4,6 +4,7 @@
   --orange-red: #d34422;
   --dark-gray: #878786;
   --off-white: #f7f7f7;
+  --blue: #326699;
   --white: white;
   --black: black;
 }
@@ -41,7 +42,7 @@
 }
 
 .rebate-search-button {
-  background-color: var(--orange-red);
+  background-color: var(--blue);
   border-radius: .2em;
 }
 
