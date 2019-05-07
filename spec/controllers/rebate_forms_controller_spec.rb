@@ -8,7 +8,7 @@ RSpec.describe RebateFormsController, type: :controller do
   let(:fields) { { 'dependants' => '0', 'full_name' => 'bob', 'income' => '10000' } }
   let(:property) { FactoryBot.create :property_with_rates, rating_year: ENV['YEAR'] }
 
-  describe '#create' do
+  pending '#create' do
     let(:body) do
       {
         data: {
