@@ -1,12 +1,17 @@
 /*Colours*/
 :root {
-  --light-gray: #EEEEEE;
-  --orange-red: #d34422;
-  --dark-gray: #878786;
-  --off-white: #f7f7f7;
-  --blue: #326699;
-  --white: white;
-  --black: black;
+  --dove: #ebebeb;
+  --gray: #ababab;
+  --dark-gray: #4c4c4c;
+  --dark-gray-hover: #3d3d3d;
+  --orange: #d34322;
+  --orange-hover: #b73a1e;
+  --blue: #336699;
+  --blue-hover: #1a4d80;
+  --purple: #993366;
+  --purple-hover: #6a2347;
+  --white: #ffffff;
+  --black: #000000;
 }
 
 .rebate-wrapper {
@@ -26,7 +31,7 @@
 }
 
 .rebate-search-box {
-  background-color: var(--light-gray);
+  background-color: var(--dove);
   padding: 1.75em;
   width: 770px;
 }
@@ -47,18 +52,18 @@
 }
 
 .rebate-results-table {
-  background-color: var(--light-gray);
+  background-color: var(--dove);
   margin-top: 1.5em;
   padding: 1.75em;
   width: 770px;
 }
 
 .rebate-results-header {
-  background-color: var(--light-gray) !important;
+  background-color: var(--dove) !important;
 }
 
 .rebate-results-table-cell {
-  background-color: var(--off-white) !important;
+  background-color: var(--dove) !important;
 }
 
 .rebate-amount {
