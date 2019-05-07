@@ -10,3 +10,17 @@
 .fullWidth {
   width: 400px
 }
+
+.flex-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
+}
+.flex-column {
+  display: flex;
+  flex-direction: column
+}
+.flex-item {
+  padding: 1rem
+}

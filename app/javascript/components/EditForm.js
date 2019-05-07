@@ -68,6 +68,31 @@ class EditRebateForm extends React.Component {
               ? RadioInput(field)
               : SingleInput(field)
             })}
+            <div>
+              <div className="flex-column">
+                <h2 className="flex-item">Total Income</h2>
+                <div className="flex-row">
+                  <h2 className="flex-item" >Income Type</h2>
+                  <h2 className="flex-item" >Applicant</h2>
+                  <h2 className="flex-item" >Partner</h2>
+                </div>
+                {map(incomeRows, (field) => {
+                return (
+                  <div className="flex-row">
+                    <div className="flex-item"> 
+                      {field.label}
+                    </div>
+                    <div className="flex-item">
+                      {TableInput({...field, id: `${field.id}-Applicant`})}
+                    </div>
+                    <div className="flex-item">
+                      {TableInput({...field, id: `${field.id}-Partner`})}
+                    </div>
+                  </div>
+                )
+                })}
+              </div>
+            </div>
             <div className="buttons">
               <button type="submit" disabled={submitting}>
                 Submit
@@ -86,11 +111,25 @@ class EditRebateForm extends React.Component {
 
 EditRebateForm.propTypes = {};
 
+const incomeRows = [
+  {
+    id: "other_superannuation",
+    label: "Other superannuation"
+  },
+  {
+    id: "interest_dividends",
+    label: "Interest / Dividends"
+  },
+  {
+    id: "wages_salery",
+    label: "Wages or Salary"
+  }
+
+]   
 const customerDetailFields = [
   {
     id:"full_name",
     label: "Name",
-    type:"text"
   },
   {
     id:"customer_id",
@@ -105,8 +144,7 @@ const customerDetailFields = [
   {
     id:"total_rates",
     label: "Total Rates",
-    type:"text"
-    },
+  },
   {
     id:"valuation_id",
     label: "Valuation ID (optional)",
@@ -154,7 +192,8 @@ const customerDetailFields = [
   },
 ]
 
-const SingleInput = ({ id, label, placeholder, type = "text" }) => (
+const SingleInput = ({ id, label, placeholder, type = "text" }) => {
+  return (
   <div key={id} className=''>
     <label>{label}</label>
     <Field
@@ -166,7 +205,20 @@ const SingleInput = ({ id, label, placeholder, type = "text" }) => (
     />
     <Error name={id} />
   </div>
-)
+)}
+const TableInput = ({ id, label, placeholder, type = "text" }) => {
+  return (
+  <div key={id} className=''>
+    <Field
+      name={id}
+      label= {label}
+      placeholder= {placeholder}
+      component='input'
+      type={type}
+    />
+    <Error name={id} />
+  </div>
+)}
 
 const RadioInput = ({ id, label, type }) => (
   <div key={id} >

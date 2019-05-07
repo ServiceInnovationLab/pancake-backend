@@ -57,7 +57,6 @@ class Admin::RebateFormsController < Admin::BaseController
       @rebate_form.update(rebate_form_params)
     # updating rebate form itself
     elsif params.fetch(:rebate_form, false)
-      # byebug
       # update the fields (preserves the other elements of the hash)
       @rebate_form.fields.update(rebate_form_fields_params)
       @rebate_form.updated_by = current_user.id
