@@ -2,7 +2,7 @@
 
 class Admin::RebateFormsController < Admin::BaseController
   before_action :set_rebate_form, only: %i[show update destroy edit]
-  respond_to :html, :pdf, :csv
+  respond_to :html, :pdf, :csv, :json
 
   # GET /admin/rebate_forms
   def index
@@ -57,6 +57,7 @@ class Admin::RebateFormsController < Admin::BaseController
       @rebate_form.update(rebate_form_params)
     # updating rebate form itself
     elsif params.fetch(:rebate_form, false)
+      # byebug
       # update the fields (preserves the other elements of the hash)
       @rebate_form.fields.update(rebate_form_fields_params)
       @rebate_form.updated_by = current_user.id

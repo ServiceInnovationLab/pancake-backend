@@ -1,9 +1,3 @@
 %h1 Edit Application
 
-%p Valuation_id #{@rebate_form.valuation_id}, Year #{@rebate_form.property.rating_year}
-
-= render 'form'
-
-= link_to 'Show', admin_rebate_form_path(@rebate_form)
-\|
-= link_to 'Back', admin_rebate_forms_path
+= react_component("EditForm", { fields: @rebate_form.fields, valuation: @rebate_form.valuation_id })

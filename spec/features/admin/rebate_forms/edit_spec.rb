@@ -17,7 +17,7 @@ RSpec.describe 'RebateForm', type: :feature do
     describe '#edit' do
       it 'can modify the rebate_form' do
         visit "/admin/rebate_forms/#{rebate_form.id}/edit"
-        expect(page).to have_text('Full name')
+        expect(page).to have_text('Name')
         fill_in 'rebate_form_fields[full_name]', with: 'New name'
         click_button 'Save'
         expect(page).not_to have_text 'errors'
@@ -33,7 +33,7 @@ RSpec.describe 'RebateForm', type: :feature do
         expect(page).to have_text(rebate_form.fields['full_name'])
 
         click_link 'Edit'
-        expect(page).to have_text('Full name')
+        expect(page).to have_text('Name')
         expect(page).not_to have_text('error')
       end
     end
@@ -44,7 +44,7 @@ RSpec.describe 'RebateForm', type: :feature do
         expect(page).to have_text(rebate_form.fields['full_name'])
 
         click_link 'Edit'
-        expect(page).to have_text('Full name')
+        expect(page).to have_text('Name')
       end
     end
   end

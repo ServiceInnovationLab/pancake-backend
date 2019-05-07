@@ -1,3 +1,12 @@
 .rebate-amount {
   font-size: 4em;
 }
+
+.backgroundColor {
+  /* background: blue */
+  width: 200px
+
+}
+.fullWidth {
+  width: 400px
+}

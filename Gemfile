@@ -9,6 +9,10 @@ end
 
 gem 'rails', '~> 5.2.0'
 
+# React
+gem 'webpacker'
+gem 'react-rails'
+
 # Database
 gem 'pg'
 
