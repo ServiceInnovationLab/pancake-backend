@@ -37,11 +37,9 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
 
       describe 'filter by name' do
-        let(:property) { FactoryBot.create :property, council: council, location: '123 Taniwha avenue' }
         let!(:rebate_form) do
           FactoryBot.create :rebate_form,
-                            fields: { full_name: 'Fred Flintstone', dependants: 0, income: 0 },
-                            valuation_id: property.valuation_id
+                            fields: { full_name: 'Fred Flintstone', dependants: 0, income: 0 }
         end
 
         before { get :index, params: { name: 'F' } }

@@ -19,14 +19,13 @@ RSpec.describe 'RebateForm', type: :feature do
 
     it ' Can see rebate forms' do
       visit '/admin/rebate_forms'
+      fill_in 'name', with: 'Fred'
+      click_button 'SEARCH'
       expect(page).to have_text(rebate_form.fields['full_name'])
 
       # show the form
-      click_link 'show'
+      click_link 'right-arrow'
       expect(page).to have_text(rebate_form.fields['full_name'])
-
-      click_link 'Edit'
-      expect(page).to have_text('Full name')
     end
   end
 
@@ -37,14 +36,13 @@ RSpec.describe 'RebateForm', type: :feature do
 
     it ' Can see rebate forms' do
       visit '/admin/rebate_forms'
+      fill_in 'name', with: 'Fred'
+      click_button 'SEARCH'
       expect(page).to have_text(rebate_form.fields['full_name'])
 
       # show the form
-      click_link 'show'
+      click_link 'right-arrow'
       expect(page).to have_text(rebate_form.fields['full_name'])
-
-      click_link 'Edit'
-      expect(page).to have_text('Full name')
     end
   end
 end
