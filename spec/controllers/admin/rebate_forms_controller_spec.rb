@@ -45,6 +45,12 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         before { get :index, params: { name: 'F' } }
 
         it { expect(assigns(:rebate_forms)).to eq [rebate_form] }
+
+        context 'when they don\'t enter a name to search' do
+          before { get :index, params: { name: '' } }
+
+          it { expect(assigns(:rebate_forms)).to eq [rebate_form] }
+        end
       end
     end
 
