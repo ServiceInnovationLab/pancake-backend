@@ -6,10 +6,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # GET /admin/rebate_forms
   def index
-    @location = params[:location]
-
-    @rating_year = params[:rating_year] || Rails.configuration.rating_year
-    @years = Property.select(:rating_year).distinct.order(:rating_year).reverse_order.pluck(:rating_year)
+    @name = params[:name]
 
     @completed = (params[:completed] == 'true')
 
@@ -20,8 +17,7 @@ class Admin::RebateFormsController < Admin::BaseController
                                             .order(created_at: :desc)
 
     # filter by the search form fields
-    @rebate_forms = @rebate_forms.where('properties.location ILIKE ?', "%#{params[:location]}%") if @location.present?
-    @rebate_forms = @rebate_forms.where("properties.rating_year": @rating_year) if @rating_year.present?
+    @rebate_forms = @rebate_forms.where("fields ->> 'full_name' like ?", "%#{params[:name]}%") if @name.present?
     @rebate_forms = @rebate_forms.where(completed: @completed)
     @rebate_forms = @rebate_forms.order(created_at: :desc)
 

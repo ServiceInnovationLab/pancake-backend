@@ -1,25 +1,15 @@
-= form_tag(admin_rebate_forms_path, method: :get, class: 'pure-form pure-form-aligned') do
+= form_tag(admin_rebate_forms_path, method: :get, class: 'pure-form') do
   %fieldset
-    .pure-control-group
-      %label Address
-      = text_field_tag :location, @location, placeholder: "Address"
-
-    .pure-control-group
-      %label Rating year
-      = radio_button_tag 'rating_year', '', @rating_year.blank?
-      All years
-      - @years.each do |year|
-        = radio_button_tag 'rating_year', year, year == @rating_year, class: 'rating_year'
-        = year
-
-    .pure-control-group
-      %label Signed
+    .rebate-radio-wrapper
+      = radio_button_tag 'completed', false, @completed == false
+      Not Signed
       = radio_button_tag 'completed', true, @completed == true
       Signed
-      = radio_button_tag 'completed', false, @completed == false
-      Not-Signed
 
-    .pure-controls
-      %button.pure-button.pure-button-primary{type: "submit"}
-        = fa_icon 'search'
-        Search
+    .rebate-search-field
+      %label Name
+      = text_field_tag :name, @name, placeholder: "Eg. John Doe", class: "rebate-search-input", id: "name"
+
+
+    %button.pure-button.pure-button-primary.rebate-search-button{type: "submit"}
+      SEARCH
