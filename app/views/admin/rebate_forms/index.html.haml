@@ -1,22 +1,15 @@
 - content_for :title, "rebate forms"
 
-.pure-g
+.pure-g.rebate-wrapper
   .pure-u-1
-    %h2
-      Rebate forms
-      - unless @council.nil?
-        for #{@council.name}
+    %h1.rebate-header
+      Rates Rebate 2018/2019
+    %h2.rebate-subhead
+      Customer search
 
-  .pure-u-1-2
+  .pure-u-1-2.rebate-search-box
     = render 'search'
-  .pure-u-1-2
-    %p
-      = link_to admin_rebate_forms_path(format: :csv, rating_year: @rating_year, location: @location), class: 'pure-button' do
-        = fa_icon 'table'
-        Download CSV
 
   .pure-u-1
-    - if @rebate_forms.size.positive?
+    - unless @name.nil?
       = render 'results'
-    - else
-      %p No rebate forms found
