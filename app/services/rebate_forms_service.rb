@@ -29,7 +29,8 @@ class RebateFormsService
   def update_rebate_form(property)
     rebate_form = RebateForm.find_by(id: @id)
     property = rebate_form.property if property.id.nil?
-    rebate_form.update(property: property, valuation_id: property.valuation_id, fields: @update_fields)
+    rebate_form.update(property: property, valuation_id: property.valuation_id)
+    rebate_form.fields.update(@update_fields) unless @update_fields.nil?
     rebate_form
   end
 
