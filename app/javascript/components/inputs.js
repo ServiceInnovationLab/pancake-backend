@@ -1,5 +1,5 @@
 import React from "react"
-import { Form, Field } from "react-final-form";
+import { Field } from "react-final-form";
 import { map } from "lodash"
 
 export function SingleInput ({ id, label, placeholder, fullWidth, type = "text" }) {
@@ -8,27 +8,28 @@ export function SingleInput ({ id, label, placeholder, fullWidth, type = "text" 
     <label>{label}</label>
     <Field
       className='rebate-search-input'
-      name={id}
+      name={`fields.${id}`}
       label= {label}
       placeholder= {placeholder}
       component='input'
       type={type}
     />
-    <Error name={id} />
+    <Error name={`fields.${id}`} />
   </div>
   )
 }
 export function TableInput ({ id, label, placeholder, type = "text" }) {
   return (
-  <div key={id} className='rebate-search-input'>
+  <div key={id} className='flex-item one-third'>
     <Field
-      name={id}
+      className='rebate-search-input'
+      name={`fields.income.${id}`}
       label= {label}
       placeholder= {placeholder}
       component='input'
       type={type}
     />
-    <Error name={id} />
+    <Error name={`fields.income.${id}`} />
   </div>
 )}
 
@@ -41,7 +42,7 @@ export function RadioInput ({ id, label, type }) {
         <label key={`${id}-${value}`} >
           <Field
             className="one-quarter"
-            name={id}
+            name={`fields.${id}`}
             component="input"
             type={type}
             value={value}
@@ -49,7 +50,7 @@ export function RadioInput ({ id, label, type }) {
           {value}
         </label>
         )}
-        <Error name={id} />
+        <Error name={`fields.${id}`} />
       </div>
     </div>
   )

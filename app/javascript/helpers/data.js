@@ -4,6 +4,10 @@ export const incomeRows = [
     label: "Other superannuation"
   },
   {
+    id: "nz_superannuation",
+    label: "NZ superannuation"
+  },
+  {
     id: "interest_dividends",
     label: "Interest / Dividends"
   },
@@ -24,7 +28,7 @@ export const customerDetailFields = [
     placeholder: "0000000",
   },
   {
-    id:"address",
+    id:"location",
     label: "Address",
     fullWidth: true
   },

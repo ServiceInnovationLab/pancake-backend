@@ -62,6 +62,7 @@ class Admin::RebateFormsController < Admin::BaseController
       @rebate_form.updated_by = current_user.id
       @rebate_form.save && @rebate_form.calc_rebate_amount!
     end
+
     respond_with @rebate_form, location: admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
   end
 
@@ -84,7 +85,13 @@ class Admin::RebateFormsController < Admin::BaseController
 
   def rebate_form_fields_params
     params.require(:rebate_form).permit(
-      fields: %i[full_name income dependants lived_here_before_july_2017 lived_here_before_july_2018]
+      fields: [
+        :full_name,
+        { income: {} },
+        :dependants,
+        :lived_here_before_july_2017,
+        :lived_here_before_july_2018
+      ]
     )['fields']
   end
 

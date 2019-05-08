@@ -1,4 +1,4 @@
 %h1 Customer Details
 %h2 Signature required
 
-= react_component("EditForm", { fields: @rebate_form.fields, valuation: @rebate_form.valuation_id })
+= react_component("EditForm", {token: form_authenticity_token, rebateForm: @rebate_form, property: @rebate_form.property, ratesBills: @rebate_form.property.rates_bills})
