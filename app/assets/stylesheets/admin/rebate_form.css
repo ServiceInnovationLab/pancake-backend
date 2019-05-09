@@ -65,7 +65,16 @@
 .rebate-amount {
   font-size: 4em;
 }
-
+.rebate-edit-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 2rem;
+  width: 90vw;
+  max-width: 1000px;
+  min-width: 500px;
+  background-color: var(--dove);
+}
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -87,4 +96,9 @@
 
 .full-width {
   width: 100%
+}
+.rebate-radio-buttons {
+  margin-top:.5rem;
+  height: 50%;
+  border: 1px solid var(--gray)
 }

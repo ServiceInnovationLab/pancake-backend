@@ -19,9 +19,9 @@ export function SingleInput ({ id, label, placeholder, fullWidth, type = "text" 
   </div>
   )
 }
-export function TableInput ({ id, type = "number" }) {
+export function TableInput ({ id, className = 'flex-item', type = "number" }) {
   return (
-  <div key={id} className='flex-item one-third'>
+  <div key={id} className={className}>
     <Field
       className='rebate-search-input'
       name={`fields.income.${id}`}
@@ -36,7 +36,7 @@ export function RadioInput ({ id, label, type }) {
   return (
     <div key={id}  className="flex-item " >
       <label>{label}</label>
-      <div className="flex-row" >
+      <div className="flex-row rebate-radio-buttons" >
         {map(["yes", "no"], value =>
         <label key={`${id}-${value}`} >
           <Field
@@ -61,9 +61,9 @@ export function FieldArrayInput () {
       {({ fields }) => 
         fields.map((name, index) => (
           <div key={name} className="flex-row">
-            {ExtraTableInputs({name: `${name}.${index}`, type: 'string'})}
-            {ExtraTableInputs({name: `${name}.applicant - ${index}`})}
-            {ExtraTableInputs({name: `${name}.partner - ${index}`})}
+            {ExtraTableInputs({classname: 'flex-item', name: `${name}.${index}`, type: 'string'})}
+            {ExtraTableInputs({classname: 'flex-item', name: `${name}.applicant - ${index}`})}
+            {ExtraTableInputs({classname: 'flex-item', name: `${name}.partner - ${index}`})}
             <span
               onClick={() => fields.remove(index)}
               style={{ cursor: 'pointer' }}

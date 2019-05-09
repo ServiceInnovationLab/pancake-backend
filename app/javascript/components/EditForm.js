@@ -1,11 +1,11 @@
 
 import React from "react"
 import { map } from "lodash"
-import { Form, Field } from "react-final-form";
+import { Form } from "react-final-form";
 import arrayMutators from 'final-form-arrays'
 import 'isomorphic-fetch';
 
-import { customerDetailFields } from '../helpers/data'
+import { conditionalsFields, customerDetailFields } from '../helpers/data'
 import { getCSRF } from '../helpers/getCSRF';
 import { calculator } from '../helpers/calculator_decorator';
 
@@ -13,12 +13,6 @@ import { SingleInput, RadioInput } from './inputs'
 import { IncomeDeclaration } from "./IncomeDeclaration";
 
 const databaseURL = process.env.APP_URL  
-
-const Condition = ({ when, is, children }) => (
-  <Field name={when} subscription={{ value: true }}>
-    {({ input: { value } }) => (value === is ? children : null)}
-  </Field>
-);
 
 class EditRebateForm extends React.Component {
   onSubmit (values) {
@@ -50,7 +44,6 @@ class EditRebateForm extends React.Component {
 
     return (
       <Form
-        className="rebate-wrapper"
         onSubmit={this.onSubmit.bind(this)}
         initialValues={initialValues}
         decorators={[calculator]}
@@ -77,16 +70,14 @@ class EditRebateForm extends React.Component {
           submitting,
           values,
           form: {
-            mutators:
-             {
-              push,
-              pop
-            }
+            mutators: { push }
           }
         }) => {
           return (
-          <form onSubmit={handleSubmit}>
-            {console.log(values)}
+          <form
+            className="rebate-edit-form"
+            onSubmit={handleSubmit}
+           >
             <div className="flex-row">
               {map(customerDetailFields, (field) => {
                 return field.type == 'radio'
@@ -94,6 +85,16 @@ class EditRebateForm extends React.Component {
                 : SingleInput(field)
               })}
             </div>
+            { values.fields.moved_within_rating_year == 'yes'
+            ? <div className="flex-row">
+                {map(conditionalsFields, (field) => {
+                return field.type == 'radio'
+                ? RadioInput(field)
+                : SingleInput(field)
+                })}
+              </div>
+              : null
+            }
             {IncomeDeclaration()}
             <div className="buttons">
               <button

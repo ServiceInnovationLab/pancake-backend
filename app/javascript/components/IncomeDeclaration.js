@@ -11,29 +11,29 @@ export function IncomeDeclaration () {
       <div className="flex-column">
         <h2 className="flex-item">Income declaration (before tax)</h2>
         <div className={'flex-row'}>
-          <label className='one-third'>
+          <label className='flex-item'>
             <h3>Total Combined Income: </h3>
           </label>
           <Field
-            className='rebate-search-input one-third'
+            className='rebate-search-input flex-item'
             name="fields.income.total_income"
             component="input"
             readOnly
           />
         </div>
         <div className="flex-row">
-          {map(['Income Type', 'Applicant', 'Partner'], title => (
-            <h2 key={title} className="flex-item one-third" >{title}</h2>
-          ))}
+            <h2 className="flex-item" >Income Type</h2>
+            <h2 className="one-quarter" >Applicant</h2>
+            <h2 className="one-quarter" >Partner</h2>
         </div>
         {map(incomeRows, (field) => {
         return (
           <div key={field.id} className="flex-row">
-              <label className="flex-item one-third">
+              <label className="flex-item">
                 <h3>{field.label}</h3>
               </label>
-              {TableInput({...field, id: `applicant.${field.id}`})}
-              {TableInput({...field, id: `partner.${field.id}`})}
+              {TableInput({...field, className: 'one-quarter', id: `applicant.${field.id}`})}
+              {TableInput({...field, className: 'one-quarter', id: `partner.${field.id}`})}
           </div>
         )
         })}

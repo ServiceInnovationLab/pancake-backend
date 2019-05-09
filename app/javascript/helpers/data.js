@@ -1,3 +1,25 @@
+export const conditionalsFields = [
+  {
+    id: "previous_address",
+    label: "Address",
+    fullWidth: true
+  },
+  {
+    id: "settlement_date",
+    label: "Settlement Date",
+    type: "date"
+  },
+  {
+    id: "rates_paid",
+    label: "Rates paid this rating year",
+    type: "number"
+  },
+  {
+    id: 'rates_rebate_recieved',
+    label: "Rates rebate recieved?",
+    type:"radio"
+  },
+]
 export const incomeRows = [
   {
     id: "other_superannuation",
@@ -42,16 +64,6 @@ export const customerDetailFields = [
     placeholder: "00000 000 00",
   },
   {
-    id: 'moved_within_rating_year',
-    label: "Moved within rating year?",
-    type:"radio"
-  },
-  {
-    id: 'lived_in_property_1_July',
-    label: "Lived in property 1 July 2018",
-    type:"radio"
-  },
-  {
     id:"email",
     label: "Email",
     type:"email",
@@ -80,5 +92,15 @@ export const customerDetailFields = [
   {
     id:"occupation",
     label: "Occupation",
-  }
+  },
+  {
+    id: 'moved_within_rating_year',
+    label: "Moved within rating year?",
+    type:"radio"
+  },
+  {
+    id: 'lived_in_property_1_July',
+    label: "Lived in property 1 July 2018",
+    type:"radio"
+  },
 ]
