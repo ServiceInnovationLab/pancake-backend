@@ -19,17 +19,20 @@ const Condition = ({ when, is, children }) => (
   </Field>
 );
 
+function accumulate (obj) {
+  return reduce(obj, (sum, value) => sum + Number(value || 0), 0)
+}
+
 const calculator = createDecorator(
   {
-    field: /\w+/, // when a field matching this pattern changes...
+    field: /\.income/, // when a field matching this pattern changes...
     updates: {
       // ...update the total_income to the result of this function
       ['fields.income.total_income']: (newValue, allValues) => {
-        const applicantValues = reduce(allValues.fields.income.applicant, (sum, value) =>
-          sum + Number(value || 0), 0)
-        const partnerValues = reduce(allValues.fields.income.partner, (sum, value) =>
-          sum + Number(value || 0), 0)
-        const total = applicantValues + partnerValues         
+        const applicantValues = accumulate(allValues.fields.income.applicant)
+        const partnerValues = accumulate(allValues.fields.income.partner)
+        const otherValues = reduce(allValues.fields.income.other_income, (sum, obj) => sum + accumulate(obj), 0)
+        const total = applicantValues + partnerValues + otherValues    
         return total
       }
     }

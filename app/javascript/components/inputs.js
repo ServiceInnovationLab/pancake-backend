@@ -55,15 +55,15 @@ export function RadioInput ({ id, label, type }) {
   )
 }
 
-export function FieldArrayInput ({name}) {
+export function FieldArrayInput () {
   return (
-    <FieldArray name={`fields.income.${name}`}>
+    <FieldArray name={`fields.income.other_income`}>
       {({ fields }) => 
         fields.map((name, index) => (
           <div key={name} className="flex-row">
-            {TableInput({id: `${name} - ${index}`})}
-            {TableInput({id: `applicant.${name}`})}
-            {TableInput({id: `partner.${name}`})}
+            {ExtraTableInputs({name: `${name}.${index}`, type: 'string'})}
+            {ExtraTableInputs({name: `${name}.applicant - ${index}`})}
+            {ExtraTableInputs({name: `${name}.partner - ${index}`})}
             <span
               onClick={() => fields.remove(index)}
               style={{ cursor: 'pointer' }}
@@ -77,6 +77,18 @@ export function FieldArrayInput ({name}) {
   )
 }
 
+export function ExtraTableInputs ({ name, type = "number" }) {
+  return (
+  <div key={name} className='flex-item one-third'>
+    <Field
+      className='rebate-search-input'
+      name={name}
+      component='input'
+      type={type}
+    />
+    <Error name={name} />
+  </div>
+)}
 
 const Error = ({ name }) => (
   <Field name={name} subscription={{ error: true, touched: true }}>

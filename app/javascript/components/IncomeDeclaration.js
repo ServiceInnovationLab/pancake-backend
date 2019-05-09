@@ -38,7 +38,7 @@ export function IncomeDeclaration () {
         )
         })}
         <div>
-        {FieldArrayInput({name: 'other_income'})}
+        {FieldArrayInput()}
         </div>
       </div>
     </div>
