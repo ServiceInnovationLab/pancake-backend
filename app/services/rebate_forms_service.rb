@@ -33,11 +33,14 @@ class RebateFormsService
   def update_rebate_form(property)
     rebate_form = RebateForm.find_by(id: @id)
     property = rebate_form.property if property.id.nil?
-    new_fields = @update_fields unless @update_fields.nil?
-    new_fields = {} if @update_fields.nil?
-    fields_to_update = rebate_form.fields.merge(new_fields)
+    fields_to_update = rebate_form.fields.merge(merged_fields)
     rebate_form.update(property: property, valuation_id: property.valuation_id, fields: fields_to_update)
     rebate_form
+  end
+
+  def merged_fields
+    return @update_fields unless @update_fields.nil?
+    {}
   end
 
   def create_rebate_form(property)
