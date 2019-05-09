@@ -1,5 +1,6 @@
 import React from "react"
 import { Field } from "react-final-form";
+import { FieldArray } from 'react-final-form-arrays'
 import { map } from "lodash"
 
 export function SingleInput ({ id, label, placeholder, fullWidth, type = "text" }) {
@@ -18,14 +19,12 @@ export function SingleInput ({ id, label, placeholder, fullWidth, type = "text" 
   </div>
   )
 }
-export function TableInput ({ id, label, placeholder, type = "number" }) {
+export function TableInput ({ id, type = "number" }) {
   return (
   <div key={id} className='flex-item one-third'>
     <Field
       className='rebate-search-input'
       name={`fields.income.${id}`}
-      label= {label}
-      placeholder= {placeholder}
       component='input'
       type={type}
     />
@@ -55,6 +54,29 @@ export function RadioInput ({ id, label, type }) {
     </div>
   )
 }
+
+export function FieldArrayInput ({name}) {
+  return (
+    <FieldArray name={`fields.income.${name}`}>
+      {({ fields }) => 
+        fields.map((name, index) => (
+          <div key={name} className="flex-row">
+            {TableInput({id: `${name} - ${index}`})}
+            {TableInput({id: `applicant.${name}`})}
+            {TableInput({id: `partner.${name}`})}
+            <span
+              onClick={() => fields.remove(index)}
+              style={{ cursor: 'pointer' }}
+            >
+              ❌
+            </span>
+          </div>
+        ))
+      }
+    </FieldArray>
+  )
+}
+
 
 const Error = ({ name }) => (
   <Field name={name} subscription={{ error: true, touched: true }}>

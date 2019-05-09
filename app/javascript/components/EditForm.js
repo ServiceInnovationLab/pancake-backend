@@ -2,12 +2,14 @@
 import React from "react"
 import { reduce, map } from "lodash"
 import { Form, Field } from "react-final-form";
+import arrayMutators from 'final-form-arrays'
 import createDecorator from 'final-form-calculate'
 import 'isomorphic-fetch';
 
-import { incomeRows, customerDetailFields } from '../helpers/data'
+import { customerDetailFields } from '../helpers/data'
 import { getCSRF } from '../helpers/getCSRF';
-import { SingleInput, RadioInput, TableInput } from './inputs'
+import { SingleInput, RadioInput } from './inputs'
+import { IncomeDeclaration } from "./IncomeDeclaration";
 
 const databaseURL = process.env.APP_URL  
 
@@ -68,6 +70,9 @@ class EditRebateForm extends React.Component {
         onSubmit={this.onSubmit.bind(this)}
         initialValues={initialValues}
         decorators={[calculator]}
+        mutators={{
+          ...arrayMutators
+        }}
         validate={values => {
           const errors = {};
           {map(initialValues, (value, key) => {
@@ -83,7 +88,18 @@ class EditRebateForm extends React.Component {
           return errors;
         }}
       >
-        {({ handleSubmit, submitting, values }) => {
+        {({
+          handleSubmit,
+          submitting,
+          values,
+          form: {
+            mutators:
+             {
+              push,
+              pop
+            }
+          }
+        }) => {
           return (
           <form onSubmit={handleSubmit}>
             {console.log(values)}
@@ -94,39 +110,14 @@ class EditRebateForm extends React.Component {
                 : SingleInput(field)
               })}
             </div>
-            <div>
-              <div className="flex-column">
-                <h2 className="flex-item">Income declaration (before tax)</h2>
-                <div className={'flex-row'}>
-                  <label className='one-third'>
-                    <h3>Total Combined Income: </h3>
-                  </label>
-                  <Field
-                    className='rebate-search-input one-third'
-                    name="fields.income.total_income"
-                    component="input"
-                    readOnly
-                  />
-                </div>
-                <div className="flex-row">
-                  {map(['Income Type', 'Applicant', 'Partner'], title => (
-                    <h2 key={title} className="flex-item one-third" >{title}</h2>
-                  ))}
-                </div>
-                {map(incomeRows, (field) => {
-                return (
-                  <div key={field.id} className="flex-row">
-                      <label className="flex-item one-third">
-                        <h3>{field.label}</h3>
-                      </label>
-                      {TableInput({...field, id: `applicant.${field.id}`})}
-                      {TableInput({...field, id: `partner.${field.id}`})}
-                  </div>
-                )
-                })}
-              </div>
-            </div>
+            {IncomeDeclaration()}
             <div className="buttons">
+              <button
+                type="button"
+                onClick={() => push('fields.income.other_income', undefined)}
+                >
+                  Add Income Type
+              </button>
               <button type="submit" disabled={submitting}>
                 Submit
               </button>
