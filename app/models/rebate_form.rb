@@ -16,7 +16,6 @@ class RebateForm < ApplicationRecord
   validates :rebate, presence: true
   validates :property, presence: true
 
-  validate :required_fields_present
   validate :same_council
   validate :only_completed_forms_in_batch
 
@@ -97,12 +96,6 @@ class RebateForm < ApplicationRecord
 
   def mailer
     RebateFormsMailer.with(rebate_form: self)
-  end
-
-  def required_fields_present
-    %w[income dependants full_name].each do |field|
-      errors.add(:fields, "must include #{field}") if fields[field].blank?
-    end
   end
 
   def same_council

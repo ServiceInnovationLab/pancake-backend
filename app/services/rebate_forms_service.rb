@@ -2,12 +2,16 @@
 
 class RebateFormsService
   def initialize(rebate_form_attributes)
-    @id = rebate_form_attributes[:id]
-    @valuation_id = rebate_form_attributes[:valuation_id]
-    @create_fields = rebate_form_attributes[:fields]
-    @update_fields = rebate_form_attributes[:rebate_form][:fields] if rebate_form_attributes[:rebate_form]
-    @location = rebate_form_attributes[:location]
-    @total_rates = rebate_form_attributes[:total_rates]
+    @id = rebate_form_attributes['id']
+    @valuation_id = rebate_form_attributes['valuation_id']
+    @create_fields = rebate_form_attributes['fields']
+    @update_fields = if rebate_form_attributes['rebate_form']
+                       rebate_form_attributes['rebate_form']['fields']
+                     else
+                       @create_fields
+                     end
+    @location = rebate_form_attributes['location']
+    @total_rates = rebate_form_attributes['total_rates']
   end
 
   def update
@@ -29,8 +33,10 @@ class RebateFormsService
   def update_rebate_form(property)
     rebate_form = RebateForm.find_by(id: @id)
     property = rebate_form.property if property.id.nil?
-    rebate_form.update(property: property, valuation_id: property.valuation_id)
-    rebate_form.fields.update(@update_fields) unless @update_fields.nil?
+    new_fields = @update_fields unless @update_fields.nil?
+    new_fields = {} if @update_fields.nil?
+    fields_to_update = rebate_form.fields.merge(new_fields)
+    rebate_form.update(property: property, valuation_id: property.valuation_id, fields: fields_to_update)
     rebate_form
   end
 
