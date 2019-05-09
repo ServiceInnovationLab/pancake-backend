@@ -13,9 +13,7 @@ class RebateFormsController < ApiController
   end
 
   def create
-    rebate_form = RebateForm.create(rebate_form_params)
-    rebate_form.calc_rebate_amount!
-    raise 'No rebate calculated. This should never happen' if rebate_form.rebate.blank?
+    rebate_form = RebateFormsService.new(rebate_form_params).update
 
     if rebate_form.errors.any?
       render_errors_for(rebate_form)
@@ -25,8 +23,8 @@ class RebateFormsController < ApiController
   end
 
   def update
-    rebate_form = RebateForm.find_by(token: params[:id])
-    rebate_form.update(rebate_form_params)
+    rebate_form = RebateFormsService.new(rebate_form_params).update
+
     if rebate_form.errors.any?
       render_errors_for(rebate_form)
     else
@@ -35,6 +33,14 @@ class RebateFormsController < ApiController
   end
 
   def rebate_form_params
-    params.require(:api).require(:data).require(:attributes).permit(:valuation_id, fields: {})
+    params
+      .require(:api)
+      .require(:data)
+      .require(:attributes)
+      .permit(:id,
+              :valuation_id,
+              :total_rates,
+              :location,
+              fields: {})
   end
 end

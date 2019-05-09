@@ -15,9 +15,10 @@ module RebateFormsHelper
     "$#{format('%.2f', rebate_form.rebate)}"
   end
 
-  def rebate_form_total(rebate_form)
-    "$#{format('%.2f', rebate_form.fields['income'])}"
-  end
+  # commenting this out until Mischa's code lands
+  # def rebate_form_total(rebate_form)
+  #   "$#{format('%.2f', rebate_form.fields['income'])}"
+  # end
 
   def rebate_form_lived_year?(rebate_form)
     if rebate_form.lived_here.present?
