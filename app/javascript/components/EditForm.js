@@ -1,7 +1,8 @@
 
 import React from "react"
-import { map } from "lodash"
+import { reduce, map } from "lodash"
 import { Form, Field } from "react-final-form";
+import createDecorator from 'final-form-calculate'
 import 'isomorphic-fetch';
 
 import { incomeRows, customerDetailFields } from '../helpers/data'
@@ -16,6 +17,22 @@ const Condition = ({ when, is, children }) => (
   </Field>
 );
 
+const calculator = createDecorator(
+  {
+    field: /\w+/, // when a field matching this pattern changes...
+    updates: {
+      // ...update the total_income to the result of this function
+      ['fields.income.total_income']: (newValue, allValues) => {
+        const applicantValues = reduce(allValues.fields.income.applicant, (sum, value) =>
+          sum + Number(value || 0), 0)
+        const partnerValues = reduce(allValues.fields.income.partner, (sum, value) =>
+          sum + Number(value || 0), 0)
+        const total = applicantValues + partnerValues         
+        return total
+      }
+    }
+  }
+)
 
 class EditRebateForm extends React.Component {
   onSubmit (values) {
@@ -50,6 +67,7 @@ class EditRebateForm extends React.Component {
         className="rebate-wrapper"
         onSubmit={this.onSubmit.bind(this)}
         initialValues={initialValues}
+        decorators={[calculator]}
         validate={values => {
           const errors = {};
           {map(initialValues, (value, key) => {
@@ -65,7 +83,8 @@ class EditRebateForm extends React.Component {
           return errors;
         }}
       >
-        {({ handleSubmit, reset, submitting, pristine, values }) => (
+        {({ handleSubmit, submitting, values }) => {
+          return (
           <form onSubmit={handleSubmit}>
             {console.log(values)}
             <div className="flex-row">
@@ -78,7 +97,15 @@ class EditRebateForm extends React.Component {
             <div>
               <div className="flex-column">
                 <h2 className="flex-item">Income declaration (before tax)</h2>
-                <h3> Total combined income before </h3>
+                <div className={'flex-row'}>
+                  <label className='flex-item' >Total Combined Income: </label>
+                  <Field
+                    className='rebate-search-input flex-item'
+                    name="fields.income.total_income"
+                    component="input"
+                    readOnly
+                  />
+                </div>
                 <div className="flex-row">
                   {map(['Income Type', 'Applicant', 'Partner'], title => (
                     <h2 key={title} className="flex-item one-third" >{title}</h2>
@@ -102,7 +129,7 @@ class EditRebateForm extends React.Component {
             </div>
             <pre>{JSON.stringify(values, 0, 2)}</pre>
           </form>
-        )}
+        )}}
       </Form>
     );
   }

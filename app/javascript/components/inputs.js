@@ -18,7 +18,7 @@ export function SingleInput ({ id, label, placeholder, fullWidth, type = "text" 
   </div>
   )
 }
-export function TableInput ({ id, label, placeholder, type = "text" }) {
+export function TableInput ({ id, label, placeholder, type = "number" }) {
   return (
   <div key={id} className='flex-item one-third'>
     <Field

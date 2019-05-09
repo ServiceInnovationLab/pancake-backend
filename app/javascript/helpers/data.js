@@ -80,5 +80,5 @@ export const customerDetailFields = [
   {
     id:"occupation",
     label: "Occupation",
-  },
+  }
 ]
