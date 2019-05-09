@@ -1,13 +1,14 @@
 
 import React from "react"
-import { reduce, map } from "lodash"
+import { map } from "lodash"
 import { Form, Field } from "react-final-form";
 import arrayMutators from 'final-form-arrays'
-import createDecorator from 'final-form-calculate'
 import 'isomorphic-fetch';
 
 import { customerDetailFields } from '../helpers/data'
 import { getCSRF } from '../helpers/getCSRF';
+import { calculator } from '../helpers/calculator_decorator';
+
 import { SingleInput, RadioInput } from './inputs'
 import { IncomeDeclaration } from "./IncomeDeclaration";
 
@@ -18,26 +19,6 @@ const Condition = ({ when, is, children }) => (
     {({ input: { value } }) => (value === is ? children : null)}
   </Field>
 );
-
-function accumulate (obj) {
-  return reduce(obj, (sum, value) => sum + Number(value || 0), 0)
-}
-
-const calculator = createDecorator(
-  {
-    field: /\.income/, // when a field matching this pattern changes...
-    updates: {
-      // ...update the total_income to the result of this function
-      ['fields.income.total_income']: (newValue, allValues) => {
-        const applicantValues = accumulate(allValues.fields.income.applicant)
-        const partnerValues = accumulate(allValues.fields.income.partner)
-        const otherValues = reduce(allValues.fields.income.other_income, (sum, obj) => sum + accumulate(obj), 0)
-        const total = applicantValues + partnerValues + otherValues    
-        return total
-      }
-    }
-  }
-)
 
 class EditRebateForm extends React.Component {
   onSubmit (values) {
