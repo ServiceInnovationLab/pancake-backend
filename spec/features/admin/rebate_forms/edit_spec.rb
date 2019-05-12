@@ -27,24 +27,13 @@ RSpec.describe 'RebateForm', type: :feature do
       end
     end
 
-    describe '#index' do
-      it 'can see edit link' do
-        visit '/admin/rebate_forms'
-        expect(page).to have_text(rebate_form.fields['full_name'])
-
-        click_link 'Edit'
-        expect(page).to have_text('Name')
-        expect(page).not_to have_text('error')
-      end
-    end
-
     describe '#show' do
       it 'can see edit link' do
         visit "/admin/rebate_forms/#{rebate_form.id}"
         expect(page).to have_text(rebate_form.fields['full_name'])
-
         click_link 'Edit'
-        expect(page).to have_text('Name')
+        byebug
+        expect(page).to have_text('Income declaration (before tax)')
       end
     end
   end

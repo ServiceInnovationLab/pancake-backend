@@ -57,11 +57,6 @@ class EditRebateForm extends React.Component {
               errors[key] = "Required";
             }
           })}
-          // if (values.reception === "delivery") {
-          //   if (!values.street) {
-          //     errors.street = "Required";
-          //   }
-          // }
           return errors;
         }}
       >
