@@ -62,8 +62,8 @@ export function FieldArrayInput () {
         fields.map((name, index) => (
           <div key={name} className="flex-row">
             {ExtraTableInputs({classname: 'flex-item', name: `${name}.${index}`, type: 'string'})}
-            {ExtraTableInputs({classname: 'flex-item', name: `${name}.applicant - ${index}`})}
-            {ExtraTableInputs({classname: 'flex-item', name: `${name}.partner - ${index}`})}
+            {ExtraTableInputs({classname: 'flex-item', name: `${name}.applicant-${index}`})}
+            {ExtraTableInputs({classname: 'flex-item', name: `${name}.partner-${index}`})}
             <span
               onClick={() => fields.remove(index)}
               style={{ cursor: 'pointer' }}
