@@ -1,9 +1,4 @@
-%h1 Edit Application
+%h1 Customer Details
+%h2 Signature required
 
-%p Valuation_id #{@rebate_form.valuation_id}, Year #{@rebate_form.property.rating_year}
-
-= render 'form'
-
-= link_to 'Show', admin_rebate_form_path(@rebate_form)
-\|
-= link_to 'Back', admin_rebate_forms_path
+= react_component("EditForm", {token: form_authenticity_token, rebateForm: @rebate_form, property: @rebate_form.property, ratesBills: @rebate_form.property.rates_bills})
