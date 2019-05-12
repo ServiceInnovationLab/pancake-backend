@@ -8,6 +8,22 @@
  *= require_tree .
 */
 
+/*Colours*/
+:root {
+  --dove: #ebebeb;
+  --gray: #ababab;
+  --dark-gray: #4c4c4c;
+  --dark-gray-hover: #3d3d3d;
+  --orange: #d34322;
+  --orange-hover: #b73a1e;
+  --blue: #336699;
+  --blue-hover: #1a4d80;
+  --purple: #993366;
+  --purple-hover: #6a2347;
+  --white: #ffffff;
+  --black: #000000;
+}
+
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -34,20 +50,6 @@ a:focus {
   text-decoration: underline;
 }
 
-#layout {
-}
-
-#header {
-  margin: 0;
-  padding: 0;
-  background-color: #6dca7f;
-}
-
-#menus {
-  float: top-right;
-  background-color: #f3faec;
-}
-
 #main {
   margin: 0;
   padding: 1em;
@@ -59,6 +61,7 @@ a:focus {
   /*top: auto;*/
   margin: 0 auto;
   padding: 1em;
+  background-color: var(--black);
 }
 
 .show_header {

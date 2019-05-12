@@ -8,14 +8,10 @@
     = csrf_meta_tags
 
   %body
-  #layout.pure-g
-    .pure-u-1-2
-      .header
-        %h1 Te Whakamāmā i ngā Reiti
-        %h2 Rates Rebates
-    .pure-u-1-2
-      = render 'layouts/menu'
-    #main.pure-u-1
-      - flash.each do |name, msg|
-        = content_tag :div, msg, class: name
-      = yield
+    .pure-g
+      .pure-u-1.header
+        = render 'layouts/header'
+      #main.pure-u-1
+        - flash.each do |name, msg|
+          = content_tag :div, msg, class: name
+        = yield
