@@ -2,7 +2,7 @@
 
 class Admin::RebateFormsController < Admin::BaseController
   before_action :set_rebate_form, only: %i[show update destroy edit]
-  respond_to :html, :pdf, :csv
+  respond_to :html, :pdf, :csv, :json
 
   # GET /admin/rebate_forms
   def index
