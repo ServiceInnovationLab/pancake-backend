@@ -3,9 +3,9 @@ import { Field } from "react-final-form";
 import { map } from "lodash"
 
 import { incomeRows } from '../helpers/data'
-import { TableInput, FieldArrayInput } from './inputs'
+import { TableInput, ExtraTableInputs } from './inputs'
 
-export function IncomeDeclaration () {
+export function IncomeDeclaration ({otherIncomeFields}) {
   return (
     <div>
       <div className="flex-column">
@@ -37,10 +37,18 @@ export function IncomeDeclaration () {
           </div>
         )
         })}
-        <div>
-        {FieldArrayInput()}
+         {map(otherIncomeFields, (value, key) => {
+          return (
+            <div key={key} className="flex-row">
+                <label className="flex-item">
+                  <h3>{key}</h3>
+                </label>
+                {ExtraTableInputs({id: `applicant.${key}`})}
+                {ExtraTableInputs({id: `partner.${key}`})}
+            </div>
+          )
+          })}
         </div>
-      </div>
     </div>
   )
 }

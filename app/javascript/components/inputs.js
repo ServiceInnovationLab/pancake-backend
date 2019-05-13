@@ -32,6 +32,19 @@ export function TableInput ({ id, className = 'flex-item', type = "number" }) {
   </div>
 )}
 
+export function ExtraTableInputs ({ id, type = "number" }) {
+  return (
+  <div key={id} className='one-quarter'>
+    <Field
+      className='rebate-search-input'
+      name={`fields.income.${id}`}
+      component='input'
+      type={type}
+    />
+    <Error name={`fields.income.${id}`} />
+  </div>
+)}
+
 export function RadioInput ({ id, label, type }) {
   return (
     <div key={id}  className="flex-item " >
@@ -54,40 +67,6 @@ export function RadioInput ({ id, label, type }) {
     </div>
   )
 }
-
-export function FieldArrayInput () {
-  return (
-    <FieldArray name={`fields.income.other_income`}>
-      {({ fields }) => 
-        fields.map((name, index) => (
-          <div key={name} className="flex-row">
-            {ExtraTableInputs({classname: 'flex-item', name: `${name}other-${index}-applicant`})}
-            {ExtraTableInputs({classname: 'flex-item', name: `${name}other-${index}-partner`})}
-            <span
-              onClick={() => fields.remove(index)}
-              style={{ cursor: 'pointer' }}
-            >
-              ❌
-            </span>
-          </div>
-        ))
-      }
-    </FieldArray>
-  )
-}
-
-export function ExtraTableInputs ({ name, type = "number" }) {
-  return (
-  <div key={name} className='flex-item one-third'>
-    <Field
-      className='rebate-search-input'
-      name={name}
-      component='input'
-      type={type}
-    />
-    <Error name={name} />
-  </div>
-)}
 
 const Error = ({ name }) => (
   <Field name={name} subscription={{ error: true, touched: true }}>

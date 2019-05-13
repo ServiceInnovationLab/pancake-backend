@@ -1,8 +1,7 @@
 
 import React from "react"
 import { map } from "lodash"
-import { Form } from "react-final-form";
-import arrayMutators from 'final-form-arrays'
+import { Form, Field } from "react-final-form";
 import 'isomorphic-fetch';
 
 import { conditionalsFields, customerDetailFields } from '../helpers/data'
@@ -15,6 +14,13 @@ import { IncomeDeclaration } from "./IncomeDeclaration";
 const databaseURL = process.env.APP_URL  
 
 class EditRebateForm extends React.Component {
+
+  constructor(props) {
+    super(props);
+    const { rebateForm: { fields } } = this.props
+    this.state = { otherIncomeFields: fields.other_income }
+  }
+
   onSubmit (values) {
     fetch(`${databaseURL}admin/rebate_forms/1`, {
       method: 'PATCH',
@@ -41,21 +47,18 @@ class EditRebateForm extends React.Component {
 
     const { fields } = rebateForm
     const initialValues = {fields, ratesBills: ratesBills[0], property} 
-
+    const { otherIncomeFields } = this.state
     return (
       <Form
         onSubmit={this.onSubmit.bind(this)}
         initialValues={initialValues}
         decorators={[calculator]}
-        mutators={{
-          ...arrayMutators
-        }}
         validate={values => {
           const errors = {};
           {map(initialValues, (value, key) => {
             if (!values[key]) {
               errors[key] = "Required";
-            }
+            } 
           })}
           return errors;
         }}
@@ -65,7 +68,7 @@ class EditRebateForm extends React.Component {
           submitting,
           values,
           form: {
-            mutators: { push }
+            reset
           }
         }) => {
           return (
@@ -90,11 +93,23 @@ class EditRebateForm extends React.Component {
               </div>
               : null
             }
-            {IncomeDeclaration()}
+            {IncomeDeclaration({otherIncomeFields})}
+            <div className={'flex-row'}>
+              <label className='flex-item'>
+                <h3>Total Combined Income: </h3>
+              </label>
+              <Field
+                className='rebate-search-input flex-item'
+                name="newIncomeField"
+                component="input"
+              />
+            </div>
             <div className="buttons">
               <button
                 type="button"
-                onClick={() => push('fields.income.other_income', undefined)}
+                onClick={() => {
+                  this.setState({otherIncomeFields: { [values.newIncomeField]:0 , ...otherIncomeFields} })
+                }}
                 >
                   Add Income Type
               </button>
