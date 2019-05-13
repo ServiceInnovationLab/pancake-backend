@@ -57,11 +57,26 @@ a:focus {
 }
 
 .header {
-  text-align: left;
-  /*top: auto;*/
-  margin: 0 auto;
-  padding: 1em;
+  padding: 2em;
   background-color: var(--black);
+}
+
+.header-item {
+  display: inline-block;
+}
+
+.header-logo {
+  width: 373px;
+}
+
+.header-login {
+  color: var(--white);
+  float: right;
+  vertical-align: middle;
+}
+
+.header-logout-link {
+  color: var(--white) !important;
 }
 
 .show_header {

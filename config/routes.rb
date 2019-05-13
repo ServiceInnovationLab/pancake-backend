@@ -3,11 +3,6 @@
 Rails.application.routes.draw do
   root to: redirect('/admin/')
 
-  scope path: '/admin' do
-    devise_for :users
-    get '/' => 'welcome#index'
-  end
-
   namespace :admin do
     resources :rebate_forms
     resources :attachments, only: %i[destroy]
@@ -17,6 +12,11 @@ Rails.application.routes.draw do
     resources :users
     resources :batches
     get 'signature' => 'signatures#show'
+  end
+
+  scope path: '/admin' do
+    devise_for :users
+    get '/' => 'admin/rebate_forms#index'
   end
 
   scope path: '/api' do

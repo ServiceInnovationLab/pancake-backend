@@ -1,25 +1,7 @@
-.pure-menu.pure-menu-horizontal
-  %ul.pure-menu-list
-    / %li.pure-menu-item
-    /   = link_to '/admin', class: 'pure-menu-link' do
-    /     analytics
-    / %li.pure-menu-item
-    /   = link_to admin_rebate_forms_path, class: 'pure-menu-link' do
-    /     = fa_icon 'edit'
-    /     rebate forms
-    / %li.pure-menu-item
-    /   = link_to admin_batches_path, class: 'pure-menu-link' do
-    /     = fa_icon 'download'
-    /     batches
-    / %li.pure-menu-item
-    /   = link_to admin_councils_path, class: 'pure-menu-link' do
-    /     = fa_icon 'building'
-    /     councils
-    / %li.pure-menu-item
-    /   = link_to admin_users_path, class: 'pure-menu-link' do
-    /     = fa_icon 'user'
-    /     users
-    %li.pure-menu-item=current_user.email
-    %li.pure-menu-item
-      = link_to destroy_user_session_path, method: :delete do
-        Log Out x
+.header-bar
+  %div.header-item
+    = image_tag('print-logo-white', class: 'header-logo')
+  %div.header-item.header-login
+    =current_user.email
+    = link_to destroy_user_session_path, method: :delete, class: 'header-logout-link' do
+      Log out x
