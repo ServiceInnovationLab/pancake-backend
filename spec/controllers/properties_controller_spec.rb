@@ -20,7 +20,10 @@ RSpec.describe PropertiesController, type: :controller do
     let!(:property_3) { FactoryBot.create :property, location: '11 MOANA ROAD', council: council, rating_year: '1840' }
 
     shared_examples 'finds property' do
-      before { get :index, format: :json, params: { q: query, council_id: council.id } }
+      before {
+        get :index, format: :json, params: { q: query,
+                                            council_id: council.id }
+      }
 
       it { expect(subject.size).to eq 1 }
       it { expect(subject.first['id']).to eq property_2.valuation_id }
@@ -59,16 +62,16 @@ RSpec.describe PropertiesController, type: :controller do
       is_expected.to eq(
         'id' => property_1.valuation_id,
         'type' => 'properties',
-        'attributes' =>
-          {
-            'valuation_id' => property_1.valuation_id,
-            'location' => '123 Lambton Quay',
-            'suburb' => 'Te Aro',
-            'town_city' => 'Poneke',
-            'rating_year' => ENV['YEAR'],
-            'council_id' => property_1.council.id
-          },
-        'relationships' => { 'rates_payers' => { 'data' => [] }, 'rates_bills' => { 'data' => [] } }
+        'attributes' => {
+          'valuation_id' => property_1.valuation_id,
+          'location' => '123 Lambton Quay',
+          'suburb' => 'Te Aro',
+          'town_city' => 'Poneke',
+          'rating_year' => ENV['YEAR'],
+          'council_id' => property_1.council.id,
+        },
+        'relationships' => { 'rates_payers' => { 'data' => [] },
+                            'rates_bills' => { 'data' => [] } },
       )
     end
   end

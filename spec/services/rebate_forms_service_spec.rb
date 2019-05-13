@@ -23,8 +23,8 @@ RSpec.describe RebateFormsService do
           'moved_within_rating_year': 'false',
           'lived_in_property_july_1': 'true',
           'details_of_previous_property': 'string string string',
-          'income': {}
-        }
+          'income': {},
+        },
       }
     end
 
@@ -43,7 +43,10 @@ RSpec.describe RebateFormsService do
   describe 'existing rebate form' do
     let!(:property) { FactoryBot.create(:property_with_rates) }
     let!(:property2) { FactoryBot.create(:property_with_rates) }
-    let!(:rebate_form) { FactoryBot.create(:rebate_form, valuation_id: property.valuation_id, property: property) }
+    let!(:rebate_form) {
+      FactoryBot.create(:rebate_form,
+                        valuation_id: property.valuation_id, property: property)
+    }
     let(:update_params) do
       {
         'id' => rebate_form.id,
@@ -61,9 +64,9 @@ RSpec.describe RebateFormsService do
             'dependants' => '3',
             'occupation' => 'witch',
             '50_percent_claimed' => 'true',
-            'income' => {}
-          }
-        }
+            'income' => {},
+          },
+        },
       }
     end
 

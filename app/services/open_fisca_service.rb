@@ -10,24 +10,24 @@ class OpenFiscaService
       'persons' => {
         'Ruby' => {
           'salary' => {
-            year => income
+            year => income,
           },
           'dependants' => {
-            year => dependants
-          }
-        }
+            year => dependants,
+          },
+        },
       },
       'properties' => {
         property_name => {
           'owners' => ['Ruby'],
           'rates' => {
-            year => rates
+            year => rates,
           },
           'rates_rebate' => {
-            year => nil
-          }
-        }
-      }
+            year => nil,
+          },
+        },
+      },
     }
     response = calculate(query)
     response['properties'][property_name]['rates_rebate'][year]
@@ -35,6 +35,7 @@ class OpenFiscaService
 
   def self.calculate(query)
     headers = { 'Content-Type' => 'application/json' }
-    JSON.parse(HTTParty.post(ENV['OPENFISCA_ORIGIN'], body: query.to_json, headers: headers).body)
+    JSON.parse(HTTParty.post(ENV['OPENFISCA_ORIGIN'], body: query.to_json,
+                                                      headers: headers).body)
   end
 end

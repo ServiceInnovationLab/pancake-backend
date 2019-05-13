@@ -11,7 +11,8 @@ RSpec.describe 'Batch', type: :feature do
     # make sure there are unbatched forms
     10.times do
       property = FactoryBot.create(:property, council: batch.council)
-      FactoryBot.create(:signed_form, rebate: 100, property: property, valuation_id: property.valuation_id)
+      FactoryBot.create(:signed_form, rebate: 100, property: property,
+                                      valuation_id: property.valuation_id)
     end
   end
 
@@ -30,7 +31,8 @@ RSpec.describe 'Batch', type: :feature do
     it ' Can see all batches' do
       visit '/admin/batches'
       expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
-      expect(page).to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
+      expect(page).to have_link(href: admin_batch_path(batch_other_council,
+                                                       format: :pdf))
 
       expect(page).not_to have_button('Make next Batch')
     end
@@ -44,7 +46,9 @@ RSpec.describe 'Batch', type: :feature do
     it 'ca see batches from my council' do
       visit '/admin/batches'
       expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
-      expect(page).not_to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
+      expect(page).not_to have_link(href: admin_batch_path(
+                  batch_other_council, format: :pdf,
+                ))
 
       expect(page).to have_text 'Tauranga have 10 fully signed forms not in a batch yet.'
       expect(page).to have_button('Make next Batch')

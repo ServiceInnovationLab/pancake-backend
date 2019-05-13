@@ -24,10 +24,9 @@ class DocsController < ActionController::API
   jsonapi_resource '/v1/rebate_forms',
                    only: %i[create update show],
                    tags: [:rebates],
-
                    descriptions: {
                      create: 'create a new application for a rates rebate',
-                     show: 'retrieve existing application. pass token as id'
+                     show: 'retrieve existing application. pass token as id',
                    }
   jsonapi_resource '/v1/signatures',
                    only: %i[create],

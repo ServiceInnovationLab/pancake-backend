@@ -19,9 +19,9 @@ RSpec.describe SignaturesController, type: :controller do
             "type": signature_type.name,
             "name": 'brenda',
             "role": 'pancake eater',
-            "image": Base64.encode64(File.open('sig.png', 'rb').read)
-          }
-        }
+            "image": Base64.encode64(File.open('sig.png', 'rb').read),
+          },
+        },
       }
     end
 

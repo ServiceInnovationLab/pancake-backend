@@ -10,15 +10,16 @@ class RatesImporterService
   def import(row, rating_year, council)
     puts row
     valuation, _rating_year, location, suburb, town_city,
-      total_rates, total_water_rates, _order, _council_owner_id,
-      _surname, _first_names, _confidential, current_owner_start_date = row
+    total_rates, total_water_rates, _order, _council_owner_id,
+    _surname, _first_names, _confidential, current_owner_start_date = row
 
     if total_rates.blank?
       puts 'SKIPPING blank rates record'
       return
     end
 
-    property = Property.find_by(valuation_id: valuation, rating_year: rating_year)
+    property = Property.find_by(valuation_id: valuation,
+                                rating_year: rating_year)
     if property.blank?
       property = Property.create!(
         council: council,
@@ -27,7 +28,7 @@ class RatesImporterService
         suburb: suburb,
         town_city: town_city,
         rating_year: rating_year,
-        meta: row.to_s
+        meta: row.to_s,
       )
     end
 
@@ -42,7 +43,7 @@ class RatesImporterService
         rating_year: rating_year,
         total_rates: total_rates,
         total_water_rates: total_water_rates,
-        current_owner_start_date: current_owner_start_date
+        current_owner_start_date: current_owner_start_date,
       )
     end
   end

@@ -17,7 +17,8 @@ RSpec.describe Admin::UsersController, type: :routing do
     end
 
     it 'routes to #edit' do
-      expect(get: '/admin/users/1/edit').to route_to('admin/users#edit', id: '1')
+      expect(get: '/admin/users/1/edit').to route_to('admin/users#edit',
+                                                     id: '1')
     end
 
     it 'routes to #create' do
@@ -33,7 +34,8 @@ RSpec.describe Admin::UsersController, type: :routing do
     end
 
     it 'routes to #destroy' do
-      expect(delete: '/admin/users/1').to route_to('admin/users#destroy', id: '1')
+      expect(delete: '/admin/users/1').to route_to('admin/users#destroy',
+                                                   id: '1')
     end
   end
 end

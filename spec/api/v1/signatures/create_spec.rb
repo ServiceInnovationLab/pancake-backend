@@ -13,9 +13,9 @@ RSpec.describe 'signatures#create', type: :request do
         data: {
           type: 'signatures',
           attributes: {
-            # ... your attrs here
-          }
-        }
+ # ... your attrs here
+            },
+        },
       }
     end
 

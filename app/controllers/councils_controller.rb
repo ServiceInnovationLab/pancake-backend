@@ -3,6 +3,7 @@
 class CouncilsController < ApiController
   jsonapi resource: CouncilResource
   strong_resource :council
+
   def show
     scope = jsonapi_scope(Council.where(short_name: params[:id]))
     instance = scope.resolve.first

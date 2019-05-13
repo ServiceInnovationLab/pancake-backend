@@ -7,11 +7,11 @@ describe RebateFormPolicy do
 
   shared_examples 'can do nothing' do
     let(:rebate_form) { FactoryBot.create(:rebate_form) }
-    it { is_expected.not_to permit(:show)    }
-    it { is_expected.not_to permit(:create)  }
-    it { is_expected.not_to permit(:new)     }
-    it { is_expected.not_to permit(:update)  }
-    it { is_expected.not_to permit(:edit)    }
+    it { is_expected.not_to permit(:show) }
+    it { is_expected.not_to permit(:create) }
+    it { is_expected.not_to permit(:new) }
+    it { is_expected.not_to permit(:update) }
+    it { is_expected.not_to permit(:edit) }
     it { is_expected.not_to permit(:destroy) }
   end
 
@@ -19,9 +19,9 @@ describe RebateFormPolicy do
     describe 'unsigned form' do
       let(:rebate_form) { FactoryBot.create(:rebate_form) }
 
-      it { is_expected.to permit(:show)    }
-      it { is_expected.to permit(:update)  }
-      it { is_expected.to permit(:edit)    }
+      it { is_expected.to permit(:show) }
+      it { is_expected.to permit(:update) }
+      it { is_expected.to permit(:edit) }
       it { is_expected.to permit(:destroy) }
     end
 
@@ -30,8 +30,8 @@ describe RebateFormPolicy do
 
       it { expect(rebate_form.completed).to eq(true) }
       it { is_expected.to permit(:show) }
-      it { is_expected.to permit(:update)  }
-      it { is_expected.to permit(:edit)    }
+      it { is_expected.to permit(:update) }
+      it { is_expected.to permit(:edit) }
       it { is_expected.not_to permit(:destroy) }
     end
   end

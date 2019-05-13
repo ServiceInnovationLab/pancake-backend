@@ -5,7 +5,10 @@ require 'rails_helper'
 RSpec.describe RebateFormsController, type: :controller do
   subject { JSON.parse response.body }
 
-  let(:fields) { { 'dependants' => '0', 'full_name' => 'bob', 'income' => '10000' } }
+  let(:fields) {
+    { 'dependants' => '0', 'full_name' => 'bob',
+      'income' => '10000' }
+  }
   let(:property) { FactoryBot.create :property_with_rates, rating_year: ENV['YEAR'] }
 
   pending '#create' do
@@ -15,9 +18,9 @@ RSpec.describe RebateFormsController, type: :controller do
           type: 'rebate-forms',
           attributes: {
             valuation_id: property.valuation_id,
-            fields: fields
-          }
-        }
+            fields: fields,
+          },
+        },
       }
     end
 

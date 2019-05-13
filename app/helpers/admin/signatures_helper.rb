@@ -5,7 +5,7 @@ module Admin::SignaturesHelper
     "#{admin_signature_path}?" + {
       type: signature.signature_type.name,
       token: signature.rebate_form.token,
-      valuation_id: signature.rebate_form.valuation_id
+      valuation_id: signature.rebate_form.valuation_id,
     }.to_param
   end
 

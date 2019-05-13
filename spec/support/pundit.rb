@@ -13,6 +13,7 @@ module PunditViewPolicy
             end
           end.new
         end
+
         helper_method :policy
       end
     end

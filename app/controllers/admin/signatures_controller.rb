@@ -10,7 +10,8 @@ class Admin::SignaturesController < Admin::BaseController
   private
 
   def rebate_form
-    RebateForm.find_by(token: params[:token], valuation_id: params[:valuation_id])
+    RebateForm.find_by(token: params[:token],
+                       valuation_id: params[:valuation_id])
   end
 
   def signature_type

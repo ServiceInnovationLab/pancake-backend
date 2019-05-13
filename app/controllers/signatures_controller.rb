@@ -11,7 +11,7 @@ class SignaturesController < ApiController
       name: signature_params[:name],
       role: signature_params[:role],
       rebate_form: rebate_form,
-      signature_type: signature_type
+      signature_type: signature_type,
     )
     Signature.transaction do
       rebate_form.signatures.where(signature_type: signature_type).delete_all
@@ -20,7 +20,7 @@ class SignaturesController < ApiController
         name: signature_params[:name],
         role: signature_params[:role],
         rebate_form: rebate_form,
-        signature_type: signature_type
+        signature_type: signature_type,
       )
     end
     if signature.errors.any?
@@ -39,11 +39,12 @@ class SignaturesController < ApiController
   def rebate_form
     RebateForm.find_by!(
       # valuation_id: signature_params[:valuation_id]
-      token: signature_params[:token]
+      token: signature_params[:token],
     )
   end
 
   def signature_params
-    params.require(:data).require(:attributes).permit(:valuation_id, :token, :image, :type, :name, :role)
+    params.require(:data).require(:attributes).permit(:valuation_id, :token,
+                                                      :image, :type, :name, :role)
   end
 end

@@ -3,7 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe SignatureType, type: :model do
-  let!(:applicant_type) { FactoryBot.create(:signature_type, name: 'applicant') }
+  let!(:applicant_type) {
+    FactoryBot.create(:signature_type,
+                      name: 'applicant')
+  }
   let!(:witness_type) { FactoryBot.create(:signature_type, name: 'witness') }
 
   it { expect(witness_type.name).to eq 'witness' }

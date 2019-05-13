@@ -26,7 +26,8 @@ module PancakeServer
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins ENV['CORS_ORIGINS'] if ENV.key? 'CORS_ORIGINS'
-        resource ENV['CORS_RESOURCE'], headers: :any, methods: %i[get post options] if ENV.key? 'CORS_RESOURCE'
+        resource ENV['CORS_RESOURCE'], headers: :any, methods: %i[get post
+                                                                  options] if ENV.key? 'CORS_RESOURCE'
       end
     end
 

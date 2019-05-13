@@ -15,6 +15,7 @@ class RatesBill < ApplicationRecord
   end
 
   def rating_year_matches
-    errors.add(:rating_year, 'must match property record') unless rating_year == property.rating_year
+    errors.add(:rating_year,
+               'must match property record') unless rating_year == property.rating_year
   end
 end

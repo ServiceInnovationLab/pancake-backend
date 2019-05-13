@@ -13,9 +13,9 @@ RSpec.describe 'rebate_forms#create', type: :request do
         data: {
           type: 'rebate_forms',
           attributes: {
-            # ... your attrs here
-          }
-        }
+ # ... your attrs here
+            },
+        },
       }
     end
 

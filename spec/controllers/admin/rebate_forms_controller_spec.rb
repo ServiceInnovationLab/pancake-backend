@@ -39,7 +39,8 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       describe 'filter by name' do
         let!(:rebate_form) do
           FactoryBot.create :rebate_form,
-                            fields: { full_name: 'Fred Flintstone', dependants: 0, income: 0 }
+                            fields: { full_name: 'Fred Flintstone',
+                                      dependants: 0, income: 0 }
         end
 
         before { get :index, params: { name: 'F' } }
@@ -89,14 +90,14 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
                               has_home_business: 'no',
                               email_phone_can_be_used: true,
                               income: 23_405.2,
-                              lived_with_partner: false
+                              lived_with_partner: false,
                             })
         end
 
         before do
           put :update, params: { id: rebate_form.to_param, rebate_form: {
-            fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 }
-          } }
+                     fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 },
+                   } }
           rebate_form.reload
         end
 
@@ -133,7 +134,8 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     describe 'Editing rebate_forms' do
       let(:params) do
         {
-          fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 }
+          fields: { full_name: 'Mary Jane Kelly', 'dependants': 9,
+                    income: 11_999 },
         }
       end
 
@@ -143,7 +145,10 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
 
       context 'with valid params' do
-        before { put :update, params: { id: rebate_form.to_param, rebate_form: params } }
+        before {
+          put :update, params: { id: rebate_form.to_param,
+                                 rebate_form: params }
+        }
 
         include_examples 'controller works'
       end
@@ -151,7 +156,10 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       context 'with invalid params' do
         let(:invalid_attributes) { { fields: {} } }
 
-        before { put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes } }
+        before {
+          put :update, params: { id: rebate_form.to_param,
+                                 rebate_form: invalid_attributes }
+        }
 
         include_examples 'controller works'
       end
@@ -161,7 +169,8 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
         it 'does not allow changes to completed rebate_form' do
           expect do
-            put :update, params: { id: rebate_form.to_param, rebate_form: params }
+            put :update, params: { id: rebate_form.to_param,
+                                   rebate_form: params }
           end.not_to change(rebate_form, :valuation_id)
         end
       end

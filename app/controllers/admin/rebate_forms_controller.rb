@@ -17,7 +17,8 @@ class Admin::RebateFormsController < Admin::BaseController
                                             .order(created_at: :desc)
 
     # filter by the search form fields
-    @rebate_forms = @rebate_forms.where("fields ->> 'full_name' like ?", "%#{params[:name]}%") if @name.present?
+    @rebate_forms = @rebate_forms.where("fields ->> 'full_name' like ?",
+                                        "%#{params[:name]}%") if @name.present?
     @rebate_forms = @rebate_forms.where(completed: @completed)
     @rebate_forms = @rebate_forms.order(created_at: :desc)
 
@@ -39,7 +40,9 @@ class Admin::RebateFormsController < Admin::BaseController
 
     respond_with(@rebate_form) do |format|
       format.pdf do
-        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf', margin: { top: 0, bottom: 0, left: 0, right: 0 }, dpi: '300'
+        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf', margin: {
+                 top: 0, bottom: 0, left: 0, right: 0,
+               }, dpi: '300'
       end
     end
   end
@@ -71,7 +74,8 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def rebate_form_fields_params
-    params.permit(:id, :valuation_id, :total_rates, :location, :council, rebate_form: { fields: {} })
+    params.permit(:id, :valuation_id, :total_rates, :location, :council,
+                  rebate_form: { fields: {} })
   end
 
   def rebate_form_params

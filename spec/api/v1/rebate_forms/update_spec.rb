@@ -16,9 +16,9 @@ RSpec.describe 'rebate_forms#update', type: :request do
           id: rebate_form.id.to_s,
           type: 'rebate_forms',
           attributes: {
-            # ... your attrs here
-          }
-        }
+ # ... your attrs here
+            },
+        },
       }
     end
 

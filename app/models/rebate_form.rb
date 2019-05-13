@@ -30,7 +30,7 @@ class RebateForm < ApplicationRecord
 
     rebate = OpenFiscaService.rebate_amount(
       income: income, rates: rates_bill.total_bill,
-      dependants: dependants, year: rating_year
+      dependants: dependants, year: rating_year,
     )
     update!(rebate: rebate)
   rescue StandardError => e
@@ -82,7 +82,8 @@ class RebateForm < ApplicationRecord
   def set_property_id
     return if property_id.present?
 
-    self.property = Property.find_by(valuation_id: valuation_id, rating_year: Rails.configuration.rating_year)
+    self.property = Property.find_by(valuation_id: valuation_id,
+                                     rating_year: Rails.configuration.rating_year)
   end
 
   def new_token
@@ -99,10 +100,12 @@ class RebateForm < ApplicationRecord
   end
 
   def same_council
-    errors.add(:batch_id, 'council must match') if batch.present? && property.council_id != batch.council_id
+    errors.add(:batch_id,
+               'council must match') if batch.present? && property.council_id != batch.council_id
   end
 
   def only_completed_forms_in_batch
-    errors.add(:batch_id, 'uncompleted forms cannot be in a batch') if batch_id.present? && !completed
+    errors.add(:batch_id,
+               'uncompleted forms cannot be in a batch') if batch_id.present? && !completed
   end
 end

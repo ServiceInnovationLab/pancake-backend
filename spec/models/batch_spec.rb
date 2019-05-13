@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Batch, type: :model do
-  describe 'deleting batches'  do
+  describe 'deleting batches' do
     let(:council) { FactoryBot.create :council }
     let(:batch) { FactoryBot.create :batch, council: council }
     let(:rebate_form) { FactoryBot.create :signed_form }

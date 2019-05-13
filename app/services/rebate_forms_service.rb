@@ -26,7 +26,8 @@ class RebateFormsService
     rebate_form = RebateForm.find_by(id: @rebate_form_attributes['id'])
     property = rebate_form.property if property.id.nil?
     fields_to_update = rebate_form.fields.merge(fields_to_merge)
-    rebate_form.update(property: property, valuation_id: property.valuation_id, fields: fields_to_update)
+    rebate_form.update(property: property,
+                       valuation_id: property.valuation_id, fields: fields_to_update)
     rebate_form
   end
 

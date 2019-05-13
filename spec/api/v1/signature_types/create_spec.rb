@@ -13,9 +13,9 @@ RSpec.describe 'signature_types#create', type: :request do
         data: {
           type: 'signature_types',
           attributes: {
-            name: 'scribble'
-          }
-        }
+            name: 'scribble',
+          },
+        },
       }
     end
 

@@ -6,8 +6,8 @@ RSpec.describe 'admin/councils/new', type: :view do
   before do
     assign(
       :council, Council.new(
-                  name: 'MyString',
-                  active: false
+        name: 'MyString',
+        active: false,
       )
     )
   end

@@ -3,14 +3,16 @@
 class PropertiesController < ApiController
   jsonapi resource: PropertyResource
   strong_resource :property
+
   def show
-    scope = jsonapi_scope(Property.where(valuation_id: params[:id], rating_year: Rails.configuration.rating_year))
+    scope = jsonapi_scope(Property.where(valuation_id: params[:id],
+                                         rating_year: Rails.configuration.rating_year))
     instance = scope.resolve.first
     raise JsonapiCompliable::Errors::RecordNotFound unless instance
 
     render_jsonapi(
       instance, scope: false,
-                include: %i[rates_bills rates_payers council]
+                include: %i[rates_bills rates_payers council],
     )
   end
 

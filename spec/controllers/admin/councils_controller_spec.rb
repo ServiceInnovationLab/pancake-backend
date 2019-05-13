@@ -18,7 +18,8 @@ RSpec.describe Admin::CouncilsController, type: :controller do
     before { sign_in admin_user }
 
     let(:valid_attributes) do
-      { name: 'Tauranga', short_name: 'TCC', email: 'bob@example.com', active: true }
+      { name: 'Tauranga', short_name: 'TCC', email: 'bob@example.com',
+        active: true }
     end
 
     let(:invalid_attributes) do
@@ -100,24 +101,28 @@ RSpec.describe Admin::CouncilsController, type: :controller do
         end
 
         it 'assigns the requested council as @council' do
-          put :update, params: { id: council.to_param, council: valid_attributes }
+          put :update, params: { id: council.to_param,
+                                 council: valid_attributes }
           expect(assigns(:council)).to eq(council)
         end
 
         it 'redirects to the council' do
-          put :update, params: { id: council.to_param, council: valid_attributes }
+          put :update, params: { id: council.to_param,
+                                 council: valid_attributes }
           expect(response).to redirect_to(admin_councils_path)
         end
       end
 
       context 'with invalid params' do
         it 'assigns the council as @council' do
-          put :update, params: { id: council.to_param, council: invalid_attributes }
+          put :update, params: { id: council.to_param,
+                                 council: invalid_attributes }
           expect(assigns(:council)).to eq(council)
         end
 
         it "re-renders the 'edit' template" do
-          put :update, params: { id: council.to_param, council: invalid_attributes }
+          put :update, params: { id: council.to_param,
+                                 council: invalid_attributes }
           expect(response).to render_template('edit')
         end
       end

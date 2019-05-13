@@ -16,9 +16,9 @@ RSpec.describe 'signatures#update', type: :request do
           id: signature.id.to_s,
           type: 'signatures',
           attributes: {
-            # ... your attrs here
-          }
-        }
+ # ... your attrs here
+            },
+        },
       }
     end
 
