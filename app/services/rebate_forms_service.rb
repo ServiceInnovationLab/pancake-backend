@@ -6,7 +6,7 @@ class RebateFormsService
   end
 
   def update
-    council = create_or_update_council
+    council = find_council
     property = create_or_update_property(council)
     rebate_form = create_or_update_rebate_form(property)
     update_rates_bill(property)
@@ -53,7 +53,7 @@ class RebateFormsService
                                council: council)
   end
 
-  def create_or_update_council
+  def find_council
     Council.find_by(name: @rebate_form_attributes['council'])
   end
 
