@@ -9,7 +9,7 @@ class RebateFormsService
     council = find_council
     property = create_or_update_property(council)
     rebate_form = create_or_update_rebate_form(property)
-    update_rates_bill(property)
+    create_or_update_rates_bill(property)
     rebate_form.calc_rebate_amount!
     raise 'No rebate calculated. This should never happen' if rebate_form.rebate.blank?
     rebate_form
@@ -47,19 +47,21 @@ class RebateFormsService
   end
 
   def create_or_update_property(council)
-    Property.find_or_create_by(valuation_id: @rebate_form_attributes['valuation_id'],
-                               location: @rebate_form_attributes['location'],
-                               rating_year: ENV['YEAR'],
-                               council: council)
+    property = Property.find_or_create_by(valuation_id: @rebate_form_attributes['valuation_id'],
+                                          rating_year: ENV['YEAR'],
+                                          council: council)
+    property.update(location: @rebate_form_attributes['location'])
+    property
   end
 
   def find_council
     Council.find_by(name: @rebate_form_attributes['council'])
   end
 
-  def update_rates_bill(property)
-    RatesBill.find_or_create_by(property: property,
-                                rating_year: property.rating_year,
-                                total_rates: @rebate_form_attributes['total_rates'])
+  def create_or_update_rates_bill(property)
+    rates_bill = RatesBill.find_or_create_by(property: property,
+                                             rating_year: property.rating_year)
+    rates_bill.update(total_rates: @rebate_form_attributes['total_rates'])
+    rates_bill
   end
 end
