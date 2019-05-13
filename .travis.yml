@@ -23,3 +23,6 @@ after_script:
 env:
   global:
   - PGPORT=5433
+  - YEAR=2018
+  - SIGNING_URL="http://127.0.0.1:4000/#/{token}"
+  - OPENFISCA_ORIGN="https://openfisca.ratesrebates.services.govt.nz/calculate"
