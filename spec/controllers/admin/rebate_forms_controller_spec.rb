@@ -131,12 +131,10 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
     end
 
     describe 'Editing rebate_forms' do
-      let(:attachment_params) do
-        { attachments: [
-          tempfile: Rails.root.join('sig.png'),
-          original_filename: 'sig.png',
-          content_type: 'image/jpeg'
-        ] }
+      let(:params) do
+        {
+          fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 }
+        }
       end
 
       shared_examples 'controller works' do
@@ -145,7 +143,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
 
       context 'with valid params' do
-        before { put :update, params: { id: rebate_form.to_param, rebate_form: attachment_params } }
+        before { put :update, params: { id: rebate_form.to_param, rebate_form: params } }
 
         include_examples 'controller works'
       end
@@ -163,7 +161,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
         it 'does not allow changes to completed rebate_form' do
           expect do
-            put :update, params: { id: rebate_form.to_param, rebate_form: attachment_params }
+            put :update, params: { id: rebate_form.to_param, rebate_form: params }
           end.not_to change(rebate_form, :valuation_id)
         end
       end
