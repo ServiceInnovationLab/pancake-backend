@@ -31,22 +31,22 @@
 }
 
 body {
-  background-color: #fff;
+  background-color: var(--white);
   color: #333;
   margin: 33px;
 }
 
 a {
   background-color: #6dca7f;
-  color: #000000;
+  color: var(--black);
   color: rgb(61, 146, 201);
   text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  color: #fff;
-  background-color: #000;
+  color: var(--white);
+  background-color: var(--black);
   text-decoration: underline;
 }
 
@@ -76,7 +76,11 @@ a:focus {
 }
 
 .header-logout-link {
+  border: 2px solid var(--white);
+  border-radius: 5px;
   color: var(--white) !important;
+  margin-left: 15px;
+  padding: 5px;
 }
 
 .show_header {
