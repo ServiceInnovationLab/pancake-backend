@@ -1,0 +1,42 @@
+version: '3.3'
+
+volumes:
+  data: # volume for mariadb
+  cache: # volume for bundle
+
+services:
+  db:
+    image: postgres:11
+    ports:
+      - "5432:5432"
+    volumes:
+      - type: volume
+        source: data
+        target: /var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test
+      MYSQL_ROOT_HOST: '%'
+
+  mailcatcher:
+    image: tophfr/mailcatcher
+    ports:
+      - 1080:80
+    expose:
+      - "25"
+
+  web:
+    image: govtnz/pancake
+    depends_on:
+      - db
+    ports:
+      - "3000:80"
+    volumes:
+      - type: bind
+        source: ./
+        target: /usr/src/app
+      - type: volume
+        source: cache
+        target: /usr/local/bundle
+    entrypoint: bin/docker_web_aws

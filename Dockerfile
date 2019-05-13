@@ -14,12 +14,13 @@ COPY env-example .env
 COPY Gemfile* ./
 RUN bundle install
 
-#COPY package.json yarn.lock ./
-#RUN yarn install
-
 COPY . .
 
 COPY bin/* /usr/bin/
+
+RUN bundle install && \
+  yarn install && \
+  bundle exec rails assets:precompile
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
