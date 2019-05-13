@@ -11,6 +11,8 @@ before_install:
 - nvm use 9.11.1
 - "./bin/frontend-update.sh"
 script:
+- bundle install
+- yarn install
 - RAILS_ENV=test bundle exec rake db:create db:migrate
 - bundle exec rspec
 after_script:
