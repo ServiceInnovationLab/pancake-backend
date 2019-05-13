@@ -1,3 +1,111 @@
+/*Colours*/
+:root {
+  --dove: #ebebeb;
+  --gray: #ababab;
+  --dark-gray: #4c4c4c;
+  --dark-gray-hover: #3d3d3d;
+  --orange: #d34322;
+  --orange-hover: #b73a1e;
+  --blue: #336699;
+  --blue-hover: #1a4d80;
+  --purple: #993366;
+  --purple-hover: #6a2347;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+.rebate-wrapper {
+  margin: auto;
+  max-width: 960px;
+  padding: 4em;
+}
+
+.rebate-header {
+  font-size: 3em;
+  margin: 0;
+}
+
+.rebate-subhead {
+  font-size: 1.75em;
+  margin: .4em 0;
+}
+
+.rebate-search-box {
+  background-color: var(--dove);
+  padding: 1.75em;
+  width: 770px;
+}
+
+.rebate-search-field {
+  margin-bottom: 1em;
+}
+
+.rebate-search-input {
+  line-height: 2em;
+  margin-bottom: .5em;
+  width: 100%;
+}
+
+.rebate-search-button {
+  background-color: var(--blue);
+  border-radius: .2em;
+}
+
+.rebate-results-table {
+  background-color: var(--dove);
+  margin-top: 1.5em;
+  padding: 1.75em;
+  width: 770px;
+}
+
+.rebate-results-table-cell {
+  background-color: var(--white) !important;
+}
+
 .rebate-amount {
   font-size: 4em;
+}
+
+.rebate-edit-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 2rem;
+  width: 90vw;
+  max-width: 1000px;
+  min-width: 500px;
+  background-color: var(--dove);
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column
+}
+
+.flex-item {
+  width: 50%
+}
+
+.one-quarter {
+  width: 25%
+}
+
+.one-third {
+  width: 33%
+}
+
+.full-width {
+  width: 100%
+}
+
+.rebate-radio-buttons {
+  margin-top:.5rem;
+  height: 50%;
+  border: 1px solid var(--gray)
 }
