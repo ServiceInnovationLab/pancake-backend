@@ -71,7 +71,7 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def rebate_form_fields_params
-    params.permit(:id, :valuation_id, :total_rates, :location, rebate_form: { fields: {} })
+    params.permit(:id, :valuation_id, :total_rates, :location, :council, rebate_form: { fields: {} })
   end
 
   def rebate_form_params
