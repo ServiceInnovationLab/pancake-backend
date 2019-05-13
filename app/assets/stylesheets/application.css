@@ -51,14 +51,15 @@ a:focus {
 }
 
 #main {
-  margin: 0;
+  margin-top: 10%;
   padding: 1em;
   font-family: Georgia, "Cambria", serif;
 }
 
 .header {
-  padding: 2em;
   background-color: var(--black);
+  padding: 2em;
+  position: fixed;
 }
 
 .header-item {
