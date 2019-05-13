@@ -2,7 +2,7 @@
 
 class Admin::RebateFormsController < Admin::BaseController
   before_action :set_rebate_form, only: %i[show update destroy edit]
-  respond_to :html, :pdf, :csv
+  respond_to :html, :pdf, :csv, :json
 
   # GET /admin/rebate_forms
   def index
@@ -71,7 +71,7 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def rebate_form_fields_params
-    params.permit(:id, :valuation_id, :total_rates, :location, rebate_form: { fields: {} })
+    params.permit(:id, :valuation_id, :total_rates, :location, :council, rebate_form: { fields: {} })
   end
 
   def rebate_form_params

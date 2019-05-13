@@ -6,7 +6,8 @@ class RebateFormsService
   end
 
   def update
-    property = create_or_update_property
+    council = find_council
+    property = create_or_update_property(council)
     rebate_form = create_or_update_rebate_form(property)
     update_rates_bill(property)
     rebate_form.calc_rebate_amount!
@@ -45,10 +46,15 @@ class RebateFormsService
                       fields: @rebate_form_attributes['fields'])
   end
 
-  def create_or_update_property
+  def create_or_update_property(council)
     Property.find_or_create_by(valuation_id: @rebate_form_attributes['valuation_id'],
                                location: @rebate_form_attributes['location'],
-                               rating_year: ENV['YEAR'])
+                               rating_year: ENV['YEAR'],
+                               council: council)
+  end
+
+  def find_council
+    Council.find_by(name: @rebate_form_attributes['council'])
   end
 
   def update_rates_bill(property)

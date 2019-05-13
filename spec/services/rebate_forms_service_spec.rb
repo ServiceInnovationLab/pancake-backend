@@ -10,6 +10,7 @@ RSpec.describe RebateFormsService do
         'valuation_id': '12345',
         'total_rates': '12345',
         'location': 'This is the address',
+        'council': 'Wellington City Council',
         'fields': {
           'full_name': 'Herminone Granger',
           'customer_id': '12345',
@@ -49,6 +50,7 @@ RSpec.describe RebateFormsService do
         'valuation_id' => property2.valuation_id,
         'total_rates' => '12345',
         'location' => property2.location,
+        'council' => property2.council.name,
         'rebate_form' => {
           'fields' => {
             'full_name' => 'Best Witch',
@@ -74,6 +76,7 @@ RSpec.describe RebateFormsService do
           expect(RebateForm.first.reload.fields['full_name']).to eq 'Best Witch'
           expect(RebateForm.first.reload.fields['email']).to eq 'hermione.granger@potterworld.com'
           expect(RebateForm.first.reload.fields['dependants']).to eq '3'
+          expect(RebateForm.first.reload.property.council.name).to eq property2.council.name
         end
       end
     end
