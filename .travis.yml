@@ -5,7 +5,7 @@ cache:
 services:
   - postgresql
 addons:
-  postgresql: "10.8"
+  postgresql: "10"
   apt:
     packages:
     - postgresql-10
@@ -20,3 +20,6 @@ script:
 - bundle exec rspec
 after_script:
 - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t simplecov --id $CC_TEST_REPORTER_ID"
+env:
+  global:
+  - PGPORT=5433
