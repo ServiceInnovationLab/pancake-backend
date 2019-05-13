@@ -59,7 +59,7 @@ class RebateFormsService
 
   def update_rates_bill(property)
     RatesBill.find_or_create_by(property: property,
-                                rating_year: property.rating_year,
+                                # rating_year: property.rating_year,
                                 total_rates: @rebate_form_attributes['total_rates'])
   end
 end
