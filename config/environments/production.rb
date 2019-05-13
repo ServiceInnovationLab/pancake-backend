@@ -38,7 +38,8 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  #config.force_ssl = true
+  config.force_ssl = false
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -80,19 +81,25 @@ Rails.application.configure do
   end
 
   # Do not dump schema after migrations.
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.default_url_options = { host: ENV['HOSTNAME'] }
   config.action_mailer.smtp_settings = {
-    user_name: ENV['SENDGRID_USERNAME'],
-    password: ENV['SENDGRID_PASSWORD'],
-    domain: 'heroku.com',
-    address: 'smtp.sendgrid.net',
-    port: 587,
+    address: ENV['SES_SMTP_SERVER'],
+    port: ENV['SES_SMTP_PORT'],
+    user_name: ENV['SES_SMTP_USERNAME'],
+    password: ENV['SES_SMTP_PASSWORD'],
     authentication: :plain,
-    enable_starttls_auto: true
+    enable_starttls_auto: true,
+
+    # Had to add these to prevent read timeout issues, see https://github.com/mikel/mail/issues/639
+    ssl: true,
+    tls: true
   }
-  config.active_storage.service = :amazon
+
+  #config.active_storage.service = :amazon
 
   # For pdfs on heroku
-  config.assets.precompile += ['pdf.css']
+  #config.assets.precompile += ['pdf.css']
 end
