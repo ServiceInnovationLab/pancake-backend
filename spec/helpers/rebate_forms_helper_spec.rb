@@ -31,7 +31,7 @@ RSpec.describe RebateFormsHelper, type: :helper do
     it { expect(rebate_form_amount(rebate_form)).to eq '$555.12' }
   end
 
-  describe 'rebate_form_total(rebate_form)' do
+  pending 'rebate_form_total(rebate_form)' do
     it { expect(rebate_form_total(rebate_form)).to eq '$0.00' }
   end
 
