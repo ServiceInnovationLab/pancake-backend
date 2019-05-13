@@ -51,7 +51,7 @@ class RebateForm < ApplicationRecord
   end
 
   def income
-    fields['income']
+    fields['income']['total_income']
   end
 
   def lived_here
