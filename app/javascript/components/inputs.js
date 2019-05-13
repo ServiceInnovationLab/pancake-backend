@@ -21,12 +21,13 @@ export function SingleInput ({ id, label, placeholder, fullWidth, type = "text" 
 }
 export function TableInput ({ id, className = 'flex-item', type = "number" }) {
   return (
-  <div key={id} className={className}>
+  <div key={id} className='one-quarter'>
     <Field
       className='rebate-search-input'
       name={`fields.income.${id}`}
       component='input'
       type={type}
+      min={0}
     />
     <Error name={`fields.income.${id}`} />
   </div>
@@ -40,6 +41,7 @@ export function ExtraTableInputs ({ id, type = "number" }) {
       name={`fields.income.${id}`}
       component='input'
       type={type}
+      min={0}
     />
     <Error name={`fields.income.${id}`} />
   </div>
@@ -53,7 +55,6 @@ export function RadioInput ({ id, label, type }) {
         {map(["yes", "no"], value =>
         <label key={`${id}-${value}`} >
           <Field
-            className="one-quarter"
             name={`fields.${id}`}
             component="input"
             type={type}

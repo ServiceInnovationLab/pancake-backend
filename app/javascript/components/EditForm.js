@@ -96,7 +96,7 @@ class EditRebateForm extends React.Component {
             {IncomeDeclaration({otherIncomeFields})}
             <div className={'flex-row'}>
               <label className='flex-item'>
-                <h3>Total Combined Income: </h3>
+                <h3>Additional Income Type: </h3>
               </label>
               <Field
                 className='rebate-search-input flex-item'
@@ -106,6 +106,7 @@ class EditRebateForm extends React.Component {
             </div>
             <div className="buttons">
               <button
+                disabled={!(values.newIncomeField)}
                 type="button"
                 onClick={() => {
                   this.setState({otherIncomeFields: { [values.newIncomeField]:0 , ...otherIncomeFields} })

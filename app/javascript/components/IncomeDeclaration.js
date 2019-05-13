@@ -43,8 +43,8 @@ export function IncomeDeclaration ({otherIncomeFields}) {
                 <label className="flex-item">
                   <h3>{key}</h3>
                 </label>
-                {ExtraTableInputs({id: `applicant.${key}`})}
-                {ExtraTableInputs({id: `partner.${key}`})}
+                {TableInput({id: `other_income.applicant.${key}`})}
+                {TableInput({id: `other_income.partner.${key}`})}
             </div>
           )
           })}
