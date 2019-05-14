@@ -47,11 +47,12 @@ export function RadioInput ({ id, label, type, isReadOnly, withMargin }) {
   return (
     <div key={id} className={className}>
       <label>{label}</label>
-      <div className="flex-row rebate-radio-buttons" >
+      <div className="flex-row rebate-radio-buttons radio" >
         {map(["yes", "no"], value =>
         <label key={`${id}-${value}`} >
           <Field
             name={`fields.${id}`}
+            className='radio-inline'
             component="input"
             type={type}
             value={value}

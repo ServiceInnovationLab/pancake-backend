@@ -99,16 +99,15 @@ class EditRebateForm extends React.Component {
                 : SingleInput({...field, isReadOnly})
               })}
             </div>
-            { values.fields.moved_within_rating_year == 'yes'
-            ? <div className="flex-row">
+            { values.fields.moved_within_rating_year == 'yes' &&
+              <div className="flex-row">
                 {map(conditionalsFields, (field, index) => {
                 if (indexOf([2, 4, 5], index) >= 0) field.withMargin = true
                 return field.type == 'radio'
                 ? RadioInput({...field, isReadOnly})
                 : SingleInput({...field, isReadOnly})
                 })}
-              </div>
-              : null
+              </div>   
             }
             {IncomeDeclaration({otherIncomeFields, isReadOnly})}
             <div className={'flex-row'}>
