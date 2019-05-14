@@ -20,12 +20,16 @@ class EditRebateForm extends React.Component {
 
     const { rebateForm: { fields: {income} } } = this.props
 
-    const applicantKeys = income && income.otherIncome ? Object.keys(income.other_income.applicant) : []
-    const partnerKeys = income && income.otherIncome ? Object.keys(income.other_income.partner) : []
+    const hasOtheIncome = income && income.other_income
+
+    const applicantKeys = hasOtheIncome ? Object.keys(income.other_income.applicant) : []
+    const partnerKeys = hasOtheIncome ? Object.keys(income.other_income.partner) : []
+
     const uniqKeys = uniq(applicantKeys.concat(partnerKeys))
 
     this.state = { otherIncomeFields: uniqKeys }
   }
+
   addNewIncomeValue (values) {
     this.setState({otherIncomeFields: this.state.otherIncomeFields.concat(values.newIncomeField)})
     values.newIncomeField = null

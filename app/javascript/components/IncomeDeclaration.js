@@ -26,28 +26,22 @@ export function IncomeDeclaration ({otherIncomeFields, isEditable}) {
             <h2 className="one-quarter" >Applicant</h2>
             <h2 className="one-quarter" >Partner</h2>
         </div>
-        {map(incomeRows, (field) => {
-        return (
-          <div key={field.id} className="flex-row">
-              <label className="flex-item">
-                <h3>{field.label}</h3>
-              </label>
-              {TableInput({...field, isEditable, className: 'one-quarter', id: `applicant.${field.id}`})}
-              {TableInput({...field, isEditable, className: 'one-quarter', id: `partner.${field.id}`})}
-          </div>
-        )
-        })}
-         {map(otherIncomeFields, (name) => {
-          return (
-            <div key={name} className="flex-row">
-                <label className="flex-item">
-                  <h3>{name}</h3>
-                </label>
-                {TableInput({isEditable, id: `other_income.applicant.${name}`})}
-                {TableInput({isEditable, id: `other_income.partner.${name}`})}
-            </div>
-          )
-          })}
+        {map([...incomeRows, ...otherIncomeFields], field => {
+
+            const isArray = typeof field == 'object'
+            const name = isArray ? field[0] : field
+            const label = isArray ? field[1] : field
+            
+            return (
+              <div key={name} className="flex-row">
+                  <label className="flex-item">
+                    <h3>{label || name}</h3>
+                  </label>
+                  {TableInput({name, isEditable, className: 'one-quarter', id: `applicant.${name}`})}
+                  {TableInput({name, isEditable, className: 'one-quarter', id: `partner.${name}`})}
+              </div>
+            )}
+          )}
         </div>
     </div>
   )

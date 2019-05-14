@@ -20,18 +20,18 @@ export function SingleInput ({ isEditable, id, label, placeholder, fullWidth, ty
   </div>
   )
 }
-export function TableInput ({ id, type = "number", isEditable }) {
+export function TableInput ({ name, type = "number", isEditable }) {
   return (
-  <div key={id} className='one-quarter'>
+  <div key={name} className='one-quarter'>
     <Field
       className='rebate-search-input'
-      name={`fields.income.${id}`}
+      name={`fields.income.${name}`}
       component='input'
       type={type}
       readOnly={!isEditable}
       min={0}
     />
-    <Error name={`fields.income.${id}`} />
+    <Error name={`fields.income.${name}`} />
   </div>
 )}
 
