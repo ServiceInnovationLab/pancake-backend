@@ -15,13 +15,6 @@ RSpec.describe 'Batch', type: :feature do
     end
   end
 
-  context 'anonymous' do
-    it "can't see it" do
-      visit '/admin/batches'
-      expect(page).to have_text('Forgot your password?')
-    end
-  end
-
   context 'signed in as dia' do
     let(:user) { FactoryBot.create :admin_user }
 
