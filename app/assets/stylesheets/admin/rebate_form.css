@@ -104,6 +104,14 @@
   width: 100%
 }
 
+.rebate-submit-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1.5rem 0
+}
+.rebate-add-income-button {
+  margin: .25rem 0 1rem 0
+}
 .rebate-radio-buttons {
   margin-top:.5rem;
   height: 50%;

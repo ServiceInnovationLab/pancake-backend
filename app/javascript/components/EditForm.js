@@ -110,29 +110,27 @@ class EditRebateForm extends React.Component {
             }
             {IncomeDeclaration({otherIncomeFields, isEditable})}
             <div className={'flex-row'}>
-              <label className='flex-item'>
-                <h3>Additional Income Type: </h3>
-              </label>
               <Field
-                className='rebate-search-input flex-item'
+                className='rebate-search-input flex-item'rebate-add-income-button
                 name="newIncomeField"
                 component="input"
                 readOnly={!isEditable}
               />
-            </div>
-            <div className="buttons">
               <button
+                className='flex-item rebate-add-income-button'
                 disabled={!isEditable || !(values.newIncomeField)}
                 type="button"
                 onClick={() => this.addNewIncomeValue(values)}
                 >
                   Add Income Type
               </button>
-              <button type="submit" disabled={submitting}>
+
+            </div>
+            <div className="rebate-submit-button-wrapper">
+              <button classname="flex-item" type="submit" disabled={submitting}>
                 Submit
               </button>
             </div>
-            <pre>{JSON.stringify(values, 0, 2)}</pre>
           </form>
         )}}
       </Form>
