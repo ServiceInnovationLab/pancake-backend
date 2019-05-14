@@ -11,7 +11,7 @@ import { calculator } from '../helpers/calculator_decorator';
 import { SingleInput, RadioInput } from './inputs'
 import { IncomeDeclaration } from "./IncomeDeclaration";
 
-const databaseURL = process.env.APP_URL  
+const appUrl = process.env.APP_URL  
 
 class EditRebateForm extends React.Component {
 
@@ -38,7 +38,7 @@ class EditRebateForm extends React.Component {
   onSubmit (values) {
     return values.newIncomeField
       ? this.addNewIncomeValue(values)
-      : fetch(`${databaseURL}admin/rebate_forms/${this.props.rebateForm.id}`, {
+      : fetch(`${appUrl}admin/rebate_forms/${this.props.rebateForm.id}`, {
         method: 'PATCH',
         headers: {
           'X-CSRF-Token': getCSRF(),
@@ -50,7 +50,7 @@ class EditRebateForm extends React.Component {
         }),
         credentials: 'same-origin'
       }).then(res => {
-        if (res.ok) window.location = `${databaseURL}admin/rebate_forms/${this.props.rebateForm.id}` 
+        if (res.ok) window.location = `${appUrl}admin/rebate_forms/${this.props.rebateForm.id}` 
         else console.error(res)
       })
   }
