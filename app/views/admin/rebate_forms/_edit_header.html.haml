@@ -9,7 +9,7 @@
     Customer details
 
   %h3.rebate-subtitle
-    - if rebate_form_signature_required?(@rebate_form)
+    - if rebate_form_signature_completed?(@rebate_form)
       Signed and ready to process
     - else
       Signature required
