@@ -8,7 +8,6 @@ export function SingleInput ({ isReadOnly, id, label, placeholder, fullWidth, wi
     : withMargin
       ? 'flex-item'
       : 'flex-item with-margin'
-  console.log(withMargin)
   return (
   <div key={id} className={className}>
     <label>{label}</label>
@@ -26,9 +25,9 @@ export function SingleInput ({ isReadOnly, id, label, placeholder, fullWidth, wi
   </div>
   )
 }
-export function TableInput ({ id, type = "number", isReadOnly }) {
+export function TableInput ({ id, type = "number", isReadOnly, className }) {
   return (
-  <div key={id} className='one-quarter'>
+  <div key={id} className={className}>
     <Field
       className='rebate-search-input'
       name={`fields.income.${id}`}
@@ -45,7 +44,6 @@ export function RadioInput ({ id, label, type, isReadOnly, withMargin }) {
   const className = withMargin
     ? 'flex-item'
     : 'flex-item with-margin'
-  console.log(withMargin)
   return (
     <div key={id} className={className}>
       <label>{label}</label>
