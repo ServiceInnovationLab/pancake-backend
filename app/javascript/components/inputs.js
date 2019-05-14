@@ -42,21 +42,19 @@ export function RadioInput ({ id, label, type, isEditable }) {
       <label>{label}</label>
       <div className="flex-row rebate-radio-buttons" >
         {map(["yes", "no"], value =>
-        <div key={`${id}-${value}`} className="wrapper">
+        <label key={`${id}-${value}`} >
           <Field
             name={`fields.${id}`}
             component="input"
             type={type}
             value={value}
             readOnly={!isEditable}
-          />
-          <label  >
-            {value}
-          </label>
-        </div>
+          />{" "}
+          {value}
+        </label>
         )}
         <Error name={`fields.${id}`} />
-      </div>
+     </div>
     </div>
   )
 }
