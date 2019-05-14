@@ -18,7 +18,7 @@ export function IncomeDeclaration ({otherIncomeFields, isReadOnly}) {
             className='rebate-search-input flex-item'
             name="fields.income.total_income"
             component="input"
-            isReadOnly
+            readOnly
           />
         </div>
         <div className="flex-row">
