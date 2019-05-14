@@ -21,7 +21,7 @@ export function SingleInput ({ isEditable, id, label, placeholder, fullWidth, ty
   </div>
   )
 }
-export function TableInput ({ id, name, type = "number", isEditable }) {
+export function TableInput ({ id, type = "number", isEditable }) {
   return (
   <div key={id} className='one-quarter'>
     <Field
