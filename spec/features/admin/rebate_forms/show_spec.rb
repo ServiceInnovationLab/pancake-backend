@@ -46,6 +46,8 @@ RSpec.describe 'RebateForm', type: :feature do
           visit "/admin/rebate_forms/#{rebate_form.id}"
           click_link('edit')
           expect(page).to_not have_text('EDIT')
+          expect(page).to have_text('Customer details')
+          expect(page).to have_text('Signature required')
         end
       end
     end
