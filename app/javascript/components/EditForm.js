@@ -1,6 +1,6 @@
 
 import React from "react"
-import { map } from "lodash"
+import { map, uniq } from "lodash"
 import { Form, Field } from "react-final-form";
 import 'isomorphic-fetch';
 
@@ -17,37 +17,51 @@ class EditRebateForm extends React.Component {
 
   constructor(props) {
     super(props);
-    const { rebateForm: { fields } } = this.props
-    this.state = { otherIncomeFields: fields.other_income }
+
+    const { rebateForm: { fields: {income} } } = this.props
+
+    const applicantKeys = income && income.otherIncome ? Object.keys(income.other_income.applicant) : []
+    const partnerKeys = income && income.otherIncome ? Object.keys(income.other_income.partner) : []
+    const uniqKeys = uniq(applicantKeys.concat(partnerKeys))
+
+    this.state = { otherIncomeFields: uniqKeys }
+  }
+  addNewIncomeValue (values) {
+    this.setState({otherIncomeFields: this.state.otherIncomeFields.concat(values.newIncomeField)})
+    values.newIncomeField = null
   }
 
   onSubmit (values) {
-    fetch(`${databaseURL}admin/rebate_forms/1`, {
-      method: 'PATCH',
-      headers: {
-        'X-CSRF-Token': this.props.token || getCSRF(),
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        rebate_form: {...values}
-      }),
-      credentials: 'same-origin'
-    }).then(res => {
-      console.log(res)
-    })
+    return values.newIncomeField
+      ? this.addNewIncomeValue(values)
+      : fetch(`${databaseURL}admin/rebate_forms/${this.props.rebateForm.id}`, {
+        method: 'PATCH',
+        headers: {
+          'X-CSRF-Token': getCSRF(),
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          rebate_form: {...values}
+        }),
+        credentials: 'same-origin'
+      }).then(res => {
+        if (res.ok) window.location = `${databaseURL}admin/rebate_forms/${this.props.rebateForm.id}` 
+        else console.error(res)
+      })
   }
 
   render () {
     const { 
       rebateForm,
       property,
-      ratesBills
+      ratesBills,
+      isEditable
     } = this.props
-
     const { fields } = rebateForm
     const initialValues = {fields, ratesBills: ratesBills[0], property} 
     const { otherIncomeFields } = this.state
+
     return (
       <Form
         onSubmit={this.onSubmit.bind(this)}
@@ -67,9 +81,6 @@ class EditRebateForm extends React.Component {
           handleSubmit,
           submitting,
           values,
-          form: {
-            reset
-          }
         }) => {
           return (
           <form
@@ -79,21 +90,21 @@ class EditRebateForm extends React.Component {
             <div className="flex-row">
               {map(customerDetailFields, (field) => {
                 return field.type == 'radio'
-                ? RadioInput(field)
-                : SingleInput(field)
+                ? RadioInput({...field, isEditable})
+                : SingleInput({...field, isEditable})
               })}
             </div>
             { values.fields.moved_within_rating_year == 'yes'
             ? <div className="flex-row">
                 {map(conditionalsFields, (field) => {
                 return field.type == 'radio'
-                ? RadioInput(field)
-                : SingleInput(field)
+                ? RadioInput({...field, isEditable})
+                : SingleInput({...field, isEditable})
                 })}
               </div>
               : null
             }
-            {IncomeDeclaration({otherIncomeFields})}
+            {IncomeDeclaration({otherIncomeFields, isEditable})}
             <div className={'flex-row'}>
               <label className='flex-item'>
                 <h3>Additional Income Type: </h3>
@@ -102,15 +113,14 @@ class EditRebateForm extends React.Component {
                 className='rebate-search-input flex-item'
                 name="newIncomeField"
                 component="input"
+                readOnly={!isEditable}
               />
             </div>
             <div className="buttons">
               <button
-                disabled={!(values.newIncomeField)}
+                disabled={!isEditable || !(values.newIncomeField)}
                 type="button"
-                onClick={() => {
-                  this.setState({otherIncomeFields: { [values.newIncomeField]:0 , ...otherIncomeFields} })
-                }}
+                onClick={() => this.addNewIncomeValue(values)}
                 >
                   Add Income Type
               </button>

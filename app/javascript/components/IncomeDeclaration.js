@@ -3,9 +3,9 @@ import { Field } from "react-final-form";
 import { map } from "lodash"
 
 import { incomeRows } from '../helpers/data'
-import { TableInput, ExtraTableInputs } from './inputs'
+import { TableInput } from './inputs'
 
-export function IncomeDeclaration ({otherIncomeFields}) {
+export function IncomeDeclaration ({otherIncomeFields, isEditable}) {
   return (
     <div>
       <div className="flex-column">
@@ -32,19 +32,19 @@ export function IncomeDeclaration ({otherIncomeFields}) {
               <label className="flex-item">
                 <h3>{field.label}</h3>
               </label>
-              {TableInput({...field, className: 'one-quarter', id: `applicant.${field.id}`})}
-              {TableInput({...field, className: 'one-quarter', id: `partner.${field.id}`})}
+              {TableInput({...field, isEditable, className: 'one-quarter', id: `applicant.${field.id}`})}
+              {TableInput({...field, isEditable, className: 'one-quarter', id: `partner.${field.id}`})}
           </div>
         )
         })}
-         {map(otherIncomeFields, (value, key) => {
+         {map(otherIncomeFields, (name) => {
           return (
-            <div key={key} className="flex-row">
+            <div key={name} className="flex-row">
                 <label className="flex-item">
-                  <h3>{key}</h3>
+                  <h3>{name}</h3>
                 </label>
-                {TableInput({id: `other_income.applicant.${key}`})}
-                {TableInput({id: `other_income.partner.${key}`})}
+                {TableInput({isEditable, id: `other_income.applicant.${name}`})}
+                {TableInput({isEditable, id: `other_income.partner.${name}`})}
             </div>
           )
           })}
