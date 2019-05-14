@@ -128,7 +128,7 @@ class EditRebateForm extends React.Component {
 
             </div>
             <div className="rebate-submit-button-wrapper">
-              <button className="one-third rebate-add-income-button rebate-search-button" type="submit" disabled={submitting}>
+              <button className="one-third rebate-add-income-button rebate-search-button" type="submit" disabled={submitting || isReadOnly}>
                 Submit
               </button>
             </div>

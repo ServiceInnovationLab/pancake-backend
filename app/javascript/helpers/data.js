@@ -15,6 +15,34 @@ export const incomeRows = [
     "wages_salary",
     "Wages or Salary"
   ],
+  [
+    "business_profit",
+    "Business profit (net)"
+  ],
+  [
+    "work_and_income_supplements",
+    "Work and Income supplements"
+  ],
+  [
+    "working_for_families_tax_credits",
+    "Working For Families Tax Credits"
+  ],
+  [
+    "rental_income",
+    "Rental Income"
+  ],
+  [
+    "acc_earnings",
+    "ACC Earnings"
+  ],
+  [
+    "trust_income",
+    "Trust income"
+  ],
+  [
+    "overseas_income",
+    "Overseas income (in $NZ)"
+  ],
 ]   
 
 export const conditionalsFields = [
