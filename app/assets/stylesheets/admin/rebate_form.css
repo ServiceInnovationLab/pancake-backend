@@ -113,9 +113,13 @@
 }
 
 .flex-item {
-  width: 50%
+  width: 47%
 }
 
+.with-margin {
+  width: 47%;
+  margin-right: 6%
+}
 .one-quarter {
   width: 25%
 }

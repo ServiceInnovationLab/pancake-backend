@@ -2,10 +2,15 @@ import React from "react"
 import { Field } from "react-final-form";
 import { map } from "lodash"
 
-export function SingleInput ({ isReadOnly, id, label, placeholder, fullWidth, type = "text" }) {
-  
+export function SingleInput ({ isReadOnly, id, label, placeholder, fullWidth, withMargin, type = "text" }) {
+  const className = fullWidth
+    ? 'full-width'
+    : withMargin
+      ? 'flex-item'
+      : 'flex-item with-margin'
+  console.log(withMargin)
   return (
-  <div key={id} className={fullWidth ? 'full-width' : 'flex-item'}>
+  <div key={id} className={className}>
     <label>{label}</label>
     <Field
       className='rebate-search-input'
@@ -36,9 +41,13 @@ export function TableInput ({ id, type = "number", isReadOnly }) {
   </div>
 )}
 
-export function RadioInput ({ id, label, type, isReadOnly }) {
+export function RadioInput ({ id, label, type, isReadOnly, withMargin }) {
+  const className = withMargin
+    ? 'flex-item'
+    : 'flex-item with-margin'
+  console.log(withMargin)
   return (
-    <div key={id}  className="flex-item " >
+    <div key={id} className={className}>
       <label>{label}</label>
       <div className="flex-row rebate-radio-buttons" >
         {map(["yes", "no"], value =>

@@ -1,6 +1,6 @@
 
 import React from "react"
-import { map, uniq } from "lodash"
+import { map, uniq, indexOf } from "lodash"
 import { Form, Field } from "react-final-form";
 import 'isomorphic-fetch';
 
@@ -92,7 +92,8 @@ class EditRebateForm extends React.Component {
             onSubmit={handleSubmit}
            >
             <div className="flex-row">
-              {map(customerDetailFields, (field) => {
+              {map(customerDetailFields, (field, index) => {
+                if (indexOf([1, 4, 6, 8, 10, 12], index) >= 0) field.withMargin = true
                 return field.type == 'radio'
                 ? RadioInput({...field, isReadOnly})
                 : SingleInput({...field, isReadOnly})
@@ -100,7 +101,8 @@ class EditRebateForm extends React.Component {
             </div>
             { values.fields.moved_within_rating_year == 'yes'
             ? <div className="flex-row">
-                {map(conditionalsFields, (field) => {
+                {map(conditionalsFields, (field, index) => {
+                if (indexOf([2, 4, 5], index) >= 0) field.withMargin = true
                 return field.type == 'radio'
                 ? RadioInput({...field, isReadOnly})
                 : SingleInput({...field, isReadOnly})
