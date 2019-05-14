@@ -37,8 +37,8 @@ export function IncomeDeclaration ({otherIncomeFields, isEditable}) {
                   <label className="flex-item">
                     <h3>{label || name}</h3>
                   </label>
-                  {TableInput({name, isEditable, className: 'one-quarter', id: `applicant.${name}`})}
-                  {TableInput({name, isEditable, className: 'one-quarter', id: `partner.${name}`})}
+                  {TableInput({isEditable, className: 'one-quarter', id: `applicant.${name}`})}
+                  {TableInput({isEditable, className: 'one-quarter', id: `partner.${name}`})}
               </div>
             )}
           )}
