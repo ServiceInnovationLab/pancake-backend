@@ -29,7 +29,9 @@ export const conditionalsFields = [
     type: "date"
   },
   {
-     type: "number"
+    id: "rates_paid",
+    label: "Rates paid this rating year",
+    type: "number"
   },
   {
     id: 'rates_rebate_received',
@@ -55,6 +57,7 @@ export const customerDetailFields = [
   {
     id:"total_rates",
     label: "Total Rates",
+    type: 'number'
   },
   {
     id:"valuation_id",

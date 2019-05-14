@@ -14,24 +14,25 @@ export function SingleInput ({ isEditable, id, label, placeholder, fullWidth, ty
       placeholder= {placeholder}
       component='input'
       type={type}
+      min={type == 'number' ? 0 : null}
       readOnly={!isEditable}
     />
     <Error name={`fields.${id}`} />
   </div>
   )
 }
-export function TableInput ({ name, type = "number", isEditable }) {
+export function TableInput ({ id, name, type = "number", isEditable }) {
   return (
-  <div key={name} className='one-quarter'>
+  <div key={id} className='one-quarter'>
     <Field
       className='rebate-search-input'
-      name={`fields.income.${name}`}
+      name={`fields.income.${id}`}
       component='input'
       type={type}
       readOnly={!isEditable}
       min={0}
     />
-    <Error name={`fields.income.${name}`} />
+    <Error name={`fields.income.${id}`} />
   </div>
 )}
 
@@ -41,16 +42,18 @@ export function RadioInput ({ id, label, type, isEditable }) {
       <label>{label}</label>
       <div className="flex-row rebate-radio-buttons" >
         {map(["yes", "no"], value =>
-        <label key={`${id}-${value}`} >
+        <div key={`${id}-${value}`} className="wrapper">
           <Field
             name={`fields.${id}`}
             component="input"
             type={type}
             value={value}
             readOnly={!isEditable}
-          />{" "}
-          {value}
-        </label>
+          />
+          <label  >
+            {value}
+          </label>
+        </div>
         )}
         <Error name={`fields.${id}`} />
       </div>

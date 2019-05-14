@@ -49,6 +49,7 @@
 .rebate-search-button {
   background-color: var(--blue);
   border-radius: .2em;
+  color: white
 }
 
 .rebate-results-table {
@@ -80,7 +81,8 @@
 .flex-row {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap
+  flex-wrap: wrap;
+  align-items: center
 }
 
 .flex-column {
@@ -107,10 +109,12 @@
 .rebate-submit-button-wrapper {
   display: flex;
   justify-content: flex-end;
-  margin: 1.5rem 0
+  margin-top: 1rem
 }
 .rebate-add-income-button {
-  margin: .25rem 0 1rem 0
+  line-height: 2em;
+  margin: 0 auto .5em auto;
+  padding: .4rem;  
 }
 .rebate-radio-buttons {
   margin-top:.5rem;

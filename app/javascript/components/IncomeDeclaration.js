@@ -9,7 +9,7 @@ export function IncomeDeclaration ({otherIncomeFields, isEditable}) {
   return (
     <div>
       <div className="flex-column">
-        <h2 className="flex-item">Income declaration (before tax)</h2>
+        <h2 className="full-width">Income declaration (before tax)</h2>
         <div className={'flex-row'}>
           <label className='flex-item'>
             <h3>Total Combined Income: </h3>
