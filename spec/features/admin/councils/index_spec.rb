@@ -6,6 +6,13 @@ RSpec.describe 'Council', type: :feature do
   let!(:council) { FactoryBot.create :council }
   let!(:council_two) { FactoryBot.create :council }
 
+  context 'anonymous' do
+    it "can't see it" do
+      visit '/admin/councils'
+      expect(page).to have_text('Forgot your password?')
+    end
+  end
+
   context 'signed in as dia' do
     let(:user) { FactoryBot.create :admin_user }
 

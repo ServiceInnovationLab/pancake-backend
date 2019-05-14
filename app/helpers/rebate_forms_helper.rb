@@ -48,7 +48,7 @@ module RebateFormsHelper
     end
   end
 
-  def rebate_form_signature_completed?(rebate_form)
+  def rebate_form_completed?(rebate_form)
     rebate_form.completed
   end
 end

@@ -6,6 +6,13 @@ RSpec.describe 'Property', type: :feature do
   let!(:council) { FactoryBot.create :council }
   let!(:property) { FactoryBot.create :property, council: council }
 
+  context 'anonymous' do
+    it "can't see it" do
+      visit "/admin/councils/#{council.id}/properties"
+      expect(page).to have_text('Forgot your password?')
+    end
+  end
+
   shared_examples 'can see properties for a council' do
     it do
       visit '/admin/councils'

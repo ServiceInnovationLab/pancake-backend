@@ -2,6 +2,6 @@
   %div.header-item
     = image_tag('print-logo-white', class: 'header-logo')
   %div.header-item.header-login
-    =current_user.name
+    =current_user.name if current_user
     = link_to destroy_user_session_path, method: :delete, class: 'header-logout-link' do
       Log out x

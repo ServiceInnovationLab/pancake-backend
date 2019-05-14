@@ -6,6 +6,13 @@ RSpec.describe 'RebateForm', type: :feature do
   let(:property) { FactoryBot.create :property_with_rates, rating_year: ENV['YEAR'] }
   let!(:rebate_form) { FactoryBot.create :rebate_form, completed: false, property: property }
 
+  context 'anonymous' do
+    it "can't see it" do
+      visit "/admin/rebate_forms/#{rebate_form.id}"
+      expect(page).to have_text('Forgot your password?')
+    end
+  end
+
   shared_examples 'can edit' do
     describe '#edit' do
       xit 'can modify the rebate_form' do
