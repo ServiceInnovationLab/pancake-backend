@@ -1,3 +1,5 @@
 %h1 Customer Details
 
+= render 'edit_header'
+
 = react_component("EditForm", {isEditable: true, rebateForm: @rebate_form, property: @rebate_form.property, ratesBills: @rebate_form.property.rates_bills})
