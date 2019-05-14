@@ -20,10 +20,10 @@ class EditRebateForm extends React.Component {
 
     const { rebateForm: { fields: {income} } } = this.props
 
-    const hasOtheIncome = income && income.other_income
+    const hasOtherIncome = income && income.other_income
 
-    const applicantKeys = hasOtheIncome ? Object.keys(income.other_income.applicant) : []
-    const partnerKeys = hasOtheIncome ? Object.keys(income.other_income.partner) : []
+    const applicantKeys = hasOtherIncome ? Object.keys(income.other_income.applicant) : []
+    const partnerKeys = hasOtherIncome ? Object.keys(income.other_income.partner) : []
 
     const uniqKeys = uniq(applicantKeys.concat(partnerKeys))
 
@@ -60,7 +60,7 @@ class EditRebateForm extends React.Component {
       rebateForm,
       property,
       ratesBills,
-      isEditable
+      isReadOnly
     } = this.props
     const { fields } = rebateForm
     const initialValues = {fields, ratesBills: ratesBills[0], property} 
@@ -94,31 +94,31 @@ class EditRebateForm extends React.Component {
             <div className="flex-row">
               {map(customerDetailFields, (field) => {
                 return field.type == 'radio'
-                ? RadioInput({...field, isEditable})
-                : SingleInput({...field, isEditable})
+                ? RadioInput({...field, isReadOnly})
+                : SingleInput({...field, isReadOnly})
               })}
             </div>
             { values.fields.moved_within_rating_year == 'yes'
             ? <div className="flex-row">
                 {map(conditionalsFields, (field) => {
                 return field.type == 'radio'
-                ? RadioInput({...field, isEditable})
-                : SingleInput({...field, isEditable})
+                ? RadioInput({...field, isReadOnly})
+                : SingleInput({...field, isReadOnly})
                 })}
               </div>
               : null
             }
-            {IncomeDeclaration({otherIncomeFields, isEditable})}
+            {IncomeDeclaration({otherIncomeFields, isReadOnly})}
             <div className={'flex-row'}>
               <Field
                 className='rebate-search-input flex-item'
                 name="newIncomeField"
                 component="input"
-                readOnly={!isEditable}
+                readOnly={isReadOnly}
               />
               <button
                 className='one-third rebate-add-income-button'
-                disabled={!isEditable || !(values.newIncomeField)}
+                disabled={isReadOnly || !values.newIncomeField}
                 type="button"
                 onClick={() => this.addNewIncomeValue(values)}
                 >

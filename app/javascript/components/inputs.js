@@ -2,7 +2,7 @@ import React from "react"
 import { Field } from "react-final-form";
 import { map } from "lodash"
 
-export function SingleInput ({ isEditable, id, label, placeholder, fullWidth, type = "text" }) {
+export function SingleInput ({ isReadOnly, id, label, placeholder, fullWidth, type = "text" }) {
   
   return (
   <div key={id} className={fullWidth ? 'full-width' : 'flex-item'}>
@@ -15,13 +15,13 @@ export function SingleInput ({ isEditable, id, label, placeholder, fullWidth, ty
       component='input'
       type={type}
       min={type == 'number' ? 0 : null}
-      readOnly={!isEditable}
+      readOnly={isReadOnly}
     />
     <Error name={`fields.${id}`} />
   </div>
   )
 }
-export function TableInput ({ id, type = "number", isEditable }) {
+export function TableInput ({ id, type = "number", isReadOnly }) {
   return (
   <div key={id} className='one-quarter'>
     <Field
@@ -29,14 +29,14 @@ export function TableInput ({ id, type = "number", isEditable }) {
       name={`fields.income.${id}`}
       component='input'
       type={type}
-      readOnly={!isEditable}
+      readOnly={isReadOnly}
       min={0}
     />
     <Error name={`fields.income.${id}`} />
   </div>
 )}
 
-export function RadioInput ({ id, label, type, isEditable }) {
+export function RadioInput ({ id, label, type, isReadOnly }) {
   return (
     <div key={id}  className="flex-item " >
       <label>{label}</label>
@@ -48,7 +48,7 @@ export function RadioInput ({ id, label, type, isEditable }) {
             component="input"
             type={type}
             value={value}
-            readOnly={!isEditable}
+            readOnly={isReadOnly}
           />{" "}
           {value}
         </label>
