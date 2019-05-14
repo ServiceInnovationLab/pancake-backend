@@ -51,15 +51,12 @@ a:focus {
 }
 
 #main {
-  margin-top: 10%;
-  padding: 1em;
   font-family: Georgia, "Cambria", serif;
 }
 
 .header {
   background-color: var(--black);
   padding: 2em;
-  position: fixed;
 }
 
 .header-item {
@@ -82,11 +79,6 @@ a:focus {
   color: var(--white) !important;
   margin-left: 15px;
   padding: 5px;
-}
-
-.show_header {
-  border-bottom: 1px solid #999;
-  padding: 10px 0;
 }
 
 label {

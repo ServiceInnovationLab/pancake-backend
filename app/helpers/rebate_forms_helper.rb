@@ -47,4 +47,8 @@ module RebateFormsHelper
       answer.to_s.capitalize
     end
   end
+
+  def rebate_form_signature_required?(rebate_form)
+    rebate_form.completed
+  end
 end

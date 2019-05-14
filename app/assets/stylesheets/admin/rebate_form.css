@@ -21,13 +21,35 @@
 }
 
 .rebate-header {
+  padding: 1.5em 4em;
+}
+
+.rebate-title {
   font-size: 3em;
   margin: 0;
 }
 
-.rebate-subhead {
+.rebate-subtitle {
   font-size: 1.75em;
   margin: .4em 0;
+}
+
+.rebate-header-buttons {
+  background-color: var(--dove);
+  padding: 1.5em 4em;
+}
+
+.rebate-header-icon {
+  margin-right: 2em;
+  width: 1.75em;
+}
+
+.rebate-edit {
+  background-color: var(--blue);
+  border-radius: .2em;
+  color: var(--white);
+  float: right;
+  width: 5em;
 }
 
 .rebate-search-box {
