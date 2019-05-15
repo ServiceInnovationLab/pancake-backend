@@ -1,39 +1,6 @@
+
 - content_for :title, "RatesRebate #{@rebate_form.property.location}"
 
-.show_header
-  %h2
-    = "#{@rebate_form.valuation_id} - #{@rebate_form.property.rating_year}"
+= render 'show_header'
 
-  = link_to 'Edit', edit_admin_rebate_form_path, class: 'pure-button'
-  = link_to 'Back', admin_rebate_forms_path, class: 'pure-button'
-
-  - if @rebate_form.applicant_signature.present?
-    = link_to admin_rebate_form_path(@rebate_form, format: 'pdf'), class: 'pure-button' do
-      = fa_icon 'download'
-
-%p#notice= notice
-
-
-.pure-g
-  .pure-u-1
-    .pure-g
-      .pure-u-1-4
-        %h2 Rebate
-        %p.rebate-amount $#{@rebate_form.rebate}
-      .pure-u-1-4= render 'property', rebate_form: @rebate_form
-      .pure-u-1-4= render 'rates_bills', rates_bill: @rates_bill
-      .pure-u-1-4= render 'applicant', rebate_form: @rebate_form
-
-  .pure-u-1
-    .pure-g
-      .pure-u-1-2
-        - if @rebate_form.completed
-          = render 'signatures'
-        - else
-          = render 'sign_button', rebate_form: @rebate_form
-      .pure-u-1-4= render 'attachments', rebate_form: @rebate_form
-      .pure-u-1-4= render 'fields', fields: @rebate_form.fields
-
-- if @updated_by.present?
-  %p
-    %em="Updated by #{@updated_by.email} on #{@rebate_form.updated_at}"
+= react_component("EditForm", {isReadOnly: true, rebateForm: @rebate_form, property: @rebate_form.property, ratesBills: @rebate_form.property.rates_bills})
