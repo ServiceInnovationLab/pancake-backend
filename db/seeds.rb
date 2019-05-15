@@ -11,5 +11,5 @@ frontline = Role.find_or_create_by name: 'frontline', friendly_name: 'Council fr
 
 ['juanvandenanker@gmail.com'].each do |email|
   #email = "#{name}@dia.govt.nz"
-  User.invite!(email: email, roles: [dia_role]) unless User.find_by(email: email)
+  User.invite!(name: 'Ron Weasley', email: email, roles: [dia_role]) unless User.find_by(email: email)
 end

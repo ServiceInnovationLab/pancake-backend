@@ -3,13 +3,13 @@ import { Field } from "react-final-form";
 import { map } from "lodash"
 
 import { incomeRows } from '../helpers/data'
-import { TableInput, FieldArrayInput } from './inputs'
+import { TableInput } from './inputs'
 
-export function IncomeDeclaration () {
+export function IncomeDeclaration ({otherIncomeFields, isReadOnly}) {
   return (
     <div>
       <div className="flex-column">
-        <h2 className="flex-item">Income declaration (before tax)</h2>
+        <h2 className="full-width">Income declaration (before tax)</h2>
         <div className={'flex-row'}>
           <label className='flex-item'>
             <h3>Total Combined Income: </h3>
@@ -26,20 +26,21 @@ export function IncomeDeclaration () {
             <h2 className="one-quarter" >Applicant</h2>
             <h2 className="one-quarter" >Partner</h2>
         </div>
-        {map(incomeRows, (field) => {
-        return (
-          <div key={field.id} className="flex-row">
-              <label className="flex-item">
-                <h3>{field.label}</h3>
-              </label>
-              {TableInput({...field, className: 'one-quarter', id: `applicant.${field.id}`})}
-              {TableInput({...field, className: 'one-quarter', id: `partner.${field.id}`})}
-          </div>
-        )
-        })}
-        <div>
-        {FieldArrayInput()}
-        </div>
+        {map([...incomeRows, ...otherIncomeFields], field => {
+          const isArray = typeof field == 'object'
+          const name = isArray ? field[0] : field
+          const label = isArray ? field[1] : field
+          
+          return (
+            <div key={name} className="flex-row">
+                <label className="flex-item">
+                  <h3>{label || name}</h3>
+                </label>
+                {TableInput({isReadOnly, className: 'one-quarter with-margin', id: `applicant.${name}`})}
+                {TableInput({isReadOnly, className: 'one-quarter', id: `partner.${name}`})}
+            </div>
+          )}
+        )}
       </div>
     </div>
   )
