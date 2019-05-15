@@ -1,0 +1,8 @@
+- content_for :title, "RatesRebate #{@rebate_form.property.location}"
+
+.show_header
+  %h2
+    = "#{@rebate_form.valuation_id} - #{@rebate_form.property.rating_year}"
+
+%img(src='#{@image_data}' class='qrcode')
+

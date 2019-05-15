@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :rebate_forms
+    resources :rebate_forms do
+      get 'generateqr'
+    end
     resources :attachments, only: %i[destroy]
     resources :councils do
       resources :properties

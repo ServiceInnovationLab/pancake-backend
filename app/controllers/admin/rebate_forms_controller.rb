@@ -1,8 +1,41 @@
+require 'rqrcode'
+require 'base64'
+require 'jwt'
+
 # frozen_string_literal: true
 
 class Admin::RebateFormsController < Admin::BaseController
   before_action :set_rebate_form, only: %i[show update destroy edit]
   respond_to :html, :pdf, :csv, :json
+
+  def generateqr
+    @rebate_form = RebateForm.find(params[:rebate_form_id])
+    authorize @rebate_form
+
+    # create a new token that only allows you to fetch a restricted set of details for this application only
+    # and use the same token to submit the signatures back
+    # this token is valid for 30 minutes
+    # TODO this secret should be stored in the ENV
+    # TODO the expiration time should be stored in the ENV
+    hmac_secret = 'DgD3NMLjoEsgbT7bOmpgI0svg18BMHuy0VpE6cX9xMMxznWhvEKIggR61nE/E+MOcoRi6adWUQXjiZ8/gC95ow=='
+    puts hmac_secret
+
+    puts @rebate_form.id
+    payload = {
+      applicationId: @rebate_form.id,
+      exp: Time.now.to_i + (30 * 60),
+      per: 'fetch_application_and_submit_signatures'
+    }
+    token = JWT.encode payload, hmac_secret, 'HS256'
+    puts token
+
+    # this will be the URL that will host the iPad-application
+    url = 'http://pancake-lb-518327613.ap-southeast-2.elb.amazonaws.com/admin/sign?t=' + token
+
+    @qr = RQRCode::QRCode.new(url, :size => 20, :level => :h)
+    image = @qr.as_png(offset: 0, color: '0', shape_rendering: 'crispEdges', module_size: 10)
+    @image_data = image.to_data_url
+  end
 
   # GET /admin/rebate_forms
   def index

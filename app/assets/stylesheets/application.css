@@ -82,3 +82,7 @@ input {
 .search-form {
   float: right;
 }
+
+.qrcode {
+  background-color: black;
+}
