@@ -25,7 +25,7 @@ RSpec.describe 'RebateForm', type: :feature do
 
       # show the form
       click_link 'right-arrow'
-      expect(page).to have_text(rebate_form.fields['full_name'])
+      expect(page).to have_text('Customer details')
     end
   end
 
@@ -42,7 +42,7 @@ RSpec.describe 'RebateForm', type: :feature do
 
       # show the form
       click_link 'right-arrow'
-      expect(page).to have_text(rebate_form.fields['full_name'])
+      expect(page).to have_text('Customer details')
     end
   end
 end

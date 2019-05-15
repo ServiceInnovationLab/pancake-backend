@@ -1,8 +1,7 @@
 
 import React from "react"
-import { map } from "lodash"
-import { Form } from "react-final-form";
-import arrayMutators from 'final-form-arrays'
+import { map, uniq, indexOf } from "lodash"
+import { Form, Field } from "react-final-form";
 import 'isomorphic-fetch';
 
 import { conditionalsFields, customerDetailFields } from '../helpers/data'
@@ -12,50 +11,72 @@ import { calculator } from '../helpers/calculator_decorator';
 import { SingleInput, RadioInput } from './inputs'
 import { IncomeDeclaration } from "./IncomeDeclaration";
 
-const databaseURL = process.env.APP_URL  
+const appUrl = process.env.APP_URL  
 
 class EditRebateForm extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    const { rebateForm: { fields: {income} } } = this.props
+
+    const hasOtherIncome = income && income.other_income
+
+    const applicantKeys = hasOtherIncome ? Object.keys(income.other_income.applicant) : []
+    const partnerKeys = hasOtherIncome ? Object.keys(income.other_income.partner) : []
+
+    const uniqKeys = uniq(applicantKeys.concat(partnerKeys))
+
+    this.state = { otherIncomeFields: uniqKeys }
+  }
+
+  addNewIncomeValue (values) {
+    this.setState({otherIncomeFields: this.state.otherIncomeFields.concat(values.newIncomeField)})
+    values.newIncomeField = null
+  }
+
   onSubmit (values) {
-    fetch(`${databaseURL}admin/rebate_forms/1`, {
-      method: 'PATCH',
-      headers: {
-        'X-CSRF-Token': this.props.token || getCSRF(),
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        rebate_form: {...values}
-      }),
-      credentials: 'same-origin'
-    }).then(res => {
-      console.log(res)
-    })
+    return values.newIncomeField
+      ? this.addNewIncomeValue(values)
+      : fetch(`${appUrl}admin/rebate_forms/${this.props.rebateForm.id}`, {
+        method: 'PATCH',
+        headers: {
+          'X-CSRF-Token': getCSRF(),
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          rebate_form: {...values}
+        }),
+        credentials: 'same-origin'
+      }).then(res => {
+        if (res.ok) window.location = `${appUrl}admin/rebate_forms/${this.props.rebateForm.id}` 
+        else console.error(res)
+      })
   }
 
   render () {
     const { 
       rebateForm,
       property,
-      ratesBills
+      ratesBills,
+      isReadOnly
     } = this.props
-
     const { fields } = rebateForm
     const initialValues = {fields, ratesBills: ratesBills[0], property} 
+    const { otherIncomeFields } = this.state
 
     return (
       <Form
         onSubmit={this.onSubmit.bind(this)}
         initialValues={initialValues}
         decorators={[calculator]}
-        mutators={{
-          ...arrayMutators
-        }}
         validate={values => {
           const errors = {};
           {map(initialValues, (value, key) => {
             if (!values[key]) {
               errors[key] = "Required";
-            }
+            } 
           })}
           return errors;
         }}
@@ -64,9 +85,6 @@ class EditRebateForm extends React.Component {
           handleSubmit,
           submitting,
           values,
-          form: {
-            mutators: { push }
-          }
         }) => {
           return (
           <form
@@ -74,35 +92,46 @@ class EditRebateForm extends React.Component {
             onSubmit={handleSubmit}
            >
             <div className="flex-row">
-              {map(customerDetailFields, (field) => {
+              {map(customerDetailFields, (field, index) => {
+                if (indexOf([1, 4, 6, 8, 10, 12], index) >= 0) field.withMargin = true
                 return field.type == 'radio'
-                ? RadioInput(field)
-                : SingleInput(field)
+                ? RadioInput({...field, isReadOnly})
+                : SingleInput({...field, isReadOnly})
               })}
             </div>
-            { values.fields.moved_within_rating_year == 'yes'
-            ? <div className="flex-row">
-                {map(conditionalsFields, (field) => {
+            { values.fields.moved_within_rating_year == 'yes' &&
+              <div className="flex-row">
+                {map(conditionalsFields, (field, index) => {
+                if (indexOf([2, 4, 5], index) >= 0) field.withMargin = true
                 return field.type == 'radio'
-                ? RadioInput(field)
-                : SingleInput(field)
+                ? RadioInput({...field, isReadOnly})
+                : SingleInput({...field, isReadOnly})
                 })}
-              </div>
-              : null
+              </div>   
             }
-            {IncomeDeclaration()}
-            <div className="buttons">
+            {IncomeDeclaration({otherIncomeFields, isReadOnly})}
+            <div className={'flex-row'}>
+              <Field
+                className='rebate-search-input flex-item'
+                name="newIncomeField"
+                component="input"
+                readOnly={isReadOnly}
+              />
               <button
+                className='one-third rebate-add-income-button'
+                disabled={isReadOnly || !values.newIncomeField}
                 type="button"
-                onClick={() => push('fields.income.other_income', undefined)}
+                onClick={() => this.addNewIncomeValue(values)}
                 >
                   Add Income Type
               </button>
-              <button type="submit" disabled={submitting}>
+
+            </div>
+            <div className="rebate-submit-button-wrapper">
+              <button className="one-third rebate-add-income-button rebate-search-button" type="submit" disabled={submitting || isReadOnly}>
                 Submit
               </button>
             </div>
-            <pre>{JSON.stringify(values, 0, 2)}</pre>
           </form>
         )}}
       </Form>

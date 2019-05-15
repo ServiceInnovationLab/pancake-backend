@@ -1,11 +1,15 @@
 import React from "react"
 import { Field } from "react-final-form";
-import { FieldArray } from 'react-final-form-arrays'
 import { map } from "lodash"
 
-export function SingleInput ({ id, label, placeholder, fullWidth, type = "text" }) {
+export function SingleInput ({ isReadOnly, id, label, placeholder, fullWidth, withMargin, type = "text" }) {
+  const className = fullWidth
+    ? 'full-width'
+    : withMargin
+      ? 'flex-item'
+      : 'flex-item with-margin'
   return (
-  <div key={id} className={fullWidth ? 'full-width' : 'flex-item'}>
+  <div key={id} className={className}>
     <label>{label}</label>
     <Field
       className='rebate-search-input'
@@ -14,12 +18,14 @@ export function SingleInput ({ id, label, placeholder, fullWidth, type = "text" 
       placeholder= {placeholder}
       component='input'
       type={type}
+      min={type == 'number' ? 0 : null}
+      readOnly={isReadOnly}
     />
     <Error name={`fields.${id}`} />
   </div>
   )
 }
-export function TableInput ({ id, className = 'flex-item', type = "number" }) {
+export function TableInput ({ id, type = "number", isReadOnly, className }) {
   return (
   <div key={id} className={className}>
     <Field
@@ -27,67 +33,39 @@ export function TableInput ({ id, className = 'flex-item', type = "number" }) {
       name={`fields.income.${id}`}
       component='input'
       type={type}
+      readOnly={isReadOnly}
+      min={0}
     />
     <Error name={`fields.income.${id}`} />
   </div>
 )}
 
-export function RadioInput ({ id, label, type }) {
+export function RadioInput ({ id, label, type, isReadOnly, withMargin }) {
+  const className = withMargin
+    ? 'flex-item'
+    : 'flex-item with-margin'
   return (
-    <div key={id}  className="flex-item " >
+    <div key={id} className={className}>
       <label>{label}</label>
-      <div className="flex-row rebate-radio-buttons" >
+      <div className="flex-row rebate-radio-buttons radio" >
         {map(["yes", "no"], value =>
         <label key={`${id}-${value}`} >
           <Field
-            className="one-quarter"
             name={`fields.${id}`}
+            className='radio-inline'
             component="input"
             type={type}
             value={value}
+            readOnly={isReadOnly}
           />{" "}
           {value}
         </label>
         )}
         <Error name={`fields.${id}`} />
-      </div>
+     </div>
     </div>
   )
 }
-
-export function FieldArrayInput () {
-  return (
-    <FieldArray name={`fields.income.other_income`}>
-      {({ fields }) => 
-        fields.map((name, index) => (
-          <div key={name} className="flex-row">
-            {ExtraTableInputs({classname: 'flex-item', name: `${name}other-${index}-applicant`})}
-            {ExtraTableInputs({classname: 'flex-item', name: `${name}other-${index}-partner`})}
-            <span
-              onClick={() => fields.remove(index)}
-              style={{ cursor: 'pointer' }}
-            >
-              ❌
-            </span>
-          </div>
-        ))
-      }
-    </FieldArray>
-  )
-}
-
-export function ExtraTableInputs ({ name, type = "number" }) {
-  return (
-  <div key={name} className='flex-item one-third'>
-    <Field
-      className='rebate-search-input'
-      name={name}
-      component='input'
-      type={type}
-    />
-    <Error name={name} />
-  </div>
-)}
 
 const Error = ({ name }) => (
   <Field name={name} subscription={{ error: true, touched: true }}>

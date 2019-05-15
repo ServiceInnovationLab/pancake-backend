@@ -71,6 +71,7 @@
 .rebate-search-button {
   background-color: var(--blue);
   border-radius: .2em;
+  color: white
 }
 
 .rebate-results-table {
@@ -102,7 +103,8 @@
 .flex-row {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap
+  flex-wrap: wrap;
+  align-items: center
 }
 
 .flex-column {
@@ -111,11 +113,14 @@
 }
 
 .flex-item {
-  width: 50%
+  width: 48.5%
 }
 
+.with-margin {
+  margin-right: 3%
+}
 .one-quarter {
-  width: 25%
+  width: 23.5%
 }
 
 .one-third {
@@ -126,6 +131,16 @@
   width: 100%
 }
 
+.rebate-submit-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem
+}
+.rebate-add-income-button {
+  line-height: 2em;
+  margin: 0 auto .5em auto;
+  padding: .4rem;  
+}
 .rebate-radio-buttons {
   margin-top:.5rem;
   height: 50%;

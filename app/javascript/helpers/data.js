@@ -1,3 +1,50 @@
+export const incomeRows = [
+  [
+    "other_superannuation",
+    "Other superannuation"
+  ],
+  [
+    "nz_superannuation",
+    "NZ superannuation"
+  ],
+  [
+    "interest_dividends",
+    "Interest / Dividends"
+  ],
+  [
+    "wages_salary",
+    "Wages or Salary"
+  ],
+  [
+    "business_profit",
+    "Business profit (net)"
+  ],
+  [
+    "work_and_income_supplements",
+    "Work and Income supplements"
+  ],
+  [
+    "working_for_families_tax_credits",
+    "Working For Families Tax Credits"
+  ],
+  [
+    "rental_income",
+    "Rental Income"
+  ],
+  [
+    "acc_earnings",
+    "ACC Earnings"
+  ],
+  [
+    "trust_income",
+    "Trust income"
+  ],
+  [
+    "overseas_income",
+    "Overseas income (in $NZ)"
+  ],
+]   
+
 export const conditionalsFields = [
   {
     id: "previous_address",
@@ -15,30 +62,11 @@ export const conditionalsFields = [
     type: "number"
   },
   {
-    id: 'rates_rebate_recieved',
-    label: "Rates rebate recieved?",
+    id: 'rates_rebate_received',
+    label: "Rates rebate received?",
     type:"radio"
   },
 ]
-export const incomeRows = [
-  {
-    id: "other_superannuation",
-    label: "Other superannuation"
-  },
-  {
-    id: "nz_superannuation",
-    label: "NZ superannuation"
-  },
-  {
-    id: "interest_dividends",
-    label: "Interest / Dividends"
-  },
-  {
-    id: "wages_salery",
-    label: "Wages or Salary"
-  }
-
-]   
 export const customerDetailFields = [
   {
     id:"full_name",
@@ -57,6 +85,7 @@ export const customerDetailFields = [
   {
     id:"total_rates",
     label: "Total Rates",
+    type: 'number'
   },
   {
     id:"valuation_id",
