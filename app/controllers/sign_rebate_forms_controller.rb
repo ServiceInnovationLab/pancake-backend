@@ -2,7 +2,7 @@
 
 class SignRebateFormsController < ApiController
   jsonapi resource: SignRebateFormResource
-  # strong_resource :rebate_form
+  strong_resource :rebate_form
 
   def sign
     decoded_token = decode_jwt(params[:data][:token])
@@ -43,7 +43,7 @@ class SignRebateFormsController < ApiController
   def signature_params
     params
       .require(:data)
-      .permit(signatures: [])
+      .require(signatures: [])
       .permit(:image, :type, :name, :role)
   end
 end

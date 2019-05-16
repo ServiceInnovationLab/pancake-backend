@@ -28,8 +28,9 @@ gem 'devise_invitable'
 # Permissions
 gem 'pundit'
 
+# JWT and QR stuff
+gem 'jwt', '~> 2.1.0'
 gem 'rqrcode'
-gem "jwt", "~> 2.1.0"
 
 gem 'loofah', '>= 2.2.1'
 gem 'rails-html-sanitizer', '>= 1.0.4'
@@ -38,7 +39,6 @@ gem 'haml-rails'
 gem 'purecss-rails'
 
 gem 'rack-cors', require: 'rack/cors'
-
 
 gem 'font-awesome-rails'
 
