@@ -49,7 +49,7 @@ class SignRebateFormsController < ApiController
   def signature_params
     params
       .require(:data)
-      .require(signatures: [])
+      .require(:signatures)
       .permit(:image, :type, :name, :role)
   end
 end
