@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-class SignRebateFormsController < ActionController::API
+class SignRebateFormsController < ApiController
+  jsonapi resource: SignRebateFormResource
+  # strong_resource :rebate_form
+
   def sign
     decoded_token = decode_jwt(params[:data][:token])
 
@@ -16,10 +19,9 @@ class SignRebateFormsController < ActionController::API
 
     instance.signatures << [sig1, sig2]
 
-    # what would a good error message be?
+    raise JsonapiCompliable::Errors::RecordNotFound unless instance
 
-    # maybe change this to just 200 "i did things"
-    # render_jsonapi(instance, scope: false)
+    render_jsonapi([sig1, sig2, instance], scope: false)
   end
 
   private
