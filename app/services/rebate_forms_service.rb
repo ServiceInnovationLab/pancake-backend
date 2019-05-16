@@ -18,8 +18,8 @@ class RebateFormsService
 
     token = JWT.encode payload, ENV['HMAC_SECRET'], 'HS256'
 
-    # this will be the URL that will host the iPad-application
-    url = 'http://pancake-lb-518327613.ap-southeast-2.elb.amazonaws.com/admin/sign?t=' + token
+    # iPad-application URL
+    url = ENV['APP_URL'] + 'admin/sign?jwt=' + token
 
     RQRCode::QRCode
       .new(url, size: 20, level: :h)

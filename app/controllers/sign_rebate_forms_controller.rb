@@ -11,20 +11,26 @@ class SignRebateFormsController < ApiController
 
     instance = RebateForm.find(rebate_form_id)
 
+    signatures = get_signatures_for_form(instance)
+
+    instance.signatures << signatures
+
+    raise JsonapiCompliable::Errors::RecordNotFound unless instance
+
+    render_jsonapi(signatures, scope: false)
+  end
+
+  private
+
+  def get_signatures_for_form(instance)
     sig1_data = params[:data][:signatures][0]
     sig2_data = params[:data][:signatures][1]
 
     sig1 = instantiate_signature(sig1_data, instance)
     sig2 = instantiate_signature(sig2_data, instance)
 
-    instance.signatures << [sig1, sig2]
-
-    raise JsonapiCompliable::Errors::RecordNotFound unless instance
-
-    render_jsonapi([sig1, sig2, instance], scope: false)
+    [sig1, sig2]
   end
-
-  private
 
   def instantiate_signature(data, instance)
     Signature.create(
