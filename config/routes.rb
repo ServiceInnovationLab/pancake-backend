@@ -26,11 +26,12 @@ Rails.application.routes.draw do
 
     scope path: '/v1' do
       post '/rebate_forms/sign' => 'sign_rebate_forms#sign'
+      get '/rebate_forms/' => 'rebate_forms#show_by_jwt'
       resources :councils
       resources :rates_payers, only: %(show)
       resources :rates_bills, only: %(show)
       resources :properties, only: %(index show)
-      resources :rebate_forms, only: %i[index create]
+      resources :rebate_forms, only: %i[create]
       resources :properties, only: %i[show index]
       resources :signature_types, only: %i[index show]
       resources :signatures, only: %i[create]
