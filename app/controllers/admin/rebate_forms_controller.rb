@@ -1,8 +1,19 @@
 # frozen_string_literal: true
 
+require 'rqrcode'
+require 'base64'
+require 'jwt'
+
 class Admin::RebateFormsController < Admin::BaseController
   before_action :set_rebate_form, only: %i[show update destroy edit]
   respond_to :html, :pdf, :csv, :json
+
+  def generateqr
+    @rebate_form = RebateForm.find(params[:rebate_form_id])
+    authorize @rebate_form
+
+    @image_data = RebateFormsService.new(rebate_form_fields_params).generate_qr(@rebate_form)
+  end
 
   # GET /admin/rebate_forms
   def index
