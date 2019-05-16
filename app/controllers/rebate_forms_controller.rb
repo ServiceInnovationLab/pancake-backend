@@ -5,7 +5,6 @@ class RebateFormsController < ApiController
   # strong_resource :rebate_form
 
   def show_by_jwt
-    debugger
     decoded_token = decode_jwt(params[:jwt])
 
     rebate_form_id = decoded_token[0]['rebate_form_id']
