@@ -19,7 +19,7 @@ class RebateFormsService
     token = JWT.encode payload, ENV['HMAC_SECRET'], 'HS256'
 
     # iPad-application URL
-    url = ENV['APP_URL'] + 'admin/sign?jwt=' + token
+    url = `#{ENV['APP_URL']}admin/sign?jwt=#{token}`
 
     RQRCode::QRCode
       .new(url, size: 20, level: :h)
