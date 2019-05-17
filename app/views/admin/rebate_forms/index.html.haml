@@ -6,10 +6,12 @@
       Rates Rebate 2018/2019
     %h2.rebate-subtitle
       Customer applications
+  
+  = react_component("CustomerApplications")
 
-  .pure-u-1-2.rebate-search-box
-    = render 'search'
+  -# .pure-u-1-2.rebate-search-box
+  -#   = render 'search'
 
-  .pure-u-1
-    - unless @name.nil?
-      = render 'results'
+  -# .pure-u-1
+  -#   - unless @name.nil?
+  -#     = render 'results'

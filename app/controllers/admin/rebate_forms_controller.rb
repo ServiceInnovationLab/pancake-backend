@@ -21,7 +21,7 @@ class Admin::RebateFormsController < Admin::BaseController
     @rebate_forms = @rebate_forms.where(completed: @completed)
     @rebate_forms = @rebate_forms.order(created_at: :desc)
 
-    respond_with @rebate_forms
+    respond_with json: @rebate_forms
   end
 
   # GET /admin/rebate_forms/1
