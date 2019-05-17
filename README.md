@@ -50,7 +50,16 @@ To run the server:
 bundle exec rails s
 ```
 
-To run the tests:
+Seed the database and create a user:
+
+```
+bundle exec rake db:seed
+```
+
+This will pop up an invitation email for `juanvandenanker@gmail.com` in your browser. If the server is running you will be able to click the link to accept the invitation and set your password.
+
+To run the tests
+----------------
 
 ```
 bundle exec rspec
