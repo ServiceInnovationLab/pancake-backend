@@ -9,9 +9,11 @@ class RebateFormsController < ApiController
 
     raise JsonapiCompliable::Errors::RecordNotFound unless token
 
-    decoded_token = decode_jwt(token)
+    decoded_token = decode_jwt(token)[0]
 
-    rebate_form_id = decoded_token[0]['rebate_form_id']
+    correct_token(decoded_token)
+
+    rebate_form_id = decoded_token['rebate_form_id']
 
     rebate_form = RebateForm.find(rebate_form_id)
 
@@ -49,5 +51,9 @@ class RebateFormsController < ApiController
 
   def decode_jwt(token)
     JWT.decode token, ENV['HMAC_SECRET'], true, algorithm: 'HS256'
+  end
+
+  def correct_token(decoded_token)
+    raise JsonapiCompliable::Errors::RecordNotFound unless decoded_token['per'] == 'fetch_application_and_submit_signatures'
   end
 end
