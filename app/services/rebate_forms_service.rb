@@ -47,11 +47,22 @@ class RebateFormsService
   end
 
   def create_or_update_property(council)
+    return create_or_update_property_with_valuation_id(council) if @rebate_form_attributes['valuation_id']
+    find_or_create_property_with_no_valuation_id(council)
+  end
+
+  def create_or_update_property_with_valuation_id(council)
     property = Property.find_or_create_by(valuation_id: @rebate_form_attributes['valuation_id'],
                                           rating_year: ENV['YEAR'],
                                           council: council)
     property.update(location: @rebate_form_attributes['location'])
     property
+  end
+
+  def find_or_create_property_with_no_valuation_id(council)
+    Property.find_or_create_by(location: @rebate_form_attributes['location'],
+                               rating_year: ENV['YEAR'],
+                               council: council)
   end
 
   def find_council
