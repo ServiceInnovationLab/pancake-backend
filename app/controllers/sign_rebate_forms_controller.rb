@@ -21,8 +21,6 @@ class SignRebateFormsController < ApiController
 
     instance.signatures << signatures
 
-    raise JsonapiCompliable::Errors::RecordNotFound unless instance
-
     render_jsonapi(signatures, scope: false)
   end
 
