@@ -54,7 +54,7 @@ RSpec.describe 'RebateForm', type: :feature do
       context 'when the generate QR button is clicked' do
         it 'goes to the right place' do
           visit "/admin/rebate_forms/#{rebate_form.id}/"
-          click_link('Generate QR')
+          click_link('generate_qr')
           expect(page).to_not have_text('EDIT')
           expect(page).to_not have_text('Customer details')
           expect(page).to_not have_text('Signature required')
