@@ -3,6 +3,4 @@
 
 = render 'show_header'
 
-= link_to 'Generate QR', admin_rebate_form_generateqr_path(@rebate_form), class: 'pure-button' 
-
 = react_component("EditForm", {isReadOnly: true, rebateForm: @rebate_form, property: @rebate_form.property, ratesBills: @rebate_form.property.rates_bills})

@@ -150,3 +150,9 @@
 .rebate-qrcode {
   background-color: black;
 }
+
+.rebate-generate-qr {
+  border: 1px solid black;
+  float: right;
+  width: 5.5rem;
+}
