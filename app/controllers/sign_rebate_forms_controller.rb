@@ -5,7 +5,11 @@ class SignRebateFormsController < ApiController
   strong_resource :rebate_form
 
   def sign
-    decoded_token = decode_jwt(params[:data][:token])
+    token = params[:data][:token]
+
+    raise JsonapiCompliable::Errors::ValidationError unless token
+
+    decoded_token = decode_jwt(token)
 
     rebate_form_id = decoded_token[0]['rebate_form_id']
 

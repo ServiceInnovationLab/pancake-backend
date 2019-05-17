@@ -8,6 +8,16 @@ RSpec.describe RebateFormsController, type: :controller do
   let(:fields) { { 'dependants' => '0', 'full_name' => 'bob', 'income' => '10000' } }
   let(:property) { FactoryBot.create :property_with_rates, rating_year: ENV['YEAR'] }
 
+  before do
+    payload = {
+      rebate_form_id: rebate_form.id,
+      exp: Time.now.to_i + (1000 * 60),
+      per: 'fetch_application_and_submit_signatures'
+    }
+
+    @token = JWT.encode payload, ENV['HMAC_SECRET'], 'HS256'
+  end
+
   pending '#create' do
     let(:body) do
       {
@@ -30,12 +40,10 @@ RSpec.describe RebateFormsController, type: :controller do
     end
   end
 
-  pending '#update'
-
-  describe '#show' do
+  describe '#show_by_jwt' do
     let(:rebate_form) { FactoryBot.create :rebate_form }
 
-    before { get :show, format: :json, params: { id: rebate_form.token } }
+    before { get :show_by_jwt, format: :json, params: { jwt: @token } }
 
     it { expect(subject['data']['attributes']['fields']).to eq rebate_form.fields }
     it { expect(subject['data']['attributes']['token']).to eq rebate_form.token }

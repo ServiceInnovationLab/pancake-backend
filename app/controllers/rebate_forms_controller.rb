@@ -5,7 +5,11 @@ class RebateFormsController < ApiController
   strong_resource :rebate_form
 
   def show_by_jwt
-    decoded_token = decode_jwt(params[:jwt])
+    token = params[:jwt]
+
+    raise JsonapiCompliable::Errors::RecordNotFound unless token
+
+    decoded_token = decode_jwt(token)
 
     rebate_form_id = decoded_token[0]['rebate_form_id']
 
