@@ -148,6 +148,8 @@
 }
 
 .rebate-qrcode {
+  display: flex;
+  margin: 1em auto;
   background-color: black;
 }
 

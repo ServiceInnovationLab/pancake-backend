@@ -17,7 +17,7 @@ class SignRebateFormsController < ApiController
 
     instance = RebateForm.find(rebate_form_id)
 
-    signatures = get_signatures_for_form(instance)
+    signatures = signatures_for_form
 
     instance.signatures << signatures
 
@@ -28,22 +28,21 @@ class SignRebateFormsController < ApiController
 
   private
 
-  def get_signatures_for_form(instance)
+  def signatures_for_form
     sig1_data = params[:data][:signatures][0]
     sig2_data = params[:data][:signatures][1]
 
-    sig1 = instantiate_signature(sig1_data, instance)
-    sig2 = instantiate_signature(sig2_data, instance)
+    sig1 = instantiate_signature(sig1_data)
+    sig2 = instantiate_signature(sig2_data)
 
     [sig1, sig2]
   end
 
-  def instantiate_signature(data, instance)
+  def instantiate_signature(data)
     Signature.create(
       image: data[:image],
       name: data[:name],
       role: data[:role],
-      rebate_form: instance,
       signature_type: SignatureType.find_by!(name: data[:type])
     )
   end

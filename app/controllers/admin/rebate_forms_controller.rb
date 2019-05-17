@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'rqrcode'
-require 'base64'
-require 'jwt'
-
 class Admin::RebateFormsController < Admin::BaseController
   before_action :set_rebate_form, only: %i[show update destroy edit]
   respond_to :html, :pdf, :csv, :json
