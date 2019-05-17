@@ -71,10 +71,10 @@ RSpec.describe RebateFormsService do
       context 'with valid params' do
         it 'updates a rebate form' do
           subject.update
-          expect(RebateForm.first.reload.fields['full_name']).to eq 'Best Witch'
-          expect(RebateForm.first.reload.fields['email']).to eq 'hermione.granger@potterworld.com'
-          expect(RebateForm.first.reload.fields['dependants']).to eq '3'
-          expect(RebateForm.first.reload.property.council.name).to eq property2.council.name
+          expect(RebateForm.first.fields['full_name']).to eq 'Best Witch'
+          expect(RebateForm.first.fields['email']).to eq 'hermione.granger@potterworld.com'
+          expect(RebateForm.first.fields['dependants']).to eq '3'
+          expect(RebateForm.first.property.council.name).to eq property2.council.name
         end
 
         context 'without a valuation id' do
@@ -103,7 +103,70 @@ RSpec.describe RebateFormsService do
           it 'finds the correct property and updates the rebate form accordingly' do
             expect(RebateForm.first.property).to eq property
             subject.update
-            expect(RebateForm.first.reload.property).to eq property2
+            expect(RebateForm.first.property).to eq property2
+          end
+        end
+
+        context 'when it receives an address that doesn\'t belong to an existing property' do
+          let(:update_params) do
+            {
+              'id' => rebate_form.id,
+              'total_rates' => '12345',
+              'location' => 'This is a different address than property2',
+              'council' => property2.council.name,
+              'rebate_form' => {
+                'fields' => {
+                  'full_name' => 'Best Witch',
+                  'customer_id' => '12345',
+                  'phone' => '022123-4567',
+                  'email' => 'hermione.granger@potterworld.com',
+                  'has_partner' => 'true',
+                  'dependants' => '3',
+                  'occupation' => 'witch',
+                  '50_percent_claimed' => 'true',
+                  'income' => {}
+                }
+              }
+            }
+          end
+
+          it 'creates a new property object' do
+            expect(Property.count).to eq 2
+            subject.update
+            expect(Property.count).to eq 3
+            expect(Property.last.location).to eq 'This is a different address than property2'
+          end
+        end
+
+        context 'when it receives an address that is slightly different than that of an existing property' do
+          # property2 address is '999 Lambton quay'
+          let(:update_params) do
+            {
+              'id' => rebate_form.id,
+              'total_rates' => '12345',
+              'location' => '999 Lambton Quay',
+              'council' => property2.council.name,
+              'rebate_form' => {
+                'fields' => {
+                  'full_name' => 'Best Witch',
+                  'customer_id' => '12345',
+                  'phone' => '022123-4567',
+                  'email' => 'hermione.granger@potterworld.com',
+                  'has_partner' => 'true',
+                  'dependants' => '3',
+                  'occupation' => 'witch',
+                  '50_percent_claimed' => 'true',
+                  'income' => {}
+                }
+              }
+            }
+          end
+
+          it 'creates a new property object' do
+            expect(Property.count).to eq 2
+            subject.update
+            expect(Property.count).to eq 3
+            expect(Property.last.location).to eq '999 Lambton Quay'
           end
         end
       end
