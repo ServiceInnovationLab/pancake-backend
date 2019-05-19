@@ -146,3 +146,19 @@
   height: 50%;
   border: 1px solid var(--gray)
 }
+
+.rebate-button {
+  margin: 1rem;
+  padding: 1rem;
+  color: var(--white);
+  background: var(--blue);
+  border: none
+}
+
+.rebate-button-selected {
+  margin: 1rem;
+  padding: 1rem;
+  color: var(--white);
+  border: 5px solid var(--black);
+  background: var(--blue)
+}

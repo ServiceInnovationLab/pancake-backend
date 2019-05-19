@@ -28,7 +28,7 @@ class CustomerApplications extends React.Component {
         return response.json()
       })
       .then(data => {
-        this.setState({ rebateForms: data.json })
+        this.setState({ rebateForms: JSON.parse(data.json) })
       })
   }
 
@@ -53,7 +53,7 @@ class CustomerApplications extends React.Component {
         <div className='pure-u-1-2 rebate-search-box'>
           <div className={"rebate-radio-wrapper flex-row"}>
             {map([["Not Signed", 'not-completed'], ["Signed", 'completed']], ([key, value]) =>
-              <button key={key} onClick={() => this.onChange(value)}>
+              <button key={key} className={(this.state.applicationState === value) ? 'rebate-button-selected' : 'rebate-button' } onClick={() => this.onChange(value)}>
               {key}
               </button>
             )}
@@ -78,7 +78,8 @@ class CustomerApplications extends React.Component {
           </Form>
         }
         </div>
-        {(this.state.rebateForms && this.state.rebateForms[0]) && <table className="pure-u-1 pure-table pure-table-bordered rebate-results-table">
+        {(this.state.rebateForms && this.state.rebateForms[0]) && <div className="pure-u-1">
+         <table className="pure-table pure-table-bordered rebate-results-table">
           <thead>
             <tr>
               <th>Name</th>
@@ -88,23 +89,29 @@ class CustomerApplications extends React.Component {
           </thead>
           <tbody className='rebate-results-table-body'>
             {map(this.state.rebateForms, (rebateForm, key) => {
-              const { property, fields } = rebateForm
-
+              const { property, fields, id } = rebateForm
               return (
                 <tr key={`${key}-${fields.full_name}`} className='rebate_form.completed'>
                   <td className='rebate-results-table-cell'>{fields.full_name}</td>
                   {property
-                    ? <td className='rebate-results-table-cell'>{property.location} {property.suburb} {property.town_city}</td>
+                    ? <td className='rebate-results-table-cell'>{property.location} <br/> {property.suburb} <br/>  {property.town_city}</td>
                     : <td className='rebate-results-table-cell' />
                   }
                   <td className='rebate-results-table-cell'>
-                    <img src='/assets/blue-right-arrow.svg' />
+                    <a onClick={() => {
+                      console.log(`${appUrl}/admin/rebate_forms/${id}`)
+                      window.location = `${appUrl}/admin/rebate_forms/${id}`
+                      }
+                    }>
+                      <img src='/assets/blue-right-arrow.svg' />
+                    </a>
                   </td>
                 </tr>
               )
             })}
           </tbody>
         </table>
+        </div>
       }
       </Fragment>
     )
