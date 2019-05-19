@@ -141,24 +141,26 @@
   margin: 0 auto .5em auto;
   padding: .4rem;  
 }
-.rebate-radio-buttons {
-  margin-top:.5rem;
-  height: 50%;
-  border: 1px solid var(--gray)
+.rebate-tabs {
+  border-bottom: 1px solid var(--black);
+  padding-bottom: .25rem;
+  margin-bottom: 1rem
 }
 
 .rebate-button {
+  color: var(--dark-gray);
   padding: 1rem;
-  color: var(--black);
-  background: var(--gray);
+  background: none;
   border: none;
   min-width: 200px
 }
 
 .rebate-button-selected {
   padding: 1rem;
-  color: var(--white);
+  color: var(--blue);
+  font-weight: bold;
   border: none;
-  background: var(--black);
+  border-bottom: 4px solid var(--blue);
+  background: none;
   min-width: 200px
 }

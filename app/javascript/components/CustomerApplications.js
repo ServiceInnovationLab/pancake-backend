@@ -51,7 +51,7 @@ class CustomerApplications extends React.Component {
     return (
       <Fragment>
         <div className='pure-u-1-2 rebate-search-box'>
-          <div className={"rebate-radio-wrapper flex-row"}>
+          <div className={"rebate-tabs flex-row"}>
             {map([["Not Signed", 'not-completed'], ["Signed", 'completed']], ([key, value]) =>
               <button key={key} className={(this.state.applicationState === value) ? 'rebate-button-selected' : 'rebate-button' } onClick={() => this.onChange(value)}>
               {key}
@@ -63,7 +63,6 @@ class CustomerApplications extends React.Component {
             >
             {({ handleSubmit }) => (
               <form className="pure-form" onSubmit={handleSubmit}>
-                <hr />
                 <Field
                   className='rebate-search-field rebate-search-input'
                   name="name"
