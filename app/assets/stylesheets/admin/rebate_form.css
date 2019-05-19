@@ -148,17 +148,17 @@
 }
 
 .rebate-button {
-  margin: 1rem;
   padding: 1rem;
-  color: var(--white);
-  background: var(--blue);
-  border: none
+  color: var(--black);
+  background: var(--gray);
+  border: none;
+  min-width: 200px
 }
 
 .rebate-button-selected {
-  margin: 1rem;
   padding: 1rem;
   color: var(--white);
-  border: 5px solid var(--black);
-  background: var(--blue)
+  border: none;
+  background: var(--black);
+  min-width: 200px
 }
