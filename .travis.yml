@@ -23,7 +23,7 @@ after_script:
 env:
   global:
   - PGPORT=5433
-  - YEAR=2018
+  - YEAR=2019
   - SIGNING_URL="http://127.0.0.1:4000/#/{token}"
-  - OPENFISCA_ORIGN="https://govtnz-rates-rebate-of.herokuapp.com/" 
+  - OPENFISCA_ORIGN="https://govtnz-rates-rebate-of.herokuapp.com/"
   - HMAC_SECRET="DgD3NMLjoEsgbT7bOmpgI0svg18BMHuy0VpE6cX9xMMxznWhvEKIggR61nE/E"
