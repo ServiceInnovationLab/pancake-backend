@@ -30,8 +30,6 @@ RSpec.describe RebateFormsController, type: :controller do
     end
   end
 
-  pending '#update'
-
   describe '#show' do
     let(:rebate_form) { FactoryBot.create :rebate_form }
 
