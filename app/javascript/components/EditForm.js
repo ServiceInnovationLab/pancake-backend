@@ -1,5 +1,5 @@
 
-import React from "react"
+import React, { Fragment } from "react"
 import { map, uniq, indexOf } from "lodash"
 import { Form, Field } from "react-final-form";
 import 'isomorphic-fetch';
@@ -104,28 +104,32 @@ class EditRebateForm extends React.Component {
               </div>   
             }
             {IncomeDeclaration({otherIncomeFields, isReadOnly})}
-            <div className={'flex-row'}>
-              <Field
-                className='rebate-search-input flex-item'
-                name="newIncomeField"
-                component="input"
-                readOnly={isReadOnly}
-              />
-              <button
-                className='one-third rebate-add-income-button'
-                disabled={isReadOnly || !values.newIncomeField}
-                type="button"
-                onClick={() => this.addNewIncomeValue(values)}
-                >
-                  Add Income Type
-              </button>
+            { !isReadOnly &&
+              <Fragment>
+                <div className={'flex-row'}>
+                  <Field
+                    className='rebate-search-input flex-item'
+                    name="newIncomeField"
+                    component="input"
+                    readOnly={isReadOnly}
+                  />
+                  <button
+                    className='one-third rebate-add-income-button'
+                    disabled={isReadOnly || !values.newIncomeField}
+                    type="button"
+                    onClick={() => this.addNewIncomeValue(values)}
+                    >
+                      Add Income Type
+                  </button>
 
-            </div>
-            { !isReadOnly && <div className="rebate-submit-button-wrapper">
-              <button className="one-third rebate-add-income-button rebate-search-button" type="submit" >
-                Submit
-              </button>
-            </div>}
+                </div>
+                <div className="rebate-submit-button-wrapper">
+                  <button className="one-third rebate-add-income-button rebate-search-button" type="submit" >
+                    Submit
+                  </button>
+                </div>
+              </Fragment> 
+              }
           </form>
         )}}
       </Form>
