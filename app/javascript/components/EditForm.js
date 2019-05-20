@@ -46,12 +46,15 @@ class EditRebateForm extends React.Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          rebate_form: {...values}
+          rebate_form: {...values},
+          location: values.fields.location,
+          total_rates: values.fields.total_rates,
+          council: this.props.council.name
         }),
         credentials: 'same-origin'
       }).then(res => {
         console.log('res', res)
-        if (res.ok) window.location = `${appUrl}admin/rebate_forms/${this.props.rebateForm.id}` 
+        if (res.ok) window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}` 
         else console.error(res)
       })
   }
@@ -60,11 +63,11 @@ class EditRebateForm extends React.Component {
     const { 
       rebateForm,
       property,
-      ratesBills,
       isReadOnly
     } = this.props
     const { fields } = rebateForm
-    const initialValues = {fields, ratesBills: ratesBills[0], property} 
+    fields.location = property.location
+    const initialValues = {fields, location: property.location} 
     const { otherIncomeFields } = this.state
 
     return (

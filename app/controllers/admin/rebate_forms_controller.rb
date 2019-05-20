@@ -58,8 +58,6 @@ class Admin::RebateFormsController < Admin::BaseController
     @rebate_form = RebateFormsService.new(rebate_form_fields_params).update!
     @rebate_form.update(updated_by: current_user.id)
     respond_with @rebate_form, location: admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
-  rescue RebateFormsService::Error
-    redirect_to edit_admin_rebate_form_path(@rebate_form), notice: 'The rebate form did not update, please try again.'
   end
 
   # DELETE /admin/rebate_forms/1
