@@ -1,0 +1,6 @@
+.rebate-header-buttons
+  = link_to admin_rebate_forms_path, id: 'back' do
+    =image_tag("blue-left-arrow.svg", class: 'rebate-header-icon')
+  = link_to admin_rebate_form_path(@rebate_form), id: 'reload' do
+    =image_tag("blue-reload.svg", class: 'rebate-header-icon')
+  = link_to 'DONE', admin_rebate_form_path(@rebate_form), id: 'done', class: 'pure-button rebate-done'
