@@ -7,7 +7,8 @@ RSpec.describe 'RebateForm', type: :feature do
 
   it "Anonymous can't see it" do
     visit "/admin/rebate_forms/#{rebate_form.id}"
-    expect(page).to have_text('Forgot your password?')
+    expect(page).to have_text('Rates Rebate 2018/2019')
+    expect(page).to have_text('Log in')
   end
 
   context 'signed in as dia' do
