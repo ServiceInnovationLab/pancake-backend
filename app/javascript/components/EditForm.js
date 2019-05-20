@@ -50,6 +50,7 @@ class EditRebateForm extends React.Component {
         }),
         credentials: 'same-origin'
       }).then(res => {
+        console.log('res', res)
         if (res.ok) window.location = `${appUrl}admin/rebate_forms/${this.props.rebateForm.id}` 
         else console.error(res)
       })
@@ -71,15 +72,6 @@ class EditRebateForm extends React.Component {
         onSubmit={this.onSubmit.bind(this)}
         initialValues={initialValues}
         decorators={[calculator]}
-        validate={values => {
-          const errors = {};
-          {map(initialValues, (value, key) => {
-            if (!values[key]) {
-              errors[key] = "Required";
-            } 
-          })}
-          return errors;
-        }}
       >
         {({
           handleSubmit,
@@ -95,7 +87,7 @@ class EditRebateForm extends React.Component {
               {map(customerDetailFields, (field, index) => {
                 if (indexOf([1, 4, 6, 8, 10, 12], index) >= 0) field.withMargin = true
                 return field.type == 'radio'
-                ? RadioInput({...field, isReadOnly})
+                ? RadioInput({...field, isReadOnly, values})
                 : SingleInput({...field, isReadOnly})
               })}
             </div>
@@ -104,7 +96,7 @@ class EditRebateForm extends React.Component {
                 {map(conditionalsFields, (field, index) => {
                 if (indexOf([2, 4, 5], index) >= 0) field.withMargin = true
                 return field.type == 'radio'
-                ? RadioInput({...field, isReadOnly})
+                ? RadioInput({...field, isReadOnly, values})
                 : SingleInput({...field, isReadOnly})
                 })}
               </div>   
@@ -128,7 +120,7 @@ class EditRebateForm extends React.Component {
 
             </div>
             <div className="rebate-submit-button-wrapper">
-              <button className="one-third rebate-add-income-button rebate-search-button" type="submit" disabled={submitting || isReadOnly}>
+              <button className="one-third rebate-add-income-button rebate-search-button" type="submit" >
                 Submit
               </button>
             </div>

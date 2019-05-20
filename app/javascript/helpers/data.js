@@ -1,15 +1,15 @@
 export const incomeRows = [
   [
-    "other_superannuation",
-    "Other Superannuation"
-  ],
-  [
     "nz_superannuation",
     "NZ Superannuation"
   ],
   [
+    "other_superannuation",
+    "Other superannuation"
+  ],
+  [
     "interest_dividends",
-    "Interest / Dividends"
+    "Interest or dividends"
   ],
   [
     "wages_salary",
@@ -17,27 +17,11 @@ export const incomeRows = [
   ],
   [
     "business_profit",
-    "Business Profit (NET)"
-  ],
-  [
-    "work_and_income_supplements",
-    "Work and Income Supplements"
-  ],
-  [
-    "working_for_families_tax_credits",
-    "Working For Families Tax Credits"
+    "Business Profit (net)"
   ],
   [
     "rental_income",
     "Rental Income"
-  ],
-  [
-    "acc_earnings",
-    "ACC Earnings"
-  ],
-  [
-    "trust_income",
-    "Trust income"
   ],
   [
     "overseas_income",
