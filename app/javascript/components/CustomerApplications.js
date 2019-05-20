@@ -48,6 +48,7 @@ class CustomerApplications extends React.Component {
   }
 
   render() {
+    console.log(this.state, 'this state')
     return (
       <Fragment>
         <div className='pure-u-1-2 rebate-search-box'>

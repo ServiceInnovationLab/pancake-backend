@@ -1,3 +1,5 @@
 - content_for :title, "RatesRebate #{@rebate_form.property.location}"
 
+= render 'signature_done_header'
+
 %img(src='#{@image_data}' class='rebate-qrcode')
