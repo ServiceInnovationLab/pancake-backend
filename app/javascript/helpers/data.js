@@ -73,7 +73,8 @@ export const customerDetailFields = [
   {
     id:"total_rates",
     label: "Total Rates",
-    type: 'number'
+    type: 'number',
+    step: 0.01
   },
   {
     id:"valuation_id",
