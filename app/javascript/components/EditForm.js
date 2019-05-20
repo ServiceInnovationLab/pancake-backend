@@ -20,15 +20,14 @@ class EditRebateForm extends React.Component {
 
     const { rebateForm: { fields: {income} } } = this.props
 
-    const hasOtherIncome = income && income.other_income
+    const otherIncome = income && income.otherIncome
 
-    const applicantKeys = hasOtherIncome ? Object.keys(income.other_income.applicant) : []
-    const partnerKeys = hasOtherIncome ? Object.keys(income.other_income.partner) : []
+    const applicantKeys = otherIncome && otherIncome.applicant ? Object.keys(otherIncome.applicant) : []
+    const partnerKeys = otherIncome && otherIncome.partner ? Object.keys(otherIncome.partner) : []
 
     const uniqKeys = uniq(applicantKeys.concat(partnerKeys))
-
     this.state = { otherIncomeFields: uniqKeys }
-  }
+    }
 
   addNewIncomeValue (values) {
     this.setState({otherIncomeFields: this.state.otherIncomeFields.concat(values.newIncomeField)})
@@ -122,11 +121,11 @@ class EditRebateForm extends React.Component {
               </button>
 
             </div>
-            <div className="rebate-submit-button-wrapper">
+            { !isReadOnly && <div className="rebate-submit-button-wrapper">
               <button className="one-third rebate-add-income-button rebate-search-button" type="submit" >
                 Submit
               </button>
-            </div>
+            </div>}
           </form>
         )}}
       </Form>

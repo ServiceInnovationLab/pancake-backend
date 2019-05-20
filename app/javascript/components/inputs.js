@@ -56,7 +56,7 @@ export function RadioInput ({ id, label, type, isReadOnly, withMargin, values })
             component="input"
             type={type}
             value={value}
-            disabled={isReadOnly && values.fields[id] == value}
+            disabled={isReadOnly && values.fields[id] != value}
           />{" "}
           {value}
         </label>

@@ -28,7 +28,6 @@ class RebateFormsService
       .as_png(offset: 0, color: '0', shape_rendering: 'crispEdges', module_size: 10)
       .to_data_url
   end
-
   def update!
     council = find_council!
     property = create_or_update_property!(council)
