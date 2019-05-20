@@ -2,3 +2,60 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+/*Colours*/
+:root {
+  --dove: #ebebeb;
+  --gray: #ababab;
+  --dark-gray: #4c4c4c;
+  --dark-gray-hover: #3d3d3d;
+  --orange: #d34322;
+  --orange-hover: #b73a1e;
+  --blue: #336699;
+  --blue-hover: #1a4d80;
+  --purple: #993366;
+  --purple-hover: #6a2347;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+.login-wrapper {
+  margin: auto;
+  max-width: 960px;
+  padding: 4em;
+}
+
+.login-title {
+  font-size: 3em;
+  margin: 0;
+}
+
+.login-subtitle {
+  font-size: 1.75em;
+  margin: .4em 0;
+}
+
+.login-box {
+  background-color: var(--dove);
+  margin-bottom: 2em;
+  padding: 1.75em;
+  width: 770px;
+}
+
+.login-input {
+  border: solid 5px #e6e6e6;
+  line-height: 2em;
+  margin-bottom: .5em;
+  width: 100%;
+}
+
+.login-button-wrapper {
+  margin-top: 1em;
+}
+
+.login-button {
+  background-color: var(--blue);
+  border-radius: .2em;
+  color: white;
+  padding: .5em 1em;
+}

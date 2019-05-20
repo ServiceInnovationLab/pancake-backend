@@ -1,0 +1,21 @@
+.login-wrapper
+  %h1.login-title Rates Rebate 2018/2019
+  %h2.login-subtitle Log in
+
+  .login-box
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      %div
+        = f.label :email
+        = f.email_field :email, autofocus: true, autocomplete: "email", class: "login-input"
+
+      %div
+        = f.label :password
+        = f.password_field :password, autocomplete: "current-password", class: "login-input"
+
+      .login-button-wrapper
+        = f.submit "LOG IN", class: "login-button"
+
+  .login-text
+    Trouble logging in? Please email
+    =mail_to 'rob.holmes@dia.govt.nz'
+    and we will help you resolve the issue.
