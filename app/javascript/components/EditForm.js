@@ -68,7 +68,8 @@ class EditRebateForm extends React.Component {
     fields.location = property.location
     const initialValues = {fields, location: property.location} 
     const { otherIncomeFields } = this.state
-
+// LEAVE IN FOR PRODUCTION
+    console.log('initial: ', initialValues , 'rebateform: ', 'rebate form: ', rebateForm, 'property: ', property)
     return (
       <Form
         onSubmit={this.onSubmit.bind(this)}
