@@ -26,11 +26,18 @@ export function IncomeDeclaration ({otherIncomeFields, isReadOnly}) {
             <h2 className="one-quarter" >Applicant</h2>
             <h2 className="one-quarter" >Partner</h2>
         </div>
-        {map([...incomeRows, ...otherIncomeFields], field => {
-          const isArray = typeof field == 'object'
-          const name = isArray ? field[0] : field
-          const label = isArray ? field[1] : field
-          
+        {map(incomeRows, ([name, label]) => {
+          return (
+            <div key={name} className="flex-row">
+                <label className="flex-item">
+                  <h3>{label || name}</h3>
+                </label>
+                {TableInput({isReadOnly, className: 'one-quarter with-margin', id: `applicant.${name}`})}
+                {TableInput({isReadOnly, className: 'one-quarter', id: `partner.${name}`})}
+            </div>
+          )}
+        )}
+        {map(otherIncomeFields, ([name, label]) => {
           return (
             <div key={name} className="flex-row">
                 <label className="flex-item">
