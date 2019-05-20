@@ -4,6 +4,15 @@
   = link_to edit_admin_rebate_form_path do
     =image_tag("blue-reload.svg", class: 'rebate-header-icon')
 
+.rebate-banner
+  - if rebate_form_completed?(@rebate_form)
+    =image_tag("alert1.svg", class: 'rebate-banner-icon')
+    .rebate-banner-header
+      %h2.rebate-banner-title
+        Are you sure you want to edit?
+      .rebate-banner-text
+        If you make any changes, the customer will have to sign the declaration again
+
 .rebate-header
   %h2.rebate-title
     Customer details
