@@ -13,6 +13,7 @@
   --white: #ffffff;
   --black: #000000;
   --alert-red: #cc0000;
+  --light-red: #f4cccc;
 }
 
 .rebate-wrapper {
@@ -41,7 +42,9 @@
 }
 
 .rebate-banner {
-
+  background-color: var(--light-red);
+  border-top: .25em solid var(--alert-red);
+  padding: 0 2em 2em 2em;
 }
 
 .rebate-header-icon {
