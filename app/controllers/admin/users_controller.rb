@@ -8,6 +8,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def edit; end
+
   def show; end
 
   def update
