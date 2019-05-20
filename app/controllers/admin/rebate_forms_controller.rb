@@ -8,7 +8,7 @@ class Admin::RebateFormsController < Admin::BaseController
     @rebate_form = RebateForm.find(params[:rebate_form_id])
     authorize @rebate_form
 
-    @image_data = RebateFormsService.new(rebate_form_fields_params).generate_qr(@rebate_form)
+    @image_data = RebateFormsService.new(rebate_form_fields_params).generate_qr(@rebate_form, current_user)
   end
 
   # GET /admin/rebate_forms
