@@ -24,7 +24,7 @@ class RebateFormsController < ApiController
   end
 
     def create
-      rebate_form = RebateFormsService.new(rebate_form_params).update
+      rebate_form = RebateFormsService.new(rebate_form_params).update!
 
       if rebate_form.errors.any?
         render_errors_for(rebate_form)
