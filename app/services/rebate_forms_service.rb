@@ -28,6 +28,7 @@ class RebateFormsService
       .as_png(offset: 0, color: '0', shape_rendering: 'crispEdges', module_size: 10)
       .to_data_url
   end
+
   def update!
     council = find_council!
     property = create_or_update_property!(council)
@@ -50,9 +51,14 @@ class RebateFormsService
   def update_rebate_form!(property)
     rebate_form = RebateForm.find_by(id: @rebate_form_attributes['id'])
     property = rebate_form.property if property.id.nil?
+    remove_signatures_if_completed(rebate_form)
     fields_to_update = rebate_form.fields.merge(fields_to_merge)
     rebate_form.update!(property: property, valuation_id: property.valuation_id, fields: fields_to_update)
     rebate_form
+  end
+
+  def remove_signatures_if_completed(rebate_form)
+    rebate_form.signatures.destroy_all && rebate_form.update(completed: false) if rebate_form.completed
   end
 
   def update_fields

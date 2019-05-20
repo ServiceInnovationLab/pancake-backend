@@ -4,6 +4,10 @@
   = link_to edit_admin_rebate_form_path do
     =image_tag("blue-reload.svg", class: 'rebate-header-icon')
 
+.rebate-banner
+  - if rebate_form_completed?(@rebate_form)
+    Are you sure?
+
 .rebate-header
   %h2.rebate-title
     Customer details

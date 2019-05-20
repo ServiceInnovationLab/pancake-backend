@@ -12,6 +12,7 @@
   --purple-hover: #6a2347;
   --white: #ffffff;
   --black: #000000;
+  --alert-red: #cc0000;
 }
 
 .rebate-wrapper {
@@ -37,6 +38,10 @@
 .rebate-header-buttons {
   background-color: var(--dove);
   padding: 1.5em 4em;
+}
+
+.rebate-banner {
+
 }
 
 .rebate-header-icon {
@@ -136,23 +141,25 @@
   justify-content: flex-end;
   margin-top: 1rem
 }
+
 .rebate-add-income-button {
   line-height: 2em;
   margin: 0 auto .5em auto;
-  padding: .4rem;  
+  padding: .4rem;
 }
+
 .rebate-tabs {
   padding-bottom: .25rem;
   border-bottom: 2px solid var(--gray);
   margin-bottom: 1rem
 }
+
 .rebate-button {
   width: 200px;
   background: var(--dove);
   padding: 1rem;
   border: none;
   font-weight: bold
-
 }
 
 .rebate-button-selected {
@@ -163,8 +170,8 @@
   border: none;
   border-bottom: 5px solid var(--blue);
   font-weight: bold
-
 }
+
 .rebate-qrcode {
   display: flex;
   margin: 1em auto;
