@@ -7,7 +7,7 @@ class RebateFormsService
     @rebate_form_attributes = rebate_form_attributes
   end
 
-  def generate_qr(rebate_form)
+  def generate_qr(rebate_form, current_user)
     # create a new token that only allows you to fetch a restricted set of details for this application only
     # and use the same token to submit the signatures back
     # this token is valid for 30 minutes
@@ -15,13 +15,13 @@ class RebateFormsService
     payload = {
       rebate_form_id: rebate_form.id,
       exp: Time.now.to_i + (ENV['IPAD_JWT_LENGTH'].to_i * 60),
-      per: 'fetch_application_and_submit_signatures'
+      per: 'fetch_application_and_submit_signatures',
+      witness: witness_details(current_user)
     }
 
     token = JWT.encode payload, ENV['HMAC_SECRET'], 'HS256'
-
     # iPad-application URL
-    url = ENV['APP_URL'] + 'admin/sign?jwt=' + token
+    url = ENV['APP_URL'] + 'ipad/?t=' + token
 
     RQRCode::QRCode
       .new(url, size: 20, level: :h)
@@ -42,6 +42,14 @@ class RebateFormsService
   end
 
   private
+
+  def witness_details(current_user)
+    {
+      name: current_user.name || '',
+      location: current_user&.council&.name,
+      occupation: 'council_officer'
+    }
+  end
 
   def create_or_update_rebate_form!(property)
     return update_rebate_form!(property) if @rebate_form_attributes['id']
