@@ -6,10 +6,12 @@
 
 .rebate-banner
   - if rebate_form_completed?(@rebate_form)
-    %h2.rebate-banner-header
-      Are you sure you want to edit?
-    .rebate-banner-text
-      If you make any changes, the customer will have to sign the declaration again
+    =image_tag("alert1.svg", class: 'rebate-banner-icon')
+    .rebate-banner-header
+      %h2.rebate-banner-title
+        Are you sure you want to edit?
+      .rebate-banner-text
+        If you make any changes, the customer will have to sign the declaration again
 
 .rebate-header
   %h2.rebate-title

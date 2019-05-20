@@ -44,7 +44,26 @@
 .rebate-banner {
   background-color: var(--light-red);
   border-top: .25em solid var(--alert-red);
-  padding: 0 2em 2em 2em;
+  padding: 0 2em 1.5em 2em;
+}
+
+.rebate-banner-header {
+  display: inline-block;
+}
+
+.rebate-banner-title {
+  font-size: 1.75em;
+  margin-bottom: 0.25em;
+}
+
+.rebate-banner-text {
+  font-size: 1.25em;
+}
+
+.rebate-banner-icon {
+  display: inline-block;
+  margin: 1em 1em 0 2em;
+  width: 4em;
 }
 
 .rebate-header-icon {
