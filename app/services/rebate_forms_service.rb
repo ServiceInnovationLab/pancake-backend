@@ -21,13 +21,14 @@ class RebateFormsService
     token = JWT.encode payload, ENV['HMAC_SECRET'], 'HS256'
 
     # iPad-application URL
-    url = `#{ENV['APP_URL']}admin/sign?jwt=#{token}`
+    url = ENV['APP_URL'] + 'admin/sign?jwt=' + token
 
     RQRCode::QRCode
       .new(url, size: 20, level: :h)
       .as_png(offset: 0, color: '0', shape_rendering: 'crispEdges', module_size: 10)
       .to_data_url
   end
+
   def update!
     council = find_council!
     property = create_or_update_property!(council)
