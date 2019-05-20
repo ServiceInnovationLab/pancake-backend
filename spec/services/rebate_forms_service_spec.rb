@@ -29,10 +29,10 @@ RSpec.describe RebateFormsService do
 
     subject { described_class.new(create_params) }
 
-    describe '#update' do
+    describe '#update!' do
       context 'with valid params' do
         it 'creates a new rebate form' do
-          subject.update
+          subject.update!
           expect(RebateForm.count).to eq 1
         end
       end
@@ -67,10 +67,28 @@ RSpec.describe RebateFormsService do
 
     subject { described_class.new(update_params) }
 
-    describe '#update' do
+    describe '#update!' do
+      context 'with invalid params' do
+        let(:update_params) do
+          {
+            'id' => rebate_form.id,
+            'valuation_id' => property2.valuation_id,
+            'total_rates' => '12345',
+            'location' => property2.location,
+            'rebate_form' => {
+              'fields' => {}
+            }
+          }
+        end
+
+        it 'raises an error' do
+          expect { subject.update! }.to raise_error(RebateFormsService::Error)
+        end
+      end
+
       context 'with valid params' do
         it 'updates a rebate form' do
-          subject.update
+          subject.update!
           expect(RebateForm.first.fields['full_name']).to eq 'Best Witch'
           expect(RebateForm.first.fields['email']).to eq 'hermione.granger@potterworld.com'
           expect(RebateForm.first.fields['dependants']).to eq '3'
@@ -102,7 +120,7 @@ RSpec.describe RebateFormsService do
 
           it 'finds the correct property and updates the rebate form accordingly' do
             expect(RebateForm.first.property).to eq property
-            subject.update
+            subject.update!
             expect(RebateForm.first.property).to eq property2
           end
         end
@@ -132,7 +150,7 @@ RSpec.describe RebateFormsService do
 
           it 'creates a new property object' do
             expect(Property.count).to eq 2
-            subject.update
+            subject.update!
             expect(Property.count).to eq 3
             expect(Property.last.location).to eq 'This is a different address than property2'
           end
@@ -164,7 +182,7 @@ RSpec.describe RebateFormsService do
 
           it 'creates a new property object' do
             expect(Property.count).to eq 2
-            subject.update
+            subject.update!
             expect(Property.count).to eq 3
             expect(Property.last.location).to eq '999 Lambton Quay'
           end

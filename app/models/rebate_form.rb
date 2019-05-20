@@ -11,7 +11,6 @@ class RebateForm < ApplicationRecord
   after_initialize :set_token
   before_validation :set_property_id
 
-  validates :valuation_id, presence: true
   validates :token, presence: true
   validates :rebate, presence: true
   validates :property, presence: true
