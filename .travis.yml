@@ -27,3 +27,4 @@ env:
   - SIGNING_URL="http://127.0.0.1:4000/#/{token}"
   - OPENFISCA_ORIGN="https://govtnz-rates-rebate-of.herokuapp.com/"
   - HMAC_SECRET="DgD3NMLjoEsgbT7bOmpgI0svg18BMHuy0VpE6cX9xMMxznWhvEKIggR61nE/E"
+  - APP_URL="http://localhost:3000/"
