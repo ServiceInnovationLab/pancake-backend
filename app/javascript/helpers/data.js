@@ -16,6 +16,10 @@ export const incomeRows = [
     "Wages or Salary"
   ],
   [
+    "work_and_income_benefits",
+    "Work and Income Benefits"
+  ],
+  [
     "business_profit",
     "Business Profit (net)"
   ],
@@ -69,7 +73,8 @@ export const customerDetailFields = [
   {
     id:"total_rates",
     label: "Total Rates",
-    type: 'number'
+    type: 'number',
+    step: 0.01
   },
   {
     id:"valuation_id",
