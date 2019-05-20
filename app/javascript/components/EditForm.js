@@ -20,15 +20,14 @@ class EditRebateForm extends React.Component {
 
     const { rebateForm: { fields: {income} } } = this.props
 
-    const hasOtherIncome = income && income.other_income
+    const otherIncome = income && income.otherIncome
 
-    const applicantKeys = hasOtherIncome ? Object.keys(income.other_income.applicant) : []
-    const partnerKeys = hasOtherIncome ? Object.keys(income.other_income.partner) : []
+    const applicantKeys = otherIncome && otherIncome.applicant ? Object.keys(otherIncome.applicant) : []
+    const partnerKeys = otherIncome && otherIncome.partner ? Object.keys(otherIncome.partner) : []
 
     const uniqKeys = uniq(applicantKeys.concat(partnerKeys))
-
     this.state = { otherIncomeFields: uniqKeys }
-  }
+    }
 
   addNewIncomeValue (values) {
     this.setState({otherIncomeFields: this.state.otherIncomeFields.concat(values.newIncomeField)})
@@ -46,12 +45,15 @@ class EditRebateForm extends React.Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          rebate_form: {...values}
+          rebate_form: {...values},
+          location: values.fields.location,
+          total_rates: values.fields.total_rates,
+          council: this.props.council.name
         }),
         credentials: 'same-origin'
       }).then(res => {
         console.log('res', res)
-        if (res.ok) window.location = `${appUrl}admin/rebate_forms/${this.props.rebateForm.id}` 
+        if (res.ok) window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}` 
         else console.error(res)
       })
   }
@@ -60,11 +62,11 @@ class EditRebateForm extends React.Component {
     const { 
       rebateForm,
       property,
-      ratesBills,
       isReadOnly
     } = this.props
     const { fields } = rebateForm
-    const initialValues = {fields, ratesBills: ratesBills[0], property} 
+    fields.location = property.location
+    const initialValues = {fields, location: property.location} 
     const { otherIncomeFields } = this.state
 
     return (
@@ -102,28 +104,32 @@ class EditRebateForm extends React.Component {
               </div>   
             }
             {IncomeDeclaration({otherIncomeFields, isReadOnly})}
-            <div className={'flex-row'}>
-              <Field
-                className='rebate-search-input flex-item'
-                name="newIncomeField"
-                component="input"
-                readOnly={isReadOnly}
-              />
-              <button
-                className='one-third rebate-add-income-button'
-                disabled={isReadOnly || !values.newIncomeField}
-                type="button"
-                onClick={() => this.addNewIncomeValue(values)}
-                >
-                  Add Income Type
-              </button>
+            { !isReadOnly &&
+              <Fragment>
+                <div className={'flex-row'}>
+                  <Field
+                    className='rebate-search-input flex-item'
+                    name="newIncomeField"
+                    component="input"
+                    readOnly={isReadOnly}
+                  />
+                  <button
+                    className='one-third rebate-add-income-button'
+                    disabled={isReadOnly || !values.newIncomeField}
+                    type="button"
+                    onClick={() => this.addNewIncomeValue(values)}
+                    >
+                      Add Income Type
+                  </button>
 
-            </div>
-            <div className="rebate-submit-button-wrapper">
-              <button className="one-third rebate-add-income-button rebate-search-button" type="submit" >
-                Submit
-              </button>
-            </div>
+                </div>
+                <div className="rebate-submit-button-wrapper">
+                  <button className="one-third rebate-add-income-button rebate-search-button" type="submit" >
+                    Submit
+                  </button>
+                </div>
+              </Fragment> 
+              }
           </form>
         )}}
       </Form>

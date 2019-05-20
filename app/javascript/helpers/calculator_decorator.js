@@ -9,10 +9,10 @@ export const calculator = createDecorator(
     updates: {
       // ...update the total_income to the result of this function
       ['fields.income.total_income']: (newValue, allValues) => {
-        const { applicant, partner, other_income } = allValues.fields.income
+        const { applicant, partner, otherIncome } = allValues.fields.income
         const applicantValues = accumulate(applicant)
         const partnerValues = accumulate(partner)
-        const otherValues = reduce(other_income, (sum, obj) => sum + accumulate(obj), 0)
+        const otherValues = reduce(otherIncome, (sum, obj) => sum + accumulate(obj), 0)
         const total = applicantValues + partnerValues + otherValues    
         return total
       }

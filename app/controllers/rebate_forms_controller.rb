@@ -20,16 +20,17 @@ class RebateFormsController < ApiController
     raise JsonapiCompliable::Errors::RecordNotFound unless rebate_form
 
     render_jsonapi(rebate_form, scope: false)
+
   end
 
-  def create
-    rebate_form = RebateFormsService.new(rebate_form_params).update
+    def create
+      rebate_form = RebateFormsService.new(rebate_form_params).update
 
-    if rebate_form.errors.any?
-      render_errors_for(rebate_form)
-    else
-      render_jsonapi(rebate_form, scope: false)
-    end
+      if rebate_form.errors.any?
+        render_errors_for(rebate_form)
+      else
+        render_jsonapi(rebate_form, scope: false)
+      end
   end
 
   private

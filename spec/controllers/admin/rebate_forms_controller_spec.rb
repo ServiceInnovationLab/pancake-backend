@@ -94,15 +94,18 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         end
 
         before do
-          put :update, params: { id: rebate_form.to_param, rebate_form: {
-            fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 }
-          } }
+          put :update, params: { id: rebate_form.to_param,
+                                 total_rates: '123',
+                                 location: property.location,
+                                 council: property.council.name,
+                                 rebate_form: { fields: { full_name: 'Mary Jane Kelly',
+                                                          'dependants': 9,
+                                                          income: 11_999 } } }
           rebate_form.reload
         end
 
         it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         describe 'Does not have errors to report' do
-          xit { expect(assigns(:rebate_form).errors.empty?).to eq true }
           it { expect(assigns(:rebate_form)).to be_valid }
         end
 
@@ -132,9 +135,13 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
     describe 'Editing rebate_forms' do
       let(:params) do
-        {
-          fields: { full_name: 'Mary Jane Kelly', 'dependants': 9, income: 11_999 }
-        }
+        { id: rebate_form.to_param,
+          total_rates: '123',
+          location: property.location,
+          council: property.council.name,
+          rebate_form: { fields: { full_name: 'Mary Jane Kelly',
+                                   'dependants': 9,
+                                   income: 11_999 } } }
       end
 
       shared_examples 'controller works' do
@@ -143,26 +150,22 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
 
       context 'with valid params' do
-        before { put :update, params: { id: rebate_form.to_param, rebate_form: params } }
+        before { put :update, params: params }
 
         include_examples 'controller works'
       end
 
       context 'with invalid params' do
-        let(:invalid_attributes) { { fields: {} } }
+        let(:invalid_params) do
+          { id: rebate_form.to_param,
+            total_rates: '123',
+            rebate_form: { fields: {} } }
+        end
 
-        before { put :update, params: { id: rebate_form.to_param, rebate_form: invalid_attributes } }
+        before { put :update, params: invalid_params }
 
-        include_examples 'controller works'
-      end
-
-      context 'rebate_form is completed' do
-        let!(:rebate_form) { FactoryBot.create :signed_form }
-
-        it 'does not allow changes to completed rebate_form' do
-          expect do
-            put :update, params: { id: rebate_form.to_param, rebate_form: params }
-          end.not_to change(rebate_form, :valuation_id)
+        xit 'redirects to the edit form' do
+          expect(response).to redirect_to(edit_admin_rebate_form_path(rebate_form))
         end
       end
     end
