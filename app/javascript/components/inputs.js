@@ -40,7 +40,7 @@ export function TableInput ({ id, type = "number", isReadOnly, className }) {
   </div>
 )}
 
-export function RadioInput ({ id, label, type, isReadOnly, withMargin }) {
+export function RadioInput ({ id, label, type, isReadOnly, withMargin, values }) {
   const className = withMargin
     ? 'flex-item'
     : 'flex-item with-margin'
@@ -56,7 +56,7 @@ export function RadioInput ({ id, label, type, isReadOnly, withMargin }) {
             component="input"
             type={type}
             value={value}
-            readOnly={isReadOnly}
+            disabled={isReadOnly && values.fields[id] == value}
           />{" "}
           {value}
         </label>
