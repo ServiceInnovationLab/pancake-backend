@@ -16,6 +16,10 @@ export const incomeRows = [
     "Wages or Salary"
   ],
   [
+    "work_and_income_benefits",
+    "Work and Income Benefits"
+  ],
+  [
     "business_profit",
     "Business Profit (net)"
   ],
