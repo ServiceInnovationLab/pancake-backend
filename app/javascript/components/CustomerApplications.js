@@ -63,12 +63,15 @@ class CustomerApplications extends React.Component {
             >
             {({ handleSubmit }) => (
               <form className="pure-form" onSubmit={handleSubmit}>
+                <label>
+                  Name
                 <Field
                   className='rebate-search-field rebate-search-input'
                   name="name"
                   component="input"
                   placeholder="E.g. John Doe"
                 />
+                </label>
                 <button className="pure-button pure-button-primary rebate-search-button" type="submit">
                   Search
               </button>
@@ -98,7 +101,6 @@ class CustomerApplications extends React.Component {
                   }
                   <td className='rebate-results-table-cell'>
                     <a onClick={() => {
-                      console.log(`${appUrl}/admin/rebate_forms/${id}`)
                       window.location = `${appUrl}/admin/rebate_forms/${id}`
                       }
                     }>
