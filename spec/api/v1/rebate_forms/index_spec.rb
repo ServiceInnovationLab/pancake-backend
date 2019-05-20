@@ -17,7 +17,7 @@ RSpec.describe 'rebate_forms#index', type: :request do
     it 'does not return list' do
       expect do
         make_request
-      end.to raise_error(ActionController::RoutingError)
+      end.to raise_error(JsonapiCompliable::Errors::RecordNotFound)
     end
   end
 end
