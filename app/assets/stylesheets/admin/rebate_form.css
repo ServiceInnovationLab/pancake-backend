@@ -176,3 +176,11 @@
   float: right;
   width: 5.5rem;
 }
+
+.rebate-done {
+  background-color: var(--blue);
+  border-radius: .2em;
+  color: var(--white);
+  float: right;
+  width: 5em;
+}
