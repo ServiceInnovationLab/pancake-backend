@@ -25,6 +25,6 @@ env:
   - PGPORT=5433
   - YEAR=2019
   - SIGNING_URL="http://127.0.0.1:4000/#/{token}"
-  - OPENFISCA_ORIGN="https://govtnz-rates-rebate-of.herokuapp.com/"
+  - OPENFISCA_ORIGN="https://govtnz-rates-rebate-of.herokuapp.com/calculate"
   - HMAC_SECRET="DgD3NMLjoEsgbT7bOmpgI0svg18BMHuy0VpE6cX9xMMxznWhvEKIggR61nE/E"
   - APP_URL="http://localhost:3000/"
