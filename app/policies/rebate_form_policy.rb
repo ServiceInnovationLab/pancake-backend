@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class RebateFormPolicy < ApplicationPolicy
+  def generateqr?
+    dia? || same_council?
+  end
+
   def index?
     dia? || same_council?
   end

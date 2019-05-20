@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :rebate_forms
+    resources :rebate_forms do
+      get 'generateqr'
+    end
     resources :attachments, only: %i[destroy]
     resources :councils do
       resources :properties
@@ -23,11 +25,13 @@ Rails.application.routes.draw do
     resources :docs, only: [:index], path: '/swagger'
 
     scope path: '/v1' do
+      post '/rebate_forms/sign' => 'sign_rebate_forms#sign'
+      get '/rebate_forms/' => 'rebate_forms#show_by_jwt'
       resources :councils
       resources :rates_payers, only: %(show)
       resources :rates_bills, only: %(show)
       resources :properties, only: %(index show)
-      resources :rebate_forms, only: %i[create show update]
+      resources :rebate_forms, only: %i[create]
       resources :properties, only: %i[show index]
       resources :signature_types, only: %i[index show]
       resources :signatures, only: %i[create]

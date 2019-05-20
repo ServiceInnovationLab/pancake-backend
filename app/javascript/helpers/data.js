@@ -1,15 +1,15 @@
 export const incomeRows = [
   [
+    "nz_superannuation",
+    "NZ Superannuation"
+  ],
+  [
     "other_superannuation",
     "Other superannuation"
   ],
   [
-    "nz_superannuation",
-    "NZ superannuation"
-  ],
-  [
     "interest_dividends",
-    "Interest / Dividends"
+    "Interest or dividends"
   ],
   [
     "wages_salary",
@@ -17,27 +17,11 @@ export const incomeRows = [
   ],
   [
     "business_profit",
-    "Business profit (net)"
-  ],
-  [
-    "work_and_income_supplements",
-    "Work and Income supplements"
-  ],
-  [
-    "working_for_families_tax_credits",
-    "Working For Families Tax Credits"
+    "Business Profit (net)"
   ],
   [
     "rental_income",
     "Rental Income"
-  ],
-  [
-    "acc_earnings",
-    "ACC Earnings"
-  ],
-  [
-    "trust_income",
-    "Trust income"
   ],
   [
     "overseas_income",
@@ -108,8 +92,8 @@ export const customerDetailFields = [
     type:"radio"
   },
   {
-    id:"dependents",
-    label: "Dependents",
+    id:"dependants",
+    label: "Dependants",
     type:"number",
     placeholder: "0",
   },

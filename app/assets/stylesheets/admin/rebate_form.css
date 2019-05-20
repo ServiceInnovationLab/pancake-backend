@@ -146,3 +146,15 @@
   height: 50%;
   border: 1px solid var(--gray)
 }
+
+.rebate-qrcode {
+  display: flex;
+  margin: 1em auto;
+  background-color: black;
+}
+
+.rebate-generate-qr {
+  border: 1px solid black;
+  float: right;
+  width: 5.5rem;
+}
