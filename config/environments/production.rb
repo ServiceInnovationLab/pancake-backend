@@ -84,7 +84,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.active_record.dump_schema_after_migration = false
-  config.action_mailer.default_url_options = { host: ENV['HOSTNAME'] }
+  config.action_mailer.default_url_options = { host: ENV['APP_URL'] }
   config.action_mailer.smtp_settings = {
     address: ENV['SES_SMTP_SERVER'],
     port: ENV['SES_SMTP_PORT'],
