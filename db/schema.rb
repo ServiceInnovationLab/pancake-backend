@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_13_215402) do
+ActiveRecord::Schema.define(version: 2019_05_17_025429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_215402) do
     t.integer "council_id"
     t.text "rating_year"
     t.index ["council_id"], name: "index_properties_on_council_id"
-    t.index ["valuation_id", "rating_year"], name: "index_properties_on_valuation_id_and_rating_year", unique: true
+    t.index ["valuation_id", "rating_year"], name: "index_properties_on_valuation_id_and_rating_year"
   end
 
   create_table "rates_bills", force: :cascade do |t|
