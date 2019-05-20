@@ -50,7 +50,7 @@ class SignRebateFormsController < ApiController
   end
 
   def correct_token(decoded_token)
-    raise JsonapiCompliable::Errors::RecordNotFound unless decoded_token['per'] == 'fetch_application_and_submit_signatures'
+    raise JsonapiCompliable::Errors::RecordNotFound unless decoded_token['per'] == 'sign'
   end
 
   def signature_params

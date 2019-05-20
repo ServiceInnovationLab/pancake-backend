@@ -59,7 +59,7 @@ RSpec.describe RebateFormsController, type: :controller do
         {
           rebate_form_id: rebate_form.id,
           exp: Time.now.to_i + (1000 * 60),
-          per: 'fetch_application_and_submit_signatures'
+          per: 'sign'
         }
       end
 
@@ -75,7 +75,7 @@ RSpec.describe RebateFormsController, type: :controller do
         {
           rebate_form_id: rebate_form.id,
           exp: Time.now.to_i - (1000 * 60),
-          per: 'fetch_application_and_submit_signatures'
+          per: 'sign'
         }
       end
       let(:token) { JWT.encode payload, ENV['HMAC_SECRET'], 'HS256' }

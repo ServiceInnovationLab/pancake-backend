@@ -15,7 +15,7 @@ class RebateFormsService
     payload = {
       rebate_form_id: rebate_form.id,
       exp: Time.now.to_i + (ENV['IPAD_JWT_LENGTH'].to_i * 60),
-      per: 'fetch_application_and_submit_signatures',
+      per: 'sign',
       witness: witness_details(current_user)
     }
 
@@ -37,8 +37,8 @@ class RebateFormsService
     rebate_form.calc_rebate_amount!
     raise Error if rebate_form.rebate.blank?
     rebate_form
-    # # rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotFound
-    # raise Error
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotFound
+    raise Error
   end
 
   private
