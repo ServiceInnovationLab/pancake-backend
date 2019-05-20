@@ -9,16 +9,6 @@ class RebateFormsController < ApiController
 
     raise JsonapiCompliable::Errors::RecordNotFound unless token
 
-  def create
-    rebate_form = RebateFormsService.new(rebate_form_params).update!
-
-    render_jsonapi(rebate_form, scope: false)
-    rescue RebateFormsService::Error
-    render_errors_for(rebate_form)
-  end
-
-  def update
-    rebate_form = RebateFormsService.new(rebate_form_params).update!
     decoded_token = decode_jwt(token)[0]
 
     correct_token(decoded_token)
@@ -30,6 +20,14 @@ class RebateFormsController < ApiController
     raise JsonapiCompliable::Errors::RecordNotFound unless rebate_form
 
     render_jsonapi(rebate_form, scope: false)
+  end
+
+  def create
+    rebate_form = RebateFormsService.new(rebate_form_params).update
+
+    render_jsonapi(rebate_form, scope: false)
+  rescue RebateFormsService::Error
+    render_errors_for(rebate_form)
   end
 
   private
