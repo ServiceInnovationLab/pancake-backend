@@ -141,26 +141,20 @@
   margin: 0 auto .5em auto;
   padding: .4rem;  
 }
-.rebate-tabs {
-  border-bottom: 1px solid var(--black);
-  padding-bottom: .25rem;
-  margin-bottom: 1rem
+.rebate-radio-buttons {
+  margin-top:.5rem;
+  height: 50%;
+  border: 1px solid var(--gray)
 }
 
-.rebate-button {
-  color: var(--dark-gray);
-  padding: 1rem;
-  background: none;
-  border: none;
-  min-width: 200px
+.rebate-qrcode {
+  display: flex;
+  margin: 1em auto;
+  background-color: black;
 }
 
-.rebate-button-selected {
-  padding: 1rem;
-  color: var(--blue);
-  font-weight: bold;
-  border: none;
-  border-bottom: 4px solid var(--blue);
-  background: none;
-  min-width: 200px
+.rebate-generate-qr {
+  border: 1px solid black;
+  float: right;
+  width: 5.5rem;
 }
