@@ -36,8 +36,8 @@ export function IncomeDeclaration ({otherIncomeFields, isReadOnly}) {
                 <label className="flex-item">
                   <h3>{label || name}</h3>
                 </label>
-                {TableInput({isReadOnly, className: 'one-quarter with-margin', id: `applicant.${name}`})}
-                {TableInput({isReadOnly, className: 'one-quarter', id: `partner.${name}`})}
+                {TableInput({isReadOnly, className: 'one-quarter with-margin', id: `otherIncome.applicant.${name}`})}
+                {TableInput({isReadOnly, className: 'one-quarter', id: `otherIncome.partner.${name}`})}
             </div>
           )}
         )}
