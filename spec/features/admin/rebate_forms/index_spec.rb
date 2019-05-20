@@ -18,7 +18,7 @@ RSpec.describe 'RebateForm', type: :feature do
 
     before { login_as(user, scope: :user) }
 
-    it ' Can see rebate forms' do
+    xit ' Can see rebate forms' do
       visit '/admin/rebate_forms'
       fill_in 'name', with: rebate_form.fields['full_name']
       click_button 'SEARCH'
@@ -35,7 +35,7 @@ RSpec.describe 'RebateForm', type: :feature do
 
     before { login_as(user, scope: :user) }
 
-    it ' Can see rebate forms' do
+    xit ' Can see rebate forms' do
       visit '/admin/rebate_forms'
       fill_in 'name', with: rebate_form.fields['full_name']
       click_button 'SEARCH'
