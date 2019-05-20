@@ -67,7 +67,6 @@ class RebateFormsService
   end
 
   def create_rebate_form!(property)
-    logger.info('create rebate form with property', @rebate_form_attributes, property)
     RebateForm.create!(property: property,
                        valuation_id: property.valuation_id,
                        rebate: 0,
@@ -75,13 +74,11 @@ class RebateFormsService
   end
 
   def create_or_update_property!(council)
-    logger.info('create or update property', @rebate_form_attributes)
     return create_or_update_property_with_valuation_id!(council) if @rebate_form_attributes['valuation_id']
     find_or_create_property_with_no_valuation_id!(council)
   end
 
   def create_or_update_property_with_valuation_id!(council)
-    logger.info('create_or_update_property_with_valuation_id!', @rebate_form_attributes)
     property = Property.find_or_create_by(valuation_id: @rebate_form_attributes['valuation_id'],
                                           rating_year: ENV['YEAR'],
                                           council: council)
@@ -90,7 +87,6 @@ class RebateFormsService
   end
 
   def find_or_create_property_with_no_valuation_id!(council)
-    logger.info('create_or_update_property_with_ NO _valuation_id!', @rebate_form_attributes)
     Property.find_or_create_by!(location: @rebate_form_attributes['location'],
                                 rating_year: ENV['YEAR'],
                                 council: council)
