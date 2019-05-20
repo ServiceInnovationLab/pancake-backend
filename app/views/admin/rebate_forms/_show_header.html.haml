@@ -3,13 +3,12 @@
     =image_tag("blue-left-arrow.svg", class: 'rebate-header-icon')
   = link_to admin_rebate_form_path(@rebate_form), id: 'reload' do
     =image_tag("blue-reload.svg", class: 'rebate-header-icon')
-  = link_to 'EDIT', edit_admin_rebate_form_path, id: 'edit', class: 'pure-button rebate-edit'
+  = link_to 'EDIT', edit_admin_rebate_form_path, confirm: 'Are you sure?', id: 'edit', class: 'pure-button rebate-edit'
 
 .rebate-header
   %h2.rebate-title
     Customer details
-    - if rebate_form_completed?(@rebate_form)
-    - else
+    - unless rebate_form_completed?(@rebate_form)
       = link_to admin_rebate_form_generateqr_path(@rebate_form), id: 'generate_qr' do
         =image_tag("signature1.svg", class: 'rebate-generate-qr')
 
@@ -18,4 +17,4 @@
       Signed and ready to process
     - else
       Signature required
- 
+
