@@ -22,7 +22,6 @@ class RebateFormsService
 
     # iPad-application URL
     url = ENV['APP_URL'] + 'admin/sign?jwt=' + token
-    byebug
 
     RQRCode::QRCode
       .new(url, size: 20, level: :h)
