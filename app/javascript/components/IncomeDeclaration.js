@@ -37,11 +37,11 @@ export function IncomeDeclaration ({otherIncomeFields, isReadOnly}) {
             </div>
           )}
         )}
-        {map(otherIncomeFields, ([name, label]) => {
+        {map(otherIncomeFields, (name) => {
           return (
             <div key={name} className="flex-row">
                 <label className="flex-item">
-                  <h3>{label || name}</h3>
+                  <h3>{name}</h3>
                 </label>
                 {TableInput({isReadOnly, className: 'one-quarter with-margin', id: `otherIncome.applicant.${name}`})}
                 {TableInput({isReadOnly, className: 'one-quarter', id: `otherIncome.partner.${name}`})}
