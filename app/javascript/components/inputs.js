@@ -19,6 +19,8 @@ export function SingleInput ({ isReadOnly, id, label, placeholder, fullWidth, wi
       component='input'
       type={type}
       min={type == 'number' ? 0 : null}
+      step={type == 'number' ? 0.01 : null}
+
       readOnly={isReadOnly}
     />
     <Error name={`fields.${id}`} />
@@ -35,6 +37,7 @@ export function TableInput ({ id, type = "number", isReadOnly, className }) {
       type={type}
       readOnly={isReadOnly}
       min={0}
+      step={0.01}
     />
     <Error name={`fields.income.${id}`} />
   </div>
