@@ -24,7 +24,7 @@ class Admin::RebateFormsController < Admin::BaseController
                                             .order(created_at: :desc)
 
     # filter by the search form fields
-    @rebate_forms = @rebate_forms.where("fields ->> 'full_name' like ?", "%#{params[:name]}%") if @name.present?
+    @rebate_forms = @rebate_forms.where("fields ->> 'full_name' iLIKE ?", "%#{params[:name]}%") if @name.present?
     @rebate_forms = @rebate_forms.where(completed: @completed)
     @rebate_forms = @rebate_forms.order(created_at: :desc)
 
