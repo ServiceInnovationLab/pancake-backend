@@ -1,5 +1,5 @@
 
-import React from "react"
+import React, { Fragment } from "react"
 import { map, uniq, indexOf } from "lodash"
 import { Form, Field } from "react-final-form";
 import 'isomorphic-fetch';

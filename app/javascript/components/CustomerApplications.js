@@ -104,7 +104,7 @@ class CustomerApplications extends React.Component {
                       window.location = `${appUrl}/admin/rebate_forms/${id}`
                       }
                     }>
-                      <img src='/assets/blue-right-arrow.svg' />
+                      <img src='/assets/blue-right-arrow.svg' alt="blue coloured right arrow"/>
                     </a>
                   </td>
                 </tr>
