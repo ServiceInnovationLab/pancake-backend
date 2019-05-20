@@ -25,11 +25,9 @@ class RebateFormsController < ApiController
   def create
     rebate_form = RebateFormsService.new(rebate_form_params).update
 
-    if rebate_form.errors.any?
-      render_errors_for(rebate_form)
-    else
-      render_jsonapi(rebate_form, scope: false)
-    end
+    render_jsonapi(rebate_form, scope: false)
+  rescue RebateFormsService::Error
+    render_errors_for(rebate_form)
   end
 
   private
