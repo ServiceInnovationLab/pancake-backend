@@ -50,7 +50,7 @@ RSpec.describe 'RebateForm', type: :feature do
           it 'goes to the right place' do
             visit "/admin/rebate_forms/#{rebate_form.id}"
             click_link('edit')
-            expect(page).to_not have_text('EDIT')
+            expect(page).not_to have_text('EDIT')
             expect(page).to have_text('Customer details')
             expect(page).to have_text('Signature required')
           end
@@ -74,9 +74,9 @@ RSpec.describe 'RebateForm', type: :feature do
         it 'goes to the right place' do
           visit "/admin/rebate_forms/#{rebate_form.id}/"
           click_link('generate_qr')
-          expect(page).to_not have_text('EDIT')
-          expect(page).to_not have_text('Customer details')
-          expect(page).to_not have_text('Signature required')
+          expect(page).not_to have_text('EDIT')
+          expect(page).not_to have_text('Customer details')
+          expect(page).not_to have_text('Signature required')
         end
       end
 
@@ -84,9 +84,9 @@ RSpec.describe 'RebateForm', type: :feature do
         it 'goes to the right place' do
           visit "/admin/rebate_forms/#{rebate_form.id}/"
           click_link('generate_qr')
-          expect(page).to_not have_text('EDIT')
-          expect(page).to_not have_text('Customer details')
-          expect(page).to_not have_text('Signature required')
+          expect(page).not_to have_text('EDIT')
+          expect(page).not_to have_text('Customer details')
+          expect(page).not_to have_text('Signature required')
         end
       end
     end
