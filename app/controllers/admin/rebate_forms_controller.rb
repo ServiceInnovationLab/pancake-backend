@@ -34,6 +34,7 @@ class Admin::RebateFormsController < Admin::BaseController
   # GET /admin/rebate_forms/1
   def show
     @year = @rebate_form.property.rating_year
+    @completed = @rebate_form.completed
 
     @rates_bill = @rebate_form.property.rates_bills.find_by(rating_year: @year)
 
