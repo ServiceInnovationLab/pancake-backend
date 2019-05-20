@@ -4,15 +4,15 @@
 
   .login-box
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      .field
+      %div
         = f.label :email
         = f.email_field :email, autofocus: true, autocomplete: "email", class: "login-input"
 
-      .field
+      %div
         = f.label :password
         = f.password_field :password, autocomplete: "current-password", class: "login-input"
 
-      .actions
+      .login-button-wrapper
         = f.submit "LOG IN", class: "login-button"
 
   .login-text

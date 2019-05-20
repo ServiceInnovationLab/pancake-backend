@@ -49,8 +49,13 @@
   width: 100%;
 }
 
+.login-button-wrapper {
+  margin-top: 1em;
+}
+
 .login-button {
   background-color: var(--blue);
   border-radius: .2em;
-  color: white
+  color: white;
+  padding: .5em 1em;
 }
