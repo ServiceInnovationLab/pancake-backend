@@ -11,7 +11,7 @@ import { calculator } from '../helpers/calculator_decorator';
 import { SingleInput, RadioInput } from './inputs'
 import { IncomeDeclaration } from "./IncomeDeclaration";
 
-const appUrl = window.location.origin  
+const appUrl = window.location.origin
 
 class EditRebateForm extends React.Component {
 
@@ -53,20 +53,20 @@ class EditRebateForm extends React.Component {
         credentials: 'same-origin'
       }).then(res => {
         console.log('res', res)
-        if (res.ok) window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}` 
+        if (res.ok) window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}`
         else console.error(res)
       })
   }
 
   render () {
-    const { 
+    const {
       rebateForm,
       property,
       isReadOnly
     } = this.props
     const { fields } = rebateForm
     fields.location = property.location
-    const initialValues = {fields, location: property.location} 
+    const initialValues = {fields, location: property.location}
     const { otherIncomeFields } = this.state
 // LEAVE IN FOR PRODUCTION
     console.log('initial: ', initialValues , 'rebateform: ', 'rebate form: ', rebateForm, 'property: ', property)
@@ -94,7 +94,7 @@ class EditRebateForm extends React.Component {
                 : SingleInput({...field, isReadOnly})
               })}
             </div>
-            { values.fields.moved_within_rating_year == 'yes' &&
+            { values.fields.moved_within_rating_year == 'Yes' &&
               <div className="flex-row">
                 {map(conditionalsFields, (field, index) => {
                 if (indexOf([2, 4, 5], index) >= 0) field.withMargin = true
@@ -102,7 +102,7 @@ class EditRebateForm extends React.Component {
                 ? RadioInput({...field, isReadOnly, values})
                 : SingleInput({...field, isReadOnly})
                 })}
-              </div>   
+              </div>
             }
             {IncomeDeclaration({otherIncomeFields, isReadOnly})}
             { !isReadOnly &&
@@ -129,7 +129,7 @@ class EditRebateForm extends React.Component {
                     Submit
                   </button>
                 </div>
-              </Fragment> 
+              </Fragment>
               }
           </form>
         )}}
