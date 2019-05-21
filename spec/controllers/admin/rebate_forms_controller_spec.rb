@@ -51,6 +51,12 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
           it { expect(assigns(:rebate_forms)).to eq [rebate_form] }
         end
+
+        context 'when they do a case insensitive search' do
+          before { get :index, params: { name: 'flin' } }
+
+          it { expect(assigns(:rebate_forms)).to eq [rebate_form] }
+        end
       end
     end
 
