@@ -4,6 +4,7 @@ class RebateFormsService
   class Error < StandardError; end
 
   def initialize(rebate_form_attributes)
+    rebate_form_attributes['fields']['location'] = rebate_form_attributes['location'] if rebate_form_attributes['fields']
     @rebate_form_attributes = rebate_form_attributes
   end
 

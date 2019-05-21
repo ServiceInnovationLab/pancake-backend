@@ -2,6 +2,5 @@
 
 # How to test this change
 
-- [ ] has automated tests
+- [ ] has tests
 - [ ] at least one a reviewer ran the code
-- [ ] updated API docs
