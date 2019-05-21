@@ -36,6 +36,45 @@ RSpec.describe 'RebateForm', type: :feature do
         expect(page).to have_text('Customer Details')
       end
     end
+
+    describe 'header buttons' do
+      context 'when the back button is clicked' do
+        it 'goes to the right place' do
+          visit "/admin/rebate_forms/#{rebate_form.id}/edit"
+          click_link('back')
+          expect(page).to have_text('Rates Rebate 2018/2019')
+          expect(page).to have_text('Customer applications')
+        end
+      end
+
+      context 'when the reload button is clicked' do
+        it 'goes to the right place' do
+          visit "/admin/rebate_forms/#{rebate_form.id}/edit"
+          click_link('reload')
+          expect(page).to have_http_status :ok
+        end
+      end
+    end
+
+    describe 'edit banner message for completed rebate forms' do
+      context 'when the rebate form is not completed' do
+        it 'does not show the banner' do
+          visit "/admin/rebate_forms/#{rebate_form.id}/edit"
+          expect(page).to_not have_text('Are you sure you want to edit?')
+          expect(page).to_not have_text('If you make any changes, the customer will have to sign the declaration again')
+        end
+      end
+
+      context 'when the rebate form is completed' do
+        let!(:rebate_form) { FactoryBot.create :signed_form, completed: true, property: property }
+
+        it 'shows the banner' do
+          visit "/admin/rebate_forms/#{rebate_form.id}/edit"
+          expect(page).to have_text('Are you sure you want to edit?')
+          expect(page).to have_text('If you make any changes, the customer will have to sign the declaration again')
+        end
+      end
+    end
   end
 
   context 'signed in as dia' do
