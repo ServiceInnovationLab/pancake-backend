@@ -4,6 +4,7 @@ class RebateFormsService
   class Error < StandardError; end
 
   def initialize(rebate_form_attributes)
+    rebate_form_attributes['fields']['location'] = rebate_form_attributes['location'] if rebate_form_attributes['fields']
     @rebate_form_attributes = rebate_form_attributes
   end
 
@@ -22,7 +23,7 @@ class RebateFormsService
     token = JWT.encode payload, ENV['HMAC_SECRET'], 'HS256'
     # iPad-application URL
     url = ENV['APP_URL'] + 'ipad/?t=' + token
-
+    Rails.logger.info('the ipad signing url is:' + url) # for easier debugging in production
     RQRCode::QRCode
       .new(url, size: 20, level: :h)
       .as_png(offset: 0, color: '0', shape_rendering: 'crispEdges', module_size: 10)
