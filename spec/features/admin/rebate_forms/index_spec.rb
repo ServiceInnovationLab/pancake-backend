@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'RebateForm', type: :feature do
+RSpec.describe 'RebateForm', type: :feature, js: true do
   let!(:rebate_form) { FactoryBot.create :rebate_form }
 
   context 'anonymous' do
