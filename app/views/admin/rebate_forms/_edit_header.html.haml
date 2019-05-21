@@ -1,11 +1,11 @@
 .rebate-header-buttons
-  = link_to admin_rebate_form_path(@rebate_form) do
+  = link_to admin_rebate_forms_path, id: 'back' do
     =image_tag("blue-left-arrow.svg", class: 'rebate-header-icon')
-  = link_to edit_admin_rebate_form_path do
+  = link_to edit_admin_rebate_form_path, id: 'reload' do
     =image_tag("blue-reload.svg", class: 'rebate-header-icon')
 
-.rebate-banner
-  - if rebate_form_completed?(@rebate_form)
+- if rebate_form_completed?(@rebate_form)
+  .rebate-banner#rebate-banner
     =image_tag("alert1.svg", class: 'rebate-banner-icon')
     .rebate-banner-header
       %h2.rebate-banner-title
