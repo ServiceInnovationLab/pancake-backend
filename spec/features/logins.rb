@@ -8,7 +8,7 @@ RSpec.describe 'Logging in', type: :feature do
       visit '/admin'
       expect(page).to have_text('Rates Rebate 2018/2019')
       expect(page).to have_text('Log in')
-      expect(page).not_to have_text('Logout')
+      expect(page).not_to have_text('Log out')
     end
   end
 
@@ -19,7 +19,7 @@ RSpec.describe 'Logging in', type: :feature do
 
     it ' Can see rebate forms' do
       visit '/admin'
-      expect(page).not_to have_text('Logout')
+      expect(page).to have_text('Log out')
     end
   end
 end
