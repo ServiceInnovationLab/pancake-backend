@@ -18,14 +18,14 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
 
     before { login_as(user, scope: :user) }
 
-    xit ' Can see rebate forms' do
-      visit '/admin/rebate_forms'
-      fill_in 'name', with: rebate_form.fields['full_name']
-      click_button 'SEARCH'
+    it ' Can see rebate forms' do
+      visit '/admin/'
+      fill_in 'Name', with: rebate_form.fields['full_name']
+      click_button 'Search'
       expect(page).to have_text(rebate_form.fields['full_name'])
 
       # show the form
-      click_link 'right-arrow'
+      click_button 'Search'
       expect(page).to have_text('Customer details')
     end
   end
