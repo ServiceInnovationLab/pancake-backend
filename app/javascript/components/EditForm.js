@@ -6,7 +6,7 @@ import 'isomorphic-fetch';
 
 import { conditionalsFields, customerDetailFields } from '../helpers/data'
 import { getCSRF } from '../helpers/getCSRF';
-import { calculator } from '../helpers/calculator_decorator';
+import { calculator } from '../helpers/decorators';
 
 import { SingleInput, RadioInput } from './inputs'
 import { IncomeDeclaration } from "./IncomeDeclaration";
@@ -79,6 +79,7 @@ class EditRebateForm extends React.Component {
           submitting,
           values,
         }) => {
+          const includePartnerValues = values.fields.spouse_or_partner == 'yes'
           return (
           <form
             className="rebate-edit-form"
@@ -102,7 +103,7 @@ class EditRebateForm extends React.Component {
                 })}
               </div>   
             }
-            {IncomeDeclaration({otherIncomeFields, isReadOnly})}
+            {IncomeDeclaration({otherIncomeFields, isReadOnly, includePartnerValues})}
             { !isReadOnly &&
               <Fragment>
                 <div className={'flex-row'}>
