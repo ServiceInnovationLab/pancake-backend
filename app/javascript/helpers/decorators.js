@@ -9,15 +9,15 @@ export const calculator = createDecorator(
     updates: {
       // ...update the total_income
       ['fields.income.total_income']: (newValue, allValues) => {
-        const { applicant, partner, otherIncome } = allValues.fields.income
+        const { applicant, partner, otherIncome = {} } = allValues.fields.income
+        const {applicant: otherApplicant = {}, partner: otherPartner = {} } = otherIncome
+
         const includePartnerValues = allValues.fields.spouse_or_partner == 'yes'
+        
+        const applicantValues = accumulate({...applicant, ...otherApplicant})
+        const partnerValues = includePartnerValues && accumulate({...partner, ...otherPartner})
 
-        const applicantValues = accumulate(applicant)
-        const partnerValues = includePartnerValues && accumulate(partner)
-
-        const otherValues = reduce(otherIncome, (sum, obj) => sum + accumulate(obj), 0)
-
-        const total = applicantValues + partnerValues + otherValues    
+        const total = applicantValues + partnerValues
         return total.toFixed(2) 
       }
     }
