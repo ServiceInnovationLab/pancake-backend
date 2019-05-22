@@ -52,9 +52,9 @@ class CustomerSearch extends React.Component {
     return (
       <Fragment>
         <div className="pure-u-1-2 rebate-search-box">
-          <div className={"rebate-tabs flex-row"}>
+          <div className={'rebate-tabs flex-row'}>
             {map([['Not Signed', 'not-completed'], ['Signed', 'completed']], ([key, value]) =>
-              <button key={key} className={(this.state.applicationState === value) ? "rebate-button-selected" : "rebate-button" } onClick={() => this.onChange(value)}>
+              <button key={key} className={(this.state.applicationState === value) ? 'rebate-button-selected' : 'rebate-button' } onClick={() => this.onChange(value)}>
               {key}
               </button>
             )}
