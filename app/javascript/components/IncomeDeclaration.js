@@ -24,7 +24,7 @@ export function IncomeDeclaration ({otherIncomeFields, isReadOnly, includePartne
         <div className="flex-row">
             <h2 className="flex-item" >Income Type</h2>
             <h2 className="one-quarter" >Applicant</h2>
-            {includePartnerValues && <h2 className="one-quarter" >Partner</h2>}
+            {includePartnerValues && <h2 className="one-quarter" >Partner or joint homeowner</h2>
         </div>
         {map(incomeRows, ([name, label]) => {
           return (
