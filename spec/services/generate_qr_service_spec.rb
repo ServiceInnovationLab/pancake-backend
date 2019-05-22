@@ -3,10 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe GenerateQrService do
+  subject { described_class.new(rebate_form, current_user) }
   let!(:current_user) { FactoryBot.create(:admin_user) }
   let!(:rebate_form) { FactoryBot.create(:rebate_form) }
-
-  subject { described_class.new(rebate_form, current_user) }
 
   describe '#generate_qr' do
     it 'generates a qr code' do

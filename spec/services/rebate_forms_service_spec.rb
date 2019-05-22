@@ -6,6 +6,7 @@ RSpec.describe RebateFormsService do
   let!(:property) { FactoryBot.create(:property_with_rates) }
 
   describe 'new rebate form' do
+    subject { described_class.new(create_params) }
     let(:create_params) do
       {
         'total_rates' => '12345',
@@ -25,8 +26,6 @@ RSpec.describe RebateFormsService do
       }
     end
 
-    subject { described_class.new(create_params) }
-
     describe '#update!' do
       context 'with valid params' do
         it 'creates a new rebate form' do
@@ -39,6 +38,7 @@ RSpec.describe RebateFormsService do
   end
 
   describe 'existing rebate form' do
+    subject { described_class.new(update_params) }
     let!(:property2) { FactoryBot.create(:property_with_rates) }
     let!(:rebate_form) { FactoryBot.create(:rebate_form, valuation_id: property.valuation_id, property: property) }
     let(:update_params) do
@@ -63,8 +63,6 @@ RSpec.describe RebateFormsService do
         }
       }
     end
-
-    subject { described_class.new(update_params) }
 
     describe '#update!' do
       context 'with invalid params' do
