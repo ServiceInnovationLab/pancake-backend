@@ -8,7 +8,7 @@ import { getCSRF } from '../helpers/getCSRF';
 
 const appUrl = window.location.origin
 
-class CustomerApplications extends React.Component {
+class CustomerSearch extends React.Component {
   constructor(props) {
     super(props)
     this.state = { rebateForms: null, applicationState: 'not-completed' }
@@ -120,4 +120,4 @@ class CustomerApplications extends React.Component {
   }
 }
 
-export default CustomerApplications
+export default CustomerSearch
