@@ -11,7 +11,7 @@ import { calculator } from '../helpers/decorators';
 import { SingleInput, RadioInput } from './inputs'
 import { IncomeDeclaration } from "./IncomeDeclaration";
 
-const appUrl = window.location.origin  
+const appUrl = window.location.origin
 
 class EditRebateForm extends React.Component {
 
@@ -52,13 +52,13 @@ class EditRebateForm extends React.Component {
         credentials: 'same-origin'
       }).then(res => {
         console.log('res', res)
-        if (res.ok) window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}` 
+        if (res.ok) window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}`
         else console.error(res)
       })
   }
 
   render () {
-    const { 
+    const {
       rebateForm,
       property,
       isReadOnly
@@ -101,7 +101,7 @@ class EditRebateForm extends React.Component {
                 ? RadioInput({...field, isReadOnly, values})
                 : SingleInput({...field, isReadOnly})
                 })}
-              </div>   
+              </div>
             }
             {IncomeDeclaration({otherIncomeFields, isReadOnly, includePartnerValues})}
             { !isReadOnly &&
@@ -128,7 +128,7 @@ class EditRebateForm extends React.Component {
                     Submit
                   </button>
                 </div>
-              </Fragment> 
+              </Fragment>
               }
           </form>
         )}}
