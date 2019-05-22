@@ -41,6 +41,10 @@ class RebateForm < ApplicationRecord
     fields['full_name']
   end
 
+  def occupation
+    fields['occupation']
+  end
+
   def email
     fields['email']
   end
