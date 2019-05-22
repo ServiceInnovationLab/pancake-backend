@@ -32,6 +32,10 @@
   margin: 0;
 }
 
+.users-title {
+  margin-bottom: .5em;
+}
+
 .login-subtitle {
   font-size: 1.75em;
   margin: .4em 0;
@@ -60,4 +64,8 @@
   border-radius: .2em;
   color: white;
   padding: .5em 1em;
+}
+
+.users-button {
+  margin-bottom: 1em;
 }
