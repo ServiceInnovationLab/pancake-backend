@@ -51,7 +51,7 @@ export function RadioInput ({ id, label, type, isReadOnly, withMargin, values })
     <div key={id} className={className}>
       <label>{label}</label>
       <div className="flex-row rebate-radio-buttons radio" >
-        {map([["Yes", "yes"], ["No", "no"]], [label, value] =>
+        {map([["Yes", "yes"], ["No", "no"]], ([label, value]) =>
         <label key={`${id}-${value}`} >
           <Field
             name={`fields.${id}`}
