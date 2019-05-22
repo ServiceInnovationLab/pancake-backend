@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'RebateForm', type: :feature, js: true do
   let!(:rebate_form) { FactoryBot.create :rebate_form }
-  let(:expected_name) { rebate_form.fields['full_name'] }
+  let(:expected_name) { rebate_form.full_name }
 
   context 'anonymous' do
     it "can't see it" do
