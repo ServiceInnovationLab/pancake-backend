@@ -5,24 +5,22 @@ require 'rails_helper'
 RSpec.describe RebateFormsService do
   let!(:property) { FactoryBot.create(:property_with_rates) }
 
-  pending 'new rebate form' do
+  describe 'new rebate form' do
     let(:create_params) do
       {
         'total_rates' => '12345',
         'location' => property.location,
         'council' => property.council.name,
-        'rebate_form' => {
-          'fields' => {
-            'full_name' => 'Best Witch',
-            'customer_id' => '12345',
-            'phone' => '022123-4567',
-            'email' => 'hermione.granger@potterworld.com',
-            'has_partner' => 'true',
-            'dependants' => '3',
-            'occupation' => 'witch',
-            '50_percent_claimed' => 'true',
-            'income' => {}
-          }
+        'fields' => {
+          'full_name' => 'Best Witch',
+          'customer_id' => '12345',
+          'phone' => '022123-4567',
+          'email' => 'hermione.granger@potterworld.com',
+          'has_partner' => 'true',
+          'dependants' => '3',
+          'occupation' => 'witch',
+          '50_percent_claimed' => 'true',
+          'income' => {}
         }
       }
     end
@@ -34,6 +32,7 @@ RSpec.describe RebateFormsService do
         it 'creates a new rebate form' do
           subject.update!
           expect(RebateForm.count).to eq 1
+          expect(RebateForm.first.fields['location']).to eq property.location
         end
       end
     end
