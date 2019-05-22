@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'RebateForm', type: :feature, js: true do
   let!(:rebate_form) { FactoryBot.create :rebate_form }
+  let(:expected_name) { rebate_form.fields['full_name'] }
 
   context 'anonymous' do
     it "can't see it" do
@@ -13,37 +14,34 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     end
   end
 
-  context 'signed in as dia' do
-    let(:user) { FactoryBot.create :admin_user }
-
+  shared_examples 'rebate_forms' do
     before { login_as(user, scope: :user) }
+    describe ' Can see all rebate forms' do
+      before do
+        visit '/admin'
+        click_button 'Search'
+      end
+      it { expect(page).to have_text('Signed') }
+      it { expect(page).to have_text('Not Signed') }
+      it { expect(page).to have_text(expected_name) }
+    end
 
-    it ' Can see rebate forms' do
-      visit '/admin/'
-      fill_in 'Name', with: rebate_form.fields['full_name']
-      click_button 'Search'
-      expect(page).to have_text(rebate_form.fields['full_name'])
-
-      # show the form
-      click_button 'Search'
-      expect(page).to have_text('Customer details')
+    describe 'searching for rebate forms by name' do
+      before do
+        visit '/admin'
+        fill_in 'Name', with: expected_name
+        click_button 'Search'
+      end
+      it { expect(page).to have_text(expected_name) }
     end
   end
 
+  context 'signed in as dia' do
+    let(:user) { FactoryBot.create :admin_user }
+    include_examples 'rebate_forms'
+  end
   context 'signed in as council' do
     let(:user) { FactoryBot.create :user, council_id: rebate_form.property.council_id }
-
-    before { login_as(user, scope: :user) }
-
-    xit ' Can see rebate forms' do
-      visit '/admin/rebate_forms'
-      fill_in 'name', with: rebate_form.fields['full_name']
-      click_button 'SEARCH'
-      expect(page).to have_text(rebate_form.fields['full_name'])
-
-      # show the form
-      click_link 'right-arrow'
-      expect(page).to have_text('Customer details')
-    end
+    include_examples 'rebate_forms'
   end
 end
