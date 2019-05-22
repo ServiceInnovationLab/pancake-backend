@@ -12,6 +12,7 @@ require 'capybara'
 require 'capybara/rspec'
 require 'selenium/webdriver'
 require 'capybara-screenshot/rspec'
+require 'percy'
 
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
