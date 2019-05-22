@@ -48,7 +48,7 @@ class CustomerSearch extends React.Component {
   }
 
   render() {
-    console.log(this.state, 'this state');
+    // console.log(this.state, 'this state');
     return (
       <Fragment>
         <div className="pure-u-1-2 rebate-search-box">
@@ -103,7 +103,7 @@ class CustomerSearch extends React.Component {
                   <td className="rebate-results-table-cell">
                     <a onClick={() => {
                       window.location = `${appUrl}/admin/rebate_forms/${id}`;
-                      }
+                    }
                     }>
                       <img src="/assets/blue-right-arrow.svg" alt="blue coloured right arrow"/>
                     </a>
