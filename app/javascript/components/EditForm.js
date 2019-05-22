@@ -46,7 +46,6 @@ class EditRebateForm extends React.Component {
         },
         body: JSON.stringify({
           rebate_form: {...values},
-          location: values.fields.location,
           total_rates: values.fields.total_rates,
           council: this.props.council.name
         }),
@@ -65,10 +64,9 @@ class EditRebateForm extends React.Component {
       isReadOnly
     } = this.props
     const { fields } = rebateForm
-    fields.location = property.location
-    const initialValues = {fields, location: property.location}
+    const initialValues = {fields} 
     const { otherIncomeFields } = this.state
-// LEAVE IN FOR PRODUCTION
+    // LEAVE IN FOR PRODUCTION
     console.log('initial: ', initialValues , 'rebateform: ', 'rebate form: ', rebateForm, 'property: ', property)
     return (
       <Form
