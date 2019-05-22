@@ -120,4 +120,4 @@ class CustomerSearch extends React.Component {
   }
 }
 
-export default CustomerSearch
+export default CustomerSearch;
