@@ -1,6 +1,6 @@
 
 import React, { Fragment } from 'react';
-import { Form, Field, FormSpy } from 'react-final-form';
+import { Form, Field } from 'react-final-form';
 import { map } from 'lodash';
 import 'isomorphic-fetch';
 
@@ -29,11 +29,11 @@ class CustomerSearch extends React.Component {
       })
       .then(data => {
         this.setState({ rebateForms: JSON.parse(data.json) });
-      })
+      });
   }
 
   onChange(value) {
-    const signed = value === 'completed' 
+    const signed = value === 'completed';
     if(signed) {
       this.setState({applicationState: value});
       this.fetchRebates(signed);
@@ -102,7 +102,7 @@ class CustomerSearch extends React.Component {
                   }
                   <td className='rebate-results-table-cell'>
                     <a onClick={() => {
-                      window.location = `${appUrl}/admin/rebate_forms/${id}`
+                      window.location = `${appUrl}/admin/rebate_forms/${id}`;
                     }
                     }>
                       <img src='/assets/blue-right-arrow.svg' alt="blue coloured right arrow"/>
