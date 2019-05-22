@@ -43,7 +43,7 @@ RSpec.describe 'RebateForm', type: :feature do
           visit "/admin/rebate_forms/#{rebate_form.id}/edit"
           click_link('back')
           expect(page).to have_text('Rates Rebate 2018/2019')
-          expect(page).to have_text('Customer Search')
+          expect(page).to have_text('Customer search')
         end
       end
 
