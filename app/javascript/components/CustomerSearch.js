@@ -1,17 +1,17 @@
 
-import React, { Fragment } from "react"
-import { Form, Field, FormSpy } from "react-final-form";
-import { map } from "lodash"
+import React, { Fragment } from 'react';
+import { Form, Field, FormSpy } from 'react-final-form';
+import { map } from 'lodash';
 import 'isomorphic-fetch';
 
 import { getCSRF } from '../helpers/getCSRF';
 
-const appUrl = window.location.origin
+const appUrl = window.location.origin;
 
 class CustomerSearch extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = { rebateForms: null, applicationState: 'not-completed' }
+    super(props);
+    this.state = { rebateForms: null, applicationState: 'not-completed' };
   }
 
   fetchRebates (completed = false, name = '') {
@@ -25,35 +25,35 @@ class CustomerSearch extends React.Component {
       credentials: 'same-origin'
     })
       .then(response => {
-        return response.json()
+        return response.json();
       })
       .then(data => {
-        this.setState({ rebateForms: JSON.parse(data.json) })
+        this.setState({ rebateForms: JSON.parse(data.json) });
       })
   }
 
   onChange(value) {
     const signed = value === 'completed' 
     if(signed) {
-      this.setState({applicationState: value})
-      this.fetchRebates(signed)
+      this.setState({applicationState: value});
+      this.fetchRebates(signed);
     }
     else {
-      this.setState({applicationState: value, rebateForms: null})
+      this.setState({applicationState: value, rebateForms: null});
     }
   }
 
   onSubmit(values = {}) {
-    this.fetchRebates(false, values.name)
+    this.fetchRebates(false, values.name);
   }
 
   render() {
-    console.log(this.state, 'this state')
+    // console.log(this.state, 'this state');
     return (
       <Fragment>
         <div className='pure-u-1-2 rebate-search-box'>
-          <div className={"rebate-tabs flex-row"}>
-            {map([["Not Signed", 'not-completed'], ["Signed", 'completed']], ([key, value]) =>
+          <div className={'rebate-tabs flex-row'}>
+            {map([['Not Signed', 'not-completed'], ['Signed', 'completed']], ([key, value]) =>
               <button key={key} className={(this.state.applicationState === value) ? 'rebate-button-selected' : 'rebate-button' } onClick={() => this.onChange(value)}>
               {key}
               </button>
@@ -67,7 +67,7 @@ class CustomerSearch extends React.Component {
                 <label>
                   Name
                 <Field
-                  className='rebate-search-field rebate-search-input'
+                  className="rebate-search-field rebate-search-input"
                   name="name"
                   component="input"
                   placeholder="E.g. John Doe"
@@ -92,9 +92,9 @@ class CustomerSearch extends React.Component {
           </thead>
           <tbody className='rebate-results-table-body'>
             {map(this.state.rebateForms, (rebateForm, key) => {
-              const { property, fields, id } = rebateForm
+              const { property, fields, id } = rebateForm;
               return (
-                <tr key={`${key}-${fields.full_name}`} className='rebate_form.completed'>
+                <tr key={`${key}-${fields.full_name}`} className="rebate_form.completed">
                   <td className='rebate-results-table-cell'>{fields.full_name}</td>
                   {property
                     ? <td className='rebate-results-table-cell'>{property.location} <br/> {property.suburb} <br/>  {property.town_city}</td>
@@ -103,20 +103,20 @@ class CustomerSearch extends React.Component {
                   <td className='rebate-results-table-cell'>
                     <a onClick={() => {
                       window.location = `${appUrl}/admin/rebate_forms/${id}`
-                      }
+                    }
                     }>
                       <img src='/assets/blue-right-arrow.svg' alt="blue coloured right arrow"/>
                     </a>
                   </td>
                 </tr>
-              )
+              );
             })}
           </tbody>
         </table>
         </div>
       }
       </Fragment>
-    )
+    );
   }
 }
 
