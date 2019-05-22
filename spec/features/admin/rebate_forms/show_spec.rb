@@ -9,7 +9,7 @@ RSpec.describe 'RebateForm', type: :feature do
     visit "/admin/rebate_forms/#{rebate_form.id}"
     expect(page).to have_text('Rates Rebate 2018/2019')
     expect(page).to have_text('Log in')
-    expect(page).to have_text('Log out x')
+    expect(page).not_to have_text('Log out x')
   end
 
   context 'signed in as dia' do

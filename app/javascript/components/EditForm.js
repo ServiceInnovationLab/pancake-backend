@@ -6,12 +6,12 @@ import 'isomorphic-fetch';
 
 import { conditionalsFields, customerDetailFields } from '../helpers/data'
 import { getCSRF } from '../helpers/getCSRF';
-import { calculator } from '../helpers/calculator_decorator';
+import { calculator } from '../helpers/decorators';
 
 import { SingleInput, RadioInput } from './inputs'
 import { IncomeDeclaration } from "./IncomeDeclaration";
 
-const appUrl = window.location.origin  
+const appUrl = window.location.origin
 
 class EditRebateForm extends React.Component {
 
@@ -46,29 +46,27 @@ class EditRebateForm extends React.Component {
         },
         body: JSON.stringify({
           rebate_form: {...values},
-          location: values.fields.location,
           total_rates: values.fields.total_rates,
           council: this.props.council.name
         }),
         credentials: 'same-origin'
       }).then(res => {
         console.log('res', res)
-        if (res.ok) window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}` 
+        if (res.ok) window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}`
         else console.error(res)
       })
   }
 
   render () {
-    const { 
+    const {
       rebateForm,
       property,
       isReadOnly
     } = this.props
     const { fields } = rebateForm
-    fields.location = property.location
-    const initialValues = {fields, location: property.location} 
+    const initialValues = {fields} 
     const { otherIncomeFields } = this.state
-// LEAVE IN FOR PRODUCTION
+    // LEAVE IN FOR PRODUCTION
     console.log('initial: ', initialValues , 'rebateform: ', 'rebate form: ', rebateForm, 'property: ', property)
     return (
       <Form
@@ -81,6 +79,7 @@ class EditRebateForm extends React.Component {
           submitting,
           values,
         }) => {
+          const includePartnerValues = values.fields.spouse_or_partner == 'yes'
           return (
           <form
             className="rebate-edit-form"
@@ -102,9 +101,9 @@ class EditRebateForm extends React.Component {
                 ? RadioInput({...field, isReadOnly, values})
                 : SingleInput({...field, isReadOnly})
                 })}
-              </div>   
+              </div>
             }
-            {IncomeDeclaration({otherIncomeFields, isReadOnly})}
+            {IncomeDeclaration({otherIncomeFields, isReadOnly, includePartnerValues})}
             { !isReadOnly &&
               <Fragment>
                 <div className={'flex-row'}>
@@ -129,7 +128,7 @@ class EditRebateForm extends React.Component {
                     Submit
                   </button>
                 </div>
-              </Fragment> 
+              </Fragment>
               }
           </form>
         )}}

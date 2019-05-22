@@ -13,25 +13,21 @@ export const incomeRows = [
   ],
   [
     "wages_salary",
-    "Wages or Salary"
-  ],
-  [
-    "work_and_income_benefits",
-    "Work and Income Benefits"
+    "Wages or salary"
   ],
   [
     "business_profit",
-    "Business Profit (net)"
+    "Business profit (NET)"
   ],
   [
     "rental_income",
-    "Rental Income"
+    "Rental income"
   ],
   [
     "overseas_income",
     "Overseas income (in $NZ)"
   ],
-]   
+]
 
 export const conditionalsFields = [
   {
@@ -41,7 +37,7 @@ export const conditionalsFields = [
   },
   {
     id: "settlement_date",
-    label: "Settlement Date",
+    label: "Settlement date",
     type: "date"
   },
   {
@@ -72,7 +68,7 @@ export const customerDetailFields = [
   },
   {
     id:"total_rates",
-    label: "Total Rates",
+    label: "Total rates",
     type: 'number',
     step: 0.01
   },
@@ -83,7 +79,7 @@ export const customerDetailFields = [
   },
   {
     id:"email",
-    label: "Email",
+    label: "Email (optional)",
     type:"email",
   },
   {
@@ -93,7 +89,7 @@ export const customerDetailFields = [
   },
   {
     id: 'spouse_or_partner',
-    label: "Spouse or Partner",
+    label: "Partner or joint homeowner",
     type:"radio"
   },
   {
@@ -104,7 +100,7 @@ export const customerDetailFields = [
   },
   {
     id:"50%_claimed_expenses",
-    label: "50% claimed as expenses?",
+    label: "Mostly used for business",
     type:"radio"
   },
   {
@@ -113,7 +109,7 @@ export const customerDetailFields = [
   },
   {
     id: 'moved_within_rating_year',
-    label: "Moved within rating year?",
+    label: "Moved within rating year",
     type:"radio"
   },
   {
