@@ -52,6 +52,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         click_button 'Search'
       end
       it { expect(page).not_to have_text other_councils_form.full_name }
+      after { Percy.snapshot(page, { name: 'rebate_forms#index' }) }
     end
   end
 end
