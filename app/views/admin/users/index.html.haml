@@ -1,44 +1,42 @@
-%h2
-  Users
-  - if current_user.council.present?
-    for #{current_user.council.name}
+.users-wrapper
+  %h2.users-title
+    Users
+    - if current_user.council.present?
+      for #{current_user.council.name}
 
-.pure-g
-  .pure-u-2-5
-    %p Password change link goes here soon
-  .pure-u-3-5
-    %p
-      = link_to new_user_invitation_path, class: 'pure-button' do
+  .pure-g
+    .pure-u-3-5
+      = link_to new_user_invitation_path, class: 'pure-button users-button' do
         = fa_icon 'plus'
         Invite new users
 
-    %table.pure-table.pure-table-horizontal
-      %thead
-        %tr
-          %th Email
-          %th Role
-          - if current_user.council.nil?
-            %th Council
-
-      %tbody
-        - @users.each do |user|
+      %table.pure-table.pure-table-horizontal
+        %thead
           %tr
-            %td= user.email
-            %td
-              - user.roles.each do |r|
-                %li= r.friendly_name
+            %th Email
+            %th Role
             - if current_user.council.nil?
+              %th Council
+
+        %tbody
+          - @users.each do |user|
+            %tr
+              %td= user.email
               %td
-                = user.council.name if user.council.present?
+                - user.roles.each do |r|
+                  %li= r.friendly_name
+              - if current_user.council.nil?
+                %td
+                  = user.council.name if user.council.present?
 
-            - if policy(user).edit?
-              %td= link_to 'edit', edit_admin_user_path(user)
+              - if policy(user).edit?
+                %td= link_to 'edit', edit_admin_user_path(user)
 
-            %td
-              - if user.deactivated_at.present?
-                Deactivated
-                = user.deactivated_at
-              - elsif policy(user).destroy?
-                = link_to admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'pure-button' do
-                  = fa_icon 'ban'
-                  deactivate
+              %td
+                - if user.deactivated_at.present?
+                  Deactivated
+                  = user.deactivated_at
+                - elsif policy(user).destroy?
+                  = link_to admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'pure-button' do
+                    = fa_icon 'ban'
+                    deactivate
