@@ -78,6 +78,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 4.0'
   gem 'faker', '~> 1.7'
   gem 'letter_opener'
+  gem 'percy-capybara', '~> 4.0.0'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5.2'
   gem 'rubocop', '0.55.0'
