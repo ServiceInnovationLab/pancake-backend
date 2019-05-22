@@ -5,7 +5,9 @@
 
 .pure-g
   .pure-u-2-5
-    %p Password change link goes here soon
+    %p
+      = link_to edit_user_password_path, class: 'pure-button' do
+        Reset password
   .pure-u-3-5
     %p
       = link_to new_user_invitation_path, class: 'pure-button' do
