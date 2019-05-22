@@ -43,5 +43,15 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
   context 'signed in as council' do
     let(:user) { FactoryBot.create :user, council_id: rebate_form.property.council_id }
     include_examples 'rebate_forms'
+
+    describe "can't see rebate_forms from other councils" do
+      let(:other_councils_form){ FactoryBot.create :rebate_form }
+      before do
+        visit '/admin'
+        fill_in 'Name', with: other_councils_form.full_name
+        click_button 'Search'
+      end
+      it { expect(page).not_to have_text other_councils_form.full_name}
+    end
   end
 end
