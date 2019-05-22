@@ -19,13 +19,15 @@
   --black: #000000;
 }
 
-.login-wrapper {
+.login-wrapper,
+.users-wrapper {
   margin: auto;
   max-width: 960px;
   padding: 4em;
 }
 
-.login-title {
+.login-title,
+.users-title {
   font-size: 3em;
   margin: 0;
 }
