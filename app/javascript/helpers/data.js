@@ -17,7 +17,7 @@ export const incomeRows = [
   ],
   [
     "business_profit",
-    "Business profit (net)"
+    "Business profit (NET)"
   ],
   [
     "rental_income",
