@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.b6cf3829.chunk.css",
-    "main.js": "/static/js/main.a52e0d82.chunk.js",
-    "main.js.map": "/static/js/main.a52e0d82.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/js/2.3c1a2099.chunk.js": "/static/js/2.3c1a2099.chunk.js",
-    "static/js/2.3c1a2099.chunk.js.map": "/static/js/2.3c1a2099.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.a4c953c3e439895bcfb60893733dd823.js": "/precache-manifest.a4c953c3e439895bcfb60893733dd823.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.b6cf3829.chunk.css.map": "/static/css/main.b6cf3829.chunk.css.map",
-    "static/media/App.css": "/static/media/FiraSans-Regular.5d6a923d.woff",
-    "static/media/tick.svg": "/static/media/tick.bd37d876.svg"
+    "main.css": "/ipad/static/css/main.16942e9c.chunk.css",
+    "main.js": "/ipad/static/js/main.c8c9dfe1.chunk.js",
+    "main.js.map": "/ipad/static/js/main.c8c9dfe1.chunk.js.map",
+    "runtime~main.js": "/ipad/static/js/runtime~main.8b4588fc.js",
+    "runtime~main.js.map": "/ipad/static/js/runtime~main.8b4588fc.js.map",
+    "static/js/2.3c1a2099.chunk.js": "/ipad/static/js/2.3c1a2099.chunk.js",
+    "static/js/2.3c1a2099.chunk.js.map": "/ipad/static/js/2.3c1a2099.chunk.js.map",
+    "index.html": "/ipad/index.html",
+    "precache-manifest.55d38bd1b22daca797a670d59162d098.js": "/ipad/precache-manifest.55d38bd1b22daca797a670d59162d098.js",
+    "service-worker.js": "/ipad/service-worker.js",
+    "static/css/main.16942e9c.chunk.css.map": "/ipad/static/css/main.16942e9c.chunk.css.map",
+    "static/media/App.css": "/ipad/static/media/FiraSans-Regular.5d6a923d.woff",
+    "static/media/tick.svg": "/ipad/static/media/tick.bd37d876.svg"
   }
 }
