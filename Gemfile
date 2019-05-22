@@ -91,6 +91,8 @@ end
 group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
+  gem 'capybara-selenium'
   gem 'database_cleaner', '~> 1.6'
   gem 'simplecov', require: false
+  gem 'webdrivers'
 end
