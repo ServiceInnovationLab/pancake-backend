@@ -73,30 +73,24 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           it { expect(page).to have_field('fields.email', with: rebate_form.email) }
           it { expect(page).to have_field('fields.occupation', with: rebate_form.occupation) }
         end
+        include_examples 'percy snapshot'
       end
 
       context 'when the generate QR button is clicked' do
-        it 'goes to the right place' do
-          visit "/admin/rebate_forms/#{rebate_form.id}/"
-          find("img[class='rebate-generate-qr']").click
-          expect(page).to_not have_text('EDIT')
-          expect(page).to_not have_text('Customer details')
-          expect(page).to_not have_text('Signature required')
-        end
-      end
-
-      context 'when the generate QR button is clicked' do
-        it 'goes to the right place' do
-          visit "/admin/rebate_forms/#{rebate_form.id}/"
-          find("img[class='rebate-generate-qr']").click
-          expect(page).to_not have_text('EDIT')
-          expect(page).to_not have_text('Customer details')
-          expect(page).to_not have_text('Signature required')
+        describe 'requests the QR code' do
+          before do
+            visit "/admin/rebate_forms/#{rebate_form.id}/"
+            find("img[class='rebate-generate-qr']").click
+          end
+          it { expect(page).to_not have_text('EDIT') }
+          it { expect(page).to_not have_text('Customer details') }
+          it { expect(page).to_not have_text('Signature required') }
+          include_examples 'percy snapshot'
         end
       end
     end
 
-    context 'when the user does have a name' do
+    context 'when the user has a name' do
       let(:user) { FactoryBot.create :admin_user, name: 'George Foreman' }
 
       before { login_as(user, scope: :user) }
