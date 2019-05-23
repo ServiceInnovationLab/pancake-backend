@@ -48,11 +48,11 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
   end
 
   context 'signed in as admin (dia user)' do
-    let(:user) { FactoryBot.create :admin_user }
+    let(:user) { FactoryBot.create :admin_user, email: 'somebody.important@dia.govt.nz' }
     include_examples 'rebate_forms'
   end
   context 'signed in as council' do
-    let(:user) { FactoryBot.create :user, council_id: council.id }
+    let(:user) { FactoryBot.create :user, council_id: council.id, email: 'somebody.important@somecouncil.govt.nz' }
     include_examples 'rebate_forms'
 
     describe "can't see rebate_forms from other councils" do
