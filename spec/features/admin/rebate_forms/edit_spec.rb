@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'RebateForm', type: :feature do
+RSpec.describe 'RebateForm', type: :feature, js: true do
   let(:property) { FactoryBot.create :property_with_rates, rating_year: ENV['YEAR'] }
   let!(:rebate_form) { FactoryBot.create :rebate_form, completed: false, property: property }
 
@@ -16,11 +16,11 @@ RSpec.describe 'RebateForm', type: :feature do
 
   shared_examples 'can edit' do
     describe '#edit' do
-      xit 'can modify the rebate_form' do
+      it 'can modify the rebate_form' do
         visit "/admin/rebate_forms/#{rebate_form.id}/edit"
         expect(page).to have_text('Name')
-        fill_in 'rebate_form_fields[full_name]', with: 'New name'
-        click_button 'Save'
+        fill_in 'fields.full_name', with: 'New name'
+        click_button 'Submit'
         expect(page).not_to have_text 'errors'
         expect(page).to have_text 'New name'
         rebate_form.reload
@@ -29,12 +29,14 @@ RSpec.describe 'RebateForm', type: :feature do
     end
 
     describe '#show' do
-      xit 'can see edit link' do
+      it 'can see edit link' do
         visit "/admin/rebate_forms/#{rebate_form.id}"
-        expect(page).to have_text(rebate_form.fields['full_name'])
-        click_link 'Edit'
-        expect(page).to have_text('Customer Details')
+        expect(page).to have_field(with: rebate_form.full_name)
+        click_link 'EDIT'
+        expect(page).to have_text('Customer details')
+        expect(page).to have_field(with: rebate_form.full_name)
       end
+      include_examples 'percy snapshot'
     end
 
     describe 'header buttons' do
@@ -51,7 +53,7 @@ RSpec.describe 'RebateForm', type: :feature do
         it 'goes to the right place' do
           visit "/admin/rebate_forms/#{rebate_form.id}/edit"
           click_link('reload')
-          expect(page).to have_http_status :ok
+          expect(page).to have_text('Customer details')
         end
       end
     end
@@ -73,6 +75,7 @@ RSpec.describe 'RebateForm', type: :feature do
           expect(page).to have_text('Are you sure you want to edit?')
           expect(page).to have_text('If you make any changes, the customer will have to sign the declaration again')
         end
+        include_examples 'percy snapshot'
       end
     end
   end
