@@ -20,14 +20,14 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
 
       context 'and the rebate form is not completed' do
         before { visit "/admin/rebate_forms/#{rebate_form.id}" }
-        describe 'viewing a customer details' do
-          it { expect(page).to have_text('Customer details') }
-          it { expect(page).to have_text('Signature required') }
-          it { expect(page).to have_text(user.email) }
-          it { expect(page).to have_text('Log out x') }
-          it { expect(page).to have_field('fields.full_name', with: rebate_form.full_name) }
-          it { expect(page).to have_field('fields.email', with: rebate_form.email) }
-          it { expect(page).to have_field('fields.occupation', with: rebate_form.occupation) }
+        it 'viewing a customer details' do
+          expect(page).to have_text('Customer details')
+          expect(page).to have_text('Signature required')
+          expect(page).to have_text(user.email)
+          expect(page).to have_text('Log out x')
+          expect(page).to have_field('fields.full_name', with: rebate_form.full_name)
+          expect(page).to have_field('fields.email', with: rebate_form.email)
+          expect(page).to have_field('fields.occupation', with: rebate_form.occupation)
         end
         include_examples 'percy snapshot'
 
