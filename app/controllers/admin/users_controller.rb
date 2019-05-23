@@ -37,7 +37,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def user_params
-    u = params.require(:user).permit(:council_id, role_ids: [])
+    u = params.require(:user).permit(:name, :council_id, role_ids: [])
     u[:council_id] = nil if u[:council_id].blank?
     u[:role_ids] = [] if u[:role_ids].blank?
     u
