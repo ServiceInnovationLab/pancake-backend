@@ -91,7 +91,9 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     end
 
     context 'when the user has a name' do
-      let(:user) { FactoryBot.create :admin_user, name: 'George Foreman', email: 'frontlinestaff@regionalcouncil.govt.nz' }
+      let(:user) do
+        FactoryBot.create :admin_user, name: 'George Foreman', email: 'frontlinestaff@regionalcouncil.govt.nz'
+      end
 
       before { login_as(user, scope: :user) }
 
