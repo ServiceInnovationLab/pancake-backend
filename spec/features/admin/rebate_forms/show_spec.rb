@@ -29,6 +29,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           it { expect(page).to have_field('fields.email', with: rebate_form.email) }
           it { expect(page).to have_field('fields.occupation', with: rebate_form.occupation) }
         end
+        include_examples 'percy snapshot'
 
         context 'when the back link is clicked' do
           describe 'goes to the right place' do
