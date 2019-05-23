@@ -1,4 +1,8 @@
-%p= @user.email
+%p.users-subtitle
+  - if @user.name
+    = @user.name
+  - else
+    = @user.email
 
 = form_for [:admin, @user], class: 'pure-form pure-form-stacked' do |f|
 
@@ -11,6 +15,10 @@
       = f.submit 'Re-activate', class: 'pure-button'
 
   - else
+    %fieldset
+      .pure-control-group
+        %h3= f.label :name
+        = f.text_field :name, placeholder: 'e.g. John Smith', class: 'users-input'
     %fieldset
       .pure-control-group
         %h3= f.label :role
@@ -31,4 +39,4 @@
             = council.name
 
     .pure-controls
-      = f.submit 'Save', class: 'pure-button'
+      = f.submit 'Save', class: 'pure-button login-button'
