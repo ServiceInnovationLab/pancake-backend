@@ -22,7 +22,6 @@ RSpec.describe 'Property', type: :feature do
       expect(page).to have_text(property.valuation_id)
       expect(page).to have_text(property.location)
     end
-    include_examples 'percy snapshot'
   end
 
   context 'signed in as dia' do
@@ -39,5 +38,6 @@ RSpec.describe 'Property', type: :feature do
     before { login_as(user, scope: :user) }
 
     include_examples 'can see properties for a council'
+    include_examples 'percy snapshot'
   end
 end
