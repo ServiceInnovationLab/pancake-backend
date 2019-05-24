@@ -79,16 +79,16 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       context 'when the generate QR button is clicked' do
         describe 'requests the QR code' do
           before do
+            Timecop.freeze(Time.local.utc(2019, 9, 1, 10, 5, 0))
             visit "/admin/rebate_forms/#{rebate_form.id}/"
             # Freeze time when we generate the qr
-            Timecop.freeze(Time.local.utc(2019, 9, 1, 10, 5, 0)) do
-              find("img[class='rebate-generate-qr']").click
-            end
+            find("img[class='rebate-generate-qr']").click
           end
           it { expect(page).to_not have_text('EDIT') }
           it { expect(page).to_not have_text('Customer details') }
           it { expect(page).to_not have_text('Signature required') }
           include_examples 'percy snapshot'
+          after { Timecop.return }
         end
       end
     end
