@@ -42,7 +42,9 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         fill_in 'Name', with: expected_name
         click_button 'Search'
       end
-      it { expect(page).to have_text(expected_name) }
+      it 'finds the person with matching name' do
+        expect(page).to have_text(expected_name)
+      end
       include_examples 'percy snapshot'
     end
   end
