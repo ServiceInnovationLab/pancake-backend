@@ -79,7 +79,7 @@ RSpec.describe RebateFormsService do
         end
 
         it 'raises an error' do
-          expect { subject.update! }.to raise_error(RebateFormsService::Error)
+          expect { subject.update! }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
 
