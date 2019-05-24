@@ -80,7 +80,10 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         describe 'requests the QR code' do
           before do
             visit "/admin/rebate_forms/#{rebate_form.id}/"
-            find("img[class='rebate-generate-qr']").click
+            # Freeze time when we generate the qr
+            Timecop.freeze(Time.local.utc(2019, 9, 1, 10, 5, 0)) do
+              find("img[class='rebate-generate-qr']").click
+            end
           end
           it { expect(page).to_not have_text('EDIT') }
           it { expect(page).to_not have_text('Customer details') }
