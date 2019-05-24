@@ -21,5 +21,6 @@ RSpec.describe 'Logging in', type: :feature do
       visit '/admin'
       expect(page).to have_text('Log out')
     end
+    include_examples 'percy snapshot'
   end
 end
