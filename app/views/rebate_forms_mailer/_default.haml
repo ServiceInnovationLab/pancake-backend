@@ -1,25 +1,26 @@
 %p
-  Hi
-  = @rebate_form.full_name
+  Hi #{@rebate_form.full_name}
 
 %p
-  Your application for a rates rebate for the 1 July #{@rebate_form.rating_year.to_i - 1} – 30 June #{@rebate_form.rating_year} rates
-  year has been sent to the #{@council.name}.
+  Your application for a rates rebate for the 1 July #{@rebate_form.rating_year.to_i - 1} – 30 June #{@rebate_form.rating_year} rates year has been sent to the #{@council.name}.
 
 %p
   %b What you need to do now
 
 %p
   %ul
-    %li Go to the the #{@council.name} at
+    %li Go to the #{@council.name}
     %li Tell the Service Centre staff you're there to sign your rates rebate application.
 
 %p
-  %strong
+  %b
     Make sure you complete your application by getting your signature witnessed at the council offices as soon as you can.
 
 %p
-  Please note: you can only apply for a rebate for the #{@rebate_form.rating_year.to_i - 1}/#{@rebate_form.rating_year} rates year between
-  1 July #{@rebate_form.rating_year.to_i - 1} – 30 June #{@rebate_form.rating_year}.
+  Please note: you can only apply for a rebate for the #{@rebate_form.rating_year.to_i - 1}/#{@rebate_form.rating_year} rates year between 1 July #{@rebate_form.rating_year.to_i - 1} – 30 June #{@rebate_form.rating_year}.
 
 %p Once your application is completed, your total rebate will be applied to your rates account.
+
+%p
+  %b
+    If you have any issues, call the #{@council.name}
