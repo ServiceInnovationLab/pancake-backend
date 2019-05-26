@@ -29,6 +29,7 @@ RSpec.describe 'Council', type: :feature, js: true do
       it { expect(page).to have_text('Email') }
       it { expect(page).to have_field(with: council.email) }
       it { expect(page).to have_text('where to send') }
+      it { expect(page).to have_checked_field('council_active') }
       it { expect(page).to have_text('Active') }
       it { expect(page).to have_selector(:link_or_button, 'Save') }
       it { expect(page).to have_selector(:link_or_button, 'Show') }
