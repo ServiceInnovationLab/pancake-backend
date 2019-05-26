@@ -16,8 +16,6 @@ class RebateFormsService
     rebate_form.calc_rebate_amount!
     raise Error if rebate_form.rebate.blank?
     rebate_form
-  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotFound
-    raise Error
   end
 
   private

@@ -36,7 +36,8 @@
   margin-bottom: .5em;
 }
 
-.login-subtitle {
+.login-subtitle,
+.users-subtitle {
   font-size: 1.75em;
   margin: .4em 0;
 }
@@ -48,7 +49,8 @@
   width: 770px;
 }
 
-.login-input {
+.login-input,
+.users-input {
   border: solid 5px #e6e6e6;
   line-height: 2em;
   margin-bottom: .5em;
