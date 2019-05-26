@@ -26,9 +26,6 @@ This is an app built using Json API suite https://jsonapi-suite.github.io/jsonap
 
 1. `cd pancake-backend`
 
-1. Add project upstream
-  `git remote add upstream git@github.com:WhareHauora/pancake-backend.git`
-
 1. Set up environment variables
   `cp env-example .env`
 
@@ -36,13 +33,36 @@ You will need ruby, the bundler gem to install dependencies. We recommend managi
 
 Install the dependencies
 
-1. `bundle install`
+```
+bundle install
+yarn install
+```
 
 You will need a database. Any database supported by ruby on rails / jsonapi suite should work, but we only support Postgresql. Configure your database url in your `.env`, then:
 
-1. `bundle exec rake db:create db:migrate`
-
+```
+bundle exec rake db:create db:migrate
+```
 
 To run the server:
 
-1. `bundle exec rails s`
+```
+bundle exec rails s
+```
+
+Seed the database and create a user:
+
+```
+bundle exec rake db:seed
+```
+
+This will pop up an invitation email for `juanvandenanker@gmail.com` in your browser. If the server is running you will be able to click the link to accept the invitation and set your password.
+
+To run the tests
+----------------
+
+```
+bundle exec rspec
+```
+
+Test coverage report is at `coverage/index.html`
