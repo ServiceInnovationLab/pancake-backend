@@ -20,6 +20,7 @@ RSpec.describe 'Council', type: :feature, js: true do
       visit "/admin/councils/#{council.id}/edit"
     end
     describe 'can modify the fields for the selected council' do
+      it { expect(page).to have_text('Editing council') }
       it { expect(page).to have_text('Name') }
       it { expect(page).to have_field(with: council.name) }
       it { expect(page).to have_text('This is a required field.') }
