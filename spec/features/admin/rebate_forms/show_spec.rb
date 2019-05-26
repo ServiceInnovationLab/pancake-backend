@@ -85,7 +85,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
             find("img[class='rebate-generate-qr']").click
           end
           it { expect(page).to have_link 'DONE' }
-          xit "displays the qr code" do
+          xit 'displays the qr code' do
             expect(page).to have_image(class: 'rebate-qrcode')
           end
           include_examples 'percy snapshot'
