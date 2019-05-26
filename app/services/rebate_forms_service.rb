@@ -41,7 +41,6 @@ class RebateFormsService
   end
 
   def update_fields
-    return @rebate_form_attributes['rebate_form']['fields'] if @rebate_form_attributes['rebate_form']
     @rebate_form_attributes['fields']
   end
 
