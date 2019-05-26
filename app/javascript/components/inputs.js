@@ -19,6 +19,8 @@ export function SingleInput ({ isReadOnly, id, label, placeholder, fullWidth, wi
       component='input'
       type={type}
       min={type == 'number' ? 0 : null}
+      step={type == 'number' ? 0.01 : null}
+
       readOnly={isReadOnly}
     />
     <Error name={`fields.${id}`} />
@@ -35,12 +37,13 @@ export function TableInput ({ id, type = "number", isReadOnly, className }) {
       type={type}
       readOnly={isReadOnly}
       min={0}
+      step={0.01}
     />
     <Error name={`fields.income.${id}`} />
   </div>
 )}
 
-export function RadioInput ({ id, label, type, isReadOnly, withMargin }) {
+export function RadioInput ({ id, label, type, isReadOnly, withMargin, values }) {
   const className = withMargin
     ? 'flex-item'
     : 'flex-item with-margin'
@@ -48,7 +51,7 @@ export function RadioInput ({ id, label, type, isReadOnly, withMargin }) {
     <div key={id} className={className}>
       <label>{label}</label>
       <div className="flex-row rebate-radio-buttons radio" >
-        {map(["yes", "no"], value =>
+        {map([["Yes", "yes"], ["No", "no"]], ([label, value]) =>
         <label key={`${id}-${value}`} >
           <Field
             name={`fields.${id}`}
@@ -56,9 +59,9 @@ export function RadioInput ({ id, label, type, isReadOnly, withMargin }) {
             component="input"
             type={type}
             value={value}
-            readOnly={isReadOnly}
+            disabled={isReadOnly && values.fields[id] != value}
           />{" "}
-          {value}
+          {label}
         </label>
         )}
         <Error name={`fields.${id}`} />

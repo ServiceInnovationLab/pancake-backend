@@ -2,7 +2,7 @@
 
 class RebateFormPolicy < ApplicationPolicy
   def generateqr?
-    (dia? || same_council?)
+    dia? || same_council?
   end
 
   def index?

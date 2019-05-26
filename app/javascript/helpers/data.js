@@ -1,49 +1,33 @@
 export const incomeRows = [
   [
-    "other_superannuation",
-    "Other Superannuation"
-  ],
-  [
     "nz_superannuation",
     "NZ Superannuation"
   ],
   [
+    "other_superannuation",
+    "Other superannuation"
+  ],
+  [
     "interest_dividends",
-    "Interest / Dividends"
+    "Interest or dividends"
   ],
   [
     "wages_salary",
-    "Wages or Salary"
+    "Wages or salary"
   ],
   [
     "business_profit",
-    "Business Profit (NET)"
-  ],
-  [
-    "work_and_income_supplements",
-    "Work and Income Supplements"
-  ],
-  [
-    "working_for_families_tax_credits",
-    "Working For Families Tax Credits"
+    "Business profit (NET)"
   ],
   [
     "rental_income",
-    "Rental Income"
-  ],
-  [
-    "acc_earnings",
-    "ACC Earnings"
-  ],
-  [
-    "trust_income",
-    "Trust income"
+    "Rental income"
   ],
   [
     "overseas_income",
     "Overseas income (in $NZ)"
   ],
-]   
+]
 
 export const conditionalsFields = [
   {
@@ -53,7 +37,7 @@ export const conditionalsFields = [
   },
   {
     id: "settlement_date",
-    label: "Settlement Date",
+    label: "Settlement date",
     type: "date"
   },
   {
@@ -84,8 +68,9 @@ export const customerDetailFields = [
   },
   {
     id:"total_rates",
-    label: "Total Rates",
-    type: 'number'
+    label: "Total rates",
+    type: 'number',
+    step: 0.01
   },
   {
     id:"valuation_id",
@@ -94,7 +79,7 @@ export const customerDetailFields = [
   },
   {
     id:"email",
-    label: "Email",
+    label: "Email (optional)",
     type:"email",
   },
   {
@@ -104,7 +89,7 @@ export const customerDetailFields = [
   },
   {
     id: 'spouse_or_partner',
-    label: "Spouse or Partner",
+    label: "Partner or joint homeowner",
     type:"radio"
   },
   {
@@ -115,7 +100,7 @@ export const customerDetailFields = [
   },
   {
     id:"50%_claimed_expenses",
-    label: "50% claimed as expenses?",
+    label: "Mostly used for business",
     type:"radio"
   },
   {
@@ -124,7 +109,7 @@ export const customerDetailFields = [
   },
   {
     id: 'moved_within_rating_year',
-    label: "Moved within rating year?",
+    label: "Moved within rating year",
     type:"radio"
   },
   {

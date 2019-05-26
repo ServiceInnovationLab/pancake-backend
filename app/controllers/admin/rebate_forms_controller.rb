@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'rqrcode'
-require 'base64'
-require 'jwt'
-
 class Admin::RebateFormsController < Admin::BaseController
   before_action :set_rebate_form, only: %i[show update destroy edit]
   respond_to :html, :pdf, :csv, :json
@@ -12,7 +8,7 @@ class Admin::RebateFormsController < Admin::BaseController
     @rebate_form = RebateForm.find(params[:rebate_form_id])
     authorize @rebate_form
 
-    @image_data = RebateFormsService.new(rebate_form_fields_params).generate_qr(@rebate_form)
+    @image_data = GenerateQrService.new(@rebate_form, current_user).generate_qr
   end
 
   # GET /admin/rebate_forms
@@ -28,11 +24,11 @@ class Admin::RebateFormsController < Admin::BaseController
                                             .order(created_at: :desc)
 
     # filter by the search form fields
-    @rebate_forms = @rebate_forms.where("fields ->> 'full_name' like ?", "%#{params[:name]}%") if @name.present?
+    @rebate_forms = @rebate_forms.where("fields ->> 'full_name' iLIKE ?", "%#{params[:name]}%") if @name.present?
     @rebate_forms = @rebate_forms.where(completed: @completed)
     @rebate_forms = @rebate_forms.order(created_at: :desc)
 
-    respond_with @rebate_forms
+    respond_with json: @rebate_forms.to_json(include: [:property])
   end
 
   # GET /admin/rebate_forms/1
@@ -59,7 +55,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
-    @rebate_form = RebateFormsService.new(rebate_form_fields_params).update
+    @rebate_form = RebateFormsService.new(rebate_form_fields_params).update!
     @rebate_form.update(updated_by: current_user.id)
     respond_with @rebate_form, location: admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
   end

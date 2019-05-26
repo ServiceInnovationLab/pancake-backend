@@ -6,7 +6,7 @@ FactoryBot.define do
     property { Property.find_by(valuation_id: valuation_id, rating_year: ENV['YEAR']) }
     # token <-- auto generated. Don't set in factory
     fields do
-      { full_name: 'Hermione Granger',
+      { full_name: Faker::Name.name,
         dependants: 0,
         customer_id: 123,
         phone: '0212345678',
