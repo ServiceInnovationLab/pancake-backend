@@ -11,6 +11,7 @@ FactoryBot.define do
         customer_id: 123,
         phone: '0212345678',
         income: {},
+        location: property.location,
         email: 'hermione.granger@hogwarts.com',
         has_partner: true,
         occupation: 'witch',
