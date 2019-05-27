@@ -32,9 +32,18 @@ RSpec.describe 'Council', type: :feature, js: true do
       it { expect(page).to have_text('where to send') }
       it { expect(page).to have_checked_field('council_active') }
       it { expect(page).to have_text('Active') }
-      it { expect(page).to have_selector(:link_or_button, 'Save') }
-      it { expect(page).to have_selector(:link_or_button, 'Show') }
-      it { expect(page).to have_selector(:link_or_button, 'Back') }
+      it { expect(page).to have_button('Save') }
+      it { expect(page).to have_link('Show') }
+      it { expect(page).to have_link('Back') }
+
+      it do
+        fill_in 'Name', with: 'New Council 2'
+        fill_in 'Short name', with: 'New C2'
+        fill_in 'Email', with: 'C2@council.co.nz'
+        check 'council_active'
+        click_button 'Save'
+        expect(page).to have_text('Council was successfully updated.')
+      end
     end
   end
 end
