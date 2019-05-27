@@ -8,9 +8,10 @@ import { conditionalsFields, customerDetailFields } from '../helpers/data';
 import { getCSRF } from '../helpers/getCSRF';
 import { calculator } from '../helpers/decorators';
 
-import { SingleInput, RadioInput } from './inputs';
-import { IncomeDeclaration } from './IncomeDeclaration';
+import { SingleInput, RadioInput } from '../components/inputs';
+import { IncomeDeclaration } from '../components/IncomeDeclaration';
 import { parseFromAPI, prepareForAPI } from '../helpers/formatRebateForm';
+
 const appUrl = window.location.origin;
 
 class EditRebateForm extends React.Component {
