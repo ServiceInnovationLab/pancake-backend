@@ -12,6 +12,7 @@ require 'capybara'
 require 'capybara/rspec'
 require 'selenium/webdriver'
 require 'capybara-screenshot/rspec'
+require 'percy'
 
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
@@ -27,9 +28,16 @@ Capybara.register_driver :headless_chrome do |app|
                                  desired_capabilities: capabilities
 end
 
+Capybara::Screenshot.register_driver(:headless_chrome) do |driver, path|
+  driver.browser.save_screenshot(path)
+end
+
 Capybara.javascript_driver = :headless_chrome
 
 Capybara.raise_server_errors = true
+
+Capybara.asset_host = 'http://localhost:3000'
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

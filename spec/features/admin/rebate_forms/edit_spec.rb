@@ -28,12 +28,14 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     end
 
     describe '#show' do
-      xit 'can see edit link' do
+      it 'can see edit link' do
         visit "/admin/rebate_forms/#{rebate_form.id}"
-        expect(page).to have_text(rebate_form.fields['full_name'])
-        click_link 'Edit'
-        expect(page).to have_text('Customer Details')
+        expect(page).to have_field(with: rebate_form.full_name)
+        click_link 'EDIT'
+        expect(page).to have_text('Customer details')
+        expect(page).to have_field(with: rebate_form.full_name)
       end
+      include_examples 'percy snapshot'
     end
 
     describe 'header buttons' do
@@ -74,6 +76,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           expect(page).to have_text('Are you sure you want to edit?')
           expect(page).to have_text('If you make any changes, the customer will have to sign the declaration again')
         end
+        include_examples 'percy snapshot'
       end
     end
   end
