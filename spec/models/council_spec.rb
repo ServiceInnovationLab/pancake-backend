@@ -17,7 +17,7 @@ RSpec.describe Council, type: :model do
   end
 
   describe 'has properties' do
-    it { expect(council.properties).to eq properties }
+    it { expect(council.properties.sort).to eq properties.sort }
   end
 
   describe 'has rates_bills' do
