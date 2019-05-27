@@ -18,7 +18,7 @@ class RebateForm < ApplicationRecord
   validate :same_council
   validate :only_completed_forms_in_batch
 
-  after_create :send_emails
+  after_create :send_email
   has_many_attached :attachments
 
   scope :by_council, ->(council) { where(properties: { council_id: council.id }) }
@@ -88,13 +88,8 @@ class RebateForm < ApplicationRecord
     SecureRandom.hex(rand(40..60))
   end
 
-  def send_emails
-    mailer.applicant_mail.deliver_now if fields['email'].present?
-    mailer.council_mail.deliver_now if council.email.present?
-  end
-
-  def mailer
-    RebateFormsMailer.with(rebate_form: self)
+  def send_email
+    RebateFormsMailer.applicant_mail(self).deliver_now if fields['email'].present?
   end
 
   def same_council
