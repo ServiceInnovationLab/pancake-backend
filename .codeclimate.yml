@@ -23,8 +23,8 @@ plugins:
     enabled: true
   # hlint:
   #   enabled: true
-  # markdownlint:
-  #   enabled: true
+  markdownlint:
+    enabled: true
   # git.legal:
   #   enabled: true
   # scsslint:
