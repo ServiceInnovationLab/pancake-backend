@@ -81,7 +81,7 @@ group :development, :test do
   gem 'percy-capybara', '~> 4.0.0'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5.2'
-  gem 'rubocop', '0.55.0'
+  gem 'rubocop', '0.70.0'
   gem 'swagger-diff', '~> 1.1'
 end
 
