@@ -15,7 +15,6 @@ Production server = `https://ratesrebates.services.govt.nz`
 
 This is an app built using [Json API suite](https://jsonapi-suite.github.io/jsonapi_suite/concepts)
 
-
 1. make your own fork, and clone
   `git clone [repo]`
 
