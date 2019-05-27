@@ -27,8 +27,8 @@ plugins:
     enabled: true
   # git.legal:
   #   enabled: true
-  # scsslint:
-  #   enabled: true
+  scsslint:
+    enabled: true
   # nodesecurity:
   #   enabled: true
 exclude_patterns:
