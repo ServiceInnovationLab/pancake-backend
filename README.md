@@ -1,4 +1,4 @@
-# README
+# README #
 
 [![Build Status](https://travis-ci.org/ServiceInnovationLab/pancake-backend.svg?branch=dev)](https://travis-ci.org/ServiceInnovationLab/pancake-backend)
 [![Maintainability](https://api.codeclimate.com/v1/badges/87a2101f7a74f5a28320/maintainability)](https://codeclimate.com/github/ServiceInnovationLab/pancake-backend/maintainability)
@@ -12,11 +12,9 @@ Serverside Rates Rebate processor.
 
 Production server = https://ratesrebates.services.govt.nz
 
-Installation
-============
+## Installation ##
 
-To set up a development environment
------------------------------------
+### To set up a development environment ###
 
 This is an app built using Json API suite https://jsonapi-suite.github.io/jsonapi_suite/concepts
 
@@ -58,8 +56,7 @@ bundle exec rake db:seed
 
 This will pop up an invitation email for `juanvandenanker@gmail.com` in your browser. If the server is running you will be able to click the link to accept the invitation and set your password.
 
-To run the tests
-----------------
+### To run the tests ###
 
 ```
 bundle exec rspec
