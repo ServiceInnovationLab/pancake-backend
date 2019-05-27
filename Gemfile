@@ -10,8 +10,8 @@ end
 gem 'rails', '~> 5.2.0'
 
 # React
-gem 'webpacker'
 gem 'react-rails'
+gem 'webpacker'
 
 # Database
 gem 'pg'
@@ -44,8 +44,8 @@ gem 'font-awesome-rails'
 
 gem 'raygun4ruby' # exception catcher/logger
 
-gem 'groupdate'
 gem 'chartkick'
+gem 'groupdate'
 
 # Makes the pdfs
 gem 'wicked_pdf'
