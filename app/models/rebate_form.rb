@@ -16,7 +16,7 @@ class RebateForm < ApplicationRecord
   validates :property, presence: true
 
   validate :same_council
-  validate :only_completed_forms_in_batch
+  # validate :only_completed_forms_in_batch
 
   after_create :send_email
   has_many_attached :attachments
@@ -100,7 +100,8 @@ class RebateForm < ApplicationRecord
     errors.add(:batch_id, 'council must match') if batch.present? && property.council_id != batch.council_id
   end
 
-  def only_completed_forms_in_batch
-    errors.add(:batch_id, 'uncompleted forms cannot be in a batch') if batch_id.present? && !completed
-  end
+  # this will need to be updated when processed/batched are refactored
+  # def only_completed_forms_in_batch
+  #   errors.add(:batch_id, 'uncompleted forms cannot be in a batch') if batch_id.present? && !completed
+  # end
 end
