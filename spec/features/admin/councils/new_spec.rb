@@ -33,22 +33,22 @@ RSpec.describe 'Council', type: :feature, js: true do
       it { expect(page).to have_text('where to send') }
       it { expect(page).to have_unchecked_field('council_active') }
       it { expect(page).to have_text('Active') }
-      it { expect(page).to have_selector(:link_or_button, 'Save') }
-      it { expect(page).to have_selector(:link_or_button, 'Back') }
+      it { expect(page).to have_button('Save') }
+      it { expect(page).to have_link('Back') }
 
       it do
         fill_in 'Name', with: 'New Council 1'
         fill_in 'Short name', with: 'New C1'
         fill_in 'Email', with: 'C1@council.co.nz'
         check 'council_active'
-        click_button 'Save'
+        expect { click_button 'Save' }.to change { Council.count }.by(1)
         expect(page).to have_text('Council was successfully created.')
       end
 
       # Only Name filled in
       it do
         fill_in 'Name', with: 'New Council 1'
-        click_button 'Save'
+        expect { click_button 'Save' }.to change { Council.count }.by(0)
         expect(page).to have_text('2 errors prohibited this data from being saved:')
         expect(page).to have_text("Short name can't be blank")
         expect(page).to have_text("Email can't be blank")
@@ -57,7 +57,7 @@ RSpec.describe 'Council', type: :feature, js: true do
       # Only Short name filled in
       it do
         fill_in 'Short name', with: 'New C1'
-        click_button 'Save'
+        expect { click_button 'Save' }.to change { Council.count }.by(0)
         expect(page).to have_text('2 errors prohibited this data from being saved:')
         expect(page).to have_text("Name can't be blank")
         expect(page).to have_text("Email can't be blank")
@@ -66,22 +66,23 @@ RSpec.describe 'Council', type: :feature, js: true do
       # Only Email filled in
       it do
         fill_in 'Email', with: 'C1@council.co.nz'
-        click_button 'Save'
+        expect { click_button 'Save' }.to change { Council.count }.by(0)
         expect(page).to have_text('2 errors prohibited this data from being saved:')
         expect(page).to have_text("Name can't be blank")
         expect(page).to have_text("Short name can't be blank")
-        # expect(click_button('Save')).to change { Council.count }.by(1)
       end
 
-      # # Duplicate Name & Short name
-      # it do
-      #   fill_in 'Name', with: 'New Council 1'
-      #   fill_in 'Short name', with: 'New C1'
-      #   click_button 'Save'
-      #   expect(page).to have_text('2 errors prohibited this data from being saved:')
-      #   expect(page).to have_text('Name has already been taken')
-      #   expect(page).to have_text('Short name has already been taken')
-      # end
+      # Duplicate Name & Short name
+      it do
+        FactoryBot.create :council, name: 'New Council 1', short_name: 'New C1'
+        fill_in 'Name', with: 'New Council 1'
+        fill_in 'Short name', with: 'New C1'
+        fill_in 'Email', with: 'C1@council.co.nz'
+        expect { click_button 'Save' }.to change { Council.count }.by(0)
+        expect(page).to have_text('2 errors prohibited this data from being saved:')
+        expect(page).to have_text('Name has already been taken')
+        expect(page).to have_text('Short name has already been taken')
+      end
     end
   end
 end
