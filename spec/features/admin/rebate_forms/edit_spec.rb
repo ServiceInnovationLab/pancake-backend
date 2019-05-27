@@ -50,7 +50,9 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         it 'goes to the right place' do
           visit "/admin/rebate_forms/#{rebate_form.id}/edit"
           click_link('reload')
-          expect(page).to have_http_status :ok
+          expect(page).to have_current_path("/admin/rebate_forms/#{rebate_form.id}/edit")
+          expect(page).to have_text('Customer details')
+          expect(page).to have_text('Income declaration (before tax)')
         end
       end
     end
