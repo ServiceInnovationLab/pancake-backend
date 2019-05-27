@@ -35,7 +35,7 @@ class GenerateQrService
     {
       name: current_user.name || '',
       location: current_user&.council&.name,
-      occupation: find_user_role(current_user)
+      occupation: 'authorised_council_officer'
     }
   end
 
@@ -44,9 +44,5 @@ class GenerateQrService
       .new(url, size: 20, level: :h)
       .as_png(offset: 0, color: '0', shape_rendering: 'crispEdges', module_size: 10)
       .to_data_url
-  end
-
-  def find_user_role(current_user)
-    current_user&.roles&.first&.friendly_name
   end
 end
