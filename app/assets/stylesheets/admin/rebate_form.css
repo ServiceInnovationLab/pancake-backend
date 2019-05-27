@@ -171,13 +171,13 @@
 }
 
 .rebate-tabs {
-  padding-bottom: .25rem;
+  padding-bottom: .01rem;
   border-bottom: 2px solid var(--gray);
   margin-bottom: 1rem
 }
 
 .rebate-button {
-  width: 200px;
+  width: 25%;
   background: var(--dove);
   padding: 1rem;
   border: none;
@@ -185,7 +185,7 @@
 }
 
 .rebate-button-selected {
-  width: 200px;
+  width: 25%;
   background: var(--dove);
   color: var(--blue);
   padding: 1rem;

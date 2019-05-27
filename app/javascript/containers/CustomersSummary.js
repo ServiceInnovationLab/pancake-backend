@@ -9,14 +9,14 @@ import { SummaryTabs } from '../components/SummaryTabs';
 
 const appUrl = window.location.origin;
 
-class CustomerApplications extends React.Component {
+class CustomersSummary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { rebateForms: null, applicationState: 'not-completed' };
   }
 
-  fetchRebates (completed = false, name = '') {
-    fetch(`${appUrl}/admin/rebate_forms?utf8=✓&completed=${completed}&name=${name || ''}`, {
+  fetchRebates (status, name = '') {
+    fetch(`${appUrl}/admin/rebate_forms?utf8=✓&completed=${status}&name=${name || ''}`, {
       method: 'GET',
       headers: {
         'X-CSRF-Token': getCSRF(),
@@ -63,4 +63,4 @@ class CustomerApplications extends React.Component {
   }
 }
 
-export default CustomerApplications;
+export default CustomersSummary;
