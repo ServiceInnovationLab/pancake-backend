@@ -32,7 +32,9 @@ bundle install
 yarn install
 ```
 
-You will need a database. Any database supported by ruby on rails / jsonapi suite should work, but we only support Postgresql. Configure your database url in your `.env`, then:
+You will need a database. Any database supported by ruby
+on rails / jsonapi suite should work, but we only support
+Postgresql. Configure your database url in your `.env`, then:
 
 ```
 bundle exec rake db:create db:migrate
