@@ -20,21 +20,23 @@ RSpec.describe 'Council', type: :feature, js: true do
       visit "/admin/councils/#{council.id}/edit"
     end
     describe 'can modify the fields for the selected council' do
-      it { expect(page).to have_text('Editing council') }
-      it { expect(page).to have_text('Name') }
-      it { expect(page).to have_field(with: council.name) }
-      it { expect(page).to have_text('This is a required field.') }
-      it { expect(page).to have_text('Short name') }
-      it { expect(page).to have_field(with: council.short_name) }
-      it { expect(page).to have_text('This is a required field.') }
-      it { expect(page).to have_text('Email') }
-      it { expect(page).to have_field(with: council.email) }
-      it { expect(page).to have_text('where to send') }
-      it { expect(page).to have_checked_field('council_active') }
-      it { expect(page).to have_text('Active') }
-      it { expect(page).to have_button('Save') }
-      it { expect(page).to have_link('Show') }
-      it { expect(page).to have_link('Back') }
+      it 'displays populated fields' do
+        expect(page).to have_text('Editing council')
+        expect(page).to have_text('Name')
+        expect(page).to have_field(with: council.name)
+        expect(page).to have_text('This is a required field.')
+        expect(page).to have_text('Short name')
+        expect(page).to have_field(with: council.short_name)
+        expect(page).to have_text('This is a required field.')
+        expect(page).to have_text('Email')
+        expect(page).to have_field(with: council.email)
+        expect(page).to have_text('where to send')
+        expect(page).to have_checked_field('council_active')
+        expect(page).to have_text('Active')
+        expect(page).to have_button('Save')
+        expect(page).to have_link('Show')
+        expect(page).to have_link('Back')
+      end
 
       it do
         fill_in 'Name', with: 'New Council 2'
