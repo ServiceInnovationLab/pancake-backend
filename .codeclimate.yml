@@ -21,8 +21,6 @@ plugins:
       - javascript
   fixme:
     enabled: true
-  # hlint:
-  #   enabled: true
   markdownlint:
     enabled: true
   git.legal:
