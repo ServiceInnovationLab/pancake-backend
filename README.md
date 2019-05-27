@@ -4,7 +4,7 @@ Council admin interface & Public frontend
 
 [![Build Status](https://travis-ci.org/ServiceInnovationLab/pancake-backend.svg?branch=dev)](https://travis-ci.org/ServiceInnovationLab/pancake-backend)
 [![Maintainability](https://api.codeclimate.com/v1/badges/87a2101f7a74f5a28320/maintainability)](https://codeclimate.com/github/ServiceInnovationLab/pancake-backend/maintainability)
-[![AwesomeCode Status for ServiceInnovationLab/pancake-backend](https://awesomecode.io/projects/61fa3b06-4025-4829-ad9d-568b2967bdd8/status)](https://awesomecode.io/projects/81)
+[![AwesomeCode Status for ServiceInnovationLab/pancake-backend](https://awesomecode.io/projects/d3e06a45-fec6-4be2-b340-7deb86b18fc3/status)](https://awesomecode.io/repos/ServiceInnovationLab/pancake-backend)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/87a2101f7a74f5a28320/test_coverage)](https://codeclimate.com/github/ServiceInnovationLab/pancake-backend/test_coverage)
 
 Production server = `https://ratesrebates.services.govt.nz`
