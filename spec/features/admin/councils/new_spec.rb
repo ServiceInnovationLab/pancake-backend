@@ -24,21 +24,64 @@ RSpec.describe 'Council', type: :feature, js: true do
       it { expect(page).to have_text('New council') }
       it { expect(page).to have_text('Name') }
       it { expect(page).to have_field('council_name') }
-      it { fill_in 'Name', with: 'New Council 1' }
       it { expect(page).to have_text('This is a required field.') }
       it { expect(page).to have_text('Short name') }
       it { expect(page).to have_field('council_short_name') }
-      it { fill_in 'Short name', with: 'New C1' }
       it { expect(page).to have_text('This is a required field.') }
       it { expect(page).to have_text('Email') }
       it { expect(page).to have_field('council_email') }
-      it { fill_in 'Email', with: 'C1@council.co.nz' }
       it { expect(page).to have_text('where to send') }
       it { expect(page).to have_unchecked_field('council_active') }
       it { expect(page).to have_text('Active') }
       it { expect(page).to have_selector(:link_or_button, 'Save') }
-      it { click_button 'Save' }
       it { expect(page).to have_selector(:link_or_button, 'Back') }
+
+      it do
+        fill_in 'Name', with: 'New Council 1'
+        fill_in 'Short name', with: 'New C1'
+        fill_in 'Email', with: 'C1@council.co.nz'
+        check 'council_active'
+        click_button 'Save'
+        expect(page).to have_text('Council was successfully created.')
+      end
+
+      # Only Name filled in
+      it do
+        fill_in 'Name', with: 'New Council 1'
+        click_button 'Save'
+        expect(page).to have_text('2 errors prohibited this data from being saved:')
+        expect(page).to have_text("Short name can't be blank")
+        expect(page).to have_text("Email can't be blank")
+      end
+
+      # Only Short name filled in
+      it do
+        fill_in 'Short name', with: 'New C1'
+        click_button 'Save'
+        expect(page).to have_text('2 errors prohibited this data from being saved:')
+        expect(page).to have_text("Name can't be blank")
+        expect(page).to have_text("Email can't be blank")
+      end
+
+      # Only Email filled in
+      it do
+        fill_in 'Email', with: 'C1@council.co.nz'
+        click_button 'Save'
+        expect(page).to have_text('2 errors prohibited this data from being saved:')
+        expect(page).to have_text("Name can't be blank")
+        expect(page).to have_text("Short name can't be blank")
+        # expect(click_button('Save')).to change { Council.count }.by(1)
+      end
+
+      # # Duplicate Name & Short name
+      # it do
+      #   fill_in 'Name', with: 'New Council 1'
+      #   fill_in 'Short name', with: 'New C1'
+      #   click_button 'Save'
+      #   expect(page).to have_text('2 errors prohibited this data from being saved:')
+      #   expect(page).to have_text('Name has already been taken')
+      #   expect(page).to have_text('Short name has already been taken')
+      # end
     end
   end
 end
