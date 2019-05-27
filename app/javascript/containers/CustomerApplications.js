@@ -48,18 +48,19 @@ class CustomerApplications extends React.Component {
   }
 
   render() {
+    const { applicationState, rebateForms } = this.state;
     console.log(this.state, 'this state');
     return (
       <Fragment>
         <div className='pure-u-1-2 rebate-search-box'>
           <div className={'rebate-tabs flex-row'}>
             {map([['Not Signed', 'not-completed'], ['Signed', 'completed']], ([key, value]) =>
-              <button key={key} className={(this.state.applicationState === value) ? 'rebate-button-selected' : 'rebate-button' } onClick={() => this.onChange(value)}>
+              <button key={key} className={(applicationState === value) ? 'rebate-button-selected' : 'rebate-button' } onClick={() => this.onChange(value)}>
                 {key}
               </button>
             )}
           </div>
-          { !(this.state.applicationState === 'completed') && <Form
+          { !(applicationState === 'completed') && <Form
             onSubmit={this.onSubmit.bind(this)}
           >
             {({ handleSubmit }) => (
@@ -81,7 +82,7 @@ class CustomerApplications extends React.Component {
           </Form>
           }
         </div>
-        {(this.state.rebateForms && this.state.rebateForms[0]) && <div className="pure-u-1">
+        {(rebateForms && rebateForms[0]) && <div className="pure-u-1">
           <table className="pure-table pure-table-bordered rebate-results-table">
             <thead>
               <tr>
@@ -91,7 +92,7 @@ class CustomerApplications extends React.Component {
               </tr>
             </thead>
             <tbody className='rebate-results-table-body'>
-              {map(this.state.rebateForms, (rebateForm, key) => {
+              {map(rebateForms, (rebateForm, key) => {
                 const { property, fields, id } = rebateForm;
                 return (
                   <tr key={`${key}-${fields.full_name}`} className='rebate_form.completed'>
