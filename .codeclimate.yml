@@ -29,8 +29,8 @@ plugins:
     enabled: true
   scsslint:
     enabled: true
-  # nodesecurity:
-  #   enabled: true
+  nodesecurity:
+    enabled: true
 exclude_patterns:
 - config/
 - db/
