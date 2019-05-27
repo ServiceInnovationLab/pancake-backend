@@ -10,7 +10,7 @@
 
 Serverside Rates Rebate processor.
 
-Production server = https://ratesrebates.services.govt.nz
+Production server = `https://ratesrebates.services.govt.nz`
 
 ## Installation ##
 
