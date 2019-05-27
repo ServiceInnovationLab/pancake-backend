@@ -1,6 +1,6 @@
 
 import React, { Fragment } from 'react';
-import { Form, Field, FormSpy } from 'react-final-form';
+import { Form, Field } from 'react-final-form';
 import { map } from 'lodash';
 import 'isomorphic-fetch';
 
@@ -48,7 +48,7 @@ class CustomerApplications extends React.Component {
   }
 
   render() {
-    const { applicationState, rebateForms } = this.state
+    const { applicationState, rebateForms } = this.state;
     console.log(this.state, 'this state');
     return (
       <Fragment>
