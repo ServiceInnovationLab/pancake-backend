@@ -105,9 +105,9 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           total_rates: '123',
           location: property.location,
           council: property.council.name,
-          rebate_form: { fields: { full_name: 'Mary Jane Kelly',
-                                   'dependants': 9,
-                                   income: 11_999 } } }
+          fields: { full_name: 'Mary Jane Kelly',
+                    'dependants': 9,
+                    income: 11_999 } }
       end
 
       before do
@@ -149,9 +149,9 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           total_rates: '123',
           location: property.location,
           council: property.council.name,
-          rebate_form: { fields: { full_name: 'Mary Jane Kelly',
-                                   'dependants': 9,
-                                   income: 11_999 } } }
+          fields: { full_name: 'Mary Jane Kelly',
+                    'dependants': 9,
+                    income: 11_999 } }
       end
 
       shared_examples 'controller works' do
@@ -169,7 +169,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         let(:invalid_params) do
           { id: rebate_form.to_param,
             total_rates: '123',
-            rebate_form: { fields: {} } }
+            fields: {} }
         end
 
         before { put :update, params: invalid_params }
