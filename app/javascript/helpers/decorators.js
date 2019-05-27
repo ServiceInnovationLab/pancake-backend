@@ -1,5 +1,3 @@
-import { reduce } from 'lodash'
-
 import createDecorator from 'final-form-calculate'
 import { accumulate } from "./accumulate";
 
