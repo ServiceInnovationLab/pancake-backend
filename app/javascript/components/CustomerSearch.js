@@ -1,4 +1,3 @@
-
 import React, { Fragment } from 'react';
 import { Form, Field } from 'react-final-form';
 import { map } from 'lodash';
