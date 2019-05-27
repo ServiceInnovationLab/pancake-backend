@@ -23,7 +23,8 @@ This is an app built using [Json API suite](https://jsonapi-suite.github.io/json
 1. Set up environment variables
   `cp env-example .env`
 
-You will need ruby, the bundler gem to install dependencies. We recommend managing your ruby with a tool like rbenv or rvm
+You will need ruby, the bundler gem to install dependencies. We
+recommend managing your ruby with a tool like rbenv or rvm
 
 Install the dependencies
 
