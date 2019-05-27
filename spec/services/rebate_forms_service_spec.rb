@@ -48,18 +48,16 @@ RSpec.describe RebateFormsService do
         'total_rates' => '12345',
         'location' => property2.location,
         'council' => property2.council.name,
-        'rebate_form' => {
-          'fields' => {
-            'full_name' => 'Best Witch',
-            'customer_id' => '12345',
-            'phone' => '022123-4567',
-            'email' => 'hermione.granger@potterworld.com',
-            'has_partner' => 'true',
-            'dependants' => '3',
-            'occupation' => 'witch',
-            '50_percent_claimed' => 'true',
-            'income' => {}
-          }
+        'fields' => {
+          'full_name' => 'Best Witch',
+          'customer_id' => '12345',
+          'phone' => '022123-4567',
+          'email' => 'hermione.granger@potterworld.com',
+          'has_partner' => 'true',
+          'dependants' => '3',
+          'occupation' => 'witch',
+          '50_percent_claimed' => 'true',
+          'income' => {}
         }
       }
     end
