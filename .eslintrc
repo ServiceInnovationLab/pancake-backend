@@ -1,6 +1,6 @@
 {
   "env": {
-    "browser": false,
+    "browser": true,
     "es6": true,
     "jest": true
   },
@@ -16,6 +16,7 @@
       "react"
   ],
   "rules": {
+    "no-console": "off",
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
