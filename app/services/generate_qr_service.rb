@@ -16,7 +16,7 @@ class GenerateQrService
     token = JWT.encode payload, ENV['HMAC_SECRET'], 'HS256'
     # iPad-application URL
     url = ENV['APP_URL'] + 'ipad/?t=' + token
-Rails.logger.info('the ipad signing url is:' + url) # for easier debugging in production
+    Rails.logger.info('the ipad signing url is:' + url) # for easier debugging in production
     qr_code(url)
   end
 
@@ -35,7 +35,7 @@ Rails.logger.info('the ipad signing url is:' + url) # for easier debugging in pr
     {
       name: current_user.name || '',
       location: current_user&.council&.name,
-      occupation: 'council_officer'
+      occupation: find_user_role(current_user)
     }
   end
 
@@ -44,5 +44,9 @@ Rails.logger.info('the ipad signing url is:' + url) # for easier debugging in pr
       .new(url, size: 20, level: :h)
       .as_png(offset: 0, color: '0', shape_rendering: 'crispEdges', module_size: 10)
       .to_data_url
+  end
+
+  def find_user_role(current_user)
+    current_user&.roles&.first&.friendly_name
   end
 end
