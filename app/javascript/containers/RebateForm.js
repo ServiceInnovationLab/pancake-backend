@@ -10,6 +10,7 @@ import { calculator } from '../helpers/decorators';
 
 import { SingleInput, RadioInput } from '../components/inputs';
 import { IncomeDeclaration } from '../components/IncomeDeclaration';
+import { parseFromAPI, prepareForAPI } from '../helpers/formatRebateForm';
 
 const appUrl = window.location.origin;
 
@@ -35,6 +36,11 @@ class EditRebateForm extends React.Component {
   }
 
   onSubmit (values) {
+    const { council } = this.props; 
+    const { fields } = values;
+
+    const valuesForAPI = prepareForAPI(fields, council);
+
     return values.newIncomeField
       ? this.addNewIncomeValue(values)
       : fetch(`${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}`, {
@@ -44,11 +50,7 @@ class EditRebateForm extends React.Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          rebate_form: {...values},
-          total_rates: values.fields.total_rates,
-          council: this.props.council.name
-        }),
+        body: JSON.stringify(valuesForAPI),
         credentials: 'same-origin'
       }).then(res => {
         console.log('res', res);
@@ -61,13 +63,16 @@ class EditRebateForm extends React.Component {
     const {
       rebateForm,
       property,
+      ratesBills,
       isReadOnly
     } = this.props;
-    const { fields } = rebateForm;
+
+    const fields = parseFromAPI(rebateForm, property, ratesBills);
+
     const initialValues = {fields}; 
+
     const { otherIncomeFields } = this.state;
-    // LEAVE IN FOR PRODUCTION
-    console.log('initial: ', initialValues , 'rebateform: ', 'rebate form: ', rebateForm, 'property: ', property);
+
     return (
       <Form
         onSubmit={this.onSubmit.bind(this)}
@@ -76,7 +81,6 @@ class EditRebateForm extends React.Component {
       >
         {({
           handleSubmit,
-          submitting,
           values,
         }) => {
           const includePartnerValues = values.fields.spouse_or_partner == 'yes';
