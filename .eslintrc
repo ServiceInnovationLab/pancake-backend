@@ -1,21 +1,22 @@
 {
   "env": {
-    "browser": false,
+    "browser": true,
     "es6": true,
     "jest": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
+    "ecmaVersion": 10,
+    "sourceType": "module",
     "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true
-    },
-    "sourceType": "module"
+        "jsx": true
+    }
   },
   "plugins": [
       "react"
   ],
   "rules": {
+    "no-console": 1,
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
