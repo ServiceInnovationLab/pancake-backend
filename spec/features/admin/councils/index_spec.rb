@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Council', type: :feature do
+RSpec.describe 'Council', type: :feature, js: true do
   let!(:council) { FactoryBot.create :council }
   let!(:council_two) { FactoryBot.create :council }
 
