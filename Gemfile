@@ -10,8 +10,8 @@ end
 gem 'rails', '~> 5.2.0'
 
 # React
-gem 'webpacker'
 gem 'react-rails'
+gem 'webpacker'
 
 # Database
 gem 'pg'
@@ -44,8 +44,8 @@ gem 'font-awesome-rails'
 
 gem 'raygun4ruby' # exception catcher/logger
 
-gem 'groupdate'
 gem 'chartkick'
+gem 'groupdate'
 
 # Makes the pdfs
 gem 'wicked_pdf'
@@ -81,7 +81,7 @@ group :development, :test do
   gem 'percy-capybara', '~> 4.0.0'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5.2'
-  gem 'rubocop', '0.55.0'
+  gem 'rubocop', '0.70.0'
   gem 'swagger-diff', '~> 1.1'
 end
 
