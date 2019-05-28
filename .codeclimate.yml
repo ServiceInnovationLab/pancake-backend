@@ -5,6 +5,8 @@ plugins:
     channe: "rubocop-0-70"
     config:
       file: .rubocop.yml
+  haml-lint:
+    enabled: true
   shellcheck:
     enabled: true
   eslint:
