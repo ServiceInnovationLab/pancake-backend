@@ -15,11 +15,6 @@ module RebateFormsHelper
     "$#{format('%.2f', rebate_form.rebate)}"
   end
 
-  # commenting this out until Mischa's code lands
-  # def rebate_form_total(rebate_form)
-  #   "$#{format('%.2f', rebate_form.fields['income'])}"
-  # end
-
   def rebate_form_lived_year?(rebate_form)
     if rebate_form.lived_here.present?
       rebate_form.lived_here.to_s.capitalize
@@ -48,7 +43,7 @@ module RebateFormsHelper
     end
   end
 
-  def rebate_form_completed?(rebate_form)
-    rebate_form.completed
+  def rebate_form_signed?(rebate_form)
+    rebate_form.status == RebateForm::SIGNED_STATUS
   end
 end

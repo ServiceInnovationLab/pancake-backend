@@ -62,8 +62,8 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         end
       end
 
-      context 'when the rebate form is completed' do
-        before { rebate_form.update(completed: true) }
+      context 'when the rebate form is signed' do
+        before { rebate_form.update(status: RebateForm::SIGNED_STATUS) }
 
         describe ' Can see customer details' do
           before { visit "/admin/rebate_forms/#{rebate_form.id}" }

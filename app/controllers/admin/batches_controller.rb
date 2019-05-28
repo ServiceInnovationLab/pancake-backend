@@ -7,8 +7,10 @@ class Admin::BatchesController < Admin::BaseController
     return if @council.blank?
 
     @unbatched_count = RebateForm.joins(:property)
-                                 .where(completed: true, batch_id: nil,
-                                        properties: { council_id: @council.id }).size
+                                 .where(status: RebateForm::SIGNED_STATUS,
+                                        batch_id: nil,
+                                        properties: { council_id: @council.id })
+                                 .size
   end
 
   def show
@@ -27,7 +29,9 @@ class Admin::BatchesController < Admin::BaseController
 
     @rebate_forms = policy_scope(RebateForm)
                     .joins(:property)
-                    .where(completed: true, properties: { council: @council }, batch: nil)
+                    .where(status: RebateForm::SIGNED_STATUS,
+                           properties: { council: @council },
+                           batch: nil)
                     .order(:created_at)
                     .limit(100)
 
