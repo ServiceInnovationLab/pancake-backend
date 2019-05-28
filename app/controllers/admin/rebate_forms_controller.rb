@@ -62,7 +62,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # DELETE /admin/rebate_forms/1
   def destroy
-    if @rebate_form.status == 'signed'
+    if @rebate_form.status == RebateForm::SIGNED_STATUS
       redirect_to admin_rebate_forms_url, notice: 'Cannot delete signed forms.'
     else
       @rebate_form.destroy

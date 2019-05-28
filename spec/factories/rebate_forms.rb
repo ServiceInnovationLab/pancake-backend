@@ -19,7 +19,7 @@ FactoryBot.define do
         lived_in_property_july_1: true,
         details_of_previous_property: '123 Muggle Lane, Hogsmead, England' }
     end
-    status { 'not signed' }
+    status { RebateForm::NOT_SIGNED_STATUS }
     rebate { 555.12 }
     batch { nil }
 
@@ -36,7 +36,7 @@ FactoryBot.define do
     after(:create) do |rebate_form|
       create(:applicant_signature, rebate_form: rebate_form)
       create(:witness_signature, rebate_form: rebate_form)
-      rebate_form.update(status: 'signed')
+      rebate_form.update(status: RebateForm::SIGNED_STATUS)
     end
   end
 end

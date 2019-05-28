@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Admin::RebateFormsController, type: :controller do
   let(:property) { FactoryBot.create :property, council: council }
   let!(:rebate_form) do
-    FactoryBot.create :rebate_form, valuation_id: property.valuation_id, status: 'not signed', created_at: 5.days.ago
+    FactoryBot.create :rebate_form, valuation_id: property.valuation_id, status: RebateForm::NOT_SIGNED_STATUS, created_at: 5.days.ago
   end
   let(:council) { FactoryBot.create :council }
 
@@ -24,13 +24,13 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         let!(:not_signed) { FactoryBot.create :rebate_form, property: property }
 
         describe 'signed' do
-          before { get :index, params: { status: 'signed' } }
+          before { get :index, params: { status: RebateForm::SIGNED_STATUS } }
 
           it { expect(assigns(:rebate_forms)).to eq [signed] }
         end
 
         describe 'not signed' do
-          before { get :index, params: { status: 'not signed' } }
+          before { get :index, params: { status: RebateForm::NOT_SIGNED_STATUS } }
 
           it { expect(assigns(:rebate_forms)).to eq [not_signed, rebate_form] }
         end
