@@ -14,8 +14,8 @@ class CustomerApplications extends React.Component {
     this.state = { rebateForms: null, applicationState: 'not-completed' };
   }
 
-  fetchRebates (completed = false, name = '') {
-    fetch(`${appUrl}/admin/rebate_forms?utf8=✓&completed=${completed}&name=${name || ''}`, {
+  fetchRebates (status = 'not signed', name = '') {
+    fetch(`${appUrl}/admin/rebate_forms?utf8=✓&status=${status}&name=${name || ''}`, {
       method: 'GET',
       headers: {
         'X-CSRF-Token': getCSRF(),
@@ -33,7 +33,7 @@ class CustomerApplications extends React.Component {
   }
 
   onChange(value) {
-    const signed = value === 'completed'; 
+    const signed = value === 'completed';
     if(signed) {
       this.setState({applicationState: value});
       this.fetchRebates(signed);
@@ -44,7 +44,7 @@ class CustomerApplications extends React.Component {
   }
 
   onSubmit(values = {}) {
-    this.fetchRebates(false, values.name);
+    this.fetchRebates('not signed', values.name);
   }
 
   render() {
