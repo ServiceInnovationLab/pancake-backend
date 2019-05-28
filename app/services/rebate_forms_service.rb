@@ -28,14 +28,14 @@ class RebateFormsService
   def update_rebate_form!(property)
     rebate_form = RebateForm.find_by(id: @rebate_form_attributes['id'])
     property = rebate_form.property if property.id.nil?
-    remove_signatures_if_completed(rebate_form)
+    remove_signatures_if_signed(rebate_form)
     fields_to_update = rebate_form.fields.merge(fields_to_merge)
     rebate_form.update!(property: property, valuation_id: property.valuation_id, fields: fields_to_update)
     rebate_form
   end
 
-  def remove_signatures_if_completed(rebate_form)
-    rebate_form.signatures.destroy_all && rebate_form.update(completed: false) if rebate_form.completed
+  def remove_signatures_if_signed(rebate_form)
+    rebate_form.signatures.destroy_all && rebate_form.update(status: RebateForm::NOT_SIGNED_STATUS) if rebate_form.status == RebateForm::SIGNED_STATUS
   end
 
   def update_fields
