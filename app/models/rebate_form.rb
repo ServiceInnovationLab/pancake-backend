@@ -26,6 +26,14 @@ class RebateForm < ApplicationRecord
   NOT_SIGNED_STATUS = 'not signed'.freeze
   SIGNED_STATUS = 'signed'.freeze
 
+  def signed_state?
+    status == SIGNED_STATUS
+  end
+
+  def not_signed_state?
+    status == NOT_SIGNED_STATUS
+  end
+
   def calc_rebate_amount!
     rates_bill = property.rates_bills.find_by(rating_year: rating_year)
     raise "No rates bill found for rating_year #{year}" if rates_bill.blank?

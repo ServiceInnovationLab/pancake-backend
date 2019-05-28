@@ -16,7 +16,7 @@ class Signature < ApplicationRecord
   delegate :council, to: :property
 
   def update_form_status
-    rebate_form.status = if (rebate_form.applicant_signature.present? && rebate_form.witness_signature.present?)
+    rebate_form.status = if rebate_form.applicant_signature.present? && rebate_form.witness_signature.present?
                            RebateForm::SIGNED_STATUS
                          else
                            RebateForm::NOT_SIGNED_STATUS

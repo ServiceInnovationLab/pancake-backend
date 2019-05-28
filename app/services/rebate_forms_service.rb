@@ -35,7 +35,7 @@ class RebateFormsService
   end
 
   def remove_signatures_if_signed(rebate_form)
-    rebate_form.signatures.destroy_all && rebate_form.update(status: RebateForm::NOT_SIGNED_STATUS) if rebate_form.status == RebateForm::SIGNED_STATUS
+    rebate_form.signatures.destroy_all && rebate_form.update(status: RebateForm::NOT_SIGNED_STATUS) if rebate_form.signed_state?
   end
 
   def update_fields
