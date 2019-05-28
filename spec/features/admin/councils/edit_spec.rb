@@ -11,6 +11,7 @@ RSpec.describe 'Council', type: :feature, js: true do
       expect(page).to have_text('Rates Rebate 2018/2019')
       expect(page).to have_text('Log in')
     end
+    include_examples 'percy snapshot'
   end
 
   context 'can edit' do
@@ -36,13 +37,16 @@ RSpec.describe 'Council', type: :feature, js: true do
       it { expect(page).to have_link('Show') }
       it { expect(page).to have_link('Back') }
 
-      it do
-        fill_in 'Name', with: 'New Council 2'
-        fill_in 'Short name', with: 'New C2'
-        fill_in 'Email', with: 'C2@council.co.nz'
-        check 'council_active'
-        click_button 'Save'
-        expect(page).to have_text('Council was successfully updated.')
+      describe 'saving' do
+        it do
+          fill_in 'Name', with: 'New Council 2'
+          fill_in 'Short name', with: 'New C2'
+          fill_in 'Email', with: 'C2@council.co.nz'
+          check 'council_active'
+          click_button 'Save'
+          expect(page).to have_text('Council was successfully updated.')
+        end
+        include_examples 'percy snapshot'
       end
     end
   end
