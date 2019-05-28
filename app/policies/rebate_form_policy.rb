@@ -18,7 +18,7 @@ class RebateFormPolicy < ApplicationPolicy
   end
 
   def destroy?
-    (dia? || same_council?) && !record.completed
+    (dia? || same_council?) && record.status == RebateForm::NOT_SIGNED_STATUS
   end
 
   class Scope < Scope

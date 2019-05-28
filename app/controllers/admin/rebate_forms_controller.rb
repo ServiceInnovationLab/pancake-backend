@@ -15,7 +15,7 @@ class Admin::RebateFormsController < Admin::BaseController
   def index
     @name = params[:name]
 
-    @completed = (params[:completed] == 'true')
+    @status = params[:status]
 
     @council = current_user.council.presence
 
@@ -25,7 +25,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
     # filter by the search form fields
     @rebate_forms = @rebate_forms.where("fields ->> 'full_name' iLIKE ?", "%#{params[:name]}%") if @name.present?
-    @rebate_forms = @rebate_forms.where(completed: @completed)
+    @rebate_forms = @rebate_forms.where(status: @status) if @status
     @rebate_forms = @rebate_forms.order(created_at: :desc)
 
     respond_with json: @rebate_forms.to_json(include: [:property])
@@ -62,7 +62,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # DELETE /admin/rebate_forms/1
   def destroy
-    if @rebate_form.completed
+    if @rebate_form.status == RebateForm::SIGNED_STATUS
       redirect_to admin_rebate_forms_url, notice: 'Cannot delete signed forms.'
     else
       @rebate_form.destroy

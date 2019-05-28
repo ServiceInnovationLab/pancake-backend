@@ -16,12 +16,15 @@ class RebateForm < ApplicationRecord
   validates :property, presence: true
 
   validate :same_council
-  validate :only_completed_forms_in_batch
+  # validate :only_completed_forms_in_batch
 
   after_create :send_email
   has_many_attached :attachments
 
   scope :by_council, ->(council) { where(properties: { council_id: council.id }) }
+
+  NOT_SIGNED_STATUS = 'not signed'.freeze
+  SIGNED_STATUS = 'signed'.freeze
 
   def calc_rebate_amount!
     rates_bill = property.rates_bills.find_by(rating_year: rating_year)
@@ -100,7 +103,8 @@ class RebateForm < ApplicationRecord
     errors.add(:batch_id, 'council must match') if batch.present? && property.council_id != batch.council_id
   end
 
-  def only_completed_forms_in_batch
-    errors.add(:batch_id, 'uncompleted forms cannot be in a batch') if batch_id.present? && !completed
-  end
+  # this will need to be updated when processed/batched are refactored
+  # def only_completed_forms_in_batch
+  #   errors.add(:batch_id, 'uncompleted forms cannot be in a batch') if batch_id.present? && !completed
+  # end
 end

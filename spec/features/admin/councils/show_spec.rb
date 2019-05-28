@@ -10,9 +10,9 @@ RSpec.describe 'Council', type: :feature, js: true do
   before do
     # Set up some data
     3.times do
-      FactoryBot.create(:rebate_form, completed: true,
+      FactoryBot.create(:rebate_form, status: RebateForm::SIGNED_STATUS,
                                       property: FactoryBot.create(:property_with_rates, council: council))
-      FactoryBot.create(:rebate_form, completed: false,
+      FactoryBot.create(:rebate_form, status: RebateForm::NOT_SIGNED_STATUS,
                                       property: FactoryBot.create(:property_with_rates, council: council))
     end
   end

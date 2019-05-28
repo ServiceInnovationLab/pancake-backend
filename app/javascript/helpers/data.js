@@ -1,3 +1,10 @@
+export const summaryTabs= [
+  ['Not Signed', 'not signed'],
+  ['Signed', 'signed'],
+  ['Processed', 'processed'],
+  ['Batched', 'batched']
+];
+
 export const incomeRows = [
   [
     'nz_superannuation',

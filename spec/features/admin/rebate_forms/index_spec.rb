@@ -8,6 +8,15 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     FactoryBot.create(:rebate_form, property: FactoryBot.create(:property, council: council))
   end
   let(:expected_name) { rebate_form.full_name }
+  let!(:signed_form) do
+    FactoryBot.create(:signed_form, property: FactoryBot.create(:property, council: council))
+  end
+  let(:signed_name) { signed_form.full_name }
+
+  # let!(:processed_form) do
+  #   FactoryBot.create(:processed_form, property: FactoryBot.create(:property, council: council))
+  # end
+  # let(:processed_name) { processed_form.full_name }
 
   context 'anonymous' do
     it "can't see it" do
@@ -28,10 +37,11 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       visit '/admin'
     end
     describe 'searching with blank' do
-      it 'should see all rebate forms' do
+      it 'should see all un-signed rebate forms' do
         click_button 'Search'
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
+        expect(page).to have_field('name')
         expect(page).to have_text(expected_name)
       end
       include_examples 'percy snapshot'
@@ -44,6 +54,31 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       end
       it 'finds the person with matching name' do
         expect(page).to have_text(expected_name)
+      end
+      include_examples 'percy snapshot'
+    end
+
+    describe 'get all signed forms' do
+      before do
+        click_button 'Signed'
+      end
+      it 'should see all signed rebate forms' do
+        expect(page).to have_text('Signed')
+        expect(page).to have_text('Not Signed')
+        expect(page).not_to have_field('name')
+        expect(page).to have_text(signed_name)
+      end
+      include_examples 'percy snapshot'
+    end
+
+    describe 'get all processed forms' do
+      before do
+        click_button 'Processed'
+      end
+      xit 'should see all processed rebate forms' do
+        expect(page).to have_text('Signed')
+        expect(page).to have_text('Not Signed')
+        expect(page).to have_text(processed_name)
       end
       include_examples 'percy snapshot'
     end
