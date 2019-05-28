@@ -12,11 +12,11 @@ const appUrl = window.location.origin;
 class CustomersSummary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { rebateForms: null, applicationState: 'not-completed' };
+    this.state = { rebateForms: null, applicationState: 'not signed' };
   }
 
-  fetchRebates (status, name = '') {
-    fetch(`${appUrl}/admin/rebate_forms?utf8=✓&completed=${status}&name=${name || ''}`, {
+  fetchRebates (status = 'not signed', name = '') {
+    fetch(`${appUrl}/admin/rebate_forms?utf8=✓&status=${status}&name=${name || ''}`, {
       method: 'GET',
       headers: {
         'X-CSRF-Token': getCSRF(),
@@ -34,10 +34,10 @@ class CustomersSummary extends React.Component {
   }
 
   onChange(value) {
-    const signed = value === 'completed'; 
+    const signed = value === 'signed';
     if(signed) {
       this.setState({applicationState: value});
-      this.fetchRebates(signed);
+      this.fetchRebates(value);
     }
     else {
       this.setState({applicationState: value, rebateForms: null});
@@ -45,7 +45,7 @@ class CustomersSummary extends React.Component {
   }
 
   onSubmit(values = {}) {
-    this.fetchRebates(false, values.name);
+    this.fetchRebates('not signed', values.name);
   }
 
   render() {
@@ -54,8 +54,8 @@ class CustomersSummary extends React.Component {
     return (
       <Fragment>
         <div className='pure-u-1-2 rebate-search-box'>
-          {SummaryTabs(applicationState, this.onChange.bind(this))}          
-          { !(applicationState === 'completed') && SummarySearch(this.onSubmit.bind(this))}
+          {SummaryTabs(applicationState, this.onChange.bind(this))}
+          { !(applicationState === 'signed') && SummarySearch(this.onSubmit.bind(this))}
         </div>
         {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms)}
       </Fragment>

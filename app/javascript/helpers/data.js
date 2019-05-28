@@ -1,6 +1,6 @@
 export const summaryTabs= [
-  ['Not Signed', 'not-completed'],
-  ['Signed', 'completed'],
+  ['Not Signed', 'not signed'],
+  ['Signed', 'signed'],
   ['Processed', 'processed'],
   ['Batched', 'batched']
 ];
