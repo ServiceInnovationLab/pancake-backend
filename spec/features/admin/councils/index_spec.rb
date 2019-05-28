@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Council', type: :feature do
+RSpec.describe 'Council', type: :feature, js: true do
   let!(:council) { FactoryBot.create :council }
   let!(:council_two) { FactoryBot.create :council }
 
@@ -24,6 +24,7 @@ RSpec.describe 'Council', type: :feature do
       expect(page).to have_text(council.name)
       expect(page).to have_text(council.short_name)
     end
+    include_examples 'percy snapshot'
   end
 
   context 'signed in as council' do
