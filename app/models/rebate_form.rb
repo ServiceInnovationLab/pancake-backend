@@ -23,6 +23,9 @@ class RebateForm < ApplicationRecord
 
   scope :by_council, ->(council) { where(properties: { council_id: council.id }) }
 
+  NOT_SIGNED_STATUS = 'not signed'.freeze
+  SIGNED_STATUS = 'signed'.freeze
+
   def calc_rebate_amount!
     rates_bill = property.rates_bills.find_by(rating_year: rating_year)
     raise "No rates bill found for rating_year #{year}" if rates_bill.blank?
