@@ -11,6 +11,9 @@ plugins:
     enabled: true
   eslint:
     enabled: true
+    channel: "eslint-5"
+    config:
+      config: .eslintrc
   brakeman:
     enabled: true
   bundler-audit:
