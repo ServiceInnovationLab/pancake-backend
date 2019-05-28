@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Council', type: :feature, js: true do
-  let!(:council) { FactoryBot.create :council }
+  let!(:council) { FactoryBot.create :council, name: 'Most Oarsum City Council', short_name: 'MOCC' }
 
   context 'anonymous' do
     it "can't see it" do
@@ -36,13 +36,26 @@ RSpec.describe 'Council', type: :feature, js: true do
       it { expect(page).to have_link('Show') }
       it { expect(page).to have_link('Back') }
 
-      it do
-        fill_in 'Name', with: 'New Council 2'
-        fill_in 'Short name', with: 'New C2'
-        fill_in 'Email', with: 'C2@council.co.nz'
-        check 'council_active'
-        click_button 'Save'
-        expect(page).to have_text('Council was successfully updated.')
+      describe 'saving' do
+        it do
+          fill_in 'Name', with: 'New Council 2'
+          fill_in 'Short name', with: 'New C2'
+          fill_in 'Email', with: 'C2@council.co.nz'
+          check 'council_active'
+          click_button 'Save'
+          expect(page).to have_text('Council was successfully updated.')
+        end
+      end
+
+      describe 'editing' do
+        # This blocks exists mostly to make the percy snapshot happen
+        it do
+          fill_in 'Name', with: 'New Council 2'
+          fill_in 'Short name', with: 'New C2'
+          fill_in 'Email', with: 'C2@council.co.nz'
+          check 'council_active'
+        end
+        include_examples 'percy snapshot'
       end
     end
   end
