@@ -11,7 +11,7 @@ class Admin::ProcessRebateFormsController < Admin::BaseController
     redirect_to admin_rebate_form_path(rebate_form_to_process.id), notice: 'The application was processed.'
   end
 
-  def destroy
+  def destroy_all
     rebate_forms_to_unprocess = params[:ids].map { |id| RebateForm.find(id) }
 
     RebateForm.transaction do
