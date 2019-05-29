@@ -14,7 +14,7 @@ RSpec.describe Admin::ProcessRebateFormsController, type: :controller do
       expect(RebateForm.count).to eq 1
       expect(RebateForm.where(status: RebateForm::SIGNED_STATUS).count).to eq 1
       post :create, params: { id: form_to_process.id }
-      expect(RebateForm.first.reload.processed_state?).to eq true
+      expect(RebateForm.where(status: RebateForm::PROCESSED_STATUS).count).to eq 1
     end
   end
 
