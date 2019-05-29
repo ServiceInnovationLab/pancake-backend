@@ -6,7 +6,7 @@ class ProcessRebateFormsPolicy < ApplicationPolicy
   end
 
   def destroy?
-    (dia? || same_council?) && record.processed_state?
+    dia? || same_council?
   end
 
   class Scope < Scope
