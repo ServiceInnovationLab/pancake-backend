@@ -1,5 +1,11 @@
-engines:
+version: "2"
+plugins:
   rubocop:
+    enabled: true
+    channe: "rubocop-0-70"
+    config:
+      file: .rubocop.yml
+  haml-lint:
     enabled: true
   shellcheck:
     enabled: true
@@ -17,15 +23,15 @@ engines:
       - javascript
   fixme:
     enabled: true
-ratings:
-  paths:
-  - "**.rb"
-  - "**.js"
-  - "**.coffee"
-  - "**.sass"
-  - "**.haml"
-  - Gemfile.lock
-exclude_paths:
+  markdownlint:
+    enabled: true
+  git.legal:
+    enabled: true
+  scsslint:
+    enabled: true
+  nodesecurity:
+    enabled: true
+exclude_patterns:
 - config/
 - db/
 - public/api/docs/
