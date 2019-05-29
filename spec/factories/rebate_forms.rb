@@ -39,4 +39,12 @@ FactoryBot.define do
       rebate_form.transition_to_signed_state
     end
   end
+
+  factory :processed_form, parent: :signed_form do
+    after(:create) do |rebate_form|
+      create(:applicant_signature, rebate_form: rebate_form)
+      create(:witness_signature, rebate_form: rebate_form)
+      rebate_form.transition_to_processed_state
+    end
+  end
 end

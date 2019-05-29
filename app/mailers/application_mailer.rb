@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: 'info@digital.govt.nz'
+  default from: 'noreply@www.govt.nz '
   layout 'mailer'
 end
