@@ -4,13 +4,13 @@ const appUrl = window.location.origin;
 
 export function SummaryRow (rebateForm, key, state, checkIt) {
   const { property, fields, id } = rebateForm;
-  
+  const { full_name } = fields;
+
   const checked = state.checked.indexOf(id) >= 0;
- 
   return (
-    <tr key={`${key}-${fields.full_name}`} className='rebate_form.completed'>
+    <tr key={`${key}-${full_name}`} className='rebate_form.completed'>
       {checkIt && <td className='rebate-results-table-cell'>
-        <input type="checkbox" checked={checked} onChange={() => checkIt(key)} />
+        <input type="checkbox" id={`${full_name}-checkbox`} checked={checked} onChange={() => checkIt(key)} />
       </td>
       }
       <td className='rebate-results-table-cell'>{fields.full_name}</td>

@@ -13,10 +13,10 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
   end
   let(:signed_name) { signed_form.full_name }
 
-  # let!(:processed_form) do
-  #   FactoryBot.create(:processed_form, property: FactoryBot.create(:property, council: council))
-  # end
-  # let(:processed_name) { processed_form.full_name }
+  let!(:processed_form) do
+    FactoryBot.create(:processed_form, property: FactoryBot.create(:property, council: council))
+  end
+  let(:processed_name) { processed_form.full_name }
 
   context 'anonymous' do
     it "can't see it" do
@@ -75,7 +75,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       before do
         click_button 'Processed'
       end
-      xit 'should see all processed rebate forms' do
+      it 'should see all processed rebate forms' do
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
         expect(page).to have_text(processed_name)
@@ -84,16 +84,16 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     end
 
     describe 'unprocess some processed forms' do
-      before do
+      it 'should remove unprocessed rebate forms' do
         click_button 'Processed'
-      end
-      xit 'should see all processed rebate forms' do
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
+        expect(page).to have_text('UNPROCESS')
+        # expect(page).to have_text('CREATE BATCH')
         expect(page).to have_text(processed_name)
-        # check for presence of process and batch buttons
-        # check for presence of checkboxes
-        # select checkboxes
+        check(`#{processed_name}-checkbox`)
+        click_button 'UNPROCESS'
+        expect(page).not_to have_text(processed_name)
       end
       include_examples 'percy snapshot'
     end

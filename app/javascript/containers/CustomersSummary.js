@@ -2,8 +2,7 @@
 import React, { Fragment } from 'react';
 import 'isomorphic-fetch';
 
-import { getPath } from '../helpers/fetchRebatesPath'
-import { requestBuilder } from '../helpers/requestBuilder'
+import { requestBuilder } from '../helpers/requestBuilder';
 
 import { SummaryTable } from '../components/SummaryTable';
 import { SummarySearch } from '../components/SummarySearch';
@@ -34,24 +33,22 @@ class CustomersSummary extends React.Component {
     debugger
     requestBuilder({
       method: 'DELETE',
-      path: '/admin/rebate_forms/unprocess',
+      path: '/admin/unprocess_rebate_forms',
       body: JSON.stringify({ids: this.state.checked})
     }).then(() => {
-      const path = getPath(this.state.applicationState)
-      this.fetchRebates(path);
+      this.fetchRebates(this.state.applicationState);
     });
   }
 
-  fetchRebates (path) {
+  fetchRebates (status, name) {
     requestBuilder({
       method: 'get',
-      path: `/admin/${path}`,
+      path: `/admin/rebate_forms?utf8=✓&status=${status}&name=${name || ''}`,
     })
       .then(response => {
         return response.json();
       })
       .then(data => {
-        console.log(data, data.json)
         this.setState({ rebateForms: JSON.parse(data.json) });
       })
       .catch(error => {
@@ -63,13 +60,11 @@ class CustomersSummary extends React.Component {
   onChange(value) {
     this.setState({applicationState: value, rebateForms: null});
 
-    const path = getPath(value);
-
-    this.fetchRebates(path);
+    this.fetchRebates(value);
   }
 
   fetchRebatesByName(values = {}) {  
-    this.fetchRebates(`rebate_forms?utf8=✓&status=not signed&name=${values.name || ''}`);
+    this.fetchRebates('not signed', values.name);
   }
 
   render() {
@@ -86,7 +81,7 @@ class CustomersSummary extends React.Component {
         <div className='flex-row rebate-bulk-actions'>
           <h3>Search Results</h3>
           {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]} onClick={this.unProcessRebates.bind(this)}>UNPROCESS</button>}
-          {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]}>CREATE BATCH</button>}
+          {/* {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]}>CREATE BATCH</button>} */}
         </div>
         {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, this.state, checkIt)}
       </Fragment>

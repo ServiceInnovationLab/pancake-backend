@@ -9,6 +9,10 @@ class ProcessRebateFormsPolicy < ApplicationPolicy
     dia? || same_council?
   end
 
+  def destroy_all?
+    dia? || same_council?
+  end
+
   class Scope < Scope
     def resolve
       if user.dia?
