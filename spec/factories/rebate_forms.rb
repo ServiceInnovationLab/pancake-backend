@@ -36,7 +36,7 @@ FactoryBot.define do
     after(:create) do |rebate_form|
       create(:applicant_signature, rebate_form: rebate_form)
       create(:witness_signature, rebate_form: rebate_form)
-      rebate_form.update(status: RebateForm::SIGNED_STATUS)
+      rebate_form.transition_to_signed_state
     end
   end
 end
