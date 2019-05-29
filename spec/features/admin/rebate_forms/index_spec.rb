@@ -82,6 +82,21 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       end
       include_examples 'percy snapshot'
     end
+
+    describe 'unprocess some processed forms' do
+      before do
+        click_button 'Processed'
+      end
+      xit 'should see all processed rebate forms' do
+        expect(page).to have_text('Signed')
+        expect(page).to have_text('Not Signed')
+        expect(page).to have_text(processed_name)
+        # check for presence of process and batch buttons
+        # check for presence of checkboxes
+        # select checkboxes
+      end
+      include_examples 'percy snapshot'
+    end
   end
 
   context 'signed in as admin (dia user)' do

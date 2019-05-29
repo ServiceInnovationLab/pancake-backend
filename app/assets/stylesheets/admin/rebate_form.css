@@ -101,9 +101,9 @@
   color: white
 }
 
+
 .rebate-results-table {
   background-color: var(--dove);
-  margin-top: 1.5em;
   padding: 1.75em;
   width: 770px;
 }
@@ -212,4 +212,25 @@
   color: var(--white);
   float: right;
   width: 5em;
+}
+.rebate-bulk-actions {
+  justify-content: space-between;
+  width: 770px;
+  margin-top: 1.5em;
+  padding: 1.75em;
+  letter-spacing: normal;
+  background: var(--dove);
+}
+
+.rebate-bulk-action-button {
+  background-color: var(--dove);
+  color: var(--blue);
+  border: none;
+  font-weight: bold 
+}
+.rebate-bulk-action-button:disabled {
+  background-color: var(--dove);
+  color: var(--dark-gray);
+  border: none;
+  font-weight: bold 
 }
