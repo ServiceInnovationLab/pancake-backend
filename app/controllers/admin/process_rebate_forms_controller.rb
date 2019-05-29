@@ -3,22 +3,19 @@
 class Admin::ProcessRebateFormsController < Admin::BaseController
   respond_to :json
 
-  def index
-    @processed_rebate_forms = policy_scope(RebateForm).where(status: RebateForm::PROCESSED_STATUS)
-                                                      .order(created_at: :desc)
-
-    respond_with json: @processed_rebate_forms.to_json
-  end
-
   def create
     rebate_form_to_process = RebateForm.find(params[:id])
-
+    authorize :process_rebate_forms, :create?
     rebate_form_to_process.transition_to_processed_state
+
+    redirect_to admin_rebate_form_path(rebate_form_to_process.id), notice: 'The application was processed.'
   end
 
   def destroy
     rebate_forms_to_unprocess = params[:ids].map { |id| RebateForm.find(id) }
 
-    rebate_forms_to_unprocess.map(&:transition_to_signed_state)
+    RebateForm.transaction do
+      rebate_forms_to_unprocess.map(&:transition_to_signed_state)
+    end
   end
 end
