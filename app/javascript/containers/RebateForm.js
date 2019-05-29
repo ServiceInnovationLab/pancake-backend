@@ -93,55 +93,55 @@ class EditRebateForm extends React.Component {
                 onSubmit={handleSubmit}
               >
                 <div className="flex-row">
-                <div className="rebate-submit-button-container">
-                  <button className="pure-button rebate-submit-button" >
-                    Cancel
-                  </button>
-                  <button className="pure-button rebate-submit-button" type="submit" >
-                    Submit
-                  </button>
-                </div>
-                </div>
-                <div className="rebate-edit-form">
-                <div className="flex-row">
-                  {map(customerDetailFields, (field, index) => {
-                    if (indexOf([1, 4, 6, 8, 10, 12], index) >= 0) field.withMargin = true;
-                    return field.type == 'radio'
-                      ? RadioInput({...field, isReadOnly, values})
-                      : SingleInput({...field, isReadOnly});
-                  })}
-                </div>
-                { values.fields.moved_within_rating_year == 'yes' &&
-                <div className="flex-row">
-                  {map(conditionalsFields, (field, index) => {
-                    if (indexOf([2, 4, 5], index) >= 0) field.withMargin = true;
-                    return field.type == 'radio'
-                      ? RadioInput({...field, isReadOnly, values})
-                      : SingleInput({...field, isReadOnly});
-                  })}
-                </div>
-                }
-                {IncomeDeclaration({otherIncomeFields, isReadOnly, includePartnerValues})}
-                { !isReadOnly &&
-                <Fragment>
-                  <div className={'flex-row'}>
-                    <Field
-                      className='rebate-search-input flex-item'
-                      name="newIncomeField"
-                      component="input"
-                      readOnly={isReadOnly}
-                    />
-                    <button
-                      className='one-third rebate-add-income-button'
-                      disabled={isReadOnly || !values.newIncomeField}
-                      type="button"
-                      onClick={() => this.addNewIncomeValue(values)}
-                    >
-                        Add Income Type
+                  <div className="rebate-submit-button-container">
+                    <button className="pure-button rebate-submit-button" >
+                      Cancel
+                    </button>
+                    <button className="pure-button rebate-submit-button" type="submit" >
+                      Submit
                     </button>
                   </div>
-                </Fragment>
-                }
+                </div>
+                <div className="rebate-edit-form">
+                  <div className="flex-row">
+                    {map(customerDetailFields, (field, index) => {
+                      if (indexOf([1, 4, 6, 8, 10, 12], index) >= 0) field.withMargin = true;
+                      return field.type == 'radio'
+                        ? RadioInput({...field, isReadOnly, values})
+                        : SingleInput({...field, isReadOnly});
+                    })}
+                  </div>
+                  { values.fields.moved_within_rating_year == 'yes' &&
+                  <div className="flex-row">
+                    {map(conditionalsFields, (field, index) => {
+                      if (indexOf([2, 4, 5], index) >= 0) field.withMargin = true;
+                      return field.type == 'radio'
+                        ? RadioInput({...field, isReadOnly, values})
+                        : SingleInput({...field, isReadOnly});
+                    })}
+                  </div>
+                  }
+                  {IncomeDeclaration({otherIncomeFields, isReadOnly, includePartnerValues})}
+                  { !isReadOnly &&
+                  <Fragment>
+                    <div className={'flex-row'}>
+                      <Field
+                        className='rebate-search-input flex-item'
+                        name="newIncomeField"
+                        component="input"
+                        readOnly={isReadOnly}
+                      />
+                      <button
+                        className='one-third rebate-add-income-button'
+                        disabled={isReadOnly || !values.newIncomeField}
+                        type="button"
+                        onClick={() => this.addNewIncomeValue(values)}
+                      >
+                          Add Income Type
+                      </button>
+                    </div>
+                  </Fragment>
+                  }
                 </div>
               </form>
             </div>

@@ -51,9 +51,7 @@ class Admin::RebateFormsController < Admin::BaseController
     end
   end
 
-  def edit
-  
-  end
+  def edit end
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
