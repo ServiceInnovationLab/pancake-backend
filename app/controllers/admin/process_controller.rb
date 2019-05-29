@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
-class Admin::ProcessRebateFormsController < Admin::BaseController
+class Admin::RebateForms::ProcessController < Admin::BaseController
+  respond_to :json
+
   def index
-    @processed_rebate_forms = RebateForm.where(status: RebateForm::PROCESSED_STATE)
+    @processed_rebate_forms = policy_scope(RebateForm).where(status: RebateForm::PROCESSED_STATUS)
+                                                      .order(created_at: :desc)
 
     respond_with json: @processed_rebate_forms.to_json
   end

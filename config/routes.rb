@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get 'processed_rebate_forms', to: 'process_rebate_forms#index'
-    post 'process_rebate_form', to: 'process_rebate_forms#create'
-    delete 'unprocess_rebate_forms', to: 'process_rebate_forms#destroy'
+    namespace :rebate_forms do
+      get 'processed', to: 'process#index'
+      post 'process', to: 'process#create'
+      delete 'unprocess', to: 'process#destroy'
+    end
 
     resources :rebate_forms do
       get 'generateqr'

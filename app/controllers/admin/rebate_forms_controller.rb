@@ -19,9 +19,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
     @council = current_user.council.presence
 
-    @rebate_forms = policy_scope(RebateForm).joins(:property)
-                                            .includes(:signatures, :property, property: :council)
-                                            .order(created_at: :desc)
+    @rebate_forms = policy_scope(RebateForm).order(created_at: :desc)
 
     # filter by the search form fields
     @rebate_forms = @rebate_forms.where("fields ->> 'full_name' iLIKE ?", "%#{params[:name]}%") if @name.present?
