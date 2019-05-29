@@ -158,12 +158,19 @@
   width: 100%
 }
 
-.rebate-submit-button-wrapper {
+/* .rebate-submit-button-wrapper {
   display: flex;
   justify-content: flex-end;
   margin-top: 1rem
-}
+} */
 
+.rebate-submit-button {
+  background-color: var(--blue);
+  border-radius: .2em;
+  color: var(--white);
+  float: right;
+  width: 5em;
+}
 .rebate-add-income-button {
   line-height: 2em;
   margin: 0 auto .5em auto;
