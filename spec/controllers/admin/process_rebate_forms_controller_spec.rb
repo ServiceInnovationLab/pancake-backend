@@ -7,18 +7,18 @@ RSpec.describe Admin::ProcessRebateFormsController, type: :controller do
 
   before { sign_in user }
 
-  describe '#index' do
-    let!(:processed_rebate_form) { FactoryBot.create(:processed_form) }
+  describe '#create' do
+    let!(:form_to_process) { FactoryBot.create(:signed_form) }
 
-    it 'returns a list of processed rebate forms' do
-      get :index, format: :json
-      expect(assigns(:processed_rebate_forms)).to eq([processed_rebate_form])
+    it 'processes the rebate form' do
+      expect(RebateForm.count).to eq 1
+      expect(RebateForm.where(status: RebateForm::SIGNED_STATUS).count).to eq 1
+      post :create, params: { id: form_to_process.id }
+      expect(RebateForm.first.reload.processed_state?).to eq true
     end
   end
 
-  describe '#create' do
-  end
-
   describe '#destroy' do
+
   end
 end
