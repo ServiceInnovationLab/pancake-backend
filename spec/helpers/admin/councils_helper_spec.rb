@@ -40,23 +40,23 @@ RSpec.describe Admin::CouncilsHelper, type: :helper do
     it { expect(council_forms_sum(council)).to eq '$3000.00' }
   end
 
-  describe 'council_completed_forms_count(council)' do
-    it { expect(council_completed_forms_count(council)).to eq 20 }
+  describe 'council_signed_forms_count(council)' do
+    it { expect(council_signed_forms_count(council)).to eq 20 }
   end
 
-  describe 'council_percentage_completed(council)' do
-    it { expect(council_percentage_completed(council)).to eq '66%' }
+  describe 'council_percentage_signed(council)' do
+    it { expect(council_percentage_signed(council)).to eq '66%' }
   end
 
-  describe 'council_completed_forms_sum(council)' do
-    it { expect(council_completed_forms_sum(council)).to eq '$2000.00' }
+  describe 'council_signed_forms_sum(council)' do
+    it { expect(council_signed_forms_sum(council)).to eq '$2000.00' }
   end
 
-  describe 'council_completed_batched_forms_count(council)' do
-    it { expect(council_completed_batched_forms_count(council)).to eq 10 }
+  describe 'council_signed_batched_forms_count(council)' do
+    it { expect(council_signed_batched_forms_count(council)).to eq 10 }
   end
 
-  describe 'council_completed_batched_forms_sum(council)' do
-    it { expect(council_completed_batched_forms_sum(council)).to eq '$1000.00' }
+  describe 'council_signed_batched_forms_sum(council)' do
+    it { expect(council_signed_batched_forms_sum(council)).to eq '$1000.00' }
   end
 end

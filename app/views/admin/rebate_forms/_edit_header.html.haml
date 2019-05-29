@@ -4,7 +4,7 @@
   = link_to edit_admin_rebate_form_path, id: 'reload' do
     =image_tag("blue-reload.svg", class: 'rebate-header-icon')
 
-- if rebate_form_completed?(@rebate_form)
+- if rebate_form_signed?(@rebate_form)
   .rebate-banner#rebate-banner
     =image_tag("alert1.svg", class: 'rebate-banner-icon')
     .rebate-banner-header
@@ -23,4 +23,3 @@
   -#   - else
   -#     Signature required
   -#   = link_to 'CANCEL', admin_rebate_form_url, id: 'cancel', class: 'pure-button rebate-cancel'
-

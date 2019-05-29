@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_17_025429) do
+ActiveRecord::Schema.define(version: 2019_05_27_231403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(version: 2019_05_17_025429) do
     t.integer "property_id"
     t.decimal "rebate", precision: 8, scale: 2
     t.integer "batch_id"
-    t.boolean "completed", default: false
     t.integer "updated_by"
+    t.string "status", default: "not signed"
   end
 
   create_table "roles", force: :cascade do |t|

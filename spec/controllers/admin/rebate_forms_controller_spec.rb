@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Admin::RebateFormsController, type: :controller do
   let(:property) { FactoryBot.create :property, council: council }
   let!(:rebate_form) do
-    FactoryBot.create :rebate_form, valuation_id: property.valuation_id, completed: false, created_at: 5.days.ago
+    FactoryBot.create :rebate_form, valuation_id: property.valuation_id, status: RebateForm::NOT_SIGNED_STATUS, created_at: 5.days.ago
   end
   let(:council) { FactoryBot.create :council }
 
@@ -20,19 +20,19 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       end
 
       describe 'filter by completion' do
-        let!(:completed) { FactoryBot.create :signed_form, property: property }
-        let!(:uncompleted) { FactoryBot.create :rebate_form, property: property }
+        let!(:signed) { FactoryBot.create :signed_form, property: property }
+        let!(:not_signed) { FactoryBot.create :rebate_form, property: property }
 
-        describe 'completed' do
-          before { get :index, params: { completed: 'true' } }
+        describe 'signed' do
+          before { get :index, params: { status: RebateForm::SIGNED_STATUS } }
 
-          it { expect(assigns(:rebate_forms)).to eq [completed] }
+          it { expect(assigns(:rebate_forms)).to eq [signed] }
         end
 
-        describe 'not completed' do
-          before { get :index, params: { completed: 'false' } }
+        describe 'not signed' do
+          before { get :index, params: { status: RebateForm::NOT_SIGNED_STATUS } }
 
-          it { expect(assigns(:rebate_forms)).to eq [uncompleted, rebate_form] }
+          it { expect(assigns(:rebate_forms)).to eq [not_signed, rebate_form] }
         end
       end
 

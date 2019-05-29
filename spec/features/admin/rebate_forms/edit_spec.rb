@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'RebateForm', type: :feature, js: true do
   let(:property) { FactoryBot.create :property_with_rates, rating_year: ENV['YEAR'] }
-  let!(:rebate_form) { FactoryBot.create :rebate_form, completed: false, property: property }
+  let!(:rebate_form) { FactoryBot.create :rebate_form, status: RebateForm::NOT_SIGNED_STATUS, property: property }
 
   context 'anonymous' do
     it "can't see it" do
@@ -59,8 +59,8 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       end
     end
 
-    describe 'edit banner message for completed rebate forms' do
-      context 'when the rebate form is not completed' do
+    describe 'edit banner message for signed rebate forms' do
+      context 'when the rebate form is not signed' do
         it 'does not show the banner' do
           visit "/admin/rebate_forms/#{rebate_form.id}/edit"
           expect(page).to_not have_text('Are you sure you want to edit?')
@@ -68,8 +68,8 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         end
       end
 
-      context 'when the rebate form is completed' do
-        let!(:rebate_form) { FactoryBot.create :signed_form, completed: true, property: property }
+      context 'when the rebate form is signed' do
+        let!(:rebate_form) { FactoryBot.create :signed_form, status: RebateForm::SIGNED_STATUS, property: property }
 
         it 'shows the banner' do
           visit "/admin/rebate_forms/#{rebate_form.id}/edit"
