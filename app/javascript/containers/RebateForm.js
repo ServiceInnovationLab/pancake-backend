@@ -89,15 +89,20 @@ class EditRebateForm extends React.Component {
               {/* <h3 className="rebate-subtitle">{ this.props.rebateFormCompleted && "Signed and ready to process" }
                 { !this.props.rebateFormCompleted && "Signature required" }
               </h3> */}
-              <div className="rebate-submit-button-wrapper">
-                <button className="pure-button rebate-submit-button" type="submit" >
-                  Submit
-                </button>
-              </div>
               <form
-                className="rebate-edit-form"
                 onSubmit={handleSubmit}
               >
+                <div className="flex-row">
+                <div className="rebate-submit-button-container">
+                  <button className="pure-button rebate-submit-button" >
+                    Cancel
+                  </button>
+                  <button className="pure-button rebate-submit-button" type="submit" >
+                    Submit
+                  </button>
+                </div>
+                </div>
+                <div className="rebate-edit-form">
                 <div className="flex-row">
                   {map(customerDetailFields, (field, index) => {
                     if (indexOf([1, 4, 6, 8, 10, 12], index) >= 0) field.withMargin = true;
@@ -137,6 +142,7 @@ class EditRebateForm extends React.Component {
                   </div>
                 </Fragment>
                 }
+                </div>
               </form>
             </div>
           );}}

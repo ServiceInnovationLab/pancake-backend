@@ -158,11 +158,20 @@
   width: 100%
 }
 
-/* .rebate-submit-button-wrapper {
+.rebate-submit-button-wrapper {
   display: flex;
   justify-content: flex-end;
   margin-top: 1rem
-} */
+}
+
+.rebate-submit-button-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 90vw;
+  max-width: 1000px;
+  min-width: 500px;
+}
 
 .rebate-submit-button {
   background-color: var(--blue);
