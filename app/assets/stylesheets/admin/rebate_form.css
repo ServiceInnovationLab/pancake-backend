@@ -166,11 +166,19 @@
 
 .rebate-submit-button-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin: auto;
   width: 90vw;
   max-width: 1000px;
   min-width: 500px;
+}
+
+.rebate-cancel-button {
+  background-color: var(--blue);
+  border-radius: .2em;
+  color: var(--white);
+  float: left;
+  width: 5em;
 }
 
 .rebate-submit-button {
@@ -180,6 +188,7 @@
   float: right;
   width: 5em;
 }
+
 .rebate-add-income-button {
   line-height: 2em;
   margin: 0 auto .5em auto;
