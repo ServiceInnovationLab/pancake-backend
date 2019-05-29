@@ -86,15 +86,12 @@ class EditRebateForm extends React.Component {
           const includePartnerValues = values.fields.spouse_or_partner == 'yes';
           return (
             <div>
-              {/* <h3 className="rebate-subtitle">{ this.props.rebateFormCompleted && "Signed and ready to process" }
-                { !this.props.rebateFormCompleted && "Signature required" }
-              </h3> */}
               <form
                 onSubmit={handleSubmit}
               >
                 <div className="flex-row">
                   <div className="rebate-submit-button-container">
-                    <button className="pure-button rebate-submit-button" >
+                    <button className="pure-button rebate-cancel-button" >
                       Cancel
                     </button>
                     <button className="pure-button rebate-submit-button" type="submit" >
