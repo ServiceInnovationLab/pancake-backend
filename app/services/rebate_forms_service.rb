@@ -15,6 +15,7 @@ class RebateFormsService
     create_or_update_rates_bill!(property)
     rebate_form.calc_rebate_amount!
     raise Error if rebate_form.rebate.blank?
+
     rebate_form
   end
 
@@ -22,6 +23,7 @@ class RebateFormsService
 
   def create_or_update_rebate_form!(property)
     return update_rebate_form!(property) if @rebate_form_attributes['id']
+
     create_rebate_form!(property)
   end
 
