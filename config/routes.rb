@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     post 'process_rebate_form', to: 'process_rebate_forms#create'
-    delete 'unprocess_rebate_forms', to: 'process_rebate_forms#destroy'
+    delete 'unprocess_rebate_form', to: 'process_rebate_forms#destroy'
+    delete 'unprocess_rebate_forms', to: 'process_rebate_forms#destroy_all'
 
     resources :rebate_forms do
       get 'generateqr'
