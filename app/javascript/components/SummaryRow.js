@@ -9,9 +9,10 @@ export function SummaryRow (rebateForm, key, state, checkIt) {
  
   return (
     <tr key={`${key}-${fields.full_name}`} className='rebate_form.completed'>
-      <td className='rebate-results-table-cell'>
+      {checkIt && <td className='rebate-results-table-cell'>
         <input type="checkbox" checked={checked} onChange={() => checkIt(key)} />
       </td>
+      }
       <td className='rebate-results-table-cell'>{fields.full_name}</td>
       {property
         ? <td className='rebate-results-table-cell'>{property.location} <br/> {property.suburb} <br/>  {property.town_city}</td>

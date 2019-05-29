@@ -9,7 +9,7 @@ export function SummaryTable (rebateForms, state, checkIt) {
       <table className="pure-table pure-table-bordered rebate-results-table">
         <thead>
           <tr>
-            <th></th>
+            {checkIt && <th></th>}
             <th>Name</th>
             <th>Address</th>
             <th></th>

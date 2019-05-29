@@ -2,13 +2,12 @@
 import React, { Fragment } from 'react';
 import 'isomorphic-fetch';
 
-import { getCSRF } from '../helpers/getCSRF';
 import { getPath } from '../helpers/fetchRebatesPath'
+import { requestBuilder } from '../helpers/requestBuilder'
 
 import { SummaryTable } from '../components/SummaryTable';
 import { SummarySearch } from '../components/SummarySearch';
 import { SummaryTabs } from '../components/SummaryTabs';
-const appUrl = window.location.origin;
 
 class CustomersSummary extends React.Component {
   constructor(props) {
@@ -33,31 +32,20 @@ class CustomersSummary extends React.Component {
 
   unProcessRebates () {
     debugger
-    // fetch(`${appUrl}/admin/rebate_forms/`, {
-    //   method: 'PATCH',
-    //   headers: {
-    //     'X-CSRF-Token': getCSRF(),
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(this.state.checked),
-    //   credentials: 'same-origin'
-    // }).then(response => {
-    //   return response.json();
-    // }).then(data => {
-    //   this.setState({ rebateForms: JSON.parse(data.json) });
-    // });
+    requestBuilder({
+      method: 'DELETE',
+      path: '/admin/rebate_forms/unprocess',
+      body: JSON.stringify({ids: this.state.checked})
+    }).then(() => {
+      const path = getPath(this.state.applicationState)
+      this.fetchRebates(path);
+    });
   }
 
   fetchRebates (path) {
-    fetch(`${appUrl}/admin/${path}`, {
-      method: 'GET',
-      headers: {
-        'X-CSRF-Token': getCSRF(),
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      credentials: 'same-origin'
+    requestBuilder({
+      method: 'get',
+      path: `/admin/${path}`,
     })
       .then(response => {
         return response.json();
@@ -88,19 +76,19 @@ class CustomersSummary extends React.Component {
     const { applicationState, rebateForms, checked } = this.state;
     const processable = applicationState === 'processed' &&
     (rebateForms && rebateForms[0]);
-
+    const checkIt = processable ? this.checkIt.bind(this) : null
     return (
       <Fragment>
         <div className='pure-u-1-2 rebate-search-box'>
           {SummaryTabs(applicationState, this.onChange.bind(this))}          
-          { !(applicationState === 'signed') && SummarySearch(this.fetchRebatesByName.bind(this))}
+          { (applicationState === 'not signed') && SummarySearch(this.fetchRebatesByName.bind(this))}
         </div>
         <div className='flex-row rebate-bulk-actions'>
           <h3>Search Results</h3>
-          {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]}>UNPROCESS</button>}
+          {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]} onClick={this.unProcessRebates.bind(this)}>UNPROCESS</button>}
           {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]}>CREATE BATCH</button>}
         </div>
-        {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, this.state, this.checkIt.bind(this))}
+        {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, this.state, checkIt)}
       </Fragment>
     );
   }
