@@ -35,7 +35,7 @@ class RebateFormsService
   end
 
   def remove_signatures_if_signed(rebate_form)
-    rebate_form.signatures.destroy_all && rebate_form.update(status: RebateForm::NOT_SIGNED_STATUS) if rebate_form.signed_state?
+    rebate_form.signatures.destroy_all && rebate_form.transition_to_not_signed_state if rebate_form.signed_state?
   end
 
   def update_fields
@@ -44,6 +44,7 @@ class RebateFormsService
 
   def fields_to_merge
     return update_fields unless update_fields.nil?
+
     {}
   end
 
@@ -56,6 +57,7 @@ class RebateFormsService
 
   def create_or_update_property!(council)
     return create_or_update_property_with_valuation_id!(council) if @rebate_form_attributes['valuation_id']
+
     find_or_create_property_with_no_valuation_id!(council)
   end
 
