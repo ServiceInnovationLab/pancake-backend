@@ -30,7 +30,6 @@ class CustomersSummary extends React.Component {
   }
 
   unProcessRebates () {
-    debugger
     requestBuilder({
       method: 'DELETE',
       path: '/admin/unprocess_rebate_forms',
@@ -71,7 +70,7 @@ class CustomersSummary extends React.Component {
     const { applicationState, rebateForms, checked } = this.state;
     const processable = applicationState === 'processed' &&
     (rebateForms && rebateForms[0]);
-    const checkIt = processable ? this.checkIt.bind(this) : null
+    const checkIt = processable ? this.checkIt.bind(this) : null;
     return (
       <Fragment>
         <div className='pure-u-1-2 rebate-search-box'>
