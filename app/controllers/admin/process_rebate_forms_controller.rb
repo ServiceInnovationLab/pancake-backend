@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::RebateForms::ProcessController < Admin::BaseController
+class Admin::ProcessRebateFormsController < Admin::BaseController
   respond_to :json
 
   def index
