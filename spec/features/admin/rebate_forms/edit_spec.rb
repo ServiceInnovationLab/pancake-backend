@@ -20,7 +20,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         visit "/admin/rebate_forms/#{rebate_form.id}/edit"
         expect(page).to have_text('Name')
         fill_in('fields.full_name', with: 'arnold', fill_options: { clear: :backspace })
-        click_button 'Submit'
+        click_button 'SAVE'
         expect(find_field('fields.full_name').value).to have_text 'arnold'
         rebate_form.reload
         expect(rebate_form.full_name).to eq 'arnold'
