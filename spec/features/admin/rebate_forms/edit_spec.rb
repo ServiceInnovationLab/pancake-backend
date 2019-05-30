@@ -38,6 +38,15 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       include_examples 'percy snapshot'
     end
 
+    describe '#cancel' do
+      it 'can see the CANCEL button' do
+        visit "admin/rebate_forms/#{rebate_form.id}/edit"
+        expect(page).to have_text('Name')
+        click_button 'CANCEL'
+        expect(page).to have_field(with: rebate_form.full_name)
+      end
+    end
+
     describe 'header buttons' do
       context 'when the back button is clicked' do
         it 'goes to the right place' do
