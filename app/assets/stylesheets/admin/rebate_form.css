@@ -112,6 +112,7 @@
 
 .rebate-results-table-cell {
   background-color: var(--white) !important;
+  min-width: 3rem;
 }
 
 .rebate-amount {
@@ -244,4 +245,8 @@
   font-weight: bold;
   font-size: .5em;
   
+}
+.rebate-form-blue-arrow {
+  width: 2rem;
+  height: 2rem
 }
