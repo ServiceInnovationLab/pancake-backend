@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c812c15f875c071daf4ce89e7503e948",
+    "revision": "6f03da12097fb29e58e3d048d8a9e8ac",
     "url": "/ipad/index.html"
   },
   {
-    "revision": "fd5524ecbbf103aba3f6",
-    "url": "/ipad/static/css/main.16942e9c.chunk.css"
+    "revision": "5f23d5f6a112eaa99f24",
+    "url": "/ipad/static/css/main.a43cc759.chunk.css"
   },
   {
     "revision": "7d3f52c032539c3d9ec8",
     "url": "/ipad/static/js/2.3c1a2099.chunk.js"
   },
   {
-    "revision": "fd5524ecbbf103aba3f6",
-    "url": "/ipad/static/js/main.c8c9dfe1.chunk.js"
+    "revision": "5f23d5f6a112eaa99f24",
+    "url": "/ipad/static/js/main.915054f4.chunk.js"
   },
   {
     "revision": "dd0051aba38b01f68560",
@@ -44,7 +44,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ipad/static/media/FiraSans-Regular.5d6a923d.woff"
   },
   {
-    "revision": "bd37d876a5f4d0996777a69c50815803",
-    "url": "/ipad/static/media/tick.bd37d876.svg"
+    "revision": "cb25f8549a6a8cae9c8a9c905ce77f88",
+    "url": "/ipad/static/media/signature-noLine1.cb25f854.svg"
+  },
+  {
+    "revision": "12268824dcc55c2e3dec6e9210eefb66",
+    "url": "/ipad/static/media/tick.12268824.svg"
   }
 ]);
