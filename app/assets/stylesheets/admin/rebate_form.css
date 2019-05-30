@@ -27,6 +27,8 @@
 }
 
 .rebate-title {
+  display: flex;
+  justify-content: space-between;
   font-size: 3em;
   margin: 0;
 }
@@ -233,4 +235,13 @@
   color: var(--dark-gray);
   border: none;
   font-weight: bold 
+}
+
+.rebate-single-process-button {
+  align-self: flex-end;
+  color: var(--blue);
+  border: none;
+  font-weight: bold;
+  font-size: .5em;
+  
 }
