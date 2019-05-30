@@ -8,7 +8,7 @@ RSpec.describe RebateFormsMailer, type: :mailer do
     let(:email) { RebateFormsMailer.applicant_mail(rebate_form) }
 
     it 'has the expected data' do
-      expect(email.from).to eq(['info@digital.govt.nz'])
+      expect(email.from).to eq(['noreply@www.govt.nz'])
       expect(email.to).to eq([rebate_form.email])
       expect(email.subject).to eq('Your Rates Rebate application')
 
