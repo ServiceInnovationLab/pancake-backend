@@ -5,7 +5,7 @@ import { Form, Field } from 'react-final-form';
 import 'isomorphic-fetch';
 
 import { conditionalsFields, customerDetailFields } from '../helpers/data';
-import { getCSRF } from '../helpers/getCSRF';
+import { requestBuilder } from '../helpers/requestBuilder';
 import { calculator } from '../helpers/decorators';
 
 import { SingleInput, RadioInput } from '../components/inputs';
@@ -43,20 +43,16 @@ class EditRebateForm extends React.Component {
 
     return values.newIncomeField
       ? this.addNewIncomeValue(values)
-      : fetch(`${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}`, {
+      : requestBuilder({
         method: 'PATCH',
-        headers: {
-          'X-CSRF-Token': getCSRF(),
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(valuesForAPI),
-        credentials: 'same-origin'
-      }).then(res => {
-        console.log('res', res);
-        if (res.ok) window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}`;
-        else console.error(res);
-      });
+        path: `/admin/rebate_forms/${this.props.rebateForm.id}`,
+        body: JSON.stringify(valuesForAPI)
+      })
+        .then(res => {
+          console.log('res', res);
+          if (res.ok) window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}`;
+          else console.error(res);
+        });
   }
 
   render () {
