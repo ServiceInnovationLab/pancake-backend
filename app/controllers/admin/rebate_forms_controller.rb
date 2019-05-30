@@ -13,7 +13,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   def edit
   end
-  
+
   # GET /admin/rebate_forms
   def index
     @name = params[:name]
