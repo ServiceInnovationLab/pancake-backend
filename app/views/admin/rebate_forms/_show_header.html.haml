@@ -3,7 +3,8 @@
     =image_tag("search.svg", class: 'rebate-header-icon')
   = link_to admin_rebate_form_path(@rebate_form), id: 'reload' do
     =image_tag("blue-reload.svg", class: 'rebate-header-icon')
-  = link_to 'EDIT', edit_admin_rebate_form_path, id: 'edit', class: 'pure-button rebate-edit'
+  - unless @rebate_form.processed_state?
+    = link_to 'EDIT', edit_admin_rebate_form_path, id: 'edit', class: 'pure-button rebate-edit'
 
 .rebate-header
   %h2.rebate-title
