@@ -8,13 +8,21 @@
 .rebate-header
   %h2.rebate-title
     Customer details
-    - unless rebate_form_signed?(@rebate_form)
+    - if @rebate_form.not_signed_state?
       = link_to admin_rebate_form_generateqr_path(@rebate_form), id: 'generate_qr' do
         =image_tag("signature1.svg", class: 'rebate-generate-qr')
+    - if @rebate_form.signed_state?
+      = link_to admin_process_rebate_form_path(id: @rebate_form.id), action: :create, method: :post do
+        Process
+    - if @rebate_form.processed_state?
+      = link_to admin_unprocess_rebate_form_path(id: @rebate_form.id), action: :destroy, method: :delete do
+        Unprocess
 
   %h3.rebate-subtitle
-    - if rebate_form_signed?(@rebate_form)
+    - if @rebate_form.signed_state?
       Signed and ready to process
-    - else
+    - if @rebate_form.processed_state?
+      Processed
+    - if @rebate_form.not_signed_state?
       Signature required
 

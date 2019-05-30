@@ -42,8 +42,4 @@ module RebateFormsHelper
       answer.to_s.capitalize
     end
   end
-
-  def rebate_form_signed?(rebate_form)
-    rebate_form.status == RebateForm::SIGNED_STATUS
-  end
 end
