@@ -89,16 +89,20 @@ class EditRebateForm extends React.Component {
               <form
                 onSubmit={handleSubmit}
               >
-                <div className="flex-row">
-                  <div className="rebate-submit-button-container">
-                    <button className="pure-button rebate-cancel-button" >
-                      Cancel
-                    </button>
-                    <button className="pure-button rebate-submit-button" type="submit" >
-                      Submit
-                    </button>
+                { !isReadOnly && 
+                <>
+                  <div className="flex-row">
+                    <div className="button-container">
+                      <button className="pure-button rebate-cancel-button" >
+                        CANCEL
+                      </button>
+                      <button className="pure-button rebate-submit-button" type="submit" >
+                        SAVE
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </>
+                }
                 <div className="rebate-edit-form">
                   <div className="flex-row">
                     {map(customerDetailFields, (field, index) => {

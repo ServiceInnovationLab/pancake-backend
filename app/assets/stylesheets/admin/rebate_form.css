@@ -164,29 +164,32 @@
   margin-top: 1rem
 }
 
-.rebate-submit-button-container {
+.button-container {
   display: flex;
   flex-direction: row;
   margin: auto;
   width: 90vw;
   max-width: 1000px;
   min-width: 500px;
+  margin: -6em 0 0 3.5em;
 }
 
 .rebate-cancel-button {
-  background-color: var(--blue);
+  background-color: var(--white);
   border-radius: .2em;
-  color: var(--white);
-  float: left;
+  border: 1px solid var(--black);
+  color: var(--black);
   width: 5em;
+  padding-right: 5em;
+  margin: 0 1em 1.5em 43.5em;
 }
 
 .rebate-submit-button {
   background-color: var(--blue);
   border-radius: .2em;
   color: var(--white);
-  float: right;
   width: 5em;
+  margin-bottom: 1.5em;
 }
 
 .rebate-add-income-button {
