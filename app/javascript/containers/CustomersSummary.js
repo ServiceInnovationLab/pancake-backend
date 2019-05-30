@@ -35,6 +35,7 @@ class CustomersSummary extends React.Component {
       path: '/admin/unprocess_rebate_forms',
       body: JSON.stringify({ids: this.state.checked})
     }).then(() => {
+      this.setState({checked: []});
       this.fetchRebates(this.state.applicationState);
     });
   }
