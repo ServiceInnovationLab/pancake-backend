@@ -23,8 +23,33 @@ class RebateForm < ApplicationRecord
 
   scope :by_council, ->(council) { where(properties: { council_id: council.id }) }
 
-  NOT_SIGNED_STATUS = 'not signed'.freeze
-  SIGNED_STATUS = 'signed'.freeze
+  NOT_SIGNED_STATUS = 'not signed'
+  SIGNED_STATUS = 'signed'
+  PROCESSED_STATUS = 'processed'
+
+  def signed_state?
+    status == SIGNED_STATUS
+  end
+
+  def not_signed_state?
+    status == NOT_SIGNED_STATUS
+  end
+
+  def processed_state?
+    status == PROCESSED_STATUS
+  end
+
+  def transition_to_signed_state
+    update!(status: SIGNED_STATUS)
+  end
+
+  def transition_to_not_signed_state
+    update!(status: NOT_SIGNED_STATUS)
+  end
+
+  def transition_to_processed_state
+    update!(status: PROCESSED_STATUS)
+  end
 
   def calc_rebate_amount!
     rates_bill = property.rates_bills.find_by(rating_year: rating_year)
