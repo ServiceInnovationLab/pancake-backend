@@ -2,10 +2,17 @@ import React from 'react';
 
 const appUrl = window.location.origin;
 
-export function SummaryRow (rebateForm, key) {
+export function SummaryRow (rebateForm, key, state, checkIt) {
   const { property, fields, id } = rebateForm;
+  const { full_name } = fields;
+
+  const checked = state.checked.indexOf(id) >= 0;
   return (
-    <tr key={`${key}-${fields.full_name}`} className='rebate_form.completed'>
+    <tr key={`${key}-${full_name}`} className='rebate_form.completed'>
+      {checkIt && <td className='rebate-results-table-cell'>
+        <input type="checkbox" aria-label={`select-${full_name}-checkbox`} id={`${full_name}-checkbox`} checked={checked} onChange={() => checkIt(key)} />
+      </td>
+      }
       <td className='rebate-results-table-cell'>{fields.full_name}</td>
       {property
         ? <td className='rebate-results-table-cell'>{property.location} <br/> {property.suburb} <br/>  {property.town_city}</td>

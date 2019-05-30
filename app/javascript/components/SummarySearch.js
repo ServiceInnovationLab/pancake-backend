@@ -1,10 +1,10 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
 
-export function SummarySearch (onSubmit) {
+export function SummarySearch (fetchRebatesByName) {
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={fetchRebatesByName}
     >
       {({ handleSubmit }) => (
         <form className="pure-form" onSubmit={handleSubmit}>
