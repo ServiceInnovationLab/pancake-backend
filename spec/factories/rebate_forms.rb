@@ -19,7 +19,7 @@ FactoryBot.define do
         lived_in_property_july_1: true,
         details_of_previous_property: '123 Muggle Lane, Hogsmead, England' }
     end
-    completed { false }
+    status { RebateForm::NOT_SIGNED_STATUS }
     rebate { 555.12 }
     batch { nil }
 
@@ -36,6 +36,13 @@ FactoryBot.define do
     after(:create) do |rebate_form|
       create(:applicant_signature, rebate_form: rebate_form)
       create(:witness_signature, rebate_form: rebate_form)
+      rebate_form.transition_to_signed_state
+    end
+  end
+
+  factory :processed_form, parent: :signed_form do
+    after(:create) do |rebate_form|
+      rebate_form.transition_to_processed_state
     end
   end
 end

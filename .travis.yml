@@ -1,5 +1,9 @@
 sudo: required
 language: ruby
+branches:
+  only:
+  - master
+  - dev
 cache:
   bundler: true
 services:
@@ -19,7 +23,7 @@ script:
 - bundle install
 - yarn install
 - RAILS_ENV=test bundle exec rake db:create db:migrate
-- bundle exec rspec
+- bundle exec rspec spec
 after_script:
 - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t simplecov --id $CC_TEST_REPORTER_ID"
 env:

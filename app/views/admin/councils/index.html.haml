@@ -34,23 +34,23 @@
               Launch #{council.short_name} app
           - else
             Not active
-          
+
         %td
           = council_forms_count(council)
           applications
         %td
-          = council_completed_forms_count(council)
+          = council_signed_forms_count(council)
           applications
           %br/
-          = council_completed_forms_sum(council)
+          = council_signed_forms_sum(council)
           %br/
-          = council_percentage_completed(council)
+          = council_percentage_signed(council)
           completion rate
         %td
-          = council_completed_batched_forms_count(council)
+          = council_signed_batched_forms_count(council)
           applications
           %br/
-          = council_completed_batched_forms_sum(council)
+          = council_signed_batched_forms_sum(council)
         %td
           = council.batches.size
           batches

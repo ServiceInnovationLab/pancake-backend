@@ -27,6 +27,8 @@
 }
 
 .rebate-title {
+  display: flex;
+  justify-content: space-between;
   font-size: 3em;
   margin: 0;
 }
@@ -101,9 +103,9 @@
   color: white
 }
 
+
 .rebate-results-table {
   background-color: var(--dove);
-  margin-top: 1.5em;
   padding: 1.75em;
   width: 770px;
 }
@@ -171,13 +173,13 @@
 }
 
 .rebate-tabs {
-  padding-bottom: .25rem;
+  padding-bottom: .01rem;
   border-bottom: 2px solid var(--gray);
   margin-bottom: 1rem
 }
 
 .rebate-button {
-  width: 200px;
+  width: 25%;
   background: var(--dove);
   padding: 1rem;
   border: none;
@@ -185,7 +187,7 @@
 }
 
 .rebate-button-selected {
-  width: 200px;
+  width: 25%;
   background: var(--dove);
   color: var(--blue);
   padding: 1rem;
@@ -212,4 +214,34 @@
   color: var(--white);
   float: right;
   width: 5em;
+}
+.rebate-bulk-actions {
+  justify-content: space-between;
+  width: 770px;
+  margin-top: 1.5em;
+  padding: 1.75em;
+  letter-spacing: normal;
+  background: var(--dove);
+}
+
+.rebate-bulk-action-button {
+  background-color: var(--dove);
+  color: var(--blue);
+  border: none;
+  font-weight: bold 
+}
+.rebate-bulk-action-button:disabled {
+  background-color: var(--dove);
+  color: var(--dark-gray);
+  border: none;
+  font-weight: bold 
+}
+
+.rebate-single-process-button {
+  align-self: flex-end;
+  color: var(--blue);
+  border: none;
+  font-weight: bold;
+  font-size: .5em;
+  
 }

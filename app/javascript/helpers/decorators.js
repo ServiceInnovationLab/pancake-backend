@@ -1,7 +1,5 @@
-import { reduce } from 'lodash'
-
-import createDecorator from 'final-form-calculate'
-import { accumulate } from "./accumulate";
+import createDecorator from 'final-form-calculate';
+import { accumulate } from './accumulate';
 
 export const calculator = createDecorator(
   {
@@ -9,17 +7,17 @@ export const calculator = createDecorator(
     updates: {
       // ...update the total_income
       ['fields.income.total_income']: (newValue, allValues) => {
-        const { applicant, partner, otherIncome } = allValues.fields.income
-        const includePartnerValues = allValues.fields.spouse_or_partner == 'yes'
+        const { applicant, partner, otherIncome = {} } = allValues.fields.income;
+        const {applicant: otherApplicant = {}, partner: otherPartner = {} } = otherIncome;
 
-        const applicantValues = accumulate(applicant)
-        const partnerValues = includePartnerValues && accumulate(partner)
+        const includePartnerValues = allValues.fields.spouse_or_partner == 'yes';
+        
+        const applicantValues = accumulate({...applicant, ...otherApplicant});
+        const partnerValues = includePartnerValues && accumulate({...partner, ...otherPartner});
 
-        const otherValues = reduce(otherIncome, (sum, obj) => sum + accumulate(obj), 0)
-
-        const total = applicantValues + partnerValues + otherValues    
-        return total.toFixed(2) 
+        const total = applicantValues + partnerValues;
+        return total.toFixed(2); 
       }
     }
   }
-)
+);

@@ -48,18 +48,16 @@ RSpec.describe RebateFormsService do
         'total_rates' => '12345',
         'location' => property2.location,
         'council' => property2.council.name,
-        'rebate_form' => {
-          'fields' => {
-            'full_name' => 'Best Witch',
-            'customer_id' => '12345',
-            'phone' => '022123-4567',
-            'email' => 'hermione.granger@potterworld.com',
-            'has_partner' => 'true',
-            'dependants' => '3',
-            'occupation' => 'witch',
-            '50_percent_claimed' => 'true',
-            'income' => {}
-          }
+        'fields' => {
+          'full_name' => 'Best Witch',
+          'customer_id' => '12345',
+          'phone' => '022123-4567',
+          'email' => 'hermione.granger@potterworld.com',
+          'has_partner' => 'true',
+          'dependants' => '3',
+          'occupation' => 'witch',
+          '50_percent_claimed' => 'true',
+          'income' => {}
         }
       }
     end
@@ -185,9 +183,9 @@ RSpec.describe RebateFormsService do
           end
         end
 
-        context 'when the rebate form is already completed with signatures attached' do
+        context 'when the rebate form is signed with signatures attached' do
           let!(:rebate_form) do
-            FactoryBot.create(:signed_form, valuation_id: property.valuation_id, property: property, completed: true)
+            FactoryBot.create(:signed_form, valuation_id: property.valuation_id, property: property, status: RebateForm::SIGNED_STATUS)
           end
 
           let(:update_params) do
@@ -212,11 +210,11 @@ RSpec.describe RebateFormsService do
             }
           end
 
-          it 'removes the signatures and sets completed to false' do
-            expect(RebateForm.first.completed).to eq true
+          it 'removes the signatures and sets status to not signed' do
+            expect(RebateForm.first.status).to eq RebateForm::SIGNED_STATUS
             expect(RebateForm.first.signatures).to_not be_empty
             subject.update!
-            expect(RebateForm.first.completed).to eq false
+            expect(RebateForm.first.status).to eq RebateForm::NOT_SIGNED_STATUS
             expect(RebateForm.first.signatures).to be_empty
           end
         end
