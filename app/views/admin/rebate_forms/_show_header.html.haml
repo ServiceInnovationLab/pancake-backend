@@ -15,7 +15,7 @@
       = link_to admin_process_rebate_form_path(id: @rebate_form.id), action: :create, method: :post do
         Process
     - if @rebate_form.processed_state?
-      = link_to admin_unprocess_rebate_forms_path(ids: [@rebate_form.id]), action: :destroy, method: :delete do
+      = link_to admin_unprocess_rebate_form_path(id: @rebate_form.id), action: :destroy, method: :delete do
         Unprocess
 
   %h3.rebate-subtitle

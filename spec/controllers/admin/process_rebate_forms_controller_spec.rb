@@ -19,6 +19,24 @@ RSpec.describe Admin::ProcessRebateFormsController, type: :controller do
   end
 
   describe '#destroy' do
+    let!(:processed_form) { FactoryBot.create(:processed_form) }
 
+    it 'unprocesses a single application' do
+      expect(RebateForm.count).to eq 1
+      expect(RebateForm.where(status: RebateForm::PROCESSED_STATUS).count).to eq 1
+      delete :destroy, params: { id: processed_form.id }
+      expect(RebateForm.where(status: RebateForm::SIGNED_STATUS).count).to eq 1
+    end
+  end
+
+  describe '#destroy_all' do
+    let!(:processed_forms) { FactoryBot.create_list(:processed_form, 3) }
+
+    it 'unprocesses multiple applications' do
+      expect(RebateForm.count).to eq 3
+      expect(RebateForm.where(status: RebateForm::PROCESSED_STATUS).count).to eq 3
+      delete :destroy_all, params: { ids: processed_forms.map(&:id) }
+      expect(RebateForm.where(status: RebateForm::SIGNED_STATUS).count).to eq 3
+    end
   end
 end
