@@ -14,7 +14,7 @@ RSpec.describe RebateForm, type: :model do
       it { expect(form.signatures.size).to eq 0 }
     end
 
-    it { expect(form.status).to eq RebateForm::NOT_SIGNED_STATUS }
+    it { expect(form.not_signed_state?).to eq true }
   end
 
   describe 'Signed form' do
@@ -24,7 +24,7 @@ RSpec.describe RebateForm, type: :model do
       it { expect(form.signatures.size).to eq 2 }
     end
 
-    it { expect(form.status).to eq RebateForm::SIGNED_STATUS }
+    it { expect(form.signed_state?).to eq true }
   end
 
   describe 'signatures' do
@@ -59,5 +59,29 @@ RSpec.describe RebateForm, type: :model do
     before { form.calc_rebate_amount! }
 
     xit { expect(form.rebate).to eq 370.67 }
+  end
+
+  describe 'rebate form state machine' do
+    let!(:form) { FactoryBot.create :rebate_form, property: property, valuation_id: valuation_id }
+
+    it 'transitions the rebate form between its different states' do
+      expect(form.not_signed_state?).to eq true
+
+      form.transition_to_signed_state
+      expect(form.signed_state?).to eq true
+      expect(form.not_signed_state?).to eq false
+
+      form.transition_to_processed_state
+      expect(form.processed_state?).to eq true
+      expect(form.signed_state?).to eq false
+
+      form.transition_to_signed_state
+      expect(form.signed_state?).to eq true
+      expect(form.processed_state?).to eq false
+
+      form.transition_to_not_signed_state
+      expect(form.not_signed_state?).to eq true
+      expect(form.signed_state?).to eq false
+    end
   end
 end

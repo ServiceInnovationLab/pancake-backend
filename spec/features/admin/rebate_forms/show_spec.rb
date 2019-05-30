@@ -63,15 +63,39 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       end
 
       context 'when the rebate form is signed' do
-        before { rebate_form.update(status: RebateForm::SIGNED_STATUS) }
+        before { rebate_form.transition_to_signed_state }
 
         describe ' Can see customer details' do
           before { visit "/admin/rebate_forms/#{rebate_form.id}" }
           it { expect(page).to have_text('Customer details') }
           it { expect(page).to have_text('Signed and ready to process') }
+          it { expect(page).to have_text('Process') }
           it { expect(page).to have_field('fields.full_name', with: rebate_form.full_name) }
           it { expect(page).to have_field('fields.email', with: rebate_form.email) }
           it { expect(page).to have_field('fields.occupation', with: rebate_form.occupation) }
+        end
+
+        describe 'can process an application' do
+          before { visit "/admin/rebate_forms/#{rebate_form.id}" }
+
+          it 'processes the application' do
+            click_link('Process')
+            expect(page).to_not have_text('Signed and ready to process')
+            expect(page).to have_text('Processed')
+          end
+        end
+
+        describe 'can unprocess an application' do
+          let!(:processed_rebate_form) { FactoryBot.create(:processed_form) }
+          before { visit "/admin/rebate_forms/#{processed_rebate_form.id}" }
+
+          it 'unprocesses the application' do
+            expect(page).to have_text('Unprocess')
+            expect(page).to have_text('Processed')
+            click_link('Unprocess')
+            expect(page).to have_text('Signed and ready to process')
+            expect(page).to_not have_text('Processed')
+          end
         end
         include_examples 'percy snapshot'
       end
