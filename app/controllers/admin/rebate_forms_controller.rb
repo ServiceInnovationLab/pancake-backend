@@ -22,9 +22,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
     @council = current_user.council.presence
 
-    @rebate_forms = policy_scope(RebateForm).joins(:property)
-                                            .includes(:signatures, :property, property: :council)
-                                            .order(created_at: :desc)
+    @rebate_forms = policy_scope(RebateForm).order(created_at: :desc)
 
     # filter by the search form fields
     @rebate_forms = @rebate_forms.where("fields ->> 'full_name' iLIKE ?", "%#{params[:name]}%") if @name.present?
@@ -63,7 +61,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # DELETE /admin/rebate_forms/1
   def destroy
-    if @rebate_form.status == RebateForm::SIGNED_STATUS
+    if @rebate_form.signed_state?
       redirect_to admin_rebate_forms_url, notice: 'Cannot delete signed forms.'
     else
       @rebate_form.destroy
