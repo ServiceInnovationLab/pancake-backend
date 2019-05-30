@@ -21,4 +21,14 @@ class Admin::ProcessRebateFormsController < Admin::BaseController
       end
     end
   end
+
+  def destroy
+    rebate_form_to_unprocess = RebateForm.find(params[:id])
+
+    authorize rebate_form_to_unprocess, policy_class: ProcessRebateFormsPolicy
+
+    rebate_form_to_unprocess.transition_to_signed_state
+
+    redirect_to admin_rebate_form_path(rebate_form_to_unprocess.id), notice: 'The application was unprocessed.'
+  end
 end
