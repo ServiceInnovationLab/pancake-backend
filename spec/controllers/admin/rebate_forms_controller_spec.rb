@@ -32,7 +32,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         describe 'not signed' do
           before { get :index, params: { status: RebateForm::NOT_SIGNED_STATUS } }
 
-          it { expect(assigns(:rebate_forms)).to eq [not_signed, rebate_form] }
+          it { expect(assigns(:rebate_forms)).to eq [rebate_form, not_signed] }
         end
       end
 
