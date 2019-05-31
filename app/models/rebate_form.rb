@@ -41,7 +41,7 @@ class RebateForm < ApplicationRecord
   end
 
   def batched_state?
-    (status == BATCHED_STATUS) && batch
+    (status == BATCHED_STATUS) && batch_id.positive?
   end
 
   def transition_to_signed_state

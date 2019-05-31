@@ -83,5 +83,16 @@ RSpec.describe RebateForm, type: :model do
       expect(form.not_signed_state?).to eq true
       expect(form.signed_state?).to eq false
     end
+
+    context 'to batch a rebate form' do
+      let!(:processed_form) { FactoryBot.create :processed_form }
+      let!(:batch) { FactoryBot.create :batch, council: processed_form.council }
+
+      it 'transitions the status from processed to batched' do
+        processed_form.transition_to_batched_state(batch)
+        expect(processed_form.batched_state?).to eq true
+        expect(processed_form.processed_state?).to eq false
+      end
+    end
   end
 end
