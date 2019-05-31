@@ -11,6 +11,9 @@ class Admin::RebateFormsController < Admin::BaseController
     @image_data = GenerateQrService.new(@rebate_form, current_user).generate_qr
   end
 
+  def edit
+  end
+
   # GET /admin/rebate_forms
   def index
     @name = params[:name]
@@ -47,8 +50,6 @@ class Admin::RebateFormsController < Admin::BaseController
       end
     end
   end
-
-  def edit; end
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
