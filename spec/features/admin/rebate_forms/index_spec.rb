@@ -36,6 +36,15 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       login_as(user, scope: :user)
       visit '/admin'
     end
+    describe 'on initial load' do
+      it 'no applications should be visible' do
+        expect(page).to have_text('Signed')
+        expect(page).to have_text('Not Signed')
+        expect(page).to have_field('name')
+        expect(page).not_to have_text(expected_name)
+      end
+      include_examples 'percy snapshot'
+    end
     describe 'searching with blank' do
       it 'should see all un-signed rebate forms' do
         click_button 'Search'

@@ -23,7 +23,7 @@ export function SummaryRow (rebateForm, key, state, checkIt) {
           window.location = `${appUrl}/admin/rebate_forms/${id}`;
         }
         }>
-          <img src='/assets/blue-right-arrow.svg' alt="blue coloured right arrow"/>
+          <img className='rebate-form-blue-arrow'src='/assets/blue-right-arrow.svg' alt="blue coloured right arrow"/>
         </a>
       </td>
     </tr>
