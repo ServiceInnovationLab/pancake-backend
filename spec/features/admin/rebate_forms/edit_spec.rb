@@ -41,9 +41,12 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     describe '#cancel' do
       it 'can see the CANCEL button' do
         visit "admin/rebate_forms/#{rebate_form.id}/edit"
+        expect(page).to have_text('CANCEL')
         expect(page).to have_text('Name')
+        expect(page).to have_field(with: rebate_form.full_name)
         fill_in('fields.full_name', with: 'arnold', fill_options: { clear: :backspace })
         click_button 'CANCEL'
+        expect(page).to have_text('EDIT')
         expect(page).to have_field(with: rebate_form.full_name)
       end
     end
@@ -52,7 +55,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       it 'cannot see edit link on processed form' do
         visit "/admin/rebate_forms/#{processed_form.id}"
         expect(page).to have_field(with: processed_form.full_name)
-        expect(page).not_to have_text('Edit')
+        expect(page).not_to have_text('EDIT')
       end
       include_examples 'percy snapshot'
     end
