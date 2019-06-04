@@ -89,13 +89,13 @@ export const customerDetailFields = [
     placeholder: '00000 000 00',
   },
   {
-    id: 'moved_within_rating_year',
-    label: 'Moved within rating year',
+    id: 'lived_in_property_1_July',
+    label: 'Lived in property 1 July 2018',
     type:'radio'
   },
   {
-    id: 'lived_in_property_1_July',
-    label: 'Lived in property 1 July 2018',
+    id: 'moved_within_rating_year',
+    label: 'Moved within rating year',
     type:'radio'
   },
   {
