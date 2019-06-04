@@ -29,6 +29,9 @@ class EditRebateForm extends React.Component {
     const uniqKeys = uniq(applicantKeys.concat(partnerKeys));
     this.state = { otherIncomeFields: uniqKeys };
   }
+  cancelEdit () {
+    window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}`;
+  }
 
   addNewIncomeValue (values) {
     this.setState({otherIncomeFields: this.state.otherIncomeFields.concat(values.newIncomeField)});
@@ -89,7 +92,7 @@ class EditRebateForm extends React.Component {
                 <>
                   <div className="flex-row">
                     <div className="button-container">
-                      <button className="pure-button rebate-cancel-button" >
+                      <button className="pure-button rebate-cancel-button" type="button" onClick={this.cancelEdit.bind(this)} >
                         CANCEL
                       </button>
                       <button className="pure-button rebate-submit-button" type="submit" >
