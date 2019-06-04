@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
-    "@rails/webpacker": "^4.0.2",
+    "@rails/webpacker": "^4.0.4",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "final-form": "^4.13.0",
     "final-form-arrays": "^1.1.2",
@@ -16,7 +16,7 @@
     "react_ujs": "^2.5.0"
   },
   "devDependencies": {
-    "@percy/agent": "^0.4.9",
+    "@percy/agent": "^0.5.0",
     "webpack-dev-server": "^3.4.1"
   }
 }

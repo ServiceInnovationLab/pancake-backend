@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'RebateForm', type: :feature, js: true do
   let(:property) { FactoryBot.create :property_with_rates, rating_year: ENV['YEAR'] }
   let!(:rebate_form) { FactoryBot.create :rebate_form, status: RebateForm::NOT_SIGNED_STATUS, property: property }
-
+  let!(:processed_form) { FactoryBot.create :processed_form, property: property }
   context 'anonymous' do
     it "can't see it" do
       visit "/admin/rebate_forms/#{rebate_form.id}"
@@ -20,7 +20,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         visit "/admin/rebate_forms/#{rebate_form.id}/edit"
         expect(page).to have_text('Name')
         fill_in('fields.full_name', with: 'arnold', fill_options: { clear: :backspace })
-        click_button 'Submit'
+        click_button 'SAVE'
         expect(find_field('fields.full_name').value).to have_text 'arnold'
         rebate_form.reload
         expect(rebate_form.full_name).to eq 'arnold'
@@ -34,6 +34,28 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         click_link 'EDIT'
         expect(page).to have_text('Customer details')
         expect(page).to have_field(with: rebate_form.full_name)
+      end
+      include_examples 'percy snapshot'
+    end
+
+    describe '#cancel' do
+      it 'can see the CANCEL button' do
+        visit "admin/rebate_forms/#{rebate_form.id}/edit"
+        expect(page).to have_text('CANCEL')
+        expect(page).to have_text('Name')
+        expect(page).to have_field(with: rebate_form.full_name)
+        fill_in('fields.full_name', with: 'arnold', fill_options: { clear: :backspace })
+        click_button 'CANCEL'
+        expect(page).to have_text('EDIT')
+        expect(page).to have_field(with: rebate_form.full_name)
+      end
+    end
+
+    describe '#show' do
+      it 'cannot see edit link on processed form' do
+        visit "/admin/rebate_forms/#{processed_form.id}"
+        expect(page).to have_field(with: processed_form.full_name)
+        expect(page).not_to have_text('EDIT')
       end
       include_examples 'percy snapshot'
     end

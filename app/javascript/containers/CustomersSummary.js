@@ -60,6 +60,8 @@ class CustomersSummary extends React.Component {
   onChange(value) {
     this.setState({applicationState: value, rebateForms: null});
 
+    if(value === 'not signed') return;
+
     this.fetchRebates(value);
   }
 
