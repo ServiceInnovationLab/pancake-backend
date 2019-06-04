@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6f03da12097fb29e58e3d048d8a9e8ac",
+    "revision": "6056dde8e210d6996fa0de6e0cc42f58",
     "url": "/ipad/index.html"
   },
   {
-    "revision": "5f23d5f6a112eaa99f24",
+    "revision": "0ba9cf3eb4c9559cb39b",
     "url": "/ipad/static/css/main.a43cc759.chunk.css"
   },
   {
-    "revision": "7d3f52c032539c3d9ec8",
-    "url": "/ipad/static/js/2.3c1a2099.chunk.js"
+    "revision": "e0b2dd88882f349f6c0d",
+    "url": "/ipad/static/js/2.b08ed0af.chunk.js"
   },
   {
-    "revision": "5f23d5f6a112eaa99f24",
-    "url": "/ipad/static/js/main.915054f4.chunk.js"
+    "revision": "0ba9cf3eb4c9559cb39b",
+    "url": "/ipad/static/js/main.20b54ed8.chunk.js"
   },
   {
     "revision": "dd0051aba38b01f68560",
