@@ -48,7 +48,7 @@ class CustomersSummary extends React.Component {
     }).then(() => {
       this.setState({checked: []});
       this.fetchRebates(this.state.applicationState);
-    })
+    });
   }
 
   fetchRebates (status, name) {
