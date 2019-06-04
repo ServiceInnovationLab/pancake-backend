@@ -28,7 +28,7 @@ class Admin::BatchesController < Admin::BaseController
     rebate_forms = params[:ids].map { |id| policy_scope(RebateForm).find(id) }
 
     batch = Batch.new(
-      council: current_user.council,
+      council: rebate_forms.first.council,
       amount: batch_amount(rebate_forms),
       batch_date: rebate_forms.last.created_at,
       claim_count: rebate_forms.size
