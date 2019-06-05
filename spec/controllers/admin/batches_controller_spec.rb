@@ -27,8 +27,8 @@ RSpec.describe Admin::BatchesController, type: :controller do
 
       it 'updates a batch' do
         expect(Batch.first.name).to eq "TEMP-BATCH-ID##{batched_form.batch_id}"
-        patch :update, params: { id: batched_form.batch_id, batch: { name: 'This is the new name' } }
-        expect(Batch.first.name).to eq 'This is the new name'
+        patch :update, params: { id: batched_form.batch_id, batch: { name: 'This is the 23rd new name' } }
+        expect(Batch.first.name).to eq 'This is the 23rd new name'
       end
     end
   end
