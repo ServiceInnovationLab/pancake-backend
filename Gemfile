@@ -77,9 +77,6 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 4.0'
   gem 'faker', '~> 1.7'
   gem 'letter_opener'
-  gem 'percy-capybara', '~> 4.0.0'
-  gem 'rails-controller-testing'
-  gem 'rspec-rails', '~> 3.5.2'
   gem 'rubocop', '0.70.0'
   gem 'swagger-diff', '~> 1.1'
 end
@@ -88,12 +85,12 @@ group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'capybara-selenium'
+  gem 'chromedriver-helper' # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'database_cleaner', '~> 1.6'
+  gem 'percy-capybara', '~> 4.0.0'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 3.5.2'
   gem 'simplecov', require: false
-  # freezes time in some specs
-  gem 'timecop'
+  gem 'timecop' # freezes time in some specs
   gem 'webdrivers'
-
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
 end
