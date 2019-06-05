@@ -64,7 +64,7 @@ RSpec.describe RebateForm, type: :model do
   describe 'rebate form state machine' do
     let!(:form) { FactoryBot.create :rebate_form, property: property, valuation_id: valuation_id }
 
-    it 'transitions the rebate form between its different states' do
+    it 'transitions the rebate form from Not Signed to Signed to Processed and back again' do
       expect(form.not_signed_state?).to eq true
 
       form.transition_to_signed_state
@@ -82,6 +82,17 @@ RSpec.describe RebateForm, type: :model do
       form.transition_to_not_signed_state
       expect(form.not_signed_state?).to eq true
       expect(form.signed_state?).to eq false
+    end
+
+    context 'to batch a rebate form' do
+      let!(:processed_form) { FactoryBot.create :processed_form }
+      let!(:batch) { FactoryBot.create :batch, council: processed_form.council }
+
+      it 'transitions the status from Processed to Batched' do
+        processed_form.transition_to_batched_state(batch)
+        expect(processed_form.batched_state?).to eq true
+        expect(processed_form.processed_state?).to eq false
+      end
     end
   end
 end

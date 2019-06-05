@@ -14,4 +14,12 @@ RSpec.describe Batch, type: :model do
       expect(RebateForm.all).to include rebate_form
     end
   end
+
+  describe 'temporary name' do
+    let(:batch) { FactoryBot.create(:batch) }
+
+    it 'should have a temporary name' do
+      expect(batch.name).to eq "TEMP-BATCH-ID##{batch.id}"
+    end
+  end
 end

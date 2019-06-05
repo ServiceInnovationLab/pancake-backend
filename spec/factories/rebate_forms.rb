@@ -45,4 +45,11 @@ FactoryBot.define do
       rebate_form.transition_to_processed_state
     end
   end
+
+  factory :batched_form, parent: :processed_form do
+    after(:create) do |rebate_form|
+      batch = FactoryBot.create(:batch, council: rebate_form.council)
+      rebate_form.transition_to_batched_state(batch)
+    end
+  end
 end
