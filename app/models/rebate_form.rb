@@ -2,8 +2,8 @@
 
 class RebateForm < ApplicationRecord
   has_many :signatures, dependent: :destroy
-  belongs_to :property, required: true
-  belongs_to :batch, required: false
+  belongs_to :property, optional: false
+  belongs_to :batch, optional: true
 
   delegate :council, to: :property
   delegate :rating_year, to: :property
@@ -26,6 +26,7 @@ class RebateForm < ApplicationRecord
   NOT_SIGNED_STATUS = 'not signed'
   SIGNED_STATUS = 'signed'
   PROCESSED_STATUS = 'processed'
+  BATCHED_STATUS = 'batched'
 
   def signed_state?
     status == SIGNED_STATUS
@@ -39,6 +40,10 @@ class RebateForm < ApplicationRecord
     status == PROCESSED_STATUS
   end
 
+  def batched_state?
+    (status == BATCHED_STATUS) && batch_id.positive?
+  end
+
   def transition_to_signed_state
     update!(status: SIGNED_STATUS)
   end
@@ -49,6 +54,10 @@ class RebateForm < ApplicationRecord
 
   def transition_to_processed_state
     update!(status: PROCESSED_STATUS)
+  end
+
+  def transition_to_batched_state(batch)
+    update!(status: BATCHED_STATUS, batch: batch)
   end
 
   def calc_rebate_amount!

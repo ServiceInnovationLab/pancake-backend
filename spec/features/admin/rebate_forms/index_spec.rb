@@ -98,10 +98,25 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
         expect(page).to have_text('UNPROCESS')
-        # expect(page).to have_text('CREATE BATCH')
+        expect(page).to have_text('CREATE BATCH')
         expect(page).to have_text(processed_name)
         check(`#{processed_name}-checkbox`)
         click_button 'UNPROCESS'
+        expect(page).not_to have_text(processed_name)
+      end
+      include_examples 'percy snapshot'
+    end
+
+    describe 'batch some processed forms' do
+      it 'should remove batched rebate forms' do
+        click_button 'Processed'
+        expect(page).to have_text('Signed')
+        expect(page).to have_text('Not Signed')
+        expect(page).to have_text('UNPROCESS')
+        expect(page).to have_text('CREATE BATCH')
+        expect(page).to have_text(processed_name)
+        check(`#{processed_name}-checkbox`)
+        click_button 'CREATE BATCH'
         expect(page).not_to have_text(processed_name)
       end
       include_examples 'percy snapshot'
