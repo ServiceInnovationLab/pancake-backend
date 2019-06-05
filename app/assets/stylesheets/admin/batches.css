@@ -53,3 +53,27 @@
   margin-bottom: .5em;
   width: 100%;
 }
+
+.batch-button-container {
+  margin-bottom: 2em;
+  padding-bottom: .5em;
+}
+
+.batch-cancel-button {
+  background-color: var(--white);
+  border-radius: .2em;
+  border: 1px solid var(--black);
+  color: var(--black);
+  float: right;
+  margin-left: 3em;
+  padding: 7px 10px;
+}
+
+.batch-submit-button {
+  background-color: var(--blue);
+  border-radius: .2em;
+  color: var(--white);
+  float: right;
+  margin-bottom: 1.5em;
+  margin-top: 0 !important;
+}
