@@ -10,7 +10,7 @@ services:
   - postgresql
 addons:
   postgresql: "10"
-  chrome: stable
+  chrome: beta
   apt:
     packages:
     - postgresql-10
