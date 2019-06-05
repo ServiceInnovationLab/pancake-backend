@@ -85,7 +85,7 @@ GEM
     capybara-selenium (0.0.6)
       capybara
       selenium-webdriver
-    chartkick (3.0.2)
+    chartkick (3.2.0)
     childprocess (1.0.1)
       rake (< 13.0)
     chromedriver-helper (2.1.1)
