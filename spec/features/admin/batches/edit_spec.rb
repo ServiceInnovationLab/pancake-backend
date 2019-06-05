@@ -11,6 +11,7 @@ RSpec.describe 'Batch', type: :feature, js: true do
       it 'can modify the batch name' do
         visit "/admin/batches/#{batched_form.batch_id}/edit"
         expect(page).to have_text('Name')
+        expect(batched_form.batch.name).to eq "TEMP-BATCH-ID##{batched_form.batch_id}"
         fill_in('Name', with: 'BB8-123-456-789', fill_options: { clear: :backspace })
         click_button 'Save'
         batched_form.reload
