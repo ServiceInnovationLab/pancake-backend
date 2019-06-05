@@ -21,5 +21,15 @@ RSpec.describe Admin::BatchesController, type: :controller do
         expect(RebateForm.third.batch_id).to eq Batch.first.id
       end
     end
+
+    describe '#update' do
+      let!(:batched_form) { FactoryBot.create(:batched_form, property: property) }
+
+      it 'updates a batch' do
+        expect(Batch.first.name).to eq "TEMP-BATCH-ID##{batched_form.batch_id}"
+        patch :update, params: { id: batched_form.batch_id, batch: { name: 'This is the new name' } }
+        expect(Batch.first.name).to eq 'This is the new name'
+      end
+    end
   end
 end
