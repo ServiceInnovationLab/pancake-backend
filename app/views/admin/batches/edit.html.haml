@@ -1,0 +1,14 @@
+.batch-wrapper
+  .batch-header
+    .batch-title
+      Batch Details
+
+  .batch-edit-box
+    = form_for(@batch, url: edit_admin_batch_path) do |f|
+      .batch-field
+        = f.submit 'Save'
+        = link_to 'Cancel', admin_rebate_forms_path
+      .batch-field
+        = f.label :name
+        = f.text_field :name, class: 'batch-input'
+

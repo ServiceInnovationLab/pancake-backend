@@ -13,6 +13,11 @@ class Admin::BatchesController < Admin::BaseController
                                  .size
   end
 
+  def edit
+    @batch = Batch.find(params[:id])
+    authorize @batch
+  end
+
   def show
     @batch = Batch.find(params[:id])
     authorize @batch

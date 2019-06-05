@@ -13,6 +13,10 @@ class BatchPolicy < ApplicationPolicy
     dia? || same_council?
   end
 
+  def edit?
+    dia? || same_council?
+  end
+
   def update?
     (dia? || same_council?) && !record.completed
   end
