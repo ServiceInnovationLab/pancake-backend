@@ -85,13 +85,19 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           end
         end
 
-        describe 'can unprocess an application' do
+        describe 'when a rebate form is processed' do
           let!(:processed_rebate_form) { FactoryBot.create(:processed_form) }
           before { visit "/admin/rebate_forms/#{processed_rebate_form.id}" }
 
-          it 'unprocesses the application' do
-            expect(page).to have_text('Unprocess')
+          it 'cannot be edited' do
             expect(page).to have_text('Processed')
+            expect(page).to have_text('Unprocess')
+            expect(page).to_not have_text('Edit')
+          end
+
+          it 'can be unprocessed' do
+            expect(page).to have_text('Processed')
+            expect(page).to have_text('Unprocess')
             click_link('Unprocess')
             expect(page).to have_text('Signed and ready to process')
             expect(page).to_not have_text('Processed')
