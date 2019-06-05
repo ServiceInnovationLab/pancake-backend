@@ -2,7 +2,7 @@ version: "2"
 plugins:
   rubocop:
     enabled: true
-    channe: "rubocop-0-70"
+    channel: "rubocop-0-70"
     config:
       file: .rubocop.yml
   haml-lint:
