@@ -42,7 +42,7 @@ class Admin::BatchesController < Admin::BaseController
     rebate_forms = params[:ids].map { |id| policy_scope(RebateForm).find(id) }
 
     batch = Batch.new(
-      council: rebate_forms.first.council,
+      council: find_council(rebate_forms),
       amount: batch_amount(rebate_forms),
       batch_date: rebate_forms.last.created_at,
       claim_count: rebate_forms.size
@@ -61,6 +61,12 @@ class Admin::BatchesController < Admin::BaseController
 
   def batch_name_param
     params.require(:batch).require(:name).strip
+  end
+
+  def find_council(rebate_forms)
+    return current_user.council if current_user.council
+
+    rebate_forms.first.council
   end
 
   def pdf_filename

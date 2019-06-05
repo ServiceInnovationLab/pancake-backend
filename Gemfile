@@ -54,22 +54,21 @@ gem 'wkhtmltopdf-heroku'
 
 gem 'aws-sdk-s3' # We store images on s3
 
+gem 'httparty'
 gem 'image_processing'
-
-group :development do
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-end
-
 gem 'jsonapi-rails', '~> 0.3.0'
 gem 'jsonapi_spec_helpers', '~> 0.4', require: false
 gem 'jsonapi_suite', '~> 0.7'
 gem 'jsonapi_swagger_helpers', '~> 0.6', require: false
 gem 'kaminari', '~> 1.0'
 
-gem 'httparty'
+group :development do
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'travis'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -85,10 +84,6 @@ group :development, :test do
   gem 'swagger-diff', '~> 1.1'
 end
 
-group :development do
-  gem 'travis'
-end
-
 group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
@@ -98,4 +93,7 @@ group :test do
   # freezes time in some specs
   gem 'timecop'
   gem 'webdrivers'
+
+  # Easy installation and use of chromedriver to run system tests with Chrome
+  gem 'chromedriver-helper'
 end
