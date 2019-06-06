@@ -70,7 +70,7 @@ class CustomersSummary extends React.Component {
         this.setState({ rebateForms: JSON.parse(data.json) });
       })
       .catch(error => {
-         console.error(error);
+        console.error(error);
       });
   }
 
