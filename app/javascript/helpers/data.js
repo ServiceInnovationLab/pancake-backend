@@ -24,7 +24,7 @@ export const incomeRows = [
   ],
   [
     'work_and_income_benefits',
-    'Work and Income benefits'
+    'Work and Income Benefits'
   ],
   [
     'business_profit',
