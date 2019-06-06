@@ -19,7 +19,7 @@ class CustomersSummary extends React.Component {
     this.createBatch = this.createBatch.bind(this);
     this.fetchRebatesByName = this.fetchRebatesByName.bind(this);
     
-    this.state = { checked: [], rebateForms: this.props.rebateForms};
+    this.state = { checked: [], batches: this.props.batches, rebateForms: this.props.rebateForms};
   }
 
   checkIt (key) {
@@ -78,7 +78,8 @@ class CustomersSummary extends React.Component {
   }
 
   render() {
-    const { rebateForms, checked } = this.state;
+    const { batches, rebateForms, checked } = this.state;
+    console.log(batches)
     const processable = pathname === '/admin/rebate_forms/processed' &&
     (rebateForms && rebateForms[0]);
     const checkIt = processable ? this.checkIt.bind(this) : null;

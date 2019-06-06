@@ -6,7 +6,9 @@ class Admin::BatchesController < Admin::BaseController
   def index
     @batches = policy_scope(Batch).all.order(created_at: :asc)
 
-    respond_with json: @batches.to_json(include: [:rebate_forms])
+    @batches_with_forms = @batches.map { |batch|
+      { batch: batch, rebate_forms: batch.rebate_forms }
+    }
   end
 
   def show

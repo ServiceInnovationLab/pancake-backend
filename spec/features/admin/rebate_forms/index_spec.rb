@@ -40,7 +40,6 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       it 'no applications should be visible' do
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
-        byebug
         expect(page).to have_field('name')
         expect(page).not_to have_text(expected_name)
       end
