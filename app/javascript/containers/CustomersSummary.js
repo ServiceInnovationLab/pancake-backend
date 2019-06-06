@@ -94,7 +94,7 @@ class CustomersSummary extends React.Component {
         <div className='flex-row rebate-bulk-actions'>
           <h3>Search Results</h3>
           {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]} onClick={this.unProcessRebates.bind(this)}>UNPROCESS</button>}
-          {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]} onClick={this.createBatch.bind(this)}>CREATE BATCH</button>}
+//           {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]} onClick={this.createBatch.bind(this)}>CREATE BATCH</button>}
         </div>
         {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, this.state, checkIt)}
       </Fragment>
