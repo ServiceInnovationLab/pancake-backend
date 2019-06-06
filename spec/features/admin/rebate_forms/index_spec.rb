@@ -20,7 +20,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
 
   context 'anonymous' do
     it "can't see it" do
-      visit '/admin'
+      visit '/admin/'
       expect(page).to have_text('Rates Rebate 2018/2019')
       expect(page).to have_text('Log in')
     end
@@ -34,12 +34,13 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         FactoryBot.create(:rebate_form, property: property)
       end
       login_as(user, scope: :user)
-      visit '/admin'
+      visit '/admin/'
     end
     describe 'on initial load' do
       it 'no applications should be visible' do
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
+        byebug
         expect(page).to have_field('name')
         expect(page).not_to have_text(expected_name)
       end
@@ -134,7 +135,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     describe "can't see rebate_forms from other councils" do
       let(:other_councils_form) { FactoryBot.create :rebate_form }
       before do
-        visit '/admin'
+        visit '/admin/'
         fill_in 'Name', with: other_councils_form.full_name
         click_button 'Search'
       end
