@@ -24,7 +24,7 @@ class Admin::BatchesController < Admin::BaseController
 
     batch.update!(name: batch_name_param)
 
-    redirect_to admin_rebate_forms_path, notice: 'The selected batch has been updated successfully.'
+    redirect_to admin_batches_path, notice: 'The selected batch has been updated successfully.'
   end
 
   def show
