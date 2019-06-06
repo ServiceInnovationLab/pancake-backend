@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::BatchesController < Admin::BaseController
-  respond_to :json
+  respond_to :json, :html
 
   def index
     @batches = policy_scope(Batch).all.order(created_at: :asc)
