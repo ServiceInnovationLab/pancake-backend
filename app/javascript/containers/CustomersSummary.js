@@ -10,6 +10,7 @@ import { SummarySearch } from '../components/SummarySearch';
 import { SummaryTabs } from '../components/SummaryTabs';
 
 const pathname = window.location.pathname;
+const location = pathname.substring(pathname.lastIndexOf('/') + 1);
 
 class CustomersSummary extends React.Component {
   constructor(props) {
@@ -69,7 +70,7 @@ class CustomersSummary extends React.Component {
         this.setState({ rebateForms: JSON.parse(data.json) });
       })
       .catch(error => {
-        console.error(error);
+         console.error(error);
       });
   }
 
@@ -79,7 +80,7 @@ class CustomersSummary extends React.Component {
 
   render() {
     const { rebateForms, checked } = this.state;
-    const processable = pathname === '/admin/rebate_forms/processed' &&
+    const processable = location === 'processed' &&
     (rebateForms && rebateForms[0]);
     const checkIt = processable ? this.checkIt.bind(this) : null;
 
@@ -87,7 +88,7 @@ class CustomersSummary extends React.Component {
       <Fragment>
         <div className='pure-u-1-2 rebate-search-box'>
           {SummaryTabs()}
-          { (pathname === '/admin/') && SummarySearch(this.fetchRebatesByName)}
+          { (location === 'admin') && SummarySearch(this.fetchRebatesByName)}
         </div>
         <div className='flex-row rebate-bulk-actions'>
           <h3>Search Results</h3>
