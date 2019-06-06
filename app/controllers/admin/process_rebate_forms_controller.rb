@@ -3,6 +3,14 @@
 class Admin::ProcessRebateFormsController < Admin::BaseController
   respond_to :json
 
+  def index
+    @processed_rebate_forms = policy_scope(RebateForm)
+                              .where(status: RebateForm::PROCESSED_STATUS)
+                              .order(created_at: :asc)
+
+    respond_with json: @processed_rebate_forms.to_json
+  end
+
   def create
     rebate_form_to_process = RebateForm.find(params[:id])
     authorize rebate_form_to_process, policy_class: ProcessRebateFormsPolicy

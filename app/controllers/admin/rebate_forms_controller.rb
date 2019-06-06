@@ -18,15 +18,12 @@ class Admin::RebateFormsController < Admin::BaseController
   def index
     @name = params[:name]
 
-    @status = params[:status]
-
-    @council = current_user.council.presence
-
-    @rebate_forms = policy_scope(RebateForm).order(created_at: :asc)
+    @rebate_forms = policy_scope(RebateForm)
+                    .where(status: RebateForm::NOT_SIGNED_STATUS)
+                    .order(created_at: :asc)
 
     # filter by the search form fields
-    @rebate_forms = @rebate_forms.where("fields ->> 'full_name' iLIKE ?", "%#{params[:name]}%") if @name.present?
-    @rebate_forms = @rebate_forms.where(status: @status) if @status
+    @rebate_forms = @rebate_forms.where("fields ->> 'full_name' iLIKE ?", "%#{@name}%") if @name.present?
 
     respond_with json: @rebate_forms.to_json(include: [:property])
   end
