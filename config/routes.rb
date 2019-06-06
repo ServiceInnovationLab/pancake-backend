@@ -9,11 +9,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get 'rebate_forms/signed', to: 'sign_rebate_forms#index'
-    get 'rebate_forms/processed', to: 'process_rebate_forms#index'
-    post 'process_rebate_form', to: 'process_rebate_forms#create'
-    delete 'unprocess_rebate_form', to: 'process_rebate_forms#destroy'
-    delete 'unprocess_rebate_forms', to: 'process_rebate_forms#destroy_all'
+    get 'rebate_forms/signed', to: 'signed_rebate_forms#index'
+    get 'rebate_forms/processed', to: 'processed_rebate_forms#index'
+    post 'process_rebate_form', to: 'processed_rebate_forms#create'
+    delete 'unprocess_rebate_form', to: 'processed_rebate_forms#destroy'
+    delete 'unprocess_rebate_forms', to: 'processed_rebate_forms#destroy_all'
 
     resources :rebate_forms do
       get 'generateqr'
