@@ -28,7 +28,7 @@ RSpec.describe 'Batch', type: :feature do
 
     before { login_as(user, scope: :user) }
 
-    it ' Can see all batches' do
+    xit ' Can see all batches' do
       visit '/admin/batches'
       expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
       expect(page).to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
@@ -43,7 +43,7 @@ RSpec.describe 'Batch', type: :feature do
 
     before { login_as(user, scope: :user) }
 
-    it 'can see batches from my council' do
+    xit 'can see batches from my council' do
       visit '/admin/batches'
       expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
       expect(page).not_to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
