@@ -229,7 +229,8 @@
   display: flex;
   margin: 5em auto;
   background-color: black;
-  width: 20%;
+  min-width: 20%;
+  max-width: 25%;
   position: absolute;
   top: 50%;
   left: 50%;
