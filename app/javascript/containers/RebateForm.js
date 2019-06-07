@@ -121,7 +121,12 @@ class EditRebateForm extends React.Component {
                     })}
                   </div>
                   }
-                  {IncomeDeclaration({otherIncomeFields, isReadOnly, includePartnerValues})}
+                  { isReadOnly && 
+                  IncomeDeclaration({otherIncomeFields, isReadOnly, includePartnerValues})
+                  }
+                  { !isReadOnly && 
+                  IncomeDeclaration({otherIncomeFields, includePartnerValues})
+                  }
                   { !isReadOnly &&
                   <Fragment>
                     <div className={'flex-row'}>

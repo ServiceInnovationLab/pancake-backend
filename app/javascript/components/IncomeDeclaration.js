@@ -14,12 +14,20 @@ export function IncomeDeclaration ({otherIncomeFields, isReadOnly, includePartne
           <label className='flex-item'>
             <h3>Total combined income: </h3>
           </label>
+          {!isReadOnly && 
           <Field
             className='rebate-search-input flex-item'
             name="fields.income.total_income"
             component="input"
             readOnly
-          />
+          />}
+          {isReadOnly && 
+          <Field
+            className='rebate-search-input-disabled flex-item'
+            name="fields.income.total_income"
+            component="input"
+            readOnly
+          />}
         </div>
         <div className="flex-row">
           <h2 className="flex-item" >Income Type</h2>

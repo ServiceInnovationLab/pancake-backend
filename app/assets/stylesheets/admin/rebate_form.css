@@ -97,12 +97,18 @@
   width: 100%;
 }
 
+.rebate-search-input-disabled {
+  line-height: 2em;
+  margin-bottom: .5em;
+  width: 100%;
+  background: #dddddd;
+}
+
 .rebate-search-button {
   background-color: var(--blue);
   border-radius: .2em;
   color: white
 }
-
 
 .rebate-results-table {
   background-color: var(--dove);
@@ -149,6 +155,7 @@
 .with-margin {
   margin-right: 3%
 }
+
 .one-quarter {
   width: 23.5%
 }
