@@ -14,7 +14,7 @@ const pathname = window.location.pathname;
 class CustomersSummary extends React.Component {
   constructor(props) {
     super(props);
-    const {batches, rebateForms } = this.props
+    const {batches, rebateForms } = this.props;
 
     this.unProcessRebates = this.unProcessRebates.bind(this);
     this.createBatch = this.createBatch.bind(this);
@@ -85,7 +85,7 @@ class CustomersSummary extends React.Component {
   render() {
     const { batches, rebateForms, checked } = this.state;
     
-    console.log(batches)
+    console.log(batches);
     const processable = pathname === '/admin/rebate_forms/processed' &&
     (rebateForms && rebateForms[0]);
     const checkIt = processable ? this.checkIt.bind(this) : null;
