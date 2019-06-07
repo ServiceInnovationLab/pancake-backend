@@ -61,7 +61,6 @@ export function TableInput ({ id, type = 'number', isReadOnly, className }) {
         name={`fields.income.${id}`}
         component='input'
         type={type}
-        readOnly={isReadOnly}
         min={0}
         step={0.01}
       />
