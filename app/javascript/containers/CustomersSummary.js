@@ -14,12 +14,17 @@ const pathname = window.location.pathname;
 class CustomersSummary extends React.Component {
   constructor(props) {
     super(props);
+    const {batches, rebateForms } = this.props
 
     this.unProcessRebates = this.unProcessRebates.bind(this);
     this.createBatch = this.createBatch.bind(this);
     this.fetchRebatesByName = this.fetchRebatesByName.bind(this);
     
-    this.state = { checked: [], batches: this.props.batches, rebateForms: this.props.rebateForms};
+    this.state = {
+      checked: [],
+      batches: batches && JSON.parse(batches),
+      rebateForms: rebateForms && JSON.parse(rebateForms)
+    };
   }
 
   checkIt (key) {
@@ -79,6 +84,7 @@ class CustomersSummary extends React.Component {
 
   render() {
     const { batches, rebateForms, checked } = this.state;
+    
     console.log(batches)
     const processable = pathname === '/admin/rebate_forms/processed' &&
     (rebateForms && rebateForms[0]);

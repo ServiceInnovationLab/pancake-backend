@@ -7,6 +7,7 @@ class Admin::ProcessedRebateFormsController < Admin::BaseController
     @processed_rebate_forms = policy_scope(RebateForm)
                               .where(status: RebateForm::PROCESSED_STATUS)
                               .order(created_at: :asc)
+                              .to_json(include: [:property])
 
     respond_with json: @processed_rebate_forms.to_json(include: [:property])
   end
