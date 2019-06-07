@@ -10,6 +10,7 @@
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-accessible-accordion": "^3.0.0",
     "react-dom": "^16.8.6",
     "react-final-form": "^4.1.0",
     "react-final-form-arrays": "^2.0.3",
