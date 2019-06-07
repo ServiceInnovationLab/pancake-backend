@@ -14,7 +14,7 @@ RSpec.describe Admin::BatchesController, type: :controller do
 
       it 'assigns all batches to @batches' do
         get :index
-        expect(assigns(:batches)).to eq([batched_form.batch])
+        expect(assigns(:batches)).to eq([batched_form.batch].to_json(include: [:rebate_forms]))
         expect(response.status).to eq(200)
       end
     end
