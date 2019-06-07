@@ -49,8 +49,8 @@ gem 'groupdate'
 
 # Makes the pdfs
 gem 'wicked_pdf'
-# gem 'wkhtmltopdf-binary'
-gem 'wkhtmltopdf-heroku'
+gem 'wkhtmltopdf-binary'
+# gem 'wkhtmltopdf-heroku'
 
 gem 'aws-sdk-s3' # We store images on s3
 

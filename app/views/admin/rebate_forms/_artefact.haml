@@ -20,7 +20,7 @@
             .column
               .field
                 %h3 Phone
-                %p=rebate_form.fields['phone_number']
+                %p=rebate_form.fields['phone']
             .column
               .field
                 %h3 Email
@@ -42,7 +42,7 @@
       .pure-g
         .pure-u-2-3
           .field
-            %h3 Were you living at address at 1 July?
+            %h3 Were you living at this address at 1 July?
             %p=rebate_form_lived_year?(rebate_form)
           .field
             %h3 Did you live with a partner or a joint homeowner on 1 July?
@@ -53,6 +53,7 @@
           .field
             %h3 Do you run a business from home?
             %p=rebate_form_pdf_home_business(rebate_form).capitalize
+          / add a field to show if they answered yes to moving, show all info about previous address
           .field
             %h3 Rebate amount
             %p=rebate_form_amount(rebate_form)
@@ -61,28 +62,22 @@
           .table-border
             - rebate_form.property.rates_bills.where(rating_year: rebate_form.property.rating_year).each do |bill|
               %div
-                %span.table-col
-                  %h3 Rates
-                  %p= number_to_currency bill.total_rates
-                %span.table-col
-                  %h3 Water
-                  %p= number_to_currency bill.total_water_rates
-              %div
                 %h3 Total
                 %p= number_to_currency bill.total_bill
               %hr
                 %div
                   %h3 Total Income
-                  %p= rebate_form.fields['total_income']
+                  %p= rebate_form.fields['income']['total_income']
+                  / need to show all of the income fields
     .pure-u-1
       .pure-g
         .pure-u-1-2
           .declaration
             %h3 Declaration
             %p
-              I, #{rebate_form.fields['full_name']} of
+              I, #{rebate_form.fields['full_name']}, #{rebate_form.fields['occupation']}, of
               #{rebate_form.property.location}
-              #{rebate_form.property.town_city}
+              #{rebate_form.property.town_city},
               solemnly and sincerely declare that I believe the information I have given on this form is true and correct, and I make this solemn declaration conscientiously believing the same to be true and by virtue of the Oaths and Declarations Act 1957.
 
         .pure-u-1-4

@@ -6,6 +6,8 @@
       %h3
         COVER PAGE for Batch
         = @batch.id
+      %h3
+        = @batch.name
         %p
           = @batch.created_at.strftime("%d-%m-%Y - %I:%M%P").to_time.localtime
         %p="Total claimed rebates = $#{@batch.amount}"
