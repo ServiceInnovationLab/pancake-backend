@@ -53,7 +53,12 @@
           .field
             %h3 Do you run a business from home?
             %p=rebate_form_pdf_home_business(rebate_form).capitalize
-          / add a field to show if they answered yes to moving, show all info about previous address
+          .field
+            %h3 Did you move within the last rating year?
+            %p=rebate_form_boolean_field_to_english(rebate_form.fields['moved_within_rating_year'])
+            - if moved_within_rating_year?(rebate_form)
+              %h3 Previous Address
+              %p=rebate_form.fields['details_of_previous_property']
           .field
             %h3 Rebate amount
             %p=rebate_form_amount(rebate_form)
@@ -61,14 +66,7 @@
         .pure-u-1-4
           .table-border
             - rebate_form.property.rates_bills.where(rating_year: rebate_form.property.rating_year).each do |bill|
-              %div
-                %h3 Total
-                %p= number_to_currency bill.total_bill
-              %hr
-                %div
-                  %h3 Total Income
-                  %p= rebate_form.fields['income']['total_income']
-                  / need to show all of the income fields
+              = render 'admin/rebate_forms/rates_and_income', bill: bill, rebate_form: rebate_form
     .pure-u-1
       .pure-g
         .pure-u-1-2
