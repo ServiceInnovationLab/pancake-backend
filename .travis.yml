@@ -26,11 +26,4 @@ script:
 after_script:
 - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t simplecov --id $CC_TEST_REPORTER_ID"
 env:
-- PGPORT=5433
-- YEAR=2019
-- SIGNING_URL="http://127.0.0.1:4000/#/{token}"
-# TODO Update to new open fisca response
-#- OPENFISCA_ORIGN="https://govtnz-rates-rebate-of.herokuapp.com/calculate"
-- OPENFISCA_ORIGIN="https://openfisca.ratesrebates.services.govt.nz/calculate"
-- HMAC_SECRET="DgD3NMLjoEsgbT7bOmpgI0svg18BMHuy0VpE6cX9xMMxznWhvEKIggR61nE/E"
-- APP_URL="http://localhost:3000/"
+- PGPORT=5433 YEAR=2019 SIGNING_URL="http://127.0.0.1:4000/#/{token}" OPENFISCA_ORIGIN="https://openfisca.ratesrebates.services.govt.nz/calculate" HMAC_SECRET="DgD3NMLjoEsgbT7bOmpgI0svg18BMHuy0VpE6cX9xMMxznWhvEKIggR61nE/E" APP_URL="http://localhost:3000/"
