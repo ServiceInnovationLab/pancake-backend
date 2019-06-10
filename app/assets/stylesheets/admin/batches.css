@@ -25,7 +25,10 @@
   letter-spacing: normal
 }
 .batches-flex-table-cell {
-  width: 33%
+  width: 30%
+}
+.batches-flex-table-first-cell {
+  width: 40%
 }
 .batches-accordion-header-row {
   width: 100%;

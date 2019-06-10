@@ -6,7 +6,7 @@ export function BatchRow (rebateForm) {
 
   return (
     <div className='flex-row'>
-      <div className='batches-flex-table-cell'> {full_name} </div>
+      <div className='batches-flex-table-first-cell'> {full_name} </div>
       <div className='batches-flex-table-cell'> {property && property.valuation_id} </div>
       <div className='batches-flex-table-cell'>
         <a className='batch-details-link' onClick={() => {
