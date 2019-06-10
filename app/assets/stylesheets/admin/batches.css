@@ -24,6 +24,11 @@
   padding: 0 1.75em 1.75em 1.75em;
   letter-spacing: normal
 }
+.batches-flex-table-row {
+  padding: 1em 1.75em;
+  display: flex;
+  border-top: 2px solid var(--dove);
+}
 .batches-flex-table-cell {
   width: 30%
 }
@@ -71,7 +76,9 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 2px;
 }
-
+.accordion__item {
+  margin-bottom: .5em
+}
 .accordion__item + .accordion__item {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -108,7 +115,6 @@
 }
 
 .accordion__panel {
-  padding: 20px;
   animation: fadein 0.35s ease-in;
   background-color: var(--white);
   border: 2px solid var(--dove);
