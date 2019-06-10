@@ -122,7 +122,7 @@
 .rebate-search-button {
   background-color: var(--blue);
   border-radius: .2em;
-  color: white;
+  color: var(--white);
   font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
