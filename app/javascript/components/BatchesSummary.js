@@ -14,7 +14,7 @@ import {
 
 import { BatchRow } from './BatchRow';
 
-export function BatchesSummary(batches, isDiaUser) {
+export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
 
   return (
     <Accordion allowZeroExpanded={true} className="batches-accordion">
@@ -32,7 +32,7 @@ export function BatchesSummary(batches, isDiaUser) {
               <AccordionItemButton>
                 <div className='batches-accordion-header-title'>
                   {name}
-                  {!isDiaUser && <button
+                  {isCouncilUser && <button
                     className='batches-accordion-header-button'
                     onClick={() => {
                       window.location = `/admin/batches/${id}/edit`;

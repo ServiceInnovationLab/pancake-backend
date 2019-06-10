@@ -25,7 +25,9 @@ class CustomersSummary extends React.Component {
       checked: [],
       batches: batches && JSON.parse(batches),
       rebateForms: rebateForms && JSON.parse(rebateForms),
-      isDiaUser: !!find(current_user_roles, role => role.name === 'dia')
+      isDiaUser: !!find(current_user_roles, role => role.name === 'dia'),
+      isCouncilUser: !!find(current_user_roles, role => role.name === 'rates' || 'frontline')
+
     };
   }
 
@@ -85,7 +87,7 @@ class CustomersSummary extends React.Component {
   }
 
   render() {
-    const { batches, rebateForms, checked, isDiaUser } = this.state;
+    const { batches, rebateForms, checked, isDiaUser, isCouncilUser } = this.state;
     
     const processable = pathname === '/admin/rebate_forms/processed' &&
     (rebateForms && rebateForms[0]);
@@ -107,7 +109,7 @@ class CustomersSummary extends React.Component {
             }
           )}
         </div>
-        {(batches && batches[0]) && BatchesSummary(batches, isDiaUser)}
+        {(batches && batches[0]) && BatchesSummary(batches, isDiaUser, isCouncilUser)}
         {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, checked, checkIt)}
       </Fragment>
     );
