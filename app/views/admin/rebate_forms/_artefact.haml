@@ -40,7 +40,7 @@
               %br/
     .pure-u-1
       .pure-g
-        .pure-u-1-2
+        .pure-u-2-3
           .field
             %h3 Were you living at this address at 1 July?
             %p=rebate_form_lived_year?(rebate_form)
@@ -63,13 +63,10 @@
             %h3 Rebate amount
             %p=rebate_form_amount(rebate_form)
 
-    .pure-u-1
-      .pure-g
-        .pure-u-1-2
+        .pure-u-1-4
           .table-border
             - rebate_form.property.rates_bills.where(rating_year: rebate_form.property.rating_year).each do |bill|
               = render 'admin/rebate_forms/rates_and_income', bill: bill, rebate_form: rebate_form
-
     .pure-u-1
       .pure-g
         .pure-u-1-2
@@ -81,20 +78,14 @@
               #{rebate_form.property.town_city},
               solemnly and sincerely declare that I believe the information I have given on this form is true and correct, and I make this solemn declaration conscientiously believing the same to be true and by virtue of the Oaths and Declarations Act 1957.
 
-    .pure-u-1
-      .pure-g
-        .pure-u-1-2
+        .pure-u-1-4
           .applicant-heading Applicant
           = signature_for_pdf(rebate_form.applicant_signature, 'applicant')
 
-    .pure-u-1
       .pure-g
         .pure-u-1-2
           %h3= "At #{rebate_form.signatures.first.created_at.strftime("%d-%m-%Y - %I:%M%P").to_time.localtime} before me"
           = render 'admin/rebate_forms/witness', signature: rebate_form.signatures.witness.last, council: rebate_form.council
-
-    .pure-u-1
-      .pure-g
-        .pure-u-1-2
+        .pure-u-1-4
           .witness-heading Witness
           = signature_for_pdf(rebate_form.witness_signature, 'witness')
