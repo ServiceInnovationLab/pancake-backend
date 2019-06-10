@@ -79,9 +79,6 @@
 .accordion__item {
   margin-bottom: .5em
 }
-.accordion__item + .accordion__item {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
 
 .accordion__button {
   background-color: var(--white);
