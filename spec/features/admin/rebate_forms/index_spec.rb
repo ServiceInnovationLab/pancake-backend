@@ -22,7 +22,6 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
   let(:processed_name) { processed_form.full_name }
   let(:processed_location) { processed_form.property.location }
 
-
   context 'anonymous' do
     it "can't see it" do
       visit '/admin'
