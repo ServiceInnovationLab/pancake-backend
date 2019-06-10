@@ -14,11 +14,7 @@ class BatchPolicy < ApplicationPolicy
   end
 
   def update?
-    (dia? || same_council?) && !record.completed
-  end
-
-  def destroy?
-    (dia? || same_council?) && !record.completed
+    dia? || same_council?
   end
 
   class Scope < Scope
