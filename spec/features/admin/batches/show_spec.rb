@@ -12,10 +12,10 @@ RSpec.describe 'Batch', type: :feature, js: true do
 
     context 'when the download button is clicked' do
       it 'opens the pdf' do
-        visit '/admin/batches'
-        expect(page).to have_content("Batches for #{property.council.name}")
-        click_link('Download')
-        find('.batches-heading')
+        visit "/admin/batches/#{batched_form.batch_id}.pdf"
+        # expect(page).to have_content("Batches for #{property.council.name}")
+        # click_link('Download')
+        page.has_content?("COVER PAGE for Batch #{batched_form.batch_id}")
         expect(page).to have_content("COVER PAGE for Batch #{batched_form.batch_id}")
         expect(page).to have_content(batched_form.batch.name)
       end
