@@ -57,7 +57,7 @@ body {
 a {
   background-color: #6dca7f;
   color: var(--black);
-  color: rgb(61, 146, 201);
+  color: 3D92C9;
   text-decoration: none;
 }
 
@@ -73,7 +73,7 @@ a:focus {
 }
 
 .header {
-  background-color: rgba(15,15,15,1);
+  background-color: #0f0f0f;
   padding: 1.25em;
 }
 
@@ -89,7 +89,7 @@ a:focus {
 }
 
 .header-login {
-  color: rgba(208,205,205,1);
+  color: #d0cdcd;
   float: right;
   vertical-align: middle;
   font-size: 16px;
@@ -98,7 +98,7 @@ a:focus {
 
 .header-logout-link {
   border-radius: 4px;
-  color: rgba(208,205,205,1) !important;
+  color: #d0cdcd;
   background-color: var(--dark-gray);
   margin-left: 15px;
   padding: 5px 10px;
