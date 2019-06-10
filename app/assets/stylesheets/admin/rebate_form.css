@@ -1,3 +1,21 @@
+/* Fonts
+=============================== */
+@font-face {
+  font-family: 'Fira';
+  src: url("fonts/FiraSans-Regular.eot");
+  src: url("fonts/FiraSans-Regular.eot?#iefix") format("embedded-opentype"),
+  url("fonts/FiraSans-Regular.woff") format("woff"),
+  url("fonts/FiraSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Fira-Bold';
+  src: url("fonts/FiraSans-Bold.eot");
+  src: url("fonts/FiraSans-Bold.eot?#iefix") format("embedded-opentype"),
+  url("fonts/FiraSans-Bold.woff") format("woff"),
+  url("fonts/FiraSans-Bold.ttf") format("truetype");
+}
+
 /*Colours*/
 :root {
   --dove: #ebebeb;
@@ -30,11 +48,13 @@
   display: flex;
   justify-content: space-between;
   font-size: 3em;
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
   margin: 0;
 }
 
 .rebate-subtitle {
   font-size: 1.75em;
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
   margin: .4em 0;
 }
 
@@ -79,6 +99,7 @@
   color: var(--white);
   float: right;
   width: 5em;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 .rebate-search-box {
@@ -89,6 +110,7 @@
 
 .rebate-search-field {
   margin-bottom: 1em;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 .rebate-search-input {
@@ -100,7 +122,8 @@
 .rebate-search-button {
   background-color: var(--blue);
   border-radius: .2em;
-  color: white
+  color: white;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 
@@ -184,6 +207,7 @@
   margin: 0 1em 1.5em 5em;
   /* margin: auto; */
   float: right;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 .rebate-submit-button {
@@ -193,12 +217,14 @@
   margin-bottom: 1.5em;
   /* margin: auto; */
   float: right;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 .rebate-add-income-button {
   line-height: 2em;
   margin: 0 auto .5em auto;
   padding: .4rem;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 .rebate-tabs {
@@ -212,7 +238,8 @@
   background: var(--dove);
   padding: 1rem;
   border: none;
-  font-weight: bold
+  font-weight: bold;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 .rebate-button-selected {
@@ -222,7 +249,8 @@
   padding: 1rem;
   border: none;
   border-bottom: 5px solid var(--blue);
-  font-weight: bold
+  font-weight: bold;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 .rebate-qrcode {
@@ -244,6 +272,7 @@
   float: right;
   width: 5em;
 }
+
 .rebate-bulk-actions {
   justify-content: space-between;
   width: 770px;
@@ -257,13 +286,16 @@
   background-color: var(--dove);
   color: var(--blue);
   border: none;
-  font-weight: bold 
+  font-weight: bold;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
+
 .rebate-bulk-action-button:disabled {
   background-color: var(--dove);
   color: var(--dark-gray);
   border: none;
-  font-weight: bold 
+  font-weight: bold;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 .rebate-single-process-button {
@@ -274,6 +306,7 @@
   font-size: .5em;
   
 }
+
 .rebate-form-blue-arrow {
   width: 2rem;
   height: 2rem

@@ -10,8 +10,8 @@ body {
 }
 
 * {
-  font-family: "Fira Sans", sans-serif;
-  color: rgb(51, 51, 51);
+  font-family: "Fira", Helvetica, Arial, sans-serif;
+  color: #333333;
 }
 
 .container {
@@ -65,13 +65,14 @@ body {
 .field,
 .declaration {
   margin-bottom: 10px;
-  color: rgb(51, 51, 51);
+  color: #333333;
 }
 
 h3,
 p {
   line-height: 1.4em;
   margin: 0;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 h3 + p {
