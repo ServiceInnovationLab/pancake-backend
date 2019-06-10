@@ -36,6 +36,10 @@ module RebateFormsHelper
     rebate_form_boolean_field_to_english rebate_form.fields['has_partner']
   end
 
+  def last_rating_year(rebate_form)
+    rebate_form.property.rating_year.to_i - 1
+  end
+
   def rebate_form_boolean_field_to_english(answer)
     if answer === true || answer.to_s.casecmp('yes').zero?
       'Yes'

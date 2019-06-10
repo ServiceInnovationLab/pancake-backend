@@ -1,34 +1,25 @@
 %div
-  %h3 Total Rates
-  %p= number_to_currency bill.total_bill
-%hr
-  %div
-    %h3 Total Income
-    %p= '$' + rebate_form.fields['income']['total_income']
-  %div
-    - if rebate_form.fields['income']['applicant'].present?
-      %h3 Applicant Income
-      - rebate_form.fields['income']['applicant'].each do |key, value|
+  - if rebate_form.fields['income']['applicant'].present?
+    - rebate_form.fields['income']['applicant'].each do |key, value|
+      - if value.present?
+        %h3="Applicant income - #{key.titleize}"
+        %p='$' + value
+  - if rebate_form.fields['income']['partner'].present?
+    - rebate_form.fields['income']['partner'].each do |key, value|
+      - if value.present?
+        %h3="Partner income - #{key.titleize}"
+        %p='$' + value
+  - if rebate_form.fields['income']['otherIncome'].present?
+    - if rebate_form.fields['income']['otherIncome']['applicant'].present?
+      - rebate_form.fields['income']['otherIncome']['applicant'].each do |key, value|
         - if value.present?
-          %h3=key.titleize
+          %h3="Applicant other income - #{key.titleize}"
           %p='$' + value
-    - if rebate_form.fields['income']['partner'].present?
-      %h3 Partner Income
-      - rebate_form.fields['income']['partner'].each do |key, value|
+    - if rebate_form.fields['income']['otherIncome']['partner'].present?
+      - rebate_form.fields['income']['otherIncome']['partner'].each do |key, value|
         - if value.present?
-          %h3=key.titleize
+          %h3="Partner other income - #{key.titleize}"
           %p='$' + value
-    - if rebate_form.fields['income']['otherIncome'].present?
-      %h3 Other Income
-      - if rebate_form.fields['income']['otherIncome']['applicant'].present?
-        %h3 Applicant
-        - rebate_form.fields['income']['otherIncome']['applicant'].each do |key, value|
-          - if value.present?
-            %h3=key.titleize
-            %p='$' + value
-      - if rebate_form.fields['income']['otherIncome']['partner'].present?
-        %h3 Partner
-        - rebate_form.fields['income']['otherIncome']['partner'].each do |key, value|
-          - if value.present?
-            %h3=key.titleize
-            %p='$' + value
+%div
+  %h3 Total combined income before tax
+  %p= '$' + rebate_form.fields['income']['total_income']
