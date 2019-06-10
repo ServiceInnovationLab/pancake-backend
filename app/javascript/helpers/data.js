@@ -1,8 +1,9 @@
+
 export const summaryTabs= [
-  ['Not Signed', 'not signed'],
-  ['Signed', 'signed'],
-  ['Processed', 'processed'],
-  ['Batched', 'batched']
+  ['Not Signed', '/admin'],
+  ['Signed', '/admin/rebate_forms/signed'],
+  ['Processed', '/admin/rebate_forms/processed'],
+  ['Batched', '/admin/batches']
 ];
 
 export const incomeRows = [

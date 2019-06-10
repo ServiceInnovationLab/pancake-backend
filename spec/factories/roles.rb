@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :role do
-    name { 'cool' }
+    name { 'rates' }
     friendly_name { 'very cool' }
   end
   factory :dia_role, parent: :role do
