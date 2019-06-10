@@ -11,13 +11,13 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js');
-
 importScripts(
-  '/ipad/precache-manifest.72f672eb9a94efda9f9313835c7730f2.js'
+  'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js',
 );
 
-self.addEventListener('message', (event) => {
+importScripts('/ipad/precache-manifest.72f672eb9a94efda9f9313835c7730f2.js');
+
+self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
@@ -33,7 +33,9 @@ workbox.core.clientsClaim();
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL('/ipad/index.html'), {
-  
-  blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
-});
+workbox.routing.registerNavigationRoute(
+  workbox.precaching.getCacheKeyForURL('/ipad/index.html'),
+  {
+    blacklist: [/^\/_/, /\/[^\/]+\.[^\/]+$/],
+  },
+);

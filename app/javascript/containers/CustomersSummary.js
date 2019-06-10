@@ -1,4 +1,3 @@
-
 import React, { Fragment } from 'react';
 import 'isomorphic-fetch';
 
@@ -11,47 +10,49 @@ import { SummaryTabs } from '../components/SummaryTabs';
 class CustomersSummary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { checked: [], rebateForms: null, applicationState: 'not signed' };
+    this.state = {
+      checked: [],
+      rebateForms: null,
+      applicationState: 'not signed',
+    };
   }
 
-  checkIt (key) {
+  checkIt(key) {
     const rebateFormId = this.state.rebateForms[key].id;
     let { checked } = this.state;
 
     const index = checked.indexOf(rebateFormId);
 
-    index !== -1
-      ? checked.splice(index, 1)
-      : checked.push(rebateFormId);
+    index !== -1 ? checked.splice(index, 1) : checked.push(rebateFormId);
 
     this.setState({
-      checked: [...checked]
+      checked: [...checked],
     });
   }
 
-  unProcessRebates () {
+  unProcessRebates() {
     requestBuilder({
       method: 'DELETE',
       path: '/admin/unprocess_rebate_forms',
-      body: JSON.stringify({ids: this.state.checked})
+      body: JSON.stringify({ ids: this.state.checked }),
     }).then(() => {
-      this.setState({checked: []});
+      this.setState({ checked: [] });
       this.fetchRebates(this.state.applicationState);
     });
   }
 
-  createBatch () {
+  createBatch() {
     requestBuilder({
       method: 'POST',
       path: '/admin/batches',
-      body: JSON.stringify({ids: this.state.checked})
+      body: JSON.stringify({ ids: this.state.checked }),
     }).then(() => {
-      this.setState({checked: []});
+      this.setState({ checked: [] });
       this.fetchRebates(this.state.applicationState);
     });
   }
 
-  fetchRebates (status, name) {
+  fetchRebates(status, name) {
     requestBuilder({
       method: 'get',
       path: `/admin/rebate_forms?utf8=✓&status=${status}&name=${name || ''}`,
@@ -67,11 +68,10 @@ class CustomersSummary extends React.Component {
       });
   }
 
-
   onChange(value) {
-    this.setState({applicationState: value, rebateForms: null});
+    this.setState({ applicationState: value, rebateForms: null });
 
-    if(value === 'not signed') return;
+    if (value === 'not signed') return;
 
     this.fetchRebates(value);
   }
@@ -82,21 +82,40 @@ class CustomersSummary extends React.Component {
 
   render() {
     const { applicationState, rebateForms, checked } = this.state;
-    const processable = applicationState === 'processed' &&
-    (rebateForms && rebateForms[0]);
+    const processable =
+      applicationState === 'processed' && (rebateForms && rebateForms[0]);
     const checkIt = processable ? this.checkIt.bind(this) : null;
     return (
       <Fragment>
-        <div className='pure-u-1-2 rebate-search-box'>
+        <div className="pure-u-1-2 rebate-search-box">
           {SummaryTabs(applicationState, this.onChange.bind(this))}
-          { (applicationState === 'not signed') && SummarySearch(this.fetchRebatesByName.bind(this))}
+          {applicationState === 'not signed' &&
+            SummarySearch(this.fetchRebatesByName.bind(this))}
         </div>
-        <div className='flex-row rebate-bulk-actions'>
+        <div className="flex-row rebate-bulk-actions">
           <h3>Search Results</h3>
-          {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]} onClick={this.unProcessRebates.bind(this)}>UNPROCESS</button>}
-          {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]} onClick={this.createBatch.bind(this)}>CREATE BATCH</button>}
+          {processable && (
+            <button
+              className="rebate-bulk-action-button"
+              disabled={!checked[0]}
+              onClick={this.unProcessRebates.bind(this)}
+            >
+              UNPROCESS
+            </button>
+          )}
+          {processable && (
+            <button
+              className="rebate-bulk-action-button"
+              disabled={!checked[0]}
+              onClick={this.createBatch.bind(this)}
+            >
+              CREATE BATCH
+            </button>
+          )}
         </div>
-        {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, this.state, checkIt)}
+        {rebateForms &&
+          rebateForms[0] &&
+          SummaryTable(rebateForms, this.state, checkIt)}
       </Fragment>
     );
   }
