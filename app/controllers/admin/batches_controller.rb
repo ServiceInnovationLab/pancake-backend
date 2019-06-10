@@ -13,6 +13,20 @@ class Admin::BatchesController < Admin::BaseController
                                  .size
   end
 
+  def edit
+    @batch = Batch.find(params[:id])
+    authorize @batch
+  end
+
+  def update
+    batch = Batch.find(params[:id])
+    authorize batch
+
+    batch.update!(name: batch_name_param)
+
+    redirect_to admin_batches_path, notice: 'The selected batch has been updated successfully.'
+  end
+
   def show
     @batch = Batch.find(params[:id])
     authorize @batch
@@ -45,6 +59,10 @@ class Admin::BatchesController < Admin::BaseController
   end
 
   private
+
+  def batch_name_param
+    params.require(:batch).require(:name).strip
+  end
 
   def find_council(rebate_forms)
     return current_user.council if current_user.council

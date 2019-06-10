@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::BatchesController, type: :controller do
   context 'signed in as admin' do
+    let(:admin_user) { FactoryBot.create(:admin_user, council: property.council) }
     let(:property) { FactoryBot.create(:property_with_rates) }
     let(:admin_user) { FactoryBot.create(:admin_user, council: property.council) }
 
@@ -41,6 +42,16 @@ RSpec.describe Admin::BatchesController, type: :controller do
         before { get :show, params: { id: batched_form.batch.to_param }, format: :pdf }
 
         it { expect(assigns(:batch)).to eq(batched_form.batch) }
+      end
+    end
+
+    describe '#update' do
+      let!(:batched_form) { FactoryBot.create(:batched_form, property: property) }
+
+      it 'updates a batch' do
+        expect(Batch.first.name).to eq "TEMP-BATCH-ID##{batched_form.batch_id}"
+        patch :update, params: { id: batched_form.batch_id, batch: { name: 'This is the 23rd new name' } }
+        expect(Batch.first.name).to eq 'This is the 23rd new name'
       end
     end
   end

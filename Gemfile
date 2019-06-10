@@ -94,7 +94,4 @@ group :test do
   # freezes time in some specs
   gem 'timecop'
   gem 'webdrivers'
-
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
 end
