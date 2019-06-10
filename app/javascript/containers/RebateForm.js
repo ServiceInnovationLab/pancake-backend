@@ -12,8 +12,6 @@ import { SingleInput, RadioInput } from '../components/inputs';
 import { IncomeDeclaration } from '../components/IncomeDeclaration';
 import { parseFromAPI, prepareForAPI } from '../helpers/formatRebateForm';
 
-const appUrl = window.location.origin;
-
 class EditRebateForm extends React.Component {
 
   constructor(props) {
@@ -30,7 +28,7 @@ class EditRebateForm extends React.Component {
     this.state = { otherIncomeFields: uniqKeys };
   }
   cancelEdit () {
-    window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}`;
+    window.location = `/admin/rebate_forms/${this.props.rebateForm.id}`;
   }
 
   addNewIncomeValue (values) {
@@ -53,7 +51,7 @@ class EditRebateForm extends React.Component {
       })
         .then(res => {
           console.log('res', res);
-          if (res.ok) window.location = `${appUrl}/admin/rebate_forms/${this.props.rebateForm.id}`;
+          if (res.ok) window.location = `/admin/rebate_forms/${this.props.rebateForm.id}`;
           else console.error(res);
         });
   }
