@@ -28,7 +28,7 @@
         %th Amount
         %th Date
         %th Claim count
-        %th Download
+        %th Get Batch
 
     %tbody
       - @batches.each do |batch|
@@ -39,5 +39,4 @@
           %td= batch.batch_date.localtime
           %td= number_to_currency batch.claim_count
           %td
-            = link_to(admin_batch_path(batch, format: :pdf), class: 'pure-button') do
-              = fa_icon 'download'
+            = link_to 'Download', admin_batch_path(batch, format: :pdf), class: 'pure-button'

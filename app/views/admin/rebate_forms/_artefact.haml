@@ -73,10 +73,11 @@
           .declaration
             %h3 Declaration
             %p
-              I, #{rebate_form.fields['full_name']}, #{rebate_form.fields['occupation']}, of
-              #{rebate_form.property.location}
+              I, #{rebate_form.fields['full_name']}, of
+              #{rebate_form.property.location},
               #{rebate_form.property.town_city},
-              solemnly and sincerely declare that I believe the information I have given on this form is true and correct, and I make this solemn declaration conscientiously believing the same to be true and by virtue of the Oaths and Declarations Act 1957.
+              #{rebate_form.fields['occupation']},
+              solemnly and sincerely declare that I believe the information given in my rates rebate application form is true and correct. I make this solemn declaration conscientiously believing the same to be true and by virtue of the Oaths and Declarations Act 1957.
 
         .pure-u-1-4
           .applicant-heading Applicant

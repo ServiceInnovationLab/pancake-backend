@@ -6,7 +6,6 @@ RSpec.describe Admin::BatchesController, type: :controller do
   context 'signed in as admin' do
     let(:admin_user) { FactoryBot.create(:admin_user, council: property.council) }
     let(:property) { FactoryBot.create(:property_with_rates) }
-    let(:admin_user) { FactoryBot.create(:admin_user, council: property.council) }
 
     before { sign_in admin_user }
 
