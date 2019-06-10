@@ -2,3 +2,111 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+.batches-accordion {
+  background-color: var(--dove);
+  padding: 0 1.75em 1.75em 1.75em;
+  letter-spacing: normal
+}
+.batches-flex-table-cell {
+  width: 33%
+}
+.batches-accordion-header-row {
+  width: 100%;
+  color: var(--dark-gray)
+}
+.batches-accordion-header-title {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--black)
+}
+.batches-accordion-header-button {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: normal;
+  color: var(--white);
+  background-color: var(--blue);
+  border: none;
+  border-radius: .2em;
+  margin-left: auto;
+  padding: .5em 2em;
+
+}
+.batches-accordion-header-button:hover {
+  background-color: var(--blue-hover);
+}
+.batch-details-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  font-weight: bold;
+  color: var(--blue)
+}
+.batch-details-link:hover {
+  border: 1px solid var(--blue);
+}
+.accordion {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+.accordion__item + .accordion__item {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.accordion__button {
+  background-color: var(--white);
+  color: var(--dark-gray);
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: 2px solid var(--dove);
+}
+
+.accordion__button:hover {
+  background-color: var(--gray);
+}
+
+.accordion__button:after {
+  color: var(--blue);
+  display: inline-block;
+  content: '';
+  height: 20px;
+  width: 20px;
+  margin-left: 95%;
+  border-bottom: 5px solid;
+  border-right: 5px solid;
+  transform: rotate(-45deg);
+}
+
+.accordion__button[aria-expanded='true']::after,
+.accordion__button[aria-selected='true']::after {
+  transform: rotate(45deg);
+}
+
+.accordion__panel {
+  padding: 20px;
+  animation: fadein 0.35s ease-in;
+  background-color: var(--white);
+  border: 2px solid var(--dove);
+}
+.accordion__panel:last-child {
+  border-bottom: 4px solid var(--gray);
+}
+
+/* -------------------------------------------------- */
+/* ---------------- Animation part ------------------ */
+/* -------------------------------------------------- */
+
+@keyframes fadein {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}

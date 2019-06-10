@@ -5,6 +5,7 @@ import 'isomorphic-fetch';
 import { requestBuilder } from '../helpers/requestBuilder';
 
 import { ProcessButtons } from '../components/ProcessButtons';
+import { BatchesSummary } from '../components/BatchesSummary';
 import { SummaryTable } from '../components/SummaryTable';
 import { SummarySearch } from '../components/SummarySearch';
 import { SummaryTabs } from '../components/SummaryTabs';
@@ -97,14 +98,17 @@ class CustomersSummary extends React.Component {
           { (pathname === '/admin/') && SummarySearch(this.fetchRebatesByName)}
         </div>
         <div className='flex-row rebate-bulk-actions'>
-          <h3>Search Results</h3>
-          {processable && ProcessButtons({
-            disabled: Boolean(!checked[0]),
-            unProcessRebates: this.unProcessRebates,
-            createBatch: this.createBatch}
+          <h3>{batches && batches[0] ?'Batches' :'Search Results'}</h3>
+          {processable && ProcessButtons(
+            {
+              disabled: Boolean(!checked[0]),
+              unProcessRebates: this.unProcessRebates,
+              createBatch: this.createBatch
+            }
           )}
         </div>
-        {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, this.state, checkIt)}
+        {(batches && batches[0]) && BatchesSummary(batches)}
+        {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, checked, checkIt)}
       </Fragment>
     );
   }
