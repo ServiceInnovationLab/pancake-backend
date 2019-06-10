@@ -1,7 +1,5 @@
 import React from 'react';
 
-const appUrl = window.location.origin;
-
 export function SummaryRow (rebateForm, key, checked, checkIt) {
   const { property, fields, id } = rebateForm;
   const { full_name } = fields;
@@ -26,7 +24,7 @@ export function SummaryRow (rebateForm, key, checked, checkIt) {
       }
       <td className='rebate-results-table-cell'>
         <a onClick={() => {
-          window.location = `${appUrl}/admin/rebate_forms/${id}`;
+          window.location = `/admin/rebate_forms/${id}`;
         }
         }>
           <img className='rebate-form-blue-arrow'src='/assets/blue-right-arrow.svg' alt="blue coloured right arrow"/>

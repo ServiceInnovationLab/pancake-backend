@@ -36,7 +36,7 @@ export function BatchesSummary(batches) {
                   <button
                     className='batches-accordion-header-button'
                     onClick={() => {
-                      window.location = `/admin/batches/${id}`;
+                      window.location = `/admin/batches/edit/${id}`;
                     }}>
                       Edit
                   </button>

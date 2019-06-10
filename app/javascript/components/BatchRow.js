@@ -1,7 +1,5 @@
 import React from 'react';
 
-const appUrl = window.location.origin;
-
 export function BatchRow (rebateForm) {
   const { property, fields, id } = rebateForm;
   const { full_name } = fields;
@@ -12,7 +10,7 @@ export function BatchRow (rebateForm) {
       <div className='batches-flex-table-cell'> {property && property.valuation_id} </div>
       <div className='batches-flex-table-cell'>
         <a className='batch-details-link' onClick={() => {
-          window.location = `${appUrl}/admin/rebate_forms/${id}`;
+          window.location = `/admin/rebate_forms/${id}`;
         }}>
           DETAILS
           {'\u00A0'}
