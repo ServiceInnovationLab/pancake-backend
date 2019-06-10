@@ -14,8 +14,8 @@ import {
 
 import { BatchRow } from './BatchRow';
 
-export function BatchesSummary(batches) {
-  console.log(batches)
+export function BatchesSummary(batches, isDiaUser) {
+
   return (
     <Accordion allowZeroExpanded={true} className="batches-accordion">
       {map(batches, batch => {
@@ -26,31 +26,31 @@ export function BatchesSummary(batches) {
           download_link,
           id
         } = batch;
-
         return(
           <AccordionItem key={name}>
             <AccordionItemHeading>
               <AccordionItemButton>
                 <div className='batches-accordion-header-title'>
                   {name}
-                  <button
+                  {!isDiaUser && <button
                     className='batches-accordion-header-button'
                     onClick={() => {
                       window.location = `/admin/batches/${id}/edit`;
                     }}>
                       Edit
-                  </button>
+                  </button>}
                 </div>
                 <div className='batches-accordion-header-row'>{dateFns.format(batch_date, 'DD MMM YYYY')} | {rebate_forms.length} Applications</div>
                 <br/>
                 <div className='batches-accordion-header-row'>
-                  {download_link || 'Cover sheet required'}
+                  {download_link ? <button>COVER SHEET</button> : 'Cover sheet required'}
+                  {isDiaUser && <button>APPLICATIONS</button>}
                 </div>
 
               </AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
-              { map(rebate_forms, (rebateForm) => BatchRow(rebateForm))}
+              { map(rebate_forms, (rebateForm) => BatchRow(rebateForm, isDiaUser))}
             </AccordionItemPanel>
           </AccordionItem>
         );

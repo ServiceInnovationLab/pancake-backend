@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import 'isomorphic-fetch';
 
 import { requestBuilder } from '../helpers/requestBuilder';
-
+import { find } from 'lodash';
 import { ProcessButtons } from '../components/ProcessButtons';
 import { BatchesSummary } from '../components/BatchesSummary';
 import { SummaryTable } from '../components/SummaryTable';
@@ -15,7 +15,7 @@ const pathname = window.location.pathname;
 class CustomersSummary extends React.Component {
   constructor(props) {
     super(props);
-    const {batches, rebateForms } = this.props;
+    const {batches, rebateForms, current_user_roles } = this.props;
 
     this.unProcessRebates = this.unProcessRebates.bind(this);
     this.createBatch = this.createBatch.bind(this);
@@ -24,7 +24,8 @@ class CustomersSummary extends React.Component {
     this.state = {
       checked: [],
       batches: batches && JSON.parse(batches),
-      rebateForms: rebateForms && JSON.parse(rebateForms)
+      rebateForms: rebateForms && JSON.parse(rebateForms),
+      isDiaUser: !!find(current_user_roles, role => role.name === 'dia')
     };
   }
 
@@ -84,9 +85,8 @@ class CustomersSummary extends React.Component {
   }
 
   render() {
-    const { batches, rebateForms, checked } = this.state;
+    const { batches, rebateForms, checked, isDiaUser } = this.state;
     
-    console.log(batches);
     const processable = pathname === '/admin/rebate_forms/processed' &&
     (rebateForms && rebateForms[0]);
     const checkIt = processable ? this.checkIt.bind(this) : null;
@@ -107,7 +107,7 @@ class CustomersSummary extends React.Component {
             }
           )}
         </div>
-        {(batches && batches[0]) && BatchesSummary(batches)}
+        {(batches && batches[0]) && BatchesSummary(batches, isDiaUser)}
         {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, checked, checkIt)}
       </Fragment>
     );
