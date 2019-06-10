@@ -8,6 +8,24 @@
  *= require_tree .
 */
 
+/* Fonts
+=============================== */
+@font-face {
+  font-family: 'Fira';
+  src: url("fonts/FiraSans-Regular.eot");
+  src: url("fonts/FiraSans-Regular.eot?#iefix") format("embedded-opentype"),
+  url("fonts/FiraSans-Regular.woff") format("woff"),
+  url("fonts/FiraSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Fira-Bold';
+  src: url("fonts/FiraSans-Bold.eot");
+  src: url("fonts/FiraSans-Bold.eot?#iefix") format("embedded-opentype"),
+  url("fonts/FiraSans-Bold.woff") format("woff"),
+  url("fonts/FiraSans-Bold.ttf") format("truetype");
+}
+
 /*Colours*/
 :root {
   --dove: #ebebeb;
@@ -55,34 +73,42 @@ a:focus {
 }
 
 .header {
-  background-color: var(--black);
-  padding: 2em;
+  background-color: rgba(15,15,15,1);
+  padding: 1.25em;
 }
 
 .header-item {
   display: inline-block;
 }
 
-.header-logo {
-  width: 373px;
+.header-title {
+  color: white;
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
+  font-size: 21px;
+  font-weight: bold;
 }
 
 .header-login {
-  color: var(--white);
+  color: rgba(208,205,205,1);
   float: right;
   vertical-align: middle;
+  font-size: 16px;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 .header-logout-link {
-  border: 2px solid var(--white);
-  border-radius: 5px;
-  color: var(--white) !important;
+  border-radius: 4px;
+  color: rgba(208,205,205,1) !important;
+  background-color: var(--dark-gray);
   margin-left: 15px;
-  padding: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 label {
   font-weight: bold;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 input {
