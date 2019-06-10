@@ -2,10 +2,20 @@
 
 require 'rails_helper'
 
-RSpec.describe Admin::ProcessRebateFormsController, type: :controller do
+RSpec.describe Admin::ProcessedRebateFormsController, type: :controller do
   let(:user) { FactoryBot.create :admin_user }
 
   before { sign_in user }
+
+  describe '#index' do
+    let!(:processed_forms) { FactoryBot.create_list(:processed_form, 3) }
+
+    it 'assigns all processed rebate forms to @processed_rebate_forms' do
+      get :index
+      expect(assigns(:processed_rebate_forms)).to eq processed_forms.to_json(include: [:property])
+      expect(response.status).to eq(200)
+    end
+  end
 
   describe '#create' do
     let!(:form_to_process) { FactoryBot.create(:signed_form) }

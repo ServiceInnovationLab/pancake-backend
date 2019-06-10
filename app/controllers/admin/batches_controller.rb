@@ -1,16 +1,13 @@
 # frozen_string_literal: true
 
 class Admin::BatchesController < Admin::BaseController
-  def index
-    @council = current_user.council
-    @batches = policy_scope(Batch).all.order(created_at: :desc)
-    return if @council.blank?
+  respond_to :json, :html
 
-    @unbatched_count = RebateForm.joins(:property)
-                                 .where(status: RebateForm::SIGNED_STATUS,
-                                        batch_id: nil,
-                                        properties: { council_id: @council.id })
-                                 .size
+  def index
+    @batches = policy_scope(Batch)
+               .all
+               .order(created_at: :asc)
+               .to_json(include: { rebate_forms: { include: :property } })
   end
 
   def edit

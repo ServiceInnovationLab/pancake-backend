@@ -1,43 +1,9 @@
-- content_for :title, "BATCHES"
+- content_for :title, 'rebate form batches'
 
-%h2
-  Batches
-  - unless @council.nil?
-    for #{@council.name}
-
-%p A batch is a collection of application forms, ready to send to DIA.
-
-- if current_user.council_id.present?
-  - if @unbatched_count.present? && @unbatched_count.positive?
-    %p
-      = @council.name
-      have
-      #{@unbatched_count} fully signed forms not in a batch yet.
-    %p
-      = form_for [:admin, Batch.new], class: 'pure-form pure-form-aligned' do |f|
-        = f.submit "Make next Batch", class: 'pure-button'
-- else
-  %p Only users from a council can create batches.
-
-- if @batches.size.positive?
-  %table.pure-table.pure-table-bordered
-    %thead
-      %tr
-        %th Batch no
-        %th council
-        %th Amount
-        %th Date
-        %th Claim count
-        %th Download
-
-    %tbody
-      - @batches.each do |batch|
-        %tr
-          %td= batch.id
-          %td= batch.council.name
-          %td $#{batch.amount}
-          %td= batch.batch_date.localtime
-          %td= number_to_currency batch.claim_count
-          %td
-            = link_to(admin_batch_path(batch, format: :pdf), class: 'pure-button') do
-              = fa_icon 'download'
+.pure-g.rebate-wrapper
+  .pure-u-1
+    %h1.rebate-title
+      Rates Rebate 2018/2019
+    %h2.rebate-subtitle
+      Customer search
+  = react_component('CustomersSummary', {current_user_roles: current_user.roles, batches: @batches})

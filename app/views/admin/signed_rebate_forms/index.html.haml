@@ -1,4 +1,4 @@
-- content_for :title, "rebate forms"
+- content_for :title, 'signed rebate forms'
 
 .pure-g.rebate-wrapper
   .pure-u-1
@@ -6,5 +6,5 @@
       Rates Rebate 2018/2019
     %h2.rebate-subtitle
       Customer search
-  
-  = react_component('CustomersSummary')
+
+  = react_component('CustomersSummary', rebateForms: @signed_rebate_forms)
