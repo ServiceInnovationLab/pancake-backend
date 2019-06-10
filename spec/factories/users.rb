@@ -9,6 +9,9 @@ FactoryBot.define do
       user.confirm
     end
   end
+  factory :council_user, parent: :user do
+    roles { [FactoryBot.create(:role)] }
+  end
   factory :admin_user, parent: :user do
     roles { [FactoryBot.create(:dia_role)] }
   end
