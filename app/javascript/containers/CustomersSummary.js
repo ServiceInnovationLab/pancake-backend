@@ -11,6 +11,7 @@ import { SummarySearch } from '../components/SummarySearch';
 import { SummaryTabs } from '../components/SummaryTabs';
 
 const pathname = window.location.pathname;
+const location = pathname.substring(pathname.lastIndexOf('/') + 1);
 
 class CustomersSummary extends React.Component {
   constructor(props) {
@@ -95,7 +96,7 @@ class CustomersSummary extends React.Component {
       <Fragment>
         <div className='pure-u-1-2 rebate-search-box'>
           {SummaryTabs()}
-          { (pathname === '/admin/') && SummarySearch(this.fetchRebatesByName)}
+          { (location === 'admin') && SummarySearch(this.fetchRebatesByName)}
         </div>
         <div className='flex-row rebate-bulk-actions'>
           <h3>{batches && batches[0] ?'Batches' :'Search Results'}</h3>
