@@ -45,8 +45,10 @@ a {
 
 a:hover,
 a:focus {
-  color: var(--white);
-  background-color: var(--black);
+  cursor: pointer;
+  color: var(--blue);
+  background-color: var(--white);
+  border-bottom: 1px solid var(--blue);
   text-decoration: underline;
 }
 
