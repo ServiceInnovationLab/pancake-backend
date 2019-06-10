@@ -5,7 +5,7 @@ export function BatchRow (rebateForm) {
   const { full_name } = fields;
 
   return (
-    <div className='batches-flex-table-row'>
+    <div className='batches-flex-table-row' key={`batch-${id}`}>
       <div className='batches-flex-table-first-cell'> {full_name} </div>
       <div className='batches-flex-table-cell'> {property && property.valuation_id} </div>
       <div className='batches-flex-table-cell'>

@@ -20,14 +20,12 @@ class CustomersSummary extends React.Component {
     this.unProcessRebates = this.unProcessRebates.bind(this);
     this.createBatch = this.createBatch.bind(this);
     this.fetchRebatesByName = this.fetchRebatesByName.bind(this);
-    
     this.state = {
       checked: [],
       batches: batches && JSON.parse(batches),
       rebateForms: rebateForms && JSON.parse(rebateForms),
       isDiaUser: !!find(current_user_roles, role => role.name === 'dia'),
-      isCouncilUser: !!find(current_user_roles, role => role.name === 'rates' || 'frontline')
-
+      isCouncilUser: !!find(current_user_roles, role => role.name === 'rates' || role.name ===  'frontline')
     };
   }
 
