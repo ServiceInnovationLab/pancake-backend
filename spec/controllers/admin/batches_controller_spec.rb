@@ -9,6 +9,16 @@ RSpec.describe Admin::BatchesController, type: :controller do
 
     before { sign_in admin_user }
 
+    describe '#index' do
+      let!(:batched_form) { FactoryBot.create(:batched_form, property: property) }
+
+      it 'assigns all batches to @batches' do
+        get :index
+        expect(assigns(:batches)).to eq([batched_form.batch].to_json(include: { rebate_forms: { include: :property } }))
+        expect(response.status).to eq(200)
+      end
+    end
+
     describe '#create' do
       context 'when the user council is the same as the rebate forms' do
         let!(:rebate_forms) { FactoryBot.create_list(:processed_form, 3, property: property) }
@@ -30,7 +40,7 @@ RSpec.describe Admin::BatchesController, type: :controller do
         it 'does not create a batch' do
           expect do
             post :create, params: { ids: rebate_forms.map(&:id) }
-          end.to raise_error
+          end.to raise_error(ActiveRecord::RecordInvalid)
         end
       end
     end
