@@ -10,14 +10,16 @@ RSpec.describe 'Batch', type: :feature, js: true do
   describe 'show pdf' do
     before { login_as(user, scope: :user) }
 
-    context 'when the download button is clicked' do
-      it 'opens the pdf' do
-        visit "/admin/batches/#{batched_form.batch_id}.pdf"
-        # expect(page).to have_content("Batches for #{property.council.name}")
-        # click_link('Download')
-        page.has_content?("COVER PAGE for Batch #{batched_form.batch_id}")
-        expect(page).to have_content("COVER PAGE for Batch #{batched_form.batch_id}")
+    context 'when I visit the pdf link' do
+      it 'displays all of the correct information' do
+        visit "/admin/batches/#{batched_form.batch_id}.pdf?debug=true"
         expect(page).to have_content(batched_form.batch.name)
+        expect(page).to have_content(batched_form.fields['full_name'])
+        expect(page).to have_content(batched_form.property.valuation_id)
+        expect(page).to have_content(batched_form.fields['income']['total_income'])
+        expect(page).to have_content(batched_form.fields['occupation'])
+        expect(page).to have_content(batched_form.council.name)
+        expect(page).to have_content(batched_form.signatures.witness.last.name)
       end
     end
   end

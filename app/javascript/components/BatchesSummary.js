@@ -45,8 +45,9 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                 <div className='batches-accordion-header-row'>
                   {download_link ? <button>COVER SHEET</button> : 'Cover sheet required'}
                   {isDiaUser && <button
-                    target="_blank"
-                    rel="noopener"
+                    target='_blank'
+                    rel='noopener'
+                    class='applications-button'
                     onClick={() => {
                       window.open(`/admin/batches/${id}.pdf`)
                     }}>

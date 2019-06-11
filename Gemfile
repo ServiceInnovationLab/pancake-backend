@@ -89,7 +89,6 @@ group :test do
   gem 'capybara-screenshot'
   gem 'capybara-selenium'
   gem 'database_cleaner', '~> 1.6'
-  gem 'pdf-reader'
   gem 'simplecov', require: false
   # freezes time in some specs
   gem 'timecop'

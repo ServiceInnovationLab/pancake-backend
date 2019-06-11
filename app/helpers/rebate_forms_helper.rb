@@ -41,9 +41,9 @@ module RebateFormsHelper
   end
 
   def rebate_form_boolean_field_to_english(answer)
-    if answer === true || answer.to_s.casecmp('yes').zero?
+    if answer == true || answer.to_s.casecmp('yes').zero?
       'Yes'
-    elsif answer === false || answer.to_s.casecmp('no').zero?
+    elsif answer == false || answer.to_s.casecmp('no').zero?
       'No'
     elsif answer == '' || answer.nil?
       'No answer'
