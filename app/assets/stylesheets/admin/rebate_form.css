@@ -227,14 +227,8 @@
 
 .rebate-qrcode {
   display: flex;
-  margin: 5em auto;
+  margin: 1em auto;
   background-color: black;
-  width: 20%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
 }
 
 .rebate-generate-qr {
