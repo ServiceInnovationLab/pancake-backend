@@ -5,6 +5,8 @@ class Batch < ApplicationRecord
   belongs_to :council, optional: false
   after_create :add_temp_name
 
+  has_one_attached :cover_sheet
+
   private
 
   def add_temp_name

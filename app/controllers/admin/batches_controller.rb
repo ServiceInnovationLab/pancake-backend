@@ -20,6 +20,7 @@ class Admin::BatchesController < Admin::BaseController
     authorize batch
 
     batch.update!(name: batch_name_param)
+    batch.attach(batch_cover_sheet_param) if batch_cover_sheet_param
 
     redirect_to admin_batches_path, notice: 'The selected batch has been updated successfully.'
   end
@@ -58,6 +59,10 @@ class Admin::BatchesController < Admin::BaseController
 
   def batch_name_param
     params.require(:batch).require(:name).strip
+  end
+
+  def batch_cover_sheet_param
+    params.require(:batch).permit(:cover_sheet)
   end
 
   def find_council(rebate_forms)
