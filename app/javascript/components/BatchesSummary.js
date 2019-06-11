@@ -44,7 +44,14 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                 <br/>
                 <div className='batches-accordion-header-row'>
                   {download_link ? <button>COVER SHEET</button> : 'Cover sheet required'}
-                  {isDiaUser && <button>APPLICATIONS</button>}
+                  {isDiaUser && <button
+                    target="_blank"
+                    rel="noopener"
+                    onClick={() => {
+                      window.open(`/admin/batches/${id}.pdf`)
+                    }}>
+                      APPLICATIONS
+                    </button>}
                 </div>
 
               </AccordionItemButton>
@@ -55,7 +62,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
           </AccordionItem>
         );
       })}
- 
+
     </Accordion>
   );
 }
