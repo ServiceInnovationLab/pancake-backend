@@ -42,10 +42,10 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                 </div>
                 <div className='batches-accordion-header-row'>{dateFns.format(batch_date, 'DD MMM YYYY')} | {rebate_forms.length} Applications</div>
                 <br/>
-                <div className='batches-accordion-header-row'>
+                {/* <div className='batches-accordion-header-row'>
                   {download_link ? <button>COVER SHEET</button> : 'Cover sheet required'}
                   {isDiaUser && <button>APPLICATIONS</button>}
-                </div>
+                </div> */}
 
               </AccordionItemButton>
             </AccordionItemHeading>
