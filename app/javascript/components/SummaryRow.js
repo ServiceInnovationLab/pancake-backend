@@ -1,16 +1,20 @@
 import React from 'react';
 
-const appUrl = window.location.origin;
-
-export function SummaryRow (rebateForm, key, state, checkIt) {
+export function SummaryRow (rebateForm, key, checked, checkIt) {
   const { property, fields, id } = rebateForm;
   const { full_name } = fields;
 
-  const checked = state.checked.indexOf(id) >= 0;
+  const isChecked = checked.indexOf(id) >= 0;
   return (
     <tr key={`${key}-${full_name}`} className='rebate_form.completed'>
       {checkIt && <td className='rebate-results-table-cell'>
-        <input type="checkbox" aria-label={`select-${full_name}-checkbox`} id={`${full_name}-checkbox`} checked={checked} onChange={() => checkIt(key)} />
+        <input
+          type="checkbox"
+          aria-label={`select-${full_name}-checkbox`}
+          id={`${full_name}-checkbox`}
+          checked={isChecked}
+          onChange={() => checkIt(key)}
+        />
       </td>
       }
       <td className='rebate-results-table-cell'>{fields.full_name}</td>
@@ -20,7 +24,7 @@ export function SummaryRow (rebateForm, key, state, checkIt) {
       }
       <td className='rebate-results-table-cell'>
         <a onClick={() => {
-          window.location = `${appUrl}/admin/rebate_forms/${id}`;
+          window.location = `/admin/rebate_forms/${id}`;
         }
         }>
           <img className='rebate-form-blue-arrow'src='/assets/blue-right-arrow.svg' alt="blue coloured right arrow"/>
