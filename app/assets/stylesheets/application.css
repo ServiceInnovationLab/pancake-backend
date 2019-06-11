@@ -75,7 +75,7 @@ a:focus {
 }
 
 .header {
-  background-color: #0f0f0f;
+  background-color: var(--black);
   padding: 1.25em;
 }
 
@@ -84,14 +84,14 @@ a:focus {
 }
 
 .header-title {
-  color: white;
+  color: var(--white);
   font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
   font-size: 21px;
   font-weight: bold;
 }
 
 .header-login {
-  color: #d0cdcd;
+  color: var(--gray);
   float: right;
   vertical-align: middle;
   font-size: 16px;
@@ -100,7 +100,7 @@ a:focus {
 
 .header-logout-link {
   border-radius: 4px;
-  color: #d0cdcd;
+  color: var(--dove);
   background-color: var(--dark-gray);
   margin-left: 15px;
   padding: 5px 10px;
