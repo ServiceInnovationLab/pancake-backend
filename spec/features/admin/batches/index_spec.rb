@@ -31,7 +31,7 @@ RSpec.describe 'Batch', type: :feature do
     it ' Can see all batches' do
       visit '/admin/batches'
       expect(page).to have_text(batch.name)
-      expect(page).to have_text('COVER SHEET')
+      # expect(page).to have_text('COVER SHEET')
       expect(page).to have_text(batch_other_council.name)
       expect(page).not_to have_text('EDIT')
     end
@@ -46,7 +46,7 @@ RSpec.describe 'Batch', type: :feature do
     it 'can see batches from my council' do
       visit '/admin/batches'
       expect(page).to have_text(batch.name)
-      expect(page).to have_text('COVER SHEET')
+      # expect(page).to have_text('COVER SHEET')
       expect(page).not_to have_text(batch_other_council.name)
       expect(page).to have_text('EDIT')
     end
