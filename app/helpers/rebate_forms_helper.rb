@@ -5,7 +5,7 @@ module RebateFormsHelper
     dependants_count = rebate_form.fields['dependants'].to_i || 0
     return pluralize(dependants_count, 'dependant') if dependants_count.positive?
 
-    'none'
+    'None'
   end
 
   def rebate_form_pdf_home_business(rebate_form)

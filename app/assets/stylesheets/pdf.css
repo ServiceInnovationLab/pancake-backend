@@ -45,14 +45,20 @@ body {
 
 .pdf-image {
   position: absolute;
-  top: 66px;
-  right: 43px;
-  width: 263px;
-  height: 71px;
+  top: 150px;
+  right: 540px;
+  width: 400px;
+  height: 70px;
 }
 
-.applicant_info {
-  margin-bottom: 0 !important;
+.applicant-info,
+.address-info {
+  display: inline-block;
+}
+
+.address-info {
+  float: right;
+  margin-right: 150px;
 }
 
 .column {
@@ -64,19 +70,47 @@ body {
   margin-left: 0;
 }
 
-.phone_email {
+.phone-email {
   margin: 30px 0;
-  border: 1px solid #993366;
 }
 
-.address {
-  margin-left: 50px;
+.rebate-amount,
+.rates-amount {
+  display: inline-block;
 }
 
-.field,
-.declaration {
-  margin-bottom: 10px;
-  color: rgb(51, 51, 51);
+.rebate-amount {
+  float: right;
+  margin-right: 180px;
+}
+
+.declaration-and-signature {
+  margin-bottom: 50px;
+}
+
+.declaration,
+.witness-details {
+  width: 60%;
+}
+
+.declaration,
+.applicant-signature {
+  display: inline-block;
+}
+
+.applicant-signature {
+  float: right;
+  margin-right: 110px;
+}
+
+.witness-details,
+.witness-signature {
+  display: inline-block;
+}
+
+.witness-signature {
+  float: right;
+  margin-right: 110px;
 }
 
 h3,
@@ -94,27 +128,8 @@ h3 {
   margin-bottom: 0;
 }
 
-.declaration {
-  margin-top: 60px;
-}
-
-.declaration p {
-  margin-bottom: 65px;
-}
-
-.declaration h3 {
-  margin-bottom: 5px;
-}
-
 p {
   margin-top: 0;
-}
-
-.table-border {
-  border: 3px solid #ccc;
-  border-radius: 33px;
-  padding: 20px 30px;
-  width: 100%;
 }
 
 .pdf th,
@@ -133,36 +148,12 @@ table h3 {
 .applicant,
 .witness {
   width: 200px;
-}
-
-.applicant,
-.witness {
-  /*position: absolute;*/
-  right: 80px;
-}
-
-.applicant {
-  top: 630px;
-}
-
-.witness {
-  top: 890px;
+  margin-top: 20px;
 }
 
 .applicant-heading,
 .witness-heading {
-  /*position: absolute;*/
   font-style: italic;
-}
-
-.applicant-heading {
-  top: 610px;
-  right: 195px;
-}
-
-.witness-heading {
-  top: 860px;
-  right: 215px;
 }
 
 .table-col {
@@ -192,10 +183,4 @@ hr {
 
 .batches-heading p {
   margin-bottom: 10px;
-}
-
-.batches-logo {
-  position: absolute;
-  top: 70px;
-  left: 45px;
 }
