@@ -3,17 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Batch', type: :feature do
-  let(:council) { FactoryBot.create :council, name: 'Tauranga' }
-  let!(:batch) { FactoryBot.create :batch, council: council }
+  let(:property) { FactoryBot.create :property }
+  let!(:batched_form) { FactoryBot.create :batched_form, property: property }
   let!(:batch_other_council) { FactoryBot.create :batch }
-
-  before do
-    # make sure there are unbatched forms
-    10.times do
-      property = FactoryBot.create(:property, council: batch.council)
-      FactoryBot.create(:signed_form, rebate: 100, property: property, valuation_id: property.valuation_id)
-    end
-  end
 
   context 'anonymous' do
     it "can't see it" do
@@ -30,25 +22,34 @@ RSpec.describe 'Batch', type: :feature do
 
     it ' Can see all batches' do
       visit '/admin/batches'
-      expect(page).to have_text(batch.name)
-      # expect(page).to have_text('COVER SHEET')
+      expect(page).to have_text(batched_form.batch.name)
+      expect(page).to have_text('COVER SHEET')
       expect(page).to have_text(batch_other_council.name)
       expect(page).not_to have_text('EDIT')
+      expect(page).to have_text('APPLICATIONS')
+    end
+
+    it ' opens a new window when the APPLICATIONS button is clicked' do
+      visit '/admin/batches'
+      expect(page.windows.count).to eq 1
+      find('.applications-button', match: :first).click
+      expect(page.windows.count).to eq 2
     end
     include_examples 'percy snapshot'
   end
 
   context 'signed in as council' do
-    let(:user) { FactoryBot.create :council_user, council: council }
+    let(:user) { FactoryBot.create :council_user, council: property.council }
 
     before { login_as(user, scope: :user) }
 
-    it 'can see batches from my council' do
+    it 'can only see batches from my council' do
       visit '/admin/batches'
-      expect(page).to have_text(batch.name)
-      # expect(page).to have_text('COVER SHEET')
+      expect(page).to have_text(batched_form.batch.name)
+      expect(page).to have_text('COVER SHEET')
       expect(page).not_to have_text(batch_other_council.name)
       expect(page).to have_text('EDIT')
+      expect(page).to_not have_text('APPLICATIONS')
     end
     include_examples 'percy snapshot'
   end

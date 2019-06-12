@@ -22,6 +22,7 @@
   --purple-hover: #6a2347;
   --white: #ffffff;
   --black: #000000;
+  --light-green: #6dca7f;
 }
 
 /* Fonts
@@ -56,9 +57,9 @@ body {
 }
 
 a {
-  background-color: #6dca7f;
+  background-color: var(--light-green);
   color: var(--black);
-  color: rgb(61, 146, 201);
+  color: var(--blue);
   text-decoration: none;
 }
 
@@ -77,29 +78,34 @@ a:focus {
 
 .header {
   background-color: var(--black);
-  padding: 2em;
+  padding: 1.25em;
 }
 
 .header-item {
   display: inline-block;
 }
 
-.header-logo {
-  width: 373px;
+.header-title {
+  color: var(--white);
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
+  font-size: 21px;
+  font-weight: bold;
 }
 
 .header-login {
-  color: var(--white);
+  color: var(--gray);
   float: right;
   vertical-align: middle;
+  font-size: 16px;
 }
 
 .header-logout-link {
-  border: 2px solid var(--white);
-  border-radius: 5px;
-  color: var(--white) !important;
+  border-radius: 4px;
+  color: var(--dove);
+  background-color: var(--dark-gray);
   margin-left: 15px;
-  padding: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
 }
 
 label {

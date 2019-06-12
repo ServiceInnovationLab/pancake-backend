@@ -1,6 +1,6 @@
 
-export const summaryTabs= [
-  ['Not Signed', '/admin'],
+export const summaryTabs = [
+  ['Not Signed', '/admin/rebate_forms'],
   ['Signed', '/admin/rebate_forms/signed'],
   ['Processed', '/admin/rebate_forms/processed'],
   ['Batched', '/admin/batches']
@@ -60,32 +60,32 @@ export const conditionalsFields = [
   {
     id: 'rates_rebate_received',
     label: 'Rates rebate received?',
-    type:'radio'
+    type: 'radio'
   },
 ];
 export const customerDetailFields = [
   {
-    id:'full_name',
+    id: 'full_name',
     label: 'Name',
   },
   {
-    id:'customer_id',
+    id: 'customer_id',
     label: 'Customer ID (optional)',
     placeholder: '0000000',
   },
   {
-    id:'location',
+    id: 'location',
     label: 'Address',
     fullWidth: true
   },
   {
-    id:'total_rates',
+    id: 'total_rates',
     label: 'Total rates',
     type: 'number',
     step: 0.01
   },
   {
-    id:'valuation_id',
+    id: 'valuation_id',
     label: 'Valuation ID (optional)',
     placeholder: '00000 000 00',
   },
@@ -100,9 +100,9 @@ export const customerDetailFields = [
     type:'radio'
   },
   {
-    id:'phone_number',
+    id: 'phone_number',
     label: 'Phone',
-    type:'tel',
+    type: 'tel',
   },
   {
     id:'email',
@@ -112,21 +112,21 @@ export const customerDetailFields = [
   {
     id: 'spouse_or_partner',
     label: 'Partner or joint homeowner',
-    type:'radio'
+    type: 'radio'
   },
   {
-    id:'dependants',
+    id: 'dependants',
     label: 'Dependants',
-    type:'number',
+    type: 'number',
     placeholder: '0',
   },
   {
-    id:'50%_claimed_expenses',
+    id: '50%_claimed_expenses',
     label: 'Mostly used for business',
-    type:'radio'
+    type: 'radio'
   },
   {
-    id:'occupation',
+    id: 'occupation',
     label: 'Occupation',
   },
 ];

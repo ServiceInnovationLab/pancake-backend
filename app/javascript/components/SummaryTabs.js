@@ -1,11 +1,13 @@
 import React from 'react';
 import { map } from 'lodash';
 
-import {summaryTabs} from '../helpers/data';
+import { summaryTabs } from '../helpers/data';
+import { getCurrentPath } from '../helpers/getCurrentPath';
 
-const currentLocation = window.location.pathname;
+const pathname = window.location.pathname;
+const currentLocation = getCurrentPath(pathname);
 
-export function SummaryTabs () {
+export function SummaryTabs() {
   return (
     <div className={'rebate-tabs flex-row'}>
       {map(summaryTabs, ([key, value]) =>

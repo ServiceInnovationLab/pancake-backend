@@ -5,5 +5,5 @@ require 'rails_helper'
 RSpec.describe 'Root', type: :request do
   before { get '/' }
 
-  it { expect(response).to redirect_to('/admin') }
+  it { expect(response).to redirect_to('/admin/rebate_forms') }
 end
