@@ -20,7 +20,7 @@ RSpec.describe RebateFormsHelper, type: :helper do
   end
 
   describe 'rebate_form_pdf_dependants(rebate_form)' do
-    it { expect(rebate_form_pdf_dependants(rebate_form)).to eq 'none' }
+    it { expect(rebate_form_pdf_dependants(rebate_form)).to eq 'None' }
   end
 
   describe 'rebate_form_pdf_home_business(rebate_form)' do
