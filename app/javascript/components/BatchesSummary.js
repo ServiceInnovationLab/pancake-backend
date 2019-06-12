@@ -47,14 +47,13 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                   {isDiaUser && <button
                     target='_blank'
                     rel='noopener'
-                    class='applications-button'
+                    className='applications-button'
                     onClick={() => {
                       window.open(`/admin/batches/${id}.pdf`)
                     }}>
                       APPLICATIONS
-                    </button>}
+                  </button>}
                 </div>
-
               </AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>

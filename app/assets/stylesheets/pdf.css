@@ -9,13 +9,10 @@ body {
   margin: 0;
 }
 
-* {
-  font-family: "Fira Sans", sans-serif;
-  color: rgb(51, 51, 51);
-}
-
 .container {
   margin: 66px 60px 0;
+  font-family: "Fira Sans", sans-serif;
+  color: #000000;
 }
 
 .border {
@@ -171,13 +168,6 @@ table h3 {
 
 hr {
   margin: 20px 0;
-}
-
-.sub-heading strong {
-  font-size: 24px;
-  position: absolute;
-  top: 175px;
-  color: rgb(83, 184, 103) !important;
 }
 
 .batches-heading {
