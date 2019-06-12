@@ -5,7 +5,7 @@ import { map } from 'lodash';
 import { incomeRows } from '../helpers/data';
 import { TableInput } from './inputs';
 
-export function IncomeDeclaration ({otherIncomeFields, isReadOnly, includePartnerValues}) {
+export function IncomeDeclaration({ otherIncomeFields, isReadOnly, includePartnerValues }) {
   return (
     <div>
       <div className="flex-column">
@@ -32,10 +32,10 @@ export function IncomeDeclaration ({otherIncomeFields, isReadOnly, includePartne
               <label className="flex-item">
                 <h3>{label || name}</h3>
               </label>
-              {TableInput({isReadOnly, className: 'one-quarter with-margin', id: `applicant.${name}`})}
-              {includePartnerValues && TableInput({isReadOnly, className: 'one-quarter', id: `partner.${name}`})}
+              {TableInput({ isReadOnly, className: 'one-quarter with-margin', id: `applicant.${name}` })}
+              {includePartnerValues && TableInput({ isReadOnly, className: 'one-quarter', id: `partner.${name}` })}
             </div>
-          );}
+          ); }
         )}
         {map(otherIncomeFields, (name) => {
           return (
@@ -43,10 +43,10 @@ export function IncomeDeclaration ({otherIncomeFields, isReadOnly, includePartne
               <label className="flex-item">
                 <h3>{name}</h3>
               </label>
-              {TableInput({isReadOnly, className: 'one-quarter with-margin', id: `otherIncome.applicant.${name}`})}
-              {includePartnerValues && TableInput({isReadOnly, className: 'one-quarter', id: `otherIncome.partner.${name}`})}
+              {TableInput({ isReadOnly, className: 'one-quarter with-margin', id: `otherIncome.applicant.${name}` })}
+              {includePartnerValues && TableInput({ isReadOnly, className: 'one-quarter', id: `otherIncome.partner.${name}` })}
             </div>
-          );}
+          ); }
         )}
       </div>
     </div>
