@@ -11,7 +11,7 @@ body {
 
 * {
   font-family: "Fira Sans", sans-serif;
-  color: #333333;
+  color: rgb(51, 51, 51);
 }
 
 .container {
