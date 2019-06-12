@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function BatchRow (rebateForm) {
+export function BatchRow(rebateForm) {
   const { property, fields, id } = rebateForm;
   const { full_name } = fields;
 
