@@ -1,6 +1,6 @@
 .header-bar
   %div.header-item
-    = image_tag('print-logo-white', class: 'header-logo')
+    %strong.header-title Rates Rebate 2018/2019
   %div.header-item.header-login
     - if current_user
       - if current_user.name
@@ -8,4 +8,4 @@
       - else
         =current_user.email
       = link_to destroy_user_session_path, method: :delete, class: 'header-logout-link' do
-        Log out x
+        LOG OUT x
