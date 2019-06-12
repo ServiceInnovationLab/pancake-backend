@@ -30,26 +30,25 @@ RSpec.describe 'Batch', type: :feature do
 
     it ' Can see all batches' do
       visit '/admin/batches'
-      expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
-      expect(page).to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
-
-      expect(page).not_to have_button('Make next Batch')
+      expect(page).to have_text(batch.name)
+      # expect(page).to have_text('COVER SHEET')
+      expect(page).to have_text(batch_other_council.name)
+      expect(page).not_to have_text('EDIT')
     end
     include_examples 'percy snapshot'
   end
 
   context 'signed in as council' do
-    let(:user) { FactoryBot.create :user, council: council }
+    let(:user) { FactoryBot.create :council_user, council: council }
 
     before { login_as(user, scope: :user) }
 
     it 'can see batches from my council' do
       visit '/admin/batches'
-      expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
-      expect(page).not_to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
-
-      expect(page).to have_text 'Tauranga have 10 fully signed forms not in a batch yet.'
-      expect(page).to have_button('Make next Batch')
+      expect(page).to have_text(batch.name)
+      # expect(page).to have_text('COVER SHEET')
+      expect(page).not_to have_text(batch_other_council.name)
+      expect(page).to have_text('EDIT')
     end
     include_examples 'percy snapshot'
   end

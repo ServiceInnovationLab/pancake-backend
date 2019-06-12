@@ -8,15 +8,19 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     FactoryBot.create(:rebate_form, property: FactoryBot.create(:property, council: council))
   end
   let(:expected_name) { rebate_form.full_name }
+  let(:expected_location) { rebate_form.property.location }
+
   let!(:signed_form) do
     FactoryBot.create(:signed_form, property: FactoryBot.create(:property, council: council))
   end
   let(:signed_name) { signed_form.full_name }
+  let(:signed_location) { signed_form.property.location }
 
   let!(:processed_form) do
     FactoryBot.create(:processed_form, property: FactoryBot.create(:property, council: council))
   end
   let(:processed_name) { processed_form.full_name }
+  let(:processed_location) { processed_form.property.location }
 
   context 'anonymous' do
     it "can't see it" do
@@ -52,6 +56,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_text('Not Signed')
         expect(page).to have_field('name')
         expect(page).to have_text(expected_name)
+        expect(page).to have_text(expected_location)
       end
       include_examples 'percy snapshot'
     end
@@ -76,6 +81,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_text('Not Signed')
         expect(page).not_to have_field('name')
         expect(page).to have_text(signed_name)
+        expect(page).to have_text(signed_location)
       end
       include_examples 'percy snapshot'
     end
@@ -98,10 +104,26 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
         expect(page).to have_text('UNPROCESS')
-        # expect(page).to have_text('CREATE BATCH')
+        expect(page).to have_text('CREATE BATCH')
         expect(page).to have_text(processed_name)
+        expect(page).to have_text(processed_location)
         check(`#{processed_name}-checkbox`)
         click_button 'UNPROCESS'
+        expect(page).not_to have_text(processed_name)
+      end
+      include_examples 'percy snapshot'
+    end
+
+    describe 'batch some processed forms' do
+      it 'should remove batched rebate forms' do
+        click_button 'Processed'
+        expect(page).to have_text('Signed')
+        expect(page).to have_text('Not Signed')
+        expect(page).to have_text('UNPROCESS')
+        expect(page).to have_text('CREATE BATCH')
+        expect(page).to have_text(processed_name)
+        check(`#{processed_name}-checkbox`)
+        click_button 'CREATE BATCH'
         expect(page).not_to have_text(processed_name)
       end
       include_examples 'percy snapshot'

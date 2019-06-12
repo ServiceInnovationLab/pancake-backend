@@ -1,4 +1,192 @@
+/*Colours*/
+:root {
+  --dove: #ebebeb;
+  --gray: #ababab;
+  --dark-gray: #4c4c4c;
+  --dark-gray-hover: #3d3d3d;
+  --orange: #d34322;
+  --orange-hover: #b73a1e;
+  --blue: #336699;
+  --blue-hover: #1a4d80;
+  --purple: #993366;
+  --purple-hover: #6a2347;
+  --white: #ffffff;
+  --black: #000000;
+  --alert-red: #b10d1e;
+  --light-red: #f0d5d8;
+}
 /*
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+.batches-accordion {
+  background-color: var(--dove);
+  padding: 0 1.75em 1.75em 1.75em;
+  letter-spacing: normal
+}
+.batches-flex-table-row {
+  padding: 1em 1.75em;
+  display: flex;
+  border-top: 2px solid var(--dove);
+}
+.batches-flex-table-cell {
+  width: 30%
+}
+.batches-flex-table-first-cell {
+  width: 40%
+}
+.batches-accordion-header-row {
+  width: 100%;
+  color: var(--dark-gray)
+}
+.batches-accordion-header-title {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--black)
+}
+.batches-accordion-header-button {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: normal;
+  color: var(--white);
+  background-color: var(--blue);
+  border: none;
+  border-radius: .2em;
+  margin-left: auto;
+  padding: .5em 2em;
+
+}
+.batches-accordion-header-button:hover {
+  background-color: var(--blue-hover);
+}
+.batch-details-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  font-weight: bold;
+  color: var(--blue)
+}
+.batch-details-link:hover {
+  border: 1px solid var(--blue);
+}
+.accordion {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+.accordion__item {
+  margin-bottom: .5em
+}
+
+.accordion__button {
+  background-color: var(--white);
+  color: var(--dark-gray);
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: 2px solid var(--dove);
+}
+
+.accordion__button:hover {
+  background-color: var(--gray);
+}
+
+.accordion__button:after {
+  color: var(--blue);
+  display: inline-block;
+  content: '';
+  height: 20px;
+  width: 20px;
+  margin-left: 95%;
+  border-bottom: 5px solid;
+  border-right: 5px solid;
+  transform: rotate(-45deg);
+}
+
+.accordion__button[aria-expanded='true']::after,
+.accordion__button[aria-selected='true']::after {
+  transform: rotate(45deg);
+}
+
+.accordion__panel {
+  animation: fadein 0.35s ease-in;
+  background-color: var(--white);
+  border: 2px solid var(--dove);
+}
+.accordion__panel:last-child {
+  border-bottom: 4px solid var(--gray);
+}
+
+/* -------------------------------------------------- */
+/* ---------------- Animation part ------------------ */
+/* -------------------------------------------------- */
+
+@keyframes fadein {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+.batch-wrapper {
+  margin: auto;
+  max-width: 960px;
+  padding: 4em;
+}
+
+.batch-header {
+  padding: 1.5em;
+}
+
+.batch-title {
+  display: flex;
+  justify-content: space-between;
+  font-size: 3em;
+  margin: 0;
+}
+
+.batch-edit-box {
+  background-color: var(--dove);
+  padding: 1.75em;
+  width: 770px;
+}
+
+.batch-field {
+  margin-bottom: 1em;
+}
+
+.batch-input {
+  line-height: 2em;
+  margin-bottom: .5em;
+  width: 100%;
+}
+
+.batch-button-container {
+  margin-bottom: 2em;
+  padding-bottom: .5em;
+}
+
+.batch-cancel-button {
+  background-color: var(--white);
+  border-radius: .2em;
+  border: 1px solid var(--black);
+  color: var(--black);
+  float: right;
+  margin-right: 3em;
+  padding: 7px 10px;
+}
+
+.batch-submit-button {
+  background-color: var(--blue);
+  border-radius: .2em;
+  color: var(--white);
+  float: right;
+  margin-bottom: 1.5em;
+  margin-top: 0 !important;
+}
