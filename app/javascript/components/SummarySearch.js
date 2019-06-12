@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
 
-export function SummarySearch (fetchRebatesByName) {
+export function SummarySearch(fetchRebatesByName) {
   return (
     <Form
       onSubmit={fetchRebatesByName}

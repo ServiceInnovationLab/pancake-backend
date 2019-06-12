@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function SummaryRow (rebateForm, key, checked, checkIt) {
+export function SummaryRow(rebateForm, key, checked, checkIt) {
   const { property, fields, id } = rebateForm;
   const { full_name } = fields;
 
