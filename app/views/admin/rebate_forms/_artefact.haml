@@ -1,0 +1,92 @@
+%header.main-header
+  .container
+    .heading
+      = rebate_form_year_header(rebate_form)
+      Application form
+
+.container-secondary
+  .applicant-info
+    .field
+      %h3 Application for
+      = rebate_form.fields['full_name']
+    .row.phone-email
+      .column
+        .field
+          %h3 Phone
+          %p
+            = rebate_form.fields['phone']
+      .column
+        .field
+          %h3 Email
+          %p
+            = rebate_form.fields['email']
+  .address-info
+    .field
+      %h3 Address
+      %p
+        = rebate_form.property.valuation_id
+        %br/
+        = rebate_form.property.location
+        %br/
+        - unless rebate_form.property.suburb.to_s.include?('RT.VAL.AREAUNIT')
+          = rebate_form.property.suburb
+          %br/
+        = rebate_form.property.town_city
+  %hr
+  .field
+    %h3
+      = "Did you live here on 1 July #{last_rating_year(rebate_form)}?"
+    %p
+      = rebate_form_lived_year?(rebate_form)
+    - if moved_within_rating_year?(rebate_form)
+      %h3 Previous Address
+      %p
+        = rebate_form.fields['details_of_previous_property']
+  .field
+    %h3 Is the property mostly used for business?
+    %p
+      = rebate_form_pdf_home_business(rebate_form).capitalize
+  .field
+    %h3 How many dependants do you have?
+    %p
+      = rebate_form_pdf_dependants(rebate_form)
+  .field
+    %h3
+      = "Were you living with a spouse, partner or a joint homeowner on 1 July #{last_rating_year(rebate_form)}?"
+    %p
+      = rebate_form_has_partner(rebate_form)
+  %hr
+  = render 'admin/rebate_forms/rates_and_income', rebate_form: rebate_form
+  %hr
+  .rates-amount
+    .field
+      %h3 Rates amount
+      - rebate_form.property.rates_bills.where(rating_year: rebate_form.property.rating_year).each do |bill|
+        %p
+          = number_to_currency bill.total_bill
+  .rebate-amount
+    .field
+      %h3 Rebate amount
+      %p
+        = rebate_form_amount(rebate_form)
+  %hr
+  .declaration-and-signature
+    .declaration
+      %h3 Declaration
+      %p
+        I, #{rebate_form.fields['full_name']}, of
+        #{rebate_form.property.location},
+        #{rebate_form.property.town_city},
+        #{rebate_form.fields['occupation']},
+        solemnly and sincerely declare that I believe the information given in my rates rebate application form is true and correct. I make this solemn declaration conscientiously believing the same to be true and by virtue of the Oaths and Declarations Act 1957.
+    .applicant-signature
+      .applicant-heading Applicant
+      = signature_for_pdf(rebate_form.applicant_signature, 'applicant')
+  %div
+    .witness-details
+      %h3
+        = "At #{rebate_form.signatures.first.created_at.strftime("%d-%m-%Y - %I:%M%P").to_time.localtime} before me"
+      = render 'admin/rebate_forms/witness', signature: rebate_form.signatures.witness.last, council: rebate_form.council
+    .witness-signature
+      .witness-heading Witness
+      = signature_for_pdf(rebate_form.witness_signature, 'witness')
