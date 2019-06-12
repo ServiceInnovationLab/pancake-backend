@@ -11,13 +11,13 @@ FactoryBot.define do
         customer_id: 123,
         phone: '0212345678',
         income: {
-          total_income: '224',
+          total_income: 224,
           applicant: {
-            wages_salary: '74'
+            wages_salary: 74
           },
           otherIncome: {
             applicant: {
-              'Selling old toys': '70'
+              'Selling old toys': 70
             }
           },
           partner: {
