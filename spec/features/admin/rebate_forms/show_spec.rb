@@ -103,6 +103,17 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
             expect(page).to_not have_text('Processed')
           end
         end
+
+        describe 'when a rebate form is batched' do
+          let!(:batched_rebate_form) { FactoryBot.create(:batched_form) }
+          before { visit "/admin/rebate_forms/#{batched_rebate_form.id}" }
+
+          it 'cannot be edited' do
+            expect(page).to_not have_text('Processed')
+            expect(page).to_not have_text('Unprocess')
+            expect(page).to_not have_text('Edit')
+          end
+        end
         include_examples 'percy snapshot'
       end
 
