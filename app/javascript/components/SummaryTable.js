@@ -3,7 +3,7 @@ import { map } from 'lodash';
 
 import { SummaryRow } from './SummaryRow';
 
-export function SummaryTable (rebateForms, checked, checkIt) {
+export function SummaryTable(rebateForms, checked, checkIt) {
   return (
     <div className="pure-u-1">
       <table className="pure-table pure-table-bordered rebate-results-table">
@@ -20,5 +20,5 @@ export function SummaryTable (rebateForms, checked, checkIt) {
         </tbody>
       </table>
     </div>
-  );          
+  );
 }
