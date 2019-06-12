@@ -1,14 +1,10 @@
 #! /bin/bash
 /usr/bin/wait-for-it -h $RDS_HOSTNAME -p $RDS_PORT
 
-# Initialise development database
-FILE=$INSTALL_PATH/tmp/database_initialised_development.txt
-if [ ! -f "$FILE" ]; then
-  echo "Setting db environment"
-  # DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rails db:environment:set RAILS_ENV=production
+# Initialise development database if RDS_CREATE_DATABASE == true
+if [ "$RDS_CREATE_DATABASE" == "true" ]; then
   echo "Creating and loading databases"
-  # TODO only run seed once -> bundle exec rake db:setup db:seed
-  touch "$FILE"
+  bundle exec rake db:setup db:seed
 fi
 
 echo "Migrating and refreshing reference data"
