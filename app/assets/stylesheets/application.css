@@ -22,6 +22,7 @@
   --purple-hover: #6a2347;
   --white: #ffffff;
   --black: #000000;
+  --light-green: #6dca7f;
 }
 
 /* Fonts
@@ -56,7 +57,7 @@ body {
 }
 
 a {
-  background-color: #6dca7f;
+  background-color: var(--light-green);
   color: var(--black);
   color: var(--blue);
   text-decoration: none;
