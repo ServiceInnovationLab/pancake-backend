@@ -3,13 +3,13 @@ export function getCurrentPath (pathname) {
 
   switch(currentPath) {
   case 'batches':
-    return 'batches';
+    return '/admin/batches';
   case 'processed':
-    return 'processed';
+    return '/admin/rebate_forms/processed';
   case 'signed':
-    return 'signed';
-  case 'admin':
+    return '/admin/rebate_forms/signed';
+  case 'rebate_forms':
   default:
-    return 'admin';
+    return '/admin/rebate_forms';
   } 
 }

@@ -89,7 +89,7 @@ class CustomersSummary extends React.Component {
   render() {
     const { batches, rebateForms, checked, isDiaUser, isCouncilUser } = this.state;
     
-    const processable = currentLocation === 'processed' &&
+    const processable = currentLocation === '/admin/rebate_forms/processed' &&
     (rebateForms && rebateForms[0]);
     const checkIt = processable ? this.checkIt.bind(this) : null;
 
@@ -97,7 +97,7 @@ class CustomersSummary extends React.Component {
       <Fragment>
         <div className='pure-u-1-2 rebate-search-box'>
           {SummaryTabs()}
-          { (currentLocation === 'admin') && SummarySearch(this.fetchRebatesByName)}
+          { (currentLocation === '/admin/rebate_forms') && SummarySearch(this.fetchRebatesByName)}
         </div>
         <div className='flex-row rebate-bulk-actions'>
           <h3>{batches && batches[0] ?'Batches' :'Search Results'}</h3>

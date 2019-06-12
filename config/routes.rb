@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: redirect('/admin')
+  root to: redirect('/admin/rebate_forms')
 
   scope path: '/admin' do
     devise_for :users
