@@ -105,7 +105,6 @@
   color: var(--white);
 }
 
-
 .rebate-results-table {
   background-color: var(--dove);
   padding: 1.75em;
@@ -228,15 +227,11 @@
 }
 
 .rebate-qrcode {
-  margin: 5em auto;
+  margin: 1em auto;
   background-color: black;
   width: 20%;
   min-width: 350px;
   max-width: 500px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .rebate-generate-qr {
