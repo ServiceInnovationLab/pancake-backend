@@ -39,7 +39,7 @@ RSpec.describe 'Logging in', type: :feature do
   end
 
   context 'signed in as council' do
-    let(:user) { FactoryBot.create :user}
+    let(:user) { FactoryBot.create :user }
 
     before { login_as(user, scope: :user) }
 
