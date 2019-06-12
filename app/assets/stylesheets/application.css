@@ -116,7 +116,15 @@ input {
   padding: 7px 10px;
   margin: 5px 0 15px !important;
 }
+input:-moz-read-only {
+  border-style: none;
+  background: var(--dove);
+} /* For Firefox */
 
+input:read-only {
+  border-style: none;
+  background: var(--dove);
+}
 .content {
   padding: 2em 1em 0;
 }
