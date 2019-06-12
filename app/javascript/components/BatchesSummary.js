@@ -26,7 +26,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
           download_link,
           id
         } = batch;
-        return(
+        return (
           <AccordionItem key={name}>
             <AccordionItemHeading>
               <AccordionItemButton>
@@ -55,7 +55,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
           </AccordionItem>
         );
       })}
- 
+
     </Accordion>
   );
 }

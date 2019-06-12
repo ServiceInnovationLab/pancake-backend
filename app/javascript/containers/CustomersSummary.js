@@ -16,7 +16,7 @@ const location = pathname.substring(pathname.lastIndexOf('/') + 1);
 class CustomersSummary extends React.Component {
   constructor(props) {
     super(props);
-    const {batches, rebateForms, current_user_roles } = this.props;
+    const { batches, rebateForms, current_user_roles } = this.props;
 
     this.unProcessRebates = this.unProcessRebates.bind(this);
     this.createBatch = this.createBatch.bind(this);
@@ -26,11 +26,11 @@ class CustomersSummary extends React.Component {
       batches: batches && JSON.parse(batches),
       rebateForms: rebateForms && JSON.parse(rebateForms),
       isDiaUser: !!find(current_user_roles, role => role.name === 'dia'),
-      isCouncilUser: !!find(current_user_roles, role => role.name === 'rates' || role.name ===  'frontline')
+      isCouncilUser: !!find(current_user_roles, role => role.name === 'rates' || role.name === 'frontline')
     };
   }
 
-  checkIt (key) {
+  checkIt(key) {
     const rebateFormId = this.state.rebateForms[key].id;
     let { checked } = this.state;
 
@@ -45,27 +45,27 @@ class CustomersSummary extends React.Component {
     });
   }
 
-  unProcessRebates () {
+  unProcessRebates() {
     requestBuilder({
       method: 'DELETE',
       path: '/admin/unprocess_rebate_forms',
-      body: JSON.stringify({ids: this.state.checked})
+      body: JSON.stringify({ ids: this.state.checked })
     }).then(() => {
       window.location = '/admin/rebate_forms/processed';
     });
   }
 
-  createBatch () {
+  createBatch() {
     requestBuilder({
       method: 'POST',
       path: '/admin/batches',
-      body: JSON.stringify({ids: this.state.checked})
+      body: JSON.stringify({ ids: this.state.checked })
     }).then(() => {
       window.location = '/admin/batches';
     });
   }
 
-  fetchRebates (name) {
+  fetchRebates(name) {
     requestBuilder({
       method: 'get',
       path: `${pathname}?utf8=✓&name=${name || ''}`,
@@ -87,7 +87,7 @@ class CustomersSummary extends React.Component {
 
   render() {
     const { batches, rebateForms, checked, isDiaUser, isCouncilUser } = this.state;
-    
+
     const processable = pathname === '/admin/rebate_forms/processed' &&
     (rebateForms && rebateForms[0]);
     const checkIt = processable ? this.checkIt.bind(this) : null;
@@ -99,7 +99,7 @@ class CustomersSummary extends React.Component {
           { (location === 'admin') && SummarySearch(this.fetchRebatesByName)}
         </div>
         <div className='flex-row rebate-bulk-actions'>
-          <h3>{batches && batches[0] ?'Batches' :'Search Results'}</h3>
+          <h3>{batches && batches[0] ? 'Batches' : 'Search Results'}</h3>
           {processable && ProcessButtons(
             {
               disabled: Boolean(!checked[0]),

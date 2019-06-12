@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 
-export function ProcessButtons ({disabled, unProcessRebates, createBatch}) {
+export function ProcessButtons({ disabled, unProcessRebates, createBatch }) {
   return (
     <Fragment>
-      <button 
+      <button
         className='rebate-bulk-action-button'
         disabled={disabled}
         onClick={unProcessRebates}
