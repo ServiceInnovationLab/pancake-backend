@@ -19,6 +19,8 @@ class RebateFormsController < ApiController
 
     rebate_form.fields['total_rates'] = rebate_form.property.rates_bills[0].total_rates
 
+    rebate_form.fields['location'] = rebate_form.property.location
+
     raise JsonapiCompliable::Errors::RecordNotFound unless rebate_form
 
     render_jsonapi(rebate_form, scope: false)
