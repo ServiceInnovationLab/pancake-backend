@@ -411,7 +411,7 @@ GEM
     websocket-extensions (0.1.3)
     wicked_pdf (1.2.2)
       activesupport
-    wkhtmltopdf-heroku (2.12.4.0)
+    wkhtmltopdf-binary (0.12.4)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -469,7 +469,7 @@ DEPENDENCIES
   webdrivers
   webpacker
   wicked_pdf
-  wkhtmltopdf-heroku
+  wkhtmltopdf-binary
 
 BUNDLED WITH
    1.17.3

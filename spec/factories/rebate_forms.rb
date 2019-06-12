@@ -10,7 +10,20 @@ FactoryBot.define do
         dependants: 0,
         customer_id: 123,
         phone: '0212345678',
-        income: {},
+        income: {
+          total_income: 224,
+          applicant: {
+            wages_salary: 74
+          },
+          otherIncome: {
+            applicant: {
+              'Selling old toys': 70
+            }
+          },
+          partner: {
+            wages_salary: '80'
+          }
+        },
         email: 'hermione.granger@hogwarts.com',
         has_partner: true,
         occupation: 'witch',

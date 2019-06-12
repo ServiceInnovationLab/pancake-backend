@@ -1,0 +1,34 @@
+%div
+  - if rebate_form.fields['income']['applicant'].present?
+    - rebate_form.fields['income']['applicant'].each do |key, value|
+      - if value.present?
+        %h3
+          = "Applicant income - #{key.titleize}"
+        %p
+          = '$' + (value.to_s)
+  - if rebate_form.fields['income']['partner'].present?
+    - rebate_form.fields['income']['partner'].each do |key, value|
+      - if value.present?
+        %h3
+          = "Partner income - #{key.titleize}"
+        %p
+          = '$' + (value.to_s)
+  - if rebate_form.fields['income']['otherIncome'].present?
+    - if rebate_form.fields['income']['otherIncome']['applicant'].present?
+      - rebate_form.fields['income']['otherIncome']['applicant'].each do |key, value|
+        - if value.present?
+          %h3
+            = "Applicant other income - #{key.titleize}"
+          %p
+            = '$' + (value.to_s)
+    - if rebate_form.fields['income']['otherIncome']['partner'].present?
+      - rebate_form.fields['income']['otherIncome']['partner'].each do |key, value|
+        - if value.present?
+          %h3
+            = "Partner other income - #{key.titleize}"
+          %p
+            = '$' + (value.to_s)
+%div
+  %h3 Total combined income before tax
+  %p
+    = '$' + (rebate_form.fields['income']['total_income'].to_s)

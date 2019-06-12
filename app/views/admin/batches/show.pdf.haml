@@ -1,15 +1,31 @@
-%header
+%header.main-header
   .container
+    %p.heading
+      = rebate_form_year_header(@batch.rebate_forms.first)
+      Applications
+
+    = image_tag wicked_pdf_asset_base64('print-logo-black.png'), class: 'pdf-image'
+
     .batches-heading
-      %h1 Rates Rebates
-      %h2 Gov Lab Alpha
-      %h3
-        COVER PAGE for Batch
-        = @batch.id
+      %h1 Batch details
+      %hr
+      %div
+        %h3 Batch ID
+        %p
+          = @batch.name
+      %div
+        %h3 Date
         %p
           = @batch.created_at.strftime("%d-%m-%Y - %I:%M%P").to_time.localtime
-        %p="Total claimed rebates = $#{@batch.amount}"
-  = image_tag wicked_pdf_asset_base64('dia.png'), class: 'pdf-image batches-logo'
+      %div
+        %h3 Applications in this batch
+        %p
+          = @batch.rebate_forms.count
+      %div
+        %h3 Total claimed rebates
+        %p
+          = "$#{@batch.amount}"
+      %hr
 
 
   - @batch.rebate_forms.each do |rebate_form|
