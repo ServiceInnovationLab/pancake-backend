@@ -8,24 +8,6 @@
  *= require_tree .
 */
 
-/* Fonts
-=============================== */
-@font-face {
-  font-family: 'Fira';
-  src: url("fonts/FiraSans-Regular.eot");
-  src: url("fonts/FiraSans-Regular.eot?#iefix") format("embedded-opentype"),
-  url("fonts/FiraSans-Regular.woff") format("woff"),
-  url("fonts/FiraSans-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: 'Fira-Bold';
-  src: url("fonts/FiraSans-Bold.eot");
-  src: url("fonts/FiraSans-Bold.eot?#iefix") format("embedded-opentype"),
-  url("fonts/FiraSans-Bold.woff") format("woff"),
-  url("fonts/FiraSans-Bold.ttf") format("truetype");
-}
-
 /*Colours*/
 :root {
   --dove: #ebebeb;
@@ -64,7 +46,7 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: "Fira", Helvetica, Arial, sans-serif;
+  font-family: "Fira", Helvetica, Arial, sans-serif !important;
 }
 
 body {
@@ -114,7 +96,6 @@ a:focus {
   float: right;
   vertical-align: middle;
   font-size: 16px;
-  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 .header-logout-link {
@@ -124,12 +105,10 @@ a:focus {
   margin-left: 15px;
   padding: 5px 10px;
   font-size: 14px;
-  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 label {
   font-weight: bold;
-  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 input {
