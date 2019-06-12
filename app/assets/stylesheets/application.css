@@ -24,10 +24,29 @@
   --black: #000000;
 }
 
+/* Fonts
+=============================== */
+@font-face {
+  font-family: 'Fira';
+  src: url("fonts/FiraSans-Regular.eot");
+  src: url("fonts/FiraSans-Regular.eot?#iefix") format("embedded-opentype"),
+  url("fonts/FiraSans-Regular.woff") format("woff"),
+  url("fonts/FiraSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Fira-Bold';
+  src: url("fonts/FiraSans-Bold.eot");
+  src: url("fonts/FiraSans-Bold.eot?#iefix") format("embedded-opentype"),
+  url("fonts/FiraSans-Bold.woff") format("woff"),
+  url("fonts/FiraSans-Bold.ttf") format("truetype");
+}
+
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
 body {
