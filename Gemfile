@@ -49,8 +49,8 @@ gem 'groupdate'
 
 # Makes the pdfs
 gem 'wicked_pdf'
-# gem 'wkhtmltopdf-binary'
-gem 'wkhtmltopdf-heroku'
+gem 'wkhtmltopdf-binary'
+# gem 'wkhtmltopdf-heroku'
 
 gem 'aws-sdk-s3' # We store images on s3
 
@@ -93,7 +93,4 @@ group :test do
   # freezes time in some specs
   gem 'timecop'
   gem 'webdrivers'
-
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
 end

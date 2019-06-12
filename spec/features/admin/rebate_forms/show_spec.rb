@@ -24,7 +24,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           expect(page).to have_text('Customer details')
           expect(page).to have_text('Signature required')
           expect(page).to have_text(user.email)
-          expect(page).to have_text('Log out x')
+          expect(page).to have_text('LOG OUT x')
           expect(page).to have_field('fields.full_name', with: rebate_form.full_name)
           expect(page).to have_field('fields.email', with: rebate_form.email)
           expect(page).to have_field('fields.occupation', with: rebate_form.occupation)
@@ -103,6 +103,17 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
             expect(page).to_not have_text('Processed')
           end
         end
+
+        describe 'when a rebate form is batched' do
+          let!(:batched_rebate_form) { FactoryBot.create(:batched_form) }
+          before { visit "/admin/rebate_forms/#{batched_rebate_form.id}" }
+
+          it 'cannot be edited' do
+            expect(page).to_not have_text('Processed')
+            expect(page).to_not have_text('Unprocess')
+            expect(page).to_not have_text('Edit')
+          end
+        end
         include_examples 'percy snapshot'
       end
 
@@ -136,7 +147,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_text('Customer details')
         expect(page).to have_text('Signature required')
         expect(page).to have_text(user.name)
-        expect(page).to have_text('Log out x')
+        expect(page).to have_text('LOG OUT x')
       end
     end
   end

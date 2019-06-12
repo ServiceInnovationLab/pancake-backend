@@ -2,19 +2,36 @@
 import React, { Fragment } from 'react';
 import 'isomorphic-fetch';
 
+import { getCurrentPath } from '../helpers/getCurrentPath';
 import { requestBuilder } from '../helpers/requestBuilder';
-
+import { find } from 'lodash';
+import { ProcessButtons } from '../components/ProcessButtons';
+import { BatchesSummary } from '../components/BatchesSummary';
 import { SummaryTable } from '../components/SummaryTable';
 import { SummarySearch } from '../components/SummarySearch';
 import { SummaryTabs } from '../components/SummaryTabs';
 
+const pathname = window.location.pathname;
+const currentLocation = getCurrentPath(pathname);
+
 class CustomersSummary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { checked: [], rebateForms: null, applicationState: 'not signed' };
+    const { batches, rebateForms, current_user_roles } = this.props;
+
+    this.unProcessRebates = this.unProcessRebates.bind(this);
+    this.createBatch = this.createBatch.bind(this);
+    this.fetchRebatesByName = this.fetchRebatesByName.bind(this);
+    this.state = {
+      checked: [],
+      batches: batches && JSON.parse(batches),
+      rebateForms: rebateForms && JSON.parse(rebateForms),
+      isDiaUser: !!find(current_user_roles, role => role.name === 'dia'),
+      isCouncilUser: !!find(current_user_roles, role => role.name === 'rates' || role.name === 'frontline')
+    };
   }
 
-  checkIt (key) {
+  checkIt(key) {
     const rebateFormId = this.state.rebateForms[key].id;
     let { checked } = this.state;
 
@@ -29,32 +46,30 @@ class CustomersSummary extends React.Component {
     });
   }
 
-  unProcessRebates () {
+  unProcessRebates() {
     requestBuilder({
       method: 'DELETE',
       path: '/admin/unprocess_rebate_forms',
-      body: JSON.stringify({ids: this.state.checked})
+      body: JSON.stringify({ ids: this.state.checked })
     }).then(() => {
-      this.setState({checked: []});
-      this.fetchRebates(this.state.applicationState);
+      window.location = '/admin/rebate_forms/processed';
     });
   }
 
-  createBatch () {
+  createBatch() {
     requestBuilder({
       method: 'POST',
       path: '/admin/batches',
-      body: JSON.stringify({ids: this.state.checked})
+      body: JSON.stringify({ ids: this.state.checked })
     }).then(() => {
-      this.setState({checked: []});
-      this.fetchRebates(this.state.applicationState);
+      window.location = '/admin/batches';
     });
   }
 
-  fetchRebates (status, name) {
+  fetchRebates(name) {
     requestBuilder({
       method: 'get',
-      path: `/admin/rebate_forms?utf8=✓&status=${status}&name=${name || ''}`,
+      path: `${pathname}?utf8=✓&name=${name || ''}`,
     })
       .then(response => {
         return response.json();
@@ -67,36 +82,34 @@ class CustomersSummary extends React.Component {
       });
   }
 
-
-  onChange(value) {
-    this.setState({applicationState: value, rebateForms: null});
-
-    if(value === 'not signed') return;
-
-    this.fetchRebates(value);
-  }
-
   fetchRebatesByName(values = {}) {
-    this.fetchRebates('not signed', values.name);
+    this.fetchRebates(values.name);
   }
 
   render() {
-    const { applicationState, rebateForms, checked } = this.state;
-    const processable = applicationState === 'processed' &&
-    (rebateForms && rebateForms[0]);
+    const { batches, rebateForms, checked, isDiaUser, isCouncilUser } = this.state;
+
+    const processable = currentLocation === '/admin/rebate_forms/processed' && (rebateForms && rebateForms[0]);
     const checkIt = processable ? this.checkIt.bind(this) : null;
+
     return (
       <Fragment>
         <div className='pure-u-1-2 rebate-search-box'>
-          {SummaryTabs(applicationState, this.onChange.bind(this))}
-          { (applicationState === 'not signed') && SummarySearch(this.fetchRebatesByName.bind(this))}
+          {SummaryTabs()}
+          { (currentLocation === '/admin/rebate_forms') && SummarySearch(this.fetchRebatesByName)}
         </div>
         <div className='flex-row rebate-bulk-actions'>
-          <h3>Search Results</h3>
-          {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]} onClick={this.unProcessRebates.bind(this)}>UNPROCESS</button>}
-          {processable && <button className='rebate-bulk-action-button' disabled={!checked[0]} onClick={this.createBatch.bind(this)}>CREATE BATCH</button>}
+          <h3>{batches && batches[0] ? 'Batches' : 'Search Results'}</h3>
+          {processable && ProcessButtons(
+            {
+              disabled: Boolean(!checked[0]),
+              unProcessRebates: this.unProcessRebates,
+              createBatch: this.createBatch
+            }
+          )}
         </div>
-        {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, this.state, checkIt)}
+        {(batches && batches[0]) && BatchesSummary(batches, isDiaUser, isCouncilUser)}
+        {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, checked, checkIt)}
       </Fragment>
     );
   }

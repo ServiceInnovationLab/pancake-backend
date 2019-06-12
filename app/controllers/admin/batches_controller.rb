@@ -1,16 +1,27 @@
 # frozen_string_literal: true
 
 class Admin::BatchesController < Admin::BaseController
-  def index
-    @council = current_user.council
-    @batches = policy_scope(Batch).all.order(created_at: :desc)
-    return if @council.blank?
+  respond_to :json, :html
 
-    @unbatched_count = RebateForm.joins(:property)
-                                 .where(status: RebateForm::SIGNED_STATUS,
-                                        batch_id: nil,
-                                        properties: { council_id: @council.id })
-                                 .size
+  def index
+    @batches = policy_scope(Batch)
+               .all
+               .order(created_at: :asc)
+               .to_json(include: { rebate_forms: { include: :property } })
+  end
+
+  def edit
+    @batch = Batch.find(params[:id])
+    authorize @batch
+  end
+
+  def update
+    batch = Batch.find(params[:id])
+    authorize batch
+
+    batch.update!(name: batch_name_param)
+
+    redirect_to admin_batches_path, notice: 'The selected batch has been updated successfully.'
   end
 
   def show
@@ -19,7 +30,7 @@ class Admin::BatchesController < Admin::BaseController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf', margin: { top: 0, bottom: 0, left: 0, right: 0 }, dpi: '300'
+        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf', margin: { top: 0, bottom: 0, left: 0, right: 0 }, dpi: '300', show_as_html: params[:debug]
       end
     end
   end
@@ -44,6 +55,10 @@ class Admin::BatchesController < Admin::BaseController
   end
 
   private
+
+  def batch_name_param
+    params.require(:batch).require(:name).strip
+  end
 
   def find_council(rebate_forms)
     return current_user.council if current_user.council

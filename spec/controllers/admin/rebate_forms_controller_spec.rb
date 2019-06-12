@@ -16,23 +16,7 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
 
         describe 'assigns all rebate_forms as @rebate_forms' do
           it { expect(assigns(:rebate_forms)).to eq([rebate_form]) }
-        end
-      end
-
-      describe 'filter by completion' do
-        let!(:signed) { FactoryBot.create :signed_form, property: property }
-        let!(:not_signed) { FactoryBot.create :rebate_form, property: property }
-
-        describe 'signed' do
-          before { get :index, params: { status: RebateForm::SIGNED_STATUS } }
-
-          it { expect(assigns(:rebate_forms)).to eq [signed] }
-        end
-
-        describe 'not signed' do
-          before { get :index, params: { status: RebateForm::NOT_SIGNED_STATUS } }
-
-          it { expect(assigns(:rebate_forms)).to eq [rebate_form, not_signed] }
+          it { expect(response.status).to eq(200) }
         end
       end
 
@@ -67,12 +51,6 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         describe 'assigns the requested rebate_form as @rebate_form' do
           it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         end
-      end
-
-      pending 'pdf' do
-        before { get :show, params: { id: rebate_form.to_param }, format: :pdf }
-
-        it { expect(assigns(:rebate_form)).to eq(rebate_form) }
       end
     end
 
