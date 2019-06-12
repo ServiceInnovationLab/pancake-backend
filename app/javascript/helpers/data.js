@@ -9,7 +9,7 @@ export const summaryTabs = [
 export const incomeRows = [
   [
     'nz_superannuation',
-    'NZ Superannuation'
+    'New Zealand Superannuation'
   ],
   [
     'other_superannuation',
@@ -29,7 +29,7 @@ export const incomeRows = [
   ],
   [
     'business_profit',
-    'Business profit (NET)'
+    'Business profit'
   ],
   [
     'rental_income',
@@ -37,7 +37,7 @@ export const incomeRows = [
   ],
   [
     'overseas_income',
-    'Overseas income (in $NZ)'
+    'Overseas income (in NZD$)'
   ],
 ];
 
@@ -90,14 +90,24 @@ export const customerDetailFields = [
     placeholder: '00000 000 00',
   },
   {
-    id: 'email',
-    label: 'Email (optional)',
-    type: 'email',
+    id: 'lived_in_property_1_July',
+    label: 'Lived in property 1 July 2018',
+    type:'radio'
+  },
+  {
+    id: 'moved_within_rating_year',
+    label: 'Moved within rating year',
+    type:'radio'
   },
   {
     id: 'phone_number',
     label: 'Phone',
     type: 'tel',
+  },
+  {
+    id:'email',
+    label: 'Email (optional)',
+    type:'email',
   },
   {
     id: 'spouse_or_partner',
@@ -118,15 +128,5 @@ export const customerDetailFields = [
   {
     id: 'occupation',
     label: 'Occupation',
-  },
-  {
-    id: 'moved_within_rating_year',
-    label: 'Moved within rating year',
-    type: 'radio'
-  },
-  {
-    id: 'lived_in_property_1_July',
-    label: 'Lived in property 1 July 2018',
-    type: 'radio'
   },
 ];
