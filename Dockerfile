@@ -10,16 +10,37 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app
-COPY env-example .env
 COPY Gemfile* ./
 RUN bundle install
 
-#COPY package.json yarn.lock ./
-#RUN yarn install
+COPY app/ app/
+COPY bin/ bin/
+COPY config/ config/
+COPY db/ db/
+COPY lib/ lib/
+COPY log/ log/
+COPY public/ public/
+COPY spec/ spec/
+COPY tmp/ tmp/
+COPY vendor/ vendor/
 
-COPY . .
+COPY *.yml ./
+COPY .ruby-version .
+COPY app.json .
+COPY babel.config.js .
+COPY config.ru .
+COPY package.json .
+COPY postcss.config.js .
+COPY Procfile .
+COPY Rakefile .
+COPY yarn.lock .
+COPY .env .
 
 COPY bin/* /usr/bin/
+
+RUN bundle install && \
+  yarn install && \
+  bundle exec rails assets:precompile
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
