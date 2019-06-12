@@ -7,7 +7,7 @@ import { getCurrentPath } from '../helpers/getCurrentPath';
 const pathname = window.location.pathname;
 const currentLocation = getCurrentPath(pathname);
 
-export function SummaryTabs () {
+export function SummaryTabs() {
   return (
     <div className={'rebate-tabs flex-row'}>
       {map(summaryTabs, ([key, value]) =>

@@ -30,11 +30,13 @@
   display: flex;
   justify-content: space-between;
   font-size: 3em;
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
   margin: 0;
 }
 
 .rebate-subtitle {
   font-size: 1.75em;
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
   margin: .4em 0;
 }
 
@@ -100,7 +102,7 @@
 .rebate-search-button {
   background-color: var(--blue);
   border-radius: .2em;
-  color: white
+  color: var(--white);
 }
 
 
@@ -212,7 +214,7 @@
   background: var(--dove);
   padding: 1rem;
   border: none;
-  font-weight: bold
+  font-weight: bold;
 }
 
 .rebate-button-selected {
@@ -222,7 +224,7 @@
   padding: 1rem;
   border: none;
   border-bottom: 5px solid var(--blue);
-  font-weight: bold
+  font-weight: bold;
 }
 
 .rebate-qrcode {
@@ -244,6 +246,7 @@
   float: right;
   width: 5em;
 }
+
 .rebate-bulk-actions {
   justify-content: space-between;
   width: 770px;
@@ -257,13 +260,14 @@
   background-color: var(--dove);
   color: var(--blue);
   border: none;
-  font-weight: bold 
+  font-weight: bold;
 }
+
 .rebate-bulk-action-button:disabled {
   background-color: var(--dove);
   color: var(--dark-gray);
   border: none;
-  font-weight: bold 
+  font-weight: bold;
 }
 
 .rebate-single-process-button {
@@ -272,8 +276,8 @@
   border: none;
   font-weight: bold;
   font-size: .5em;
-  
 }
+
 .rebate-form-blue-arrow {
   width: 2rem;
   height: 2rem

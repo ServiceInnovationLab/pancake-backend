@@ -30,7 +30,7 @@ class Admin::BatchesController < Admin::BaseController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf', margin: { top: 0, bottom: 0, left: 0, right: 0 }, dpi: '300'
+        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf', margin: { top: 0, bottom: 0, left: 0, right: 0 }, dpi: '300', show_as_html: params[:debug]
       end
     end
   end

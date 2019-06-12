@@ -45,6 +45,15 @@ RSpec.describe Admin::BatchesController, type: :controller do
       end
     end
 
+    describe '#show' do
+      context 'pdf' do
+        let(:batched_form) { FactoryBot.create(:batched_form, property: property) }
+        before { get :show, params: { id: batched_form.batch.to_param }, format: :pdf }
+
+        it { expect(assigns(:batch)).to eq(batched_form.batch) }
+      end
+    end
+
     describe '#update' do
       let!(:batched_form) { FactoryBot.create(:batched_form, property: property) }
 
