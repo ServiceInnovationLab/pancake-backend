@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'react-final-form';
 import { map } from 'lodash';
 
-export function SingleInput ({ isReadOnly, id, label, placeholder, fullWidth, withMargin, type = 'text' }) {
+export function SingleInput({ isReadOnly, id, label, placeholder, fullWidth, withMargin, type = 'text' }) {
   const className = fullWidth
     ? 'full-width'
     : withMargin
@@ -41,7 +41,7 @@ export function SingleInput ({ isReadOnly, id, label, placeholder, fullWidth, wi
   );
 }
 
-export function TableInput ({ id, type = 'number', isReadOnly, className }) {
+export function TableInput({ id, type = 'number', isReadOnly, className }) {
   return (
     <div key={id} className={className}>
       {isReadOnly &&
@@ -67,9 +67,9 @@ export function TableInput ({ id, type = 'number', isReadOnly, className }) {
       }
       <Error name={`fields.income.${id}`} />
     </div>
-  );}
+  ); }
 
-export function RadioInput ({ id, label, type, isReadOnly, withMargin, values }) {
+export function RadioInput({ id, label, type, isReadOnly, withMargin, values }) {
   const className = withMargin
     ? 'flex-item'
     : 'flex-item with-margin';
