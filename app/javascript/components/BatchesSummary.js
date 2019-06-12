@@ -49,7 +49,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                     rel='noopener'
                     className='applications-button'
                     onClick={() => {
-                      window.open(`/admin/batches/${id}.pdf`)
+                      window.open(`/admin/batches/${id}.pdf`);
                     }}>
                       APPLICATIONS
                   </button>}

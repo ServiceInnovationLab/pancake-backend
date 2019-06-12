@@ -1,7 +1,7 @@
 %header.main-header
   .container
     %p.heading
-      =rebate_form_year_header(@batch.rebate_forms.first)
+      = rebate_form_year_header(@batch.rebate_forms.first)
       Applications
 
     = image_tag wicked_pdf_asset_base64('print-logo-black.png'), class: 'pdf-image'
@@ -11,16 +11,20 @@
       %hr
       %div
         %h3 Batch ID
-        %p= @batch.name
+        %p
+          = @batch.name
       %div
         %h3 Date
-        %p= @batch.created_at.strftime("%d-%m-%Y - %I:%M%P").to_time.localtime
+        %p
+          = @batch.created_at.strftime("%d-%m-%Y - %I:%M%P").to_time.localtime
       %div
         %h3 Applications in this batch
-        %p=@batch.rebate_forms.count
+        %p
+          = @batch.rebate_forms.count
       %div
         %h3 Total claimed rebates
-        %p="$#{@batch.amount}"
+        %p
+          = "$#{@batch.amount}"
       %hr
 
 
