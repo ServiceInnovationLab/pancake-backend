@@ -1,7 +1,7 @@
 import React from 'react';
 import { map } from 'lodash';
 
-import {summaryTabs} from '../helpers/data';
+import { summaryTabs } from '../helpers/data';
 import { getCurrentPath } from '../helpers/getCurrentPath';
 
 const pathname = window.location.pathname;

@@ -1,7 +1,7 @@
-export function getCurrentPath (pathname) {
+export function getCurrentPath(pathname) {
   const currentPath = pathname.substring(pathname.lastIndexOf('/') + 1);
 
-  switch(currentPath) {
+  switch (currentPath) {
   case 'batches':
     return '/admin/batches';
   case 'processed':
@@ -11,5 +11,5 @@ export function getCurrentPath (pathname) {
   case 'rebate_forms':
   default:
     return '/admin/rebate_forms';
-  } 
+  }
 }

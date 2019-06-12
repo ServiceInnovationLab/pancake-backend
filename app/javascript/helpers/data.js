@@ -1,5 +1,5 @@
 
-export const summaryTabs= [
+export const summaryTabs = [
   ['Not Signed', '/admin/rebate_forms'],
   ['Signed', '/admin/rebate_forms/signed'],
   ['Processed', '/admin/rebate_forms/processed'],
