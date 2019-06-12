@@ -52,12 +52,6 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
           it { expect(assigns(:rebate_form)).to eq(rebate_form) }
         end
       end
-
-      pending 'pdf' do
-        before { get :show, params: { id: rebate_form.to_param }, format: :pdf }
-
-        it { expect(assigns(:rebate_form)).to eq(rebate_form) }
-      end
     end
 
     describe 'PUT #update' do
