@@ -65,7 +65,7 @@ body {
 .field,
 .declaration {
   margin-bottom: 10px;
-  color: #333333;
+  color: rgb(51, 51, 51);
 }
 
 h3,
