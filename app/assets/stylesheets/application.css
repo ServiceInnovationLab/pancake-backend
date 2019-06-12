@@ -117,6 +117,10 @@ input {
   margin: 5px 0 15px !important;
 }
 
+input:read-only {
+  border-style: none;
+  background: var(--dove);
+}
 .content {
   padding: 2em 1em 0;
 }
