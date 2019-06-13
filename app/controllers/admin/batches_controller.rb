@@ -19,9 +19,12 @@ class Admin::BatchesController < Admin::BaseController
     batch = Batch.find(params[:id])
     authorize batch
 
-    batch.update!(name: batch_name_param)
-    batch.cover_sheet.attach(batch_cover_sheet_param)
-    
+    Batch.transaction do
+      batch.name = batch_name_param if batch_name_param
+      batch.cover_sheet.attach(batch_cover_sheet_param) if batch_cover_sheet_param
+      batch.save!
+    end
+
     redirect_to admin_batches_path, notice: 'The selected batch has been updated successfully.'
   end
 
