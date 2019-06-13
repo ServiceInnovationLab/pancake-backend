@@ -1,10 +1,9 @@
-%header.main-header
-  .container
-    .heading
-      = rebate_form_year_header(rebate_form)
-      Application form
+.heading
+  %h3
+    = rebate_form_year_header(rebate_form)
+    Application form
 
-.container-secondary
+.rebate-container-secondary
   .applicant-info
     .field
       %h3 Application for
@@ -33,28 +32,29 @@
           %br/
         = rebate_form.property.town_city
   %hr
-  .field
-    %h3
-      = "Did you live here on 1 July #{last_rating_year(rebate_form)}?"
-    %p
-      = rebate_form_lived_year?(rebate_form)
-    - if moved_within_rating_year?(rebate_form)
-      %h3 Previous Address
+  .questions
+    .field
+      %h3
+        = "Did you live here on 1 July #{last_rating_year(rebate_form)}?"
       %p
-        = rebate_form.fields['details_of_previous_property']
-  .field
-    %h3 Is the property mostly used for business?
-    %p
-      = rebate_form_pdf_home_business(rebate_form).capitalize
-  .field
-    %h3 How many dependants do you have?
-    %p
-      = rebate_form_pdf_dependants(rebate_form)
-  .field
-    %h3
-      = "Were you living with a spouse, partner or a joint homeowner on 1 July #{last_rating_year(rebate_form)}?"
-    %p
-      = rebate_form_has_partner(rebate_form)
+        = rebate_form_lived_year?(rebate_form)
+      - if moved_within_rating_year?(rebate_form)
+        %h3 Previous Address
+        %p
+          = rebate_form.fields['details_of_previous_property']
+    .field
+      %h3 Is the property mostly used for business?
+      %p
+        = rebate_form_pdf_home_business(rebate_form).capitalize
+    .field
+      %h3 How many dependants do you have?
+      %p
+        = rebate_form_pdf_dependants(rebate_form)
+    .field
+      %h3
+        = "Were you living with a spouse, partner or a joint homeowner on 1 July #{last_rating_year(rebate_form)}?"
+      %p
+        = rebate_form_has_partner(rebate_form)
   %hr
   = render 'admin/rebate_forms/rates_and_income', rebate_form: rebate_form
   %hr

@@ -1,4 +1,4 @@
-%div
+.income
   - if rebate_form.fields['income']['applicant'].present?
     - rebate_form.fields['income']['applicant'].each do |key, value|
       - if value.present?
@@ -28,7 +28,7 @@
             = "Partner other income - #{key.titleize}"
           %p
             = '$' + (value.to_s)
-%div
-  %h3 Total combined income before tax
-  %p
-    = '$' + (rebate_form.fields['income']['total_income'].to_s)
+  %div
+    %h3 Total combined income before tax
+    %p
+      = '$' + (rebate_form.fields['income']['total_income'].to_s)

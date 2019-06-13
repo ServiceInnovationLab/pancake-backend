@@ -11,8 +11,9 @@
 
   %body
     .pure-g
-      .pure-u-1.header
-        = render 'layouts/header'
+      - unless admin_batch_path
+        .header
+          = render 'layouts/header'
       #main.pure-u-1
         - flash.each do |name, msg|
           = content_tag :div, msg, class: name
