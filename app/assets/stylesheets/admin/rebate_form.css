@@ -227,11 +227,9 @@
 }
 
 .rebate-qrcode {
+  display: flex;
   margin: 1em auto;
   background-color: black;
-  width: 20%;
-  min-width: 350px;
-  max-width: 500px;
 }
 
 .rebate-generate-qr {
