@@ -4,7 +4,6 @@ class Batch < ApplicationRecord
   has_many :rebate_forms, dependent: :nullify
   belongs_to :council, optional: false
   after_create :add_temp_name
-  after_update :update_cover_sheet_attached
 
   has_one_attached :cover_sheet
 
@@ -17,5 +16,4 @@ class Batch < ApplicationRecord
   def cover_sheet_attached?
     cover_sheet.attached?
   end
-  
 end
