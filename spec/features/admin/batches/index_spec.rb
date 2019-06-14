@@ -25,6 +25,7 @@ RSpec.describe 'Batch', type: :feature do
       expect(page).to have_text(batched_form.batch.name)
       expect(page).to have_text('COVER SHEET')
       expect(page).to have_text(batch_other_council.name)
+      expect(page).to have_text(batch_other_council.created_at)
       expect(page).not_to have_text('EDIT')
       expect(page).to have_text('APPLICATIONS')
     end
@@ -48,6 +49,7 @@ RSpec.describe 'Batch', type: :feature do
       expect(page).to have_text(batched_form.batch.name)
       expect(page).to have_text('COVER SHEET')
       expect(page).not_to have_text(batch_other_council.name)
+      expect(page).to have_text(batch_other_council.created_at)
       expect(page).to have_text('EDIT')
       expect(page).to_not have_text('APPLICATIONS')
     end
