@@ -20,9 +20,9 @@ class Admin::BatchesController < Admin::BaseController
     authorize batch
 
     Batch.transaction do
-      batch.name = batch_name_param if batch_name_param
       batch.cover_sheet.attach(batch_cover_sheet_param) if batch_cover_sheet_param
-      batch.save!
+      batch.update!(name: batch_name_param) if batch_name_param
+      batch.update!(cover_sheet_attached: true) if batch.erms_cover_sheet_attached?
     end
 
     redirect_to admin_batches_path, notice: 'The selected batch has been updated successfully.'
