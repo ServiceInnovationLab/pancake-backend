@@ -10,7 +10,7 @@
     = csrf_meta_tags
 
   %body
-    - unless admin_batch_path
+    - unless @batch && admin_batch_path
       .header
         = render 'layouts/header'
     #main.pure-u-1
