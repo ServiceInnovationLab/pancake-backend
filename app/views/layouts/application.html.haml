@@ -14,7 +14,7 @@
       .pure-u-1.header
         = render 'layouts/header'
       #main.pure-u-1
-        - flash.each do |name, msg|
+        - flash.each do |_name, msg|
           .notice
             = image_tag('tick.svg', class: 'tick-icon')
             = msg
