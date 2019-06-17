@@ -12,9 +12,8 @@ docker --version
 pip install --user awscli
 export PATH=$PATH:$HOME/.local/bin
 
-eval $(aws ecr get-login --no-include-email --region ap-southeast-2 | sed 's/https://||')
-
 docker build -t $DOCKER_REPO .
 docker tag $DOCKER_REPO $DOCKER_ECR/$DOCKER_REPO:$TAG
 
+eval $(aws ecr get-login --no-include-email --region ap-southeast-2)
 docker push $DOCKER_ECR/$DOCKER_REPO:$TAG
