@@ -15,7 +15,7 @@
         = render 'layouts/header'
       #main.pure-u-1
         - flash.each do |name, msg|
-          %div.notice
-            =image_tag('tick.svg', class: 'tick-icon')
-            =msg
+          .notice
+            = image_tag('tick.svg', class: 'tick-icon')
+            = msg
         = yield
