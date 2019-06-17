@@ -11,7 +11,7 @@ export function SummaryTable(rebateForms, checked, checkIt) {
           <tr>
             {checkIt && <th></th>}
             <th>Name</th>
-            <th>Address</th>
+            <th>{checkIt ? 'Valuation ID' : 'Address'}</th>
             <th></th>
           </tr>
         </thead>
