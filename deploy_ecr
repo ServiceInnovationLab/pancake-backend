@@ -20,10 +20,10 @@ pip install --user awscli ecs-deploy
 
 export PATH=$PATH:$HOME/.local/bin
 
-docker build -t $DOCKER_REPO .
-docker tag $DOCKER_REPO $DOCKER_ECR/$DOCKER_REPO:$TAG
+#docker build -t $DOCKER_REPO .
+#docker tag $DOCKER_REPO $DOCKER_ECR/$DOCKER_REPO:$TAG
 
 eval $(aws ecr get-login --no-include-email --region ap-southeast-2)
-docker push $DOCKER_ECR/$DOCKER_REPO:$TAG
+#docker push $DOCKER_ECR/$DOCKER_REPO:$TAG
 
 ecs deploy pancake-uat pancake-service-uat --tag $TAG
