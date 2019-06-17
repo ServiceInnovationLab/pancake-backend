@@ -10,13 +10,12 @@
     = csrf_meta_tags
 
   %body
-    .pure-g
-      - unless admin_batch_path
-        .header
-          = render 'layouts/header'
-      #main.pure-u-1
-        - flash.each do |_name, msg|
-          .notice
-            = image_tag('tick.svg', class: 'tick-icon')
-            = msg
-        = yield
+    - unless admin_batch_path
+      .header
+        = render 'layouts/header'
+    #main.pure-u-1
+      - flash.each do |_name, msg|
+        .notice
+          = image_tag('tick.svg', class: 'tick-icon')
+          = msg
+      = yield
