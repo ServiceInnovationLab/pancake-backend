@@ -117,10 +117,40 @@ input {
   margin: 5px 0 15px !important;
 }
 
+input:-moz-read-only {
+  border-style: none;
+  background: var(--dove);
+} /* For Firefox */
+
+input:read-only {
+  border-style: none;
+  background: var(--dove);
+}
+
 .content {
   padding: 2em 1em 0;
 }
 
 .search-form {
   float: right;
+}
+
+.notice {
+  background-color: var(--gray);
+  height: 40px;
+  font-size: 16px;
+  color: var(--black);
+  padding-left: 10px;
+}
+
+.notice::before {
+  content: ' ';
+  background-image: url('tick.svg');
+  background-size: 10px;
+}
+
+.tick-icon {
+  width: 25px;
+  height: 25px;
+  padding-top: 12px;
 }

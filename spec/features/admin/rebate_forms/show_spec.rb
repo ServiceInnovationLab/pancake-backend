@@ -73,6 +73,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           it { expect(page).to have_field('fields.full_name', with: rebate_form.full_name) }
           it { expect(page).to have_field('fields.email', with: rebate_form.email) }
           it { expect(page).to have_field('fields.occupation', with: rebate_form.occupation) }
+          it { expect(page).to have_field('fields.valuation_id', with: rebate_form.valuation_id) }
         end
 
         describe 'can process an application' do
@@ -101,6 +102,17 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
             click_link('Unprocess')
             expect(page).to have_text('Signed and ready to process')
             expect(page).to_not have_text('Processed')
+          end
+        end
+
+        describe 'when a rebate form is batched' do
+          let!(:batched_rebate_form) { FactoryBot.create(:batched_form) }
+          before { visit "/admin/rebate_forms/#{batched_rebate_form.id}" }
+
+          it 'cannot be edited' do
+            expect(page).to_not have_text('Processed')
+            expect(page).to_not have_text('Unprocess')
+            expect(page).to_not have_text('Edit')
           end
         end
         include_examples 'percy snapshot'

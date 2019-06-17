@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Batch', type: :feature do
   let(:property) { FactoryBot.create :property }
-  let!(:batched_form) { FactoryBot.create :batched_form, property: property }
   let!(:batch_other_council) { FactoryBot.create :batch }
+  let!(:batched_form) { FactoryBot.create :batched_form, property: property }
 
   context 'anonymous' do
     it "can't see it" do
@@ -23,10 +23,23 @@ RSpec.describe 'Batch', type: :feature do
     it ' Can see all batches' do
       visit '/admin/batches'
       expect(page).to have_text(batched_form.batch.name)
-      expect(page).to have_text('COVER SHEET')
+      expect(page).to have_text('Cover sheet required')
       expect(page).to have_text(batch_other_council.name)
+      expect(page).to have_text(batch_other_council.created_at.strftime('%d %b %Y'))
       expect(page).not_to have_text('EDIT')
       expect(page).to have_text('APPLICATIONS')
+    end
+
+    context 'when there is a cover sheet' do
+      before do
+        batched_form.batch.update!(cover_sheet_attached: true)
+        batch_other_council.update!(cover_sheet_attached: true)
+      end
+      it 'updates the display accordingly' do
+        visit '/admin/batches'
+        expect(page).to_not have_text('Cover sheet required')
+        expect(page).to have_text('COVER SHEET')
+      end
     end
 
     it ' opens a new window when the APPLICATIONS button is clicked' do
@@ -46,8 +59,9 @@ RSpec.describe 'Batch', type: :feature do
     it 'can only see batches from my council' do
       visit '/admin/batches'
       expect(page).to have_text(batched_form.batch.name)
-      expect(page).to have_text('COVER SHEET')
+      expect(page).to have_text('Cover sheet required')
       expect(page).not_to have_text(batch_other_council.name)
+      expect(page).to have_text(batch_other_council.created_at.strftime('%d %b %Y'))
       expect(page).to have_text('EDIT')
       expect(page).to_not have_text('APPLICATIONS')
     end

@@ -2,6 +2,7 @@
 import React, { Fragment } from 'react';
 import 'isomorphic-fetch';
 
+import { getCurrentPath } from '../helpers/getCurrentPath';
 import { requestBuilder } from '../helpers/requestBuilder';
 import { find } from 'lodash';
 import { ProcessButtons } from '../components/ProcessButtons';
@@ -11,7 +12,7 @@ import { SummarySearch } from '../components/SummarySearch';
 import { SummaryTabs } from '../components/SummaryTabs';
 
 const pathname = window.location.pathname;
-const location = pathname.substring(pathname.lastIndexOf('/') + 1);
+const currentLocation = getCurrentPath(pathname);
 
 class CustomersSummary extends React.Component {
   constructor(props) {
@@ -88,15 +89,14 @@ class CustomersSummary extends React.Component {
   render() {
     const { batches, rebateForms, checked, isDiaUser, isCouncilUser } = this.state;
 
-    const processable = pathname === '/admin/rebate_forms/processed' &&
-    (rebateForms && rebateForms[0]);
+    const processable = currentLocation === '/admin/rebate_forms/processed' && (rebateForms && rebateForms[0]);
     const checkIt = processable ? this.checkIt.bind(this) : null;
 
     return (
       <Fragment>
         <div className='pure-u-1-2 rebate-search-box'>
           {SummaryTabs()}
-          { (location === 'admin') && SummarySearch(this.fetchRebatesByName)}
+          { (currentLocation === '/admin/rebate_forms') && SummarySearch(this.fetchRebatesByName)}
         </div>
         <div className='flex-row rebate-bulk-actions'>
           <h3>{batches && batches[0] ? 'Batches' : 'Search Results'}</h3>

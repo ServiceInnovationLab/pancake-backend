@@ -1,6 +1,6 @@
 
 export const summaryTabs = [
-  ['Not Signed', '/admin'],
+  ['Not Signed', '/admin/rebate_forms'],
   ['Signed', '/admin/rebate_forms/signed'],
   ['Processed', '/admin/rebate_forms/processed'],
   ['Batched', '/admin/batches']
@@ -120,13 +120,13 @@ export const customerDetailFields = [
     label: 'Occupation',
   },
   {
-    id: 'moved_within_rating_year',
-    label: 'Moved within rating year',
-    type: 'radio'
-  },
-  {
     id: 'lived_in_property_1_July',
     label: 'Lived in property 1 July 2018',
     type: 'radio'
   },
+  {
+    id: 'moved_within_rating_year',
+    label: 'Moved within rating year',
+    type: 'radio'
+  }
 ];

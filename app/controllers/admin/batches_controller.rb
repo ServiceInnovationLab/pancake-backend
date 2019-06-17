@@ -6,7 +6,7 @@ class Admin::BatchesController < Admin::BaseController
   def index
     @batches = policy_scope(Batch)
                .all
-               .order(created_at: :asc)
+               .order(created_at: :desc)
                .to_json(include: { rebate_forms: { include: :property } })
   end
 
@@ -19,7 +19,9 @@ class Admin::BatchesController < Admin::BaseController
     batch = Batch.find(params[:id])
     authorize batch
 
-    batch.update!(name: batch_name_param)
+    Batch.transaction do
+      update_batch(batch)
+    end
 
     redirect_to admin_batches_path, notice: 'The selected batch has been updated successfully.'
   end
@@ -50,8 +52,22 @@ class Admin::BatchesController < Admin::BaseController
 
   private
 
+  def update_batch(batch)
+    batch.cover_sheet.attach(batch_cover_sheet_param) unless batch_cover_sheet_param.nil?
+    batch.update!(name: batch_name_param) unless batch_name_param.nil?
+    batch.update!(cover_sheet_attached: true) if batch.erms_cover_sheet_attached?
+  end
+
   def batch_name_param
+    return nil unless params[:batch][:name]
+
     params.require(:batch).require(:name).strip
+  end
+
+  def batch_cover_sheet_param
+    return nil unless params[:batch][:cover_sheet]
+
+    params.require(:batch).require(:cover_sheet)
   end
 
   def find_council(rebate_forms)

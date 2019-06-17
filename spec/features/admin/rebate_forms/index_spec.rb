@@ -20,7 +20,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     FactoryBot.create(:processed_form, property: FactoryBot.create(:property, council: council))
   end
   let(:processed_name) { processed_form.full_name }
-  let(:processed_location) { processed_form.property.location }
+  let(:processed_valuation_id) { processed_form.property.valuation_id }
 
   context 'anonymous' do
     it "can't see it" do
@@ -106,7 +106,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_text('UNPROCESS')
         expect(page).to have_text('CREATE BATCH')
         expect(page).to have_text(processed_name)
-        expect(page).to have_text(processed_location)
+        expect(page).to have_text(processed_valuation_id)
         check(`#{processed_name}-checkbox`)
         click_button 'UNPROCESS'
         expect(page).not_to have_text(processed_name)
