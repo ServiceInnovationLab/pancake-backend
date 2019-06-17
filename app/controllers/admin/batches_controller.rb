@@ -20,8 +20,8 @@ class Admin::BatchesController < Admin::BaseController
     authorize batch
 
     Batch.transaction do
-      batch.cover_sheet.attach(batch_cover_sheet_param) if batch_cover_sheet_param
-      batch.update!(name: batch_name_param) if batch_name_param
+      batch.cover_sheet.attach(batch_cover_sheet_param) unless batch_cover_sheet_param.nil?
+      batch.update!(name: batch_name_param) unless batch_name_param.nil?
       batch.update!(cover_sheet_attached: true) if batch.erms_cover_sheet_attached?
     end
 
@@ -61,10 +61,14 @@ class Admin::BatchesController < Admin::BaseController
   private
 
   def batch_name_param
+    return nil unless params[:batch][:name]
+
     params.require(:batch).require(:name).strip
   end
 
   def batch_cover_sheet_param
+    return nil unless params[:batch][:cover_sheet]
+
     params.require(:batch).require(:cover_sheet)
   end
 
