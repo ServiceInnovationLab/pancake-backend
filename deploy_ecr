@@ -5,22 +5,23 @@ if ! [ $TRAVIS_PULL_REQUEST == "false" ]; then
   # exit 0;
 fi
 
-TAG=`if [ "$TRAVIS_BRANCH" == "dev" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "prod"; else echo $TRAVIS_BRANCH ; fi`
 COMMIT=${TRAVIS_COMMIT::8}
-
+BUILD="$COMMIT-$TAG"
 echo "TRAVIS_BRANCH = $TRAVIS_BRANCH"
 echo "TRAVIS_PULL_REQUEST = $TRAVIS_PULL_REQUEST"
 echo "TAG = $TAG"
 echo "COMMIT = $COMMIT"
 echo "DOCKER_REPO = $DOCKER_REPO"
 echo "DOCKER_ECR = $DOCKER_ECR"
+echo "BUILD = $BUILD"
 
 docker --version
 pip install --user awscli
 export PATH=$PATH:$HOME/.local/bin
 
 docker build -t $DOCKER_REPO .
-docker tag $DOCKER_REPO $DOCKER_ECR/$DOCKER_REPO:$TAG
+docker tag $DOCKER_REPO $DOCKER_ECR/$DOCKER_REPO:$BUILD
 
 eval $(aws ecr get-login --no-include-email --region ap-southeast-2)
-docker push $DOCKER_ECR/$DOCKER_REPO:$TAG
+docker push $DOCKER_ECR/$DOCKER_REPO:$BUILD
