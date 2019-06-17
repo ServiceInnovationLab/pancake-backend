@@ -6,27 +6,28 @@ branches:
   - dev
 cache:
   bundler: true
-services:
-  - postgresql
-addons:
-  postgresql: "10"
-  apt:
-    packages:
-    - postgresql-10
-    - postgresql-client-10
-    - chromium-chromedriver
-    - google-chrome-stable
+# services:
+  # - postgresql
+# addons:
+  # postgresql: "10"
+  # apt:
+  #   packages:
+  #   - postgresql-10
+  #   - postgresql-client-10
+  #   - chromium-chromedriver
+  #   - google-chrome-stable
 before_install:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64  > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - chmod +x ./deploy_ecr
 script:
-- bundle install
+- echo "build"
+# - bundle install
 # - yarn install
 # - RAILS_ENV=test bundle exec rake db:create db:migrate
 # - bundle exec rspec spec
-after_script:
-- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t simplecov --id $CC_TEST_REPORTER_ID"
+# after_script:
+# - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t simplecov --id $CC_TEST_REPORTER_ID"
 after_success:
 - ./deploy_ecr
 env:
