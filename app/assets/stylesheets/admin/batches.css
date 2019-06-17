@@ -22,7 +22,8 @@
 .batches-accordion {
   background-color: var(--dove);
   padding: 0 1.75em 1.75em 1.75em;
-  letter-spacing: normal
+  letter-spacing: normal;
+  width: 770px
 }
 .batches-flex-table-row {
   padding: 1em 1.75em;
