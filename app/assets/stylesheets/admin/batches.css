@@ -103,7 +103,7 @@
   margin-left: 95%;
   border-bottom: 5px solid;
   border-right: 5px solid;
-  transform: rotate(-45deg);
+  transform: rotate(-135deg);
 }
 
 .accordion__button[aria-expanded='true']::after,
