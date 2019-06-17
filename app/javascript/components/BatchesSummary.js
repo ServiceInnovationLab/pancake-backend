@@ -21,7 +21,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
       {map(batches, batch => {
         const {
           name,
-          batch_date,
+          created_at,
           rebate_forms,
           cover_sheet_attached,
           id
@@ -40,7 +40,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                       Edit
                   </button>}
                 </div>
-                <div className='batches-accordion-header-row'>{dateFns.format(batch_date, 'DD MMM YYYY')} | {rebate_forms.length} Applications</div>
+                <div className='batches-accordion-header-row'>{dateFns.format(created_at, 'DD MMM YYYY')} | {rebate_forms.length} Applications</div>
                 <br/>
                 <div className='batches-accordion-header-row'>
                   {cover_sheet_attached ? <button>COVER SHEET</button> : 'Cover sheet required'}

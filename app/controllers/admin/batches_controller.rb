@@ -6,7 +6,7 @@ class Admin::BatchesController < Admin::BaseController
   def index
     @batches = policy_scope(Batch)
                .all
-               .order(created_at: :asc)
+               .order(created_at: :desc)
                .to_json(include: { rebate_forms: { include: :property } })
   end
 
