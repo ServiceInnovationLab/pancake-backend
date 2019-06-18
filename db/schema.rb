@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_30_021728) do
+ActiveRecord::Schema.define(version: 2019_06_16_201934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2019_05_30_021728) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.boolean "cover_sheet_attached", default: false
     t.index ["council_id"], name: "index_batches_on_council_id"
   end
 
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(version: 2019_05_30_021728) do
     t.text "meta"
     t.integer "council_id"
     t.text "rating_year"
+    t.boolean "has_address_lookups", default: false
     t.index ["council_id"], name: "index_properties_on_council_id"
     t.index ["valuation_id", "rating_year"], name: "index_properties_on_valuation_id_and_rating_year"
   end

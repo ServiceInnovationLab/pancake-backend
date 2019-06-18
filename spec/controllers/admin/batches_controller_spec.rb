@@ -62,6 +62,16 @@ RSpec.describe Admin::BatchesController, type: :controller do
         patch :update, params: { id: batched_form.batch_id, batch: { name: 'This is the 23rd new name' } }
         expect(Batch.first.name).to eq 'This is the 23rd new name'
       end
+
+      context 'when an eRMS cover sheet is uploaded' do
+        it 'updates the batch accordingly' do
+          file = fixture_file_upload(Rails.root.join('spec', 'support', 'files', 'print-logo-black.png'), 'image/png')
+          patch :update, params: { id: batched_form.batch_id,
+                                   batch: { cover_sheet: file } }
+          expect(Batch.first.erms_cover_sheet_attached?).to eq true
+          expect(Batch.first.cover_sheet_attached).to eq true
+        end
+      end
     end
   end
 end
