@@ -30,4 +30,4 @@ eval $(aws ecr get-login --no-include-email --region ap-southeast-2)
 
 #ecs deploy pancake-uat pancake-service-uat --tag $TAG
 
-update-service --cluster pancake-uat --service pancake-service-uat --force-new-deployment
+aws ecs update-service --cluster pancake-uat --service pancake-service-uat --force-new-deployment
