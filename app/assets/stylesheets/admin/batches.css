@@ -104,7 +104,7 @@
   margin-left: 95%;
   border-bottom: 5px solid;
   border-right: 5px solid;
-  transform: rotate(-135deg);
+transform: rotate(45deg);
 }
 
 .accordion__button[aria-expanded='true']::after,
