@@ -3,7 +3,7 @@
 namespace :rates do
   desc 'Import rates'
   task tauranga: :environment do
-    council = Council.find_or_create_by(name: 'Tauranga')
+    council = Council.find_or_create_by(name: 'Tauranga City Council')
     rates_file = Rails.root.join('db', 'seeds', 'tauranga.csv')
     Property.transaction do
       row_num = 0
@@ -16,10 +16,11 @@ namespace :rates do
       end
     end
     puts 'Finished loading rates'
+    council.update(has_address_lookups: true)
   end
 
   task kapiti: :environment do
-    council = Council.find_or_create_by(name: 'Kapiti')
+    council = Council.find_or_create_by(name: 'Kāpiti Coast District Council')
     rates_file = Rails.root.join('db', 'seeds', 'kapiti.csv')
 
     Property.transaction do
@@ -33,7 +34,9 @@ namespace :rates do
         puts "======================= #{row_num} ====================="
       end
     end
+    Council.
     puts 'Finished loading rates'
+    council.update(has_address_lookups: true)
   end
 
   private
