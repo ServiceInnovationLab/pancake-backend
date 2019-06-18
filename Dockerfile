@@ -34,7 +34,6 @@ COPY postcss.config.js .
 COPY Procfile .
 COPY Rakefile .
 COPY yarn.lock .
-COPY .env .
 
 COPY bin/* /usr/bin/
 
