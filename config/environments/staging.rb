@@ -99,7 +99,7 @@ Rails.application.configure do
     tls: true
   }
 
-  #config.active_storage.service = :amazon
+  config.active_storage.service = :amazon
 
   # For pdfs on heroku
   #config.assets.precompile += ['pdf.css']
