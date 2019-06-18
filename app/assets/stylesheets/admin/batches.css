@@ -104,12 +104,12 @@
   margin-left: 95%;
   border-bottom: 5px solid;
   border-right: 5px solid;
-  transform: rotate(-135deg);
+  transform: rotate(45deg);
 }
 
 .accordion__button[aria-expanded='true']::after,
 .accordion__button[aria-selected='true']::after {
-  transform: rotate(45deg);
+  transform: rotate(-135deg);
 }
 
 .accordion__panel {
