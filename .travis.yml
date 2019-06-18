@@ -19,12 +19,16 @@ addons:
 before_install:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64  > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
+- chmod +x ./deploy_ecr
 script:
+- echo "build"
 - bundle install
 - yarn install
 - RAILS_ENV=test bundle exec rake db:create db:migrate
 - bundle exec rspec spec
 after_script:
 - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t simplecov --id $CC_TEST_REPORTER_ID"
+after_success:
+- ./deploy_ecr
 env:
 - PGPORT=5433 YEAR=2019 SIGNING_URL="http://127.0.0.1:4000/#/{token}" OPENFISCA_ORIGIN="https://openfisca.ratesrebates.services.govt.nz/calculate" HMAC_SECRET="DgD3NMLjoEsgbT7bOmpgI0svg18BMHuy0VpE6cX9xMMxznWhvEKIggR61nE/E" APP_URL="http://localhost:3000/"
