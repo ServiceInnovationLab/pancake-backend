@@ -99,6 +99,10 @@ Rails.application.configure do
     tls: true
   }
 
+  config.time_zone = 'Wellington'
+
+  config.active_record.default_timezone = :local
+
   #config.active_storage.service = :amazon
 
   # For pdfs on heroku
