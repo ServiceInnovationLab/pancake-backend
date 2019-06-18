@@ -18,5 +18,5 @@ export function ErrorMessage(name) {
         </li>
       </ul>
     </div> 
-  )
+  );
 }
