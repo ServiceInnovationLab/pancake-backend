@@ -20,7 +20,7 @@ export function SummaryRow(rebateForm, key, checked, checkIt) {
       <td className='rebate-results-table-cell'>{fields.full_name}</td>
       {checkIt && property.valuation_id
         ? <td className='rebate-results-table-cell' id='valuation-id'>{property.valuation_id} </td>
-        : (checkIt && !property.valuation.id
+        : (checkIt && !property.valuation_id
           ? <td className='rebate-results-table-cell'></td>
           : <td className='rebate-results-table-cell'>{property.location} <br/> {property.suburb} <br/>  {property.town_city}</td>
         )
