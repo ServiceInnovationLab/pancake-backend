@@ -17,8 +17,8 @@ echo "DOCKER_ECR = $DOCKER_ECR"
 
 docker --version
 
-pip install -r requirements.txt
-pip install --user awscli ecs-deploy
+#pip install -r requirements.txt
+pip install --user awscli
 
 export PATH=$PATH:$HOME/.local/bin
 
@@ -28,4 +28,6 @@ export PATH=$PATH:$HOME/.local/bin
 eval $(aws ecr get-login --no-include-email --region ap-southeast-2)
 #docker push $DOCKER_ECR/$DOCKER_REPO:$TAG
 
-ecs deploy pancake-uat pancake-service-uat --tag $TAG
+#ecs deploy pancake-uat pancake-service-uat --tag $TAG
+
+update-service --cluster pancake-uat --service pancake-service-uat --force-new-deployment
