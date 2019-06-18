@@ -14,7 +14,7 @@ class Admin::UsersController < Admin::BaseController
   def update
     if params[:activate].present?
       @user.restore
-      redirect_to edit_admin_user_url(@user), notice: 'User was re-actived.'
+      redirect_to edit_admin_user_url(@user), notice: 'User was re-activated.'
     else
       if @user.update(user_params)
         redirect_to admin_users_url, notice: 'User was updated.'
