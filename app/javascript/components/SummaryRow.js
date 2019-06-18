@@ -18,15 +18,19 @@ export function SummaryRow(rebateForm, key, checked, checkIt) {
       </td>
       }
       <td className='rebate-results-table-cell'>{fields.full_name}</td>
-      {property
-        ? <td className='rebate-results-table-cell'>{property.location} <br/> {property.suburb} <br/>  {property.town_city}</td>
-        : <td className='rebate-results-table-cell' />
+      {checkIt && property.valuation_id &&
+        <td className='rebate-results-table-cell' id='valuation-id'>{property.valuation_id} </td>
+      }
+      {checkIt && !property.valuation_id &&
+        <td className='rebate-results-table-cell'></td>
+      }
+      {!checkIt &&
+        <td className='rebate-results-table-cell'>{property.location} <br/> {property.suburb} <br/>  {property.town_city}</td>
       }
       <td className='rebate-results-table-cell'>
         <a onClick={() => {
           window.location = `/admin/rebate_forms/${id}`;
-        }
-        }>
+        }}>
           <img className='rebate-form-blue-arrow'src='/assets/blue-right-arrow.svg' alt="blue coloured right arrow"/>
         </a>
       </td>

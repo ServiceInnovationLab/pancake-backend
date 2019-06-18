@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2019_06_16_201934) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.boolean "cover_sheet_attached", default: false
     t.index ["council_id"], name: "index_batches_on_council_id"
   end
 

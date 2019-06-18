@@ -73,6 +73,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           it { expect(page).to have_field('fields.full_name', with: rebate_form.full_name) }
           it { expect(page).to have_field('fields.email', with: rebate_form.email) }
           it { expect(page).to have_field('fields.occupation', with: rebate_form.occupation) }
+          it { expect(page).to have_field('fields.valuation_id', with: rebate_form.valuation_id) }
         end
 
         describe 'can process an application' do
