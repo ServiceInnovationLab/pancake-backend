@@ -24,6 +24,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
           created_at,
           rebate_forms,
           cover_sheet_attached,
+          download_link,
           id
         } = batch;
         return (
@@ -43,7 +44,18 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                 <div className='batches-accordion-header-row'>{dateFns.format(created_at, 'DD MMM YYYY')} | {rebate_forms.length} Applications</div>
                 <br/>
                 <div className='batches-accordion-header-row'>
-                  {cover_sheet_attached ? <button>COVER SHEET</button> : 'Cover sheet required'}
+                  {cover_sheet_attached
+                    ? isDiaUser
+                      ? <a
+                        target='_blank'
+                        rel='noopener'
+                        href={download_link}
+                        download>
+                        HEADER SHEET
+                      </a>
+                      : 'HEADER SHEET'
+                    : 'HEADER SHEET REQUIRED'
+                  }
                   {isDiaUser && <button
                     target='_blank'
                     rel='noopener'
@@ -51,7 +63,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                     onClick={() => {
                       window.open(`/admin/batches/${id}.pdf`);
                     }}>
-                      APPLICATIONS
+                      BATCH
                   </button>}
                 </div>
               </AccordionItemButton>
