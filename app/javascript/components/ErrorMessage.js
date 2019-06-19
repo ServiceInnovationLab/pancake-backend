@@ -3,7 +3,7 @@ import React from 'react';
 export function ErrorMessage(name) {
   return (
     <div className="pure-u-1 no-results-error-message">
-      <h3>We couldn't find anyone named {name}</h3>
+      <h3>We couldn't find anyone named "{name}"</h3>
       <br/>
       <p>Search tips:</p>
       <ul>
