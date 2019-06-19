@@ -10,6 +10,7 @@ class SerializableCouncil < JSONAPI::Serializable::Resource
   attribute :name
   attribute :short_name
   attribute :active
+  attribute :has_address_lookups
   #
   # To customize, pass a block and reference the underlying @object
   # being serialized:

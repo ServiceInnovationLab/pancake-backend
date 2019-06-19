@@ -6,5 +6,6 @@ FactoryBot.define do
     short_name { "#{Faker::Types.rb_string}#{Faker::Number.number(10)}" }
     email { Faker::Internet.email }
     active { true }
+    has_address_lookups { false }
   end
 end
