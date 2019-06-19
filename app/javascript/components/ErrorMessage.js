@@ -8,13 +8,13 @@ export function ErrorMessage(name) {
       <p>Search tips:</p>
       <ul>
         <li>
-          Check the spelling.
+          Check the spelling
         </li>
         <li>
-          Try using a first name or last name.
+          Try using a first name or last name
         </li>
         <li>
-          Search on all customers by leaving the field blank.
+          Search on all customers by leaving the field blank
         </li>
       </ul>
     </div> 
