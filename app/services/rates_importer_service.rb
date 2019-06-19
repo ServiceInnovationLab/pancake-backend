@@ -8,7 +8,6 @@ class RatesImporterService
   end
 
   def import(row, rating_year, council)
-    puts row
     valuation, _rating_year, location, suburb, town_city,
       total_rates, total_water_rates, _order, _council_owner_id,
       _surname, _first_names, _confidential, current_owner_start_date = row
