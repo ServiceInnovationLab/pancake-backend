@@ -24,7 +24,6 @@ namespace :rates do
     rates_file = Rails.root.join('db', 'seeds', 'kapiti.csv')
 
     Property.transaction do
-      importer.clear!(rating_year, council)
       row_num = 0
 
       CSV.foreach(rates_file) do |row|
