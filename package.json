@@ -18,7 +18,7 @@
     "react_ujs": "^2.5.0"
   },
   "devDependencies": {
-    "@percy/agent": "^0.7.1",
-    "webpack-dev-server": "^3.7.1"
+    "@percy/agent": "^0.7.2",
+    "webpack-dev-server": "^3.7.2"
   }
 }
