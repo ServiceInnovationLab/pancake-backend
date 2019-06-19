@@ -33,7 +33,6 @@ namespace :rates do
         puts "======================= #{row_num} ====================="
       end
     end
-    Council.
     puts 'Finished loading rates'
     council.update(has_address_lookups: true)
   end
