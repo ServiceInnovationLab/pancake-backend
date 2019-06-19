@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_18_231804) do
+ActiveRecord::Schema.define(version: 2019_06_19_225849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,8 @@ ActiveRecord::Schema.define(version: 2019_06_18_231804) do
     t.integer "batch_id"
     t.integer "updated_by"
     t.string "status", default: "not signed"
+    t.string "customer_id"
+    t.string "application_id"
   end
 
   create_table "roles", force: :cascade do |t|
