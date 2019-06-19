@@ -33,4 +33,6 @@ JsonapiSpecHelpers::Payload.register(:council) do
   key(:name, String)
   key(:short_name, String, allow_nil: true)
   key(:active, TrueClass)
+  key(:has_address_lookups)
+
 end
