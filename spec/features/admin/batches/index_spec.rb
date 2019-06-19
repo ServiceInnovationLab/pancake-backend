@@ -23,11 +23,10 @@ RSpec.describe 'Batch', type: :feature do
     it ' Can see all batches' do
       visit '/admin/batches'
       expect(page).to have_text(batched_form.batch.name)
-      expect(page).to have_text('Cover sheet required')
+      expect(page).to have_text('HEADER SHEET REQUIRED')
       expect(page).to have_text(batch_other_council.name)
       expect(page).to have_text(batch_other_council.created_at.strftime('%d %b %Y'))
       expect(page).not_to have_text('EDIT')
-      expect(page).to have_text('APPLICATIONS')
     end
 
     context 'when there is a cover sheet' do
@@ -35,10 +34,12 @@ RSpec.describe 'Batch', type: :feature do
         batched_form.batch.update!(cover_sheet_attached: true)
         batch_other_council.update!(cover_sheet_attached: true)
       end
+
       it 'updates the display accordingly' do
         visit '/admin/batches'
-        expect(page).to_not have_text('Cover sheet required')
-        expect(page).to have_text('COVER SHEET')
+        expect(page).to_not have_text('HEADER SHEET REQUIRED')
+        expect(page).to have_text('HEADER SHEET')
+        expect(page).to have_css('#header-sheet')
       end
     end
 
@@ -59,11 +60,23 @@ RSpec.describe 'Batch', type: :feature do
     it 'can only see batches from my council' do
       visit '/admin/batches'
       expect(page).to have_text(batched_form.batch.name)
-      expect(page).to have_text('Cover sheet required')
+      expect(page).to have_text('HEADER SHEET REQUIRED')
       expect(page).not_to have_text(batch_other_council.name)
       expect(page).to have_text(batch_other_council.created_at.strftime('%d %b %Y'))
       expect(page).to have_text('EDIT')
-      expect(page).to_not have_text('APPLICATIONS')
+    end
+
+    context 'when there is a cover sheet' do
+      before do
+        batched_form.batch.update!(cover_sheet_attached: true)
+      end
+
+      it 'updates the display accordingly' do
+        visit '/admin/batches'
+        expect(page).to_not have_text('HEADER SHEET REQUIRED')
+        expect(page).to have_text('HEADER SHEET')
+        expect(page).to_not have_css('#header-sheet')
+      end
     end
     include_examples 'percy snapshot'
   end

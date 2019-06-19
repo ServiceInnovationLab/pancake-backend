@@ -50,6 +50,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                         target='_blank'
                         rel='noopener'
                         href={download_link}
+                        id='header-sheet'
                         download>
                         HEADER SHEET
                       </a>

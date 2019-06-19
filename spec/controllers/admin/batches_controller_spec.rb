@@ -65,11 +65,14 @@ RSpec.describe Admin::BatchesController, type: :controller do
 
       context 'when an eRMS cover sheet is uploaded' do
         it 'updates the batch accordingly' do
+          expect(Batch.first.download_link).to eq nil
           file = fixture_file_upload(Rails.root.join('spec', 'support', 'files', 'print-logo-black.png'), 'image/png')
           patch :update, params: { id: batched_form.batch_id,
                                    batch: { cover_sheet: file } }
           expect(Batch.first.erms_cover_sheet_attached?).to eq true
           expect(Batch.first.cover_sheet_attached).to eq true
+          expect(Batch.first.download_link).to_not eq nil
+          expect(Batch.first.cover_sheet).to be_an_instance_of(ActiveStorage::Attached::One)
         end
       end
     end
