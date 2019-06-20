@@ -12,7 +12,6 @@
   %h3.rebate-details-title Council details
 .rebate-edit-form
   = form_for(@rebate_form, url: admin_rebate_forms_update_council_details_path, html: { method: 'patch' }) do |f|
-    = hidden_field_tag :council_details, true
     = hidden_field_tag :id, @rebate_form.id
     .flex-row
       .button-container.council-buttons
