@@ -10,6 +10,7 @@ import { BatchesSummary } from '../components/BatchesSummary';
 import { SummaryTable } from '../components/SummaryTable';
 import { SummarySearch } from '../components/SummarySearch';
 import { SummaryTabs } from '../components/SummaryTabs';
+import { ErrorMessage } from '../components/ErrorMessage';
 
 const pathname = window.location.pathname;
 const currentLocation = getCurrentPath(pathname);
@@ -23,6 +24,8 @@ class CustomersSummary extends React.Component {
     this.createBatch = this.createBatch.bind(this);
     this.fetchRebatesByName = this.fetchRebatesByName.bind(this);
     this.state = {
+      name: '',
+      hasSearched: false,
       checked: [],
       batches: batches && JSON.parse(batches),
       rebateForms: rebateForms && JSON.parse(rebateForms),
@@ -75,7 +78,7 @@ class CustomersSummary extends React.Component {
         return response.json();
       })
       .then(data => {
-        this.setState({ rebateForms: JSON.parse(data.json) });
+        this.setState({ rebateForms: JSON.parse(data.json), hasSearched: true, name });
       })
       .catch(error => {
         console.error(error);
@@ -87,7 +90,7 @@ class CustomersSummary extends React.Component {
   }
 
   render() {
-    const { batches, rebateForms, checked, isDiaUser, isCouncilUser } = this.state;
+    const { batches, rebateForms, checked, isDiaUser, isCouncilUser, hasSearched, name } = this.state;
 
     const processable = currentLocation === '/admin/rebate_forms/processed' && (rebateForms && rebateForms[0]);
     const checkIt = processable ? this.checkIt.bind(this) : null;
@@ -110,6 +113,7 @@ class CustomersSummary extends React.Component {
         </div>
         {(batches && batches[0]) && BatchesSummary(batches, isDiaUser, isCouncilUser)}
         {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, checked, checkIt)}
+        {hasSearched && !(rebateForms && rebateForms[0]) && ErrorMessage(name)}
       </Fragment>
     );
   }

@@ -287,3 +287,10 @@
   width: 2rem;
   height: 2rem
 }
+
+.no-results-error-message {
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
+  color: var(--black);
+  font-size: 1em;
+  padding: 2em;
+}
