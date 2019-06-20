@@ -1,4 +1,12 @@
-= render 'admin/rebate_forms/edit_header'
+.rebate-header
+  %h2.rebate-title
+    Application details
+
+  %h3.rebate-subtitle
+    - if @rebate_form.signed_state?
+      Signed and ready to process
+    - else
+      Signature required
 
 .rebate-details-header.customer-details-header
   %h3.rebate-details-title Council Details
