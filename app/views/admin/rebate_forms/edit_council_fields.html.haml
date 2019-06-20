@@ -1,0 +1,21 @@
+= render 'edit_header'
+
+.rebate-details-header.customer-details-header
+  %h3.rebate-details-title Council Details
+.rebate-edit-form
+  = form_for(@rebate_form, url: admin_rebate_form_path(@rebate_form), html: { method: 'patch' }) do |f|
+    = hidden_field_tag :council_details, true
+    .flex-row
+      .button-container.council-buttons
+        = link_to 'Cancel', admin_rebate_form_path(@rebate_form), class: 'pure-button rebate-cancel-button'
+        = f.submit 'Save', class: 'pure-button rebate-submit-button'
+    .flex-row.council-row
+      .flex-item.with-margin
+        = f.label :valuation_id
+        = f.text_field :valuation_id, class: 'rebate-search-input'
+      .flex-item
+        = f.label :application_id
+        = f.text_field :application_id, class: 'rebate-search-input'
+      .flex-item
+        = f.label :customer_id
+        = f.text_field :customer_id, class: 'rebate-search-input'

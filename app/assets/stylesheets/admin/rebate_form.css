@@ -151,6 +151,10 @@
   align-items: center
 }
 
+.council-row {
+  align-items: normal;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column
@@ -188,6 +192,10 @@
   min-width: 325px;
   margin-left: auto;
   margin-top: -5em;
+}
+
+.council-buttons {
+  margin-top: -10em;
 }
 
 .rebate-cancel-button {

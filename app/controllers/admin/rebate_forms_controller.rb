@@ -12,7 +12,7 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def edit_council_fields
-    @rebate_form = RebateForm.find(params[:id])
+    @rebate_form = RebateForm.find(params[:rebate_form_id])
     authorize @rebate_form
   end
 
@@ -50,7 +50,8 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
-    @rebate_form = RebateFormsService.new(rebate_form_fields_params).update!
+    @rebate_form = RebateFormsService.new(rebate_form_council_details_params).update_council_details! if params[:council_details]
+    @rebate_form = RebateFormsService.new(rebate_form_fields_params).update! unless params[:council_details]
     @rebate_form.update(updated_by: current_user.id)
     respond_with @rebate_form, location: admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
   end
@@ -73,11 +74,11 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def rebate_form_fields_params
-    params.permit(:id, :valuation_id, :total_rates, :location, :council, fields: {})
+    params.permit(:id, :total_rates, :location, :council, fields: {})
   end
 
-  def rebate_form_params
-    params.require(:rebate_form).permit(attachments: [])
+  def rebate_form_council_details_params
+    params.permit([:id, :council_details, rebate_form: {}])
   end
 
   def pdf_filename
