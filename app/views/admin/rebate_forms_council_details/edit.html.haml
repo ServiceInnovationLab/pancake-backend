@@ -9,7 +9,7 @@
       Signature required
 
 .rebate-details-header.customer-details-header
-  %h3.rebate-details-title Council Details
+  %h3.rebate-details-title Council details
 .rebate-edit-form
   = form_for(@rebate_form, url: admin_rebate_form_path(@rebate_form), html: { method: 'patch' }) do |f|
     = hidden_field_tag :council_details, true

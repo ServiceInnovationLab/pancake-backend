@@ -20,11 +20,28 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
 
       context 'and the rebate form is not completed' do
         before { visit "/admin/rebate_forms/#{rebate_form.id}" }
-        it 'viewing a customer details' do
-          expect(page).to have_text('Customer details')
-          expect(page).to have_text('Signature required')
+        it 'viewing council details' do
           expect(page).to have_text(user.email)
           expect(page).to have_text('LOG OUT x')
+          expect(page).to have_text('Rates Rebate')
+          expect(page).to have_text('Application details')
+          expect(page).to have_text('Signature required')
+          expect(page).to have_text('Council details')
+          expect(page).to have_text('Valuation ID')
+          expect(page).to have_text(rebate_form.valuation_id)
+          expect(page).to have_text('Customer ID')
+          expect(page).to have_text(rebate_form.customer_id)
+          expect(page).to have_text('Application ID')
+          expect(page).to have_text(rebate_form.application_id)
+        end
+        include_examples 'percy snapshot'
+
+        it 'viewing customer details' do
+          expect(page).to have_text(user.email)
+          expect(page).to have_text('LOG OUT x')
+          expect(page).to have_text('Application details')
+          expect(page).to have_text('Signature required')
+          expect(page).to have_text('Customer details')
           expect(page).to have_field('fields.full_name', with: rebate_form.full_name)
           expect(page).to have_field('fields.email', with: rebate_form.email)
           expect(page).to have_field('fields.occupation', with: rebate_form.occupation)
@@ -51,19 +68,49 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           end
         end
 
-        context 'when the edit button is clicked' do
-          it 'goes to the right place' do
-            visit "/admin/rebate_forms/#{rebate_form.id}"
-            click_link('edit')
-            expect(page).to_not have_text('EDIT')
-            expect(page).to have_text('Customer details')
-            expect(page).to have_text('Signature required')
+        context 'when the edit buttons are clicked' do
+          context 'editing council details' do
+            it 'goes to the right place' do
+              visit "/admin/rebate_forms/#{rebate_form.id}"
+              click_link('edit-council')
+              expect(page).to_not have_text('EDIT')
+              expect(page).to have_text('Council details')
+              expect(page).to_not have_text('Customer details')
+              expect(page).to have_text('Signature required')
+              expect(page).to have_field(with: rebate_form.valuation_id)
+            end
+          end
+
+          context 'editing customer details' do
+            it 'goes to the right place' do
+              visit "/admin/rebate_forms/#{rebate_form.id}"
+              click_link('edit-customer')
+              expect(page).to_not have_text('EDIT')
+              expect(page).to_not have_text('Council details')
+              expect(page).to have_text('Customer details')
+              expect(page).to have_text('Signature required')
+              expect(page).to have_field(with: rebate_form.full_name)
+            end
           end
         end
       end
 
       context 'when the rebate form is signed' do
         before { rebate_form.transition_to_signed_state }
+
+        describe ' Can see council details' do
+          before { visit "/admin/rebate_forms/#{rebate_form.id}" }
+          it { expect(page).to have_text('Council details') }
+          it { expect(page).to have_text('Signed and ready to process') }
+          it { expect(page).to have_text('Process') }
+          it { expect(page).to have_field('fields.full_name', with: rebate_form.full_name) }
+          it { expect(page).to have_text('Valuation ID') }
+          it { expect(page).to have_text(rebate_form.valuation_id) }
+          it { expect(page).to have_text('Customer ID') }
+          it { expect(page).to have_text(rebate_form.customer_id) }
+          it { expect(page).to have_text('Application ID') }
+          it { expect(page).to have_text(rebate_form.application_id) }
+        end
 
         describe ' Can see customer details' do
           before { visit "/admin/rebate_forms/#{rebate_form.id}" }
@@ -73,7 +120,6 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           it { expect(page).to have_field('fields.full_name', with: rebate_form.full_name) }
           it { expect(page).to have_field('fields.email', with: rebate_form.email) }
           it { expect(page).to have_field('fields.occupation', with: rebate_form.occupation) }
-          it { expect(page).to have_field('fields.valuation_id', with: rebate_form.valuation_id) }
         end
 
         describe 'can process an application' do
@@ -93,7 +139,8 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           it 'cannot be edited' do
             expect(page).to have_text('Processed')
             expect(page).to have_text('Unprocess')
-            expect(page).to_not have_text('Edit')
+            expect(page).to_not have_text('EDIT')
+            expect(page).to have_field(with: processed_rebate_form.full_name)
           end
 
           it 'can be unprocessed' do
@@ -102,6 +149,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
             click_link('Unprocess')
             expect(page).to have_text('Signed and ready to process')
             expect(page).to_not have_text('Processed')
+            expect(page).to have_text('EDIT')
           end
         end
 
@@ -112,7 +160,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           it 'cannot be edited' do
             expect(page).to_not have_text('Processed')
             expect(page).to_not have_text('Unprocess')
-            expect(page).to_not have_text('Edit')
+            expect(page).to_not have_text('EDIT')
           end
         end
         include_examples 'percy snapshot'
@@ -126,9 +174,11 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
             # Freeze time when we generate the qr
             find("img[class='rebate-generate-qr']").click
           end
+
           it { expect(page).to have_link 'DONE' }
+
           xit 'displays the qr code' do
-            expect(page).to have_image(class: 'rebate-qrcode')
+            expect(page).to have_css('rebate-qrcode')
           end
           include_examples 'percy snapshot'
           after { Timecop.return }

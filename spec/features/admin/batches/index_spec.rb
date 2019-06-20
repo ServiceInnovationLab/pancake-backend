@@ -25,7 +25,6 @@ RSpec.describe 'Batch', type: :feature do
       expect(page).to have_text(batched_form.batch.name)
       expect(page).to have_text('HEADER SHEET REQUIRED')
       expect(page).to have_text(batch_other_council.name)
-      expect(page).to have_text(batch_other_council.created_at.strftime('%d %b %Y'))
       expect(page).not_to have_text('EDIT')
     end
 
@@ -62,7 +61,6 @@ RSpec.describe 'Batch', type: :feature do
       expect(page).to have_text(batched_form.batch.name)
       expect(page).to have_text('HEADER SHEET REQUIRED')
       expect(page).not_to have_text(batch_other_council.name)
-      expect(page).to have_text(batch_other_council.created_at.strftime('%d %b %Y'))
       expect(page).to have_text('EDIT')
     end
 

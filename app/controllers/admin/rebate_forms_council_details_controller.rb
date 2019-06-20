@@ -8,6 +8,8 @@ class Admin::RebateFormsCouncilDetailsController < Admin::BaseController
 
   def update
     rebate_form = RebateForm.find(params['id'])
+    authorize rebate_form
+
     rebate_form.update!(valuation_id: rebate_form_council_details_params['valuation_id'],
                         customer_id: rebate_form_council_details_params['customer_id'],
                         application_id: rebate_form_council_details_params['application_id'])
