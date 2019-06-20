@@ -4,7 +4,6 @@ class RatesBill < ApplicationRecord
   belongs_to :property, required: true
   delegate :council, to: :property
   validates :total_rates, presence: true
-  validates :total_water_rates, presence: true
   validate :rating_year_matches
 
   scope :by_council, ->(council) { joins(:property).where(properties: { council_id: council.id }) }

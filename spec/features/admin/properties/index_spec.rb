@@ -9,7 +9,8 @@ RSpec.describe 'Property', type: :feature do
   context 'anonymous' do
     it "can't see it" do
       visit "/admin/councils/#{council.id}/properties"
-      expect(page).to have_text('Forgot your password?')
+      expect(page).to have_text('Rates Rebate 2018/2019')
+      expect(page).to have_text('Log in')
     end
   end
 
@@ -37,5 +38,6 @@ RSpec.describe 'Property', type: :feature do
     before { login_as(user, scope: :user) }
 
     include_examples 'can see properties for a council'
+    include_examples 'percy snapshot'
   end
 end

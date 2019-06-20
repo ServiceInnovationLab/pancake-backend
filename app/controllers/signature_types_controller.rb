@@ -25,6 +25,7 @@ class SignatureTypesController < ApiController
     scope = jsonapi_scope(SignatureType.where(id: params[:id]))
     instance = scope.resolve.first
     raise JsonapiCompliable::Errors::RecordNotFound unless instance
+
     render_jsonapi(instance, scope: false)
   end
 

@@ -2,8 +2,8 @@
 
 class RebateForm < ApplicationRecord
   has_many :signatures, dependent: :destroy
-  belongs_to :property, required: true
-  belongs_to :batch, required: false
+  belongs_to :property, optional: false
+  belongs_to :batch, optional: true
 
   delegate :council, to: :property
   delegate :rating_year, to: :property
@@ -11,19 +11,53 @@ class RebateForm < ApplicationRecord
   after_initialize :set_token
   before_validation :set_property_id
 
-  validates :valuation_id, presence: true
   validates :token, presence: true
   validates :rebate, presence: true
   validates :property, presence: true
 
-  validate :required_fields_present
   validate :same_council
-  validate :only_completed_forms_in_batch
 
-  after_create :send_emails
+  after_create :send_email
   has_many_attached :attachments
 
   scope :by_council, ->(council) { where(properties: { council_id: council.id }) }
+
+  NOT_SIGNED_STATUS = 'not signed'
+  SIGNED_STATUS = 'signed'
+  PROCESSED_STATUS = 'processed'
+  BATCHED_STATUS = 'batched'
+
+  def signed_state?
+    status == SIGNED_STATUS
+  end
+
+  def not_signed_state?
+    status == NOT_SIGNED_STATUS
+  end
+
+  def processed_state?
+    status == PROCESSED_STATUS
+  end
+
+  def batched_state?
+    (status == BATCHED_STATUS) && batch_id.positive?
+  end
+
+  def transition_to_signed_state
+    update!(status: SIGNED_STATUS)
+  end
+
+  def transition_to_not_signed_state
+    update!(status: NOT_SIGNED_STATUS)
+  end
+
+  def transition_to_processed_state
+    update!(status: PROCESSED_STATUS)
+  end
+
+  def transition_to_batched_state(batch)
+    update!(status: BATCHED_STATUS, batch: batch)
+  end
 
   def calc_rebate_amount!
     rates_bill = property.rates_bills.find_by(rating_year: rating_year)
@@ -43,6 +77,10 @@ class RebateForm < ApplicationRecord
     fields['full_name']
   end
 
+  def occupation
+    fields['occupation']
+  end
+
   def email
     fields['email']
   end
@@ -52,7 +90,7 @@ class RebateForm < ApplicationRecord
   end
 
   def income
-    fields['income']
+    fields['income']['total_income']
   end
 
   def lived_here
@@ -82,6 +120,7 @@ class RebateForm < ApplicationRecord
 
   def set_property_id
     return if property_id.present?
+
     self.property = Property.find_by(valuation_id: valuation_id, rating_year: Rails.configuration.rating_year)
   end
 
@@ -89,26 +128,11 @@ class RebateForm < ApplicationRecord
     SecureRandom.hex(rand(40..60))
   end
 
-  def send_emails
-    mailer.applicant_mail.deliver_now if fields['email'].present?
-    mailer.council_mail.deliver_now if council.email.present?
-  end
-
-  def mailer
-    RebateFormsMailer.with(rebate_form: self)
-  end
-
-  def required_fields_present
-    %w[income dependants full_name].each do |field|
-      errors.add(:fields, "must include #{field}") if fields[field].blank?
-    end
+  def send_email
+    RebateFormsMailer.applicant_mail(self).deliver_now if fields['email'].present?
   end
 
   def same_council
     errors.add(:batch_id, 'council must match') if batch.present? && property.council_id != batch.council_id
-  end
-
-  def only_completed_forms_in_batch
-    errors.add(:batch_id, 'uncompleted forms cannot be in a batch') if batch_id.present? && !completed
   end
 end

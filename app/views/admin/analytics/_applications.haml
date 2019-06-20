@@ -6,14 +6,14 @@
     %th Average rebate
   %tr
     %th Completed
-    %td= rebate_forms.where(completed: true).size
-    %td= number_to_currency rebate_forms.where(completed: true).sum(:rebate)
-    %td= number_to_currency rebate_forms.where(completed: true).average(:rebate)
+    %td= rebate_forms.where(status: RebateForm::SIGNED_STATUS).size
+    %td= number_to_currency rebate_forms.where(status: RebateForm::SIGNED_STATUS).sum(:rebate)
+    %td= number_to_currency rebate_forms.where(status: RebateForm::SIGNED_STATUS).average(:rebate)
   %tr
     %th Not Completed
-    %td= rebate_forms.where(completed: false).size
-    %td= number_to_currency rebate_forms.where(completed: false).sum(:rebate)
-    %td= number_to_currency rebate_forms.where(completed: false).average(:rebate)
+    %td= rebate_forms.where(status: RebateForm::NOT_SIGNED_STATUS).size
+    %td= number_to_currency rebate_forms.where(status: RebateForm::NOT_SIGNED_STATUS).sum(:rebate)
+    %td= number_to_currency rebate_forms.where(status: RebateForm::NOT_SIGNED_STATUS).average(:rebate)
   %tr
     %th Total
     %td= rebate_forms.all.size

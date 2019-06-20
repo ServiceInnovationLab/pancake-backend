@@ -1,8 +1,7 @@
-%h1 Editing User
+.users-wrapper
+  %h1.users-title Editing User
 
-= render 'form'
+  = render 'form'
 
-%p
-  = link_to 'Show', admin_users_path(@user)
-  \|
-  = link_to 'Back', admin_users_path
+  %p
+    = link_to 'Back', admin_users_path

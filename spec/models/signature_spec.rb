@@ -24,18 +24,18 @@ RSpec.describe Signature, type: :model do
     end
   end
 
-  it 'updated form gets marked completed' do
-    expect(rebate_form.completed).to eq false
+  it 'updated form gets marked signed' do
+    expect(rebate_form.status).to eq RebateForm::NOT_SIGNED_STATUS
 
     # applicant signs
     FactoryBot.create :applicant_signature, rebate_form: rebate_form
-    expect(rebate_form.completed).to eq false
+    expect(rebate_form.status).to eq RebateForm::NOT_SIGNED_STATUS
 
     # witness signs
     witness = FactoryBot.create :witness_signature, rebate_form: rebate_form
-    expect(rebate_form.completed).to eq true
+    expect(rebate_form.status).to eq RebateForm::SIGNED_STATUS
 
     witness.destroy
-    expect(rebate_form.completed).to eq false
+    expect(rebate_form.status).to eq RebateForm::NOT_SIGNED_STATUS
   end
 end

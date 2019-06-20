@@ -18,7 +18,6 @@
 !/tmp/.keep
 
 /node_modules
-/yarn-error.log
 
 .byebug_history
 
@@ -30,3 +29,13 @@ public/assets/**
 /storage/**
 /coverage/**
 .idea/*
+
+/public/packs
+/public/packs-test
+/public/packs/manifest.json
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
+# VSCode settings
+/.vscode

@@ -5,6 +5,14 @@ require 'rails_helper'
 RSpec.describe Admin::RebateFormsController, type: :routing do
   describe 'routing' do
     it 'routes to #index' do
+      expect(get: '/admin').to route_to('admin/rebate_forms#index')
+    end
+
+    it 'routes to #index' do
+      expect(get: '/admin/').to route_to('admin/rebate_forms#index')
+    end
+
+    it 'routes to #index' do
       expect(get: '/admin/rebate_forms').to route_to('admin/rebate_forms#index')
     end
 

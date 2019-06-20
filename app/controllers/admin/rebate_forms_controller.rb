@@ -2,30 +2,29 @@
 
 class Admin::RebateFormsController < Admin::BaseController
   before_action :set_rebate_form, only: %i[show update destroy edit]
-  respond_to :html, :pdf, :csv
+  respond_to :html, :pdf, :csv, :json
+
+  def generateqr
+    @rebate_form = RebateForm.find(params[:rebate_form_id])
+    authorize @rebate_form
+
+    @image_data = GenerateQrService.new(@rebate_form, current_user).generate_qr
+  end
+
+  def edit; end
 
   # GET /admin/rebate_forms
   def index
-    @location = params[:location]
+    @name = params[:name]
 
-    @rating_year = params[:rating_year] || Rails.configuration.rating_year
-    @years = Property.select(:rating_year).distinct.order(:rating_year).reverse_order.pluck(:rating_year)
-
-    @completed = (params[:completed] == 'true')
-
-    @council = current_user.council.presence
-
-    @rebate_forms = policy_scope(RebateForm).joins(:property)
-                                            .includes(:signatures, :property, property: :council)
-                                            .order(created_at: :desc)
+    @rebate_forms = policy_scope(RebateForm)
+                    .where(status: RebateForm::NOT_SIGNED_STATUS)
+                    .order(created_at: :asc)
 
     # filter by the search form fields
-    @rebate_forms = @rebate_forms.where('properties.location ILIKE ?', "%#{params[:location]}%") if @location.present?
-    @rebate_forms = @rebate_forms.where("properties.rating_year": @rating_year) if @rating_year.present?
-    @rebate_forms = @rebate_forms.where(completed: @completed)
-    @rebate_forms = @rebate_forms.order(created_at: :desc)
+    @rebate_forms = @rebate_forms.where("fields ->> 'full_name' iLIKE ?", "%#{@name}%") if @name.present?
 
-    respond_with @rebate_forms
+    respond_with json: @rebate_forms.to_json(include: [:property])
   end
 
   # GET /admin/rebate_forms/1
@@ -48,26 +47,16 @@ class Admin::RebateFormsController < Admin::BaseController
     end
   end
 
-  def edit; end
-
   # PATCH/PUT /admin/rebate_forms/1
   def update
-    # updating attachments
-    if params.fetch(:rebate_form, {}).fetch(:attachments, false)
-      @rebate_form.update(rebate_form_params)
-    # updating rebate form itself
-    elsif params.fetch(:rebate_form, false)
-      # update the fields (preserves the other elements of the hash)
-      @rebate_form.fields.update(rebate_form_fields_params)
-      @rebate_form.updated_by = current_user.id
-      @rebate_form.save && @rebate_form.calc_rebate_amount!
-    end
+    @rebate_form = RebateFormsService.new(rebate_form_fields_params).update!
+    @rebate_form.update(updated_by: current_user.id)
     respond_with @rebate_form, location: admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
   end
 
   # DELETE /admin/rebate_forms/1
   def destroy
-    if @rebate_form.completed
+    if @rebate_form.signed_state?
       redirect_to admin_rebate_forms_url, notice: 'Cannot delete signed forms.'
     else
       @rebate_form.destroy
@@ -83,9 +72,7 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def rebate_form_fields_params
-    params.require(:rebate_form).permit(
-      fields: %i[full_name income dependants lived_here_before_july_2017 lived_here_before_july_2018]
-    )['fields']
+    params.permit(:id, :valuation_id, :total_rates, :location, :council, fields: {})
   end
 
   def rebate_form_params

@@ -2,49 +2,183 @@
 
 require 'rails_helper'
 
-RSpec.describe 'RebateForm', type: :feature do
-  let!(:rebate_form) { FactoryBot.create :rebate_form }
+RSpec.describe 'RebateForm', type: :feature, js: true do
+  let(:council) { FactoryBot.create :council, name: 'Tauranga' }
+  let!(:rebate_form) do
+    FactoryBot.create(:rebate_form, property: FactoryBot.create(:property, council: council))
+  end
+  let(:expected_name) { rebate_form.full_name }
+  let(:expected_location) { rebate_form.property.location }
+
+  let!(:signed_form) do
+    FactoryBot.create(:signed_form, property: FactoryBot.create(:property, council: council))
+  end
+  let(:signed_name) { signed_form.full_name }
+  let(:signed_location) { signed_form.property.location }
+
+  let!(:processed_form) do
+    FactoryBot.create(:processed_form, property: FactoryBot.create(:property, council: council))
+  end
+  let(:processed_name) { processed_form.full_name }
+  let(:processed_valuation_id) { processed_form.property.valuation_id }
 
   context 'anonymous' do
     it "can't see it" do
-      visit '/admin/rebate_forms'
-      expect(page).to have_text('Forgot your password?')
+      visit '/admin'
+      expect(page).to have_text('Rates Rebate 2018/2019')
+      expect(page).to have_text('Log in')
+    end
+    include_examples 'percy snapshot'
+  end
+
+  shared_examples 'rebate_forms' do
+    before do
+      # Set up some data. 33 properties in Tauranga with data
+      FactoryBot.create_list(:property, 33, council: council).each do |property|
+        FactoryBot.create(:rebate_form, property: property)
+      end
+      login_as(user, scope: :user)
+      visit '/admin'
+    end
+    describe 'on initial load' do
+      it 'no applications should be visible' do
+        expect(page).to have_text('Signed')
+        expect(page).to have_text('Not Signed')
+        expect(page).to have_text('Processed')
+        expect(page).to have_text('Batched')
+        expect(page).to have_field('name')
+        expect(page).not_to have_text(expected_name)
+      end
+      include_examples 'percy snapshot'
+    end
+    describe 'searching with blank' do
+      it 'should see all un-signed rebate forms' do
+        click_button 'Search'
+        expect(page).to have_text('Signed')
+        expect(page).to have_text('Not Signed')
+        expect(page).to have_text('Processed')
+        expect(page).to have_text('Batched')
+        expect(page).to have_field('name')
+        expect(page).to have_text(expected_name)
+        expect(page).to have_text(expected_location)
+      end
+      include_examples 'percy snapshot'
+    end
+
+    describe 'searching by name' do
+      before do
+        fill_in 'Name', with: expected_name
+        click_button 'Search'
+      end
+      it 'finds the person with matching name' do
+        expect(page).to have_text(expected_name)
+      end
+      include_examples 'percy snapshot'
+    end
+
+    describe 'no search results' do
+      before do
+        fill_in 'Name', with: '123'
+        click_button 'Search'
+      end
+      it 'does not find the person with matching name' do
+        expect(page).to have_text("We couldn't find anyone named \"123\"")
+        expect(page).to have_text('Search tips:')
+        expect(page).to have_text('Check the spelling')
+        expect(page).to have_text('Try using a first name or last name')
+        expect(page).to have_text('Search on all customers by leaving the field blank')
+      end
+    end
+
+    describe 'get all signed forms' do
+      before do
+        click_button 'Signed'
+      end
+      it 'should see all signed rebate forms' do
+        expect(page).to have_text('Signed')
+        expect(page).to have_text('Not Signed')
+        expect(page).to have_text('Processed')
+        expect(page).to have_text('Batched')
+        expect(page).not_to have_field('name')
+        expect(page).to have_text(signed_name)
+        expect(page).to have_text(signed_location)
+      end
+      include_examples 'percy snapshot'
+    end
+
+    describe 'get all processed forms' do
+      before do
+        click_button 'Processed'
+      end
+      it 'should see all processed rebate forms' do
+        expect(page).to have_text('Signed')
+        expect(page).to have_text('Not Signed')
+        expect(page).to have_text('Processed')
+        expect(page).to have_text('Batched')
+        expect(page).to have_text(processed_name)
+      end
+      include_examples 'percy snapshot'
+    end
+
+    describe 'unprocess some processed forms' do
+      it 'should remove unprocessed rebate forms' do
+        click_button 'Processed'
+        expect(page).to have_text('Signed')
+        expect(page).to have_text('Not Signed')
+        expect(page).to have_text('Processed')
+        expect(page).to have_text('Batched')
+        expect(page).to have_text('UNPROCESS')
+        expect(page).to have_text('CREATE BATCH')
+        expect(page).to have_text(processed_name)
+        expect(page).to have_text(processed_valuation_id)
+        check(`#{processed_name}-checkbox`)
+        click_button 'UNPROCESS'
+        expect(page).not_to have_text(processed_name)
+      end
+      include_examples 'percy snapshot'
+    end
+
+    describe 'batch some processed forms' do
+      it 'should remove batched rebate forms' do
+        click_button 'Processed'
+        expect(page).to have_text('Signed')
+        expect(page).to have_text('Not Signed')
+        expect(page).to have_text('Processed')
+        expect(page).to have_text('Batched')
+        expect(page).to have_text('UNPROCESS')
+        expect(page).to have_text('CREATE BATCH')
+        expect(page).to have_text(processed_name)
+        check(`#{processed_name}-checkbox`)
+        click_button 'CREATE BATCH'
+        expect(page).not_to have_text(processed_name)
+      end
+      include_examples 'percy snapshot'
     end
   end
 
-  context 'signed in as dia' do
-    let(:user) { FactoryBot.create :admin_user }
-
-    before { login_as(user, scope: :user) }
-
-    it ' Can see rebate forms' do
-      visit '/admin/rebate_forms'
-      expect(page).to have_text(rebate_form.fields['full_name'])
-
-      # show the form
-      click_link 'show'
-      expect(page).to have_text(rebate_form.fields['full_name'])
-
-      click_link 'Edit'
-      expect(page).to have_text('Full name')
-    end
+  context 'signed in as admin (dia user)' do
+    let(:user) { FactoryBot.create :admin_user, email: 'somebody.important@dia.govt.nz' }
+    include_examples 'rebate_forms'
   end
-
   context 'signed in as council' do
-    let(:user) { FactoryBot.create :user, council_id: rebate_form.property.council_id }
+    let(:user) { FactoryBot.create :user, council_id: council.id, email: 'somebody.important@somecouncil.govt.nz' }
+    include_examples 'rebate_forms'
 
-    before { login_as(user, scope: :user) }
-
-    it ' Can see rebate forms' do
-      visit '/admin/rebate_forms'
-      expect(page).to have_text(rebate_form.fields['full_name'])
-
-      # show the form
-      click_link 'show'
-      expect(page).to have_text(rebate_form.fields['full_name'])
-
-      click_link 'Edit'
-      expect(page).to have_text('Full name')
+    describe "can't see rebate_forms from other councils" do
+      let(:other_councils_form) { FactoryBot.create :rebate_form }
+      before do
+        visit '/admin'
+        fill_in 'Name', with: other_councils_form.full_name
+        click_button 'Search'
+      end
+      # it { expect(page).not_to have_text other_councils_form.full_name }
+      it 'does not find the person with matching name' do
+        expect(page).to have_text("We couldn't find anyone named \"#{other_councils_form.full_name}\"")
+        expect(page).to have_text('Search tips:')
+        expect(page).to have_text('Check the spelling')
+        expect(page).to have_text('Try using a first name or last name')
+        expect(page).to have_text('Search on all customers by leaving the field blank')
+      end
     end
   end
 end

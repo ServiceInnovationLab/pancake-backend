@@ -3,22 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe 'Batch', type: :feature do
-  let(:council) { FactoryBot.create :council, name: 'Tauranga' }
-  let!(:batch) { FactoryBot.create :batch, council: council }
+  let(:property) { FactoryBot.create :property }
   let!(:batch_other_council) { FactoryBot.create :batch }
-
-  before do
-    # make sure there are unbatched forms
-    10.times do
-      property = FactoryBot.create(:property, council: batch.council)
-      FactoryBot.create(:signed_form, rebate: 100, property: property, valuation_id: property.valuation_id)
-    end
-  end
+  let!(:batched_form) { FactoryBot.create :batched_form, property: property }
 
   context 'anonymous' do
     it "can't see it" do
       visit '/admin/batches'
-      expect(page).to have_text('Forgot your password?')
+      expect(page).to have_text('Rates Rebate 2018/2019')
+      expect(page).to have_text('Log in')
     end
   end
 
@@ -29,25 +22,62 @@ RSpec.describe 'Batch', type: :feature do
 
     it ' Can see all batches' do
       visit '/admin/batches'
-      expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
-      expect(page).to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
-
-      expect(page).not_to have_button('Make next Batch')
+      expect(page).to have_text(batched_form.batch.name)
+      expect(page).to have_text('HEADER SHEET REQUIRED')
+      expect(page).to have_text(batch_other_council.name)
+      expect(page).to have_text(batch_other_council.created_at.strftime('%d %b %Y'))
+      expect(page).not_to have_text('EDIT')
     end
+
+    context 'when there is a cover sheet' do
+      before do
+        batched_form.batch.update!(cover_sheet_attached: true)
+        batch_other_council.update!(cover_sheet_attached: true)
+      end
+
+      it 'updates the display accordingly' do
+        visit '/admin/batches'
+        expect(page).to_not have_text('HEADER SHEET REQUIRED')
+        expect(page).to have_text('HEADER SHEET')
+        expect(page).to have_css('#header-sheet')
+      end
+    end
+
+    it ' opens a new window when the APPLICATIONS button is clicked' do
+      visit '/admin/batches'
+      expect(page.windows.count).to eq 1
+      find('.applications-button', match: :first).click
+      expect(page.windows.count).to eq 2
+    end
+    include_examples 'percy snapshot'
   end
 
   context 'signed in as council' do
-    let(:user) { FactoryBot.create :user, council: council }
+    let(:user) { FactoryBot.create :council_user, council: property.council }
 
     before { login_as(user, scope: :user) }
 
-    it 'ca see batches from my council' do
+    it 'can only see batches from my council' do
       visit '/admin/batches'
-      expect(page).to have_link(href: admin_batch_path(batch, format: :pdf))
-      expect(page).not_to have_link(href: admin_batch_path(batch_other_council, format: :pdf))
-
-      expect(page).to have_text 'Tauranga have 10 fully signed forms not in a batch yet.'
-      expect(page).to have_button('Make next Batch')
+      expect(page).to have_text(batched_form.batch.name)
+      expect(page).to have_text('HEADER SHEET REQUIRED')
+      expect(page).not_to have_text(batch_other_council.name)
+      expect(page).to have_text(batch_other_council.created_at.strftime('%d %b %Y'))
+      expect(page).to have_text('EDIT')
     end
+
+    context 'when there is a cover sheet' do
+      before do
+        batched_form.batch.update!(cover_sheet_attached: true)
+      end
+
+      it 'updates the display accordingly' do
+        visit '/admin/batches'
+        expect(page).to_not have_text('HEADER SHEET REQUIRED')
+        expect(page).to have_text('HEADER SHEET')
+        expect(page).to_not have_css('#header-sheet')
+      end
+    end
+    include_examples 'percy snapshot'
   end
 end

@@ -1,3 +1,296 @@
+/*Colours*/
+:root {
+  --dove: #ebebeb;
+  --gray: #ababab;
+  --dark-gray: #4c4c4c;
+  --dark-gray-hover: #3d3d3d;
+  --orange: #d34322;
+  --orange-hover: #b73a1e;
+  --blue: #336699;
+  --blue-hover: #1a4d80;
+  --purple: #993366;
+  --purple-hover: #6a2347;
+  --white: #ffffff;
+  --black: #000000;
+  --alert-red: #b10d1e;
+  --light-red: #f0d5d8;
+}
+
+.rebate-wrapper {
+  margin: auto;
+  max-width: 960px;
+  padding: 4em;
+}
+
+.rebate-header {
+  padding: 1.5em 4em;
+}
+
+.rebate-title {
+  display: flex;
+  justify-content: space-between;
+  font-size: 3em;
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+.rebate-subtitle {
+  font-size: 1.75em;
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
+  margin: .4em 0;
+}
+
+.rebate-header-buttons {
+  background-color: var(--dove);
+  padding: 1.5em 4em;
+}
+
+.rebate-banner {
+  background-color: var(--light-red);
+  border-top: .25em solid var(--alert-red);
+  padding: 0 2em 1.5em 2em;
+}
+
+.rebate-banner-header {
+  display: inline-block;
+}
+
+.rebate-banner-title {
+  font-size: 1.75em;
+  margin-bottom: 0.25em;
+}
+
+.rebate-banner-text {
+  font-size: 1.25em;
+}
+
+.rebate-banner-icon {
+  display: inline-block;
+  margin: 1em 1em 0 2em;
+  width: 4em;
+}
+
+.rebate-header-icon {
+  margin-right: 2em;
+  width: 1.75em;
+}
+
+.rebate-edit {
+  background-color: var(--blue);
+  border-radius: .2em;
+  color: var(--white);
+  float: right;
+  width: 5em;
+}
+
+.rebate-search-box {
+  background-color: var(--dove);
+  padding: 1.75em;
+  width: 770px;
+}
+
+.rebate-search-field {
+  margin-bottom: 1em;
+}
+
+.rebate-search-input {
+  line-height: 2em;
+  margin-bottom: .5em;
+  width: 100%;
+}
+
+.rebate-search-button {
+  background-color: var(--blue);
+  border-radius: .2em;
+  color: var(--white);
+}
+
+.rebate-results-table {
+  background-color: var(--dove);
+  padding: 1.75em;
+  width: 770px;
+}
+
+.rebate-results-table-cell {
+  background-color: var(--white) !important;
+  min-width: 3rem;
+}
+
 .rebate-amount {
   font-size: 4em;
+}
+
+.rebate-edit-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 2rem;
+  width: 90vw;
+  max-width: 1000px;
+  min-width: 500px;
+  background-color: var(--dove);
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column
+}
+
+.flex-item {
+  width: 48.5%
+}
+
+.with-margin {
+  margin-right: 3%
+}
+.one-quarter {
+  width: 23.5%
+}
+
+.one-third {
+  width: 33%
+}
+
+.full-width {
+  width: 100%
+}
+
+.rebate-submit-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 1000px;
+  min-width: 325px;
+  margin-left: auto;
+  margin-top: -5em;
+}
+
+.rebate-cancel-button {
+  background-color: var(--white);
+  border-radius: .2em;
+  border: 1px solid var(--black);
+  color: var(--black);
+  margin: 0 1em 1.5em 5em;
+  /* margin: auto; */
+  float: right;
+}
+
+.rebate-submit-button {
+  background-color: var(--blue);
+  border-radius: .2em;
+  color: var(--white);
+  margin-bottom: 1.5em;
+  /* margin: auto; */
+  float: right;
+}
+
+.rebate-add-income-button {
+  line-height: 2em;
+  margin: 0 auto .5em auto;
+  padding: .4rem;
+}
+
+.rebate-tabs {
+  padding-bottom: .01rem;
+  border-bottom: 2px solid var(--gray);
+  margin-bottom: 1rem
+}
+
+.rebate-button {
+  width: 25%;
+  background: var(--dove);
+  padding: 1rem;
+  border: none;
+  font-weight: bold;
+}
+
+.rebate-button-selected {
+  width: 25%;
+  background: var(--dove);
+  color: var(--blue);
+  padding: 1rem;
+  border: none;
+  border-bottom: 5px solid var(--blue);
+  font-weight: bold;
+}
+
+.rebate-qrcode {
+  margin: 5em auto;
+  background-color: black;
+  width: 20%;
+  min-width: 350px;
+  max-width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.rebate-generate-qr {
+  border: 1px solid black;
+  float: right;
+  width: 5.5rem;
+}
+
+.rebate-done {
+  background-color: var(--blue);
+  border-radius: .2em;
+  color: var(--white);
+  float: right;
+  width: 5em;
+}
+
+.rebate-bulk-actions {
+  justify-content: space-between;
+  width: 770px;
+  margin-top: 1.5em;
+  padding: 1.75em;
+  letter-spacing: normal;
+  background: var(--dove);
+}
+
+.rebate-bulk-action-button {
+  background-color: var(--dove);
+  color: var(--blue);
+  border: none;
+  font-weight: bold;
+}
+
+.rebate-bulk-action-button:disabled {
+  background-color: var(--dove);
+  color: var(--dark-gray);
+  border: none;
+  font-weight: bold;
+}
+
+.rebate-single-process-button {
+  align-self: flex-end;
+  color: var(--blue);
+  border: none;
+  font-weight: bold;
+  font-size: .5em;
+}
+
+.rebate-form-blue-arrow {
+  width: 2rem;
+  height: 2rem
+}
+
+.no-results-error-message {
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
+  color: var(--black);
+  font-size: 1em;
+  padding: 2em;
 }

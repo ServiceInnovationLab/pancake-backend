@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/ipad/static/css/main.a43cc759.chunk.css",
+    "main.js": "/ipad/static/js/main.c0da98b1.chunk.js",
+    "main.js.map": "/ipad/static/js/main.c0da98b1.chunk.js.map",
+    "runtime~main.js": "/ipad/static/js/runtime~main.8b4588fc.js",
+    "runtime~main.js.map": "/ipad/static/js/runtime~main.8b4588fc.js.map",
+    "static/js/2.b854fc35.chunk.js": "/ipad/static/js/2.b854fc35.chunk.js",
+    "static/js/2.b854fc35.chunk.js.map": "/ipad/static/js/2.b854fc35.chunk.js.map",
+    "index.html": "/ipad/index.html",
+    "precache-manifest.9916d6e2fc080177bbf8905b6182e86a.js": "/ipad/precache-manifest.9916d6e2fc080177bbf8905b6182e86a.js",
+    "service-worker.js": "/ipad/service-worker.js",
+    "static/css/main.a43cc759.chunk.css.map": "/ipad/static/css/main.a43cc759.chunk.css.map",
+    "static/media/App.css": "/ipad/static/media/signature-noLine1.cb25f854.svg",
+    "static/media/tick.svg": "/ipad/static/media/tick.12268824.svg"
+  }
+}

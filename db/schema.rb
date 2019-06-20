@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_09_232721) do
+ActiveRecord::Schema.define(version: 2019_06_18_231804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2018_09_09_232721) do
     t.datetime "batch_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.boolean "cover_sheet_attached", default: false
     t.index ["council_id"], name: "index_batches_on_council_id"
   end
 
@@ -54,6 +56,7 @@ ActiveRecord::Schema.define(version: 2018_09_09_232721) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "email"
+    t.boolean "has_address_lookups", default: false
   end
 
   create_table "properties", force: :cascade do |t|
@@ -65,7 +68,7 @@ ActiveRecord::Schema.define(version: 2018_09_09_232721) do
     t.integer "council_id"
     t.text "rating_year"
     t.index ["council_id"], name: "index_properties_on_council_id"
-    t.index ["valuation_id", "rating_year"], name: "index_properties_on_valuation_id_and_rating_year", unique: true
+    t.index ["valuation_id", "rating_year"], name: "index_properties_on_valuation_id_and_rating_year"
   end
 
   create_table "rates_bills", force: :cascade do |t|
@@ -96,8 +99,8 @@ ActiveRecord::Schema.define(version: 2018_09_09_232721) do
     t.integer "property_id"
     t.decimal "rebate", precision: 8, scale: 2
     t.integer "batch_id"
-    t.boolean "completed", default: false
     t.integer "updated_by"
+    t.string "status", default: "not signed"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -164,6 +167,7 @@ ActiveRecord::Schema.define(version: 2018_09_09_232721) do
     t.integer "invitations_count", default: 0
     t.datetime "deactivated_at"
     t.integer "council_id"
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"

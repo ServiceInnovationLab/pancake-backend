@@ -2,14 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Council', type: :feature do
+RSpec.describe 'Council', type: :feature, js: true do
   let!(:council) { FactoryBot.create :council }
   let!(:council_two) { FactoryBot.create :council }
 
   context 'anonymous' do
     it "can't see it" do
       visit '/admin/councils'
-      expect(page).to have_text('Forgot your password?')
+      expect(page).to have_text('Rates Rebate 2018/2019')
+      expect(page).to have_text('Log in')
     end
   end
 
@@ -23,6 +24,7 @@ RSpec.describe 'Council', type: :feature do
       expect(page).to have_text(council.name)
       expect(page).to have_text(council.short_name)
     end
+    include_examples 'percy snapshot'
   end
 
   context 'signed in as council' do

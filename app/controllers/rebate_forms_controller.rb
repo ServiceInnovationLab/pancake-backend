@@ -4,36 +4,56 @@ class RebateFormsController < ApiController
   jsonapi resource: RebateFormResource
   strong_resource :rebate_form
 
-  def show
-    scope = jsonapi_scope(RebateForm.where(token: params[:id]))
-    instance = scope.resolve.first
-    raise JsonapiCompliable::Errors::RecordNotFound unless instance
-    render_jsonapi(instance, scope: false)
+  def show_by_jwt
+    token = params[:jwt]
+
+    raise JsonapiCompliable::Errors::RecordNotFound unless token
+
+    decoded_token = decode_jwt(token)[0]
+
+    correct_token(decoded_token)
+
+    rebate_form_id = decoded_token['rebate_form_id']
+
+    rebate_form = RebateForm.find(rebate_form_id)
+
+    rebate_form.fields['total_rates'] = rebate_form.property.rates_bills[0].total_rates
+
+    raise JsonapiCompliable::Errors::RecordNotFound unless rebate_form
+
+    render_jsonapi(rebate_form, scope: false)
   end
 
   def create
-    rebate_form = RebateForm.create(rebate_form_params)
-    rebate_form.calc_rebate_amount!
-    raise 'No rebate calculated. This should never happen' if rebate_form.rebate.blank?
+    rebate_form = RebateFormsService.new(rebate_form_params).update!
 
-    if rebate_form.errors.any?
-      render_errors_for(rebate_form)
-    else
-      render_jsonapi(rebate_form, scope: false)
-    end
+    render_jsonapi(rebate_form, scope: false)
+  rescue RebateFormsService::Error
+    render_errors_for(rebate_form)
   end
 
-  def update
-    rebate_form = RebateForm.find_by(token: params[:id])
-    rebate_form.update(rebate_form_params)
-    if rebate_form.errors.any?
-      render_errors_for(rebate_form)
-    else
-      render_jsonapi(rebate_form, scope: false)
-    end
-  end
+  private
 
   def rebate_form_params
-    params.require(:api).require(:data).require(:attributes).permit(:valuation_id, fields: {})
+    params
+      .require(:api)
+      .require(:data)
+      .require(:attributes)
+      .permit(:id,
+              :valuation_id,
+              :council,
+              :total_rates,
+              :location,
+              fields: {},
+              applicant_signature: {},
+              witness_signature: {})
+  end
+
+  def decode_jwt(token)
+    JWT.decode token, ENV['HMAC_SECRET'], true, algorithm: 'HS256'
+  end
+
+  def correct_token(decoded_token)
+    raise JsonapiCompliable::Errors::RecordNotFound unless decoded_token['per'] == 'sign'
   end
 end

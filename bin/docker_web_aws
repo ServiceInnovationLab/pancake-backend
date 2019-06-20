@@ -1,0 +1,18 @@
+#! /bin/bash
+/usr/bin/wait-for-it -h $RDS_HOSTNAME -p $RDS_PORT
+
+# Initialise development database if RDS_CREATE_DATABASE == true
+if [ "$RDS_CREATE_DATABASE" == "true" ]; then
+  echo "Creating and loading databases"
+  bundle exec rake db:setup db:seed
+fi
+
+echo "Migrating and refreshing reference data"
+bundle exec rake db:migrate
+
+# bundle exec rake rates:kapiti
+# bundle exec rake rates:tauranga
+
+echo "Running the server..."
+rm -f tmp/pids/server.pid
+bundle exec rails s -p 80 -b '0.0.0.0'

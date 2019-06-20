@@ -4,18 +4,18 @@
     %title= yield(:title)
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_pack_tag 'rebate_form'
+    = favicon_link_tag 'favicon.ico'
     = javascript_include_tag 'application'
     = csrf_meta_tags
 
   %body
-  #layout.pure-g
-    .pure-u-1-2
-      .header
-        %h1 Te Whakamāmā i ngā Reiti
-        %h2 Rates Rebates
-    .pure-u-1-2
-      = render 'layouts/menu'
-    #main.pure-u-1
-      - flash.each do |name, msg|
-        = content_tag :div, msg, class: name
-      = yield
+    .pure-g
+      .pure-u-1.header
+        = render 'layouts/header'
+      #main.pure-u-1
+        - flash.each do |_name, msg|
+          .notice
+            = image_tag('tick.svg', class: 'tick-icon')
+            = msg
+        = yield

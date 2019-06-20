@@ -8,64 +8,104 @@
  *= require_tree .
 */
 
+/*Colours*/
+:root {
+  --dove: #ebebeb;
+  --gray: #ababab;
+  --dark-gray: #4c4c4c;
+  --dark-gray-hover: #3d3d3d;
+  --orange: #d34322;
+  --orange-hover: #b73a1e;
+  --blue: #336699;
+  --blue-hover: #1a4d80;
+  --purple: #993366;
+  --purple-hover: #6a2347;
+  --white: #ffffff;
+  --black: #000000;
+  --light-green: #6dca7f;
+}
+
+/* Fonts
+=============================== */
+@font-face {
+  font-family: 'Fira';
+  src: url("fonts/FiraSans-Regular.eot");
+  src: url("fonts/FiraSans-Regular.eot?#iefix") format("embedded-opentype"),
+  url("fonts/FiraSans-Regular.woff") format("woff"),
+  url("fonts/FiraSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Fira-Bold';
+  src: url("fonts/FiraSans-Bold.eot");
+  src: url("fonts/FiraSans-Bold.eot?#iefix") format("embedded-opentype"),
+  url("fonts/FiraSans-Bold.woff") format("woff"),
+  url("fonts/FiraSans-Bold.ttf") format("truetype");
+}
+
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
 }
 
-
 body {
-  background-color: #fff;
+  background-color: var(--white);
   color: #333;
   margin: 33px;
-
 }
 
 a {
-  background-color: #6dca7f;
-  color: #000000;
-  color: rgb(61, 146, 201);
+  background-color: var(--light-green);
+  color: var(--black);
+  color: var(--blue);
   text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  color: #fff;
-  background-color: #000;
+  cursor: pointer;
+  color: var(--blue);
+  background-color: var(--white);
+  border-bottom: 1px solid var(--blue);
   text-decoration: underline;
 }
 
-#layout {
-}
-
-#header {
-  margin: 0;
-  padding: 0;
-  background-color: #6dca7f;
-}
-
-#menus {
-  float: top-right;
-  background-color: #f3faec;
-}
-
 #main {
-  margin: 0;
-  padding: 1em;
   font-family: Georgia, "Cambria", serif;
 }
 
 .header {
-  text-align: left;
-  /*top: auto;*/
-  margin: 0 auto;
-  padding: 1em;
+  background-color: var(--black);
+  padding: 1.25em;
 }
 
-.show_header {
-  border-bottom: 1px solid #999;
-  padding: 10px 0;
+.header-item {
+  display: inline-block;
+}
+
+.header-title {
+  color: var(--white);
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.header-login {
+  color: var(--gray);
+  float: right;
+  vertical-align: middle;
+  font-size: 16px;
+}
+
+.header-logout-link {
+  border-radius: 4px;
+  color: var(--dove);
+  background-color: var(--dark-gray);
+  margin-left: 15px;
+  padding: 5px 10px;
+  font-size: 14px;
 }
 
 label {
@@ -77,6 +117,16 @@ input {
   margin: 5px 0 15px !important;
 }
 
+input:-moz-read-only {
+  border-style: none;
+  background: var(--dove);
+} /* For Firefox */
+
+input:read-only {
+  border-style: none;
+  background: var(--dove);
+}
+
 .content {
   padding: 2em 1em 0;
 }
@@ -85,5 +135,22 @@ input {
   float: right;
 }
 
+.notice {
+  background-color: var(--gray);
+  height: 40px;
+  font-size: 16px;
+  color: var(--black);
+  padding-left: 10px;
+}
 
+.notice::before {
+  content: ' ';
+  background-image: url('tick.svg');
+  background-size: 10px;
+}
 
+.tick-icon {
+  width: 25px;
+  height: 25px;
+  padding-top: 12px;
+}
