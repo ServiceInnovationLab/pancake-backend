@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get 'rebate_forms/edit_council_details', to: 'rebate_forms_council_details#edit'
+    patch 'rebate_forms/update_council_details', to: 'rebate_forms_council_details#update'
     get 'rebate_forms/signed', to: 'signed_rebate_forms#index'
     get 'rebate_forms/processed', to: 'processed_rebate_forms#index'
     post 'process_rebate_form', to: 'processed_rebate_forms#create'
@@ -17,7 +19,6 @@ Rails.application.routes.draw do
 
     resources :rebate_forms do
       get 'generateqr'
-      get 'edit_council_fields'
     end
     resources :attachments, only: %i[destroy]
     resources :councils do

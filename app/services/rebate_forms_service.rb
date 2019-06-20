@@ -4,17 +4,8 @@ class RebateFormsService
   class Error < StandardError; end
 
   def initialize(rebate_form_attributes)
-    @rebate_form_council_details = rebate_form_attributes if rebate_form_attributes['council_details']
     rebate_form_attributes['fields']['location'] = rebate_form_attributes['location'] if rebate_form_attributes['fields']
     @rebate_form_attributes = rebate_form_attributes
-  end
-
-  def update_council_details!
-    rebate_form = RebateForm.find(@rebate_form_council_details['id'])
-    rebate_form.update!(valuation_id: @rebate_form_council_details['rebate_form']['valuation_id'],
-                        customer_id: @rebate_form_council_details['rebate_form']['customer_id'],
-                        application_id: @rebate_form_council_details['rebate_form']['application_id'])
-    rebate_form
   end
 
   def update!

@@ -50,8 +50,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
-    @rebate_form = RebateFormsService.new(rebate_form_council_details_params).update_council_details! if params[:council_details]
-    @rebate_form = RebateFormsService.new(rebate_form_fields_params).update! unless params[:council_details]
+    @rebate_form = RebateFormsService.new(rebate_form_fields_params).update!
     @rebate_form.update(updated_by: current_user.id)
     respond_with @rebate_form, location: admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
   end
@@ -75,10 +74,6 @@ class Admin::RebateFormsController < Admin::BaseController
 
   def rebate_form_fields_params
     params.permit(:id, :total_rates, :location, :council, fields: {})
-  end
-
-  def rebate_form_council_details_params
-    params.permit([:id, :council_details, rebate_form: {}])
   end
 
   def pdf_filename

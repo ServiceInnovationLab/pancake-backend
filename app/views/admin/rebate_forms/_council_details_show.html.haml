@@ -1,7 +1,7 @@
 .rebate-details-header.council-details-header
   %h3.rebate-details-title Council Details
   - unless @rebate_form.processed_state? || @rebate_form.batched_state?
-    = link_to 'EDIT', admin_rebate_form_edit_council_fields_path(rebate_form_id: @rebate_form.id), class: 'pure-button rebate-edit council-edit'
+    = link_to 'EDIT', admin_rebate_forms_edit_council_details_path(rebate_form_id: @rebate_form.id), class: 'pure-button rebate-edit council-edit'
 
 .rebate-edit-form
   .flex-row.council-row
