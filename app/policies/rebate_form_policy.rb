@@ -13,8 +13,12 @@ class RebateFormPolicy < ApplicationPolicy
     dia? || same_council?
   end
 
+  def edit_council_fields?
+    dia? || same_council?
+  end
+
   def update?
-    (dia? || same_council?)
+    dia? || same_council?
   end
 
   def destroy?

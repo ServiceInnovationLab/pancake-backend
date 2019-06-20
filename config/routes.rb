@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
     resources :rebate_forms do
       get 'generateqr'
+      get 'edit_council_fields'
     end
     resources :attachments, only: %i[destroy]
     resources :councils do

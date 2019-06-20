@@ -1,0 +1,9 @@
+.rebate-details-header.council-details-header
+  %h3.rebate-details-title Council Details
+  - unless @rebate_form.processed_state? || @rebate_form.batched_state?
+    = link_to 'EDIT', admin_rebate_form_edit_council_fields_path(@rebate_form), class: 'pure-button rebate-edit council-edit'
+
+.rebate-edit-form
+  %label Valuation ID
+  %div
+    = @rebate_form.valuation_id

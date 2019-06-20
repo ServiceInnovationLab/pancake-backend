@@ -75,11 +75,24 @@
   width: 1.75em;
 }
 
+.rebate-details-header {
+  margin: 0 200px;
+}
+
+.customer-details-header {
+  margin-top: 30px;
+}
+
+.rebate-details-title,
+.rebate-edit {
+  display: inline-block;
+}
+
 .rebate-edit {
   background-color: var(--blue);
   border-radius: .2em;
   color: var(--white);
-  float: right;
+  margin-bottom: 10px;
   width: 5em;
 }
 

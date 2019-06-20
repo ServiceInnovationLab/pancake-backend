@@ -69,25 +69,15 @@ export const customerDetailFields = [
     label: 'Name',
   },
   {
-    id: 'customer_id',
-    label: 'Customer ID (optional)',
-    placeholder: '0000000',
-  },
-  {
-    id: 'location',
-    label: 'Address',
-    fullWidth: true
-  },
-  {
     id: 'total_rates',
     label: 'Total rates',
     type: 'number',
     step: 0.01
   },
   {
-    id: 'valuation_id',
-    label: 'Valuation ID (optional)',
-    placeholder: '00000 000 00',
+    id: 'location',
+    label: 'Address',
+    fullWidth: true
   },
   {
     id: 'email',
