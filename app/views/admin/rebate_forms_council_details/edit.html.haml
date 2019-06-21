@@ -15,8 +15,8 @@
     = hidden_field_tag :id, @rebate_form.id
     .flex-row
       .button-container.council-buttons
-        = link_to 'CANCEL', admin_rebate_form_path(@rebate_form), id: 'cancel', class: 'pure-button rebate-cancel-button'
-        = f.submit 'SAVE', class: 'pure-button rebate-submit-button'
+        = link_to 'CANCEL', admin_rebate_form_path(@rebate_form), id: 'cancel', class: 'pure-button rebate-cancel-button rebate-council-cancel-button'
+        = f.submit 'SAVE', class: 'pure-button rebate-submit-button rebate-council-submit-button'
     .flex-row.council-row
       .flex-item.with-margin
         = f.label :valuation_id, 'Valuation ID'
