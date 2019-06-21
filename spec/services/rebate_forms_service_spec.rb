@@ -26,15 +26,11 @@ RSpec.describe RebateFormsService do
       }
     end
 
-    describe '#update!' do
+    describe '#create!' do
       context 'with invalid params' do
-        let(:update_params) do
+        let(:create_params) do
           {
-            'id' => rebate_form.id,
-            'valuation_id' => property2.valuation_id,
             'total_rates' => '12345',
-            'completely_invalid' => true,
-            'location' => property2.location,
             'rebate_form' => {
               'fields' => {}
             }
