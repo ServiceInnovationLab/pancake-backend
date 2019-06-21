@@ -1,9 +1,3 @@
-.rebate-header-buttons
-  = link_to admin_rebate_forms_path, id: 'back' do
-    =image_tag("search.svg", class: 'rebate-header-icon')
-  = link_to edit_admin_rebate_form_path, id: 'reload' do
-    =image_tag("blue-reload.svg", class: 'rebate-header-icon')
-
 - if @rebate_form.signed_state?
   .rebate-banner#rebate-banner
     =image_tag("alert1.svg", class: 'rebate-banner-icon')
@@ -15,7 +9,7 @@
 
 .rebate-header
   %h2.rebate-title
-    Customer details
+    Application details
 
   %h3.rebate-subtitle
     - if @rebate_form.signed_state?

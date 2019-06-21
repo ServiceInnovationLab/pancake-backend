@@ -1,0 +1,19 @@
+.rebate-details-header.council-details-header
+  %h3.rebate-details-title Council details
+  - unless @rebate_form.processed_state? || @rebate_form.batched_state?
+    = link_to 'EDIT', admin_rebate_forms_edit_council_details_path(rebate_form_id: @rebate_form.id), id: 'edit-council', class: 'pure-button rebate-edit council-edit'
+
+.rebate-edit-form
+  .flex-row.council-row
+    .flex-item
+      %label Valuation ID
+      .rebate-search-input
+        = @rebate_form.valuation_id
+    .flex-item
+      %label Application ID (optional)
+      .rebate-search-input
+        = @rebate_form.application_id
+    .flex-item
+      %label Customer ID (optional)
+      .rebate-search-input
+        = @rebate_form.customer_id

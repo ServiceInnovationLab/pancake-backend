@@ -40,11 +40,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
     @updated_by = User.find(@rebate_form.updated_by) unless @rebate_form.updated_by.nil?
 
-    respond_with(@rebate_form) do |format|
-      format.pdf do
-        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf', margin: { top: 0, bottom: 0, left: 0, right: 0 }, dpi: '300'
-      end
-    end
+    respond_with(@rebate_form)
   end
 
   # PATCH/PUT /admin/rebate_forms/1
