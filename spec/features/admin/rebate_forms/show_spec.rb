@@ -29,7 +29,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           expect(page).to have_text('Council details')
           expect(page).to have_text('Valuation ID')
           expect(page).to have_text(rebate_form.valuation_id)
-          expect(page).to have_text('Customer ID')
+          expect(page).to have_text('Application ID')
           expect(page).to have_text(rebate_form.customer_id)
           expect(page).to have_text('Application ID')
           expect(page).to have_text(rebate_form.application_id)
@@ -106,7 +106,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           it { expect(page).to have_field('fields.full_name', with: rebate_form.full_name) }
           it { expect(page).to have_text('Valuation ID') }
           it { expect(page).to have_text(rebate_form.valuation_id) }
-          it { expect(page).to have_text('Customer ID') }
+          it { expect(page).to have_text('Application ID') }
           it { expect(page).to have_text(rebate_form.customer_id) }
           it { expect(page).to have_text('Application ID') }
           it { expect(page).to have_text(rebate_form.application_id) }
