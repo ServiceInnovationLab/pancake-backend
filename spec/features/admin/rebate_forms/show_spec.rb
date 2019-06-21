@@ -75,7 +75,6 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
               click_link('edit-council')
               expect(page).to_not have_text('EDIT')
               expect(page).to have_text('Council details')
-              expect(page).to_not have_text('Application details')
               expect(page).to have_text('Signature required')
               expect(page).to have_field(with: rebate_form.valuation_id)
             end
