@@ -42,6 +42,7 @@ class RebateFormsController < ApiController
       .permit(:valuation_id,
               :council_id,
               :location,
+              :total_rates,
               fields: {},
               applicant_signature: {},
               witness_signature: {})
