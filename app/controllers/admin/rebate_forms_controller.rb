@@ -11,11 +11,6 @@ class Admin::RebateFormsController < Admin::BaseController
     @image_data = GenerateQrService.new(@rebate_form, current_user).generate_qr
   end
 
-  def edit_council_fields
-    @rebate_form = RebateForm.find(params[:rebate_form_id])
-    authorize @rebate_form
-  end
-
   def edit; end
 
   # GET /admin/rebate_forms
