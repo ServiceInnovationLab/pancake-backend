@@ -1,6 +1,11 @@
-
 - content_for :title, "RatesRebate #{@rebate_form.property.location}"
 
 = render 'show_header'
 
+= render 'council_details_show', rebate_form: @rebate_form
+
+.rebate-details-header.customer-details-header
+  %h3.rebate-details-title Customer details
+  - unless @rebate_form.processed_state? || @rebate_form.batched_state?
+    = link_to 'EDIT', edit_admin_rebate_form_path, id: 'edit-customer', class: 'pure-button rebate-edit'
 = react_component("RebateForm", {isReadOnly: true, rebateForm: @rebate_form, property: @rebate_form.property, ratesBills: @rebate_form.property.rates_bills})

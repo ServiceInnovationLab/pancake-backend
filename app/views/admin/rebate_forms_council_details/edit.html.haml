@@ -1,0 +1,29 @@
+.rebate-header
+  %h2.rebate-title
+    Application details
+
+  %h3.rebate-subtitle
+    - if @rebate_form.signed_state?
+      Signed and ready to process
+    - else
+      Signature required
+
+.rebate-details-header.customer-details-header
+  %h3.rebate-details-title Council details
+.rebate-edit-form
+  = form_for(@rebate_form, url: admin_rebate_forms_update_council_details_path, html: { method: 'patch' }) do |f|
+    = hidden_field_tag :id, @rebate_form.id
+    .flex-row
+      .button-container.council-buttons
+        = link_to 'CANCEL', admin_rebate_form_path(@rebate_form), id: 'cancel', class: 'pure-button rebate-cancel-button rebate-council-cancel-button'
+        = f.submit 'SAVE', class: 'pure-button rebate-submit-button rebate-council-submit-button'
+    .flex-row.council-row
+      .flex-item.with-margin
+        = f.label :valuation_id, 'Valuation ID'
+        = f.text_field :valuation_id, class: 'rebate-search-input'
+      .flex-item
+        = f.label :application_id, 'Application ID'
+        = f.text_field :application_id, class: 'rebate-search-input'
+      .flex-item
+        = f.label :customer_id, 'Customer ID'
+        = f.text_field :customer_id, class: 'rebate-search-input'
