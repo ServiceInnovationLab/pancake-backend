@@ -61,6 +61,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_field('name')
         expect(page).to have_text(expected_name)
         expect(page).to have_text(expected_location)
+        expect(page).to_not have_text('Application ID')
       end
       include_examples 'percy snapshot'
     end
@@ -102,6 +103,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).not_to have_field('name')
         expect(page).to have_text(signed_name)
         expect(page).to have_text(signed_location)
+        expect(page).to_not have_text('Application ID')
       end
       include_examples 'percy snapshot'
     end
@@ -116,6 +118,8 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_text('Processed')
         expect(page).to have_text('Batched')
         expect(page).to have_text(processed_name)
+        expect(page).to have_text('Application ID')
+        expect(page).to have_text(processed_form.application_id)
       end
       include_examples 'percy snapshot'
     end
