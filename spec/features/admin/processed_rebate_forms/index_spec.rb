@@ -28,20 +28,18 @@ RSpec.describe 'ProcessedRebateForms', type: :feature, js: true do
         expect(page).to have_text(processed_forms.first.fields['full_name'])
         expect(page).to have_text(processed_forms.second.fields['full_name'])
         expect(page).to have_text(processed_forms.third.fields['full_name'])
-        expect(page).to have_text(processed_forms.first.property.valuation_id)
-        expect(page).to have_text(processed_forms.second.property.valuation_id)
-        expect(page).to have_text(processed_forms.third.property.valuation_id)
+        expect(page).to have_text(processed_forms.first.valuation_id)
+        expect(page).to have_text(processed_forms.second.valuation_id)
+        expect(page).to have_text(processed_forms.third.valuation_id)
       end
 
       context 'when there is no valuation id' do
         before do
-          property.update!(valuation_id: '')
+          processed_forms.first.update!(valuation_id: '')
         end
 
         it 'the cell is left blank' do
-          expect(processed_forms.first.property.valuation_id).to eq ''
-          expect(processed_forms.second.property.valuation_id).to eq ''
-          expect(processed_forms.third.property.valuation_id).to eq ''
+          expect(processed_forms.first.valuation_id).to eq ''
           expect(page).to have_css('#valuation-id', text: '')
         end
       end

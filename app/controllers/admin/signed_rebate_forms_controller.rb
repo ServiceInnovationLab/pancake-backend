@@ -7,7 +7,7 @@ class Admin::SignedRebateFormsController < Admin::BaseController
     @signed_rebate_forms = policy_scope(RebateForm)
                            .where(status: RebateForm::SIGNED_STATUS)
                            .order(created_at: :asc)
-                           .to_json(include: [:property])
-    respond_with json: @signed_rebate_forms.to_json(include: [:property])
+
+    respond_with json: @signed_rebate_forms
   end
 end

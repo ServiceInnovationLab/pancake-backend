@@ -1,6 +1,6 @@
 
-- content_for :title, "RatesRebate #{@rebate_form.property.location}"
+- content_for :title, "RatesRebate #{@rebate_form.location}"
 
 = render 'show_header'
 
-= react_component("RebateForm", {isReadOnly: true, rebateForm: @rebate_form, property: @rebate_form.property, ratesBills: @rebate_form.property.rates_bills})
+= react_component("RebateForm", {isReadOnly: true, rebateForm: @rebate_form})

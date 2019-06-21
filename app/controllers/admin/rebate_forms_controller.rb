@@ -24,7 +24,7 @@ class Admin::RebateFormsController < Admin::BaseController
     # filter by the search form fields
     @rebate_forms = @rebate_forms.where("fields ->> 'full_name' iLIKE ?", "%#{@name}%") if @name.present?
 
-    respond_with json: @rebate_forms.to_json(include: [:property])
+    respond_with json: @rebate_forms
   end
 
   # GET /admin/rebate_forms/1
