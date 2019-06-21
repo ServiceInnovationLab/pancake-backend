@@ -27,6 +27,14 @@ export function SummaryRow(rebateForm, key, checked, checkIt) {
       {!checkIt &&
         <td className='rebate-results-table-cell'>{property.location} <br/> {property.suburb} <br/>  {property.town_city}</td>
       }
+      {checkIt &&
+        <td className='rebate-results-table-cell' id='application-id'>
+          { rebateForm.application_id
+            ? rebateForm.application_id
+            : ''
+          }
+        </td>
+      }
       <td className='rebate-results-table-cell'>
         <a onClick={() => {
           window.location = `/admin/rebate_forms/${id}`;
