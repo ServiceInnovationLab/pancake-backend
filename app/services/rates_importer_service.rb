@@ -25,8 +25,10 @@ class RatesImporterService
         suburb: suburb,
         town_city: town_city,
         rating_year: rating_year,
+        include_in_address_lookups: true,
         meta: row.to_s
       )
+    else property.update(include_in_address_lookups: true)
     end
     rates_bill = RatesBill.find_by(property: property, rating_year: rating_year)
 
