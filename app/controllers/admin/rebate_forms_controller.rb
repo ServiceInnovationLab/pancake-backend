@@ -69,15 +69,10 @@ class Admin::RebateFormsController < Admin::BaseController
 
   def rebate_form_fields_params
     params.permit(:id,
-                  :valuation_id,
                   :total_rates,
                   :location,
                   :council,
                   fields: {})
-  end
-
-  def rebate_form_params
-    params.require(:rebate_form).permit(attachments: [])
   end
 
   def pdf_filename
