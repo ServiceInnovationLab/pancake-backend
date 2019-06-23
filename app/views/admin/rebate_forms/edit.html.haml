@@ -1,6 +1,3 @@
 = render 'edit_header'
 
-.rebate-details-header.customer-details-header
-  %h3.rebate-details-title Customer details
-
 = react_component("RebateForm", {isReadOnly: false, rebateForm: @rebate_form, council: @rebate_form.council})
