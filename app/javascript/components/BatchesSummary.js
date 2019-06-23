@@ -45,17 +45,17 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                 <br/>
                 <div className='batches-accordion-header-row'>
                   {cover_sheet_attached
-                    ? isDiaUser
-                      ? <a
+                    ? <a
                         target='_blank'
                         rel='noopener'
                         href={download_link}
                         id='header-sheet'
+                        className='batches-header-sheet-download-button'
                         download>
+                        <img className='batches-download-icon' alt='blue download icon' src='/assets/blue-download.svg'/>
                         HEADER SHEET
                       </a>
-                      : 'HEADER SHEET'
-                    : 'HEADER SHEET REQUIRED'
+                    : 'Header sheet required'
                   }
                   {isDiaUser && <button
                     target='_blank'
@@ -67,6 +67,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                       BATCH
                   </button>}
                 </div>
+                <div className='batches-applications-header'>APPLICATIONS</div>
               </AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>

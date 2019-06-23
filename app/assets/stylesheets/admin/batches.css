@@ -25,21 +25,26 @@
   letter-spacing: normal;
   width: 770px
 }
+
 .batches-flex-table-row {
   padding: 1em 1.75em;
   display: flex;
   border-top: 2px solid var(--dove);
 }
+
 .batches-flex-table-cell {
   width: 30%
 }
+
 .batches-flex-table-first-cell {
   width: 40%
 }
+
 .batches-accordion-header-row {
   width: 100%;
   color: var(--dark-gray)
 }
+
 .batches-accordion-header-title {
   display: flex;
   align-items: center;
@@ -47,6 +52,7 @@
   font-weight: bold;
   color: var(--black)
 }
+
 .batches-accordion-header-button {
   font-size: 18px;
   text-transform: uppercase;
@@ -57,11 +63,31 @@
   border-radius: .2em;
   margin-left: auto;
   padding: .5em 2em;
-
 }
+
+.batches-header-sheet-download-button {
+  color: var(--blue);
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+}
+
+.batches-download-icon {
+  width: 20px;
+  margin-right: 10px;
+}
+
 .batches-accordion-header-button:hover {
   background-color: var(--blue-hover);
 }
+
+.batches-applications-header {
+  color: var(--blue);
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  margin-left: 500px;
+  position: absolute;
+}
+
 .batch-details-link {
   display: flex;
   align-items: center;
@@ -70,13 +96,16 @@
   font-weight: bold;
   color: var(--blue)
 }
+
 .batch-details-link:hover {
   border: 1px solid var(--blue);
 }
+
 .accordion {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 2px;
 }
+
 .accordion__item {
   margin-bottom: .5em
 }
@@ -89,10 +118,6 @@
   width: 100%;
   text-align: left;
   border: 2px solid var(--dove);
-}
-
-.accordion__button:hover {
-  background-color: var(--gray);
 }
 
 .accordion__button:after {
