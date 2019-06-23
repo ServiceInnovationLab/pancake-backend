@@ -47,6 +47,7 @@ RSpec.describe RebateFormsService do
           subject.create!
           expect(RebateForm.count).to eq 1
           expect(RebateForm.first.fields['location']).to eq property.location
+          expect(RebateForm.first.total_rates).to eq property.rates_bills.first.total_rates
         end
       end
     end

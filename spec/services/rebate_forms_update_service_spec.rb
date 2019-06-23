@@ -12,7 +12,6 @@ RSpec.describe RebateFormsUpdateService do
     let(:update_params) do
       {
         'id' => rebate_form.id,
-        'valuation_id' => property2.valuation_id,
         'total_rates' => '12345',
         'location' => property2.location,
         'fields' => {
@@ -38,7 +37,6 @@ RSpec.describe RebateFormsUpdateService do
           expect(RebateForm.first.fields['dependants']).to eq '3'
           expect(RebateForm.first.location).to eq property2.location
           expect(RebateForm.first.total_rates).to eq 12345
-          expect(RebateForm.first.valuation_id).to eq property2.valuation_id
         end
 
         context 'without a valuation id' do

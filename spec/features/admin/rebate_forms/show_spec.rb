@@ -86,7 +86,6 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
               click_link('edit-customer')
               expect(page).to_not have_text('EDIT')
               expect(page).to_not have_text('Council details')
-              expect(page).to have_text('Application details')
               expect(page).to have_text('Signature required')
               expect(page).to have_field(with: rebate_form.full_name)
             end
@@ -105,7 +104,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           it { expect(page).to have_field('fields.full_name', with: rebate_form.full_name) }
           it { expect(page).to have_text('Valuation ID') }
           it { expect(page).to have_text(rebate_form.valuation_id) }
-          it { expect(page).to have_text('Application ID') }
+          it { expect(page).to have_text('Customer ID') }
           it { expect(page).to have_text(rebate_form.customer_id) }
           it { expect(page).to have_text('Application ID') }
           it { expect(page).to have_text(rebate_form.application_id) }
