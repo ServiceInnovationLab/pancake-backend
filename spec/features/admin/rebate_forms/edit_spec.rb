@@ -18,6 +18,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     describe '#edit' do
       it 'can modify the rebate_form' do
         visit "/admin/rebate_forms/#{rebate_form.id}/edit"
+        expect(page).to have_text('Customer details')
         expect(page).to have_text('Name')
         fill_in('fields.full_name', with: 'arnold', fill_options: { clear: :backspace })
         click_button 'SAVE'
