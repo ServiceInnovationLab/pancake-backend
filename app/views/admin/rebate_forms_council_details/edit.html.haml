@@ -1,6 +1,6 @@
 .rebate-header
   %h2.rebate-title
-    Application details
+    Council details
 
   %h3.rebate-subtitle
     - if @rebate_form.signed_state?
@@ -8,8 +8,6 @@
     - else
       Signature required
 
-.rebate-details-header.customer-details-header
-  %h3.rebate-details-title Council details
 .rebate-edit-form
   = form_for(@rebate_form, url: admin_rebate_forms_update_council_details_path, html: { method: 'patch' }) do |f|
     = hidden_field_tag :id, @rebate_form.id
