@@ -10,14 +10,14 @@ RSpec.describe PropertiesController, type: :controller do
 
     # Property to not find, address doesn't match
     let!(:property_1) do
-      FactoryBot.create :property, location: '11 MAIN ROAD', council: council, rating_year: ENV['YEAR']
+      FactoryBot.create :property, location: '11 MAIN ROAD', council: council, rating_year: ENV['YEAR'], include_in_address_lookups: true
     end
     # Property we hope to find
     let!(:property_2) do
-      FactoryBot.create :property, location: '11 MOANA ROAD', council: council, rating_year: ENV['YEAR']
+      FactoryBot.create :property, location: '11 MOANA ROAD', council: council, rating_year: ENV['YEAR'], include_in_address_lookups: true
     end
     # Property we should not find, it's for a different year
-    let!(:property_3) { FactoryBot.create :property, location: '11 MOANA ROAD', council: council, rating_year: '1840' }
+    let!(:property_3) { FactoryBot.create :property, location: '11 MOANA ROAD', council: council, rating_year: '1840', include_in_address_lookups: true }
 
     shared_examples 'finds property' do
       before { get :index, format: :json, params: { q: query, council_id: council.id } }

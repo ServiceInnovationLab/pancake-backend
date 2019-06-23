@@ -21,7 +21,7 @@ class RatesImporterService
       property = Property.create!(
         council: council,
         valuation_id: valuation,
-        location: ("#{location.gsub /"/, ''} " + "#{suburb} " + town_city.to_s).strip,
+        location: ("#{location.gsub /"/, ''} " + "#{suburb} " + town_city.to_s).strip.capitalize,
         suburb: suburb,
         town_city: town_city,
         rating_year: rating_year,
