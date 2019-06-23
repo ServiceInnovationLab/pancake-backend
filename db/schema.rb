@@ -102,10 +102,10 @@ ActiveRecord::Schema.define(version: 2019_06_20_235127) do
     t.integer "batch_id"
     t.integer "updated_by"
     t.string "status", default: "not signed"
-    t.string "location"
-    t.decimal "total_rates", precision: 8, scale: 2
     t.string "customer_id"
     t.string "application_id"
+    t.string "location"
+    t.decimal "total_rates", precision: 8, scale: 2
   end
 
   create_table "roles", force: :cascade do |t|
