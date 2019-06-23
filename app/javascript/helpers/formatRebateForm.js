@@ -1,8 +1,6 @@
 
-export function parseFromAPI (rebateForm, property, ratesBills) {
-  const { location, valuation_id }  = property;
-  const { total_rates } = ratesBills[0];
-  const { fields } = rebateForm;
+export function parseFromAPI (rebateForm) {
+  const { fields, location, valuation_id, total_rates } = rebateForm;
 
   return  { ...fields, location, valuation_id, total_rates };
 }

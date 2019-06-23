@@ -21,18 +21,20 @@ class RatesImporterService
       property = Property.create!(
         council: council,
         valuation_id: valuation,
-        location: ("#{location.gsub /"/, ''} " + "#{suburb} " + town_city.to_s).strip,
+        location: ("#{location.gsub /"/, ''} " + "#{suburb} " + town_city.to_s).strip.capitalize,
         suburb: suburb,
         town_city: town_city,
         rating_year: rating_year,
+        include_in_address_lookups: true,
         meta: row.to_s
       )
+    else property.update(include_in_address_lookups: true)
     end
     rates_bill = RatesBill.find_by(property: property, rating_year: rating_year)
 
     if rates_bill.present?
-      current_rates = rates_bill.total_rates.to_f.round(2)
-      new_rates = (total_rates.to_f + total_water_rates.to_f).round(2)
+      # current_rates = rates_bill.total_rates.to_f.round(2)
+      # new_rates = (total_rates.to_f + total_water_rates.to_f).round(2)
       # raise 'mismatch total_rates' unless current_rates == new_rates
     else
       RatesBill.create!(

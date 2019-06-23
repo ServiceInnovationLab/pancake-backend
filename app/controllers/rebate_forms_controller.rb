@@ -25,7 +25,7 @@ class RebateFormsController < ApiController
   end
 
   def create
-    rebate_form = RebateFormsService.new(rebate_form_params).update!
+    rebate_form = RebateFormsService.new(rebate_form_params).create!
 
     render_jsonapi(rebate_form, scope: false)
   rescue RebateFormsService::Error
@@ -39,11 +39,10 @@ class RebateFormsController < ApiController
       .require(:api)
       .require(:data)
       .require(:attributes)
-      .permit(:id,
-              :valuation_id,
-              :council,
-              :total_rates,
+      .permit(:valuation_id,
+              :council_id,
               :location,
+              :total_rates,
               fields: {},
               applicant_signature: {},
               witness_signature: {})

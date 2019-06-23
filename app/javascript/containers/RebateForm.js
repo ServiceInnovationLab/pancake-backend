@@ -59,12 +59,10 @@ class EditRebateForm extends React.Component {
   render () {
     const {
       rebateForm,
-      property,
-      ratesBills,
       isReadOnly
     } = this.props;
 
-    const fields = parseFromAPI(rebateForm, property, ratesBills);
+    const fields = parseFromAPI(rebateForm);
 
     const initialValues = {fields}; 
 
