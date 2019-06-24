@@ -12,7 +12,7 @@ RSpec.describe 'Batch', type: :feature, js: true do
 
     context 'when I visit the pdf link' do
       it 'displays all of the correct information' do
-        visit "/admin/batches/#{batched_form.batch_id}.pdf?debug=true"
+        visit "/admin/batches/#{batched_form.batch_id}"
         expect(page).to have_content(batched_form.batch.name)
         expect(page).to have_content(batched_form.fields['full_name'])
         expect(page).to have_content(batched_form.property.valuation_id)
