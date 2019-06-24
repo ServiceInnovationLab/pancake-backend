@@ -14,7 +14,7 @@ RSpec.describe Admin::BatchesController, type: :controller do
 
       it 'assigns all batches to @batches' do
         get :index
-        expect(assigns(:batches)).to eq([batched_form.batch].to_json(include: { rebate_forms: { include: :property } }))
+        expect(assigns(:batches)).to eq([batched_form.batch].to_json(include: [:rebate_forms]))
         expect(response.status).to eq(200)
       end
     end
@@ -65,11 +65,14 @@ RSpec.describe Admin::BatchesController, type: :controller do
 
       context 'when an eRMS cover sheet is uploaded' do
         it 'updates the batch accordingly' do
-          file = fixture_file_upload(Rails.root.join('spec', 'support', 'files', 'kevincostner.jpg'), 'image/jpg')
+          expect(Batch.first.download_link).to eq nil
+          file = fixture_file_upload(Rails.root.join('spec', 'support', 'files', 'print-logo-black.png'), 'image/png')
           patch :update, params: { id: batched_form.batch_id,
                                    batch: { cover_sheet: file } }
           expect(Batch.first.erms_cover_sheet_attached?).to eq true
           expect(Batch.first.cover_sheet_attached).to eq true
+          expect(Batch.first.download_link).to_not eq nil
+          expect(Batch.first.cover_sheet).to be_an_instance_of(ActiveStorage::Attached::One)
         end
       end
     end

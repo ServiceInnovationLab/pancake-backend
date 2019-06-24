@@ -18,6 +18,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     describe '#edit' do
       it 'can modify the rebate_form' do
         visit "/admin/rebate_forms/#{rebate_form.id}/edit"
+        expect(page).to have_text('Customer details')
         expect(page).to have_text('Name')
         fill_in('fields.full_name', with: 'arnold', fill_options: { clear: :backspace })
         click_button 'SAVE'
@@ -25,17 +26,6 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         rebate_form.reload
         expect(rebate_form.full_name).to eq 'arnold'
       end
-    end
-
-    describe '#show' do
-      it 'can see edit link' do
-        visit "/admin/rebate_forms/#{rebate_form.id}"
-        expect(page).to have_field(with: rebate_form.full_name)
-        click_link 'EDIT'
-        expect(page).to have_text('Customer details')
-        expect(page).to have_field(with: rebate_form.full_name)
-      end
-      include_examples 'percy snapshot'
     end
 
     describe '#cancel' do
@@ -48,36 +38,6 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         click_button 'CANCEL'
         expect(page).to have_text('EDIT')
         expect(page).to have_field(with: rebate_form.full_name)
-      end
-    end
-
-    describe '#show' do
-      it 'cannot see edit link on processed form' do
-        visit "/admin/rebate_forms/#{processed_form.id}"
-        expect(page).to have_field(with: processed_form.full_name)
-        expect(page).not_to have_text('EDIT')
-      end
-      include_examples 'percy snapshot'
-    end
-
-    describe 'header buttons' do
-      context 'when the back button is clicked' do
-        it 'goes to the right place' do
-          visit "/admin/rebate_forms/#{rebate_form.id}/edit"
-          click_link('back')
-          expect(page).to have_text('Rates Rebate 2018/2019')
-          expect(page).to have_text('Customer search')
-        end
-      end
-
-      context 'when the reload button is clicked' do
-        it 'goes to the right place' do
-          visit "/admin/rebate_forms/#{rebate_form.id}/edit"
-          click_link('reload')
-          expect(page).to have_current_path("/admin/rebate_forms/#{rebate_form.id}/edit")
-          expect(page).to have_text('Customer details')
-          expect(page).to have_text('Income declaration (before tax)')
-        end
       end
     end
 

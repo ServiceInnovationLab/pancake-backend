@@ -7,7 +7,7 @@ class Admin::BatchesController < Admin::BaseController
     @batches = policy_scope(Batch)
                .all
                .order(created_at: :desc)
-               .to_json(include: { rebate_forms: { include: :property } })
+               .to_json(include: [:rebate_forms])
   end
 
   def edit
@@ -55,7 +55,11 @@ class Admin::BatchesController < Admin::BaseController
   def update_batch(batch)
     batch.cover_sheet.attach(batch_cover_sheet_param) unless batch_cover_sheet_param.nil?
     batch.update!(name: batch_name_param) unless batch_name_param.nil?
-    batch.update!(cover_sheet_attached: true) if batch.erms_cover_sheet_attached?
+    batch.update!(cover_sheet_attached: true, download_link: cover_sheet_url(batch)) if batch.erms_cover_sheet_attached?
+  end
+
+  def cover_sheet_url(batch)
+    rails_blob_path(batch.cover_sheet, disposition: 'attachment')
   end
 
   def batch_name_param

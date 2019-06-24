@@ -2,7 +2,9 @@
 
 FactoryBot.define do
   factory :rebate_form do
-    valuation_id { Faker::Vehicle.vin }
+    valuation_id { Faker::Alphanumeric.alphanumeric 10 }
+    customer_id { Faker::Alphanumeric.alphanumeric 10 }
+    application_id { Faker::Alphanumeric.alphanumeric 10 }
     property { Property.find_by(valuation_id: valuation_id, rating_year: ENV['YEAR']) }
     # token <-- auto generated. Don't set in factory
     fields do

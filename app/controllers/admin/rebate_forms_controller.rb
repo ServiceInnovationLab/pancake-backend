@@ -24,7 +24,7 @@ class Admin::RebateFormsController < Admin::BaseController
     # filter by the search form fields
     @rebate_forms = @rebate_forms.where("fields ->> 'full_name' iLIKE ?", "%#{@name}%") if @name.present?
 
-    respond_with json: @rebate_forms.to_json(include: [:property])
+    respond_with json: @rebate_forms
   end
 
   # GET /admin/rebate_forms/1
@@ -40,16 +40,12 @@ class Admin::RebateFormsController < Admin::BaseController
 
     @updated_by = User.find(@rebate_form.updated_by) unless @rebate_form.updated_by.nil?
 
-    respond_with(@rebate_form) do |format|
-      format.pdf do
-        render pdf: pdf_filename, page_size: 'A4', layout: 'pdf', margin: { top: 0, bottom: 0, left: 0, right: 0 }, dpi: '300'
-      end
-    end
+    respond_with(@rebate_form)
   end
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
-    @rebate_form = RebateFormsService.new(rebate_form_fields_params).update!
+    @rebate_form = RebateFormsUpdateService.new(rebate_form_fields_params).update!
     @rebate_form.update(updated_by: current_user.id)
     respond_with @rebate_form, location: admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
   end
@@ -72,11 +68,11 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def rebate_form_fields_params
-    params.permit(:id, :valuation_id, :total_rates, :location, :council, fields: {})
-  end
-
-  def rebate_form_params
-    params.require(:rebate_form).permit(attachments: [])
+    params.permit(:id,
+                  :total_rates,
+                  :location,
+                  :council,
+                  fields: {})
   end
 
   def pdf_filename

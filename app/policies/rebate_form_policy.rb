@@ -14,7 +14,7 @@ class RebateFormPolicy < ApplicationPolicy
   end
 
   def update?
-    (dia? || same_council?)
+    dia? || same_council?
   end
 
   def destroy?

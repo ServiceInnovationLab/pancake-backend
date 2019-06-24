@@ -8,19 +8,19 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     FactoryBot.create(:rebate_form, property: FactoryBot.create(:property, council: council))
   end
   let(:expected_name) { rebate_form.full_name }
-  let(:expected_location) { rebate_form.property.location }
+  let(:expected_location) { rebate_form.location }
 
   let!(:signed_form) do
     FactoryBot.create(:signed_form, property: FactoryBot.create(:property, council: council))
   end
   let(:signed_name) { signed_form.full_name }
-  let(:signed_location) { signed_form.property.location }
+  let(:signed_location) { signed_form.location }
 
   let!(:processed_form) do
     FactoryBot.create(:processed_form, property: FactoryBot.create(:property, council: council))
   end
   let(:processed_name) { processed_form.full_name }
-  let(:processed_valuation_id) { processed_form.property.valuation_id }
+  let(:processed_valuation_id) { processed_form.valuation_id }
 
   context 'anonymous' do
     it "can't see it" do
@@ -44,6 +44,8 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       it 'no applications should be visible' do
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
+        expect(page).to have_text('Processed')
+        expect(page).to have_text('Batched')
         expect(page).to have_field('name')
         expect(page).not_to have_text(expected_name)
       end
@@ -54,9 +56,12 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         click_button 'Search'
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
+        expect(page).to have_text('Processed')
+        expect(page).to have_text('Batched')
         expect(page).to have_field('name')
         expect(page).to have_text(expected_name)
         expect(page).to have_text(expected_location)
+        expect(page).to_not have_text('Application ID')
       end
       include_examples 'percy snapshot'
     end
@@ -72,6 +77,20 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       include_examples 'percy snapshot'
     end
 
+    describe 'no search results' do
+      before do
+        fill_in 'Name', with: '123'
+        click_button 'Search'
+      end
+      it 'does not find the person with matching name' do
+        expect(page).to have_text("We couldn't find anyone named \"123\"")
+        expect(page).to have_text('Search tips:')
+        expect(page).to have_text('Check the spelling')
+        expect(page).to have_text('Try using a first name or last name')
+        expect(page).to have_text('Search on all customers by leaving the field blank')
+      end
+    end
+
     describe 'get all signed forms' do
       before do
         click_button 'Signed'
@@ -79,9 +98,12 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       it 'should see all signed rebate forms' do
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
+        expect(page).to have_text('Processed')
+        expect(page).to have_text('Batched')
         expect(page).not_to have_field('name')
         expect(page).to have_text(signed_name)
         expect(page).to have_text(signed_location)
+        expect(page).to_not have_text('Application ID')
       end
       include_examples 'percy snapshot'
     end
@@ -93,7 +115,11 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       it 'should see all processed rebate forms' do
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
+        expect(page).to have_text('Processed')
+        expect(page).to have_text('Batched')
         expect(page).to have_text(processed_name)
+        expect(page).to have_text('Application ID')
+        expect(page).to have_text(processed_form.application_id)
       end
       include_examples 'percy snapshot'
     end
@@ -103,6 +129,8 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         click_button 'Processed'
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
+        expect(page).to have_text('Processed')
+        expect(page).to have_text('Batched')
         expect(page).to have_text('UNPROCESS')
         expect(page).to have_text('CREATE BATCH')
         expect(page).to have_text(processed_name)
@@ -119,6 +147,8 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         click_button 'Processed'
         expect(page).to have_text('Signed')
         expect(page).to have_text('Not Signed')
+        expect(page).to have_text('Processed')
+        expect(page).to have_text('Batched')
         expect(page).to have_text('UNPROCESS')
         expect(page).to have_text('CREATE BATCH')
         expect(page).to have_text(processed_name)
@@ -145,7 +175,14 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         fill_in 'Name', with: other_councils_form.full_name
         click_button 'Search'
       end
-      it { expect(page).not_to have_text other_councils_form.full_name }
+      # it { expect(page).not_to have_text other_councils_form.full_name }
+      it 'does not find the person with matching name' do
+        expect(page).to have_text("We couldn't find anyone named \"#{other_councils_form.full_name}\"")
+        expect(page).to have_text('Search tips:')
+        expect(page).to have_text('Check the spelling')
+        expect(page).to have_text('Try using a first name or last name')
+        expect(page).to have_text('Search on all customers by leaving the field blank')
+      end
     end
   end
 end

@@ -8,11 +8,9 @@ class RatesImporterService
   end
 
   def import(row, rating_year, council)
-    puts row
     valuation, _rating_year, location, suburb, town_city,
       total_rates, total_water_rates, _order, _council_owner_id,
       _surname, _first_names, _confidential, current_owner_start_date = row
-
     if total_rates.blank?
       puts 'SKIPPING blank rates record'
       return
@@ -23,25 +21,26 @@ class RatesImporterService
       property = Property.create!(
         council: council,
         valuation_id: valuation,
-        location: location,
+        location: ("#{location.gsub /"/, ''} " + "#{suburb} " + town_city.to_s).strip.titleize,
         suburb: suburb,
         town_city: town_city,
         rating_year: rating_year,
+        include_in_address_lookups: true,
         meta: row.to_s
       )
+    else property.update!(council: council, include_in_address_lookups: true, location: property.location.strip.titleize)
     end
-
     rates_bill = RatesBill.find_by(property: property, rating_year: rating_year)
+
     if rates_bill.present?
-      raise 'mismatch total_rates' unless rates_bill.total_rates.to_f == total_rates.to_f
-      raise 'mismatch total_water_rates' unless rates_bill.total_water_rates.to_f == total_water_rates.to_f
-      raise 'mismatch current_owner_start_date' unless rates_bill.current_owner_start_date == current_owner_start_date
+      # current_rates = rates_bill.total_rates.to_f.round(2)
+      # new_rates = (total_rates.to_f + total_water_rates.to_f).round(2)
+      # raise 'mismatch total_rates' unless current_rates == new_rates
     else
       RatesBill.create!(
         property: property,
         rating_year: rating_year,
-        total_rates: total_rates,
-        total_water_rates: total_water_rates,
+        total_rates: total_rates.to_f + total_water_rates.to_f,
         current_owner_start_date: current_owner_start_date
       )
     end

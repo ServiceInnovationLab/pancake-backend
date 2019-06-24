@@ -102,7 +102,7 @@ Rails.application.configure do
 
   config.active_record.default_timezone = :local
 
-  #config.active_storage.service = :amazon
+  config.active_storage.service = :amazon
 
   # For pdfs on heroku
   #config.assets.precompile += ['pdf.css']
