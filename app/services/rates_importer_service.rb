@@ -21,14 +21,14 @@ class RatesImporterService
       property = Property.create!(
         council: council,
         valuation_id: valuation,
-        location: ("#{location.gsub /"/, ''} " + "#{suburb} " + town_city.to_s).strip.capitalize,
+        location: ("#{location.gsub /"/, ''} " + "#{suburb} " + town_city.to_s).strip.titleize,
         suburb: suburb,
         town_city: town_city,
         rating_year: rating_year,
         include_in_address_lookups: true,
         meta: row.to_s
       )
-    else property.update(include_in_address_lookups: true)
+    else property.update!(council: council, include_in_address_lookups: true, location: property.location.strip.titleize)
     end
     rates_bill = RatesBill.find_by(property: property, rating_year: rating_year)
 

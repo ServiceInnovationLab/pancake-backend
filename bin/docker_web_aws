@@ -10,8 +10,8 @@ fi
 echo "Migrating and refreshing reference data"
 bundle exec rake db:migrate
 
-# bundle exec rake rates:kapiti
-# bundle exec rake rates:tauranga
+bundle exec rake rates:kapiti
+bundle exec rake rates:tauranga
 
 echo "Running the server..."
 rm -f tmp/pids/server.pid
