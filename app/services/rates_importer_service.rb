@@ -8,7 +8,6 @@ class RatesImporterService
   end
 
   def import(row, rating_year, council)
-    puts row
     valuation, _rating_year, location, suburb, town_city,
       total_rates, total_water_rates, _order, _council_owner_id,
       _surname, _first_names, _confidential, current_owner_start_date = row
@@ -22,19 +21,20 @@ class RatesImporterService
       property = Property.create!(
         council: council,
         valuation_id: valuation,
-        location: location,
+        location: ("#{location.gsub /"/, ''} " + "#{suburb} " + town_city.to_s).strip.titleize,
         suburb: suburb,
         town_city: town_city,
         rating_year: rating_year,
+        include_in_address_lookups: true,
         meta: row.to_s
       )
+    else property.update!(council: council, include_in_address_lookups: true, location: "#{location.gsub /"/, ''}".strip.titleize)
     end
-
     rates_bill = RatesBill.find_by(property: property, rating_year: rating_year)
-    if rates_bill.present?
-      raise 'mismatch total_rates' unless rates_bill.total_rates.to_f == total_rates.to_f + total_water_rates.to_f
-      raise 'mismatch current_owner_start_date' unless rates_bill.current_owner_start_date == current_owner_start_date
-    else
+
+    # future work is required to handle when rates change for a property
+    # this is complicated by the fact we use rates_bills[0] throughout the code 
+    unless rates_bill.present?
       RatesBill.create!(
         property: property,
         rating_year: rating_year,

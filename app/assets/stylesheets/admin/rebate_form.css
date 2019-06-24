@@ -75,11 +75,30 @@
   width: 1.75em;
 }
 
+.rebate-details-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  max-width: 1000px;
+  min-width: 500px;
+  width: 90vw;
+}
+
+.customer-details-header {
+  margin-top: 30px;
+}
+
+.rebate-details-title,
+.rebate-edit {
+  display: inline-block;
+}
+
 .rebate-edit {
   background-color: var(--blue);
   border-radius: .2em;
   color: var(--white);
-  float: right;
+  margin-bottom: 10px;
   width: 5em;
 }
 
@@ -138,6 +157,10 @@
   align-items: center
 }
 
+.council-row {
+  align-items: normal;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column
@@ -177,14 +200,24 @@
   margin-top: -5em;
 }
 
+.council-buttons {
+  margin-top: -10em;
+  min-width: 0;
+}
+
 .rebate-cancel-button {
   background-color: var(--white);
   border-radius: .2em;
   border: 1px solid var(--black);
   color: var(--black);
   margin: 0 1em 1.5em 5em;
-  /* margin: auto; */
   float: right;
+}
+
+.rebate-council-cancel-button {
+  float: none;
+  height: 39px;
+  margin: 0 1em 0 0;
 }
 
 .rebate-submit-button {
@@ -192,8 +225,11 @@
   border-radius: .2em;
   color: var(--white);
   margin-bottom: 1.5em;
-  /* margin: auto; */
   float: right;
+}
+
+.rebate-council-submit-button {
+  margin-top: 0 !important;
 }
 
 .rebate-add-income-button {

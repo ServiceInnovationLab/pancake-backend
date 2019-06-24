@@ -12,7 +12,7 @@ RSpec.describe Admin::SignedRebateFormsController, type: :controller do
 
     it 'assigns all signed rebate forms to @signed_rebate_forms' do
       get :index
-      expect(assigns(:signed_rebate_forms)).to eq signed_forms.to_json(include: [:property])
+      expect(assigns(:signed_rebate_forms)).to eq signed_forms
       expect(response.status).to eq(200)
     end
   end

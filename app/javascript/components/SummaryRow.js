@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function SummaryRow(rebateForm, key, checked, checkIt) {
-  const { property, fields, id } = rebateForm;
+  const { location, valuation_id, fields, id } = rebateForm;
   const { full_name } = fields;
 
   const isChecked = checked.indexOf(id) >= 0;
@@ -18,14 +18,22 @@ export function SummaryRow(rebateForm, key, checked, checkIt) {
       </td>
       }
       <td className='rebate-results-table-cell'>{fields.full_name}</td>
-      {checkIt && property.valuation_id &&
-        <td className='rebate-results-table-cell' id='valuation-id'>{property.valuation_id} </td>
+      {checkIt && valuation_id &&
+        <td className='rebate-results-table-cell' id='valuation-id'>{valuation_id} </td>
       }
-      {checkIt && !property.valuation_id &&
+      {checkIt && !valuation_id &&
         <td className='rebate-results-table-cell'></td>
       }
       {!checkIt &&
-        <td className='rebate-results-table-cell'>{property.location} <br/> {property.suburb} <br/>  {property.town_city}</td>
+        <td className='rebate-results-table-cell'>{location}</td>
+      }
+      {checkIt &&
+        <td className='rebate-results-table-cell' id='application-id'>
+          { rebateForm.application_id
+            ? rebateForm.application_id
+            : ''
+          }
+        </td>
       }
       <td className='rebate-results-table-cell'>
         <a onClick={() => {

@@ -19,6 +19,7 @@ class PropertiesController < ApiController
       Property.where('location ILIKE ?', "%#{params[:q]}%")
         .where(rating_year: Rails.configuration.rating_year)
         .where(council_id: params[:council_id])
+        .where(include_in_address_lookups: true)
     )
   end
 end

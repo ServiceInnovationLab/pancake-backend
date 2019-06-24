@@ -7,7 +7,7 @@ class Admin::BatchesController < Admin::BaseController
     @batches = policy_scope(Batch)
                .all
                .order(created_at: :desc)
-               .to_json(include: { rebate_forms: { include: :property } })
+               .to_json(include: [:rebate_forms])
   end
 
   def edit

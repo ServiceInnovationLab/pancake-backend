@@ -12,7 +12,7 @@ RSpec.describe Admin::ProcessedRebateFormsController, type: :controller do
 
     it 'assigns all processed rebate forms to @processed_rebate_forms' do
       get :index
-      expect(assigns(:processed_rebate_forms)).to eq processed_forms.to_json(include: [:property])
+      expect(assigns(:processed_rebate_forms).to_json).to eq processed_forms.to_json
       expect(response.status).to eq(200)
     end
   end
