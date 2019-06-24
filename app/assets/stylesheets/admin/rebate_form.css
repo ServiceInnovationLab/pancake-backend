@@ -76,7 +76,13 @@
 }
 
 .rebate-details-header {
-  margin: 0 200px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  max-width: 1000px;
+  min-width: 500px;
+  width: 90vw;
 }
 
 .customer-details-header {
