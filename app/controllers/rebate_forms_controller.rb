@@ -40,7 +40,7 @@ class RebateFormsController < ApiController
       .require(:data)
       .require(:attributes)
       .permit(:valuation_id,
-              :council_id,
+              :council,
               :location,
               :total_rates,
               fields: {},
