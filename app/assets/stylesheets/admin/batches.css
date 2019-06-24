@@ -66,7 +66,8 @@
 }
 
 .batches-header-sheet-download-button,
-.batches-applications-button {
+.batches-applications-button,
+.batches-applications-header {
   color: var(--blue);
   font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
   font-size: 18px;
@@ -91,9 +92,6 @@
 }
 
 .batches-applications-header {
-  color: var(--blue);
-  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
-  font-size: 18px;
   margin-left: 500px;
   position: absolute;
 }
