@@ -46,15 +46,15 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                 <div className='batches-accordion-header-row'>
                   {cover_sheet_attached
                     ? <a
-                        target='_blank'
-                        rel='noopener'
-                        href={download_link}
-                        id='header-sheet'
-                        className='batches-header-sheet-download-button'
-                        download>
-                        <img className='batches-download-icon' alt='blue download icon' src='/assets/blue-download.svg'/>
+                      target='_blank'
+                      rel='noopener'
+                      href={download_link}
+                      id='header-sheet'
+                      className='batches-header-sheet-download-button'
+                      download>
+                      <img className='batches-download-icon' alt='blue download icon' src='/assets/blue-download.svg'/>
                         HEADER SHEET
-                      </a>
+                    </a>
                     : <div className='batches-header-sheet-required'>Header sheet required</div>
                   }
                   {isDiaUser && <a
