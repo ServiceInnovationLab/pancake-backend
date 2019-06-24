@@ -13,7 +13,7 @@
         .field
           %h3 Phone
           %p
-            = rebate_form.fields['phone']
+            = rebate_form.fields['phone'] || rebate_form.fields['phone_number']
       .column
         .field
           %h3 Email
@@ -23,21 +23,22 @@
     .field
       %h3 Address
       %p
-        = rebate_form.property.valuation_id
+        = rebate_form.valuation_id
         %br/
-        = rebate_form.property.location
+        = rebate_form.location
         %br/
-        - unless rebate_form.property.suburb.to_s.include?('RT.VAL.AREAUNIT')
-          = rebate_form.property.suburb
-          %br/
-        = rebate_form.property.town_city
+        - if rebate_form.property.suburb
+          - unless rebate_form.property.suburb.to_s.include?('RT.VAL.AREAUNIT')
+            = rebate_form.property.suburb
+            %br/
+          = rebate_form.property.town_city
   %hr
   .questions
     .field
       %h3
         = "Did you live here on 1 July #{last_rating_year(rebate_form)}?"
       %p
-        = rebate_form_lived_year?(rebate_form)
+        = rebate_form_boolean_field_to_english(rebate_form.lived_here)
       - if moved_within_rating_year?(rebate_form)
         %h3 Previous Address
         %p
@@ -64,19 +65,18 @@
       - rebate_form.property.rates_bills.where(rating_year: rebate_form.property.rating_year).each do |bill|
         %p
           = number_to_currency bill.total_bill
-  .rebate-amount
-    .field
-      %h3 Rebate amount
-      %p
-        = rebate_form_amount(rebate_form)
+  / .rebate-amount
+  /   .field
+  /     %h3 Rebate amount
+  /     %p
+  /       = rebate_form_amount(rebate_form)
   %hr
   .declaration-and-signature
     .declaration
       %h3 Declaration
       %p
         I, #{rebate_form.fields['full_name']}, of
-        #{rebate_form.property.location},
-        #{rebate_form.property.town_city},
+        #{rebate_form.location},
         #{rebate_form.fields['occupation']},
         solemnly and sincerely declare that I believe the information given in my rates rebate application form is true and correct. I make this solemn declaration conscientiously believing the same to be true and by virtue of the Oaths and Declarations Act 1957.
     .applicant-signature
