@@ -16,7 +16,7 @@ class AddTotalRatesLocationToRebateForm < ActiveRecord::Migration[5.2]
     RebateForm.all.each do |rebate_form|
       property = rebate_form.property
       rebate_form.update(location: property.location,
-                         total_rates: property.rates_bills[0].total_rates,
+                         total_rates: property.rates_bills[0]&.total_rates,
                          valuation_id: rebate_form.fields['valuation_id'] || property.valuation_id || nil)
     end
   end
