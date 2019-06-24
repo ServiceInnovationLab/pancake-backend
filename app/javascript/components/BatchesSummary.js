@@ -52,7 +52,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                       id='header-sheet'
                       className='batches-header-sheet-download-button'
                       download>
-                      <img className='batches-download-icon' alt='blue download icon' src='/assets/blue-download.svg'/>
+                    <img className='batches-download-icon' alt='blue download icon' src='/assets/blue-download.svg'/>
                         HEADER SHEET
                     </a>
                     : <div className='batches-header-sheet-required'>Header sheet required</div>
