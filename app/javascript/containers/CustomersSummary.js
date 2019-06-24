@@ -28,7 +28,7 @@ class CustomersSummary extends React.Component {
       hasSearched: false,
       checked: [],
       batches: batches && JSON.parse(batches),
-      rebateForms: rebateForms && JSON.parse(rebateForms),
+      rebateForms: rebateForms,
       isDiaUser: !!find(current_user_roles, role => role.name === 'dia'),
       isCouncilUser: !!find(current_user_roles, role => role.name === 'rates' || role.name === 'frontline')
     };
@@ -78,7 +78,7 @@ class CustomersSummary extends React.Component {
         return response.json();
       })
       .then(data => {
-        this.setState({ rebateForms: JSON.parse(data.json), hasSearched: true, name });
+        this.setState({ rebateForms: data.json, hasSearched: true, name });
       })
       .catch(error => {
         console.error(error);

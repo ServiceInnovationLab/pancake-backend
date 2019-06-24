@@ -20,7 +20,7 @@ namespace :rates do
   end
 
   task kapiti: :environment do
-    council = Council.find_or_create_by(name: 'Kāpiti Coast District Council')
+    council = Council.find_or_create_by!(short_name: 'KCDC')
     rates_file = Rails.root.join('db', 'seeds', 'kapiti.csv')
 
     Property.transaction do

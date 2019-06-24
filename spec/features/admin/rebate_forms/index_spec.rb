@@ -8,19 +8,19 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     FactoryBot.create(:rebate_form, property: FactoryBot.create(:property, council: council))
   end
   let(:expected_name) { rebate_form.full_name }
-  let(:expected_location) { rebate_form.property.location }
+  let(:expected_location) { rebate_form.location }
 
   let!(:signed_form) do
     FactoryBot.create(:signed_form, property: FactoryBot.create(:property, council: council))
   end
   let(:signed_name) { signed_form.full_name }
-  let(:signed_location) { signed_form.property.location }
+  let(:signed_location) { signed_form.location }
 
   let!(:processed_form) do
     FactoryBot.create(:processed_form, property: FactoryBot.create(:property, council: council))
   end
   let(:processed_name) { processed_form.full_name }
-  let(:processed_valuation_id) { processed_form.property.valuation_id }
+  let(:processed_valuation_id) { processed_form.valuation_id }
 
   context 'anonymous' do
     it "can't see it" do

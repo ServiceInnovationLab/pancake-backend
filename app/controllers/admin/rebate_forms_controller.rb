@@ -24,7 +24,7 @@ class Admin::RebateFormsController < Admin::BaseController
     # filter by the search form fields
     @rebate_forms = @rebate_forms.where("fields ->> 'full_name' iLIKE ?", "%#{@name}%") if @name.present?
 
-    respond_with json: @rebate_forms.to_json(include: [:property])
+    respond_with json: @rebate_forms
   end
 
   # GET /admin/rebate_forms/1
@@ -45,7 +45,7 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # PATCH/PUT /admin/rebate_forms/1
   def update
-    @rebate_form = RebateFormsService.new(rebate_form_fields_params).update!
+    @rebate_form = RebateFormsUpdateService.new(rebate_form_fields_params).update!
     @rebate_form.update(updated_by: current_user.id)
     respond_with @rebate_form, location: admin_rebate_form_url(@rebate_form), notice: 'Rebate form was successfully updated.'
   end
@@ -68,7 +68,11 @@ class Admin::RebateFormsController < Admin::BaseController
   end
 
   def rebate_form_fields_params
-    params.permit(:id, :total_rates, :location, :council, fields: {})
+    params.permit(:id,
+                  :total_rates,
+                  :location,
+                  :council,
+                  fields: {})
   end
 
   def pdf_filename
