@@ -20,7 +20,7 @@ RSpec.describe RebateFormsMailer, type: :mailer do
       expect(text_body).to include "– 30 June #{rebate_form.rating_year} rates year"
       expect(text_body).to include "has been sent to the #{rebate_form.council.name}."
       expect(text_body).to include 'What you need to do now'
-      expect(text_body).to include "Go to the #{rebate_form.council.name}"
+      expect(text_body).to include "Before 31 July, go to the #{rebate_form.council.name}"
       expect(text_body).to include 'Tell the Service Centre staff you\'re there to sign your rates rebate application.'
       expect(text_body).to include 'Make sure you complete your application by getting your signature witnessed'
       expect(text_body).to include 'at the council offices as soon as you can.'
