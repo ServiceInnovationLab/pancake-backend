@@ -32,11 +32,9 @@ class RatesImporterService
     end
     rates_bill = RatesBill.find_by(property: property, rating_year: rating_year)
 
-    if rates_bill.present?
-      # current_rates = rates_bill.total_rates.to_f.round(2)
-      # new_rates = (total_rates.to_f + total_water_rates.to_f).round(2)
-      # raise 'mismatch total_rates' unless current_rates == new_rates
-    else
+    # future work is required to handle when rates change for a property
+    # this is complicated by the fact we use rates_bills[0] throughout the code 
+    unless rates_bill.present?
       RatesBill.create!(
         property: property,
         rating_year: rating_year,
