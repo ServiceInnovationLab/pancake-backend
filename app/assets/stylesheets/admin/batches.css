@@ -65,10 +65,20 @@
   padding: .5em 2em;
 }
 
-.batches-header-sheet-download-button {
+.batches-header-sheet-download-button,
+.batches-applications-button {
   color: var(--blue);
   font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
   font-size: 18px;
+}
+
+.batches-header-sheet-download-button {
+  margin-right: 64px;
+}
+
+.batches-header-sheet-required {
+  display: inline;
+  margin-right: 50px;
 }
 
 .batches-download-icon {

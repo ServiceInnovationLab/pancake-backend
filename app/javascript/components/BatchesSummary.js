@@ -55,17 +55,18 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                         <img className='batches-download-icon' alt='blue download icon' src='/assets/blue-download.svg'/>
                         HEADER SHEET
                       </a>
-                    : 'Header sheet required'
+                    : <div className='batches-header-sheet-required'>Header sheet required</div>
                   }
-                  {isDiaUser && <button
+                  {isDiaUser && <a
                     target='_blank'
                     rel='noopener'
-                    className='applications-button'
+                    className='batches-applications-button'
                     onClick={() => {
                       window.open(`/admin/batches/${id}.pdf`);
                     }}>
+                      <img className='batches-download-icon batch-download-icon' alt='blue download icon' src='/assets/blue-download.svg'/>
                       BATCH
-                  </button>}
+                  </a>}
                 </div>
                 <div className='batches-applications-header'>APPLICATIONS</div>
               </AccordionItemButton>
