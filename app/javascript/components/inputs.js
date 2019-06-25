@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Field } from 'react-final-form';
 import { map } from 'lodash';
 
@@ -49,23 +49,28 @@ export function RadioInput({ id, label, type, isReadOnly, withMargin, values }) 
     : 'flex-item with-margin';
   return (
     <div key={id} className={className}>
-      <label>{label}</label>
-      <div className="flex-row rebate-radio-buttons radio" >
-        {map([['Yes', 'yes'], ['No', 'no']], ([label, value]) =>
-          <label key={`${id}-${value}`} >
-            <Field
-              name={`fields.${id}`}
-              className='radio-inline'
-              component="input"
-              type={type}
-              value={value}
-              disabled={isReadOnly && values.fields[id] != value}
-            />{' '}
-            {label}
-          </label>
-        )}
-        <Error name={`fields.${id}`} />
-      </div>
+      {!(id === 'moved_within_rating_year' &&
+      values.fields.lived_in_property_1_July === 'yes') &&
+      <Fragment>
+        <label>{label}</label>
+        <div className="flex-row rebate-radio-buttons radio" >
+          {map([['Yes', 'yes'], ['No', 'no']], ([label, value]) =>
+            <label key={`${id}-${value}`} >
+              <Field
+                name={`fields.${id}`}
+                className='radio-inline'
+                component="input"
+                type={type}
+                value={value}
+                disabled={isReadOnly && values.fields[id] != value}
+              />{' '}
+              {label}
+            </label>
+          )}
+          <Error name={`fields.${id}`} />
+        </div>
+      </Fragment>
+      }
     </div>
   );
 }
