@@ -1,0 +1,20 @@
+.field
+  %h3 Did you move to this property during this rating year?
+  %p
+    = rebate_form_boolean_field_to_english(rebate_form.fields['moved_within_rating_year'])
+.field
+  %h3 What is the address of your previous property?
+  %p
+    = rebate_form.fields['previous_address']
+.field
+  %h3 What was the settlement date of the home you sold?
+  %p
+    = rebate_form.fields['settlement_date'].to_date.strftime("%d/%m/%Y")
+.field
+  %h3 This rating year, how much did you pay in rates for the home you sold?
+  %p
+    = rebate_form.fields['rates_paid']
+.field
+  %h3 This rating year, did you get a rates rebate for the home you sold?
+  %p
+    = rebate_form.fields['rates_rebate_received']

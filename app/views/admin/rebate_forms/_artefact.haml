@@ -40,9 +40,7 @@
       %p
         = rebate_form_boolean_field_to_english(rebate_form.lived_here)
       - if moved_within_rating_year?(rebate_form)
-        %h3 Previous Address
-        %p
-          = rebate_form.fields['details_of_previous_property']
+        = render 'admin/rebate_forms/moved_within_rating_year', rebate_form: rebate_form
     .field
       %h3 Is the property mostly used for business?
       %p
