@@ -42,6 +42,10 @@
       - if moved_within_rating_year?(rebate_form)
         = render 'admin/rebate_forms/moved_within_rating_year', rebate_form: rebate_form
     .field
+      %h3 Do you run a business or earn money from home?
+      %p
+        = rebate_form_pdf_home_business(rebate_form).capitalize
+    .field
       %h3 Is the property mostly used for business?
       %p
         = rebate_form_pdf_home_business(rebate_form).capitalize

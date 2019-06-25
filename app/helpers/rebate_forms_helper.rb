@@ -21,7 +21,7 @@ module RebateFormsHelper
   end
 
   def moved_within_rating_year?(rebate_form)
-    rebate_form.fields['moved_within_rating_year'] == 'yes' || true
+    rebate_form.fields['moved_within_rating_year'] == 'yes' || rebate_form.fields['moved_within_rating_year'] == true
   end
 
   def rebate_form_year_header(rebate_form)
