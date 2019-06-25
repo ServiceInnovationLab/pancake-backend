@@ -11,9 +11,7 @@ class RebateFormsService
   def create!
     council = find_council!
     property = find_or_create_property!(council)
-    rebate_form = create_rebate_form!(property)
-
-    rebate_form
+    create_rebate_form!(property)
   end
 
   private
