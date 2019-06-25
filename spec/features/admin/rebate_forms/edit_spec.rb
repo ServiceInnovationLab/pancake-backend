@@ -28,6 +28,22 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       end
     end
 
+    describe 'condtional render of fields' do
+      it 'can hide moved within rating year and previous year information' do
+        visit "/admin/rebate_forms/#{rebate_form.id}/edit"
+        expect(page).to have_text('Customer details')
+        expect(page).to have_text('Name')
+        choose('fields.lived_in_property_1_July', option: 'yes')
+        expect(page).to_not have_text('Moved within rating year')
+        choose('fields.lived_in_property_1_July', option: 'no')
+        expect(page).to have_text('Moved within rating year')
+        choose('fields.moved_within_rating_year', option: 'no')
+        expect(page).not_to have_text('Settlement date')
+        choose('fields.moved_within_rating_year', option: 'yes')
+        expect(page).to have_text('Settlement date')
+      end
+    end
+
     describe '#cancel' do
       it 'can see the CANCEL button' do
         visit "admin/rebate_forms/#{rebate_form.id}/edit"
