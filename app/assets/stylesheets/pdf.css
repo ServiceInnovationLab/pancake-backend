@@ -16,11 +16,6 @@
   --light-red: #f0d5d8;
 }
 
-.page-break {
-  page-break-after: always;
-  page-break-inside: avoid;
-}
-
 @media print {
   body {
     -webkit-print-color-adjust: exact !important;
