@@ -4,11 +4,11 @@ import { map, uniq, indexOf } from 'lodash';
 import { Form, Field } from 'react-final-form';
 import 'isomorphic-fetch';
 
-import { conditionalsFields, customerDetailFields } from '../helpers/data';
+import { conditionalsFields, customerDetailFields, incomeLessThan5kField } from '../helpers/data';
 import { requestBuilder } from '../helpers/requestBuilder';
 import { calculator } from '../helpers/decorators';
 
-import { SingleInput, RadioInput } from '../components/inputs';
+import { SingleInput, RadioInput, TextArea } from '../components/inputs';
 import { IncomeDeclaration } from '../components/IncomeDeclaration';
 import { parseFromAPI, prepareForAPI } from '../helpers/formatRebateForm';
 
@@ -80,9 +80,11 @@ class EditRebateForm extends React.Component {
         }) => {
           const {
             fields:
-            { spouse_or_partner,
+            { incomeLessThan5k,
               lived_in_property_1_July,
-              moved_within_rating_year
+              spouse_or_partner,
+              moved_within_rating_year,
+              income: {total_income}
             },
             newIncomeField
           } = values;
@@ -90,6 +92,7 @@ class EditRebateForm extends React.Component {
           const includePartnerValues = spouse_or_partner == 'yes';
           const renderConditionals = lived_in_property_1_July == 'no' &&
           moved_within_rating_year == 'yes';
+          const showIncomeLessThan5k = incomeLessThan5k || total_income < 5000;
           return (
             <div>
               <form
@@ -149,6 +152,7 @@ class EditRebateForm extends React.Component {
                     </div>
                   </Fragment>
                   }
+                  {showIncomeLessThan5k && TextArea({...incomeLessThan5kField, isReadOnly})}
                 </div>
               </form>
             </div>

@@ -75,6 +75,23 @@ export function RadioInput({ id, label, type, isReadOnly, withMargin, values }) 
   );
 }
 
+export function TextArea ({ isReadOnly, id, label}) {
+  return (
+    <Field
+      name={`fields.${id}`}
+      readOnly={isReadOnly}
+      render={({ input, meta }) => (
+        <div>
+          <br></br>
+          <label><h3>{label}</h3></label>
+          <textarea {...input} className={'full-width'} />
+          {meta.touched && meta.error && <span>{meta.error}</span>}
+        </div>
+      )}
+    />
+  );
+}
+
 const Error = ({ name }) => (
   <Field name={name} subscription={{ error: true, touched: true }}>
     {({ meta: { error, touched } }) =>
