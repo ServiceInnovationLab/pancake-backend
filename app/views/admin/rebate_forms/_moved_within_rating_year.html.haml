@@ -13,8 +13,8 @@
 .field
   %h3 This rating year, how much did you pay in rates for the home you sold?
   %p
-    = rebate_form.fields['rates_paid']
+    = number_to_currency(rebate_form.fields['rates_paid'])
 .field
   %h3 This rating year, did you get a rates rebate for the home you sold?
   %p
-    = rebate_form.fields['rates_rebate_received']
+    = rebate_form_boolean_field_to_english(rebate_form.fields['rates_rebate_received'])
