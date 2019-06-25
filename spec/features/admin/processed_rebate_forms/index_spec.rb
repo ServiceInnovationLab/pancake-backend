@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'ProcessedRebateForms', type: :feature, js: true do
   let(:council) { FactoryBot.create :council, name: 'Tauranga' }
-  let(:property) { FactoryBot.create(:property, council: council) }
+  let(:property) { FactoryBot.create(:property_with_rates, council: council) }
   let!(:processed_forms) { FactoryBot.create_list(:processed_form, 3, property: property) }
 
   context 'anonymous' do
