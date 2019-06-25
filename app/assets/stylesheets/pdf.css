@@ -1,8 +1,24 @@
+/*Colours*/
+:root {
+  --dove: #ebebeb;
+  --gray: #ababab;
+  --dark-gray: #4c4c4c;
+  --dark-gray-hover: #3d3d3d;
+  --orange: #d34322;
+  --orange-hover: #b73a1e;
+  --blue: #336699;
+  --blue-hover: #1a4d80;
+  --purple: #993366;
+  --purple-hover: #6a2347;
+  --white: #ffffff;
+  --black: #000000;
+  --alert-red: #b10d1e;
+  --light-red: #f0d5d8;
+}
+
 .page-break {
   page-break-after: always;
   page-break-inside: avoid;
-  /*overflow: hidden;*/
-
 }
 
 @media print {
@@ -10,21 +26,10 @@
     -webkit-print-color-adjust: exact !important;
     overflow: visible;
   }
-  .batch {
-    /*border: 10px solid #b10d1e;*/
-  }
 
   .batch-container {
-    /*background-color: #336699;*/
     font-size: 16px;
     width: 100%;
-  }
-
-  .batches-heading {
-
-  }
-
-  .heading h3 {
   }
 }
 
@@ -35,37 +40,26 @@ body {
 .batch {
   display: flex;
   flex-direction: column;
-  float: none;
 }
 
 .batch-container {
-  float: none;
   margin: 20px;
 }
 
-.rebate_container {
-  float: none;
-}
-
-.border {
-  border: 1px solid #b10d1e;
-}
-
 .rebate-container-secondary {
-  float: none;
   margin: 20px;
   position: relative;
 }
 
 .heading {
-  background-color: #000000;
+  background-color: var(--black);
   display: inline-block;
-  height: 100px;
+  height: 70px;
   width: 100%;
 }
 
 .heading h3 {
-  color: #ffffff;
+  color: var(--white);
   font-size: 25px;
   line-height: 1em;
   padding: 20px;
