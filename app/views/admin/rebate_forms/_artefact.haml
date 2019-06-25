@@ -65,11 +65,6 @@
       - rebate_form.property.rates_bills.where(rating_year: rebate_form.property.rating_year).each do |bill|
         %p
           = number_to_currency bill.total_bill
-  / .rebate-amount
-  /   .field
-  /     %h3 Rebate amount
-  /     %p
-  /       = rebate_form_amount(rebate_form)
   %hr
   .declaration-and-signature
     .declaration

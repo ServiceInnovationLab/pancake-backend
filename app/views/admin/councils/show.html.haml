@@ -30,14 +30,3 @@
 
 
 %hr/
-
-.pure-g
-  .pure-u-1-3
-    = line_chart [{name: "Witnessed", data: Signature.by_council(@council).witness.group_by_day("signatures.created_at").count},
-      {name: 'Applied', data: RebateForm.group_by_day(:created_at).count}]
-
-  .pure-u-1-3
-    = column_chart RebateForm.joins(:property).by_council(@council).group_by_hour_of_day(:created_at, format: "%H %P", time_zone: 'Pacific/Auckland').count, title: 'Applications by Hour of day'
-
-  .pure-u-1-3
-    = column_chart Signature.by_council(@council).witness.group_by_hour_of_day("signatures.created_at", format: "%H %P", time_zone: 'Pacific/Auckland').count, title: 'Witnessing by Hour of day'

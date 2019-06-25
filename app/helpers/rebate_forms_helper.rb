@@ -16,9 +16,9 @@ module RebateFormsHelper
     "$#{format('%.2f', rebate_form.rebate)}"
   end
 
-  # def rebate_form_lived_year?(rebate_form)
-  #   rebate_form.lived_here.to_s.capitalize if rebate_form.lived_here.present?
-  # end
+  def rebate_form_lived_year?(rebate_form)
+    rebate_form.lived_here.to_s.capitalize if rebate_form.lived_here.present?
+  end
 
   def moved_within_rating_year?(rebate_form)
     rebate_form.fields['moved_within_rating_year'] == 'yes'
