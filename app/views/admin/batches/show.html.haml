@@ -1,10 +1,11 @@
-%header.main-header
-  .container
-    %p.heading
+.batch
+  .heading
+    %h3
       = rebate_form_year_header(@batch.rebate_forms.first)
       Applications
 
-    = image_tag wicked_pdf_asset_base64('print-logo-black.png'), class: 'pdf-image'
+  .batch-container
+    = image_tag 'print-logo-black.png', class: 'pdf-image'
 
     .batches-heading
       %h1 Batch details
@@ -21,12 +22,9 @@
         %h3 Applications in this batch
         %p
           = @batch.rebate_forms.count
-      %div
-        %h3 Total claimed rebates
-        %p
-          = "$#{@batch.amount}"
       %hr
 
 
   - @batch.rebate_forms.each do |rebate_form|
-    .pdf-page-break= render 'admin/rebate_forms/artefact', rebate_form: rebate_form
+    .rebate-container
+      = render 'admin/rebate_forms/artefact', rebate_form: rebate_form

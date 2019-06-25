@@ -1,51 +1,69 @@
-@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+/*Colours*/
+:root {
+  --dove: #ebebeb;
+  --gray: #ababab;
+  --dark-gray: #4c4c4c;
+  --dark-gray-hover: #3d3d3d;
+  --orange: #d34322;
+  --orange-hover: #b73a1e;
+  --blue: #336699;
+  --blue-hover: #1a4d80;
+  --purple: #993366;
+  --purple-hover: #6a2347;
+  --white: #ffffff;
+  --black: #000000;
+  --alert-red: #b10d1e;
+  --light-red: #f0d5d8;
+}
 
-.pdf-page-break {
-  page-break-before: always;
+@media print {
+  body {
+    -webkit-print-color-adjust: exact !important;
+    overflow: visible;
+  }
+
+  .batch-container {
+    font-size: 16px;
+    width: 100%;
+  }
 }
 
 body {
   margin: 0;
 }
 
-.container {
-  margin: 66px 60px 0;
-  font-family: "Fira Sans", sans-serif;
-  font-size: 16px;
-  color: #000000;
+.batch {
+  display: flex;
+  flex-direction: column;
 }
 
-.border {
-  border: 1px solid #b10d1e;
+.batch-container {
+  margin: 20px;
 }
 
-.container-secondary {
-  margin: 30px 60px 0;
+.rebate-container-secondary {
+  margin: 20px;
   position: relative;
-}
-
-.main-header {
-  background-color: #000000;
-  position: relative;
-  height: 100px;
 }
 
 .heading {
-  font-family: "Fira Bold", sans-serif;
+  background-color: var(--black);
+  display: inline-block;
+  height: 70px;
+  width: 100%;
+}
+
+.heading h3 {
+  color: var(--white);
   font-size: 25px;
   line-height: 1em;
-  display: inline-block;
-  margin-top: 40px;
-  top: 65px;
-  color: #ffffff;
+  padding: 20px;
 }
 
 .pdf-image {
-  position: absolute;
-  top: 150px;
-  right: 540px;
-  width: 400px;
-  height: 70px;
+  display: inline-block;
+  padding: 20px 0;
+  width: 35%;
 }
 
 .applicant-info,
@@ -54,26 +72,22 @@ body {
 }
 
 .address-info {
-  float: right;
-  margin-right: 150px;
+  margin-left: 150px;
 }
 
-.column {
-  display: inline-block;
-  margin-right: 50px;
-}
-
-.row {
-  margin-left: 0;
+.questions,
+.income {
+  margin-top: 20px;
 }
 
 .phone-email {
-  margin: 30px 0;
+  margin: 30px 0 10px;
 }
 
 .rebate-amount,
 .rates-amount {
   display: inline-block;
+  font-size: 16px;
 }
 
 .rebate-amount {
@@ -108,6 +122,10 @@ body {
 .witness-signature {
   float: right;
   margin-right: 110px;
+}
+
+hr {
+  margin: 20px 0;
 }
 
 h3,
@@ -164,15 +182,6 @@ table h3 {
 
 .table-col p {
   font-size: 19px;
-}
-
-hr {
-  margin: 20px 0;
-}
-
-.batches-heading {
-  position: relative;
-  top: 200px;
 }
 
 .batches-heading p {

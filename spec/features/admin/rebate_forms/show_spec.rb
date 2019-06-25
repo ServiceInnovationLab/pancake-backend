@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'RebateForm', type: :feature, js: true do
-  let!(:rebate_form) { FactoryBot.create :rebate_form }
+  let(:property) { FactoryBot.create(:property_with_rates) }
+  let!(:rebate_form) { FactoryBot.create(:rebate_form, property: property) }
 
   it "Anonymous can't see it" do
     visit "/admin/rebate_forms/#{rebate_form.id}"
@@ -131,7 +132,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         end
 
         describe 'when a rebate form is processed' do
-          let!(:processed_rebate_form) { FactoryBot.create(:processed_form) }
+          let!(:processed_rebate_form) { FactoryBot.create(:processed_form, property: property) }
           before { visit "/admin/rebate_forms/#{processed_rebate_form.id}" }
 
           it 'cannot be edited' do
@@ -152,7 +153,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         end
 
         describe 'when a rebate form is batched' do
-          let!(:batched_rebate_form) { FactoryBot.create(:batched_form) }
+          let!(:batched_rebate_form) { FactoryBot.create(:batched_form, property: property) }
           before { visit "/admin/rebate_forms/#{batched_rebate_form.id}" }
 
           it 'cannot be edited' do

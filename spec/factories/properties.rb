@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :property do
-    valuation_id { Faker::Vehicle.vin }
+    valuation_id { Faker::Alphanumeric.alphanumeric 10 }
     location { Faker::Address.street_address }
     suburb { Faker::Address.community }
     town_city { Faker::Address.city }

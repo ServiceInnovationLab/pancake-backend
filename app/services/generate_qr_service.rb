@@ -35,7 +35,7 @@ class GenerateQrService
     {
       name: current_user.name || '',
       location: current_user&.council&.name,
-      occupation: 'authorised council officer'
+      occupation: 'Authorised Council Officer'
     }
   end
 

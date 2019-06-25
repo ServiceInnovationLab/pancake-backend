@@ -52,4 +52,8 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.active_storage.service = :amazon
+
+  config.time_zone = 'Wellington'
+
+  config.active_record.default_timezone = :local
 end

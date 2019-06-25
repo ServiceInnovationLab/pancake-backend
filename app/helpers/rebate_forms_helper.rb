@@ -9,7 +9,7 @@ module RebateFormsHelper
   end
 
   def rebate_form_pdf_home_business(rebate_form)
-    rebate_form.fields['has_home_business'] == 'yes' ? 'yes' : 'no'
+    rebate_form.fields['50%_claimed_expenses'] == 'yes' ? 'yes' : 'no'
   end
 
   def rebate_form_amount(rebate_form)
@@ -17,11 +17,7 @@ module RebateFormsHelper
   end
 
   def rebate_form_lived_year?(rebate_form)
-    if rebate_form.lived_here.present?
-      rebate_form.lived_here.to_s.capitalize
-    else
-      'No answer'
-    end
+    rebate_form.lived_here.to_s.capitalize if rebate_form.lived_here.present?
   end
 
   def moved_within_rating_year?(rebate_form)
@@ -45,8 +41,6 @@ module RebateFormsHelper
       'Yes'
     elsif answer == false || answer.to_s.casecmp('no').zero?
       'No'
-    elsif answer == '' || answer.nil?
-      'No answer'
     else
       answer.to_s.capitalize
     end
