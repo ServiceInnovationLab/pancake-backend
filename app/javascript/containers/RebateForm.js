@@ -78,7 +78,18 @@ class EditRebateForm extends React.Component {
           handleSubmit,
           values,
         }) => {
-          const includePartnerValues = values.fields.spouse_or_partner == 'yes';
+          const {
+            fields:
+            { spouse_or_partner,
+              lived_in_property_1_July,
+              moved_within_rating_year
+            },
+            newIncomeField
+          } = values;
+
+          const includePartnerValues = spouse_or_partner == 'yes';
+          const renderConditionals = lived_in_property_1_July == 'no' &&
+          moved_within_rating_year == 'yes';
           return (
             <div>
               <form
@@ -107,7 +118,7 @@ class EditRebateForm extends React.Component {
                         : SingleInput({...field, isReadOnly});
                     })}
                   </div>
-                  { values.fields.moved_within_rating_year == 'yes' &&
+                  {  renderConditionals &&
                   <div className="flex-row">
                     {map(conditionalsFields, (field, index) => {
                       if (indexOf([2, 4, 5], index) >= 0) field.withMargin = true;
@@ -129,7 +140,7 @@ class EditRebateForm extends React.Component {
                       />
                       <button
                         className='one-third rebate-add-income-button'
-                        disabled={isReadOnly || !values.newIncomeField}
+                        disabled={isReadOnly || !newIncomeField}
                         type="button"
                         onClick={() => this.addNewIncomeValue(values)}
                       >
