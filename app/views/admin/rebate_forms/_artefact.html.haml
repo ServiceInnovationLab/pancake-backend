@@ -4,34 +4,45 @@
     Application form
 
 .rebate-container-secondary
-  .applicant-info
-    .field
-      %h3 Application for
-      = rebate_form.fields['full_name']
-    .row.phone-email
-      .column
-        .field
-          %h3 Phone
-          %p
-            = rebate_form.fields['phone'] || rebate_form.fields['phone_number']
-      .column
-        .field
-          %h3 Email
-          %p
-            = rebate_form.fields['email']
-  .address-info
-    .field
-      %h3 Address
-      %p
-        = rebate_form.valuation_id
-        %br/
-        = rebate_form.location
-        %br/
-        - if rebate_form.property.suburb
-          - unless rebate_form.property.suburb.to_s.include?('RT.VAL.AREAUNIT')
-            = rebate_form.property.suburb
-            %br/
-          = rebate_form.property.town_city
+  .personal-details
+    .applicant-info
+      .field
+        %h3 Application for
+        = rebate_form.fields['full_name']
+      .field
+        %h3 Phone
+        %p
+          = rebate_form.fields['phone'] || rebate_form.fields['phone_number']
+      .field
+        %h3 Email
+        %p
+          = rebate_form.fields['email']
+      - if rebate_form.application_id || rebate_form.customer_id
+        - if rebate_form.application_id
+          .field
+            %h3 Application ID
+            %p
+              = rebate_form.application_id
+        - if rebate_form.customer_id
+          .field
+            %h3 Customer ID
+            %p
+              = rebate_form.customer_id
+    .address-info
+      .field
+        %h3 Address
+        %p
+          = rebate_form.location
+          %br/
+          - if rebate_form.property.suburb
+            - unless rebate_form.property.suburb.to_s.include?('RT.VAL.AREAUNIT')
+              = rebate_form.property.suburb
+              %br/
+            = rebate_form.property.town_city
+      .field
+        %h3 Valuation ID
+        %p
+          = rebate_form.valuation_id
   %hr
   .questions
     .field
@@ -40,9 +51,11 @@
       %p
         = rebate_form_boolean_field_to_english(rebate_form.lived_here)
       - if moved_within_rating_year?(rebate_form)
-        %h3 Previous Address
-        %p
-          = rebate_form.fields['details_of_previous_property']
+        = render 'admin/rebate_forms/moved_within_rating_year', rebate_form: rebate_form
+    .field
+      %h3 Do you run a business or earn money from home?
+      %p
+        = rebate_form_pdf_home_business(rebate_form).capitalize
     .field
       %h3 Is the property mostly used for business?
       %p
