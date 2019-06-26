@@ -64,9 +64,11 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           it 'goes to the right place' do
             visit "/admin/rebate_forms/#{rebate_form.id}"
             expect(page).to have_field('fields.full_name', with: rebate_form.full_name)
-            rebate_form.update!(fields: { 'full_name': 'bob the builder' })
+            updated_attributes = rebate_form.attributes.merge(
+              'fields' => { 'full_name': 'bob the builder' }
+            )
+            RebateFormsUpdateService.new(updated_attributes).update!
             click_link('reload')
-            byebug
             expect(page).to have_field('fields.full_name', with: 'bob the builder')
           end
         end
