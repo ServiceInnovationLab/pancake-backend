@@ -28,10 +28,10 @@ RSpec.describe 'Batch', type: :feature do
       expect(page).not_to have_text('EDIT')
     end
 
-    context 'when there is a cover sheet' do
+    context 'when there is a header sheet' do
       before do
-        batched_form.batch.update!(cover_sheet_attached: true)
-        batch_other_council.update!(cover_sheet_attached: true)
+        batched_form.batch.update!(header_sheet_attached: true)
+        batch_other_council.update!(header_sheet_attached: true)
       end
 
       it 'updates the display accordingly' do
@@ -64,9 +64,9 @@ RSpec.describe 'Batch', type: :feature do
       expect(page).to have_text('EDIT')
     end
 
-    context 'when there is a cover sheet' do
+    context 'when there is a header sheet' do
       before do
-        batched_form.batch.update!(cover_sheet_attached: true)
+        batched_form.batch.update!(header_sheet_attached: true)
       end
 
       it 'updates the display accordingly' do
