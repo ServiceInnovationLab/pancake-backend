@@ -4,8 +4,8 @@
     - if current_user.council.present?
       for #{current_user.council.name}
 
-  .pure-g
-    .pure-u-3-5
+  %div
+    %div
       = link_to new_user_invitation_path, class: 'pure-button users-button' do
         = fa_icon 'plus'
         Invite new users

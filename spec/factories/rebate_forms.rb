@@ -29,18 +29,49 @@ FactoryBot.define do
           }
         },
         email: 'hermione.granger@hogwarts.com',
-        has_partner: true,
+        spouse_or_partner: true,
         occupation: 'witch',
         fifty_percent_claimed: true,
         moved_within_rating_year: false,
         lived_in_property_july_1: true,
-        details_of_previous_property: '123 Muggle Lane, Hogsmead, England',
-        income_less_than_5k: ''
-      }
+        income_less_than_5k: '' }
     end
     status { RebateForm::NOT_SIGNED_STATUS }
     rebate { 555.12 }
     batch { nil }
+
+    trait :moved_within_rating_year do
+      fields do
+        { full_name: Faker::Name.name,
+          dependants: 0,
+          customer_id: 123,
+          phone_number: '0212345678',
+          income: {
+            total_income: 224,
+            applicant: {
+              wages_salary: 74
+            },
+            otherIncome: {
+              applicant: {
+                'Selling old toys': 70
+              }
+            },
+            partner: {
+              wages_salary: '80'
+            }
+          },
+          email: 'hermione.granger@hogwarts.com',
+          spouse_or_partner: true,
+          occupation: 'witch',
+          fifty_percent_claimed: true,
+          moved_within_rating_year: true,
+          lived_in_property_july_1: false,
+          previous_address: '123 Muggle Lane, Hogsmead, England',
+          settlement_date: 1.month.ago,
+          rates_paid: 1234,
+          rates_rebate_received: false }
+      end
+    end
   end
 
   factory :signed_form, parent: :rebate_form do
