@@ -20,7 +20,7 @@ RSpec.describe 'Batch', type: :feature, js: true do
 
       it 'can attach a cover sheet' do
         visit "/admin/batches/#{batched_form.batch_id}/edit"
-        expect(page).to have_text('Cover sheet')
+        expect(page).to have_text('Header sheet')
         expect(batched_form.batch.erms_cover_sheet_attached?).to eq false
         attach_file('batch_cover_sheet', Rails.root + 'spec/support/files/print-logo-black.png')
         click_button 'Save'
