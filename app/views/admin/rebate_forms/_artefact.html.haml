@@ -72,7 +72,7 @@
   %hr
   = render 'admin/rebate_forms/rates_and_income', rebate_form: rebate_form
   %hr
-  - if rebate_form.fields['income_less_than_5k'] && !rebate_form.fields['income_less_than_5k'].blank?
+  - if rebate_form.fields['income_less_than_5k'] && rebate_form.fields['income_less_than_5k'].present?
     .field
       %h3 How did you support yourself on less than $5,000?
       %p
