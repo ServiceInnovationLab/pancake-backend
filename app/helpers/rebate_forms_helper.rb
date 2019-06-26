@@ -29,7 +29,7 @@ module RebateFormsHelper
   end
 
   def rebate_form_has_partner(rebate_form)
-    rebate_form_boolean_field_to_english rebate_form.fields['has_partner']
+    rebate_form_boolean_field_to_english rebate_form.fields['spouse_or_partner']
   end
 
   def last_rating_year(rebate_form)

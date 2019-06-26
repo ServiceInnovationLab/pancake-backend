@@ -29,7 +29,7 @@ FactoryBot.define do
           }
         },
         email: 'hermione.granger@hogwarts.com',
-        has_partner: true,
+        spouse_or_partner: true,
         occupation: 'witch',
         fifty_percent_claimed: true,
         moved_within_rating_year: false,
@@ -61,7 +61,7 @@ FactoryBot.define do
             }
           },
           email: 'hermione.granger@hogwarts.com',
-          has_partner: true,
+          spouse_or_partner: true,
           occupation: 'witch',
           fifty_percent_claimed: true,
           moved_within_rating_year: true,
