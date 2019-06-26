@@ -16,13 +16,6 @@
   --light-red: #f0d5d8;
 }
 
-.page-break {
-  page-break-after: always;
-  height: 0;
-  display: block;
-  clear: both;
-}
-
 @media print {
   body {
     -webkit-print-color-adjust: exact !important;
@@ -30,7 +23,9 @@
   }
 
   .batch-container {
-    border: 5px solid var(--red);
+    font-size: 16px;
+    width: 100%;
+    break-after: page;
   }
 }
 
