@@ -75,6 +75,10 @@ body {
   width: 35%;
 }
 
+.personal-details {
+  display: flex;
+}
+
 .applicant-info,
 .address-info {
   display: inline-block;
