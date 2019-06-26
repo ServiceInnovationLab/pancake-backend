@@ -16,6 +16,13 @@
   --light-red: #f0d5d8;
 }
 
+.page-break {
+  page-break-after: always;
+  height: 0;
+  display: block;
+  clear: both;
+}
+
 @media print {
   body {
     -webkit-print-color-adjust: exact !important;
@@ -23,8 +30,7 @@
   }
 
   .batch-container {
-    font-size: 16px;
-    width: 100%;
+    border: 5px solid var(--red);
   }
 }
 
@@ -32,13 +38,12 @@ body {
   margin: 0;
 }
 
-.batch {
-  display: flex;
-  flex-direction: column;
-}
-
 .batch-container {
   margin: 20px;
+}
+
+.rebate-container {
+  margin-top: 50px;
 }
 
 .rebate-container-secondary {
