@@ -27,6 +27,15 @@
     width: 100%;
     break-after: page;
   }
+
+  .rebate-container {
+    break-after: page;
+  }
+
+  .applicant-signature,
+  .witness-signature {
+    margin-left: 0;
+  }
 }
 
 body {
@@ -101,7 +110,7 @@ body {
 
 .declaration,
 .witness-details {
-  width: 60%;
+  width: 50%;
 }
 
 .declaration,
@@ -109,19 +118,14 @@ body {
   display: inline-block;
 }
 
-.applicant-signature {
-  float: right;
-  margin-right: 110px;
+.applicant-signature,
+.witness-signature {
+  margin-left: 110px;
 }
 
 .witness-details,
 .witness-signature {
   display: inline-block;
-}
-
-.witness-signature {
-  float: right;
-  margin-right: 110px;
 }
 
 hr {
