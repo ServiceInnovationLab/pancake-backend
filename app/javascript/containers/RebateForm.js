@@ -4,7 +4,7 @@ import { map, uniq, indexOf } from 'lodash';
 import { Form, Field } from 'react-final-form';
 import 'isomorphic-fetch';
 
-import { conditionalsFields, customerDetailFields, incomeLessThan5kField } from '../helpers/data';
+import { conditionalsFields, customerDetailFields, income_less_than_5kField } from '../helpers/data';
 import { requestBuilder } from '../helpers/requestBuilder';
 import { calculator } from '../helpers/decorators';
 
@@ -80,7 +80,7 @@ class EditRebateForm extends React.Component {
         }) => {
           const {
             fields:
-            { incomeLessThan5k,
+            { income_less_than_5k,
               lived_in_property_1_July,
               spouse_or_partner,
               moved_within_rating_year,
@@ -92,7 +92,7 @@ class EditRebateForm extends React.Component {
           const includePartnerValues = spouse_or_partner == 'yes';
           const renderConditionals = lived_in_property_1_July == 'no' &&
           moved_within_rating_year == 'yes';
-          const showIncomeLessThan5k = incomeLessThan5k || total_income < 5000;
+          const showIncomeLessThan5k = income_less_than_5k || total_income < 5000;
           return (
             <div>
               <form
@@ -152,7 +152,7 @@ class EditRebateForm extends React.Component {
                     </div>
                   </Fragment>
                   }
-                  {showIncomeLessThan5k && TextArea({...incomeLessThan5kField, isReadOnly})}
+                  {showIncomeLessThan5k && TextArea({...income_less_than_5kField, isReadOnly})}
                 </div>
               </form>
             </div>

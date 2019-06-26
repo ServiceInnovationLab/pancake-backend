@@ -46,10 +46,10 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       it 'only show income less than 5k if total is less or a previous value existed' do
         visit "/admin/rebate_forms/#{rebate_form.id}/edit"
         expect(page).to have_text('How did you support yourself on less than $5000?')
-        fill_in('fields.incomeLessThan5k', with: 'I found a pot of gold', fill_options: { clear: :backspace })
+        fill_in('fields.income_less_than_5k', with: 'I found a pot of gold', fill_options: { clear: :backspace })
         fill_in('fields.income.applicant.wages_salary', with: '5000', fill_options: { clear: :backspace })
         expect(page).to have_text('How did you support yourself on less than $5000?')
-        fill_in('fields.incomeLessThan5k', with: '', fill_options: { clear: :backspace })
+        fill_in('fields.income_less_than_5k', with: '', fill_options: { clear: :backspace })
         expect(page).not_to have_text('How did you support yourself on less than $5000?')
       end
     end

@@ -121,7 +121,7 @@ export const customerDetailFields = [
   }
 ];
 
-export const incomeLessThan5kField  = {
-  id: 'incomeLessThan5k',
+export const income_less_than_5kField  = {
+  id: 'income_less_than_5k',
   label: 'How did you support yourself on less than $5000?'
 };

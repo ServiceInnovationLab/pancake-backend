@@ -35,7 +35,7 @@ FactoryBot.define do
         moved_within_rating_year: false,
         lived_in_property_july_1: true,
         details_of_previous_property: '123 Muggle Lane, Hogsmead, England',
-        incomeLessThan5k: ''
+        income_less_than_5k: ''
       }
     end
     status { RebateForm::NOT_SIGNED_STATUS }
