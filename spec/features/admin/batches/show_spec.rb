@@ -24,19 +24,33 @@ RSpec.describe 'Batch', type: :feature, js: true do
         expect(page).to have_content(batched_form.fields['occupation'])
         expect(page).to have_content(batched_form.council.name)
         expect(page).to have_content(batched_form.signatures.witness.last.name)
+        expect(page).to have_content('Customer ID')
+        expect(page).to have_content(batched_form.customer_id)
+        expect(page).to have_content('Application ID')
+        expect(page).to have_content(batched_form.application_id)
         expect(page).to_not have_content('What is the address of your previous property?')
         expect(page).to_not have_content('What was the settlement date of the home you sold?')
       end
     end
 
     context 'when there are conditional fields' do
-      let!(:batched_form) { FactoryBot.create(:batched_form, :moved_within_rating_year, property: property) }
+      let!(:batched_form) do
+        FactoryBot.create(:batched_form,
+                          :moved_within_rating_year,
+                          property: property,
+                          customer_id: nil,
+                          application_id: nil)
+      end
 
       it 'displays the extra questions and answers' do
         visit "/admin/batches/#{batched_form.batch_id}"
         expect(page).to have_content('What is the address of your previous property?')
         expect(page).to have_content('What was the settlement date of the home you sold?')
         expect(page).to have_content(batched_form.fields['previous_address'])
+        expect(page).to_not have_content('Customer ID')
+        expect(batched_form.customer_id).to eq nil
+        expect(page).to_not have_content('Application ID')
+        expect(batched_form.application_id).to eq nil
       end
     end
   end
