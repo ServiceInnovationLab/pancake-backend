@@ -83,7 +83,7 @@ export function TextArea ({ isReadOnly, id, label}) {
       render={({ input, meta }) => (
         <div>
           <br></br>
-          <label><h3>{label}</h3></label>
+          <label for={id}><h3>{label}</h3></label>
           <textarea {...input} className={'full-width'} />
           {meta.touched && meta.error && <span>{meta.error}</span>}
         </div>
