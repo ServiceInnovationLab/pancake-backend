@@ -25,6 +25,16 @@
   .batch-container {
     font-size: 16px;
     width: 100%;
+    break-after: page;
+  }
+
+  .rebate-container {
+    break-after: page;
+  }
+
+  .applicant-signature,
+  .witness-signature {
+    margin-left: 0;
   }
 }
 
@@ -32,13 +42,12 @@ body {
   margin: 0;
 }
 
-.batch {
-  display: flex;
-  flex-direction: column;
-}
-
 .batch-container {
   margin: 20px;
+}
+
+.rebate-container {
+  margin-top: 50px;
 }
 
 .rebate-container-secondary {
@@ -66,6 +75,10 @@ body {
   width: 35%;
 }
 
+.personal-details {
+  display: flex;
+}
+
 .applicant-info,
 .address-info {
   display: inline-block;
@@ -78,11 +91,7 @@ body {
 .questions,
 .income {
   margin-top: 20px;
-}
-
-.phone-email {
-  margin: 30px 0 10px;
-}
+}`
 
 .rebate-amount,
 .rates-amount {
@@ -101,7 +110,7 @@ body {
 
 .declaration,
 .witness-details {
-  width: 60%;
+  width: 50%;
 }
 
 .declaration,
@@ -109,19 +118,14 @@ body {
   display: inline-block;
 }
 
-.applicant-signature {
-  float: right;
-  margin-right: 110px;
+.applicant-signature,
+.witness-signature {
+  margin-left: 110px;
 }
 
 .witness-details,
 .witness-signature {
   display: inline-block;
-}
-
-.witness-signature {
-  float: right;
-  margin-right: 110px;
 }
 
 hr {

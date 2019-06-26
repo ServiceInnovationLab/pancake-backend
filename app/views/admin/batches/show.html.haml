@@ -24,7 +24,6 @@
           = @batch.rebate_forms.count
       %hr
 
-
   - @batch.rebate_forms.each do |rebate_form|
     .rebate-container
       = render 'admin/rebate_forms/artefact', rebate_form: rebate_form
