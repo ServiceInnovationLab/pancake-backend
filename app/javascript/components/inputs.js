@@ -10,7 +10,7 @@ export function SingleInput({ isReadOnly, id, label, placeholder, fullWidth, wit
       : 'flex-item with-margin';
   return (
     <div key={id} className={className}>
-      <label>{label}</label>
+      <label htmlFor={id}>{label}</label>
       <Field
         className='rebate-search-input'
         name={`fields.${id}`}
@@ -52,10 +52,10 @@ export function RadioInput({ id, label, type, isReadOnly, withMargin, values }) 
       {!(id === 'moved_within_rating_year' &&
       values.fields.lived_in_property_1_July === 'yes') &&
       <Fragment>
-        <label>{label}</label>
+        <label htmlFor={id}>{label}</label>
         <div className="flex-row rebate-radio-buttons radio" >
           {map([['Yes', 'yes'], ['No', 'no']], ([label, value]) =>
-            <label key={`${id}-${value}`} >
+            <label htmlFor={`${id}-${value}`} key={`${id}-${value}`} >
               <Field
                 name={`fields.${id}`}
                 className='radio-inline'
@@ -83,7 +83,7 @@ export function TextArea ({ isReadOnly, id, label}) {
       render={({ input, meta }) => (
         <div>
           <br></br>
-          <label for={id}><h3>{label}</h3></label>
+          <label htmlFor={id}><h3>{label}</h3></label>
           <textarea {...input} className={'full-width'} />
           {meta.touched && meta.error && <span>{meta.error}</span>}
         </div>
