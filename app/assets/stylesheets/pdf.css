@@ -37,6 +37,10 @@ body {
   margin: 20px;
 }
 
+.rebate-container {
+  margin-top: 50px;
+}
+
 .rebate-container-secondary {
   margin: 20px;
   position: relative;
