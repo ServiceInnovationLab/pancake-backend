@@ -179,8 +179,8 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
 
           it { expect(page).to have_link 'DONE' }
 
-          xit 'displays the qr code' do
-            expect(page).to have_css('rebate-qrcode')
+          it 'displays the qr code' do
+            expect(page).to have_css('img.rebate-qrcode')
           end
           include_examples 'percy snapshot'
           after { Timecop.return }
