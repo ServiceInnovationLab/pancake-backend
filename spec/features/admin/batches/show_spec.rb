@@ -30,27 +30,55 @@ RSpec.describe 'Batch', type: :feature, js: true do
         expect(page).to have_content(batched_form.application_id)
         expect(page).to_not have_content('What is the address of your previous property?')
         expect(page).to_not have_content('What was the settlement date of the home you sold?')
+        expect(page).to_not have_content('How did you support yourself on less than $5,000?')
       end
     end
 
     context 'when there are conditional fields' do
-      let!(:batched_form) do
-        FactoryBot.create(:batched_form,
-                          :moved_within_rating_year,
-                          property: property,
-                          customer_id: nil,
-                          application_id: nil)
+      context 'moved within rating year' do
+        let!(:batched_form) do
+          FactoryBot.create(:batched_form,
+                            :moved_within_rating_year,
+                            property: property)
+        end
+
+        it 'displays the extra questions and answers' do
+          visit "/admin/batches/#{batched_form.batch_id}"
+          expect(page).to have_content('What is the address of your previous property?')
+          expect(page).to have_content('What was the settlement date of the home you sold?')
+          expect(page).to have_content(batched_form.fields['previous_address'])
+        end
       end
 
-      it 'displays the extra questions and answers' do
-        visit "/admin/batches/#{batched_form.batch_id}"
-        expect(page).to have_content('What is the address of your previous property?')
-        expect(page).to have_content('What was the settlement date of the home you sold?')
-        expect(page).to have_content(batched_form.fields['previous_address'])
-        expect(page).to_not have_content('Customer ID')
-        expect(batched_form.customer_id).to eq nil
-        expect(page).to_not have_content('Application ID')
-        expect(batched_form.application_id).to eq nil
+      context 'no customer or application id' do
+        let!(:batched_form) do
+          FactoryBot.create(:batched_form,
+                            property: property,
+                            customer_id: nil,
+                            application_id: nil)
+        end
+
+        it 'does not display them' do
+          visit "/admin/batches/#{batched_form.batch_id}"
+          expect(page).to_not have_content('Customer ID')
+          expect(batched_form.customer_id).to eq nil
+          expect(page).to_not have_content('Application ID')
+          expect(batched_form.application_id).to eq nil
+        end
+      end
+
+      context 'income less than $5k' do
+        let!(:batched_form) do
+          FactoryBot.create(:batched_form,
+                            :income_less_than_5k,
+                            property: property)
+        end
+
+        it 'displays the extra question and answer' do
+          visit "/admin/batches/#{batched_form.batch_id}"
+          expect(page).to have_content('How did you support yourself on less than $5,000?')
+          expect(page).to have_content(batched_form.fields['income_less_than_5k'])
+        end
       end
     end
   end
