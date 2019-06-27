@@ -28,7 +28,7 @@ class RatesImporterService
         include_in_address_lookups: true,
         meta: row.to_s
       )
-    else property.update!(council: council, include_in_address_lookups: true, location: "#{location.gsub /"/, ''}".strip.titleize)
+    else property.update!(council: council, include_in_address_lookups: true, location: ("#{location.gsub /"/, ''} " + "#{suburb} " + town_city.to_s).strip.titleize)
     end
     rates_bill = RatesBill.find_by(property: property, rating_year: rating_year)
 
