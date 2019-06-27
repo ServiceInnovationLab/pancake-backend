@@ -33,8 +33,7 @@ FactoryBot.define do
         occupation: 'witch',
         fifty_percent_claimed: true,
         moved_within_rating_year: false,
-        lived_in_property_july_1: true,
-        income_less_than_5k: '' }
+        lived_in_property_july_1: true }
     end
     status { RebateForm::NOT_SIGNED_STATUS }
     rebate { 555.12 }
@@ -70,6 +69,36 @@ FactoryBot.define do
           settlement_date: 1.month.ago,
           rates_paid: 1234,
           rates_rebate_received: false }
+      end
+    end
+
+    trait :income_less_than_5k do
+      fields do
+        { full_name: Faker::Name.name,
+          dependants: 0,
+          customer_id: 123,
+          phone_number: '0212345678',
+          income: {
+            total_income: 224,
+            applicant: {
+              wages_salary: 74
+            },
+            otherIncome: {
+              applicant: {
+                'Selling old toys': 70
+              }
+            },
+            partner: {
+              wages_salary: '80'
+            }
+          },
+          email: 'hermione.granger@hogwarts.com',
+          spouse_or_partner: true,
+          occupation: 'witch',
+          fifty_percent_claimed: true,
+          moved_within_rating_year: false,
+          lived_in_property_july_1: true,
+          income_less_than_5k: 'We were given a money tree for Witchmas.' }
       end
     end
   end
