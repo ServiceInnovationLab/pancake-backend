@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Batch', type: :feature do
-  let(:property) { FactoryBot.create :property }
+  let(:property) { FactoryBot.create :property_with_rates }
   let!(:batch_other_council) { FactoryBot.create :batch }
   let!(:batched_form) { FactoryBot.create :batched_form, property: property }
 

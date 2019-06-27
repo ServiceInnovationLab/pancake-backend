@@ -14,19 +14,19 @@ RSpec.describe Admin::CouncilsHelper, type: :helper do
   before do
     # uncompleted
     10.times do
-      property = FactoryBot.create(:property, council: council)
+      property = FactoryBot.create(:property_with_rates, council: council)
       FactoryBot.create(:rebate_form, rebate: 100, property: property, valuation_id: property.valuation_id)
     end
 
     # completed
     10.times do
-      property = FactoryBot.create(:property, council: council)
+      property = FactoryBot.create(:property_with_rates, council: council)
       FactoryBot.create(:signed_form, rebate: 100, property: property, valuation_id: property.valuation_id)
     end
 
     # in a batch
     10.times do
-      property = FactoryBot.create(:property, council: council)
+      property = FactoryBot.create(:property_with_rates, council: council)
       form = FactoryBot.create(:signed_form, rebate: 100, property: property, valuation_id: property.valuation_id)
       form.update(batch: batch)
     end

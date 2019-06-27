@@ -2,16 +2,18 @@
 
 FactoryBot.define do
   factory :rebate_form do
-    valuation_id { Faker::Alphanumeric.alphanumeric 10 }
     customer_id { Faker::Alphanumeric.alphanumeric 10 }
     application_id { Faker::Alphanumeric.alphanumeric 10 }
-    property { Property.find_by(valuation_id: valuation_id, rating_year: ENV['YEAR']) }
+    property { FactoryBot.create(:property_with_rates, rating_year: ENV['YEAR']) }
+    location { property.location }
+    valuation_id { property.valuation_id }
+    total_rates { property.rates_bills.first.total_rates }
     # token <-- auto generated. Don't set in factory
     fields do
       { full_name: Faker::Name.name,
         dependants: 0,
         customer_id: 123,
-        phone: '0212345678',
+        phone_number: '0212345678',
         income: {
           total_income: 224,
           applicant: {
@@ -27,22 +29,76 @@ FactoryBot.define do
           }
         },
         email: 'hermione.granger@hogwarts.com',
-        has_partner: true,
+        spouse_or_partner: true,
         occupation: 'witch',
         fifty_percent_claimed: true,
         moved_within_rating_year: false,
-        lived_in_property_july_1: true,
-        details_of_previous_property: '123 Muggle Lane, Hogsmead, England' }
+        lived_in_property_july_1: true }
     end
     status { RebateForm::NOT_SIGNED_STATUS }
     rebate { 555.12 }
     batch { nil }
 
-    before(:create) do |rebate_form|
-      unless Property.find_by(valuation_id: rebate_form.valuation_id, rating_year: ENV['YEAR'])
-        FactoryBot.create(:property_with_rates,
-                          rating_year: ENV['YEAR'],
-                          valuation_id: rebate_form.valuation_id)
+    trait :moved_within_rating_year do
+      fields do
+        { full_name: Faker::Name.name,
+          dependants: 0,
+          customer_id: 123,
+          phone_number: '0212345678',
+          income: {
+            total_income: 224,
+            applicant: {
+              wages_salary: 74
+            },
+            otherIncome: {
+              applicant: {
+                'Selling old toys': 70
+              }
+            },
+            partner: {
+              wages_salary: '80'
+            }
+          },
+          email: 'hermione.granger@hogwarts.com',
+          spouse_or_partner: true,
+          occupation: 'witch',
+          fifty_percent_claimed: true,
+          moved_within_rating_year: true,
+          lived_in_property_july_1: false,
+          previous_address: '123 Muggle Lane, Hogsmead, England',
+          settlement_date: 1.month.ago,
+          rates_paid: 1234,
+          rates_rebate_received: false }
+      end
+    end
+
+    trait :income_less_than_5k do
+      fields do
+        { full_name: Faker::Name.name,
+          dependants: 0,
+          customer_id: 123,
+          phone_number: '0212345678',
+          income: {
+            total_income: 224,
+            applicant: {
+              wages_salary: 74
+            },
+            otherIncome: {
+              applicant: {
+                'Selling old toys': 70
+              }
+            },
+            partner: {
+              wages_salary: '80'
+            }
+          },
+          email: 'hermione.granger@hogwarts.com',
+          spouse_or_partner: true,
+          occupation: 'witch',
+          fifty_percent_claimed: true,
+          moved_within_rating_year: false,
+          lived_in_property_july_1: true,
+          income_less_than_5k: 'We were given a money tree for Witchmas.' }
       end
     end
   end

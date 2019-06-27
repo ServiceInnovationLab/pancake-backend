@@ -127,6 +127,17 @@ input:read-only {
   background: var(--dove);
 }
 
+textarea:-moz-read-only {
+  border-style: none;
+  cursor: default;
+  background: var(--dove);
+} /* For Firefox */
+
+textarea:read-only {
+  border-style: none;
+  cursor: default;
+  background: var(--dove);
+}
 .content {
   padding: 2em 1em 0;
 }

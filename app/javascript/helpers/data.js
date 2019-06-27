@@ -120,3 +120,8 @@ export const customerDetailFields = [
     type: 'radio'
   }
 ];
+
+export const income_less_than_5kField  = {
+  id: 'income_less_than_5k',
+  label: 'How did you support yourself on less than $5000?'
+};

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Property', type: :feature do
   let!(:council) { FactoryBot.create :council }
-  let!(:property) { FactoryBot.create :property, council: council }
+  let!(:property) { FactoryBot.create :property_with_rates, council: council }
 
   context 'anonymous' do
     it "can't see it" do

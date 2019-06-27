@@ -62,7 +62,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                     rel='noopener'
                     className='batches-applications-button'
                     onClick={() => {
-                      window.open(`/admin/batches/${id}.pdf`);
+                      window.open(`/admin/batches/${id}`);
                     }}>
                     <img className='batches-download-icon batch-download-icon' alt='blue download icon' src='/assets/blue-download.svg'/>
                       BATCH

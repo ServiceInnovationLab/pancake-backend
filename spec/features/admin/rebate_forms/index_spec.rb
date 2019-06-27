@@ -5,19 +5,19 @@ require 'rails_helper'
 RSpec.describe 'RebateForm', type: :feature, js: true do
   let(:council) { FactoryBot.create :council, name: 'Tauranga' }
   let!(:rebate_form) do
-    FactoryBot.create(:rebate_form, property: FactoryBot.create(:property, council: council))
+    FactoryBot.create(:rebate_form, property: FactoryBot.create(:property_with_rates, council: council))
   end
   let(:expected_name) { rebate_form.full_name }
   let(:expected_location) { rebate_form.location }
 
   let!(:signed_form) do
-    FactoryBot.create(:signed_form, property: FactoryBot.create(:property, council: council))
+    FactoryBot.create(:signed_form, property: FactoryBot.create(:property_with_rates, council: council))
   end
   let(:signed_name) { signed_form.full_name }
   let(:signed_location) { signed_form.location }
 
   let!(:processed_form) do
-    FactoryBot.create(:processed_form, property: FactoryBot.create(:property, council: council))
+    FactoryBot.create(:processed_form, property: FactoryBot.create(:property_with_rates, council: council))
   end
   let(:processed_name) { processed_form.full_name }
   let(:processed_valuation_id) { processed_form.valuation_id }
@@ -34,7 +34,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
   shared_examples 'rebate_forms' do
     before do
       # Set up some data. 33 properties in Tauranga with data
-      FactoryBot.create_list(:property, 33, council: council).each do |property|
+      FactoryBot.create_list(:property_with_rates, 33, council: council).each do |property|
         FactoryBot.create(:rebate_form, property: property)
       end
       login_as(user, scope: :user)

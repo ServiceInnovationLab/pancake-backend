@@ -4,11 +4,11 @@ import { map, uniq, indexOf } from 'lodash';
 import { Form, Field } from 'react-final-form';
 import 'isomorphic-fetch';
 
-import { conditionalsFields, customerDetailFields } from '../helpers/data';
+import { conditionalsFields, customerDetailFields, income_less_than_5kField } from '../helpers/data';
 import { requestBuilder } from '../helpers/requestBuilder';
 import { calculator } from '../helpers/decorators';
 
-import { SingleInput, RadioInput } from '../components/inputs';
+import { SingleInput, RadioInput, TextArea } from '../components/inputs';
 import { IncomeDeclaration } from '../components/IncomeDeclaration';
 import { parseFromAPI, prepareForAPI } from '../helpers/formatRebateForm';
 
@@ -78,7 +78,23 @@ class EditRebateForm extends React.Component {
           handleSubmit,
           values,
         }) => {
-          const includePartnerValues = values.fields.spouse_or_partner == 'yes';
+          const {
+            fields:
+            { income_less_than_5k,
+              lived_in_property_1_July,
+              spouse_or_partner,
+              moved_within_rating_year,
+              income: {total_income}
+            },
+            newIncomeField
+          } = values;
+
+          const includePartnerValues = spouse_or_partner == 'yes';
+          const renderConditionals = lived_in_property_1_July == 'no' &&
+          moved_within_rating_year == 'yes';
+          const showIncomeLessThan5k = isReadOnly
+            ? income_less_than_5k 
+            : income_less_than_5k || total_income < 5000;
           return (
             <div>
               <form
@@ -107,7 +123,7 @@ class EditRebateForm extends React.Component {
                         : SingleInput({...field, isReadOnly});
                     })}
                   </div>
-                  { values.fields.moved_within_rating_year == 'yes' &&
+                  {  renderConditionals &&
                   <div className="flex-row">
                     {map(conditionalsFields, (field, index) => {
                       if (indexOf([2, 4, 5], index) >= 0) field.withMargin = true;
@@ -129,7 +145,7 @@ class EditRebateForm extends React.Component {
                       />
                       <button
                         className='one-third rebate-add-income-button'
-                        disabled={isReadOnly || !values.newIncomeField}
+                        disabled={isReadOnly || !newIncomeField}
                         type="button"
                         onClick={() => this.addNewIncomeValue(values)}
                       >
@@ -138,6 +154,7 @@ class EditRebateForm extends React.Component {
                     </div>
                   </Fragment>
                   }
+                  {showIncomeLessThan5k && TextArea({...income_less_than_5kField, isReadOnly})}
                 </div>
               </form>
             </div>

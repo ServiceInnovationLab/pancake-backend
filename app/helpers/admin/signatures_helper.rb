@@ -10,6 +10,9 @@ module Admin::SignaturesHelper
   end
 
   def signature_for_pdf(signature, type)
-    image_tag "data:image/png;base64,#{signature.image}", class: type
+    image = "data:image/png;base64,#{signature.image}" unless signature.image.to_s.start_with?('data:image/png;base64')
+    image = signature.image.to_s if signature.image.to_s.start_with?('data:image/png;base64')
+
+    image_tag image, class: type
   end
 end
