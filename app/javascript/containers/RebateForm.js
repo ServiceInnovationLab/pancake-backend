@@ -92,7 +92,9 @@ class EditRebateForm extends React.Component {
           const includePartnerValues = spouse_or_partner == 'yes';
           const renderConditionals = lived_in_property_1_July == 'no' &&
           moved_within_rating_year == 'yes';
-          const showIncomeLessThan5k = income_less_than_5k || total_income < 5000;
+          const showIncomeLessThan5k = isReadOnly
+            ? income_less_than_5k 
+            : income_less_than_5k || total_income < 5000;
           return (
             <div>
               <form
