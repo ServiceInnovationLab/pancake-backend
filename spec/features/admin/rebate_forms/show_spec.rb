@@ -46,7 +46,6 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           expect(page).to have_field('fields.full_name', with: rebate_form.full_name)
           expect(page).to have_field('fields.email', with: rebate_form.email)
           expect(page).to have_field('fields.occupation', with: rebate_form.occupation)
-          expect(page).to have_field('fields.income_less_than_5k', with: rebate_form.fields['income_less_than_5k'])
         end
         include_examples 'percy snapshot'
 
@@ -123,7 +122,6 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           it { expect(page).to have_field('fields.full_name', with: rebate_form.full_name) }
           it { expect(page).to have_field('fields.email', with: rebate_form.email) }
           it { expect(page).to have_field('fields.occupation', with: rebate_form.occupation) }
-          it { expect(page).to have_field('fields.income_less_than_5k', with: rebate_form.fields['income_less_than_5k']) }
         end
 
         describe 'can process an application' do
