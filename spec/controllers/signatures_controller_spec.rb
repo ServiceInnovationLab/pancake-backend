@@ -38,5 +38,7 @@ RSpec.describe SignaturesController, type: :controller do
 
     it { expect(subject.first['attributes']['name']).to eq 'brenda' }
     it { expect(subject.first['attributes']['role']).to eq 'pancake eater' }
+    it { expect(Signature.first.name).to eq 'brenda' }
+    it { expect(Signature.first.role).to eq 'pancake eater' }
   end
 end
