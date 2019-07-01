@@ -72,15 +72,15 @@ RSpec.describe 'User', type: :feature, js: true do
     end
   end
 
-    context 'cannot edit' do
-      let(:user) { FactoryBot.create :council_user }
-      before do
-        login_as(user, scope: :user)
-        visit "/admin/users/#{user.id}/edit"
-      end
-      describe 'cannot modify the fields for the selected user' do
-        it { expect(page).to have_text('You are not authorized to perform this action.') }
-        it { expect(page).to have_text('Forbidden') }
+  context 'cannot edit' do
+    let(:user) { FactoryBot.create :council_user }
+    before do
+      login_as(user, scope: :user)
+      visit "/admin/users/#{user.id}/edit"
+    end
+    describe 'cannot modify the fields for the selected user' do
+      it { expect(page).to have_text('You are not authorized to perform this action.') }
+      it { expect(page).to have_text('Forbidden') }
     end
   end
 end
