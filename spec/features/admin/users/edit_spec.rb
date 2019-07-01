@@ -56,18 +56,17 @@ RSpec.describe 'User', type: :feature, js: true do
       it { expect(page).to have_button('Save') }
       it { expect(page).to have_link('Back') }
     end
+
     describe 'saving' do
-      it do
+      before do
         fill_in 'Name', with: 'User 1'
         click_button 'Save'
-        expect(page).to have_text('User was updated.')
       end
+      it { expect(page).to have_text('User was updated.') }
     end
     describe 'editing' do
       # This blocks exists mostly to make the percy snapshot happen
-      it do
-        fill_in 'Name', with: 'User 1'
-      end
+      before { fill_in 'Name', with: 'User 1' }
       include_examples 'percy snapshot'
     end
   end
