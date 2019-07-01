@@ -34,13 +34,13 @@ class RatesImporterService
 
     # future work is required to handle when rates change for a property
     # this is complicated by the fact we use rates_bills[0] throughout the code
-    if rates_bill.blank?
-      RatesBill.create!(
-        property: property,
-        rating_year: rating_year,
-        total_rates: total_rates.to_f + total_water_rates.to_f,
-        current_owner_start_date: current_owner_start_date
-      )
-    end
+    return if rates_bill.present?
+
+    RatesBill.create!(
+      property: property,
+      rating_year: rating_year,
+      total_rates: total_rates.to_f + total_water_rates.to_f,
+      current_owner_start_date: current_owner_start_date
+    )
   end
 end
