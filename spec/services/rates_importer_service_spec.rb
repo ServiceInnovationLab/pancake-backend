@@ -4,8 +4,12 @@ require 'rails_helper'
 
 RSpec.describe RatesImporterService do
   let!(:existing_property) { FactoryBot.create(:property_with_rates) }
-  let(:tauranga_2018_row) { ['06601*004*01*', '2018', '6/51 CLIFF ROAD', 'TAURANGA CENTRAL', 'TAURANGA', '3100', '355.32', '1', nil, nil, nil, nil, nil] }
-  let(:kapiti_2018_row) { ['1486100100', '2018', '"83 Reay MacKay Grove, Waikawa Beach"', nil, nil, '5120.81'] }
+  let(:tauranga_2018_row) do
+    ['06601*004*01*', '2018', '6/51 CLIFF ROAD', 'TAURANGA CENTRAL', 'TAURANGA', '3100', '355.32', '1', nil, nil, nil, nil, nil]
+  end
+  let(:kapiti_2018_row) do
+    ['1486100100', '2018', '"83 Reay MacKay Grove, Waikawa Beach"', nil, nil, '5120.81']
+  end
   let!(:council) { FactoryBot.create(:council) }
   let!(:rating_year) { '2018' }
 
