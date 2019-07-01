@@ -51,6 +51,7 @@ AllCops:
     - '**/config.ru'
     - '**/*.rake'
     - 'Gemfile'
+    - '**/*.rb'
   Exclude:
     # exclude files in /vendor because some CI systems put gems in here e.g.
     # TravisCI
