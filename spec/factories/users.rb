@@ -11,6 +11,7 @@ FactoryBot.define do
   end
   factory :council_user, parent: :user do
     roles { [Role.find_or_create_by(name: 'rates', friendly_name: 'very cool')] }
+    council { FactoryBot.create :council }
   end
   factory :admin_user, parent: :user do
     roles { [Role.find_or_create_by(name: 'dia', friendly_name: 'Te Tari Taiwhenua')] }
