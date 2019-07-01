@@ -17,6 +17,6 @@ export function ErrorMessage(name) {
           Search on all customers by leaving the field blank
         </li>
       </ul>
-    </div> 
+    </div>
   );
 }
