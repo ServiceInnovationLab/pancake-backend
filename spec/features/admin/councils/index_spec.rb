@@ -9,7 +9,7 @@ RSpec.describe 'Council', type: :feature, js: true do
   context 'anonymous' do
     it "can't see it" do
       visit '/admin/councils'
-      expect(page).to have_text('Rates Rebate 2018/2019')
+      expect(page).to have_text('Rates Rebate - The Future and Beyond')
       expect(page).to have_text('Log in')
     end
   end
