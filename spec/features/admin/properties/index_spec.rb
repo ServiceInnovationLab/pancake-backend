@@ -9,7 +9,7 @@ RSpec.describe 'Property', type: :feature do
   context 'anonymous' do
     it "can't see it" do
       visit "/admin/councils/#{council.id}/properties"
-      expect(page).to have_text('Rates Rebate 2018/2019')
+      expect(page).to have_text('Rates Rebate - The Future and Beyond')
       expect(page).to have_text('Log in')
     end
   end
