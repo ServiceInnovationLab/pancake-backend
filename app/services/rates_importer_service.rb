@@ -33,8 +33,8 @@ class RatesImporterService
     rates_bill = RatesBill.find_by(property: property, rating_year: rating_year)
 
     # future work is required to handle when rates change for a property
-    # this is complicated by the fact we use rates_bills[0] throughout the code 
-    unless rates_bill.present?
+    # this is complicated by the fact we use rates_bills[0] throughout the code
+    if rates_bill.blank?
       RatesBill.create!(
         property: property,
         rating_year: rating_year,
