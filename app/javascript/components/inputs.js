@@ -75,7 +75,7 @@ export function RadioInput({ id, label, type, isReadOnly, withMargin, values }) 
   );
 }
 
-export function TextArea ({ isReadOnly, id, label}) {
+export function TextArea({ isReadOnly, id, label }) {
   return (
     <Field
       name={`fields.${id}`}
