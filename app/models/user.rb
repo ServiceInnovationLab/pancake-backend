@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :roles
 
-  belongs_to :council, required: false
+  belongs_to :council, optional: true
 
   def dia?
     roles.include?(dia_role)
