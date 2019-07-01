@@ -13,8 +13,8 @@ RSpec.describe 'User', type: :feature, js: true do
 
   context 'can edit' do
     let!(:admin_user) { FactoryBot.create :admin_user, name: 'AdminAdmin', email: 'User1@dia.govt.nz' }
-    let!(:user1) { FactoryBot.create :council_user }
-    let!(:user2) { FactoryBot.create :council_user }
+    let!(:user1) { FactoryBot.create :council_user, name: 'First user' }
+    let!(:user2) { FactoryBot.create :council_user, name: 'Second user' }
 
     before do
       login_as(admin_user, scope: :user)
@@ -31,11 +31,11 @@ RSpec.describe 'User', type: :feature, js: true do
 
       it { expect(page).to have_text(user1.name) }
       it { expect(page).to have_text(user1.email) }
-      it { expect(page).to have_text(user1.council) }
+      it { expect(page).to have_text(user1.council.name) }
 
       it { expect(page).to have_text(user2.name) }
       it { expect(page).to have_text(user2.email) }
-      it { expect(page).to have_text(user2.council) }
+      it { expect(page).to have_text(user2.council.name) }
     end
 
     describe 'deactivating user' do
