@@ -53,13 +53,13 @@ class Admin::BatchesController < Admin::BaseController
   private
 
   def update_batch(batch)
-    batch.cover_sheet.attach(batch_cover_sheet_param) unless batch_cover_sheet_param.nil?
+    batch.header_sheet.attach(batch_header_sheet_param) unless batch_header_sheet_param.nil?
     batch.update!(name: batch_name_param) unless batch_name_param.nil?
-    batch.update!(cover_sheet_attached: true, download_link: cover_sheet_url(batch)) if batch.erms_cover_sheet_attached?
+    batch.update!(header_sheet_attached: true, download_link: header_sheet_url(batch)) if batch.erms_header_sheet_attached?
   end
 
-  def cover_sheet_url(batch)
-    rails_blob_path(batch.cover_sheet, disposition: 'attachment')
+  def header_sheet_url(batch)
+    rails_blob_path(batch.header_sheet, disposition: 'attachment')
   end
 
   def batch_name_param
@@ -68,10 +68,10 @@ class Admin::BatchesController < Admin::BaseController
     params.require(:batch).require(:name).strip
   end
 
-  def batch_cover_sheet_param
-    return nil unless params[:batch][:cover_sheet]
+  def batch_header_sheet_param
+    return nil unless params[:batch][:header_sheet]
 
-    params.require(:batch).require(:cover_sheet)
+    params.require(:batch).require(:header_sheet)
   end
 
   def find_council(rebate_forms)

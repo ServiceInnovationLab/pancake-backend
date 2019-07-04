@@ -23,7 +23,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
           name,
           created_at,
           rebate_forms,
-          cover_sheet_attached,
+          header_sheet_attached,
           download_link,
           id
         } = batch;
@@ -44,7 +44,7 @@ export function BatchesSummary(batches, isDiaUser, isCouncilUser) {
                 <div className='batches-accordion-header-row'>{dateFns.format(created_at, 'DD MMM YYYY')} | {rebate_forms.length} Applications</div>
                 <br/>
                 <div className='batches-accordion-header-row'>
-                  {cover_sheet_attached
+                  {header_sheet_attached
                     ? <a
                       target='_blank'
                       rel='noopener'

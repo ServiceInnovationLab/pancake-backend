@@ -5,10 +5,10 @@ class Batch < ApplicationRecord
   belongs_to :council, optional: false
   after_create :add_temp_name
 
-  has_one_attached :cover_sheet
+  has_one_attached :header_sheet
 
-  def erms_cover_sheet_attached?
-    cover_sheet.attached?
+  def erms_header_sheet_attached?
+    header_sheet.attached?
   end
 
   private
