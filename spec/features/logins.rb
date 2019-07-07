@@ -6,7 +6,7 @@ RSpec.describe 'Logging in', type: :feature do
   context 'anonymous' do
     it "can't see it" do
       visit '/admin'
-      expect(page).to have_text('Rates Rebate - The Future and Beyond')
+      expect(page).to have_text('Rates Rebate')
       expect(page).to have_text('Log in')
       expect(page).not_to have_text('Log out')
     end
