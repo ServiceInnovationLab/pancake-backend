@@ -18,6 +18,8 @@
             %th Role
             - if current_user.council.nil?
               %th Council
+            %th Edit
+            %th Status
 
         %tbody
           - @users.each do |user|

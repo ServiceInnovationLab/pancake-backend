@@ -9,7 +9,7 @@ RSpec.describe 'RebateFormsCouncilDetails', type: :feature, js: true do
   context 'anonymous' do
     it "can't see it" do
       visit "/admin/rebate_forms/edit_council_details?rebate_form_id=#{rebate_form.id}"
-      expect(page).to have_text('Rates Rebate 2018/2019')
+      expect(page).to have_text('Rates Rebate - The Future and Beyond')
       expect(page).to have_text('Log in')
     end
   end

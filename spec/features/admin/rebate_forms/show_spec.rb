@@ -8,7 +8,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
 
   it "Anonymous can't see it" do
     visit "/admin/rebate_forms/#{rebate_form.id}"
-    expect(page).to have_text('Rates Rebate 2018/2019')
+    expect(page).to have_text('Rates Rebate - The Future and Beyond')
     expect(page).to have_text('Log in')
     expect(page).not_to have_text('Log out x')
   end
@@ -55,7 +55,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
               visit "/admin/rebate_forms/#{rebate_form.id}"
               click_link('back')
             end
-            it { expect(page).to have_text('Rates Rebate 2018/2019') }
+            it { expect(page).to have_text('Rates Rebate - The Future and Beyond') }
           end
         end
 
@@ -179,8 +179,8 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
 
           it { expect(page).to have_link 'DONE' }
 
-          xit 'displays the qr code' do
-            expect(page).to have_css('rebate-qrcode')
+          it 'displays the qr code' do
+            expect(page).to have_css('img.rebate-qrcode')
           end
           include_examples 'percy snapshot'
           after { Timecop.return }

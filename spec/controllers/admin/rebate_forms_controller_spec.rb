@@ -5,7 +5,10 @@ require 'rails_helper'
 RSpec.describe Admin::RebateFormsController, type: :controller do
   let(:property) { FactoryBot.create :property, council: council }
   let!(:rebate_form) do
-    FactoryBot.create :rebate_form, valuation_id: property.valuation_id, status: RebateForm::NOT_SIGNED_STATUS, created_at: 5.days.ago
+    FactoryBot.create :rebate_form,
+                      valuation_id: property.valuation_id,
+                      status: RebateForm::NOT_SIGNED_STATUS,
+                      created_at: 5.days.ago
   end
   let(:council) { FactoryBot.create :council }
 
@@ -98,10 +101,6 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         it { expect(assigns(:rebate_form)).to be_valid }
       end
 
-      xit 'recalculates rebate amount' do
-        expect(rebate_form.rebate).to eq 630
-      end
-
       it 'updates updated_by column with current user' do
         expect(rebate_form.updated_by).to eq(user.id)
       end
@@ -141,20 +140,6 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
         before { put :update, params: params }
 
         include_examples 'controller works'
-      end
-
-      context 'with invalid params' do
-        let(:invalid_params) do
-          { id: rebate_form.to_param,
-            total_rates: '123',
-            fields: {} }
-        end
-
-        before { put :update, params: invalid_params }
-
-        xit 'redirects to the edit form' do
-          expect(response).to redirect_to(edit_admin_rebate_form_path(rebate_form))
-        end
       end
     end
 

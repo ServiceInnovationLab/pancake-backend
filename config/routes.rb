@@ -33,7 +33,6 @@ Rails.application.routes.draw do
     resources :docs, only: [:index], path: '/swagger'
 
     scope path: '/v1' do
-      post '/rebate_forms/sign' => 'sign_rebate_forms#sign'
       get '/rebate_forms/' => 'rebate_forms#show_by_jwt'
       resources :councils
       resources :rates_payers, only: %(show)
