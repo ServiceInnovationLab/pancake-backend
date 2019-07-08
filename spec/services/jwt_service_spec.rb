@@ -33,11 +33,11 @@ RSpec.describe JwtService do
       let(:witness) { FactoryBot.create(:user) }
 
       it 'can encode and decode a rebate form' do
-        token = subject.encode_for_rebate_form_signing(rebate_form.to_param, witness: witness)
+        token = subject.create_signing_token(rebate_form.to_param, witness: witness)
 
         expect(token.class).to be String
 
-        result = subject.decode_for_rebate_form_signing(token)
+        result = subject.decode_signing_token(token)
 
         expect(result).to eq(rebate_form)
       end
@@ -47,11 +47,11 @@ RSpec.describe JwtService do
       let(:witness) { nil }
 
       it 'can encode and decode a rebate form' do
-        token = subject.encode_for_rebate_form_signing(rebate_form.to_param, witness: witness)
+        token = subject.create_signing_token(rebate_form.to_param, witness: witness)
 
         expect(token.class).to be String
 
-        result = subject.decode_for_rebate_form_signing(token)
+        result = subject.decode_signing_token(token)
 
         expect(result).to eq(rebate_form)
       end

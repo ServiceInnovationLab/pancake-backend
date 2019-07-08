@@ -8,7 +8,7 @@ class SignaturesController < ApiController
   def create
     token = params[:data][:token]
 
-    rebate_form = JwtService.new.decode_for_rebate_form_signing(token)
+    rebate_form = JwtService.new.decode_signing_token(token)
 
     signatures = signature_params.map do |signature|
       instantiate_signature(signature, rebate_form)

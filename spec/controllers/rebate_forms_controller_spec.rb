@@ -50,7 +50,7 @@ RSpec.describe RebateFormsController, type: :controller do
     let!(:rebate_form) { FactoryBot.create(:rebate_form, property: property) }
 
     context 'with a valid token' do
-      let(:token) { JwtService.new.encode_for_rebate_form_signing(rebate_form.id, witness: witness) }
+      let(:token) { JwtService.new.create_signing_token(rebate_form.id, witness: witness) }
 
       before { get :show_by_jwt, format: :json, params: { jwt: token } }
 
@@ -60,14 +60,14 @@ RSpec.describe RebateFormsController, type: :controller do
     end
 
     context 'with expired token' do
-      let(:payload) do
-        {
-          rebate_form_id: rebate_form.id,
-          exp: Time.now.to_i - (1000 * 60),
-          per: 'sign'
-        }
+      let(:token) do
+        JwtService.new.create_signing_token(
+          rebate_form.id,
+          witness: nil,
+          expire_at: Time.now.to_i - (1000 * 60)
+        )
       end
-      let(:token) { JwtService.new.encode(payload, witness: nil) }
+
       it { expect { get :show_by_jwt, format: :json, params: { jwt: token } }.to raise_error JWT::DecodeError }
     end
 

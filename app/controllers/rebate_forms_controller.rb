@@ -7,7 +7,7 @@ class RebateFormsController < ApiController
   def show_by_jwt
     token = params[:jwt]
 
-    rebate_form = JwtService.new.decode_for_rebate_form_signing(token)
+    rebate_form = JwtService.new.decode_signing_token(token)
 
     render_jsonapi(rebate_form, scope: false)
   end
