@@ -35,8 +35,6 @@
 StrongResources.configure do
   strong_resource :council do
   end
-  strong_resource :rates_payer do
-  end
   strong_resource :rates_bill do
   end
   strong_resource :property do

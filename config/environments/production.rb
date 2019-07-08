@@ -38,7 +38,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  #config.force_ssl = true
+  # config.force_ssl = true
   config.force_ssl = false
 
   # Use the lowest log level to ensure availability of diagnostic information
@@ -105,5 +105,5 @@ Rails.application.configure do
   config.active_storage.service = :amazon
 
   # For pdfs on heroku
-  #config.assets.precompile += ['pdf.css']
+  # config.assets.precompile += ['pdf.css']
 end

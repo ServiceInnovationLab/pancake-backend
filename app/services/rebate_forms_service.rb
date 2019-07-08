@@ -20,7 +20,6 @@ class RebateFormsService
                        valuation_id: property.valuation_id,
                        location: property.location,
                        total_rates: total_rates(property),
-                       rebate: 0,
                        fields: @rebate_form_attributes['fields'])
   end
 

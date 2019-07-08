@@ -35,7 +35,6 @@ Rails.application.routes.draw do
     scope path: '/v1' do
       get '/rebate_forms/' => 'rebate_forms#show_by_jwt'
       resources :councils
-      resources :rates_payers, only: %(show)
       resources :rates_bills, only: %(show)
       resources :properties, only: %(index show)
       resources :rebate_forms, only: %i[create]
