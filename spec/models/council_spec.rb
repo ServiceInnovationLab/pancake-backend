@@ -9,7 +9,6 @@ RSpec.describe Council, type: :model do
 
   before do
     FactoryBot.create :rates_bill, property: properties.first, rating_year: year
-    FactoryBot.create :rates_payer, property: properties.first
   end
 
   describe 'names' do
@@ -22,10 +21,6 @@ RSpec.describe Council, type: :model do
 
   describe 'has rates_bills' do
     it { expect(council.rates_bills).to eq properties.first.rates_bills }
-  end
-
-  describe 'has rates_payers' do
-    it { expect(council.rates_payers).to eq properties.first.rates_payers }
   end
 
   describe 'has batches' do
