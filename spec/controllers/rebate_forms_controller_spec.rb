@@ -8,7 +8,7 @@ RSpec.describe RebateFormsController, type: :controller do
   let(:property) { FactoryBot.create :property_with_rates, rating_year: ENV['YEAR'] }
   let(:witness) { FactoryBot.create :user }
 
-   describe '#create' do
+  describe '#create' do
     let(:body) do
       {
         "data": {
@@ -50,7 +50,6 @@ RSpec.describe RebateFormsController, type: :controller do
     let!(:rebate_form) { FactoryBot.create(:rebate_form, property: property) }
 
     context 'with a valid token' do
-
       let(:token) { JwtService.new.encode_for_rebate_form_signing(rebate_form.id, witness: witness) }
 
       before { get :show_by_jwt, format: :json, params: { jwt: token } }

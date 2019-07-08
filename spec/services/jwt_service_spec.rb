@@ -24,7 +24,7 @@ RSpec.describe JwtService do
       result = subject.send(:decode, token)
 
       expect(result.first).to contain_exactly(*payload.stringify_keys)
-      expect(result.second).to contain_exactly(['alg', 'HS256'])
+      expect(result.second).to contain_exactly(%w[alg HS256])
     end
   end
 

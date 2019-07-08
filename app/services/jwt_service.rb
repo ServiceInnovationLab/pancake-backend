@@ -4,7 +4,6 @@
 #
 # The algorithm is hard coded for security, as reccommended by the gem documentation
 class JwtService
-
   def initialize
     @hmac_secret = ENV['HMAC_SECRET']
     @hmac_algorithm = 'HS256'
@@ -25,12 +24,10 @@ class JwtService
   # Create a JWT permitted for signing a rebate form
   def encode_for_rebate_form_signing(rebate_form_id, witness:, expire_at: default_expiry)
     encode(
-      {
-        rebate_form_id: rebate_form_id,
-        exp: expire_at,
-        per: 'sign',
-        witness: witness
-      }
+      rebate_form_id: rebate_form_id,
+      exp: expire_at,
+      per: 'sign',
+      witness: witness
     )
   end
 
