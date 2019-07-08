@@ -11,7 +11,6 @@ RSpec.describe 'IPad Signing', type: :feature, js: true do
   context 'when a rebate form is ready to sign' do
     let(:user) { FactoryBot.create :admin_user, email: 'somebody.important@dia.govt.nz' }
     let(:signing_url) do
-      Timecop.freeze(Time.zone.local(2019, 9, 1, 10, 5, 0))
       GenerateQrService.new(rebate_form, user).send(:signing_url)
     end
 
