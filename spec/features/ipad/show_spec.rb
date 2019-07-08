@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'IPad Signing', type: :feature, js: true do
+  include FormattingHelper
+
   let(:property) { FactoryBot.create(:property_with_rates) }
   let!(:rebate_form) { FactoryBot.create(:rebate_form, property: property) }
 
@@ -13,57 +15,49 @@ RSpec.describe 'IPad Signing', type: :feature, js: true do
       GenerateQrService.new(rebate_form, user).send(:signing_url)
     end
 
-    let(:test_host) { "#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}/" }
+    let(:test_host) { "http://#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}/" }
 
     it 'can visit an ipad signing url' do
-      visit signing_url.sub("localhost:3000/", test_host)
+      visit signing_url.sub(ENV['APP_URL'], test_host)
 
       expect(page).to have_text('Application summary')
 
       # expect 'Next' button
       expect(page).to have_css('button.next.ga-appsum-next')
 
-      # My name is Miss Sherron Ortiz and my occupation is witch.\nMy address is and I
-      # have not lived here 1 July 2018. I have not moved within this rating year.\nMy
-      # 2018 rates bill (including water) is $0.00.\nI have 0 dependants.\nMy income
-      # (before tax) for the 2017/2018 tax year is $224.
+      expected_content = [
+        rebate_form.location,
+        currency_like_ipad(rebate_form.total_rates),
+        rebate_form.fields['full_name'],
+        rebate_form.fields['dependants'].to_s,
+        rebate_form.fields['occupation'],
+        currency_like_ipad(rebate_form.fields['income']['total_income'])
+      ]
 
-      expected_user_values = rebate_form
-        .attributes.slice(
-          *%w[
-            location
-            total_rates
-          ]
-        ).merge(
-          rebate_form.fields.slice(
-            *%w[
-              full_name
-              dependants
-              occupation
-            ]
-          )
-        ).values
-        .map(&:to_s)
+      expect(page.body).to include(*expected_content)
 
-      # byebug
+      if rebate_form.fields['lived_in_property_1_July'] == 'yes'
+        expect(page.body).to include('I lived here on')
+      else
+        expect(page.body).to include('I have not lived here')
+      end
 
-      expect(page.body).to include(*expected_user_values)
+      if rebate_form.fields['moved_within_rating_year'] == 'yes'
+        expect(page.body).to include('I have moved')
+      else
+        expect(page.body).to include('I have not moved')
+      end
 
-      # TODO
-      # expect formatted rates_bill and total_income
-      # expect conditional text:
-      # {lived_in_property_1_July ? ' I lived here on' : ' I have not lived here'}  1 July {ratingYear}.
-      # {moved_within_rating_year ? ' I have moved ' : ' I have not moved'} within this rating year.
-      # {spouse_or_partner ?
-      #                <p>
-      #     Our combined income (before tax) for the {taxYear} tax year is <strong>{total_income_formatted}</strong>.
-      # </p>
-      #     :
-      # <p>My income (before tax) for the {taxYear} tax year is <strong>{total_income_formatted}</strong>.</p>
-      # }
-      # {income_less_than_5k && <p>
-      #     I supported myself on less than $5,000 by {income_less_than_5k}
-      # </p>}
+      if rebate_form.fields['spouse_or_partner'] == 'yes'
+        expect(page.body).to include('Our combined income')
+      else
+        expect(page.body).to include('My income')
+      end
+
+      if rebate_form.fields['income_less_than_5k'].present?
+        expect(page.body).to include('I supported myself on less than $5,000 by')
+        expect(page.body).to include(rebate_form.fields['income_less_than_5k'])
+      end
     end
   end
 end
