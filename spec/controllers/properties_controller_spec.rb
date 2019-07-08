@@ -67,7 +67,8 @@ RSpec.describe PropertiesController, type: :controller do
             'town_city' => 'Poneke',
             'rating_year' => ENV['YEAR'],
             'council_id' => property_1.council.id
-          }
+          },
+        'relationships' => { 'rates_bills' => { 'data' => [] } }
       )
     end
   end
