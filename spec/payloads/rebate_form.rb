@@ -30,8 +30,8 @@
 #
 # For more information, see https://jsonapi-suite.github.io/jsonapi_spec_helpers/
 JsonapiSpecHelpers::Payload.register(:rebate_form) do
-  key(:valuation_id, String)
-  key(:token, String)
+  key(:location, String)
   key(:fields, Hash, description: 'free form fiends')
-  key(:rebate, String, allow_nil: true)
+  key(:total_rates, String)
+  key(:token, String)
 end
