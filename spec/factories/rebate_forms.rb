@@ -111,9 +111,7 @@ FactoryBot.define do
   end
 
   factory :processed_form, parent: :signed_form do
-    after(:create) do |rebate_form|
-      rebate_form.transition_to_processed_state
-    end
+    after(:create, &:transition_to_processed_state)
   end
 
   factory :batched_form, parent: :processed_form do
