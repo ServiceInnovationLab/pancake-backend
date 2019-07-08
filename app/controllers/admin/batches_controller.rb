@@ -36,7 +36,6 @@ class Admin::BatchesController < Admin::BaseController
 
     batch = Batch.new(
       council: find_council(rebate_forms),
-      amount: batch_amount(rebate_forms),
       batch_date: rebate_forms.last.created_at,
       claim_count: rebate_forms.size
     )
@@ -82,9 +81,5 @@ class Admin::BatchesController < Admin::BaseController
 
   def pdf_filename
     "batch-#{@batch.council.short_name}-#{@batch.id}"
-  end
-
-  def batch_amount(rebate_forms)
-    rebate_forms.map(&:rebate).sum
   end
 end

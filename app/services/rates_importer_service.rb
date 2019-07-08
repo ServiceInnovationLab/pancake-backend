@@ -3,7 +3,6 @@
 class RatesImporterService
   def clear!(rating_year, council)
     RatesBill.joins(:property).by_rating_year(rating_year).by_council(council).delete_all
-    RatesPayer.joins(:property).by_rating_year(rating_year).by_council(council).delete_all
     Property.where(rating_year: rating_year, council: council).delete_all
   end
 
