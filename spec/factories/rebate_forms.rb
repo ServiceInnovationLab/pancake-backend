@@ -36,7 +36,6 @@ FactoryBot.define do
         lived_in_property_july_1: true }
     end
     status { RebateForm::NOT_SIGNED_STATUS }
-    rebate { 555.12 }
     batch { nil }
 
     trait :moved_within_rating_year do

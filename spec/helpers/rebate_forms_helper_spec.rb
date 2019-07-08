@@ -27,10 +27,6 @@ RSpec.describe RebateFormsHelper, type: :helper do
     it { expect(rebate_form_pdf_home_business(rebate_form)).to eq 'no' }
   end
 
-  describe 'rebate_form_amount(rebate_form)' do
-    it { expect(rebate_form_amount(rebate_form)).to eq '$555.12' }
-  end
-
   describe 'rebate_form_lived_year?(rebate_form)' do
     let(:rebate_form) { FactoryBot.create :rebate_form, fields: fields }
 
