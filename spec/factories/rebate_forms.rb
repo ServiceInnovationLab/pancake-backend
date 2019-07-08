@@ -29,11 +29,11 @@ FactoryBot.define do
           }
         },
         email: 'hermione.granger@hogwarts.com',
-        spouse_or_partner: true,
+        spouse_or_partner: 'yes',
         occupation: 'witch',
-        fifty_percent_claimed: true,
-        moved_within_rating_year: false,
-        lived_in_property_july_1: true }
+        fifty_percent_claimed: 'yes',
+        moved_within_rating_year: 'no',
+        lived_in_property_july_1: 'yes' }
     end
     status { RebateForm::NOT_SIGNED_STATUS }
     rebate { 555.12 }
@@ -60,15 +60,15 @@ FactoryBot.define do
             }
           },
           email: 'hermione.granger@hogwarts.com',
-          spouse_or_partner: true,
+          spouse_or_partner: 'yes',
           occupation: 'witch',
-          fifty_percent_claimed: true,
-          moved_within_rating_year: true,
-          lived_in_property_july_1: false,
+          fifty_percent_claimed: 'yes',
+          moved_within_rating_year: 'yes',
+          lived_in_property_july_1: 'no',
           previous_address: '123 Muggle Lane, Hogsmead, England',
           settlement_date: 1.month.ago,
           rates_paid: 1234,
-          rates_rebate_received: false }
+          rates_rebate_received: 'no' }
       end
     end
 
@@ -93,11 +93,11 @@ FactoryBot.define do
             }
           },
           email: 'hermione.granger@hogwarts.com',
-          spouse_or_partner: true,
+          spouse_or_partner: 'yes',
           occupation: 'witch',
-          fifty_percent_claimed: true,
-          moved_within_rating_year: false,
-          lived_in_property_july_1: true,
+          fifty_percent_claimed: 'yes',
+          moved_within_rating_year: 'no',
+          lived_in_property_july_1: 'yes',
           income_less_than_5k: 'We were given a money tree for Witchmas.' }
       end
     end
