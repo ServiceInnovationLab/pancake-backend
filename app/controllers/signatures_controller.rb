@@ -4,6 +4,7 @@ class SignaturesController < ApiController
   jsonapi resource: SignatureResource
   strong_resource :signature
   before_action :apply_strong_params, only: %i[create]
+  respond_to :json
 
   def create
     token = params[:data][:token]
