@@ -6,8 +6,9 @@ RSpec.describe RebateFormsController, type: :controller do
   subject { JSON.parse response.body }
 
   let(:property) { FactoryBot.create :property_with_rates, rating_year: ENV['YEAR'] }
+  let(:witness) { FactoryBot.create :user }
 
-  describe '#create' do
+   describe '#create' do
     let(:body) do
       {
         "data": {
@@ -49,16 +50,10 @@ RSpec.describe RebateFormsController, type: :controller do
     let!(:rebate_form) { FactoryBot.create(:rebate_form, property: property) }
 
     context 'with a valid token' do
-      before { get :show_by_jwt, format: :json, params: { jwt: token } }
-      let(:payload) do
-        {
-          rebate_form_id: rebate_form.id,
-          exp: Time.now.to_i + (1000 * 60),
-          per: 'sign'
-        }
-      end
 
-      let(:token) { JWT.encode payload, ENV['HMAC_SECRET'], 'HS256' }
+      let(:token) { JwtService.new.encode_for_rebate_form_signing(rebate_form.id, witness: witness) }
+
+      before { get :show_by_jwt, format: :json, params: { jwt: token } }
 
       it { expect(subject['data']['attributes']['fields']).to eq rebate_form.fields }
       it { expect(subject['data']['attributes']['token']).to eq rebate_form.token }
@@ -73,7 +68,7 @@ RSpec.describe RebateFormsController, type: :controller do
           per: 'sign'
         }
       end
-      let(:token) { JWT.encode payload, ENV['HMAC_SECRET'], 'HS256' }
+      let(:token) { JwtService.new.encode(payload, witness: nil) }
       it { expect { get :show_by_jwt, format: :json, params: { jwt: token } }.to raise_error JWT::DecodeError }
     end
 

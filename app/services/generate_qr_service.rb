@@ -9,11 +9,13 @@ class GenerateQrService
   def generate_qr
     # create a new token that only allows you to fetch a restricted set of details for this application only
     # and use the same token to submit the signatures back
-    # this token is valid for 30 minutes
+    # this token duration is configured by ENV['IPAD_JWT_LENGTH']
 
-    payload = payload_details
+    token = JwtService.new.encode(
+      rebate_form.id,
+      witness: witness_details(@current_user)
+    )
 
-    token = JWT.encode payload, ENV['HMAC_SECRET'], 'HS256'
     # iPad-application URL
     url = ENV['APP_URL'] + 'ipad/?t=' + token
     Rails.logger.info('the ipad signing url is:' + url) # for easier debugging in production
@@ -22,18 +24,9 @@ class GenerateQrService
 
   private
 
-  def payload_details
-    {
-      rebate_form_id: @rebate_form.id,
-      exp: Time.now.to_i + (ENV['IPAD_JWT_LENGTH'].to_i * 60),
-      per: 'sign',
-      witness: witness_details(@current_user)
-    }
-  end
-
   def witness_details(current_user)
     {
-      name: current_user.name || '',
+      name: current_user&.name || '',
       location: current_user&.council&.name,
       occupation: 'Authorised Council Officer'
     }
