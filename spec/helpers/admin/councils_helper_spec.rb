@@ -15,29 +15,25 @@ RSpec.describe Admin::CouncilsHelper, type: :helper do
     # uncompleted
     10.times do
       property = FactoryBot.create(:property_with_rates, council: council)
-      FactoryBot.create(:rebate_form, rebate: 100, property: property, valuation_id: property.valuation_id)
+      FactoryBot.create(:rebate_form, property: property, valuation_id: property.valuation_id)
     end
 
     # completed
     10.times do
       property = FactoryBot.create(:property_with_rates, council: council)
-      FactoryBot.create(:signed_form, rebate: 100, property: property, valuation_id: property.valuation_id)
+      FactoryBot.create(:signed_form, property: property, valuation_id: property.valuation_id)
     end
 
     # in a batch
     10.times do
       property = FactoryBot.create(:property_with_rates, council: council)
-      form = FactoryBot.create(:signed_form, rebate: 100, property: property, valuation_id: property.valuation_id)
+      form = FactoryBot.create(:signed_form, property: property, valuation_id: property.valuation_id)
       form.update(batch: batch)
     end
   end
 
   describe 'council_forms_count(council)' do
     it { expect(council_forms_count(council)).to eq 30 }
-  end
-
-  describe 'council_forms_sum(council)' do
-    it { expect(council_forms_sum(council)).to eq '$3000.00' }
   end
 
   describe 'council_signed_forms_count(council)' do
@@ -48,15 +44,7 @@ RSpec.describe Admin::CouncilsHelper, type: :helper do
     it { expect(council_percentage_signed(council)).to eq '66%' }
   end
 
-  describe 'council_signed_forms_sum(council)' do
-    it { expect(council_signed_forms_sum(council)).to eq '$2000.00' }
-  end
-
   describe 'council_signed_batched_forms_count(council)' do
     it { expect(council_signed_batched_forms_count(council)).to eq 10 }
-  end
-
-  describe 'council_signed_batched_forms_sum(council)' do
-    it { expect(council_signed_batched_forms_sum(council)).to eq '$1000.00' }
   end
 end
