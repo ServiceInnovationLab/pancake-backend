@@ -38,4 +38,11 @@ class GenerateQrService
       .as_png(offset: 0, color: '0', shape_rendering: 'crispEdges', module_size: 10)
       .to_data_url
   end
+
+  def signing_url
+    token = JWT.encode payload_details, ENV['HMAC_SECRET'], 'HS256'
+
+    # iPad-application URL
+    "#{ENV['APP_URL']}ipad/?t=#{token}"
+  end
 end

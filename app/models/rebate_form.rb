@@ -12,7 +12,6 @@ class RebateForm < ApplicationRecord
   before_validation :set_property_id
 
   validates :token, presence: true
-  validates :rebate, presence: true
   validates :property, presence: true
 
   validate :same_council
@@ -59,20 +58,6 @@ class RebateForm < ApplicationRecord
     update!(status: BATCHED_STATUS, batch: batch)
   end
 
-  def calc_rebate_amount!
-    rates_bill = property.rates_bills.find_by(rating_year: rating_year)
-    raise "No rates bill found for rating_year #{year}" if rates_bill.blank?
-
-    rebate = OpenFiscaService.rebate_amount(
-      income: income, rates: rates_bill.total_bill,
-      dependants: dependants, year: rating_year
-    )
-    update!(rebate: rebate)
-  rescue StandardError => e
-    errors.add(:address, e)
-    errors.add(:address, 'Application invalid')
-  end
-
   def full_name
     fields['full_name']
   end
@@ -110,10 +95,6 @@ class RebateForm < ApplicationRecord
 
   def set_token
     self.token = new_token unless token
-  end
-
-  def signing_url
-    ENV['SIGNING_URL'].sub('{token}', token)
   end
 
   private

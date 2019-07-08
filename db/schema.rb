@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_26_230410) do
+ActiveRecord::Schema.define(version: 2019_07_08_024144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,14 +83,6 @@ ActiveRecord::Schema.define(version: 2019_06_26_230410) do
     t.index ["property_id", "rating_year"], name: "index_rates_bills_on_property_id_and_rating_year", unique: true
   end
 
-  create_table "rates_payers", force: :cascade do |t|
-    t.integer "property_id"
-    t.text "council_owner_id"
-    t.text "surname"
-    t.text "first_names"
-    t.text "meta"
-  end
-
   create_table "rebate_forms", force: :cascade do |t|
     t.string "valuation_id"
     t.string "token"
@@ -98,7 +90,6 @@ ActiveRecord::Schema.define(version: 2019_06_26_230410) do
     t.datetime "updated_at", null: false
     t.json "fields"
     t.integer "property_id"
-    t.decimal "rebate", precision: 8, scale: 2
     t.integer "batch_id"
     t.integer "updated_by"
     t.string "status", default: "not signed"
@@ -182,7 +173,6 @@ ActiveRecord::Schema.define(version: 2019_06_26_230410) do
   end
 
   add_foreign_key "rates_bills", "properties"
-  add_foreign_key "rates_payers", "properties"
   add_foreign_key "rebate_forms", "batches"
   add_foreign_key "rebate_forms", "properties"
   add_foreign_key "rebate_forms", "users", column: "updated_by"
