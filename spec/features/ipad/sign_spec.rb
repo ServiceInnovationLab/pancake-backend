@@ -6,8 +6,13 @@ RSpec.describe 'IPad Signing', type: :feature, js: true do
   include FormattingHelper
 
   let(:property) { FactoryBot.create(:property_with_rates) }
-  let!(:rebate_form) { FactoryBot.create(:rebate_form, property: property) }
+  let(:rebate_form) { FactoryBot.create(:rebate_form, property: property) }
 
+  before do
+    Timecop.freeze(Time.now.utc - 1.day)
+    rebate_form
+    Timecop.return
+  end
   context 'when a rebate form is ready to sign' do
     let(:user) { FactoryBot.create :admin_user, email: 'somebody.important@dia.govt.nz' }
     let(:signing_url) do
