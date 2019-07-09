@@ -53,7 +53,7 @@ RSpec.describe RebateFormsController, type: :controller do
       let(:payload) do
         {
           rebate_form_id: rebate_form.id,
-          exp: Time.now.to_i + (1000 * 60),
+          exp: Time.now.to_i + ENV['IPAD_JWT_LENGTH'].to_i * 60,
           per: 'sign'
         }
       end
@@ -69,7 +69,7 @@ RSpec.describe RebateFormsController, type: :controller do
       let(:payload) do
         {
           rebate_form_id: rebate_form.id,
-          exp: Time.now.to_i - (1000 * 60),
+          exp: Time.now.to_i - ENV['IPAD_JWT_LENGTH'].to_i * 60,
           per: 'sign'
         }
       end
