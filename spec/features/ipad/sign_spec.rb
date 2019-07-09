@@ -116,6 +116,10 @@ RSpec.describe 'IPad Signing', type: :feature, js: true do
           end
 
           it 'submits successfully after we sign' do
+            # We need to populate the SignatureType table or the POST will fail
+            SignatureType.find_or_create_by! name: 'applicant'
+            SignatureType.find_or_create_by! name: 'witness'
+
             find('canvas.sigCanvas').click
             click_on 'SUBMIT'
             expect(page).to have_text('Thank you')
