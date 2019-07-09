@@ -27,6 +27,7 @@ RSpec.describe SignaturesController, type: :controller do
     let(:decode_token) do
       {
         rebate_form_id: rebate_form.id,
+        exp: Time.now.to_i + (1000 * 60),
         per: 'sign'
       }
     end
