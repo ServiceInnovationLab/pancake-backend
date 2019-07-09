@@ -15,7 +15,7 @@ class SignaturesController < ApiController
     rebate_form = RebateForm.find(decoded_token['rebate_form_id'])
 
     if rebate_form.signatures.exists?
-      render json: {}, status: :forbidden
+      render json: {}, status: :unprocessable_entity
     elsif form_updated_after_token_issue(decoded_token, rebate_form)
       render json: {}, status: :conflict
     else
