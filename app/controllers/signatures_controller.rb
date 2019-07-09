@@ -4,7 +4,6 @@ class SignaturesController < ApiController
   jsonapi resource: SignatureResource
   strong_resource :signature
   before_action :apply_strong_params, only: %i[create]
-  respond_to :json
 
   def create
     token = params[:data][:token]
@@ -15,11 +14,17 @@ class SignaturesController < ApiController
 
     rebate_form = RebateForm.find(decoded_token['rebate_form_id'])
 
-    signatures = signature_params.map do |signature|
-      instantiate_signature(signature, rebate_form)
-    end
+    if rebate_form.signatures.exists?
+      render json: {}, status: :unprocessable_entity
+    elsif form_updated_after_token_issue(decoded_token, rebate_form)
+      render json: {}, status: :conflict
+    else
+      signatures = signature_params.map do |signature|
+        instantiate_signature(signature, rebate_form)
+      end
 
-    render_jsonapi(signatures, scope: false)
+      render_jsonapi(signatures, scope: false)
+    end
   end
 
   private
@@ -48,5 +53,13 @@ class SignaturesController < ApiController
 
   def signature_params
     params.require(:data).require(:signatures)
+  end
+
+  def token_issued_at(decoded_token)
+    decoded_token['exp'] - ENV['IPAD_JWT_LENGTH'].to_i * 60
+  end
+
+  def form_updated_after_token_issue(decoded_token, rebate_form)
+    token_issued_at(decoded_token) <= rebate_form.updated_at.to_i
   end
 end
