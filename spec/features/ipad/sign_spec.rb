@@ -69,7 +69,6 @@ RSpec.describe 'IPad Signing', type: :feature, js: true do
       end
 
       context 'when we go to the next page' do
-
         before do
           # look for the page title - this seems to prevent the rest of the test
           # from failing due to timing issues
@@ -93,7 +92,6 @@ RSpec.describe 'IPad Signing', type: :feature, js: true do
         end
 
         context 'when we go to the next page' do
-
           before do
             # look for the page title - this seems to prevent the rest of the test
             # from failing due to timing issues
