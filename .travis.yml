@@ -31,4 +31,4 @@ after_script:
 after_success:
 - ./deploy_ecr
 env:
-- PGPORT=5433 YEAR=2019 SIGNING_URL="http://127.0.0.1:4000/#/{token}" HMAC_SECRET="DgD3NMLjoEsgbT7bOmpgI0svg18BMHuy0VpE6cX9xMMxznWhvEKIggR61nE/E" APP_URL="http://localhost:3000/"
+- PGPORT=5433 YEAR=2019 SIGNING_URL="http://127.0.0.1:4000/#/{token}" HMAC_SECRET="DgD3NMLjoEsgbT7bOmpgI0svg18BMHuy0VpE6cX9xMMxznWhvEKIggR61nE/E" APP_URL="http://localhost:3000/" IPAD_JWT_LENGTH=1000
