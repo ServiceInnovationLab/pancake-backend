@@ -36,7 +36,7 @@ RSpec.describe RebateFormsUpdateService do
           expect(RebateForm.first.fields['email']).to eq 'hermione.granger@potterworld.com'
           expect(RebateForm.first.fields['dependants']).to eq '3'
           expect(RebateForm.first.location).to eq property2.location
-          expect(RebateForm.first.total_rates).to eq 12345
+          expect(RebateForm.first.total_rates).to eq 12_345
         end
 
         context 'without a valuation id' do

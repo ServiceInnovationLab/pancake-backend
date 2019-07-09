@@ -20,7 +20,7 @@ RSpec.describe 'Council', type: :feature, js: true do
   context 'anonymous' do
     before { visit "/admin/councils/#{council.id}" }
 
-    it { is_expected.to have_text('Rates Rebate - The Future and Beyond') }
+    it { is_expected.to have_text('Rates Rebate') }
     it { is_expected.to have_text('Log in') }
     it { is_expected.not_to have_text(council.name) }
   end
@@ -32,8 +32,6 @@ RSpec.describe 'Council', type: :feature, js: true do
       visit "/admin/councils/#{council.id}"
     end
 
-    it { expect(page).to have_text('$555.12') } # average
-    it { expect(page).to have_text('$3,330.72') } # sum
     describe 'shows council' do
       # Wrapped in a describe so we only shapshot once
       it { expect(page).to have_text(council.name) }

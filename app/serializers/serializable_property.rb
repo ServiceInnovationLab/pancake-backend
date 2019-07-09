@@ -9,7 +9,6 @@ class SerializableProperty < JSONAPI::Serializable::Resource
   # Add attributes here to ensure they get rendered, .e.g.
   attributes :valuation_id, :location, :suburb, :town_city, :rating_year, :council_id
 
-  has_many :rates_payers
   has_many :rates_bills
 
   #

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RatesBill < ApplicationRecord
-  belongs_to :property, required: true
+  belongs_to :property, optional: false
   delegate :council, to: :property
   validates :total_rates, presence: true
   validate :rating_year_matches

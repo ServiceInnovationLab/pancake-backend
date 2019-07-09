@@ -10,7 +10,7 @@ class PropertiesController < ApiController
 
     render_jsonapi(
       instance, scope: false,
-                include: %i[rates_bills rates_payers council]
+                include: %i[rates_bills council]
     )
   end
 

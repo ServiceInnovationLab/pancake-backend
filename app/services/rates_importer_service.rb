@@ -3,7 +3,6 @@
 class RatesImporterService
   def clear!(rating_year, council)
     RatesBill.joins(:property).by_rating_year(rating_year).by_council(council).delete_all
-    RatesPayer.joins(:property).by_rating_year(rating_year).by_council(council).delete_all
     Property.where(rating_year: rating_year, council: council).delete_all
   end
 
@@ -34,13 +33,13 @@ class RatesImporterService
 
     # future work is required to handle when rates change for a property
     # this is complicated by the fact we use rates_bills[0] throughout the code
-    unless rates_bill.present?
-      RatesBill.create!(
-        property: property,
-        rating_year: rating_year,
-        total_rates: total_rates.to_f + total_water_rates.to_f,
-        current_owner_start_date: current_owner_start_date
-      )
-    end
+    return if rates_bill.present?
+
+    RatesBill.create!(
+      property: property,
+      rating_year: rating_year,
+      total_rates: total_rates.to_f + total_water_rates.to_f,
+      current_owner_start_date: current_owner_start_date
+    )
   end
 end

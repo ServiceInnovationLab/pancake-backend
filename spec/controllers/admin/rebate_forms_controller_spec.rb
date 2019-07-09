@@ -63,7 +63,6 @@ RSpec.describe Admin::RebateFormsController, type: :controller do
       let(:property) { FactoryBot.create :property_with_rates, rating_year: '2019' }
       let(:rebate_form) do
         FactoryBot.create(:rebate_form,
-                          rebate: 10,
                           property: property,
                           fields: {
                             valuation_id: '06601*004*02*',
