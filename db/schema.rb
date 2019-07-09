@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_024144) do
+ActiveRecord::Schema.define(version: 2019_07_09_044319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,8 @@ ActiveRecord::Schema.define(version: 2019_07_08_024144) do
     t.string "application_id"
     t.string "location"
     t.decimal "total_rates", precision: 8, scale: 2
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_rebate_forms_on_discarded_at"
   end
 
   create_table "roles", force: :cascade do |t|

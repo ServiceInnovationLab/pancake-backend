@@ -21,6 +21,14 @@ class RebateFormPolicy < ApplicationPolicy
     (dia? || same_council?) && record.not_signed_state?
   end
 
+  def archive?
+    (dia? || same_council?) && (record.not_signed_state? || record.signed_state?)
+  end
+
+  def restore?
+    dia? || same_council?
+  end
+
   class Scope < Scope
     def resolve
       if user.dia?

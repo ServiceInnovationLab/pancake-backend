@@ -57,6 +57,9 @@ gem 'jsonapi_suite', '~> 0.7'
 gem 'jsonapi_swagger_helpers', '~> 0.6', require: false
 gem 'kaminari', '~> 1.0'
 
+# Soft delete support
+gem 'discard', '~> 1.0'
+
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::RebateFormsController < Admin::BaseController
-  before_action :set_rebate_form, only: %i[show update destroy edit]
+  before_action :set_rebate_form, only: %i[show update destroy archive restore edit]
   respond_to :html, :pdf, :csv, :json
 
   def generateqr
@@ -58,6 +58,18 @@ class Admin::RebateFormsController < Admin::BaseController
       @rebate_form.destroy
       redirect_to admin_rebate_forms_url, notice: 'Rebate form was deleted.'
     end
+  end
+
+  def archive
+    @rebate_form.discard
+
+    redirect_to admin_rebate_forms_url, notice: 'Rebate form was archived.'
+  end
+
+  def restore
+    @rebate_form.undiscard
+
+    redirect_to show_rebate_form(@rebate_form), notice: 'Rebate form was restored.'
   end
 
   private
