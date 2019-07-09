@@ -11,7 +11,7 @@ class GenerateQrService
 
   def generate_qr
     # iPad-application URL
-    url = ENV['APP_URL'] + 'ipad/?t=' + create_signing_token
+    url = signing_url
     Rails.logger.info('the ipad signing url is:' + url) # for easier debugging in production
     qr_code(url)
   end
@@ -40,9 +40,6 @@ class GenerateQrService
   end
 
   def signing_url
-    token = JWT.encode payload_details, ENV['HMAC_SECRET'], 'HS256'
-
-    # iPad-application URL
-    "#{ENV['APP_URL']}ipad/?t=#{token}"
+    "#{ENV['APP_URL']}ipad/?t=#{create_signing_token}"
   end
 end
