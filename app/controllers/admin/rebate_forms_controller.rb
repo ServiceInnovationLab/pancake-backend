@@ -60,13 +60,13 @@ class Admin::RebateFormsController < Admin::BaseController
     end
   end
 
-  def archive
+  def decline
     @rebate_form.discard
 
     redirect_to admin_rebate_forms_url, notice: 'Rebate form was archived.'
   end
 
-  def restore
+  def undecline
     @rebate_form.undiscard
 
     redirect_to show_rebate_form(@rebate_form), notice: 'Rebate form was restored.'

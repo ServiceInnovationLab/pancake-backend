@@ -21,11 +21,11 @@ class RebateFormPolicy < ApplicationPolicy
     (dia? || same_council?) && record.not_signed_state?
   end
 
-  def archive?
+  def decline?
     (dia? || same_council?) && (record.not_signed_state? || record.signed_state?)
   end
 
-  def restore?
+  def undecline?
     dia? || same_council?
   end
 
