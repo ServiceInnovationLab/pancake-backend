@@ -88,10 +88,6 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
-    # Load database seeds before tests
-    #
-    # This is required for some static data like SignatureTypes in some tests
-    Rails.application.load_seed
   end
 
   config.append_after(:each) do
