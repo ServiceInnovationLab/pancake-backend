@@ -14,6 +14,6 @@ class ApiController < ActionController::API
   # end
 
   rescue_from JwtService::StalePayloadError do |exception|
-    render json: { message: exception.message }, status: :conflict
+    render json: { }, status: :conflict
   end
 end
