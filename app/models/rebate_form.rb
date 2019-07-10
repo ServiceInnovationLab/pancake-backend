@@ -26,6 +26,18 @@ class RebateForm < ApplicationRecord
   PROCESSED_STATUS = 'processed'
   BATCHED_STATUS = 'batched'
 
+  def self.to_csv
+    attributes = %w[valuation_id created_at updated_at fields status customer_id application_id location total_rates]
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.find_each do |rebate_form|
+        csv << attributes.map { |attr| rebate_form.send(attr) }
+      end
+    end
+  end
+
   def signed_state?
     status == SIGNED_STATUS
   end
