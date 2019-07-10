@@ -62,14 +62,14 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # POST /admin/rebate_forms/1/decline
   def decline
-    @rebate_form.update!(discarded_at: Time.now.utc, audit_comment: 'Because I want to')
+    @rebate_form.discard(comment: 'Because I want to')
 
     redirect_to admin_rebate_form_path(@rebate_form), notice: 'Rebate form was archived.'
   end
 
   # POST /admin/rebate_forms/1/undecline
   def undecline
-    @rebate_form.undiscard
+    @rebate_form.undiscard(comment: 'Because I no longer want to')
 
     redirect_to admin_rebate_form_path(@rebate_form), notice: 'Rebate form was restored.'
   end

@@ -2,7 +2,7 @@
 
 class RebateForm < ApplicationRecord
   include Discard::Model
-  audited only: %i[discarded_at status]
+  audited only: %i[discarded_at], comment_required: true
 
   has_many :signatures, dependent: :destroy
   belongs_to :property, optional: false
@@ -98,6 +98,16 @@ class RebateForm < ApplicationRecord
 
   def set_token
     self.token = new_token unless token
+  end
+
+  # replaces #discard from discarded gem
+  def discard(comment:)
+    update!(discarded_at: Time.now.utc, audit_comment: comment)
+  end
+
+  # replaces #undiscard from discarded gem
+  def undiscard(comment:)
+    update!(discarded_at: nil, audit_comment: comment)
   end
 
   private
