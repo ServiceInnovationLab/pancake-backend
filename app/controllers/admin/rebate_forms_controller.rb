@@ -18,6 +18,7 @@ class Admin::RebateFormsController < Admin::BaseController
     @name = params[:name]
 
     @rebate_forms = policy_scope(RebateForm)
+                    .kept
                     .where(status: RebateForm::NOT_SIGNED_STATUS)
                     .order(created_at: :asc)
 
