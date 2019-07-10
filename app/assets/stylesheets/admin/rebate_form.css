@@ -245,7 +245,7 @@
 }
 
 .rebate-button {
-  width: 25%;
+  width: 20%;
   background: var(--dove);
   padding: 1rem;
   border: none;
@@ -253,7 +253,7 @@
 }
 
 .rebate-button-selected {
-  width: 25%;
+  width: 20%;
   background: var(--dove);
   color: var(--blue);
   padding: 1rem;
