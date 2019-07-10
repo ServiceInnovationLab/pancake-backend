@@ -36,7 +36,6 @@ RSpec.describe Admin::SignedRebateFormsController, type: :controller do
         expect(response.body).to include(rebate_form.customer_id)
         expect(response.body).to include(rebate_form.application_id)
         expect(response.body).to include(rebate_form.location)
-        expect(response.body).to include(rebate_form.total_rates)
       end
     end
   end
