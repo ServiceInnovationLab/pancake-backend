@@ -5,8 +5,7 @@ class Admin::RebateFormsController < Admin::BaseController
   respond_to :html, :pdf, :csv, :json
 
   def generateqr
-    @rebate_form = RebateForm.find(params[:rebate_form_id])
-    authorize @rebate_form
+    @rebate_form = authorize RebateForm.find(params[:rebate_form_id])
 
     @image_data = GenerateQrService.new(@rebate_form, current_user).generate_qr
   end
