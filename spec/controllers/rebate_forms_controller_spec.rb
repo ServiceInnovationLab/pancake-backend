@@ -64,11 +64,26 @@ RSpec.describe RebateFormsController, type: :controller do
       end
 
       context 'the token is not stale' do
-        before { get :show_by_jwt, format: :json, params: { jwt: token } }
+        context 'the form has not been signed' do
+          before { get :show_by_jwt, format: :json, params: { jwt: token } }
 
-        it { expect(subject['data']['attributes']['fields']).to eq rebate_form.fields }
-        it { expect(subject['data']['attributes']['token']).to eq rebate_form.token }
-        it { expect(response).to have_http_status(:success) }
+          it { expect(subject['data']['attributes']['fields']).to eq rebate_form.fields }
+          it { expect(subject['data']['attributes']['token']).to eq rebate_form.token }
+          it { expect(response).to have_http_status(:success) }
+        end
+
+        context 'the form has been signed' do
+          before do
+            Timecop.freeze(Time.now.utc - 10.minutes) do
+              rebate_form.signatures << FactoryBot.create(:applicant_signature)
+              rebate_form.signatures << FactoryBot.create(:witness_signature)
+            end
+
+            get :show_by_jwt, format: :json, params: { jwt: token }
+          end
+
+          it { expect(response).to have_http_status(:unprocessable_entity) }
+        end
       end
 
       context 'the token is stale' do
