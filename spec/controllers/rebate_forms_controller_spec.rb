@@ -57,13 +57,28 @@ RSpec.describe RebateFormsController, type: :controller do
     end
 
     context 'with a valid token' do
-      let(:token) { JwtService.new.create_signing_token(rebate_form.id, witness: witness) }
+      let(:token) do
+        Timecop.freeze(Time.now.utc - 1.minute) do
+          JwtService.new.create_signing_token(rebate_form.id, witness: witness)
+        end
+      end
 
-      before { get :show_by_jwt, format: :json, params: { jwt: token } }
+      context 'the token is not stale' do
+        before { get :show_by_jwt, format: :json, params: { jwt: token } }
 
-      it { expect(subject['data']['attributes']['fields']).to eq rebate_form.fields }
-      it { expect(subject['data']['attributes']['token']).to eq rebate_form.token }
-      it { expect(response).to have_http_status(:success) }
+        it { expect(subject['data']['attributes']['fields']).to eq rebate_form.fields }
+        it { expect(subject['data']['attributes']['token']).to eq rebate_form.token }
+        it { expect(response).to have_http_status(:success) }
+      end
+
+      context 'the token is stale' do
+        before do
+          rebate_form.update!(updated_at: Time.now.utc)
+          get :show_by_jwt, format: :json, params: { jwt: token }
+        end
+
+        it { expect(response).to have_http_status(:conflict) }
+      end
     end
 
     context 'with expired token' do
