@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class RebateForm < ApplicationRecord
+  include Discard::Model
+  audited only: %i[discarded_at status]
+
   has_many :signatures, dependent: :destroy
   belongs_to :property, optional: false
   belongs_to :batch, optional: true

@@ -6,6 +6,11 @@
 
 .rebate-details-header.customer-details-header
   %h3.rebate-details-title Customer details
-  - unless @rebate_form.processed_state? || @rebate_form.batched_state?
-    = link_to 'EDIT', edit_admin_rebate_form_path, id: 'edit-customer', class: 'pure-button rebate-edit'
+  .actions
+    - unless @rebate_form.processed_state? || @rebate_form.batched_state?
+      = link_to 'EDIT', edit_admin_rebate_form_path, id: 'edit-customer', class: 'pure-button rebate-edit'
+      - unless @rebate_form.discarded?
+        = link_to 'DECLINE', admin_rebate_form_decline_path(@rebate_form), id: 'decline-customer', class: 'pure-button rebate-decline', method: :post
+    - if @rebate_form.discarded?
+      = link_to 'UNDECLINE', admin_rebate_form_undecline_path(@rebate_form), id: 'undecline-customer', class: 'pure-button rebate-undecline', method: :post
 = react_component("RebateForm", {isReadOnly: true, rebateForm: @rebate_form})
