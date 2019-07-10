@@ -10,6 +10,8 @@ class RebateFormsController < ApiController
     rebate_form = JwtService.new.decode_signing_token(token)
 
     render_jsonapi(rebate_form, scope: false)
+  rescue JwtService::StalePayloadError => e
+    render json: { message: e.message }, status: :conflict
   end
 
   def create
