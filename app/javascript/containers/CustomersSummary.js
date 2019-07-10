@@ -94,7 +94,7 @@ class CustomersSummary extends React.Component {
     const { batches, rebateForms, checked, isDiaUser, isCouncilUser, hasSearched, name } = this.state;
 
     const processable = currentLocation === '/admin/rebate_forms/processed' && (rebateForms && rebateForms[0]);
-    const CSVDownloadable = currentLocation === '/admin/rebate_forms/signed' && rebateForms && rebateForms[0]
+    const CSVDownloadable = currentLocation === '/admin/rebate_forms/signed' && rebateForms && rebateForms[0];
     const checkIt = processable ? this.checkIt.bind(this) : null;
 
     return (
