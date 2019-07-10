@@ -5,13 +5,21 @@ require 'rails_helper'
 RSpec.describe JwtService do
   subject { described_class.new }
   let!(:current_user) { FactoryBot.create(:admin_user) }
-  let!(:rebate_form) { FactoryBot.create(:rebate_form) }
+
+  let(:rebate_form) { FactoryBot.create(:rebate_form) }
+
+  before do
+    # Rebate form must be created in the past to avoid a stale payload error
+    Timecop.freeze(Time.now.utc - 1.day) do
+      rebate_form
+    end
+  end
 
   context 'using the generic encode and decode functions' do
     let(:payload) do
       {
         rebate_form_id: rebate_form.id,
-        exp: Time.now.to_i + (1000 * 60),
+        exp: Time.now.to_i + ENV['IPAD_JWT_LENGTH'].to_i * 60,
         per: 'sign'
       }
     end

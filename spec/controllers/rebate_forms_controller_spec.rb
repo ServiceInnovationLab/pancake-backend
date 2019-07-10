@@ -47,7 +47,14 @@ RSpec.describe RebateFormsController, type: :controller do
   end
 
   describe '#show_by_jwt' do
-    let!(:rebate_form) { FactoryBot.create(:rebate_form, property: property) }
+    let(:rebate_form) { FactoryBot.create(:rebate_form, property: property) }
+
+    before do
+      # Rebate form must be created in the past to avoid a stale payload error
+      Timecop.freeze(Time.now.utc - 1.day) do
+        rebate_form
+      end
+    end
 
     context 'with a valid token' do
       let(:token) { JwtService.new.create_signing_token(rebate_form.id, witness: witness) }
