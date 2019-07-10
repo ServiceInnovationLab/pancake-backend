@@ -12,7 +12,7 @@ class SignaturesController < ApiController
 
     instantiate_signatures(rebate_form)
 
-    render_jsonapi(signatures, scope: false)
+    render_jsonapi(rebate_form.signatures, scope: false)
   rescue JwtService::StalePayloadError => e
     render json: { message: e.message }, status: :conflict
   end
