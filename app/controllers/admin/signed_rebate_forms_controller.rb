@@ -15,6 +15,6 @@ class Admin::SignedRebateFormsController < Admin::BaseController
                            .where(status: RebateForm::SIGNED_STATUS)
                            .order(created_at: :asc)
 
-    send_data @signed_rebate_forms.to_csv, filename: "Rebate-Forms-#{Date.today}.csv", disposition: 'attachment'
+    send_data @signed_rebate_forms.to_csv, filename: "Rebate-Forms-#{Time.zone.today}.csv", disposition: 'attachment'
   end
 end
