@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     patch 'rebate_forms/update_council_details', to: 'rebate_forms_council_details#update'
     get 'rebate_forms/signed', to: 'signed_rebate_forms#index'
     get 'rebate_forms/processed', to: 'processed_rebate_forms#index'
+    get 'rebate_forms/declined', to: 'declined_rebate_forms#index'
     post 'process_rebate_form', to: 'processed_rebate_forms#create'
     delete 'unprocess_rebate_form', to: 'processed_rebate_forms#destroy'
     delete 'unprocess_rebate_forms', to: 'processed_rebate_forms#destroy_all'
