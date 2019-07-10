@@ -14,6 +14,7 @@ class ApiController < ActionController::API
   # end
 
   rescue_from JwtService::StalePayloadError do |exception|
-    render json: { }, status: :conflict
+    Rails.logger.info("Handled as 409 Conflict: #{exception.message}")
+    render json: { message: exception.message }, status: :conflict
   end
 end
