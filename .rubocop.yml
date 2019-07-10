@@ -29,6 +29,10 @@ Metrics/BlockLength:
 Metrics/ParameterLists:
   Max: 6
 
+Style/StringLiterals:
+  Exclude:
+    - 'public/ipad'
+
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: single_quotes
 

@@ -7,4 +7,4 @@ required_environment_variables = %w[
   IPAD_JWT_LENGTH
 ]
 
-Dotenv.require_keys(required_environment_variables)
+# Dotenv.require_keys(required_environment_variables)

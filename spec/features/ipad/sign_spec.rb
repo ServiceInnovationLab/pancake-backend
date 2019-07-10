@@ -6,8 +6,13 @@ RSpec.describe 'IPad Signing', type: :feature, js: true do
   include FormattingHelper
 
   let(:property) { FactoryBot.create(:property_with_rates) }
-  let!(:rebate_form) { FactoryBot.create(:rebate_form, property: property) }
+  let(:rebate_form) { FactoryBot.create(:rebate_form, property: property) }
 
+  before do
+    Timecop.freeze(Time.now.utc - 1.day)
+    rebate_form
+    Timecop.return
+  end
   context 'when a rebate form is ready to sign' do
     let(:user) { FactoryBot.create :admin_user, email: 'somebody.important@dia.govt.nz' }
     let(:signing_url) do
@@ -126,6 +131,47 @@ RSpec.describe 'IPad Signing', type: :feature, js: true do
 
             rebate_form.reload
             expect(rebate_form.signed_state?).to be true
+          end
+        end
+
+        context 'when the form has been updated after the JWT is issued' do
+          before do
+            updated_attributes = rebate_form.attributes.merge(
+              'fields' => { 'phone_number': '413413413' }
+            )
+            RebateFormsUpdateService.new(updated_attributes).update!
+            rebate_form.reload
+
+            # look for the page title - this seems to prevent the rest of the test
+            # from failing due to timing issues
+            expect(page).to have_text('Applicant signature')
+            find('canvas.sigCanvas').click
+            click_on 'NEXT'
+          end
+
+          it 'fails to submit if the form with error Application Updated' do
+            find('canvas.sigCanvas').click
+            click_on 'SUBMIT'
+            expect(page).to have_text('This application has been updated and needs to be re-signed.')
+
+            rebate_form.reload
+            expect(rebate_form.signed_state?).to be false
+          end
+        end
+        context 'when the form has been has already been signed' do
+          before do
+            # look for the page title - this seems to prevent the rest of the test
+            # from failing due to timing issues
+            expect(page).to have_text('Applicant signature')
+            find('canvas.sigCanvas').click
+            click_on 'NEXT'
+          end
+
+          it 'fails to submit if the form with error Application Updated' do
+            FactoryBot.create :signature, rebate_form: rebate_form
+            find('canvas.sigCanvas').click
+            click_on 'SUBMIT'
+            expect(page).to have_text('This application has already been signed.')
           end
         end
       end

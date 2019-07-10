@@ -64,7 +64,7 @@ RSpec.describe RebateFormsController, type: :controller do
         JwtService.new.create_signing_token(
           rebate_form.id,
           witness: nil,
-          expire_at: Time.now.to_i - (1000 * 60)
+          expire_at: Time.now.to_i - (ENV['IPAD_JWT_LENGTH'].to_i * 60)
         )
       end
 
