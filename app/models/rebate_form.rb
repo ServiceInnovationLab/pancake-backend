@@ -2,7 +2,7 @@
 
 class RebateForm < ApplicationRecord
   include Discard::Model
-  audited only: %i[discarded_at], comment_required: true
+  audited only: [:discarded_at], on: :update
 
   has_many :signatures, dependent: :destroy
   belongs_to :property, optional: false
