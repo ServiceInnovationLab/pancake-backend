@@ -7,7 +7,7 @@
     = form_for(@rebate_form, url: admin_rebate_form_undecline_path(@rebate_form)) do |f|
       .batch-button-container
         = f.submit 'Save', class: 'batch-submit-button'
-        = link_to 'Cancel', admin_batches_path, class: 'batch-cancel-button'
+        = link_to 'Cancel', admin_rebate_form_path(@rebate_form), class: 'batch-cancel-button'
       .batch-field
         = f.label :reason
         = f.text_field :audit_comment, class: 'batch-input'
