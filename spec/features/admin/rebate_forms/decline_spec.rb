@@ -8,14 +8,12 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
   let(:user) { FactoryBot.create :admin_user, email: 'somebody.important@dia.govt.nz' }
 
   context 'when signed in as an admin user viewing an incomplete rebate form' do
-
     before do
       login_as(user, scope: :user)
       visit "/admin/rebate_forms/#{rebate_form.id}"
     end
 
     scenario 'when I view the form I can decline it then restore it' do
-
       find('.rebate-form__action--decline').click
 
       expect(page).to have_text('Decline Application')
@@ -38,7 +36,6 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     end
 
     scenario 'when I cancel the decline dialog it goes back the show page and is not declined' do
-
       find('.rebate-form__action--decline').click
       expect(page).to have_text('Decline Application')
       click_on 'Cancel'
@@ -47,7 +44,6 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
     end
 
     scenario 'when I cancel the restore dialog it goes back to the show page and is not restored' do
-
       find('.rebate-form__action--decline').click
 
       expect(page).to have_text('Decline Application')
