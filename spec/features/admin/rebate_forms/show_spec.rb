@@ -21,6 +21,11 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
 
       context 'and the rebate form is not completed' do
         before { visit "/admin/rebate_forms/#{rebate_form.id}" }
+
+        describe 'can see action links' do
+          it { expect(page).to have_css('.rebate-form__action--decline') }
+        end
+
         it 'viewing council details' do
           expect(page).to have_text(user.email)
           expect(page).to have_text('LOG OUT x')
@@ -48,6 +53,43 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           expect(page).to have_field('fields.occupation', with: rebate_form.occupation)
         end
         include_examples 'percy snapshot'
+
+        context 'when the form is declined' do
+          before do
+            rebate_form.discard(audit_comment: 'RSpec decline')
+          end
+
+          describe 'can see action links' do
+            before { visit "/admin/rebate_forms/#{rebate_form.id}" }
+            it { expect(page).not_to have_css('.rebate-form__action--decline') }
+            it { expect(page).to have_css('.rebate-form__action--restore') }
+            it { expect(page).not_to have_css('.rebate-form__action--process') }
+            it { expect(page).not_to have_css('.rebate-form__action--unprocess') }
+          end
+
+          it 'shows the declined details' do
+            visit "/admin/rebate_forms/#{rebate_form.id}"
+
+            expect(page).to have_text('Rebate form was declined')
+          end
+
+          context 'when the form is restored' do
+            before do
+              rebate_form.undiscard(audit_comment: 'RSpec restore')
+            end
+
+            describe 'can see action links' do
+              before { visit "/admin/rebate_forms/#{rebate_form.id}" }
+              it { expect(page).to have_css('.rebate-form__action--decline') }
+            end
+
+            it 'shows the restored details' do
+              visit "/admin/rebate_forms/#{rebate_form.id}"
+
+              expect(page).to have_text('Rebate form was restored')
+            end
+          end
+        end
 
         context 'when the back link is clicked' do
           describe 'goes to the right place' do
@@ -100,11 +142,18 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       context 'when the rebate form is signed' do
         before { rebate_form.transition_to_signed_state }
 
+        describe 'can see action links' do
+          before { visit "/admin/rebate_forms/#{rebate_form.id}" }
+          it { expect(page).to have_css('.rebate-form__action--decline') }
+          it { expect(page).not_to have_css('.rebate-form__action--restore') }
+          it { expect(page).to have_css('.rebate-form__action--process') }
+          it { expect(page).not_to have_css('.rebate-form__action--unprocess') }
+        end
+
         describe ' Can see council details' do
           before { visit "/admin/rebate_forms/#{rebate_form.id}" }
           it { expect(page).to have_text('Council details') }
           it { expect(page).to have_text('Signed and ready to process') }
-          it { expect(page).to have_css('.rebate-form__action--process') }
           it { expect(page).to have_field('fields.full_name', with: rebate_form.full_name) }
           it { expect(page).to have_text('Valuation ID') }
           it { expect(page).to have_text(rebate_form.valuation_id) }
@@ -138,6 +187,13 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           let!(:processed_rebate_form) { FactoryBot.create(:processed_form, property: property) }
           before { visit "/admin/rebate_forms/#{processed_rebate_form.id}" }
 
+          describe 'can see action links' do
+            it { expect(page).not_to have_css('.rebate-form__action--decline') }
+            it { expect(page).not_to have_css('.rebate-form__action--restore') }
+            it { expect(page).not_to have_css('.rebate-form__action--process') }
+            it { expect(page).to have_css('.rebate-form__action--unprocess') }
+          end
+
           it 'cannot be edited' do
             expect(page).to have_text('Processed')
             expect(page).to have_css('.rebate-form__action--unprocess')
@@ -158,6 +214,13 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         describe 'when a rebate form is batched' do
           let!(:batched_rebate_form) { FactoryBot.create(:batched_form, property: property) }
           before { visit "/admin/rebate_forms/#{batched_rebate_form.id}" }
+
+          describe 'can see action links' do
+            it { expect(page).not_to have_css('.rebate-form__action--decline') }
+            it { expect(page).not_to have_css('.rebate-form__action--restore') }
+            it { expect(page).not_to have_css('.rebate-form__action--process') }
+            it { expect(page).not_to have_css('.rebate-form__action--unprocess') }
+          end
 
           it 'cannot be edited' do
             expect(page).to_not have_text('Processed')
