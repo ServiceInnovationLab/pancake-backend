@@ -7,17 +7,9 @@ class RebateFormsController < ApiController
   def show_by_jwt
     token = params[:jwt]
 
-    raise JsonapiCompliable::Errors::RecordNotFound unless token
+    rebate_form = JwtService.new.decode_signing_token(token)
 
-    decoded_token = decode_jwt(token)[0]
-
-    correct_token(decoded_token)
-
-    rebate_form_id = decoded_token['rebate_form_id']
-
-    rebate_form = RebateForm.find(rebate_form_id)
-
-    raise JsonapiCompliable::Errors::RecordNotFound unless rebate_form
+    return render json: { message: 'Rebate form has already signed.' }, status: :unprocessable_entity if rebate_form.signatures.exists?
 
     render_jsonapi(rebate_form, scope: false)
   end
@@ -44,13 +36,5 @@ class RebateFormsController < ApiController
               fields: {},
               applicant_signature: {},
               witness_signature: {})
-  end
-
-  def decode_jwt(token)
-    JWT.decode token, ENV['HMAC_SECRET'], true, algorithm: 'HS256'
-  end
-
-  def correct_token(decoded_token)
-    raise JsonapiCompliable::Errors::RecordNotFound unless decoded_token['per'] == 'sign'
   end
 end
