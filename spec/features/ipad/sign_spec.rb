@@ -2,31 +2,39 @@
 
 require 'rails_helper'
 
+class Messages
+  # error messages used in iPad UI
+  SERVER_ERROR = "Error while retrieving application"
+  CONFLICT = "This application has been updated. Please regenerate the QR code to sign the application."
+  UNPROCESSABLE_ENTITY = "This application has already been signed."
+end
+
 RSpec.describe 'IPad Signing', type: :feature, js: true do
   include FormattingHelper
 
+  let(:user) { FactoryBot.create :admin_user, email: 'somebody.important@dia.govt.nz' }
   let(:property) { FactoryBot.create(:property_with_rates) }
   let(:rebate_form) { FactoryBot.create(:rebate_form, property: property) }
+  let(:test_host) { "http://#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}/" }
+  let(:signing_url) do
+    Timecop.freeze(Time.now.utc - 1.minute) do
+      GenerateQrService
+        .new(rebate_form, user)
+        .send(:signing_url)
+        .sub(ENV['APP_URL'], test_host)
+    end
+  end
 
   before do
-    Timecop.freeze(Time.now.utc - 1.day)
-    rebate_form
-    Timecop.return
+    Timecop.freeze(Time.now.utc - 1.day) do
+      rebate_form
+    end
   end
   context 'when a rebate form is ready to sign' do
-    let(:user) { FactoryBot.create :admin_user, email: 'somebody.important@dia.govt.nz' }
-    let(:signing_url) do
-      GenerateQrService.new(rebate_form, user).send(:signing_url)
-    end
-
-    let(:test_host) { "http://#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}/" }
-
     context 'can visit an ipad signing url' do
-      before do
-        visit signing_url.sub(ENV['APP_URL'], test_host)
-      end
-
       it 'shows the Application summary title and "Next" button' do
+        visit signing_url
+
         expect(page).to have_text('Application summary')
 
         # expect 'Next' button
@@ -34,6 +42,8 @@ RSpec.describe 'IPad Signing', type: :feature, js: true do
       end
 
       it 'shows the summary of the rebate form' do
+        visit signing_url
+
         # look for the page title - this seems to prevent the rest of the test
         # from failing due to timing issues
         expect(page).to have_text('Application summary')
@@ -73,10 +83,39 @@ RSpec.describe 'IPad Signing', type: :feature, js: true do
         end
       end
 
+      context 'when the form has been updated after the JWT is issued' do
+        before do
+          updated_attributes = rebate_form.attributes.merge(
+            'fields' => { 'phone_number': '413413413' }
+          )
+          RebateFormsUpdateService.new(updated_attributes).update!
+        end
+
+        it 'fails to load the rebate form' do
+          visit signing_url
+
+          expect(page).to have_text(Messages::CONFLICT)
+        end
+      end
+      context 'when the form has already been signed' do
+        before do
+          Timecop.freeze(Time.now.utc - 10.minutes) do
+            FactoryBot.create :signature, rebate_form: rebate_form
+          end
+        end
+
+        it 'fails to load the rebate form' do
+          visit signing_url
+
+          expect(page).to have_text(Messages::UNPROCESSABLE_ENTITY)
+        end
+      end
+
       context 'when we go to the next page' do
         before do
           # look for the page title - this seems to prevent the rest of the test
           # from failing due to timing issues
+          visit signing_url
           expect(page).to have_text('Application summary')
           click_on 'NEXT'
         end
@@ -152,13 +191,13 @@ RSpec.describe 'IPad Signing', type: :feature, js: true do
           it 'fails to submit if the form with error Application Updated' do
             find('canvas.sigCanvas').click
             click_on 'SUBMIT'
-            expect(page).to have_text('This application has been updated and needs to be re-signed.')
+            expect(page).to have_text(Messages::CONFLICT)
 
             rebate_form.reload
             expect(rebate_form.signed_state?).to be false
           end
         end
-        context 'when the form has been has already been signed' do
+        context 'when the form has already been signed' do
           before do
             # look for the page title - this seems to prevent the rest of the test
             # from failing due to timing issues
@@ -167,11 +206,11 @@ RSpec.describe 'IPad Signing', type: :feature, js: true do
             click_on 'NEXT'
           end
 
-          it 'fails to submit if the form with error Application Updated' do
+          it 'fails to submit if the form' do
             FactoryBot.create :signature, rebate_form: rebate_form
             find('canvas.sigCanvas').click
             click_on 'SUBMIT'
-            expect(page).to have_text('This application has already been signed.')
+            expect(page).to have_text(Messages::UNPROCESSABLE_ENTITY)
           end
         end
       end
