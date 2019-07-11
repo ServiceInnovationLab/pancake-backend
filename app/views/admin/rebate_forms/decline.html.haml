@@ -1,0 +1,14 @@
+.batch-wrapper
+  .batch-header
+    %h1.batch-title
+      Decline Application
+
+  .batch-edit-box
+    = form_for(@rebate_form, url: admin_rebate_form_decline_path(@rebate_form)) do |f|
+      .batch-button-container
+        = f.submit 'Save', class: 'batch-submit-button'
+        = link_to 'Cancel', admin_batches_path, class: 'batch-cancel-button'
+      .batch-field
+        = f.label :reason
+        = f.text_field :audit_comment, class: 'batch-input'
+

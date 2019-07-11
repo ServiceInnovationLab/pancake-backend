@@ -118,13 +118,13 @@ class RebateForm < ApplicationRecord
   end
 
   # replaces #discard from discarded gem
-  def discard(comment:)
-    update!(discarded_at: Time.now.utc, audit_comment: comment)
+  def discard(audit_comment:)
+    update!(discarded_at: Time.now.utc, audit_comment: audit_comment)
   end
 
   # replaces #undiscard from discarded gem
-  def undiscard(comment:)
-    update!(discarded_at: nil, audit_comment: comment)
+  def undiscard(audit_comment:)
+    update!(discarded_at: nil, audit_comment: audit_comment)
   end
 
   private

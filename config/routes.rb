@@ -21,8 +21,10 @@ Rails.application.routes.draw do
 
     resources :rebate_forms do
       get 'generateqr'
-      post 'decline'
-      post 'undecline'
+      get 'decline'
+      patch 'decline', to: 'rebate_forms#do_decline'
+      get 'undecline'
+      patch 'undecline', to: 'rebate_forms#do_undecline'
     end
     resources :attachments, only: %i[destroy]
     resources :councils do

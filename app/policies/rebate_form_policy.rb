@@ -25,7 +25,15 @@ class RebateFormPolicy < ApplicationPolicy
     (dia? || same_council?) && (record.not_signed_state? || record.signed_state?)
   end
 
+  def do_decline?
+    (dia? || same_council?) && (record.not_signed_state? || record.signed_state?)
+  end
+
   def undecline?
+    dia? || same_council?
+  end
+
+  def do_undecline?
     dia? || same_council?
   end
 

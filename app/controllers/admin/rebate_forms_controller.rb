@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::RebateFormsController < Admin::BaseController
-  before_action :set_rebate_form, only: %i[show update destroy decline undecline edit]
+  before_action :set_rebate_form, only: %i[show update destroy decline do_decline undecline do_undecline edit]
   respond_to :html, :pdf, :csv, :json
 
   def generateqr
@@ -60,16 +60,22 @@ class Admin::RebateFormsController < Admin::BaseController
     end
   end
 
+  # GET /admin/rebate_forms/1/decline
+  def decline; end
+
   # POST /admin/rebate_forms/1/decline
-  def decline
-    @rebate_form.discard(comment: 'Because I want to')
+  def do_decline
+    @rebate_form.discard(audit_comment: params.require(:rebate_form).permit(:audit_comment)['audit_comment'])
 
     redirect_to admin_rebate_form_path(@rebate_form), notice: 'Rebate form was declined.'
   end
 
+  # GET /admin/rebate_forms/1/undecline
+  def undecline; end
+
   # POST /admin/rebate_forms/1/undecline
-  def undecline
-    @rebate_form.undiscard(comment: 'Because I no longer want to')
+  def do_undecline
+    @rebate_form.undiscard(audit_comment: params.require(:rebate_form).permit(:audit_comment)['audit_comment'])
 
     redirect_to admin_rebate_form_path(@rebate_form), notice: 'Rebate form was restored.'
   end
