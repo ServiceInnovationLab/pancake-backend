@@ -9,6 +9,8 @@ class RebateFormsController < ApiController
 
     rebate_form = JwtService.new.decode_signing_token(token)
 
+    return render json: { message: 'Rebate form has already signed.' }, status: :unprocessable_entity if rebate_form.signatures.exists?
+
     render_jsonapi(rebate_form, scope: false)
   end
 
