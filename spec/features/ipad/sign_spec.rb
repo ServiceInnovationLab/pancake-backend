@@ -4,9 +4,9 @@ require 'rails_helper'
 
 class Messages
   # error messages used in iPad UI
-  SERVER_ERROR = "Error while retrieving application"
-  CONFLICT = "This application has been updated. Please regenerate the QR code to sign the application."
-  UNPROCESSABLE_ENTITY = "This application has already been signed."
+  SERVER_ERROR = 'Error while retrieving application'
+  CONFLICT = 'This application has been updated. Please regenerate the QR code to sign the application.'
+  UNPROCESSABLE_ENTITY = 'This application has already been signed.'
 end
 
 RSpec.describe 'IPad Signing', type: :feature, js: true do
