@@ -57,6 +57,23 @@ This will pop up an invitation email for`juanvandenanker@gmail.com` in
 your browser. If the server is running you will be able to click the
 link to accept the invitation and set your password.
 
+### To update the ipad code ###
+
+- Pull repo `https://github.com/ServiceInnovationLab/rebates-signature-frontend/`
+
+- Update code
+
+- Make PR to origin repo
+
+- After PR approved, locally in `rebate-signature-frontend` do
+
+  - `npm run build`
+  - `rm -rf ../pancake-backend/public/ipad`
+  - `cp -r ./build ../pancake-backend/public/ipad`
+
+- Restart rails server to see changes
+
+
 ### To run the tests ###
 
 ```
