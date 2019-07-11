@@ -1,0 +1,8 @@
+- if @rebate_form.signed_state?
+  .nav-item
+    = link_to admin_process_rebate_form_path(id: @rebate_form.id), action: :create, method: :post do
+      = image_tag("process.svg", class: 'rebate-header-icon')
+- if @rebate_form.processed_state?
+  .nav-item
+    = link_to admin_unprocess_rebate_form_path(id: @rebate_form.id), action: :destroy, method: :delete do
+      = image_tag("unprocess.svg", class: 'rebate-header-icon')

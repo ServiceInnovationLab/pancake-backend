@@ -57,6 +57,11 @@ class RebateForm < ApplicationRecord
     (status == BATCHED_STATUS) && batch_id.positive?
   end
 
+  # applications can only be discarded before they are processed
+  def can_discard?
+    not_signed_state? || signed_state?
+  end
+
   def transition_to_signed_state
     update!(status: SIGNED_STATUS)
   end
