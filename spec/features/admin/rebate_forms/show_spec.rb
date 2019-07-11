@@ -104,7 +104,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           before { visit "/admin/rebate_forms/#{rebate_form.id}" }
           it { expect(page).to have_text('Council details') }
           it { expect(page).to have_text('Signed and ready to process') }
-          it { expect(page).to have_text('Process') }
+          it { expect(page).to have_css('.rebate-form__action--process') }
           it { expect(page).to have_field('fields.full_name', with: rebate_form.full_name) }
           it { expect(page).to have_text('Valuation ID') }
           it { expect(page).to have_text(rebate_form.valuation_id) }
@@ -118,7 +118,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           before { visit "/admin/rebate_forms/#{rebate_form.id}" }
           it { expect(page).to have_text('Application details') }
           it { expect(page).to have_text('Signed and ready to process') }
-          it { expect(page).to have_text('Process') }
+          it { expect(page).to have_css('.rebate-form__action--process') }
           it { expect(page).to have_field('fields.full_name', with: rebate_form.full_name) }
           it { expect(page).to have_field('fields.email', with: rebate_form.email) }
           it { expect(page).to have_field('fields.occupation', with: rebate_form.occupation) }
@@ -128,7 +128,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           before { visit "/admin/rebate_forms/#{rebate_form.id}" }
 
           it 'processes the application' do
-            click_link('Process')
+            find('.rebate-form__action--process').click
             expect(page).to_not have_text('Signed and ready to process')
             expect(page).to have_text('Processed')
           end
@@ -140,15 +140,15 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
 
           it 'cannot be edited' do
             expect(page).to have_text('Processed')
-            expect(page).to have_text('Unprocess')
+            expect(page).to have_css('.rebate-form__action--unprocess')
             expect(page).to_not have_text('EDIT')
             expect(page).to have_field(with: processed_rebate_form.full_name)
           end
 
           it 'can be unprocessed' do
             expect(page).to have_text('Processed')
-            expect(page).to have_text('Unprocess')
-            click_link('Unprocess')
+            expect(page).to have_css('.rebate-form__action--unprocess')
+            find('.rebate-form__action--unprocess').click
             expect(page).to have_text('Signed and ready to process')
             expect(page).to_not have_text('Processed')
             expect(page).to have_text('EDIT')
@@ -161,7 +161,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
 
           it 'cannot be edited' do
             expect(page).to_not have_text('Processed')
-            expect(page).to_not have_text('Unprocess')
+            expect(page).to_not have_css('.rebate-form__action--unprocess')
             expect(page).to_not have_text('EDIT')
           end
         end
