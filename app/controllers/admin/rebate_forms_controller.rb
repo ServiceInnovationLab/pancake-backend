@@ -65,7 +65,14 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # POST /admin/rebate_forms/1/decline
   def do_decline
-    @rebate_form.discard(audit_comment: params.require(:rebate_form).permit(:audit_comment)['audit_comment'])
+    audit_comment = params.require(:rebate_form).permit(:audit_comment)['audit_comment']
+
+    if audit_comment.blank?
+      @rebate_form.errors.add('audit_comment', 'Must provide a reason')
+      return redirect_to admin_rebate_form_decline_path(@rebate_form, flash[:error] = 'Must provide a reason')
+    end
+
+    @rebate_form.discard(audit_comment: audit_comment)
 
     redirect_to admin_rebate_form_path(@rebate_form), notice: 'Rebate form was declined.'
   end
@@ -75,7 +82,14 @@ class Admin::RebateFormsController < Admin::BaseController
 
   # POST /admin/rebate_forms/1/undecline
   def do_undecline
-    @rebate_form.undiscard(audit_comment: params.require(:rebate_form).permit(:audit_comment)['audit_comment'])
+    audit_comment = params.require(:rebate_form).permit(:audit_comment)['audit_comment']
+
+    if audit_comment.blank?
+      @rebate_form.errors.add('audit_comment', 'Must provide a reason')
+      return redirect_to admin_rebate_form_undecline_path(@rebate_form, flash[:error] = 'Must provide a reason')
+    end
+
+    @rebate_form.undiscard(audit_comment: audit_comment)
 
     redirect_to admin_rebate_form_path(@rebate_form), notice: 'Rebate form was restored.'
   end
