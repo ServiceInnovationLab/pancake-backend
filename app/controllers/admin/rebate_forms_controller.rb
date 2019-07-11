@@ -64,7 +64,7 @@ class Admin::RebateFormsController < Admin::BaseController
   def decline
     @rebate_form.discard(comment: 'Because I want to')
 
-    redirect_to admin_rebate_form_path(@rebate_form), notice: 'Rebate form was archived.'
+    redirect_to admin_rebate_form_path(@rebate_form), notice: 'Rebate form was declined.'
   end
 
   # POST /admin/rebate_forms/1/undecline
