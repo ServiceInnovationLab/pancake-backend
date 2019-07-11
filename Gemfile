@@ -61,7 +61,7 @@ gem 'kaminari', '~> 1.0'
 gem 'discard', '~> 1.0'
 
 # Auditing
-gem "audited", "~> 4.7"
+gem 'audited', '~> 4.7'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
