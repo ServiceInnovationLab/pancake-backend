@@ -1,0 +1,9 @@
+- if @rebate_form.discarded?
+  .nav-item
+    = link_to admin_rebate_form_undecline_path(@rebate_form), class: 'rebate-form__action--restore' do
+      = image_tag('tick1a.svg', class: 'rebate-header-icon')
+- elsif @rebate_form.can_discard?
+  .nav-item
+    = link_to admin_rebate_form_decline_path(@rebate_form), class: 'rebate-form__action--decline' do
+      = image_tag('cross.svg', class: 'rebate-header-icon')
+

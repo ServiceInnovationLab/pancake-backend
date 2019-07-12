@@ -6,6 +6,7 @@ class Admin::SignedRebateFormsController < Admin::BaseController
 
   def index
     @signed_rebate_forms = policy_scope(RebateForm)
+                           .kept
                            .where(status: RebateForm::SIGNED_STATUS)
                            .order(created_at: :asc)
   end

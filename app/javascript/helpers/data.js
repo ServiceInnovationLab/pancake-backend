@@ -3,7 +3,8 @@ export const summaryTabs = [
   ['Not Signed', '/admin/rebate_forms'],
   ['Signed', '/admin/rebate_forms/signed'],
   ['Processed', '/admin/rebate_forms/processed'],
-  ['Batched', '/admin/batches']
+  ['Batched', '/admin/batches'],
+  ['Declined', '/admin/rebate_forms/declined']
 ];
 
 export const incomeRows = [
