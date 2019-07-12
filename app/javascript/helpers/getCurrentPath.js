@@ -8,6 +8,8 @@ export function getCurrentPath(pathname) {
     return '/admin/rebate_forms/processed';
   case 'signed':
     return '/admin/rebate_forms/signed';
+  case 'declined':
+    return '/admin/rebate_forms/declined';
   case 'rebate_forms':
   default:
     return '/admin/rebate_forms';

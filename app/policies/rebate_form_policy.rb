@@ -21,6 +21,22 @@ class RebateFormPolicy < ApplicationPolicy
     (dia? || same_council?) && record.not_signed_state?
   end
 
+  def decline?
+    (dia? || same_council?) && (record.not_signed_state? || record.signed_state?)
+  end
+
+  def do_decline?
+    (dia? || same_council?) && (record.not_signed_state? || record.signed_state?)
+  end
+
+  def undecline?
+    dia? || same_council?
+  end
+
+  def do_undecline?
+    dia? || same_council?
+  end
+
   class Scope < Scope
     def resolve
       if user.dia?

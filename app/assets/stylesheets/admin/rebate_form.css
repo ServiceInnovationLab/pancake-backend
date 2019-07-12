@@ -43,6 +43,7 @@
 .rebate-header-buttons {
   background-color: var(--dove);
   padding: 1.5em 4em;
+  justify-content: space-between;
 }
 
 .rebate-banner {
@@ -71,8 +72,8 @@
 }
 
 .rebate-header-icon {
-  margin-right: 2em;
   width: 1.75em;
+  height: 1.75em;
 }
 
 .rebate-details-header {
@@ -245,7 +246,7 @@
 }
 
 .rebate-button {
-  width: 25%;
+  width: 20%;
   background: var(--dove);
   padding: 1rem;
   border: none;
@@ -253,7 +254,7 @@
 }
 
 .rebate-button-selected {
-  width: 25%;
+  width: 20%;
   background: var(--dove);
   color: var(--blue);
   padding: 1rem;
@@ -329,4 +330,21 @@
   color: var(--black);
   font-size: 1em;
   padding: 2em;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.nav-right {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  align-self: flex-end;
+}
+
+.nav-item {
+  margin: 0em 1em;
 }

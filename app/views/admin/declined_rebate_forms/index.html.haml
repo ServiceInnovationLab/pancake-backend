@@ -1,0 +1,9 @@
+- content_for :title, 'declined rebate forms'
+
+.rebate-wrapper
+  %h1.rebate-title
+    Rates Rebate
+  %h2.rebate-subtitle
+    Customer search
+
+  = react_component('CustomersSummary', rebateForms: @rebate_forms)

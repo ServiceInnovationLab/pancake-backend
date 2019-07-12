@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::RebateFormsController < Admin::BaseController
-  before_action :set_rebate_form, only: %i[show update destroy edit]
+  before_action :set_rebate_form, only: %i[show update destroy decline do_decline undecline do_undecline edit]
   respond_to :html, :pdf, :csv, :json
 
   def generateqr
@@ -17,6 +17,7 @@ class Admin::RebateFormsController < Admin::BaseController
     @name = params[:name]
 
     @rebate_forms = policy_scope(RebateForm)
+                    .kept
                     .where(status: RebateForm::NOT_SIGNED_STATUS)
                     .order(created_at: :asc)
 
@@ -59,10 +60,45 @@ class Admin::RebateFormsController < Admin::BaseController
     end
   end
 
+  # GET /admin/rebate_forms/1/decline
+  def decline; end
+
+  # POST /admin/rebate_forms/1/decline
+  def do_decline
+    audit_comment = params.require(:rebate_form).permit(:audit_comment)['audit_comment']
+
+    if audit_comment.blank?
+      @rebate_form.errors.add('audit_comment', 'Must provide a reason')
+      return redirect_to admin_rebate_form_decline_path(@rebate_form, flash[:error] = 'Must provide a reason')
+    end
+
+    @rebate_form.discard(audit_comment: audit_comment)
+
+    redirect_to admin_rebate_form_path(@rebate_form), notice: 'Rebate form was declined.'
+  end
+
+  # GET /admin/rebate_forms/1/undecline
+  def undecline; end
+
+  # POST /admin/rebate_forms/1/undecline
+  def do_undecline
+    audit_comment = params.require(:rebate_form).permit(:audit_comment)['audit_comment']
+
+    if audit_comment.blank?
+      @rebate_form.errors.add('audit_comment', 'Must provide a reason')
+      return redirect_to admin_rebate_form_undecline_path(@rebate_form, flash[:error] = 'Must provide a reason')
+    end
+
+    @rebate_form.undiscard(audit_comment: audit_comment)
+
+    redirect_to admin_rebate_form_path(@rebate_form), notice: 'Rebate form was restored.'
+  end
+
   private
 
   def set_rebate_form
-    @rebate_form = RebateForm.find(params[:id])
+    @rebate_form = RebateForm.find(params[:id] || params[:rebate_form_id])
+
     authorize @rebate_form
   end
 
