@@ -9,6 +9,7 @@ FactoryBot.define do
     valuation_id { property.valuation_id }
     total_rates { property.rates_bills.first.total_rates }
     # token <-- auto generated. Don't set in factory
+    audit_comment { 'FactoryBot' }
     fields do
       { full_name: Faker::Name.name,
         dependants: 0,

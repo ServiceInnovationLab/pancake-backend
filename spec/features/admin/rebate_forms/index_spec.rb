@@ -22,6 +22,12 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
   let(:processed_name) { processed_form.full_name }
   let(:processed_valuation_id) { processed_form.valuation_id }
 
+  # discarded forms should not be visible in this view. We create some in the
+  # database so that if they're not hidden properly it will be noticable
+  let!(:discarded_rebate_forms) do
+    FactoryBot.create_list(:rebate_form, 5, discarded_at: Time.now.utc)
+  end
+
   context 'anonymous' do
     it "can't see it" do
       visit '/admin'
@@ -48,6 +54,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_text('Batched')
         expect(page).to have_field('name')
         expect(page).not_to have_text(expected_name)
+        expect(page).not_to have_selector('.rebate-form--completed')
       end
       include_examples 'percy snapshot'
     end
@@ -62,6 +69,11 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_text(expected_name)
         expect(page).to have_text(expected_location)
         expect(page).to_not have_text('Application ID')
+
+        expect(page).to have_selector(
+          '.rebate-form--completed',
+          count: RebateForm.kept.select(&:not_signed_state?).count
+        )
       end
       include_examples 'percy snapshot'
     end
@@ -73,6 +85,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
       end
       it 'finds the person with matching name' do
         expect(page).to have_text(expected_name)
+        expect(page).to have_selector('.rebate-form--completed', count: 1)
       end
       include_examples 'percy snapshot'
     end
@@ -88,6 +101,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_text('Check the spelling')
         expect(page).to have_text('Try using a first name or last name')
         expect(page).to have_text('Search on all customers by leaving the field blank')
+        expect(page).not_to have_selector('.rebate-form--completed')
       end
     end
 
@@ -104,6 +118,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_text(signed_name)
         expect(page).to have_text(signed_location)
         expect(page).to_not have_text('Application ID')
+        expect(page).to have_selector('.rebate-form--completed', count: 1)
       end
       include_examples 'percy snapshot'
     end
@@ -120,6 +135,7 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
         expect(page).to have_text(processed_name)
         expect(page).to have_text('Application ID')
         expect(page).to have_text(processed_form.application_id)
+        expect(page).to have_selector('.rebate-form--completed', count: 1)
       end
       include_examples 'percy snapshot'
     end

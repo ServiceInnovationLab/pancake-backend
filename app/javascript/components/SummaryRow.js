@@ -6,7 +6,7 @@ export function SummaryRow(rebateForm, key, checked, checkIt) {
 
   const isChecked = checked.indexOf(id) >= 0;
   return (
-    <tr key={`${key}-${full_name}`} className='rebate_form.completed'>
+    <tr key={`${key}-${full_name}`} className='rebate-form--completed'>
       {checkIt && <td className='rebate-results-table-cell'>
         <input
           type="checkbox"
