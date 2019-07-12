@@ -86,10 +86,12 @@ a:focus {
 }
 
 .header-title {
+  border-radius: 4px;
   color: var(--white);
   font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
   font-size: 21px;
   font-weight: bold;
+  padding: 5px 10px;
 }
 
 .header-login {
