@@ -173,6 +173,21 @@ RSpec.describe 'RebateForm', type: :feature, js: true do
           it { expect(page).to have_field('fields.occupation', with: rebate_form.occupation) }
         end
 
+        describe 'when the form is declined' do
+          before { rebate_form.discard(audit_comment: 'RSpec decline') }
+
+          describe 'can see action links' do
+            before { visit "/admin/rebate_forms/#{rebate_form.id}" }
+            it { expect(page).not_to have_css('.rebate-form__action--decline') }
+            it { expect(page).to have_css('.rebate-form__action--restore') }
+            it { expect(page).not_to have_css('.rebate-form__action--unprocess') }
+
+            it 'the process action is not available if the form is declined' do
+              expect(page).not_to have_css('.rebate-form__action--process')
+            end
+          end
+        end
+
         describe 'can process an application' do
           before { visit "/admin/rebate_forms/#{rebate_form.id}" }
 

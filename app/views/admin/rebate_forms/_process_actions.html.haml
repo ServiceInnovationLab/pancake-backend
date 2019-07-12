@@ -1,4 +1,4 @@
-- if @rebate_form.signed_state?
+- if @rebate_form.can_process?
   .nav-item
     = link_to admin_process_rebate_form_path(id: @rebate_form.id), class: 'rebate-form__action--process', action: :create, method: :post do
       = image_tag('process.svg', class: 'rebate-header-icon')

@@ -62,6 +62,12 @@ class RebateForm < ApplicationRecord
     not_signed_state? || signed_state?
   end
 
+  # applications can be processed once they're signed, unless they're declined
+  # (implemented with discarded)
+  def can_process?
+    signed_state? && !discarded?
+  end
+
   def transition_to_signed_state
     update!(status: SIGNED_STATUS)
   end
