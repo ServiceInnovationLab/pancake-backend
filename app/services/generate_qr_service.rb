@@ -1,38 +1,35 @@
 # frozen_string_literal: true
 
 class GenerateQrService
-  def initialize(rebate_form, current_user)
+  def initialize(rebate_form, witness)
+    raise ArgumentError 'rebate_form must be saved to the database' if rebate_form.id.nil?
+    raise ArgumentError 'witness must not be blank' if witness.blank?
+
     @rebate_form = rebate_form
-    @current_user = current_user
+    @witness = witness
   end
 
   def generate_qr
-    # create a new token that only allows you to fetch a restricted set of details for this application only
-    # and use the same token to submit the signatures back
-    # this token is valid for 30 minutes
+    # iPad-application URL
     url = signing_url
-
     Rails.logger.info('the ipad signing url is:' + url) # for easier debugging in production
     qr_code(url)
   end
 
   private
 
-  def payload_details
-    {
-      rebate_form_id: @rebate_form.id,
-      exp: Time.now.to_i + (ENV['IPAD_JWT_LENGTH'].to_i * 60),
-      per: 'sign',
-      witness: witness_details(@current_user)
-    }
-  end
-
-  def witness_details(current_user)
-    {
-      name: current_user&.name || '',
-      location: current_user&.council&.name,
-      occupation: 'Authorised Council Officer'
-    }
+  # create a new token that only allows you to fetch a restricted set of details for this application only
+  # and use the same token to submit the signatures back
+  # this token duration is configured by ENV['IPAD_JWT_LENGTH']
+  def create_signing_token
+    JwtService.new.create_signing_token(
+      @rebate_form.id,
+      witness: {
+        name: @witness.name || '',
+        location: @witness.council&.name || '',
+        occupation: 'Authorised Council Officer'
+      }
+    )
   end
 
   def qr_code(url)
@@ -43,9 +40,6 @@ class GenerateQrService
   end
 
   def signing_url
-    token = JWT.encode payload_details, ENV['HMAC_SECRET'], 'HS256'
-
-    # iPad-application URL
-    "#{ENV['APP_URL']}ipad/?t=#{token}"
+    "#{ENV['APP_URL']}ipad/?t=#{create_signing_token}"
   end
 end

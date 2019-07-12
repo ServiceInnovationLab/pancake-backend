@@ -11,6 +11,7 @@ import { SummaryTable } from '../components/SummaryTable';
 import { SummarySearch } from '../components/SummarySearch';
 import { SummaryTabs } from '../components/SummaryTabs';
 import { ErrorMessage } from '../components/ErrorMessage';
+import { DownloadCSVButton } from '../components/DownloadCSVButton';
 
 const pathname = window.location.pathname;
 const currentLocation = getCurrentPath(pathname);
@@ -93,6 +94,7 @@ class CustomersSummary extends React.Component {
     const { batches, rebateForms, checked, isDiaUser, isCouncilUser, hasSearched, name } = this.state;
 
     const processable = currentLocation === '/admin/rebate_forms/processed' && (rebateForms && rebateForms[0]);
+    const CSVDownloadable = currentLocation === '/admin/rebate_forms/signed' && rebateForms && rebateForms[0];
     const checkIt = processable ? this.checkIt.bind(this) : null;
 
     return (
@@ -110,6 +112,7 @@ class CustomersSummary extends React.Component {
               createBatch: this.createBatch
             }
           )}
+          { CSVDownloadable && DownloadCSVButton() }
         </div>
         {(batches && batches[0]) && BatchesSummary(batches, isDiaUser, isCouncilUser)}
         {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, checked, checkIt)}
