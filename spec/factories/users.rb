@@ -16,4 +16,8 @@ FactoryBot.define do
   factory :admin_user, parent: :user do
     roles { [Role.find_or_create_by(name: 'dia', friendly_name: 'Te Tari Taiwhenua')] }
   end
+  factory :admin_user_with_name, parent: :user do
+    name { Faker::Name.name }
+    roles { [Role.find_or_create_by(name: 'dia', friendly_name: 'Te Tari Taiwhenua')] }
+  end
 end

@@ -7,7 +7,8 @@ class Admin::DeclinedRebateFormsController < Admin::BaseController
     @rebate_forms = policy_scope(RebateForm)
                     .discarded
                     .order(created_at: :asc)
+                    .to_json(include: { audits: { include: :user } })
 
-    respond_with json: @rebate_forms
+    @rebate_forms = JSON.parse(@rebate_forms)
   end
 end
