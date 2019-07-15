@@ -7,6 +7,12 @@ RSpec.describe 'ProcessedRebateForms', type: :feature, js: true do
   let(:property) { FactoryBot.create(:property_with_rates, council: council) }
   let!(:processed_forms) { FactoryBot.create_list(:processed_form, 3, property: property) }
 
+  # discarded forms should not be visible in this view. We create some in the
+  # database so that if they're not hidden properly it will be noticable
+  let!(:discarded_rebate_forms) do
+    FactoryBot.create_list(:rebate_form, 5, discarded_at: Time.now.utc)
+  end
+
   context 'anonymous' do
     it "can't see it" do
       visit '/admin'
@@ -25,6 +31,7 @@ RSpec.describe 'ProcessedRebateForms', type: :feature, js: true do
       before { visit '/admin/rebate_forms/processed' }
 
       it ' I can see all processed application forms' do
+        expect(page).to have_selector('.rebate-form--completed', count: 3)
         expect(page).to have_text(processed_forms.first.fields['full_name'])
         expect(page).to have_text(processed_forms.second.fields['full_name'])
         expect(page).to have_text(processed_forms.third.fields['full_name'])

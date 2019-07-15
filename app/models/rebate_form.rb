@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class RebateForm < ApplicationRecord
+  include Discard::Model
+  audited only: [:discarded_at], on: :update
+
   has_many :signatures, dependent: :destroy
   belongs_to :property, optional: false
   belongs_to :batch, optional: true
@@ -26,6 +29,18 @@ class RebateForm < ApplicationRecord
   PROCESSED_STATUS = 'processed'
   BATCHED_STATUS = 'batched'
 
+  def self.to_csv
+    attributes = %w[valuation_id created_at updated_at fields status customer_id application_id location total_rates]
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.find_each do |rebate_form|
+        csv << attributes.map { |attr| rebate_form.send(attr) }
+      end
+    end
+  end
+
   def signed_state?
     status == SIGNED_STATUS
   end
@@ -40,6 +55,17 @@ class RebateForm < ApplicationRecord
 
   def batched_state?
     (status == BATCHED_STATUS) && batch_id.positive?
+  end
+
+  # applications can only be discarded before they are processed
+  def can_discard?
+    not_signed_state? || signed_state?
+  end
+
+  # applications can be processed once they're signed, unless they're declined
+  # (implemented with discarded)
+  def can_process?
+    signed_state? && !discarded?
   end
 
   def transition_to_signed_state
@@ -95,6 +121,16 @@ class RebateForm < ApplicationRecord
 
   def set_token
     self.token = new_token unless token
+  end
+
+  # replaces #discard from discarded gem
+  def discard(audit_comment:)
+    update!(discarded_at: Time.now.utc, audit_comment: audit_comment)
+  end
+
+  # replaces #undiscard from discarded gem
+  def undiscard(audit_comment:)
+    update!(discarded_at: nil, audit_comment: audit_comment)
   end
 
   private

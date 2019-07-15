@@ -10,7 +10,9 @@ class BatchPolicy < ApplicationPolicy
   end
 
   def create?
-    dia? || same_council?
+    # DIA users are not allowed to create batches because they can view records
+    # from multiple councils simultaneously
+    same_council?
   end
 
   def update?

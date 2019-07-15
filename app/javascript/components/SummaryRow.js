@@ -1,12 +1,12 @@
 import React from 'react';
 
-export function SummaryRow(rebateForm, key, checked, checkIt) {
+export function SummaryRow({rebateForm, key, checked, checkIt, declined}) {
   const { location, valuation_id, fields, id } = rebateForm;
   const { full_name } = fields;
 
   const isChecked = checked.indexOf(id) >= 0;
   return (
-    <tr key={`${key}-${full_name}`} className='rebate_form.completed'>
+    <tr key={`${key}-${full_name}`} className='rebate-form--completed'>
       {checkIt && <td className='rebate-results-table-cell'>
         <input
           type="checkbox"
@@ -28,10 +28,19 @@ export function SummaryRow(rebateForm, key, checked, checkIt) {
         <td className='rebate-results-table-cell'>{location}</td>
       }
       {checkIt &&
-        <td className='rebate-results-table-cell' id='application-id'>
+        <td className='rebate-results-table-cell'>
           { rebateForm.application_id
             ? rebateForm.application_id
             : ''
+          }
+        </td>
+      }
+      {declined &&
+        <td className='rebate-results-table-cell' id='application-id'>
+          { rebateForm &&
+            rebateForm.audits &&
+            rebateForm.audits[rebateForm.audits.length - 1] &&
+            rebateForm.audits[rebateForm.audits.length - 1].user && rebateForm.audits[rebateForm.audits.length - 1].user.name
           }
         </td>
       }

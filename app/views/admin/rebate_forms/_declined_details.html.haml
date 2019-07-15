@@ -1,0 +1,19 @@
+- if @rebate_form.audits.any?
+  - audit = @rebate_form.audits.last
+  - action = audit.audited_changes['discarded_at']&.first.blank? ? 'declined' : 'restored'
+  .rebate-details-header
+    %h3.rebate-details-title Rebate form was #{action}
+  .rebate-edit-form
+    .flex-row.council-row
+      .flex-item
+        %label #{action.titleize} by
+        .rebate-search-input
+          = audit.user&.name
+      .flex-item
+        %label At
+        .rebate-search-input
+          = audit.created_at
+      .flex-item
+        %label With reason
+        .rebate-search-input
+          = audit.comment

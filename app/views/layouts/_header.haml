@@ -1,6 +1,6 @@
 .header-bar
   %div.header-item
-    %strong.header-title Rates Rebate
+    = link_to 'Rates Rebate', '/', class: 'strong header-title'
   %div.header-item.header-login
     - if current_user
       - if current_user.name
