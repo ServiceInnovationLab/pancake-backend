@@ -28,7 +28,7 @@ export function SummaryRow({rebateForm, key, checked, checkIt, declined}) {
         <td className='rebate-results-table-cell'>{location}</td>
       }
       {checkIt &&
-        <td className='rebate-results-table-cell' id='application-id'>
+        <td className='rebate-results-table-cell'>
           { rebateForm.application_id
             ? rebateForm.application_id
             : ''
