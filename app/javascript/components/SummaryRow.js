@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function SummaryRow(rebateForm, key, checked, checkIt) {
+export function SummaryRow({rebateForm, key, checked, checkIt, declined}) {
   const { location, valuation_id, fields, id } = rebateForm;
   const { full_name } = fields;
 
@@ -32,6 +32,15 @@ export function SummaryRow(rebateForm, key, checked, checkIt) {
           { rebateForm.application_id
             ? rebateForm.application_id
             : ''
+          }
+        </td>
+      }
+      {declined &&
+        <td className='rebate-results-table-cell' id='application-id'>
+          { rebateForm &&
+            rebateForm.audits &&
+            rebateForm.audits[rebateForm.audits.length - 1] &&
+            rebateForm.audits[rebateForm.audits.length - 1].user && rebateForm.audits[rebateForm.audits.length - 1].user.name
           }
         </td>
       }

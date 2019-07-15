@@ -3,14 +3,18 @@
 require 'rails_helper'
 
 RSpec.describe Admin::DeclinedRebateFormsController, type: :feature, js: true do
-  let(:user) { FactoryBot.create :admin_user }
+  let(:user) { FactoryBot.create :admin_user_with_name }
   let(:council) { FactoryBot.create :council }
   let(:property) { FactoryBot.create :property, council: council }
   let!(:kept_rebate_forms) do
     FactoryBot.create_list(:rebate_form, 8)
   end
   let!(:discarded_rebate_forms) do
-    FactoryBot.create_list(:rebate_form, 5, discarded_at: Time.now.utc)
+    FactoryBot.create_list(:rebate_form, 5).each do |f|
+      Audited.audit_class.as_user(user) do
+        f.discard(audit_comment: 'RSpec decline')
+      end
+    end
   end
 
   before do
@@ -20,7 +24,6 @@ RSpec.describe Admin::DeclinedRebateFormsController, type: :feature, js: true do
   describe 'GET #index' do
     it 'the show links go to the show page' do
       visit admin_rebate_forms_declined_path
-
       first('.rebate-results-table-cell .rebate-form-blue-arrow').click
       expect(page).to have_text('Application details')
     end
@@ -40,12 +43,15 @@ RSpec.describe Admin::DeclinedRebateFormsController, type: :feature, js: true do
     context 'when a form is declined' do
       it 'appears in the list' do
         declined_form = kept_rebate_forms.first
-        declined_form.discard(audit_comment: 'RSpec decline')
+        Audited.audit_class.as_user(user) do
+          declined_form.discard(audit_comment: 'RSpec decline')
+        end
 
         visit admin_rebate_forms_declined_path
 
         expect(page).to have_selector('.rebate-form--completed', count: 6)
         expect(page).to have_text(declined_form.fields['full_name'])
+        expect(page).to have_text(declined_form.audits.last.user.name)
         expect(page).to have_text(declined_form.location)
       end
     end

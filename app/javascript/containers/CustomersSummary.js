@@ -94,6 +94,7 @@ class CustomersSummary extends React.Component {
     const { batches, rebateForms, checked, isDiaUser, isCouncilUser, hasSearched, name } = this.state;
 
     const processable = currentLocation === '/admin/rebate_forms/processed' && (rebateForms && rebateForms[0]);
+    const declined = currentLocation === '/admin/rebate_forms/declined';
     const CSVDownloadable = currentLocation === '/admin/rebate_forms/signed' && rebateForms && rebateForms[0];
     const checkIt = processable ? this.checkIt.bind(this) : null;
 
@@ -115,7 +116,12 @@ class CustomersSummary extends React.Component {
           { CSVDownloadable && DownloadCSVButton() }
         </div>
         {(batches && batches[0]) && BatchesSummary(batches, isDiaUser, isCouncilUser)}
-        {(rebateForms && rebateForms[0]) && SummaryTable(rebateForms, checked, checkIt)}
+        {(rebateForms && rebateForms[0]) && SummaryTable({
+          rebateForms,
+          checked,
+          checkIt,
+          declined
+        })}
         {hasSearched && !(rebateForms && rebateForms[0]) && ErrorMessage(name)}
       </Fragment>
     );

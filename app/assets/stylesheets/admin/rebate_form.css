@@ -44,6 +44,7 @@
   background-color: var(--dove);
   padding: 1.5em 4em;
   justify-content: space-between;
+  height: 5.5rem
 }
 
 .rebate-banner {
