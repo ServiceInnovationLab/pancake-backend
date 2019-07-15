@@ -9,6 +9,6 @@ class Admin::DeclinedRebateFormsController < Admin::BaseController
                     .order(created_at: :asc)
                     .to_json(include: { audits: { include: :user } })
 
-                    @rebate_forms = JSON.parse(@rebate_forms)
+    @rebate_forms = JSON.parse(@rebate_forms)
   end
 end
