@@ -42,7 +42,7 @@ class Admin::BatchesController < Admin::BaseController
     authorize batch
 
     Batch.transaction do
-      batch.save
+      batch.save!
       rebate_forms.each do |form|
         form.transition_to_batched_state(batch)
       end
