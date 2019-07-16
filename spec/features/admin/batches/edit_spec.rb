@@ -30,12 +30,22 @@ RSpec.describe 'Batch', type: :feature, js: true do
     end
   end
 
+  shared_examples 'cannot edit' do
+    describe '#edit' do
+      it 'cannot visit the edit page' do
+        visit "/admin/batches/#{batched_form.batch_id}/edit"
+
+        expect(page).to have_text('You are not authorized to perform this action.')
+      end
+    end
+  end
+
   context 'signed in as dia' do
     let(:user) { FactoryBot.create :admin_user }
 
     before { login_as(user, scope: :user) }
 
-    include_examples 'can edit'
+    include_examples 'cannot edit'
   end
 
   context 'signed in as council' do

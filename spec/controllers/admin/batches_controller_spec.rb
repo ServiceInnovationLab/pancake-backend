@@ -3,26 +3,38 @@
 require 'rails_helper'
 
 RSpec.describe Admin::BatchesController, type: :controller do
-  context 'signed in as admin' do
-    let(:admin_user) { FactoryBot.create(:admin_user, council: property.council) }
-    let(:property) { FactoryBot.create(:property_with_rates) }
+  let(:property) { FactoryBot.create(:property_with_rates) }
 
-    before { sign_in admin_user }
+  before { sign_in user }
 
+  shared_examples 'can read batches' do
     describe '#index' do
       let!(:batched_form) { FactoryBot.create(:batched_form, property: property) }
 
       it 'assigns all batches to @batches' do
         get :index
+
+        batched_form.batch.reload
         expect(assigns(:batches)).to eq([batched_form.batch].to_json(include: [:rebate_forms]))
         expect(response.status).to eq(200)
       end
     end
 
-    describe '#create' do
-      context 'when the user council is the same as the rebate forms' do
-        let!(:rebate_forms) { FactoryBot.create_list(:processed_form, 3, property: property) }
+    describe '#show' do
+      context 'pdf' do
+        let(:batched_form) { FactoryBot.create(:batched_form, property: property) }
+        before { get :show, params: { id: batched_form.batch.to_param } }
 
+        it { expect(assigns(:batch)).to eq(batched_form.batch) }
+      end
+    end
+  end
+
+  shared_examples 'can write batches' do
+    describe '#create' do
+      let!(:rebate_forms) { FactoryBot.create_list(:processed_form, 3, property: property) }
+
+      context 'when the user council is the same as the rebate forms' do
         it 'creates a batch' do
           expect(Batch.count).to eq 0
           post :create, params: { ids: rebate_forms.map(&:id) }
@@ -34,23 +46,13 @@ RSpec.describe Admin::BatchesController, type: :controller do
       end
 
       context 'when the user council is not the same as the rebate forms' do
-        let(:admin_user) { FactoryBot.create(:admin_user, council: FactoryBot.create(:council)) }
-        let!(:rebate_forms) { FactoryBot.create_list(:processed_form, 3, property: property) }
+        let(:user) { FactoryBot.create(:user, council: FactoryBot.create(:council)) }
 
-        it 'does not create a batch' do
-          expect do
-            post :create, params: { ids: rebate_forms.map(&:id) }
-          end.to raise_error(ActiveRecord::RecordInvalid)
-        end
-      end
-    end
+        subject { post :create, params: { ids: rebate_forms.map(&:id) } }
 
-    describe '#show' do
-      context 'pdf' do
-        let(:batched_form) { FactoryBot.create(:batched_form, property: property) }
-        before { get :show, params: { id: batched_form.batch.to_param } }
-
-        it { expect(assigns(:batch)).to eq(batched_form.batch) }
+        # the policy scope on RebateForms will return not found if the
+        # current_user.council is different from the rebate form council
+        it { is_expected.to be_not_found }
       end
     end
 
@@ -76,5 +78,37 @@ RSpec.describe Admin::BatchesController, type: :controller do
         end
       end
     end
+  end
+
+  shared_examples 'cannot write batches' do
+    describe '#create' do
+      let!(:rebate_forms) { FactoryBot.create_list(:processed_form, 3, property: property) }
+
+      subject { post :create, params: { ids: rebate_forms.map(&:id) } }
+
+      it { is_expected.to be_forbidden }
+    end
+
+    describe '#update' do
+      let!(:batched_form) { FactoryBot.create(:batched_form, property: property) }
+
+      subject { patch :update, params: { id: batched_form.batch_id, batch: { name: 'This is the 23rd new name' } } }
+
+      it { is_expected.to be_forbidden }
+    end
+  end
+
+  context 'signed in as admin' do
+    let(:user) { FactoryBot.create(:admin_user, council: property.council) }
+
+    include_examples 'can read batches'
+    include_examples 'cannot write batches'
+  end
+
+  context 'signed in as a council user' do
+    let(:user) { FactoryBot.create(:user, council: property.council) }
+
+    include_examples 'can read batches'
+    include_examples 'can write batches'
   end
 end
