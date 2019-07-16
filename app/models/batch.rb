@@ -7,6 +7,10 @@ class Batch < ApplicationRecord
 
   has_one_attached :header_sheet
 
+  validates :council, presence: true
+  # Each rebate form validates that its council matches the batch council
+  validates_associated :rebate_forms
+
   def erms_header_sheet_attached?
     header_sheet.attached?
   end
