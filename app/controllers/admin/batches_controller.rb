@@ -3,6 +3,8 @@
 class Admin::BatchesController < Admin::BaseController
   respond_to :json, :html
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_in_council
+
   def index
     @batches = policy_scope(Batch)
                .all
@@ -81,5 +83,10 @@ class Admin::BatchesController < Admin::BaseController
 
   def pdf_filename
     "batch-#{@batch.council.short_name}-#{@batch.id}"
+  end
+
+  def user_not_in_council
+    flash[:alert] = 'Only users in a council role (who have been assigned to a council) are able to create batches.'
+    redirect_back fallback_location: root_path
   end
 end

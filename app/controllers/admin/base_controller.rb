@@ -13,10 +13,10 @@ class Admin::BaseController < ApplicationController
   private
 
   def user_not_authorized
-    flash[:error] = 'You are not authorized to perform this action.'
+    flash[:alert] = 'You are not authorized to perform this action.'
     respond_to do |format|
       format.html { render(file: 'public/403.html', status: :forbidden) }
-      format.json { render(json: { error: flash[:error] }, status: :forbidden) }
+      format.json { render(json: { error: flash[:alert] }, status: :forbidden) }
     end
   end
 
