@@ -2,21 +2,19 @@
 
 class BatchPolicy < ApplicationPolicy
   def index?
-    dia? || same_council?
+    read?
   end
 
   def show?
-    dia? || same_council?
+    read?
   end
 
   def create?
-    # DIA users are not allowed to create batches because they can view records
-    # from multiple councils simultaneously
-    same_council?
+    write?
   end
 
   def update?
-    dia? || same_council?
+    write?
   end
 
   class Scope < Scope
@@ -29,5 +27,20 @@ class BatchPolicy < ApplicationPolicy
         scope.none
       end
     end
+  end
+
+  private
+
+  # Unified permission for reading records (Index, Show)
+  def read?
+    dia? || same_council?
+  end
+
+  # Unified permission for write operations (Create, Update - Delete is not
+  # supported in this policy)
+  def write?
+    # DIA users are not allowed to create batches because they can view records
+    # from multiple councils simultaneously
+    same_council? && !dia?
   end
 end
